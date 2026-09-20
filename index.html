@@ -192,6 +192,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <button onclick="triggerInstall()" id="install-btn-main" class="w-full bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold py-2.5 rounded-xl text-sm shadow hover:shadow-lg transition-all flex items-center justify-center gap-2">
 <i class="fa-solid fa-download"></i> යෙදුම ස්ථාපනය කරන්න
 </button>
+<div id="install-section" class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm"></div>
 </div>
 </section>
 
@@ -537,6 +538,36 @@ function initApp() {
   renderSabbatikaBreakdowns();
   renderSabbatikaExtraSections();
 }
+
+// ============================================================
+// යෙදුම ස්ථාපනය කර ඇත්නම් Install කොටස සැඟවීම
+// ============================================================
+function checkIfInstalled() {
+  // 1. PWA එක Standalone Mode එකේ ධාවනය වේදැයි පරීක්ෂා කරන්න
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                     window.navigator.standalone === true ||
+                     document.referrer.includes('android-app://');
+  
+  // 2. යෙදුම ස්ථාපනය කර ඇත්නම්, Install කොටස සැඟවීම
+  if (isStandalone) {
+    var installSection = document.getElementById('install-section');
+    if (installSection) {
+      installSection.style.display = 'none';
+      console.log('[App] App is installed. Hiding install section.');
+    }
+  } else {
+    console.log('[App] App is not installed. Showing install section.');
+  }
+}
+
+// යෙදුම ස්ථාපනය කළ පසු (appinstalled event)
+window.addEventListener('appinstalled', function() {
+  var installSection = document.getElementById('install-section');
+  if (installSection) {
+    installSection.style.display = 'none';
+  }
+  console.log('[App] App installed successfully. Hiding install section.');
+});
 
 function loadSabbatikaDataFromStorage() {
   var saved = localStorage.getItem('sabbatika_custom_data');
@@ -1287,7 +1318,36 @@ if (localStorage.getItem('abhidhamma_theme') === 'dark' || (!localStorage.getIte
 }
 
 window.addEventListener('DOMContentLoaded', initApp);
-</script>
 
+// ============================================================
+// යෙදුම ස්ථාපනය කර ඇත්නම් Install කොටස සැඟවීම
+// ============================================================
+function checkIfInstalled() {
+  // 1. PWA එක Standalone Mode එකේ ධාවනය වේදැයි පරීක්ෂා කරන්න
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                     window.navigator.standalone === true ||
+                     document.referrer.includes('android-app://');
+  
+  // 2. යෙදුම ස්ථාපනය කර ඇත්නම්, Install කොටස සැඟවීම
+  if (isStandalone) {
+    var installSection = document.getElementById('install-section');
+    if (installSection) {
+      installSection.style.display = 'none';
+      console.log('[App] App is installed. Hiding install section.');
+    }
+  } else {
+    console.log('[App] App is not installed. Showing install section.');
+  }
+}
+
+// යෙදුම ස්ථාපනය කළ පසු (appinstalled event)
+window.addEventListener('appinstalled', function() {
+  var installSection = document.getElementById('install-section');
+  if (installSection) {
+    installSection.style.display = 'none';
+  }
+  console.log('[App] App installed successfully. Hiding install section.');
+});
+</script>
 </body>
 </html>
