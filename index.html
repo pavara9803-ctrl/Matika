@@ -1319,6 +1319,15 @@ if (localStorage.getItem('abhidhamma_theme') === 'dark' || (!localStorage.getIte
 
 window.addEventListener('DOMContentLoaded', initApp);
 
+function initApp() {
+  loadSabbatikaDataFromStorage();
+  updateBookmarksBadge();
+  updateOnlineStatus();
+  renderSabbatikaBreakdowns();
+  renderSabbatikaExtraSections();
+  checkIfInstalled(); // ← මෙය එක් කරන්න
+}
+
 // ============================================================
 // යෙදුම ස්ථාපනය කර ඇත්නම් Install කොටස සැඟවීම
 // ============================================================
