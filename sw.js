@@ -1,138 +1,84 @@
-/* ============================================================
-   අභිධර්ම මාතිකා අධ්‍යයනය - Service Worker
-   ============================================================ */
-
-const CACHE_NAME = 'matika-cache-v3';
-const RUNTIME_CACHE = 'matika-runtime-v3';
-
-// මුලින්ම cache කළ යුතු core assets
-const PRECACHE_URLS = [
+// ============================================================
+// Service Worker - Automatic Update Support
+// ============================================================
+var CACHE_NAME = 'matika-cache-v4'; // v3 සිට v4 දක්වා වැඩි කරන්න
+var urlsToCache = [
   './',
   './index.html',
-  './manifest.json',
+  './tika-data.js',
   './duka-data.js',
-  // Icons (PWABuilder generate කළ)
-  './72.png',
-  './96.png',
-  './128.png',
-  './144.png',
-  './152.png',
-  './192.png',
-  './256.png',
-  './512.png',
-  // External CDN resources
-  'https://cdn.tailwindcss.com',
-  'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2'
+  './suttanta-data.js',
+  './sabbatika-data.js',
+  './manifest.json',
+  './launchericon-48x48.png',
+  './launchericon-192x192.png',
+  './launchericon-512x512.png'
 ];
 
-// ============ INSTALL ============
-self.addEventListener('install', (event) => {
-  console.log('[SW] Installing...');
+// ============ INSTALL EVENT ============
+self.addEventListener('install', function(event) {
+  console.log('[SW] Installing new version:', CACHE_NAME);
+  // නව Service Worker එක ක්ෂණිකව සක්‍රීය කරන්න (පැරණි එක රැඳී නොසිටින්න)
+  self.skipWaiting();
+  
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('[SW] Pre-caching core assets');
-        return Promise.allSettled(
-          PRECACHE_URLS.map((url) =>
-            cache.add(url).catch((err) => {
-              console.warn('[SW] Failed to cache:', url, err);
-            })
-          )
-        );
+      .then(function(cache) {
+        console.log('[SW] Caching all files');
+        return cache.addAll(urlsToCache);
       })
-      .then(() => self.skipWaiting())
+      .catch(function(error) {
+        console.warn('[SW] Cache addAll failed:', error);
+      })
   );
 });
 
-// ============ ACTIVATE ============
-self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating...');
+// ============ ACTIVATE EVENT ============
+self.addEventListener('activate', function(event) {
+  console.log('[SW] Activating new version:', CACHE_NAME);
   event.waitUntil(
-    caches.keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames
-            .filter((name) => name !== CACHE_NAME && name !== RUNTIME_CACHE)
-            .map((name) => {
-              console.log('[SW] Deleting old cache:', name);
-              return caches.delete(name);
-            })
-        );
-      })
-      .then(() => self.clients.claim())
-  );
-});
-
-// ============ FETCH ============
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-
-  if (request.method !== 'GET') return;
-  if (!url.protocol.startsWith('http')) return;
-
-  // Navigation (HTML)
-  if (request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html')) {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const responseClone = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, responseClone));
-          return response;
-        })
-        .catch(() => {
-          return caches.match(request).then((cached) => {
-            return cached || caches.match('./index.html');
-          });
-        })
-    );
-    return;
-  }
-
-  // CDN & Static assets
-  const isCDN =
-    url.hostname.includes('cdn.tailwindcss.com') ||
-    url.hostname.includes('fonts.googleapis.com') ||
-    url.hostname.includes('fonts.gstatic.com') ||
-    url.hostname.includes('cdnjs.cloudflare.com');
-
-  if (isCDN) {
-    event.respondWith(
-      caches.match(request).then((cached) => {
-        if (cached) return cached;
-        return fetch(request).then((response) => {
-          if (!response || response.status !== 200) return response;
-          const responseClone = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, responseClone));
-          return response;
-        }).catch(() => cached);
-      })
-    );
-    return;
-  }
-
-  // Same-origin assets (images, icons, etc.)
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      const fetchPromise = fetch(request)
-        .then((response) => {
-          if (response && response.status === 200 && response.type === 'basic') {
-            const responseClone = response.clone();
-            caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, responseClone));
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheName !== CACHE_NAME) {
+            console.log('[SW] Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
           }
-          return response;
         })
-        .catch(() => cached);
-      return cached || fetchPromise;
+      );
+    }).then(function() {
+      // සියලුම Clients (විවෘත ටැබ්) වෙත පණිවිඩය යවන්න
+      return self.clients.claim();
     })
   );
 });
 
-// ============ MESSAGE ============
-self.addEventListener('message', (event) => {
+// ============ FETCH EVENT (Network First, Fallback to Cache) ============
+self.addEventListener('fetch', function(event) {
+  // Chrome Extension වැනි දේ නොසලකා හරින්න
+  if (!event.request.url.startsWith('http')) return;
+  
+  event.respondWith(
+    fetch(event.request)
+      .then(function(response) {
+        // අන්තර්ජාලයෙන් ලැබුණු නව දත්ත Cache එකට එක් කරන්න
+        if (response && response.status === 200 && response.type === 'basic') {
+          var responseToCache = response.clone();
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return response;
+      })
+      .catch(function() {
+        // අන්තර්ජාලය නොමැති නම් Cache එකෙන් ලබා දෙන්න
+        return caches.match(event.request);
+      })
+  );
+});
+
+// ============ MESSAGE EVENT (Update Notification) ============
+self.addEventListener('message', function(event) {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
