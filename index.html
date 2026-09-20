@@ -626,9 +626,6 @@ function renderMatikaCards(category, filterVal) {
     dataList = suttantaFullData;
   }
   
-  // ============================================================
-  // දුක මාතිකා සඳහා සියලු ගොච්ඡකවල සියලු පද එකට එකතු කරන්න
-  // ============================================================
   if (category === 'duka') {
     var allPadas = [];
     var gochhakaFilter = filterVal || 'all';
@@ -676,9 +673,6 @@ function renderMatikaCards(category, filterVal) {
     return;
   }
   
-  // ============================================================
-  // තික මාතිකා සහ සුත්තන්ත සඳහා
-  // ============================================================
   if (dataList.length === 0) {
     container.innerHTML = '<div class="text-center py-8 text-slate-500 text-sm">මෙම කාණ්ඩය සඳහා දත්ත නොමැත.</div>';
     return;
@@ -871,9 +865,8 @@ function renderBreakdownLists(pada) {
 // සබ්බත්තික මාතිකා සඳහා අමතර කොටස් render කිරීම
 // ============================================================
 function renderSabbatikaExtraSections() {
-  // ආදි ලබ්ධික සහ සබ්බ ලබ්ධික තොරතුරු
   var infoContainer = document.getElementById('sab-sabbathika-info');
-  if (infoContainer) {
+  if (infoContainer && sabbatikaFullData.sabbathikaInfo) {
     infoContainer.innerHTML = '';
     sabbatikaFullData.sabbathikaInfo.forEach(function(item) {
       var div = document.createElement('div');
@@ -883,10 +876,9 @@ function renderSabbatikaExtraSections() {
     });
   }
 
-  // කුසලා ධම්මා
   var kusalaDesc = document.getElementById('sab-kusala-desc');
   var kusalaContent = document.getElementById('sab-kusala-content');
-  if (kusalaDesc && kusalaContent) {
+  if (kusalaDesc && kusalaContent && sabbatikaFullData.kusala) {
     kusalaDesc.innerText = sabbatikaFullData.kusala.desc;
     kusalaContent.innerHTML = '';
     kusalaContent.appendChild(createBreakdownSection('ස්කන්ධ', sabbatikaFullData.kusala.skandha));
@@ -895,10 +887,9 @@ function renderSabbatikaExtraSections() {
     kusalaContent.appendChild(createBreakdownSection('සත්‍ය', sabbatikaFullData.kusala.sathya));
   }
 
-  // අකුසලා ධම්මා
   var akusalaDesc = document.getElementById('sab-akusala-desc');
   var akusalaContent = document.getElementById('sab-akusala-content');
-  if (akusalaDesc && akusalaContent) {
+  if (akusalaDesc && akusalaContent && sabbatikaFullData.akusala) {
     akusalaDesc.innerText = sabbatikaFullData.akusala.desc;
     akusalaContent.innerHTML = '';
     akusalaContent.appendChild(createBreakdownSection('ස්කන්ධ', sabbatikaFullData.akusala.skandha));
@@ -907,10 +898,9 @@ function renderSabbatikaExtraSections() {
     akusalaContent.appendChild(createBreakdownSection('සත්‍ය', sabbatikaFullData.akusala.sathya));
   }
 
-  // අබ්‍යාකතා ධම්මා
   var abyakataDesc = document.getElementById('sab-abyakata-desc');
   var abyakataContent = document.getElementById('sab-abyakata-content');
-  if (abyakataDesc && abyakataContent) {
+  if (abyakataDesc && abyakataContent && sabbatikaFullData.abyakata) {
     abyakataDesc.innerText = sabbatikaFullData.abyakata.desc;
     abyakataContent.innerHTML = '';
     abyakataContent.appendChild(createBreakdownSection('ස්කන්ධ', sabbatikaFullData.abyakata.skandha));
@@ -919,15 +909,13 @@ function renderSabbatikaExtraSections() {
     abyakataContent.appendChild(createBreakdownSection('සත්‍ය', sabbatikaFullData.abyakata.sathya));
   }
 
-  // සත්‍ය විනිර්මුක්ත ධර්ම
   var svDesc = document.getElementById('sab-sathya-vinirmuktha-desc');
-  if (svDesc) {
+  if (svDesc && sabbatikaFullData.sathyaVinirmuktha) {
     svDesc.innerText = sabbatikaFullData.sathyaVinirmuktha.desc;
   }
 
-  // මාර්ග අංග 08
   var maggaList = document.getElementById('sab-magga-anga-list');
-  if (maggaList) {
+  if (maggaList && sabbatikaFullData.maggaAnga) {
     maggaList.innerHTML = '';
     sabbatikaFullData.maggaAnga.forEach(function(m) {
       var div = document.createElement('div');
@@ -945,12 +933,14 @@ function createBreakdownSection(title, items) {
   h.className = 'font-bold text-xs text-maroon-900 dark:text-saffron-300 uppercase border-b border-amber-100 dark:border-slate-700 pb-1 mb-2';
   h.innerText = title;
   div.appendChild(h);
-  items.forEach(function(item) {
-    var row = document.createElement('div');
-    row.className = 'breakdown-item';
-    row.innerHTML = '<span class="num">' + item.num + '.</span><span class="name">' + item.name + '</span><span class="value">' + item.value + '</span>';
-    div.appendChild(row);
-  });
+  if (items) {
+    items.forEach(function(item) {
+      var row = document.createElement('div');
+      row.className = 'breakdown-item';
+      row.innerHTML = '<span class="num">' + item.num + '.</span><span class="name">' + item.name + '</span><span class="value">' + item.value + '</span>';
+      div.appendChild(row);
+    });
+  }
   return div;
 }
 
@@ -960,9 +950,8 @@ function createBreakdownSection(title, items) {
 function renderSabbatikaBreakdowns() {
   if (!sabbatikaFullData.breakdowns) return;
 
-  // ස්කන්ධ
   var sList = document.getElementById('sab-skandha-list');
-  if (sList) {
+  if (sList && sabbatikaFullData.breakdowns.skandha) {
     sList.innerHTML = '';
     sabbatikaFullData.breakdowns.skandha.forEach(function(s) {
       var div = document.createElement('div');
@@ -972,9 +961,8 @@ function renderSabbatikaBreakdowns() {
     });
   }
 
-  // ආයතන
   var aList = document.getElementById('sab-ayatana-list');
-  if (aList) {
+  if (aList && sabbatikaFullData.breakdowns.ayatana) {
     aList.innerHTML = '';
     sabbatikaFullData.breakdowns.ayatana.forEach(function(a) {
       var div = document.createElement('div');
@@ -984,9 +972,8 @@ function renderSabbatikaBreakdowns() {
     });
   }
 
-  // ධාතු
   var dList = document.getElementById('sab-dhatu-list');
-  if (dList) {
+  if (dList && sabbatikaFullData.breakdowns.dhatu) {
     dList.innerHTML = '';
     sabbatikaFullData.breakdowns.dhatu.forEach(function(d) {
       var div = document.createElement('div');
@@ -996,9 +983,8 @@ function renderSabbatikaBreakdowns() {
     });
   }
 
-  // සත්‍ය
   var satList = document.getElementById('sab-sathya-list');
-  if (satList) {
+  if (satList && sabbatikaFullData.breakdowns.sathya) {
     satList.innerHTML = '';
     sabbatikaFullData.breakdowns.sathya.forEach(function(sat) {
       var div = document.createElement('div');
