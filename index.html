@@ -89,8 +89,33 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <h1 class="font-bold text-xl sm:text-2xl ml-2 text-saffron-100">අභිධර්ම මාතිකා</h1>
 </div>
 <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="තේමාව"><i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i></button>
+<!-- මෙනු බොත්තම -->
+<button onclick="toggleMenu()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 ml-1" title="මෙනුව">
+    <i class="fa-solid fa-bars text-lg"></i>
+</button>
 </div>
 </header>
+
+<!-- මෙනු ලැයිස්තුව -->
+<div id="custom-menu" class="hidden fixed top-16 right-4 z-50 bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl shadow-2xl w-64 overflow-hidden">
+    <div class="py-1">
+        <button onclick="menuAction('star')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+            <i class="fa-solid fa-star text-yellow-500 text-lg w-5"></i> 0 තරු යෙදුම
+        </button>
+        <button onclick="menuAction('pali')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+            <i class="fa-solid fa-language text-blue-600 text-lg w-5"></i> පාලි අකුරු පරිවර්තකය
+        </button>
+        <button onclick="menuAction('about')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+            <i class="fa-solid fa-circle-info text-saffron-600 text-lg w-5"></i> අප ගැන
+        </button>
+        <button onclick="menuAction('help')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+            <i class="fa-solid fa-circle-question text-purple-600 text-lg w-5"></i> උදව්
+        </button>
+        <button onclick="menuAction('facebook')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200">
+            <i class="fa-brands fa-facebook text-blue-700 text-lg w-5"></i> Facebook පිටුව
+        </button>
+    </div>
+</div>
 
 <main class="flex-1 max-w-3xl w-full mx-auto p-4 sm:p-6 pb-12">
 <nav id="breadcrumb" class="hidden mb-4 flex items-center space-x-2 space-x-reverse text-sm text-amber-800 dark:text-saffron-300 font-medium">
@@ -381,7 +406,6 @@ window.addEventListener('beforeinstallprompt', function(e) {
 });
 
 window.addEventListener('appinstalled', function() {
-  console.log('[PWA] App installed successfully');
   deferredPrompt = null;
   document.getElementById('pwa-install-banner').classList.remove('show');
   installBannerDismissed = true;
@@ -397,7 +421,6 @@ function triggerInstall() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(function(choiceResult) {
-      console.log('[PWA] User choice:', choiceResult.outcome);
       deferredPrompt = null;
       document.getElementById('pwa-install-banner').classList.remove('show');
     });
@@ -437,40 +460,12 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
       .then(function(registration) {
         console.log('[App] Service Worker registered:', registration.scope);
-        registration.addEventListener('updatefound', function() {
-          var newWorker = registration.installing;
-          newWorker.addEventListener('statechange', function() {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              if (confirm('නව අනුවාදයක් ලබාගත හැක. දැන් යාවත්කාලීන කරන්නද?')) {
-                newWorker.postMessage({ type: 'SKIP_WAITING' });
-                window.location.reload();
-              }
-            }
-          });
-        });
       })
       .catch(function(error) {
         console.warn('[App] Service Worker registration failed:', error);
       });
   });
 }
-
-// ============ GOCHHAKA DATA ============
-var gochhakaList = [
-  { id: 1, name: 'හේතු ගොච්ඡකය', count: 6 },
-  { id: 2, name: 'චුල්ලන්තර දුකය', count: 7 },
-  { id: 3, name: 'ආසව ගොච්ඡකය', count: 6 },
-  { id: 4, name: 'සංයෝජන ගොච්ඡකය', count: 6 },
-  { id: 5, name: 'ගන්ථ ගොච්ඡකය', count: 6 },
-  { id: 6, name: 'ඕඝ ගොච්ඡකය', count: 6 },
-  { id: 7, name: 'යෝග ගොච්ඡකය', count: 6 },
-  { id: 8, name: 'නීවරණ ගොච්ඡකය', count: 6 },
-  { id: 9, name: 'පරාමාස ගොච්ඡකය', count: 5 },
-  { id: 10, name: 'මහන්තර දුකය', count: 14 },
-  { id: 11, name: 'උපාදාන ගොච්ඡකය', count: 6 },
-  { id: 12, name: 'කිලේස ගොච්ඡකය', count: 8 },
-  { id: 13, name: 'පිට්ඨි දුකය', count: 18 }
-];
 
 // ============ APPLICATION STATE ============
 var currentView = 'home';
@@ -485,7 +480,6 @@ var currentGochhakaFilter = 'all';
 function initApp() {
   loadSabbatikaDataFromStorage();
   updateBookmarksBadge();
-  setupGlobalSearchListeners();
   updateOnlineStatus();
   renderSabbatikaBreakdowns();
   renderSabbatikaExtraSections();
@@ -501,8 +495,6 @@ function loadSabbatikaDataFromStorage() {
   }
   document.getElementById('sab-desc-main').innerText = sabbatikaFullData.descMain;
   document.getElementById('sab-sappadesa-text').innerHTML = '<p>' + sabbatikaFullData.sappadesa + '</p>';
-  renderSabbatikaBreakdowns();
-  renderSabbatikaExtraSections();
 }
 
 function navigateTo(viewName) {
@@ -574,9 +566,6 @@ function updateBreadcrumb() {
   }
 }
 
-// ============================================================
-// showMatikaList()
-// ============================================================
 function showMatikaList(category) {
   currentCategory = category;
   navigateTo('list');
@@ -610,9 +599,6 @@ function filterDukaByGochhaka(val) {
   renderMatikaCards('duka', val);
 }
 
-// ============================================================
-// renderMatikaCards()
-// ============================================================
 function renderMatikaCards(category, filterVal) {
   var container = document.getElementById('matika-cards-container');
   container.innerHTML = '';
@@ -692,9 +678,6 @@ function renderMatikaCards(category, filterVal) {
   });
 }
 
-// ============================================================
-// openMatikaDetails()
-// ============================================================
 function openMatikaDetails(category, matikaIndex, padaIndex) {
   currentCategory = category;
   currentMatikaIndex = matikaIndex;
@@ -861,9 +844,6 @@ function renderBreakdownLists(pada) {
   document.getElementById('sathya-count').innerText = satCount + ' / 4';
 }
 
-// ============================================================
-// සබ්බත්තික මාතිකා සඳහා අමතර කොටස් render කිරීම
-// ============================================================
 function renderSabbatikaExtraSections() {
   var infoContainer = document.getElementById('sab-sabbathika-info');
   if (infoContainer && sabbatikaFullData.sabbathikaInfo) {
@@ -944,9 +924,6 @@ function createBreakdownSection(title, items) {
   return div;
 }
 
-// ============================================================
-// සබ්බත්තික මාතිකා breakdowns (skandha, ayatana, dhatu, sathya)
-// ============================================================
 function renderSabbatikaBreakdowns() {
   if (!sabbatikaFullData.breakdowns) return;
 
@@ -995,6 +972,50 @@ function renderSabbatikaBreakdowns() {
   }
 }
 
+// ============================================================
+// මෙනු ක්‍රියාකාරීත්වය
+// ============================================================
+function toggleMenu() {
+    var menu = document.getElementById('custom-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+
+document.addEventListener('click', function(event) {
+    var menu = document.getElementById('custom-menu');
+    if (!menu) return;
+    var menuBtn = event.target.closest('button[onclick="toggleMenu()"]');
+    if (!menu.contains(event.target) && !menuBtn && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+    }
+});
+
+function menuAction(action) {
+    var menu = document.getElementById('custom-menu');
+    if (menu) menu.classList.add('hidden');
+    
+    switch(action) {
+        case 'star':
+            alert('තරු යෙදුම - මෙය ඉදිරියේදී එක් කළ හැක.');
+            break;
+        case 'pali':
+            window.open('https://www.google.com/search?q=pali+unicode+converter', '_blank');
+            break;
+        case 'about':
+            alert('අභිධර්ම මාතිකා අධ්‍යයන යෙදුම\n\nමෙය අභිධර්ම පිටකයේ මාතිකා පද අධ්‍යයනය සඳහා නිර්මාණය කරන ලද යෙදුමකි.');
+            break;
+        case 'help':
+            alert('උදව්\n\n1. මුල් පිටුවේ ඇති මාතිකා කාණ්ඩ තෝරන්න.\n2. අදාළ මාතිකාව ක්ලික් කරන්න.\n3. පද තෝරා එහි ස්වරූපාර්ථ බලන්න.');
+            break;
+        case 'facebook':
+            window.open('https://www.facebook.com/', '_blank');
+            break;
+        default:
+            break;
+    }
+}
+
 // ============ BOOKMARKS LOGIC ============
 function toggleCurrentBookmark() {
   var id = currentCategory + '_' + currentMatikaIndex + '_' + currentPadaIndex;
@@ -1024,6 +1045,7 @@ function toggleCurrentBookmark() {
 function updateBookmarkButtonState() {
   var id = currentCategory + '_' + currentMatikaIndex + '_' + currentPadaIndex;
   var icon = document.getElementById('bookmark-icon');
+  if (!icon) return;
   var isFav = bookmarks.some(function(b) { return b.id === id; });
   if (isFav) {
     icon.className = 'fa-solid fa-bookmark text-saffron-500';
@@ -1034,6 +1056,7 @@ function updateBookmarkButtonState() {
 
 function updateBookmarksBadge() {
   var badge = document.getElementById('fav-badge');
+  if (!badge) return;
   if (bookmarks.length > 0) {
     badge.classList.remove('hidden');
     badge.innerText = bookmarks.length;
@@ -1088,10 +1111,6 @@ function removeBookmark(id) {
 }
 
 // ============ SEARCH LOGIC ============
-function setupGlobalSearchListeners() {
-  // සෙවුම් ක්‍රියාකාරිත්වය සඳහා
-}
-
 function handleSearch(query) {
   var container = document.getElementById('search-results-container');
   var list = document.getElementById('search-results-list');
