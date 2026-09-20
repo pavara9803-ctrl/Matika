@@ -1,50 +1,30 @@
 {
   "name": "අභිධර්ම මාතිකා අධ්‍යයනය",
-  "short_name": "මාතිකා අධ්‍යයනය",
-  "start_url": "./",
+  "short_name": "මාතිකා",
+  "description": "සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22 සහ ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#3f0a0c",
+  "theme_color": "#3f0a0c",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "./72.png",
-      "sizes": "72x72",
-      "type": "image/png"
+      "src": "launchericon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "./96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "./128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    },
-    {
-      "src": "./144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "./152.png",
-      "sizes": "152x152",
-      "type": "image/png"
-    },
-    {
-      "src": "./192.png",
+      "src": "launchericon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "./256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "./512.png",
+      "src": "launchericon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
