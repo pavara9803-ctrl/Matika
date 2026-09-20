@@ -1323,12 +1323,10 @@ window.addEventListener('DOMContentLoaded', initApp);
 // යෙදුම ස්ථාපනය කර ඇත්නම් Install කොටස සැඟවීම
 // ============================================================
 function checkIfInstalled() {
-  // 1. PWA එක Standalone Mode එකේ ධාවනය වේදැයි පරීක්ෂා කරන්න
   var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
                      window.navigator.standalone === true ||
                      document.referrer.includes('android-app://');
   
-  // 2. යෙදුම ස්ථාපනය කර ඇත්නම්, Install කොටස සැඟවීම
   if (isStandalone) {
     var installSection = document.getElementById('install-section');
     if (installSection) {
@@ -1340,7 +1338,6 @@ function checkIfInstalled() {
   }
 }
 
-// යෙදුම ස්ථාපනය කළ පසු (appinstalled event)
 window.addEventListener('appinstalled', function() {
   var installSection = document.getElementById('install-section');
   if (installSection) {
@@ -1348,6 +1345,9 @@ window.addEventListener('appinstalled', function() {
   }
   console.log('[App] App installed successfully. Hiding install section.');
 });
+
+window.addEventListener('DOMContentLoaded', initApp);
+
 </script>
 </body>
 </html>
