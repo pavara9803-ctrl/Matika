@@ -183,7 +183,8 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </div>
 </div>
 
-<div class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm">
+<!-- Install Section -->
+<div id="install-section" class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm">
 <div class="flex items-center gap-2 mb-3">
 <div class="w-8 h-8 rounded-lg bg-saffron-500/20 flex items-center justify-center text-saffron-600"><i class="fa-solid fa-mobile-screen-button"></i></div>
 <h3 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">යෙදුම ලෙස ස්ථාපනය කරන්න</h3>
@@ -192,7 +193,6 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <button onclick="triggerInstall()" id="install-btn-main" class="w-full bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold py-2.5 rounded-xl text-sm shadow hover:shadow-lg transition-all flex items-center justify-center gap-2">
 <i class="fa-solid fa-download"></i> යෙදුම ස්ථාපනය කරන්න
 </button>
-<div id="install-section" class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm"></div>
 </div>
 </section>
 
@@ -207,13 +207,11 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <div id="sab-desc-sub" class="text-xs sm:text-sm space-y-2 text-amber-100/90 pt-1"></div>
 </div>
 
-<!-- සප්පදේශ සහ නිප්පදේශ කොටස් -->
 <div class="bg-amber-100/80 dark:bg-slate-800 border border-amber-300 dark:border-slate-700 p-4 rounded-xl shadow-sm space-y-2">
 <h3 class="font-bold text-base sm:text-lg flex items-center gap-2"><i class="fa-solid fa-network-wired text-saffron-600"></i> සප්පදේශ සහ නිප්පදේශ කොටස්</h3>
 <div id="sab-sappadesa-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-2"></div>
 </div>
 
-<!-- ආදි ලබ්ධික සහ සබ්බ ලබ්ධික තොරතුරු -->
 <div id="sab-sabbathika-info" class="space-y-3"></div>
 
 <div class="bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-800 dark:to-slate-800/60 border border-amber-300 dark:border-slate-700 p-4 rounded-2xl shadow-sm">
@@ -239,7 +237,6 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <div id="sab-panel-sathya" class="sab-panel hidden space-y-3"><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">චතුරාර්ය සත්‍යය:</h4><div id="sab-sathya-list" class="space-y-1 text-sm"></div></div>
 </div>
 
-<!-- කුසල, අකුසල, අබ්‍යාකත, සත්‍ය විනිර්මුක්ත, මාර්ග අංග -->
 <div id="sab-kusala-section" class="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
 <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2"><i class="fa-solid fa-leaf text-green-600"></i> කුසලා ධම්මා</h3>
 <p id="sab-kusala-desc" class="text-xs text-slate-600 dark:text-slate-300"></p>
@@ -411,6 +408,8 @@ window.addEventListener('appinstalled', function() {
   document.getElementById('pwa-install-banner').classList.remove('show');
   installBannerDismissed = true;
   localStorage.setItem('pwa_banner_dismissed', 'true');
+  var installSection = document.getElementById('install-section');
+  if (installSection) installSection.style.display = 'none';
 });
 
 function isStandalone() {
@@ -462,7 +461,6 @@ if ('serviceWorker' in navigator) {
       .then(function(registration) {
         console.log('[App] Service Worker registered:', registration.scope);
         
-        // නව අනුවාදයක් හමු වූ විට පරීක්ෂා කරන්න
         registration.addEventListener('updatefound', function() {
           var newWorker = registration.installing;
           console.log('[App] New Service Worker installing...');
@@ -475,17 +473,15 @@ if ('serviceWorker' in navigator) {
           });
         });
         
-        // සෑම පැයකට වරක් නව අනුවාද පරීක්ෂා කරන්න
         setInterval(function() {
           registration.update();
-        }, 60 * 60 * 1000); // 1 hour = 3600000 ms
+        }, 60 * 60 * 1000);
       })
       .catch(function(error) {
         console.warn('[App] Service Worker registration failed:', error);
       });
   });
   
-  // Controller වෙනස් වූ විට (යාවත්කාලීන වූ විට) පිටුව නැවත පූරණය කරන්න
   var refreshing = false;
   navigator.serviceWorker.addEventListener('controllerchange', function() {
     if (refreshing) return;
@@ -497,7 +493,6 @@ if ('serviceWorker' in navigator) {
 
 // ============ UPDATE NOTIFICATION ============
 function showUpdateNotification() {
-  // යාවත්කාලීන කිරීමේ පණිවිඩය පෙන්වන්න
   var banner = document.createElement('div');
   banner.id = 'update-banner';
   banner.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold px-5 py-3 rounded-xl shadow-2xl border-2 border-maroon-900 flex items-center gap-3';
@@ -537,18 +532,14 @@ function initApp() {
   updateOnlineStatus();
   renderSabbatikaBreakdowns();
   renderSabbatikaExtraSections();
+  checkIfInstalled();
 }
 
-// ============================================================
-// යෙදුම ස්ථාපනය කර ඇත්නම් Install කොටස සැඟවීම
-// ============================================================
 function checkIfInstalled() {
-  // 1. PWA එක Standalone Mode එකේ ධාවනය වේදැයි පරීක්ෂා කරන්න
   var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
                      window.navigator.standalone === true ||
                      document.referrer.includes('android-app://');
   
-  // 2. යෙදුම ස්ථාපනය කර ඇත්නම්, Install කොටස සැඟවීම
   if (isStandalone) {
     var installSection = document.getElementById('install-section');
     if (installSection) {
@@ -559,15 +550,6 @@ function checkIfInstalled() {
     console.log('[App] App is not installed. Showing install section.');
   }
 }
-
-// යෙදුම ස්ථාපනය කළ පසු (appinstalled event)
-window.addEventListener('appinstalled', function() {
-  var installSection = document.getElementById('install-section');
-  if (installSection) {
-    installSection.style.display = 'none';
-  }
-  console.log('[App] App installed successfully. Hiding install section.');
-});
 
 function loadSabbatikaDataFromStorage() {
   var saved = localStorage.getItem('sabbatika_custom_data');
@@ -1056,9 +1038,7 @@ function renderSabbatikaBreakdowns() {
   }
 }
 
-// ============================================================
-// මෙනු ක්‍රියාකාරීත්වය
-// ============================================================
+// ============ මෙනු ක්‍රියාකාරීත්වය ============
 function toggleMenu() {
     var menu = document.getElementById('custom-menu');
     if (menu) {
@@ -1316,44 +1296,6 @@ if (localStorage.getItem('abhidhamma_theme') === 'dark' || (!localStorage.getIte
   document.documentElement.classList.add('dark');
   document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
 }
-
-window.addEventListener('DOMContentLoaded', initApp);
-
-function initApp() {
-  loadSabbatikaDataFromStorage();
-  updateBookmarksBadge();
-  updateOnlineStatus();
-  renderSabbatikaBreakdowns();
-  renderSabbatikaExtraSections();
-  checkIfInstalled(); // ← මෙය එක් කරන්න
-}
-
-// ============================================================
-// යෙදුම ස්ථාපනය කර ඇත්නම් Install කොටස සැඟවීම
-// ============================================================
-function checkIfInstalled() {
-  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                     window.navigator.standalone === true ||
-                     document.referrer.includes('android-app://');
-  
-  if (isStandalone) {
-    var installSection = document.getElementById('install-section');
-    if (installSection) {
-      installSection.style.display = 'none';
-      console.log('[App] App is installed. Hiding install section.');
-    }
-  } else {
-    console.log('[App] App is not installed. Showing install section.');
-  }
-}
-
-window.addEventListener('appinstalled', function() {
-  var installSection = document.getElementById('install-section');
-  if (installSection) {
-    installSection.style.display = 'none';
-  }
-  console.log('[App] App installed successfully. Hiding install section.');
-});
 
 window.addEventListener('DOMContentLoaded', initApp);
 
