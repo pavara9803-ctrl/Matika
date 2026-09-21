@@ -1,6 +1,467 @@
 // suttanta-data.js
 // අභිධර්ම මාතිකා අධ්‍යයන ප්‍රවේශය - සූත්‍රාන්තික මාතිකා (සුත්තන්ත මාතිකා)
 
+// ============================================================
+// Helper Functions for Breakdowns
+// ============================================================
+
+function makeSkandha(rupa, vedana, sanna, sankhara, vinnana) {
+  return [
+    { num: 1, name: 'රූපක්ඛන්ධෝ', value: rupa },
+    { num: 2, name: 'වේදනාක්ඛන්ධෝ', value: vedana },
+    { num: 3, name: 'සඤ්ඤාක්ඛන්ධෝ', value: sanna },
+    { num: 4, name: 'සංඛාරක්ඛන්ධෝ', value: sankhara },
+    { num: 5, name: 'විඤ්ඤාණක්ඛන්ධෝ', value: vinnana }
+  ];
+}
+
+function makeSathya(arr) {
+  return arr;
+}
+
+// ============================================================
+// ආයතන - සාමාන්‍ය (සියලු ආයතන 12)
+// ============================================================
+function makeAyatana() {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: 'චක්ඛු ප්‍රසාද රූපය' },
+    { num: 2, name: 'සෝතායතනය', value: 'සෝත ප්‍රසාද රූපය' },
+    { num: 3, name: 'ඝානායතනය', value: 'ඝාන ප්‍රසාද රූපය' },
+    { num: 4, name: 'ජිව්හායතනය', value: 'ජිව්හා ප්‍රසාද රූපය' },
+    { num: 5, name: 'කායායතනය', value: 'කාය ප්‍රසාද රූපය' },
+    { num: 6, name: 'රූපායතනය', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්දායතනය', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධායතනය', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රසායතනය', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'මනායතනය', value: 'සිත් 89' },
+    { num: 12, name: 'ධම්මායතනය', value: 'චෛතසික 52, සුබුම රූප 16, නිර්වාණය' }
+  ];
+}
+
+// ============================================================
+// ධාතු - සාමාන්‍ය (සියලු ධාතු 18)
+// ============================================================
+function makeDhatu() {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: 'චක්ඛු ප්‍රසාදය' },
+    { num: 2, name: 'සෝත ධාතුව', value: 'සෝත ප්‍රසාදය' },
+    { num: 3, name: 'ඝාන ධාතුව', value: 'ඝාන ප්‍රසාදය' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: 'ජිව්හා ප්‍රසාදය' },
+    { num: 5, name: 'කාය ධාතුව', value: 'කාය ප්‍රසාදය' },
+    { num: 6, name: 'රූප ධාතුව', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්ද ධාතුව', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රස ධාතුව', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: 'චක්ඛුවිඤ්ඤාණ සිත් 2' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: 'සෝතවිඤ්ඤාණ සිත් 2' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: 'ඝානවිඤ්ඤාණ සිත් 2' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: 'ජිව්හාවිඤ්ඤාණ සිත් 2' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: 'කායවිඤ්ඤාණ සිත් 2' },
+    { num: 16, name: 'මනෝ ධාතුව', value: 'පඤ්චද්වාරාවර්ජන + සම්පටිච්ඡන සිත් 3' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: 'ඉතිරි සිත් 76' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: 'චෛතසික 52, සුබුම රූප 16, නිර්වාණය' }
+  ];
+}
+
+// ============================================================
+// ආයතන - නාම ධර්ම පමණක් (රූප ආයතන හිස්)
+// ============================================================
+function makeAyatanaForNamaOnly(manoValue, dhammaValue) {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: '-' },
+    { num: 2, name: 'සෝතායතනය', value: '-' },
+    { num: 3, name: 'ඝානායතනය', value: '-' },
+    { num: 4, name: 'ජිව්හායතනය', value: '-' },
+    { num: 5, name: 'කායායතනය', value: '-' },
+    { num: 6, name: 'රූපායතනය', value: '-' },
+    { num: 7, name: 'සද්දායතනය', value: '-' },
+    { num: 8, name: 'ගන්ධායතනය', value: '-' },
+    { num: 9, name: 'රසායතනය', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: '-' },
+    { num: 11, name: 'මනායතනය', value: manoValue || '-' },
+    { num: 12, name: 'ධම්මායතනය', value: dhammaValue || '-' }
+  ];
+}
+
+// ============================================================
+// ධාතු - නාම ධර්ම පමණක් (රූප ධාතු හිස්)
+// ============================================================
+function makeDhatuForNamaOnly(manoVinnanaValue, dhammaValue) {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: '-' },
+    { num: 2, name: 'සෝත ධාතුව', value: '-' },
+    { num: 3, name: 'ඝාන ධාතුව', value: '-' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: '-' },
+    { num: 5, name: 'කාය ධාතුව', value: '-' },
+    { num: 6, name: 'රූප ධාතුව', value: '-' },
+    { num: 7, name: 'සද්ද ධාතුව', value: '-' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: '-' },
+    { num: 9, name: 'රස ධාතුව', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: '-' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 16, name: 'මනෝ ධාතුව', value: '-' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: manoVinnanaValue || '-' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: dhammaValue || '-' }
+  ];
+}
+
+// ============================================================
+// ආයතන - රූප ධර්ම පමණක් (නාම ආයතන හිස්)
+// ============================================================
+function makeAyatanaForRupaOnly(rupaValue) {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: 'චක්ඛු ප්‍රසාද රූපය' },
+    { num: 2, name: 'සෝතායතනය', value: 'සෝත ප්‍රසාද රූපය' },
+    { num: 3, name: 'ඝානායතනය', value: 'ඝාන ප්‍රසාද රූපය' },
+    { num: 4, name: 'ජිව්හායතනය', value: 'ජිව්හා ප්‍රසාද රූපය' },
+    { num: 5, name: 'කායායතනය', value: 'කාය ප්‍රසාද රූපය' },
+    { num: 6, name: 'රූපායතනය', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්දායතනය', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධායතනය', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රසායතනය', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'මනායතනය', value: '-' },
+    { num: 12, name: 'ධම්මායතනය', value: rupaValue || 'සුබුම රූප 16' }
+  ];
+}
+
+// ============================================================
+// ධාතු - රූප ධර්ම පමණක් (නාම ධාතු හිස්)
+// ============================================================
+function makeDhatuForRupaOnly(rupaValue) {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: 'චක්ඛු ප්‍රසාදය' },
+    { num: 2, name: 'සෝත ධාතුව', value: 'සෝත ප්‍රසාදය' },
+    { num: 3, name: 'ඝාන ධාතුව', value: 'ඝාන ප්‍රසාදය' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: 'ජිව්හා ප්‍රසාදය' },
+    { num: 5, name: 'කාය ධාතුව', value: 'කාය ප්‍රසාදය' },
+    { num: 6, name: 'රූප ධාතුව', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්ද ධාතුව', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රස ධාතුව', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 16, name: 'මනෝ ධාතුව', value: '-' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: rupaValue || 'සුබුම රූප 16' }
+  ];
+}
+
+// ============================================================
+// ආයතන - නිර්වාණය පමණක්
+// ============================================================
+function makeAyatanaForNibbanaOnly() {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: '-' },
+    { num: 2, name: 'සෝතායතනය', value: '-' },
+    { num: 3, name: 'ඝානායතනය', value: '-' },
+    { num: 4, name: 'ජිව්හායතනය', value: '-' },
+    { num: 5, name: 'කායායතනය', value: '-' },
+    { num: 6, name: 'රූපායතනය', value: '-' },
+    { num: 7, name: 'සද්දායතනය', value: '-' },
+    { num: 8, name: 'ගන්ධායතනය', value: '-' },
+    { num: 9, name: 'රසායතනය', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: '-' },
+    { num: 11, name: 'මනායතනය', value: '-' },
+    { num: 12, name: 'ධම්මායතනය', value: 'නිර්වාණය' }
+  ];
+}
+
+function makeDhatuForNibbanaOnly() {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: '-' },
+    { num: 2, name: 'සෝත ධාතුව', value: '-' },
+    { num: 3, name: 'ඝාන ධාතුව', value: '-' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: '-' },
+    { num: 5, name: 'කාය ධාතුව', value: '-' },
+    { num: 6, name: 'රූප ධාතුව', value: '-' },
+    { num: 7, name: 'සද්ද ධාතුව', value: '-' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: '-' },
+    { num: 9, name: 'රස ධාතුව', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: '-' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 16, name: 'මනෝ ධාතුව', value: '-' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: 'නිර්වාණය' }
+  ];
+}
+
+// ============================================================
+// ආයතන - සිත් + චෛතසික (මනෝ + ධම්ම)
+// ============================================================
+function makeAyatanaForCittaCetasika(cittaValue, cetasikaValue) {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: '-' },
+    { num: 2, name: 'සෝතායතනය', value: '-' },
+    { num: 3, name: 'ඝානායතනය', value: '-' },
+    { num: 4, name: 'ජිව්හායතනය', value: '-' },
+    { num: 5, name: 'කායායතනය', value: '-' },
+    { num: 6, name: 'රූපායතනය', value: '-' },
+    { num: 7, name: 'සද්දායතනය', value: '-' },
+    { num: 8, name: 'ගන්ධායතනය', value: '-' },
+    { num: 9, name: 'රසායතනය', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: '-' },
+    { num: 11, name: 'මනායතනය', value: cittaValue },
+    { num: 12, name: 'ධම්මායතනය', value: cetasikaValue }
+  ];
+}
+
+function makeDhatuForCittaCetasika(cittaValue, cetasikaValue, hasKayaVinnana) {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: '-' },
+    { num: 2, name: 'සෝත ධාතුව', value: '-' },
+    { num: 3, name: 'ඝාන ධාතුව', value: '-' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: '-' },
+    { num: 5, name: 'කාය ධාතුව', value: '-' },
+    { num: 6, name: 'රූප ධාතුව', value: '-' },
+    { num: 7, name: 'සද්ද ධාතුව', value: '-' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: '-' },
+    { num: 9, name: 'රස ධාතුව', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: '-' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: hasKayaVinnana || '-' },
+    { num: 16, name: 'මනෝ ධාතුව', value: '-' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: cittaValue },
+    { num: 18, name: 'ධම්ම ධාතුව', value: cetasikaValue }
+  ];
+}
+
+// ============================================================
+// ආයතන - රූප + සිත් + චෛතසික (සියල්ල)
+// ============================================================
+function makeAyatanaForAll(cittaValue, cetasikaValue, rupaValue) {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: 'චක්ඛු ප්‍රසාද රූපය' },
+    { num: 2, name: 'සෝතායතනය', value: 'සෝත ප්‍රසාද රූපය' },
+    { num: 3, name: 'ඝානායතනය', value: 'ඝාන ප්‍රසාද රූපය' },
+    { num: 4, name: 'ජිව්හායතනය', value: 'ජිව්හා ප්‍රසාද රූපය' },
+    { num: 5, name: 'කායායතනය', value: 'කාය ප්‍රසාද රූපය' },
+    { num: 6, name: 'රූපායතනය', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්දායතනය', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධායතනය', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රසායතනය', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'මනායතනය', value: cittaValue },
+    { num: 12, name: 'ධම්මායතනය', value: cetasikaValue + ', ' + rupaValue + ', නිර්වාණය' }
+  ];
+}
+
+function makeDhatuForAll(cittaValue, cetasikaValue, rupaValue) {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: 'චක්ඛු ප්‍රසාදය' },
+    { num: 2, name: 'සෝත ධාතුව', value: 'සෝත ප්‍රසාදය' },
+    { num: 3, name: 'ඝාන ධාතුව', value: 'ඝාන ප්‍රසාදය' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: 'ජිව්හා ප්‍රසාදය' },
+    { num: 5, name: 'කාය ධාතුව', value: 'කාය ප්‍රසාදය' },
+    { num: 6, name: 'රූප ධාතුව', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්ද ධාතුව', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රස ධාතුව', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: 'චක්ඛුවිඤ්ඤාණ සිත් 2' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: 'සෝතවිඤ්ඤාණ සිත් 2' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: 'ඝානවිඤ්ඤාණ සිත් 2' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: 'ජිව්හාවිඤ්ඤාණ සිත් 2' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: 'කායවිඤ්ඤාණ සිත් 2' },
+    { num: 16, name: 'මනෝ ධාතුව', value: 'පඤ්චද්වාරාවර්ජන + සම්පටිච්ඡන සිත් 3' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: cittaValue },
+    { num: 18, name: 'ධම්ම ධාතුව', value: cetasikaValue + ', ' + rupaValue + ', නිර්වාණය' }
+  ];
+}
+
+// ============================================================
+// ආයතන - ලෝකෝත්තර පමණක් (මාර්ග + ඵල + නිර්වාණය)
+// ============================================================
+function makeAyatanaForLokuttara() {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: '-' },
+    { num: 2, name: 'සෝතායතනය', value: '-' },
+    { num: 3, name: 'ඝානායතනය', value: '-' },
+    { num: 4, name: 'ජිව්හායතනය', value: '-' },
+    { num: 5, name: 'කායායතනය', value: '-' },
+    { num: 6, name: 'රූපායතනය', value: '-' },
+    { num: 7, name: 'සද්දායතනය', value: '-' },
+    { num: 8, name: 'ගන්ධායතනය', value: '-' },
+    { num: 9, name: 'රසායතනය', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: '-' },
+    { num: 11, name: 'මනායතනය', value: 'ලෝකෝත්තර සිත් 8' },
+    { num: 12, name: 'ධම්මායතනය', value: 'චෛතසික 36 + නිර්වාණය' }
+  ];
+}
+
+function makeDhatuForLokuttara() {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: '-' },
+    { num: 2, name: 'සෝත ධාතුව', value: '-' },
+    { num: 3, name: 'ඝාන ධාතුව', value: '-' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: '-' },
+    { num: 5, name: 'කාය ධාතුව', value: '-' },
+    { num: 6, name: 'රූප ධාතුව', value: '-' },
+    { num: 7, name: 'සද්ද ධාතුව', value: '-' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: '-' },
+    { num: 9, name: 'රස ධාතුව', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: '-' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 16, name: 'මනෝ ධාතුව', value: '-' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: 'ලෝකෝත්තර සිත් 8' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: 'චෛතසික 36 + නිර්වාණය' }
+  ];
+}
+
+// ============================================================
+// ආයතන - අකුසල පමණක්
+// ============================================================
+function makeAyatanaForAkusala() {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: '-' },
+    { num: 2, name: 'සෝතායතනය', value: '-' },
+    { num: 3, name: 'ඝානායතනය', value: '-' },
+    { num: 4, name: 'ජිව්හායතනය', value: '-' },
+    { num: 5, name: 'කායායතනය', value: '-' },
+    { num: 6, name: 'රූපායතනය', value: '-' },
+    { num: 7, name: 'සද්දායතනය', value: '-' },
+    { num: 8, name: 'ගන්ධායතනය', value: '-' },
+    { num: 9, name: 'රසායතනය', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: '-' },
+    { num: 11, name: 'මනායතනය', value: 'අකුසල් සිත් 12' },
+    { num: 12, name: 'ධම්මායතනය', value: 'චෛතසික 27' }
+  ];
+}
+
+function makeDhatuForAkusala() {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: '-' },
+    { num: 2, name: 'සෝත ධාතුව', value: '-' },
+    { num: 3, name: 'ඝාන ධාතුව', value: '-' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: '-' },
+    { num: 5, name: 'කාය ධාතුව', value: '-' },
+    { num: 6, name: 'රූප ධාතුව', value: '-' },
+    { num: 7, name: 'සද්ද ධාතුව', value: '-' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: '-' },
+    { num: 9, name: 'රස ධාතුව', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: '-' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 16, name: 'මනෝ ධාතුව', value: '-' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: 'අකුසල් සිත් 12' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: 'චෛතසික 27' }
+  ];
+}
+
+// ============================================================
+// ආයතන - කුසල පමණක්
+// ============================================================
+function makeAyatanaForKusala() {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: '-' },
+    { num: 2, name: 'සෝතායතනය', value: '-' },
+    { num: 3, name: 'ඝානායතනය', value: '-' },
+    { num: 4, name: 'ජිව්හායතනය', value: '-' },
+    { num: 5, name: 'කායායතනය', value: '-' },
+    { num: 6, name: 'රූපායතනය', value: '-' },
+    { num: 7, name: 'සද්දායතනය', value: '-' },
+    { num: 8, name: 'ගන්ධායතනය', value: '-' },
+    { num: 9, name: 'රසායතනය', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: '-' },
+    { num: 11, name: 'මනායතනය', value: 'කුසල් සිත් 21' },
+    { num: 12, name: 'ධම්මායතනය', value: 'චෛතසික 38' }
+  ];
+}
+
+function makeDhatuForKusala() {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: '-' },
+    { num: 2, name: 'සෝත ධාතුව', value: '-' },
+    { num: 3, name: 'ඝාන ධාතුව', value: '-' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: '-' },
+    { num: 5, name: 'කාය ධාතුව', value: '-' },
+    { num: 6, name: 'රූප ධාතුව', value: '-' },
+    { num: 7, name: 'සද්ද ධාතුව', value: '-' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: '-' },
+    { num: 9, name: 'රස ධාතුව', value: '-' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: '-' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: '-' },
+    { num: 16, name: 'මනෝ ධාතුව', value: '-' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: 'කුසල් සිත් 21' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: 'චෛතසික 38' }
+  ];
+}
+
+// ============================================================
+// ආයතන - අබ්‍යාකත පමණක්
+// ============================================================
+function makeAyatanaForAbyakata() {
+  return [
+    { num: 1, name: 'චක්ඛායතනය', value: 'චක්ඛු ප්‍රසාද රූපය' },
+    { num: 2, name: 'සෝතායතනය', value: 'සෝත ප්‍රසාද රූපය' },
+    { num: 3, name: 'ඝානායතනය', value: 'ඝාන ප්‍රසාද රූපය' },
+    { num: 4, name: 'ජිව්හායතනය', value: 'ජිව්හා ප්‍රසාද රූපය' },
+    { num: 5, name: 'කායායතනය', value: 'කාය ප්‍රසාද රූපය' },
+    { num: 6, name: 'රූපායතනය', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්දායතනය', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධායතනය', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රසායතනය', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බායතනය', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'මනායතනය', value: 'විපාක සිත් 36 + ක්‍රියා සිත් 20' },
+    { num: 12, name: 'ධම්මායතනය', value: 'චෛතසික 38 + රූප 28 + නිර්වාණය' }
+  ];
+}
+
+function makeDhatuForAbyakata() {
+  return [
+    { num: 1, name: 'චක්ඛු ධාතුව', value: 'චක්ඛු ප්‍රසාදය' },
+    { num: 2, name: 'සෝත ධාතුව', value: 'සෝත ප්‍රසාදය' },
+    { num: 3, name: 'ඝාන ධාතුව', value: 'ඝාන ප්‍රසාදය' },
+    { num: 4, name: 'ජිව්හා ධාතුව', value: 'ජිව්හා ප්‍රසාදය' },
+    { num: 5, name: 'කාය ධාතුව', value: 'කාය ප්‍රසාදය' },
+    { num: 6, name: 'රූප ධාතුව', value: 'වර්ණ රූපය' },
+    { num: 7, name: 'සද්ද ධාතුව', value: 'ශබ්ද රූපය' },
+    { num: 8, name: 'ගන්ධ ධාතුව', value: 'ගන්ධ රූපය' },
+    { num: 9, name: 'රස ධාතුව', value: 'රස රූපය' },
+    { num: 10, name: 'ඵොට්ඨබ්බ ධාතුව', value: 'පඨවි, තෙජෝ, වායෝ' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණ ධාතුව', value: 'චක්ඛුවිඤ්ඤාණ සිත් 2' },
+    { num: 12, name: 'සෝතවිඤ්ඤාණ ධාතුව', value: 'සෝතවිඤ්ඤාණ සිත් 2' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණ ධාතුව', value: 'ඝානවිඤ්ඤාණ සිත් 2' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණ ධාතුව', value: 'ජිව්හාවිඤ්ඤාණ සිත් 2' },
+    { num: 15, name: 'කායවිඤ්ඤාණ ධාතුව', value: 'කායවිඤ්ඤාණ සිත් 2' },
+    { num: 16, name: 'මනෝ ධාතුව', value: 'පඤ්චද්වාරාවර්ජන + සම්පටිච්ඡන සිත් 3' },
+    { num: 17, name: 'මනෝවිඤ්ඤාණ ධාතුව', value: 'විපාක සිත් 36 + ක්‍රියා සිත් 20' },
+    { num: 18, name: 'ධම්ම ධාතුව', value: 'චෛතසික 38 + රූප 28 + නිර්වාණය' }
+  ];
+}
+
+// ============================================================
+// සුත්තන්ත මාතිකා දත්ත
+// ============================================================
+
 var suttantaFullData = [
   // ============================================================
   // 01. විජ්ජාභාගි දුකය
@@ -13,8 +474,8 @@ var suttantaFullData = [
         desc: 'විද්‍යාවට අයත් ධර්ම.',
         svartha: 'විජ්ජාභාගිනෝ ධම්මා - විද්‍යාවට අයත් වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
@@ -27,8 +488,8 @@ var suttantaFullData = [
         desc: 'අවිද්‍යාවට අයත් ධර්ම.',
         svartha: 'අවිජ්ජාභාගිනෝ ධම්මා - අවිද්‍යාවට අයත් වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 25', 'අකුසල් සිත් 12'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForAkusala(),
+        dhatu: makeDhatuForAkusala(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'අකුසල් සිත් 12 + චෛතසික 26'},
           {num:2,name:'සමුදය සත්‍යය',value:'මෝහ චෛතසිකය'},
@@ -85,8 +546,8 @@ var suttantaFullData = [
         desc: 'බාලයන්ගේ ධර්ම.',
         svartha: 'බාලා ධම්මා - බාලයන්ට අයත් වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 25', 'අකුසල් සිත් 12'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForAkusala(),
+        dhatu: makeDhatuForAkusala(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'අකුසල් සිත් 12 + චෛතසික 26'},
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
@@ -99,8 +560,8 @@ var suttantaFullData = [
         desc: 'පණ්ඩිතයන්ගේ ධර්ම.',
         svartha: 'පණ්ඩිතා ධම්මා - පණ්ඩිතයන්ට අයත් වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
@@ -121,8 +582,8 @@ var suttantaFullData = [
         desc: 'කළු (අකුසල) ධර්ම.',
         svartha: 'කණ්හා ධම්මා - කළු වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 25', 'අකුසල් සිත් 12'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForAkusala(),
+        dhatu: makeDhatuForAkusala(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'අකුසල් සිත් 12 + චෛතසික 26'},
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
@@ -135,8 +596,8 @@ var suttantaFullData = [
         desc: 'සුදු (කුසල) ධර්ම.',
         svartha: 'සුක්කා ධම්මා - සුදු වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
@@ -157,8 +618,8 @@ var suttantaFullData = [
         desc: 'තවන (දවන) ධර්ම.',
         svartha: 'තපනීයා ධම්මා - තවන ස්වභාව ඇති නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 25', 'අකුසල් සිත් 12'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForAkusala(),
+        dhatu: makeDhatuForAkusala(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'අකුසල් සිත් 12 + චෛතසික 26'},
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
@@ -171,8 +632,8 @@ var suttantaFullData = [
         desc: 'නොතවන ධර්ම.',
         svartha: 'අතපනීයා ධම්මා - නොතවන ස්වභාව ඇති නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
         sathya: makeSathya([
           {num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
@@ -193,8 +654,8 @@ var suttantaFullData = [
         desc: 'අධිවචන ධර්ම.',
         svartha: 'අධිවචනා ධම්මා - අධිවචන වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'අධිවචන'),
+        dhatu: makeDhatuForNamaOnly('-', 'අධිවචන'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
@@ -202,8 +663,8 @@ var suttantaFullData = [
         desc: 'අනධිවචන ධර්ම.',
         svartha: 'අනධිවචනා ධම්මා - අනධිවචන වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'අනධිවචන'),
+        dhatu: makeDhatuForNamaOnly('-', 'අනධිවචන'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -219,8 +680,8 @@ var suttantaFullData = [
         desc: 'නිරුක්ති ධර්ම.',
         svartha: 'නිරුත්ති ධම්මා - නිරුක්ති වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'නිරුත්ති'),
+        dhatu: makeDhatuForNamaOnly('-', 'නිරුත්ති'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
@@ -228,8 +689,8 @@ var suttantaFullData = [
         desc: 'අනිරුක්ති ධර්ම.',
         svartha: 'අනිරුත්ති ධම්මා - අනිරුක්ති වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'අනිරුත්ති'),
+        dhatu: makeDhatuForNamaOnly('-', 'අනිරුත්ති'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -245,8 +706,8 @@ var suttantaFullData = [
         desc: 'ප්‍රඥප්ති ධර්ම.',
         svartha: 'පඤ්ඤත්ති ධම්මා - ප්‍රඥප්ති වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'පඤ්ඤත්ති'),
+        dhatu: makeDhatuForNamaOnly('-', 'පඤ්ඤත්ති'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
@@ -254,8 +715,8 @@ var suttantaFullData = [
         desc: 'අප්‍රඥප්ති ධර්ම.',
         svartha: 'අපඤ්ඤත්ති ධම්මා - අප්‍රඥප්ති වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'අපඤ්ඤත්ති'),
+        dhatu: makeDhatuForNamaOnly('-', 'අපඤ්ඤත්ති'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -269,20 +730,20 @@ var suttantaFullData = [
       {
         name: 'නාම ධම්මා',
         desc: 'නාම ධර්ම.',
-        svartha: 'නාම ධම්මා - නාම වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'නාම ධම්මා - නාම වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('සිත් 89', 'චෛතසික 52'),
+        dhatu: makeDhatuForCittaCetasika('සිත් 89', 'චෛතසික 52', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'රූප ධම්මා',
         desc: 'රූප ධර්ම.',
-        svartha: 'රූප ධම්මා - රූප වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'රූප ධම්මා - රූප වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය.\nආයතන වශයෙන්: එකොළොසකි.\nධාතු වශයෙන්: එකොළොසකි.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('රූප 28', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForRupaOnly('සුබුම රූප 16'),
+        dhatu: makeDhatuForRupaOnly('සුබුම රූප 16'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
   },
@@ -295,19 +756,19 @@ var suttantaFullData = [
       {
         name: 'අවිජ්ජා ධම්මා',
         desc: 'අවිද්‍යා ධර්ම.',
-        svartha: 'අවිජ්ජා ධම්මා - අවිද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අවිජ්ජා ධම්මා - අවිද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'මෝහ චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'මෝහ චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'මෝහ චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'මෝහය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'විජ්ජා ධම්මා',
         desc: 'විද්‍යා ධර්ම.',
-        svartha: 'විජ්ජා ධම්මා - විද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'විජ්ජා ධම්මා - විද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: මාර්ග සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'අමෝහ චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'අමෝහ චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'අමෝහ චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'අමෝහය'}])
       }
     ]
@@ -321,19 +782,19 @@ var suttantaFullData = [
       {
         name: 'සස්සතදිට්ඨි ධම්මා',
         desc: 'ශාස්වත දෘෂ්ටි ධර්ම.',
-        svartha: 'සස්සතදිට්ඨි ධම්මා - ශාස්වත දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සස්සතදිට්ඨි ධම්මා - ශාස්වත දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දිට්ඨි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දිට්ඨි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දිට්ඨි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දිට්ඨි'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අසස්සතදිට්ඨි ධම්මා',
         desc: 'අශාස්වත දෘෂ්ටි ධර්ම.',
-        svartha: 'අසස්සතදිට්ඨි ධම්මා - අශාස්වත දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අසස්සතදිට්ඨි ධම්මා - අශාස්වත දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දිට්ඨි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දිට්ඨි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දිට්ඨි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දිට්ඨි'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -347,19 +808,19 @@ var suttantaFullData = [
       {
         name: 'අන්තවාදිට්ඨි ධම්මා',
         desc: 'අන්තවාද දෘෂ්ටි ධර්ම.',
-        svartha: 'අන්තවාදිට්ඨි ධම්මා - අන්තවාද දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අන්තවාදිට්ඨි ධම්මා - අන්තවාද දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දිට්ඨි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දිට්ඨි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දිට්ඨි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දිට්ඨි'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අනන්තවාදිට්ඨි ධම්මා',
         desc: 'අනන්තවාද දෘෂ්ටි ධර්ම.',
-        svartha: 'අනන්තවාදිට්ඨි ධම්මා - අනන්තවාද දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අනන්තවාදිට්ඨි ධම්මා - අනන්තවාද දෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දිට්ඨි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දිට්ඨි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දිට්ඨි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දිට්ඨි'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -373,19 +834,19 @@ var suttantaFullData = [
       {
         name: 'පුබ්බන්තානුදිට්ඨි ධම්මා',
         desc: 'පූර්වාන්තානුදෘෂ්ටි ධර්ම.',
-        svartha: 'පුබ්බන්තානුදිට්ඨි ධම්මා - පූර්වාන්තානුදෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'පුබ්බන්තානුදිට්ඨි ධම්මා - පූර්වාන්තානුදෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දිට්ඨි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දිට්ඨි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දිට්ඨි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දිට්ඨි'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අපරන්තානුදිට්ඨි ධම්මා',
         desc: 'අපරාන්තානුදෘෂ්ටි ධර්ම.',
-        svartha: 'අපරන්තානුදිට්ඨි ධම්මා - අපරාන්තානුදෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අපරන්තානුදිට්ඨි ධම්මා - අපරාන්තානුදෘෂ්ටි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දිට්ඨි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දිට්ඨි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දිට්ඨි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දිට්ඨි'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -399,19 +860,19 @@ var suttantaFullData = [
       {
         name: 'අහිරික ධම්මා',
         desc: 'අහිරික ධර්ම.',
-        svartha: 'අහිරික ධම්මා - අහිරික වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අහිරික ධම්මා - අහිරික වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'අහිරික චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'අහිරික චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'අහිරික චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'අහිරික'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'හිරි ධම්මා',
         desc: 'හිරි ධර්ම.',
-        svartha: 'හිරි ධම්මා - හිරි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'හිරි ධම්මා - හිරි වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: මාර්ග සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'හිරි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'හිරි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'හිරි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'හිරි'}])
       }
     ]
@@ -425,19 +886,19 @@ var suttantaFullData = [
       {
         name: 'අනොත්තප්ප ධම්මා',
         desc: 'අනොත්තප්ප ධර්ම.',
-        svartha: 'අනොත්තප්ප ධම්මා - අනොත්තප්ප වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අනොත්තප්ප ධම්මා - අනොත්තප්ප වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'අනොත්තප්ප චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'අනොත්තප්ප චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'අනොත්තප්ප චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'අනොත්තප්ප'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'ඔත්තප්ප ධම්මා',
         desc: 'ඔත්තප්ප ධර්ම.',
-        svartha: 'ඔත්තප්ප ධම්මා - ඔත්තප්ප වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'ඔත්තප්ප ධම්මා - ඔත්තප්ප වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: මාර්ග සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'ඔත්තප්ප චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'ඔත්තප්ප චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'ඔත්තප්ප චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ඔත්තප්ප'}])
       }
     ]
@@ -451,19 +912,19 @@ var suttantaFullData = [
       {
         name: 'දොවචස්ස ධම්මා',
         desc: 'දොවචස්ස ධර්ම.',
-        svartha: 'දොවචස්ස ධම්මා - දොවචස්ස වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'දොවචස්ස ධම්මා - දොවචස්ස වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දොවචස්ස චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දොවචස්ස චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දොවචස්ස චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දොවචස්ස'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'සොවචස්ස ධම්මා',
         desc: 'සොවචස්ස ධර්ම.',
-        svartha: 'සොවචස්ස ධම්මා - සොවචස්ස වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සොවචස්ස ධම්මා - සොවචස්ස වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: මාර්ග සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'සොවචස්ස චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'සොවචස්ස චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'සොවචස්ස චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'සොවචස්ස'}])
       }
     ]
@@ -477,20 +938,20 @@ var suttantaFullData = [
       {
         name: 'පාපසහාය ධම්මා',
         desc: 'පවට සහාය වන ධර්ම.',
-        svartha: 'පාපසහාය ධම්මා - පවට සහාය වන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'අකුසල චෛතසික', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'අකුසල'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        svartha: 'පාපසහාය ධම්මා - පවට සහාය වන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 25', 'අකුසල් සිත් 12'),
+        ayatana: makeAyatanaForAkusala(),
+        dhatu: makeDhatuForAkusala(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'අකුසල් සිත් 12 + චෛතසික 26'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'කල්‍යාණසහාය ධම්මා',
         desc: 'කල්‍යාණයට සහාය වන ධර්ම.',
-        svartha: 'කල්‍යාණසහාය ධම්මා - කල්‍යාණයට සහාය වන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'කුසල චෛතසික', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'කුසල'}])
+        svartha: 'කල්‍යාණසහාය ධම්මා - කල්‍යාණයට සහාය වන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -503,20 +964,20 @@ var suttantaFullData = [
       {
         name: 'ආපායික ධම්මා',
         desc: 'අපායට ගමන් කරවන ධර්ම.',
-        svartha: 'ආපායික ධම්මා - අපායට ගමන් කරවන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'අකුසල චෛතසික', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'අකුසල'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        svartha: 'ආපායික ධම්මා - අපායට ගමන් කරවන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 25', 'අකුසල් සිත් 12'),
+        ayatana: makeAyatanaForAkusala(),
+        dhatu: makeDhatuForAkusala(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'අකුසල් සිත් 12 + චෛතසික 26'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අපායික ධම්මා',
         desc: 'අපායට නොගමන් කරවන ධර්ම.',
-        svartha: 'අපායික ධම්මා - අපායට නොගමන් කරවන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'කුසල චෛතසික', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'කුසල'}])
+        svartha: 'අපායික ධම්මා - අපායට නොගමන් කරවන නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -529,20 +990,20 @@ var suttantaFullData = [
       {
         name: 'දිට්ඨිගතා ධම්මා',
         desc: 'දෘෂ්ටිගත ධර්ම.',
-        svartha: 'දිට්ඨිගතා ධම්මා - දෘෂ්ටිගත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'දිට්ඨිගතා ධම්මා - දෘෂ්ටිගත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'දිට්ඨි චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'දිට්ඨි චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'දිට්ඨි චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'දිට්ඨි'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අදිට්ඨිගතා ධම්මා',
         desc: 'අදෘෂ්ටිගත ධර්ම.',
-        svartha: 'අදිට්ඨිගතා ධම්මා - අදෘෂ්ටිගත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
+        svartha: 'අදිට්ඨිගතා ධම්මා - අදෘෂ්ටිගත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: පහකි.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
+        skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 51', 'සිත් 89'),
         ayatana: makeAyatana(),
         dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -555,20 +1016,20 @@ var suttantaFullData = [
       {
         name: 'සඤ්ඤා ධම්මා',
         desc: 'සංඥා ධර්ම.',
-        svartha: 'සඤ්ඤා ධම්මා - සංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සඤ්ඤා ධම්මා - සංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සඤ්ඤාස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: ලෝකික සෙහේතුක සිත් 69 හි සඤ්ඤා චෛතසිකය දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'සඤ්ඤා චෛතසිකය', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'සඤ්ඤා චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'සඤ්ඤා චෛතසිකය', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'සඤ්ඤා චෛතසිකය'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අසඤ්ඤා ධම්මා',
         desc: 'අසංඥා ධර්ම.',
-        svartha: 'අසඤ්ඤා ධම්මා - අසංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අසඤ්ඤා ධම්මා - අසංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, වේදනාස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'නැත', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -581,19 +1042,19 @@ var suttantaFullData = [
       {
         name: 'සංඛාර ධම්මා',
         desc: 'සංස්කාර ධර්ම.',
-        svartha: 'සංඛාර ධම්මා - සංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සංඛාර ධම්මා - සංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: ලෝකික සෙහේතුක සිත් 69 හි සංස්කාර චෛතසික 50 දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'සංඛාර චෛතසික 50', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'සංඛාර චෛතසික 50'),
+        dhatu: makeDhatuForCittaCetasika('-', 'සංඛාර චෛතසික 50', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'සංඛාර චෛතසික 50'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'අසංඛාර ධම්මා',
         desc: 'අසංස්කාර ධර්ම.',
-        svartha: 'අසංඛාර ධම්මා - අසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අසංඛාර ධම්මා - අසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: විනිර්මුක්තය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: නිරෝධ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNibbanaOnly(),
+        dhatu: makeDhatuForNibbanaOnly(),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -607,20 +1068,20 @@ var suttantaFullData = [
       {
         name: 'වේදනා ධම්මා',
         desc: 'වේදනා ධර්ම.',
-        svartha: 'වේදනා ධම්මා - වේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'වේදනා ධම්මා - වේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: ලෝකික සෙහේතුක සිත් 69 හි වේදනා චෛතසිකය දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'වේදනා චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'වේදනා චෛතසිකය', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා චෛතසිකය'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අවේදනා ධම්මා',
         desc: 'අවේදනා ධර්ම.',
-        svartha: 'අවේදනා ධම්මා - අවේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අවේදනා ධම්මා - අවේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -633,20 +1094,20 @@ var suttantaFullData = [
       {
         name: 'සඤ්ඤාවේදයිත ධම්මා',
         desc: 'සංඥාවේදයිත ධර්ම.',
-        svartha: 'සඤ්ඤාවේදයිත ධම්මා - සංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සඤ්ඤාවේදයිත ධම්මා - සංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'වේදනා + සඤ්ඤා චෛතසික'),
+        dhatu: makeDhatuForCittaCetasika('-', 'වේදනා + සඤ්ඤා චෛතසික', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා + සඤ්ඤා චෛතසික'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අසඤ්ඤාවේදයිත ධම්මා',
         desc: 'අසංඥාවේදයිත ධර්ම.',
-        svartha: 'අසඤ්ඤාවේදයිත ධම්මා - අසංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අසඤ්ඤාවේදයිත ධම්මා - අසංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'නැත', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 50', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 50', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 50 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -659,20 +1120,20 @@ var suttantaFullData = [
       {
         name: 'සඤ්ඤාවේදයිතසංඛාර ධම්මා',
         desc: 'සංඥාවේදයිතසංස්කාර ධර්ම.',
-        svartha: 'සඤ්ඤාවේදයිතසංඛාර ධම්මා - සංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සඤ්ඤාවේදයිතසංඛාර ධම්මා - සංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'වේදනා + සඤ්ඤා + සංඛාර චෛතසික 50'),
+        dhatu: makeDhatuForCittaCetasika('-', 'වේදනා + සඤ්ඤා + සංඛාර චෛතසික 50', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා + සඤ්ඤා + සංඛාර චෛතසික 50'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'අසඤ්ඤාවේදයිතසංඛාර ධම්මා',
         desc: 'අසංඥාවේදයිතසංස්කාර ධර්ම.',
-        svartha: 'අසඤ්ඤාවේදයිතසංඛාර ධම්මා - අසංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අසඤ්ඤාවේදයිතසංඛාර ධම්මා - අසංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'නැත', 'නැත', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', '-', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', '-', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -685,20 +1146,20 @@ var suttantaFullData = [
       {
         name: 'ඵස්ස ධම්මා',
         desc: 'ස්පර්ශ ධර්ම.',
-        svartha: 'ඵස්ස ධම්මා - ස්පර්ශ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'ඵස්ස ධම්මා - ස්පර්ශ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'ඵස්ස චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'ඵස්ස චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'ඵස්ස චෛතසිකය', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ඵස්ස චෛතසිකය'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'අඵස්ස ධම්මා',
         desc: 'අස්පර්ශ ධර්ම.',
-        svartha: 'අඵස්ස ධම්මා - අස්පර්ශ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අඵස්ස ධම්මා - අස්පර්ශ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 49', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -711,20 +1172,20 @@ var suttantaFullData = [
       {
         name: 'වේදනා ධම්මා',
         desc: 'වේදනා ධර්ම.',
-        svartha: 'වේදනා ධම්මා - වේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'වේදනා ධම්මා - වේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'වේදනා චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'වේදනා චෛතසිකය', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා චෛතසිකය'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'න වේදනා ධම්මා',
         desc: 'න වේදනා ධර්ම.',
-        svartha: 'න වේදනා ධම්මා - න වේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න වේදනා ධම්මා - න වේදනා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -737,20 +1198,20 @@ var suttantaFullData = [
       {
         name: 'වේදනාවේදයිත ධම්මා',
         desc: 'වේදනාවේදයිත ධර්ම.',
-        svartha: 'වේදනාවේදයිත ධම්මා - වේදනාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'වේදනාවේදයිත ධම්මා - වේදනාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'වේදනා චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'වේදනා චෛතසිකය', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා චෛතසිකය'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'න වේදනාවේදයිත ධම්මා',
         desc: 'න වේදනාවේදයිත ධර්ම.',
-        svartha: 'න වේදනාවේදයිත ධම්මා - න වේදනාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න වේදනාවේදයිත ධම්මා - න වේදනාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -763,20 +1224,20 @@ var suttantaFullData = [
       {
         name: 'සඤ්ඤා ධම්මා',
         desc: 'සංඥා ධර්ම.',
-        svartha: 'සඤ්ඤා ධම්මා - සංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සඤ්ඤා ධම්මා - සංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සඤ්ඤාස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'සඤ්ඤා චෛතසිකය', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'සඤ්ඤා චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'සඤ්ඤා චෛතසිකය', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'සඤ්ඤා චෛතසිකය'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'න සඤ්ඤා ධම්මා',
         desc: 'න සංඥා ධර්ම.',
-        svartha: 'න සඤ්ඤා ධම්මා - න සංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න සඤ්ඤා ධම්මා - න සංඥා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, වේදනාස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'නැත', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 51', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -789,20 +1250,20 @@ var suttantaFullData = [
       {
         name: 'සඤ්ඤාවේදයිත ධම්මා',
         desc: 'සංඥාවේදයිත ධර්ම.',
-        svartha: 'සඤ්ඤාවේදයිත ධම්මා - සංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සඤ්ඤාවේදයිත ධම්මා - සංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'වේදනා + සඤ්ඤා චෛතසික'),
+        dhatu: makeDhatuForCittaCetasika('-', 'වේදනා + සඤ්ඤා චෛතසික', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා + සඤ්ඤා චෛතසික'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'න සඤ්ඤාවේදයිත ධම්මා',
         desc: 'න සංඥාවේදයිත ධර්ම.',
-        svartha: 'න සඤ්ඤාවේදයිත ධම්මා - න සංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න සඤ්ඤාවේදයිත ධම්මා - න සංඥාවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'නැත', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'චෛතසික 50', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'චෛතසික 50', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 50 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -815,20 +1276,20 @@ var suttantaFullData = [
       {
         name: 'සංඛාර ධම්මා',
         desc: 'සංස්කාර ධර්ම.',
-        svartha: 'සංඛාර ධම්මා - සංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සංඛාර ධම්මා - සංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'සංඛාර චෛතසික 50', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'සංඛාර චෛතසික 50'),
+        dhatu: makeDhatuForCittaCetasika('-', 'සංඛාර චෛතසික 50', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'සංඛාර චෛතසික 50'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'න සංඛාර ධම්මා',
         desc: 'න සංස්කාර ධර්ම.',
-        svartha: 'න සංඛාර ධම්මා - න සංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න සංඛාර ධම්මා - න සංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'නැත', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', 'වේදනා + සඤ්ඤා චෛතසික', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', 'වේදනා + සඤ්ඤා චෛතසික', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 2 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -841,20 +1302,20 @@ var suttantaFullData = [
       {
         name: 'සඤ්ඤාවේදයිතසංඛාර ධම්මා',
         desc: 'සංඥාවේදයිතසංස්කාර ධර්ම.',
-        svartha: 'සඤ්ඤාවේදයිතසංඛාර ධම්මා - සංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සඤ්ඤාවේදයිතසංඛාර ධම්මා - සංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('-', 'වේදනා + සඤ්ඤා + සංඛාර චෛතසික 50'),
+        dhatu: makeDhatuForCittaCetasika('-', 'වේදනා + සඤ්ඤා + සංඛාර චෛතසික 50', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා + සඤ්ඤා + සංඛාර චෛතසික 50'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'න සඤ්ඤාවේදයිතසංඛාර ධම්මා',
         desc: 'න සංඥාවේදයිතසංස්කාර ධර්ම.',
-        svartha: 'න සඤ්ඤාවේදයිතසංඛාර ධම්මා - න සංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න සඤ්ඤාවේදයිතසංඛාර ධම්මා - න සංඥාවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'නැත', 'නැත', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('සිත් 89', '-', 'රූප 28'),
+        dhatu: makeDhatuForAll('සිත් 89', '-', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -867,20 +1328,20 @@ var suttantaFullData = [
       {
         name: 'විඤ්ඤාණ ධම්මා',
         desc: 'විඤ්ඤාණ ධර්ම.',
-        svartha: 'විඤ්ඤාණ ධම්මා - විඤ්ඤාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'විඤ්ඤාණ ධම්මා - විඤ්ඤාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: මනායතනය.\nධාතු වශයෙන්: මනෝවිඤ්ඤාණධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('සිත් 89', '-'),
+        dhatu: makeDhatuForCittaCetasika('සිත් 89', '-', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4'}])
       },
       {
         name: 'න විඤ්ඤාණ ධම්මා',
         desc: 'න විඤ්ඤාණ ධර්ම.',
-        svartha: 'න විඤ්ඤාණ ධම්මා - න විඤ්ඤාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න විඤ්ඤාණ ධම්මා - න විඤ්ඤාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('-', 'චෛතසික 52', 'රූප 28'),
+        dhatu: makeDhatuForAll('-', 'චෛතසික 52', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'චෛතසික 52 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -893,20 +1354,20 @@ var suttantaFullData = [
       {
         name: 'විඤ්ඤාණවේදයිත ධම්මා',
         desc: 'විඤ්ඤාණවේදයිත ධර්ම.',
-        svartha: 'විඤ්ඤාණවේදයිත ධම්මා - විඤ්ඤාණවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'විඤ්ඤාණවේදයිත ධම්මා - විඤ්ඤාණවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: මනායතනය.\nධාතු වශයෙන්: මනෝවිඤ්ඤාණධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('සිත් 89', '-'),
+        dhatu: makeDhatuForCittaCetasika('සිත් 89', '-', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4'}])
       },
       {
         name: 'න විඤ්ඤාණවේදයිත ධම්මා',
         desc: 'න විඤ්ඤාණවේදයිත ධර්ම.',
-        svartha: 'න විඤ්ඤාණවේදයිත ධම්මා - න විඤ්ඤාණවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න විඤ්ඤාණවේදයිත ධම්මා - න විඤ්ඤාණවේදයිත වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය, සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('-', 'චෛතසික 52', 'රූප 28'),
+        dhatu: makeDhatuForAll('-', 'චෛතසික 52', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'චෛතසික 52 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -919,20 +1380,20 @@ var suttantaFullData = [
       {
         name: 'විඤ්ඤාණසංඛාර ධම්මා',
         desc: 'විඤ්ඤාණසංස්කාර ධර්ම.',
-        svartha: 'විඤ්ඤාණසංඛාර ධම්මා - විඤ්ඤාණසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'විඤ්ඤාණසංඛාර ධම්මා - විඤ්ඤාණසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: මනායතනය, ධම්මායතනය.\nධාතු වශයෙන්: මනෝවිඤ්ඤාණධාතුව, ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('සිත් 89', 'සංඛාර චෛතසික 50'),
+        dhatu: makeDhatuForCittaCetasika('සිත් 89', 'සංඛාර චෛතසික 50', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + සංඛාර චෛතසික 50'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'න විඤ්ඤාණසංඛාර ධම්මා',
         desc: 'න විඤ්ඤාණසංස්කාර ධර්ම.',
-        svartha: 'න විඤ්ඤාණසංඛාර ධම්මා - න විඤ්ඤාණසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න විඤ්ඤාණසංඛාර ධම්මා - න විඤ්ඤාණසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, වේදනාස්කන්ධය, සඤ්ඤාස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('-', 'වේදනා + සඤ්ඤා චෛතසික', 'රූප 28'),
+        dhatu: makeDhatuForAll('-', 'වේදනා + සඤ්ඤා චෛතසික', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'වේදනා + සඤ්ඤා චෛතසික + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -945,20 +1406,20 @@ var suttantaFullData = [
       {
         name: 'විඤ්ඤාණවේදයිතසංඛාර ධම්මා',
         desc: 'විඤ්ඤාණවේදයිතසංස්කාර ධර්ම.',
-        svartha: 'විඤ්ඤාණවේදයිතසංඛාර ධම්මා - විඤ්ඤාණවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'විඤ්ඤාණවේදයිතසංඛාර ධම්මා - විඤ්ඤාණවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: වේදනාස්කන්ධය, සංස්කාරස්කන්ධය, විඤ්ඤාණස්කන්ධය.\nආයතන වශයෙන්: මනායතනය, ධම්මායතනය.\nධාතු වශයෙන්: මනෝවිඤ්ඤාණධාතුව, ධම්මධාතුව.\nආර්ය සතය වශයෙන්: දුක්ඛ සතයය.',
         skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'නැත', 'සංඛාර චෛතසික 50', 'සිත් 89'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForCittaCetasika('සිත් 89', 'වේදනා + සංඛාර චෛතසික 50'),
+        dhatu: makeDhatuForCittaCetasika('සිත් 89', 'වේදනා + සංඛාර චෛතසික 50', '-'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + වේදනා + සංඛාර චෛතසික 50'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'න විඤ්ඤාණවේදයිතසංඛාර ධම්මා',
         desc: 'න විඤ්ඤාණවේදයිතසංස්කාර ධර්ම.',
-        svartha: 'න විඤ්ඤාණවේදයිතසංඛාර ධම්මා - න විඤ්ඤාණවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න විඤ්ඤාණවේදයිතසංඛාර ධම්මා - න විඤ්ඤාණවේදයිතසංස්කාර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: රූපස්කන්ධය, සඤ්ඤාස්කන්ධය.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'නැත', 'සඤ්ඤා චෛතසිකය', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForAll('-', 'සඤ්ඤා චෛතසිකය', 'රූප 28'),
+        dhatu: makeDhatuForAll('-', 'සඤ්ඤා චෛතසිකය', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'සඤ්ඤා චෛතසිකය + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -971,19 +1432,19 @@ var suttantaFullData = [
       {
         name: 'සච්ච ධම්මා',
         desc: 'සත්‍ය ධර්ම.',
-        svartha: 'සච්ච ධම්මා - සත්‍ය වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'සච්ච ධම්මා - සත්‍ය වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: පහකි.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'සිත් 89'),
         ayatana: makeAyatana(),
         dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'මුසා ධම්මා',
         desc: 'මුසා ධර්ම.',
-        svartha: 'මුසා ධම්මා - මුසා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'මුසා ධම්මා - මුසා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: විනිර්මුක්තය.\nආයතන වශයෙන්: විනිර්මුක්තය.\nධාතු වශයෙන්: විනිර්මුක්තය.\nආර්ය සතය වශයෙන්: විනිර්මුක්තය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNibbanaOnly(),
+        dhatu: makeDhatuForNibbanaOnly(),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -999,8 +1460,8 @@ var suttantaFullData = [
         desc: 'අර්ථ ධර්ම.',
         svartha: 'අත්ථ ධම්මා - අර්ථ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'අත්ථ'),
+        dhatu: makeDhatuForNamaOnly('-', 'අත්ථ'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
@@ -1008,8 +1469,8 @@ var suttantaFullData = [
         desc: 'න අර්ථ ධර්ම.',
         svartha: 'න අත්ථ ධම්මා - න අර්ථ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNamaOnly('-', 'න අත්ථ'),
+        dhatu: makeDhatuForNamaOnly('-', 'න අත්ථ'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -1023,19 +1484,19 @@ var suttantaFullData = [
       {
         name: 'ධම්ම ධම්මා',
         desc: 'ධර්ම ධර්ම.',
-        svartha: 'ධම්ම ධම්මා - ධර්ම වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'ධම්ම ධම්මා - ධර්ම වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: පහකි.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'සිත් 89'),
         ayatana: makeAyatana(),
         dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'න ධම්ම ධම්මා',
         desc: 'න ධර්ම ධර්ම.',
-        svartha: 'න ධම්ම ධම්මා - න ධර්ම වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න ධම්ම ධම්මා - න ධර්ම වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: විනිර්මුක්තය.\nආයතන වශයෙන්: විනිර්මුක්තය.\nධාතු වශයෙන්: විනිර්මුක්තය.\nආර්ය සතය වශයෙන්: විනිර්මුක්තය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNibbanaOnly(),
+        dhatu: makeDhatuForNibbanaOnly(),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -1049,20 +1510,20 @@ var suttantaFullData = [
       {
         name: 'අවිජ්ජා ධම්මා',
         desc: 'අවිද්‍යා ධර්ම.',
-        svartha: 'අවිජ්ජා ධම්මා - අවිද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අවිජ්ජා ධම්මා - අවිද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සංස්කාරස්කන්ධය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: සමුදය සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'මෝහ චෛතසිකය', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForCittaCetasika('-', 'මෝහ චෛතසිකය'),
+        dhatu: makeDhatuForCittaCetasika('-', 'මෝහ චෛතසිකය', '-'),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'මෝහය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'න අවිජ්ජා ධම්මා',
         desc: 'න අවිද්‍යා ධර්ම.',
-        svartha: 'න අවිජ්ජා ධම්මා - න අවිද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'න අවිජ්ජා ධම්මා - න අවිද්‍යා වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: පහකි.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: තුනකි.',
         skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 49', 'සිත් 89'),
         ayatana: makeAyatana(),
         dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 51 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග'}])
       }
     ]
   },
@@ -1075,19 +1536,19 @@ var suttantaFullData = [
       {
         name: 'භව ධම්මා',
         desc: 'භව ධර්ම.',
-        svartha: 'භව ධම්මා - භව වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        svartha: 'භව ධම්මා - භව වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: පහකි.\nආයතන වශයෙන්: දොළොසකි.\nධාතු වශයෙන්: අටළොසකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('රූප 28', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 50', 'ලෝකික සිත් 81'),
+        ayatana: makeAyatanaForAll('ලෝකික සිත් 81', 'චෛතසික 52', 'රූප 28'),
+        dhatu: makeDhatuForAll('ලෝකික සිත් 81', 'චෛතසික 52', 'රූප 28'),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකික සිත් 81 + චෛතසික 52 + රූප 28'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       },
       {
         name: 'විභව ධම්මා',
         desc: 'විභව ධර්ම.',
-        svartha: 'විභව ධම්මා - විභව වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'විභව ධම්මා - විභව වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: විනිර්මුක්තය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: නිරෝධ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
+        ayatana: makeAyatanaForNibbanaOnly(),
+        dhatu: makeDhatuForNibbanaOnly(),
         sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
@@ -1101,20 +1562,20 @@ var suttantaFullData = [
       {
         name: 'සංවර ධම්මා',
         desc: 'සංවර ධර්ම.',
-        svartha: 'සංවර ධම්මා - සංවර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'සංවර'}])
+        svartha: 'සංවර ධම්මා - සංවර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'අසංවර ධම්මා',
         desc: 'අසංවර ධර්ම.',
-        svartha: 'අසංවර ධම්මා - අසංවර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'අසංවර'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        svartha: 'අසංවර ධම්මා - අසංවර වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 25', 'අකුසල් සිත් 12'),
+        ayatana: makeAyatanaForAkusala(),
+        dhatu: makeDhatuForAkusala(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'අකුසල් සිත් 12 + චෛතසික 26'},{num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
   },
@@ -1127,20 +1588,20 @@ var suttantaFullData = [
       {
         name: 'පහාන ධම්මා',
         desc: 'ප්‍රහාණ ධර්ම.',
-        svartha: 'පහාන ධම්මා - ප්‍රහාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
-        skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'ප්‍රහාණ'}])
+        svartha: 'පහාන ධම්මා - ප්‍රහාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: සතරකි.\nආයතන වශයෙන්: දෙකකි.\nධාතු වශයෙන්: දෙකකි.\nආර්ය සතය වශයෙන්: දෙකකි.',
+        skandha: makeSkandha('නැත', 'වේදනා චෛතසිකය', 'සඤ්ඤා චෛතසිකය', 'සංඛාර චෛතසික 36', 'ලෝකෝත්තර සිත් 8'),
+        ayatana: makeAyatanaForLokuttara(),
+        dhatu: makeDhatuForLokuttara(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'ලෝකෝත්තර සිත් 8 + චෛතසික 36'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 හි මාර්ගාංග'}])
       },
       {
         name: 'අපහාන ධම්මා',
         desc: 'අප්‍රහාණ ධර්ම.',
-        svartha: 'අපහාන ධම්මා - අප්‍රහාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.',
+        svartha: 'අපහාන ධම්මා - අප්‍රහාණ වූ නිස්සත්ව නිජ්ජීව පරමාර්ථ ස්වභාව ධර්මයෝ ඇත්තාහ.\n\nස්කන්ධ වශයෙන්: විනිර්මුක්තය.\nආයතන වශයෙන්: ධම්මායතනය.\nධාතු වශයෙන්: ධම්මධාතුව.\nආර්ය සතය වශයෙන්: නිරෝධ සතයය.',
         skandha: makeSkandha('නැත', 'නැත', 'නැත', 'නැත', 'නැත'),
-        ayatana: makeAyatana(),
-        dhatu: makeDhatu(),
-        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'-'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
+        ayatana: makeAyatanaForNibbanaOnly(),
+        dhatu: makeDhatuForNibbanaOnly(),
+        sathya: makeSathya([{num:1,name:'දුක්ඛ සත්‍යය',value:'-'},{num:2,name:'සමුදය සත්‍යය',value:'-'},{num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},{num:4,name:'මාර්ග සත්‍යය',value:'-'}])
       }
     ]
   }
