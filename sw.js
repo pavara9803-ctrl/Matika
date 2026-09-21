@@ -1,15 +1,15 @@
 // ============================================================
 // Service Worker - Automatic Update Support
 // ============================================================
-var CACHE_NAME = 'matika-cache-v10';  // v9 සිට v10 දක්වා වැඩි කරන්න
+var CACHE_NAME = 'matika-cache-v11';  // ✅ සෑම අප්ලෝඩ් එකකදීම මෙය පමණක් වෙනස් කරන්න
 var urlsToCache = [
   './',
   './index.html',
-  './tika-data.js?v=10',       // ✅ ?v=10 එක්කරන්න
-  './duka-data.js?v=10',       // ✅ ?v=10 එක්කරන්න
-  './suttanta-data.js?v=10',   // ✅ ?v=10 එක්කරන්න
-  './sabbatika-data.js?v=10',  // ✅ ?v=10 එක්කරන්න
-  './manifest.json?v=10',      // ✅ ?v=10 එක්කරන්න
+  './tika-data.js',
+  './duka-data.js',
+  './suttanta-data.js',
+  './sabbatika-data.js',
+  './manifest.json',
   './launchericon-48x48.png',
   './launchericon-192x192.png',
   './launchericon-512x512.png'
@@ -18,7 +18,6 @@ var urlsToCache = [
 // ============ INSTALL EVENT ============
 self.addEventListener('install', function(event) {
   console.log('[SW] Installing new version:', CACHE_NAME);
-  // නව Service Worker එක ක්ෂණිකව සක්‍රීය කරන්න (පැරණි එක රැඳී නොසිටින්න)
   self.skipWaiting();
   
   event.waitUntil(
@@ -47,20 +46,18 @@ self.addEventListener('activate', function(event) {
         })
       );
     }).then(function() {
-      // සියලුම Clients (විවෘත ටැබ්) වෙත පණිවිඩය යවන්න
       return self.clients.claim();
     })
   );
 });
 
-// ============ FETCH EVENT (Network First, Fallback to Cache) ============
+// ============ FETCH EVENT ============
 self.addEventListener('fetch', function(event) {
-  // Chrome Extension වැනි දේ නොසලකා හරින්න
   if (!event.request.url.startsWith('http')) return;
-  
+
   var url = event.request.url;
   
-  // HTML, JS සහ root සඳහා network-first (cache bypass)
+  // HTML, JS සහ root සඳහා network-first
   if (url.endsWith('.html') || url.endsWith('.js') || 
       url.endsWith('/') || url.endsWith('.json')) {
     event.respondWith(
@@ -83,9 +80,13 @@ self.addEventListener('fetch', function(event) {
   
   // අනෙකුත් (images, icons) සඳහා cache-first
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request).then(function(networkResponse) {
-        if (networkResponse && networkResponse.status === 200) {
+    caches.match(event.request).then(function(cachedResponse) {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request).then(function(networkResponse) {
+        if (networkResponse && networkResponse.status === 200 && 
+            networkResponse.type === 'basic') {
           var responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then(function(cache) {
             cache.put(event.request, responseToCache);
@@ -97,7 +98,7 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-// ============ 4. MESSAGE EVENT ============
+// ============ MESSAGE EVENT ============
 self.addEventListener('message', function(event) {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
