@@ -1,15 +1,15 @@
 // ============================================================
 // Service Worker - Automatic Update Support
 // ============================================================
-var CACHE_NAME = 'matika-cache-v9';  // v8 සිට v9 දක්වා වැඩි කරන්න
+var CACHE_NAME = 'matika-cache-v10';  // v8 සිට v9 දක්වා වැඩි කරන්න
 var urlsToCache = [
   './',
   './index.html',
-  './tika-data.js',
-  './duka-data.js',
-  './suttanta-data.js',
-  './sabbatika-data.js',
-  './manifest.json',
+  './tika-data.js?v=10',       // ✅ ?v=10 එක්කරන්න
+  './duka-data.js?v=10',       // ✅ ?v=10 එක්කරන්න
+  './suttanta-data.js?v=10',   // ✅ ?v=10 එක්කරන්න
+  './sabbatika-data.js?v=10',  // ✅ ?v=10 එක්කරන්න
+  './manifest.json?v=10',      // ✅ ?v=10 එක්කරන්න
   './launchericon-48x48.png',
   './launchericon-192x192.png',
   './launchericon-512x512.png'
@@ -58,26 +58,46 @@ self.addEventListener('fetch', function(event) {
   // Chrome Extension වැනි දේ නොසලකා හරින්න
   if (!event.request.url.startsWith('http')) return;
   
+  var url = event.request.url;
+  
+  // HTML, JS සහ root සඳහා network-first (cache bypass)
+  if (url.endsWith('.html') || url.endsWith('.js') || 
+      url.endsWith('/') || url.endsWith('.json')) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then(function(response) {
+          if (response && response.status === 200 && response.type === 'basic') {
+            var responseToCache = response.clone();
+            caches.open(CACHE_NAME).then(function(cache) {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return response;
+        })
+        .catch(function() {
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
+  
+  // අනෙකුත් (images, icons) සඳහා cache-first
   event.respondWith(
-    fetch(event.request)
-      .then(function(response) {
-        // අන්තර්ජාලයෙන් ලැබුණු නව දත්ත Cache එකට එක් කරන්න
-        if (response && response.status === 200 && response.type === 'basic') {
-          var responseToCache = response.clone();
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request).then(function(networkResponse) {
+        if (networkResponse && networkResponse.status === 200) {
+          var responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then(function(cache) {
             cache.put(event.request, responseToCache);
           });
         }
-        return response;
-      })
-      .catch(function() {
-        // අන්තර්ජාලය නොමැති නම් Cache එකෙන් ලබා දෙන්න
-        return caches.match(event.request);
-      })
+        return networkResponse;
+      });
+    })
   );
 });
 
-// ============ MESSAGE EVENT (Update Notification) ============
+// ============ 4. MESSAGE EVENT ============
 self.addEventListener('message', function(event) {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
