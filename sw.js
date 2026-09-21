@@ -1,7 +1,7 @@
 // ============================================================
 // Service Worker - Automatic Update Support
 // ============================================================
-var CACHE_NAME = 'matika-cache-v6';  // v5 සිට v6 දක්වා වැඩි කරන්න
+var CACHE_NAME = 'matika-cache-v7';  // v6 සිට v7 දක්වා වැඩි කරන්න
 var urlsToCache = [
   './',
   './index.html',
