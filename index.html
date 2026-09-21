@@ -387,7 +387,6 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <i class="fa-solid fa-xmark"></i>
 </button>
 </div>
-
 <script>
 // ============ PWA INSTALL LOGIC ============
 var deferredPrompt = null;
@@ -707,7 +706,12 @@ function renderMatikaCards(category, filterVal) {
       var card = document.createElement('div');
       card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between cursor-pointer';
       card.onclick = function() { 
-        openMatikaDetails('duka', item.gochhakaIndex, item.padaIndex); 
+        // පිට්ඨි දුකයට (index 12) පමණක් විශේෂ හැසිරවීම
+        if (item.gochhakaIndex === 12) {
+          openPitthiPadaDetails(item.gochhakaIndex, item.padaIndex);
+        } else {
+          openMatikaDetails('duka', item.gochhakaIndex, item.padaIndex);
+        }
       };
       
       card.innerHTML = 
@@ -822,6 +826,43 @@ function selectPada(padaIndex) {
     document.getElementById('detail-matika-title').innerText = 
       matika.title + ' → ' + pada.name;
   }
+  
+  updateBookmarkButtonState();
+  renderBreakdownLists(pada);
+}
+
+// ============ පිට්ඨි දුකයට පමණක් විශේෂ හැසිරවීම ============
+// මෙම ශ්‍රිතය selectPada ශ්‍රිතයට පසුව අර්ථ දක්වා ඇත
+function openPitthiPadaDetails(gochhakaIndex, padaIndex) {
+  currentCategory = 'duka';
+  currentMatikaIndex = gochhakaIndex;
+  currentPadaIndex = padaIndex;
+  
+  navigateTo('details');
+  
+  var item = dukaFullData[currentMatikaIndex];
+  var pada = item.padas[currentPadaIndex];
+  
+  document.getElementById('detail-category-tag').innerText = 'දුක මාතිකා';
+  
+  document.getElementById('detail-matika-title').innerText = 
+    item.title + ' → ' + pada.name;
+  
+  var singlePadaArray = [pada];
+  renderPadaTabs(singlePadaArray);
+  selectPitthiPada(pada);
+}
+
+// ============ පිට්ඨි දුකයට පමණක් - පදයේ විස්තර පෙන්වීම ============
+function selectPitthiPada(pada) {
+  var b = document.getElementById('pada-tab-0');
+  if (b) {
+    b.className = 'w-full text-right p-3 rounded-xl border transition-all flex items-center justify-between bg-saffron-500/20 border-saffron-500 text-maroon-900 dark:text-saffron-200 font-bold';
+  }
+  
+  document.getElementById('current-pada-name').innerText = pada.name;
+  document.getElementById('current-pada-desc').innerText = pada.desc;
+  document.getElementById('current-swaroopartha-text').innerText = pada.svartha || 'ස්වරූපාර්ථ විස්තරය ඇතුළත් කර නැත.';
   
   updateBookmarkButtonState();
   renderBreakdownLists(pada);
