@@ -1380,8 +1380,7 @@ function switchSabbatikaTab(tabName) {
       panel.classList.remove('hidden');
     } else {
       panel.classList.add('hidden');
-    }
-  });
+    }  });
 }
 
 function renderBreakdownLists(pada) {
@@ -1402,27 +1401,89 @@ function renderBreakdownLists(pada) {
   var aList = document.getElementById('ayatana-list');
   aList.innerHTML = '';
   var aCount = 0;
-  pada.ayatana.forEach(function(a) {
-    if (a.value && a.value !== 'නැත' && a.value !== '-' && a.value !== '×') aCount++;
-    var div = document.createElement('div');
-    div.className = 'breakdown-item';
-    div.innerHTML = '<span class="num">' + a.num + '.</span><span class="name">' + a.name + '</span><span class="value">' + a.value + '</span>';
-    aList.appendChild(div);
-  });
-  document.getElementById('ayatana-count').innerText = aCount + ' / 12';
+
+  // ✅ Table දර්ශනය පරීක්ෂා කරන්න
+  if (pada.ayatanaTable && pada.ayatanaTable.length > 0) {
+    // මග්ගාරම්මණ තිකයට - Table දර්ශනය
+    aCount = pada.ayatanaTable.length;
+    var table = document.createElement('table');
+    table.className = 'min-w-full text-sm border border-amber-200 dark:border-slate-700 rounded-lg overflow-hidden';
+    table.innerHTML = 
+      '<thead class="bg-amber-100 dark:bg-slate-900">' +
+        '<tr>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700 w-12">අංකය</th>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ආයතනය</th>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ගණන</th>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">විස්තරය</th>' +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' +
+        pada.ayatanaTable.map(function(a) {
+          return '<tr class="bg-white dark:bg-slate-800 hover:bg-amber-50 dark:hover:bg-slate-700">' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 font-bold text-amber-900 dark:text-saffron-300">' + a.num + '</td>' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-amber-900 dark:text-saffron-200 font-semibold">' + a.name + '</td>' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-saffron-600 dark:text-saffron-400 font-bold">' + a.count + '</td>' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs">' + a.value + '</td>' +
+          '</tr>';
+        }).join('') +
+      '</tbody>';
+    aList.appendChild(table);
+    document.getElementById('ayatana-count').innerText = aCount + ' / ' + aCount;
+  } else {
+    // අනෙක් තික සඳහා - පවතින ලැයිස්තු දර්ශනය
+    pada.ayatana.forEach(function(a) {
+      aCount++;
+      var div = document.createElement('div');
+      div.className = 'breakdown-item';
+      div.innerHTML = '<span class="num">' + a.num + '.</span><span class="name">' + a.name + '</span><span class="value">' + a.value + '</span>';
+      aList.appendChild(div);
+    });
+    document.getElementById('ayatana-count').innerText = aCount + ' / ' + pada.ayatana.length;
+  }
 
   // ============ ධාතු ============
   var dList = document.getElementById('dhatu-list');
   dList.innerHTML = '';
   var dCount = 0;
-  pada.dhatu.forEach(function(d) {
-    if (d.value && d.value !== 'නැත' && d.value !== '-' && d.value !== '×') dCount++;
-    var div = document.createElement('div');
-    div.className = 'breakdown-item';
-    div.innerHTML = '<span class="num">' + d.num + '.</span><span class="name">' + d.name + '</span><span class="value">' + d.value + '</span>';
-    dList.appendChild(div);
-  });
-  document.getElementById('dhatu-count').innerText = dCount + ' / 18';
+
+  // ✅ Table දර්ශනය පරීක්ෂා කරන්න
+  if (pada.dhatuTable && pada.dhatuTable.length > 0) {
+    // මග්ගාරම්මණ තිකයට - Table දර්ශනය
+    dCount = pada.dhatuTable.length;
+    var table = document.createElement('table');
+    table.className = 'min-w-full text-sm border border-amber-200 dark:border-slate-700 rounded-lg overflow-hidden';
+    table.innerHTML = 
+      '<thead class="bg-amber-100 dark:bg-slate-900">' +
+        '<tr>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700 w-12">අංකය</th>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ධාතුව</th>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ගණන</th>' +
+          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">විස්තරය</th>' +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' +
+        pada.dhatuTable.map(function(d) {
+          return '<tr class="bg-white dark:bg-slate-800 hover:bg-amber-50 dark:hover:bg-slate-700">' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 font-bold text-amber-900 dark:text-saffron-300">' + d.num + '</td>' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-amber-900 dark:text-saffron-200 font-semibold">' + d.name + '</td>' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-saffron-600 dark:text-saffron-400 font-bold">' + d.count + '</td>' +
+            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs">' + d.value + '</td>' +
+          '</tr>';
+        }).join('') +
+      '</tbody>';
+    dList.appendChild(table);
+    document.getElementById('dhatu-count').innerText = dCount + ' / ' + dCount;
+  } else {
+    // අනෙක් තික සඳහා - පවතින ලැයිස්තු දර්ශනය
+    pada.dhatu.forEach(function(d) {
+      dCount++;
+      var div = document.createElement('div');
+      div.className = 'breakdown-item';
+      div.innerHTML = '<span class="num">' + d.num + '.</span><span class="name">' + d.name + '</span><span class="value">' + d.value + '</span>';
+      dList.appendChild(div);
+    });
+    document.getElementById('dhatu-count').innerText = dCount + ' / ' + pada.dhatu.length;
+  }
 
   // ============ සත්‍ය ============
   var satList = document.getElementById('sathya-list');
