@@ -1,106 +1,92 @@
-// ============================================================
-// Service Worker - Automatic Update Support
-// ============================================================
-var CACHE_NAME = 'matika-cache-v14';  // v13 → v14 // ✅ සෑම අප්ලෝඩ් එකකදීම මෙය පමණක් වෙනස් කරන්න
-var urlsToCache = [
+// sw.js - Service Worker for Offline Support
+
+const CACHE_NAME = 'abhidhamma-matika-v1';
+
+// ඔබගේ යෙදුමට අවශ්‍ය සියලුම ස්ථිතික ගොනු මෙහි ලැයිස්තුගත කරන්න
+const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './manifest.json',
   './tika-data.js',
   './duka-data.js',
   './suttanta-data.js',
   './sabbatika-data.js',
-  './manifest.json',
-  './launchericon-48x48.png',
-  './launchericon-192x192.png',
-  './launchericon-512x512.png'
+  // ඔබ භාවිතා කරන අයිකන ගොනු (උදා: 72.png, 96.png, etc.)
+  './72.png',
+  './96.png',
+  './128.png',
+  './144.png',
+  './152.png',
+  './192.png',
+  './256.png',
+  './512.png',
+  // Tailwind CSS සහ Font Awesome CDN ලින්ක්ස්
+  'https://cdn.tailwindcss.com',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+  'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap'
 ];
 
-// ============ INSTALL EVENT ============
-self.addEventListener('install', function(event) {
-  console.log('[SW] Installing new version:', CACHE_NAME);
-  self.skipWaiting();
-  
+// 1. Install Event - සියලුම ගොනු Cache කිරීම
+self.addEventListener('install', (event) => {
+  console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('[SW] Caching all files');
-        return cache.addAll(urlsToCache);
+      .then((cache) => {
+        console.log('[Service Worker] Caching all assets');
+        return cache.addAll(ASSETS_TO_CACHE);
       })
-      .catch(function(error) {
-        console.warn('[SW] Cache addAll failed:', error);
-      })
+      .then(() => self.skipWaiting()) // නව Service Worker එක වහාම සක්‍රීය කරන්න
   );
 });
 
-// ============ ACTIVATE EVENT ============
-self.addEventListener('activate', function(event) {
-  console.log('[SW] Activating new version:', CACHE_NAME);
+// 2. Activate Event - පැරණි Cache ඉවත් කිරීම
+self.addEventListener('activate', (event) => {
+  console.log('[Service Worker] Activating...');
   event.waitUntil(
-    caches.keys().then(function(cacheNames) {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheName !== CACHE_NAME) {
-            console.log('[SW] Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log('[Service Worker] Deleting old cache:', cache);
+            return caches.delete(cache);
           }
         })
       );
-    }).then(function() {
-      return self.clients.claim();
-    })
+    }).then(() => self.clients.claim()) // සියලුම clients පාලනය කරන්න
   );
 });
 
-// ============ FETCH EVENT ============
-self.addEventListener('fetch', function(event) {
-  if (!event.request.url.startsWith('http')) return;
+// 3. Fetch Event - Offline විට Cache එකෙන් දත්ත ලබා දීම
+self.addEventListener('fetch', (event) => {
+  // අපි ඉල්ලීම් සිදු කරන්නේ GET වලට පමණි
+  if (event.request.method !== 'GET') return;
 
-  var url = event.request.url;
-  
-  // HTML, JS සහ root සඳහා network-first
-  if (url.endsWith('.html') || url.endsWith('.js') || 
-      url.endsWith('/') || url.endsWith('.json')) {
-    event.respondWith(
-      fetch(event.request, { cache: 'no-store' })
-        .then(function(response) {
-          if (response && response.status === 200 && response.type === 'basic') {
-            var responseToCache = response.clone();
-            caches.open(CACHE_NAME).then(function(cache) {
-              cache.put(event.request, responseToCache);
-            });
-          }
-          return response;
-        })
-        .catch(function() {
-          return caches.match(event.request);
-        })
-    );
-    return;
-  }
-  
-  // අනෙකුත් (images, icons) සඳහා cache-first
   event.respondWith(
-    caches.match(event.request).then(function(cachedResponse) {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then(function(networkResponse) {
-        if (networkResponse && networkResponse.status === 200 && 
-            networkResponse.type === 'basic') {
-          var responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then(function(cache) {
+    caches.match(event.request)
+      .then((cachedResponse) => {
+        // 1. Cache එකේ තිබේ නම් එය ලබා දෙන්න
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        // 2. Cache එකේ නැත්නම් අන්තර්ජාලයෙන් ලබාගෙන, එය Cache කරන්න
+        return fetch(event.request).then((networkResponse) => {
+          // අවලංගු ප්‍රතිචාර Cache නොකරන්න
+          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+            return networkResponse;
+          }
+
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);
           });
-        }
-        return networkResponse;
-      });
-    })
-  );
-});
 
-// ============ MESSAGE EVENT ============
-self.addEventListener('message', function(event) {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
+          return networkResponse;
+        }).catch(() => {
+          // 3. අන්තර්ජාලය නොමැති විට සහ Cache එකේ නොමැති විට
+          // ඔබට අවශ්‍ය නම් offline.html වැනි පිටුවක් පෙන්විය හැක.
+          // උදා: return caches.match('./offline.html');
+        });
+      })
+  );
 });
