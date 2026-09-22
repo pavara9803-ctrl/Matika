@@ -1,6 +1,92 @@
 // sabbatika-data.js
 // අභිධර්ම මාතිකා අධ්‍යයන ප්‍රවේශය - සබ්බත්තික මාතිකා සහ ස්වරූපාර්ථ
 
+// ============================================================
+// HELPER FUNCTIONS (makeSkandha, makeAyatana, makeDhatu, makeSathya)
+// මෙම ශ්‍රිත tika-data.js, duka-data.js, suttanta-data.js ගොනු වලද භාවිතා වේ.
+// එබැවින් sabbatika-data.js පළමුව load වන පරිදි index.html හි සකසන්න.
+// ============================================================
+
+/**
+ * ස්කන්ධ 5 සඳහා දත්ත ව්‍යුහය සාදයි.
+ * @param {string} rupa - රූපස්කන්ධයට අදාළ අගය
+ * @param {string} vedana - වේදනාස්කන්ධයට අදාළ අගය
+ * @param {string} sanna - සඤ්ඤාස්කන්ධයට අදාළ අගය
+ * @param {string} sankhara - සංඛාරස්කන්ධයට අදාළ අගය
+ * @param {string} vinnana - විඤ්ඤාණස්කන්ධයට අදාළ අගය
+ * @returns {Array} ස්කන්ධ 5 හි array එකක්
+ */
+function makeSkandha(rupa, vedana, sanna, sankhara, vinnana) {
+  return [
+    { num: 1, name: 'රූපක්ඛන්ධෝ', value: rupa },
+    { num: 2, name: 'වේදනාක්ඛන්ධෝ', value: vedana },
+    { num: 3, name: 'සඤ්ඤාක්ඛන්ධෝ', value: sanna },
+    { num: 4, name: 'සංඛාරක්ඛන්ධෝ', value: sankhara },
+    { num: 5, name: 'විඤ්ඤාණක්ඛන්ධෝ', value: vinnana }
+  ];
+}
+
+/**
+ * ආයතන 12 සඳහා දත්ත ව්‍යුහය සාදයි.
+ * @returns {Array} ආයතන 12 හි array එකක්
+ */
+function makeAyatana() {
+  return [
+    { num: 1, name: 'චක්ඛායතනං', value: '×' },
+    { num: 2, name: 'සොතායතනං', value: '×' },
+    { num: 3, name: 'ඝානායතනං', value: '×' },
+    { num: 4, name: 'ජිව්හායතනං', value: '×' },
+    { num: 5, name: 'කායායතනං', value: '×' },
+    { num: 6, name: 'මනායතනං', value: '×' },
+    { num: 7, name: 'රූපායතනං', value: '×' },
+    { num: 8, name: 'සද්දායතනං', value: '×' },
+    { num: 9, name: 'ගන්ධායතනං', value: '×' },
+    { num: 10, name: 'රසායතනං', value: '×' },
+    { num: 11, name: 'ඵොට්ඨබ්බායතනං', value: '×' },
+    { num: 12, name: 'ධම්මායතනං', value: '×' }
+  ];
+}
+
+/**
+ * ධාතු 18 සඳහා දත්ත ව්‍යුහය සාදයි.
+ * @returns {Array} ධාතු 18 හි array එකක්
+ */
+function makeDhatu() {
+  return [
+    { num: 1, name: 'චක්ඛුධාතු', value: '×' },
+    { num: 2, name: 'සොතධාතු', value: '×' },
+    { num: 3, name: 'ඝානධාතු', value: '×' },
+    { num: 4, name: 'ජිව්හාධාතු', value: '×' },
+    { num: 5, name: 'කායධාතු', value: '×' },
+    { num: 6, name: 'රූපධාතු', value: '×' },
+    { num: 7, name: 'සද්දධාතු', value: '×' },
+    { num: 8, name: 'ගන්ධධාතු', value: '×' },
+    { num: 9, name: 'රසධාතු', value: '×' },
+    { num: 10, name: 'ඵොට්ඨබ්බධාතු', value: '×' },
+    { num: 11, name: 'චක්ඛුවිඤ්ඤාණධාතු', value: '×' },
+    { num: 12, name: 'සොතවිඤ්ඤාණධාතු', value: '×' },
+    { num: 13, name: 'ඝානවිඤ්ඤාණධාතු', value: '×' },
+    { num: 14, name: 'ජිව්හාවිඤ්ඤාණධාතු', value: '×' },
+    { num: 15, name: 'කායවිඤ්ඤාණධාතු', value: '×' },
+    { num: 16, name: 'මනොධාතු', value: '×' },
+    { num: 17, name: 'මනොවිඤ්ඤාණධාතු', value: '×' },
+    { num: 18, name: 'ධම්මධාතු', value: '×' }
+  ];
+}
+
+/**
+ * සත්‍ය 4 සඳහා දත්ත ව්‍යුහය සාදයි.
+ * @param {Array} arr - {num, name, value} ආකෘතියේ array එකක්
+ * @returns {Array} සත්‍ය 4 හි array එකක්
+ */
+function makeSathya(arr) {
+  return arr;
+}
+
+// ============================================================
+// සබ්බත්තික මාතිකා දත්ත
+// ============================================================
+
 var sabbatikaFullData = {
   title: 'සබ්බත්තික මාතිකා',
   descMain: 'සබ්බත්තික මාතිකා යනු අභිධර්ම පිටකයේ මාතිකා මාතෘකා යටතේ එන සර්වසංග්‍රාහී විශ්ලේෂණයයි. මෙහි සියලු තික සහ දුක මාතිකා පද පරමාර්ථ ධර්මයන්ට (සිත්, චෛතසික, රූප, නිර්වාණ) අනුගත කරමින් ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය වශයෙන් බෙදා වෙන් කර අධ්‍යයනය කරනු ලැබේ.',

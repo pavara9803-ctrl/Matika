@@ -10,7 +10,11 @@
   "theme_color": "#3f0a0c",
   "lang": "si",
   "dir": "ltr",
-  "categories": ["education", "books", "reference"],
+  "categories": [
+    "education",
+    "books",
+    "reference"
+  ],
   "icons": [
     {
       "src": "./launchericon-48x48.png",
@@ -67,21 +71,39 @@
       "short_name": "තික",
       "description": "තික මාතිකා 22 අධ්‍යයනය කරන්න",
       "url": "./index.html",
-      "icons": [{ "src": "./launchericon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "./launchericon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "දුක මාතිකා",
       "short_name": "දුක",
       "description": "දුක මාතිකා 100 අධ්‍යයනය කරන්න",
       "url": "./index.html",
-      "icons": [{ "src": "./launchericon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "./launchericon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "සුත්තන්ත මාතිකා",
       "short_name": "සුත්තන්ත",
       "description": "සුත්තන්ත මාතිකා අධ්‍යයනය කරන්න",
       "url": "./index.html",
-      "icons": [{ "src": "./launchericon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "./launchericon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     }
   ],
   "prefer_related_applications": false
