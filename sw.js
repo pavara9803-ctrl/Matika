@@ -1,6 +1,6 @@
 // sw.js - Service Worker for Offline Support
 
-const CACHE_NAME = 'abhidhamma-matika-v1';
+const CACHE_NAME = 'abhidhamma-matika-v2'; // 1 සිට 2 දක්වා යාවත්කාලීන කර ඇත //
 
 // ඔබගේ යෙදුමට අවශ්‍ය සියලුම ස්ථිතික ගොනු මෙහි ලැයිස්තුගත කරන්න
 const ASSETS_TO_CACHE = [
