@@ -25,6 +25,7 @@
 <!-- ============ DATA FILES ============ -->
 <!-- වැදගත්: sabbatika-data.js පළමුව පූරණය කරන්න -->
 <script src="sabbatika-data.js"></script>
+<script src="maggarammana-tika.js"></script>
 <script src="tika-data.js"></script>
 <script src="duka-data.js"></script>
 <script src="suttanta-data.js"></script>
@@ -364,6 +365,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <div class="flex items-center justify-between bg-amber-50 dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700"><span class="font-bold text-amber-900 dark:text-saffron-300 text-sm">පරමාර්ථ ධර්ම ස්කන්ධ 5 ට බෙදීම:</span><span id="skandha-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-sm"></span></div>
 <div class="pt-2 text-sm" id="skandha-list"></div>
 </div>
+
 <div id="panel-ayatana" class="tab-panel hidden space-y-3">
 <div class="flex items-center justify-between bg-amber-50 dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700"><span class="font-bold text-amber-900 dark:text-saffron-300 text-sm">පරමාර්ථ ධර්ම ආයතන 12 ට බෙදීම:</span><span id="ayatana-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-sm"></span></div>
 <div class="pt-2 text-sm" id="ayatana-list"></div>
@@ -378,6 +380,78 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </div>
 </div>
 </div>
+
+<!-- ============================================================ -->
+<!-- මග්ගාරම්මණ තිකයට විශේෂිත අමතර කොටස (detailedAnalysis ආදිය) -->
+<!-- ============================================================ -->
+<div id="maggarammana-extras" class="hidden space-y-4 mt-4">
+
+  <!-- නිරුක්ති විශ්ලේෂණය -->
+  <div id="mg-nirukthi-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
+    <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
+      <i class="fa-solid fa-book text-blue-600"></i> නිරුක්ති විශ්ලේෂණය
+    </h3>
+    <p id="mg-nirukthi-intro" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+    <div id="mg-nirukthi-list" class="space-y-3"></div>
+  </div>
+
+  <!-- විස්තරාත්මක විශ්ලේෂණය -->
+  <div id="mg-detailed-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
+    <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
+      <i class="fa-solid fa-magnifying-glass-chart text-purple-600"></i> විස්තරාත්මක විශ්ලේෂණය
+    </h3>
+    <p id="mg-detailed-intro" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+    <div id="mg-detailed-list" class="space-y-4"></div>
+  </div>
+
+  <!-- අර්ථ විකල්ප -->
+  <div id="mg-artavikalpa-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
+    <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
+      <i class="fa-solid fa-diagram-project text-green-600"></i> අර්ථ විකල්ප
+    </h3>
+    <div id="mg-artavikalpa-list" class="space-y-3"></div>
+  </div>
+
+  <!-- ප්‍රත්‍ය විශ්ලේෂණය -->
+  <div id="mg-paccaya-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
+    <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
+      <i class="fa-solid fa-link text-saffron-600"></i> ප්‍රත්‍ය විශ්ලේෂණය
+    </h3>
+    <p id="mg-paccaya-intro" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+    <div id="mg-paccaya-list" class="space-y-2"></div>
+  </div>
+
+  <!-- මාර්ගය අරමුණු නොකරන ධර්ම -->
+  <div id="mg-maggaNaKarana-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
+    <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
+      <i class="fa-solid fa-ban text-red-600"></i> මාර්ගය අරමුණු නොකරන ධර්ම
+    </h3>
+    <p id="mg-maggaNaKarana-desc" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+    <div id="mg-maggaNaKarana-list" class="space-y-1 text-sm"></div>
+    <div class="bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 p-3 rounded-lg mt-2">
+      <div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-lightbulb"></i> සාරාංශය:</div>
+      <p id="mg-maggaNaKarana-summary" class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+    </div>
+  </div>
+
+  <!-- සම්බන්ධිත තික -->
+  <div id="mg-related-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
+    <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
+      <i class="fa-solid fa-sitemap text-blue-600"></i> සම්බන්ධිත තික
+    </h3>
+    <div id="mg-related-list" class="space-y-2"></div>
+  </div>
+
+  <!-- විශේෂ සටහන් -->
+  <div id="mg-specialnotes-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
+    <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
+      <i class="fa-solid fa-circle-info text-saffron-600"></i> විශේෂ සටහන්
+    </h3>
+    <div id="mg-specialnotes-list" class="space-y-3"></div>
+  </div>
+
+</div>
+
 </section>
 
 <!-- BOOKMARKS VIEW -->
@@ -891,8 +965,353 @@ function selectPada(padaIndex) {
   
   updateBookmarkButtonState();
   renderBreakdownLists(pada);
+  switchTab('skandha');
 
-   switchTab('skandha');
+  // ============================================================
+  // ✅ අලුතින් එක් කළ කොටස - මග්ගාරම්මණ තිකය හඳුනාගැනීම
+  // ============================================================
+  if (currentCategory === 'tika' && item.title && item.title.indexOf('මග්ගාරම්මණ') > -1 && item.detailedAnalysis) {
+    // මග්ගාරම්මණ තිකයේ විස්තරාත්මක දත්ත පෙන්වන්න
+    renderMaggarammanaExtras(item, pada, padaIndex);
+  } else {
+    // අනෙක් තික සඳහා අමතර කොටස සඟවන්න
+    document.getElementById('maggarammana-extras').classList.add('hidden');
+  }
+}
+
+// ============================================================
+// මග්ගාරම්මණ තිකයට විශේෂිත අමතර දත්ත පෙන්වීම
+// ============================================================
+function renderMaggarammanaExtras(item, pada, padaIndex) {
+  var container = document.getElementById('maggarammana-extras');
+  if (!container) return;
+  
+  // ප්‍රධාන කොටස පෙන්වන්න
+  container.classList.remove('hidden');
+  
+  // 1. නිරුක්ති විශ්ලේෂණය
+  renderNirukthiAnalysis(item.nirukthiAnalysis);
+  
+  // 2. විස්තරාත්මක විශ්ලේෂණය (පදයට අදාළ කොටස පමණක්)
+  renderDetailedAnalysis(item.detailedAnalysis, padaIndex);
+  
+  // 3. අර්ථ විකල්ප (පදයට අදාළ කොටස පමණක්)
+  renderArthaVikalpa(item.detailedAnalysis, padaIndex);
+  
+  // 4. ප්‍රත්‍ය විශ්ලේෂණය
+  renderPaccayaAnalysis(item.paccayaAnalysis);
+  
+  // 5. මාර්ගය අරමුණු නොකරන ධර්ම
+  renderMaggaNaKarana(item.maggaArammanaNaKarana);
+  
+  // 6. සම්බන්ධිත තික
+  renderRelatedTikas(item.relatedTikas);
+  
+  // 7. විශේෂ සටහන්
+  renderSpecialNotes(item.specialNotes);
+}
+
+// ============================================================
+// නිරුක්ති විශ්ලේෂණය render කිරීම
+// ============================================================
+function renderNirukthiAnalysis(data) {
+  var section = document.getElementById('mg-nirukthi-section');
+  var intro = document.getElementById('mg-nirukthi-intro');
+  var list = document.getElementById('mg-nirukthi-list');
+  
+  if (!data || !data.items || data.items.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  section.classList.remove('hidden');
+  intro.innerText = data.introduction || '';
+  list.innerHTML = '';
+  
+  data.items.forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-3 space-y-1.5';
+    div.innerHTML = 
+      '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' +
+        '<i class="fa-solid fa-bookmark text-saffron-600 text-xs"></i> ' + item.name +
+      '</div>' +
+      '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-white dark:bg-slate-800 p-2 rounded border border-amber-100 dark:border-slate-700">' +
+        '<i class="fa-solid fa-language"></i> ' + item.pali +
+      '</div>' +
+      '<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">' + item.description + '</p>' +
+      (item.vyakarana ? '<p class="text-xs text-slate-500 dark:text-slate-400"><strong>ව්‍යාකරණය:</strong> ' + item.vyakarana + '</p>' : '');
+    list.appendChild(div);
+  });
+}
+
+// ============================================================
+// විස්තරාත්මක විශ්ලේෂණය render කිරීම
+// ============================================================
+function renderDetailedAnalysis(data, padaIndex) {
+  var section = document.getElementById('mg-detailed-section');
+  var intro = document.getElementById('mg-detailed-intro');
+  var list = document.getElementById('mg-detailed-list');
+  
+  if (!data || !data.sections || data.sections.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  section.classList.remove('hidden');
+  intro.innerText = data.introduction || '';
+  list.innerHTML = '';
+  
+  // පදයට අදාළ කොටස පමණක් පෙන්වන්න (padaIndex අනුව)
+  var sectionData = data.sections[padaIndex];
+  if (!sectionData) {
+    // පදයට අදාළ කොටස නොමැති නම් සියල්ල පෙන්වන්න
+    data.sections.forEach(function(sec) {
+      list.appendChild(createDetailedSection(sec));
+    });
+    return;
+  }
+  
+  list.appendChild(createDetailedSection(sectionData));
+}
+
+function createDetailedSection(sec) {
+  var div = document.createElement('div');
+  div.className = 'bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-4 space-y-3';
+  
+  var html = 
+    '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200 border-b border-amber-200 dark:border-slate-700 pb-2">' +
+      '<i class="fa-solid fa-cube text-saffron-600"></i> ' + sec.title +
+      (sec.subtitle ? ' <span class="text-xs text-saffron-600 font-medium ml-1">(' + sec.subtitle + ')</span>' : '') +
+    '</div>';
+  
+  // නිරුක්තිය
+  if (sec.nirukthi) {
+    html += '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-white dark:bg-slate-800 p-2 rounded border border-amber-100 dark:border-slate-700">' +
+              '<i class="fa-solid fa-quote-left text-saffron-500"></i> ' + sec.nirukthi +
+            '</div>';
+  }
+  
+  // සිත් විස්තරය (cittaBreakdown)
+  if (sec.cittaBreakdown && sec.cittaBreakdown.length > 0) {
+    html += '<div class="space-y-2"><div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 uppercase">සිත් විස්තරය:</div>';
+    sec.cittaBreakdown.forEach(function(c) {
+      html += '<div class="breakdown-item">' +
+                '<span class="num"><i class="fa-solid fa-brain text-blue-500 text-xs"></i></span>' +
+                '<span class="name">' + c.name + ' <span class="text-xs text-saffron-600">(' + c.count + ')</span></span>' +
+                '<span class="value">' + c.description + '</span>' +
+              '</div>';
+    });
+    html += '</div>';
+  }
+  
+  // චෛතසික විස්තරය
+  if (sec.cetasikaBreakdown) {
+    html += '<div class="bg-white dark:bg-slate-800 border border-saffron-500/30 rounded-lg p-2">' +
+              '<div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-heart text-red-500"></i> චෛතසික විස්තරය:</div>' +
+              '<p class="text-xs text-slate-700 dark:text-slate-300">' + sec.cetasikaBreakdown + '</p>' +
+            '</div>';
+  }
+  
+  // පුද්ගල විස්තරය
+  if (sec.puggalaBreakdown && sec.puggalaBreakdown.length > 0) {
+    html += '<div class="space-y-2"><div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 uppercase">පුද්ගල විස්තරය:</div>';
+    sec.puggalaBreakdown.forEach(function(p) {
+      html += '<div class="breakdown-item">' +
+                '<span class="num"><i class="fa-solid fa-user text-green-600 text-xs"></i></span>' +
+                '<span class="name">' + p.name + '</span>' +
+                '<span class="value">' + p.description + '</span>' +
+              '</div>';
+    });
+    html += '</div>';
+  }
+  
+  // පුද්ගල සටහන්
+  if (sec.puggalaNotes) {
+    html += '<div class="bg-amber-100 dark:bg-slate-800 border-l-4 border-saffron-500 p-3 rounded">' +
+              '<div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-lightbulb"></i> විශේෂ සටහන:</div>' +
+              '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' + sec.puggalaNotes + '</p>' +
+            '</div>';
+  }
+  
+  // අධිපති ධර්ම සතර
+  if (sec.adhipatiDhamma && sec.adhipatiDhamma.length > 0) {
+    html += '<div class="space-y-2"><div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 uppercase">අධිපති ධර්ම සතර:</div>';
+    sec.adhipatiDhamma.forEach(function(a) {
+      html += '<div class="breakdown-item">' +
+                '<span class="num"><i class="fa-solid fa-crown text-yellow-500 text-xs"></i></span>' +
+                '<span class="name">' + a.name + '</span>' +
+                '<span class="value">' + a.description + '</span>' +
+              '</div>';
+    });
+    html += '</div>';
+  }
+  
+  // අධිපති සටහන්
+  if (sec.adhipatiNotes) {
+    html += '<div class="bg-amber-100 dark:bg-slate-800 border-l-4 border-saffron-500 p-3 rounded">' +
+              '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' + sec.adhipatiNotes + '</p>' +
+            '</div>';
+  }
+  
+  div.innerHTML = html;
+  return div;
+}
+
+// ============================================================
+// අර්ථ විකල්ප render කිරීම
+// ============================================================
+function renderArthaVikalpa(detailedAnalysis, padaIndex) {
+  var section = document.getElementById('mg-artavikalpa-section');
+  var list = document.getElementById('mg-artavikalpa-list');
+  
+  if (!detailedAnalysis || !detailedAnalysis.sections) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  var sectionData = detailedAnalysis.sections[padaIndex];
+  if (!sectionData || !sectionData.artaVikalpa || sectionData.artaVikalpa.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  section.classList.remove('hidden');
+  list.innerHTML = '';
+  
+  sectionData.artaVikalpa.forEach(function(v, idx) {
+    var div = document.createElement('div');
+    div.className = 'bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-900 dark:to-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl p-4 space-y-2';
+    div.innerHTML = 
+      '<div class="flex items-center gap-2 mb-2">' +
+        '<span class="w-7 h-7 rounded-full bg-saffron-500 text-maroon-950 font-bold text-xs flex items-center justify-center shrink-0">' + (idx+1) + '</span>' +
+        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + v.name + '</div>' +
+      '</div>' +
+      '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-amber-100 dark:border-slate-700">' +
+        '<i class="fa-solid fa-language text-saffron-500"></i> ' + v.pali +
+      '</div>' +
+      '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' +
+        '<strong class="text-maroon-900 dark:text-saffron-300">අර්ථය:</strong> ' + v.description +
+      '</p>' +
+      '<div class="bg-saffron-500/10 border-l-4 border-saffron-500 p-3 rounded">' +
+        '<div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-check-circle text-green-600"></i> ප්‍රතිඵලය:</div>' +
+        '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' + v.result + '</p>' +
+      '</div>';
+    list.appendChild(div);
+  });
+}
+
+// ============================================================
+// ප්‍රත්‍ය විශ්ලේෂණය render කිරීම
+// ============================================================
+function renderPaccayaAnalysis(data) {
+  var section = document.getElementById('mg-paccaya-section');
+  var intro = document.getElementById('mg-paccaya-intro');
+  var list = document.getElementById('mg-paccaya-list');
+  
+  if (!data || !data.items || data.items.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  section.classList.remove('hidden');
+  intro.innerText = data.introduction || '';
+  list.innerHTML = '';
+  
+  data.items.forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'breakdown-item';
+    div.innerHTML = 
+      '<span class="num"><i class="fa-solid fa-link text-saffron-600 text-xs"></i></span>' +
+      '<span class="name">' + item.name + '</span>' +
+      '<span class="value">' + item.description + '</span>';
+    list.appendChild(div);
+  });
+}
+
+// ============================================================
+// මාර්ගය අරමුණු නොකරන ධර්ම render කිරීම
+// ============================================================
+function renderMaggaNaKarana(data) {
+  var section = document.getElementById('mg-maggaNaKarana-section');
+  var desc = document.getElementById('mg-maggaNaKarana-desc');
+  var list = document.getElementById('mg-maggaNaKarana-list');
+  var summary = document.getElementById('mg-maggaNaKarana-summary');
+  
+  if (!data || !data.items || data.items.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  section.classList.remove('hidden');
+  desc.innerText = data.description || '';
+  summary.innerText = data.summary || '';
+  list.innerHTML = '';
+  
+  data.items.forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'breakdown-item';
+    div.innerHTML = 
+      '<span class="num">' + item.count + '</span>' +
+      '<span class="name">' + item.name + '</span>' +
+      '<span class="value">' + item.description + '</span>';
+    list.appendChild(div);
+  });
+}
+
+// ============================================================
+// සම්බන්ධිත තික render කිරීම
+// ============================================================
+function renderRelatedTikas(data) {
+  var section = document.getElementById('mg-related-section');
+  var list = document.getElementById('mg-related-list');
+  
+  if (!data || data.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  section.classList.remove('hidden');
+  list.innerHTML = '';
+  
+  data.forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-3';
+    div.innerHTML = 
+      '<div class="flex items-center gap-2 mb-1.5">' +
+        '<span class="w-7 h-7 rounded-full bg-saffron-500/20 text-saffron-600 font-bold text-xs flex items-center justify-center shrink-0">' + item.number + '</span>' +
+        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + item.name + '</div>' +
+      '</div>' +
+      '<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed ml-9">' + item.relation + '</p>';
+    list.appendChild(div);
+  });
+}
+
+// ============================================================
+// විශේෂ සටහන් render කිරීම
+// ============================================================
+function renderSpecialNotes(data) {
+  var section = document.getElementById('mg-specialnotes-section');
+  var list = document.getElementById('mg-specialnotes-list');
+  
+  if (!data || data.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+  
+  section.classList.remove('hidden');
+  list.innerHTML = '';
+  
+  data.forEach(function(item, idx) {
+    var div = document.createElement('div');
+    div.className = 'bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-900 dark:to-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl p-4';
+    div.innerHTML = 
+      '<div class="flex items-start gap-2 mb-2">' +
+        '<span class="w-6 h-6 rounded-full bg-saffron-500 text-maroon-950 font-bold text-xs flex items-center justify-center shrink-0">' + (idx+1) + '</span>' +
+        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + item.title + '</div>' +
+      '</div>' +
+      '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed ml-8">' + item.content + '</p>';
+    list.appendChild(div);
+  });
 }
 
 // ============ පිට්ඨි දුකයට පමණක් විශේෂ හැසිරවීම ============
