@@ -32,23 +32,44 @@ var dukaState = {
 // ============================================================
 function getGochhakaPadas(gochhaka) {
   if (!gochhaka) return [];
-
-  // පළමුව 'padas' array එක පරීක්ෂා කරන්න
-  if (gochhaka.padas && Array.isArray(gochhaka.padas)) {
-    return gochhaka.padas;
-  }
-
-  // 'dukas' array එක තිබේ නම්, එහි එක් එක් දුකයේ 'padas' එකතු කරන්න
+  if (gochhaka.padas && Array.isArray(gochhaka.padas)) return gochhaka.padas;
   if (gochhaka.dukas && Array.isArray(gochhaka.dukas)) {
     var allPadas = [];
     gochhaka.dukas.forEach(function(duka) {
       if (duka && duka.padas && Array.isArray(duka.padas)) {
-        duka.padas.forEach(function(pada) {
-          allPadas.push(pada);
-        });
+        duka.padas.forEach(function(pada) { allPadas.push(pada); });
       }
     });
     return allPadas;
+  }
+  return [];
+}
+
+// ✅ අලුත් helper: දුක් ලැයිස්තුව ලබා ගැනීම
+function getGochhakaDukas(gochhaka) {
+  if (!gochhaka) return [];
+
+  // 'dukas' array එක තිබේ නම් (13 වන ගොච්ඡකය) - එයම return කරන්න
+  if (gochhaka.dukas && Array.isArray(gochhaka.dukas) && gochhaka.dukas.length > 0) {
+    return gochhaka.dukas;
+  }
+
+  // 'padas' array එක තිබේ නම් (01-12) - පද 2 බැගින් දුකයක් සාදන්න
+  if (gochhaka.padas && Array.isArray(gochhaka.padas) && gochhaka.padas.length > 0) {
+    var dukas = [];
+    var dukaNumber = 1;
+    for (var i = 0; i < gochhaka.padas.length; i += 2) {
+      var pada1 = gochhaka.padas[i];
+      var pada2 = gochhaka.padas[i + 1] || null;
+      dukas.push({
+        number: dukaNumber,
+        name: 'දුක මාතිකා ' + dukaNumber,  // සාමාන්‍ය නම
+        pali: pada1.name + (pada2 ? ' - ' + pada2.name : ''),
+        padas: pada2 ? [pada1, pada2] : [pada1]
+      });
+      dukaNumber++;
+    }
+    return dukas;
   }
 
   return [];
@@ -63,8 +84,8 @@ function initDukaApp() {
 
   dukaGochhakaData.forEach(function(g, i) {
     if (g) {
-      var padas = getGochhakaPadas(g);
-      console.log('[Duka App] ' + (i + 1) + '. ' + g.title + ' → ' + padas.length + ' padas');
+      var dukas = getGochhakaDukas(g);
+      console.log('[Duka App] ' + (i + 1) + '. ' + g.title + ' → ' + dukas.length + ' dukas');
     }
   });
 
@@ -79,11 +100,8 @@ function showDukaView(viewId) {
   ['duka-view-list', 'duka-view-duka-list', 'duka-view-pada-pair', 'duka-view-pada-detail', 'duka-view-bookmarks'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) {
-      if (id === viewId) {
-        el.classList.remove('hidden');
-      } else {
-        el.classList.add('hidden');
-      }
+      if (id === viewId) el.classList.remove('hidden');
+      else el.classList.add('hidden');
     }
   });
 }
@@ -93,33 +111,29 @@ function showDukaView(viewId) {
 // ============================================================
 function renderGochhakaList() {
   var container = document.getElementById('gochhaka-list');
-  if (!container) {
-    console.error('[Duka App] gochhaka-list container not found!');
-    return;
-  }
+  if (!container) return;
 
   container.innerHTML = '';
 
   dukaGochhakaData.forEach(function(gochhaka) {
     if (!gochhaka) return;
 
-    var padas = getGochhakaPadas(gochhaka);
+    var dukas = getGochhakaDukas(gochhaka);
 
     var card = document.createElement('div');
     card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
     card.onclick = function() { openGochhaka(gochhaka.id); };
 
-    var padasHtml = '';
-    if (padas.length > 0) {
-      padasHtml = padas.slice(0, 5).map(function(p) {
-        return '<span class="inline-block bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 text-amber-900 dark:text-saffron-300 text-[10px] px-2 py-0.5 rounded mr-1 mb-1">' + (p.name || '') + '</span>';
+    // දුක්වල නම් පෙන්වන්න (පළමු දුක් 3)
+    var dukasHtml = '';
+    if (dukas.length > 0) {
+      dukasHtml = dukas.slice(0, 3).map(function(d) {
+        return '<span class="inline-block bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 text-amber-900 dark:text-saffron-300 text-[10px] px-2 py-0.5 rounded mr-1 mb-1">' + (d.name || '') + '</span>';
       }).join('');
-      if (padas.length > 5) {
-        padasHtml += '<span class="inline-block text-amber-600 text-[10px] px-2 py-0.5">+' + (padas.length - 5) + ' more</span>';
+      if (dukas.length > 3) {
+        dukasHtml += '<span class="inline-block text-amber-600 text-[10px] px-2 py-0.5">+' + (dukas.length - 3) + ' more</span>';
       }
     }
-
-    var dukaCount = gochhaka.dukaCount || Math.ceil(padas.length / 2);
 
     card.innerHTML =
       '<div class="flex items-center justify-between mb-2">' +
@@ -127,9 +141,9 @@ function renderGochhakaList() {
           '<span class="w-8 h-8 rounded-full bg-saffron-500 text-maroon-950 font-bold text-sm flex items-center justify-center">' + gochhaka.id + '</span>' +
           '<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200">' + gochhaka.title + '</h3>' +
         '</div>' +
-        '<span class="text-xs bg-saffron-500/20 text-saffron-600 font-bold px-2 py-1 rounded-full">දුක ' + dukaCount + '</span>' +
+        '<span class="text-xs bg-saffron-500/20 text-saffron-600 font-bold px-2 py-1 rounded-full">දුක ' + dukas.length + '</span>' +
       '</div>' +
-      '<div class="flex flex-wrap mt-2">' + padasHtml + '</div>' +
+      '<div class="flex flex-wrap mt-2">' + dukasHtml + '</div>' +
       '<div class="text-right mt-2"><i class="fa-solid fa-chevron-right text-slate-400"></i></div>';
 
     container.appendChild(card);
@@ -147,11 +161,10 @@ function openGochhaka(gochhakaId) {
 
   showDukaView('duka-view-duka-list');
 
-  var padas = getGochhakaPadas(gochhaka);
-  var dukaCount = gochhaka.dukaCount || Math.ceil(padas.length / 2);
+  var dukas = getGochhakaDukas(gochhaka);
 
   document.getElementById('duka-list-title').innerText = gochhaka.title;
-  document.getElementById('duka-list-subtitle').innerText = 'මෙම ගොච්ඡකයේ දුක මාතිකා ' + dukaCount + ' ක් ඇත';
+  document.getElementById('duka-list-subtitle').innerText = 'මෙම ගොච්ඡකයේ දුක මාතිකා ' + dukas.length + ' ක් ඇත';
 
   renderDukaList(gochhaka);
 
@@ -160,7 +173,7 @@ function openGochhaka(gochhakaId) {
 }
 
 // ============================================================
-// දුක ලැයිස්තුව render කිරීම (පද යුගල වශයෙන්)
+// දුක ලැයිස්තුව render කිරීම (දුකයේ නම සමඟ)
 // ============================================================
 function renderDukaList(gochhaka) {
   var container = document.getElementById('duka-list-container');
@@ -168,37 +181,50 @@ function renderDukaList(gochhaka) {
 
   container.innerHTML = '';
 
-  var padas = getGochhakaPadas(gochhaka);
-  var dukaNumber = 1;
+  var dukas = getGochhakaDukas(gochhaka);
 
-  for (var i = 0; i < padas.length; i += 2) {
-    var pada1 = padas[i];
-    var pada2 = padas[i + 1] || null;
+  dukas.forEach(function(duka, index) {
+    if (!duka) return;
+
+    var dukaNumber = duka.number || (index + 1);
+    var dukaName = duka.name || ('දුක මාතිකා ' + dukaNumber);
+    var dukaPali = duka.pali || '';
+    var padas = duka.padas || [];
+
+    var pada1 = padas[0] || null;
+    var pada2 = padas[1] || null;
 
     var card = document.createElement('div');
     card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
 
-    (function(dukaIdx, padaIdx1, padaIdx2) {
-      card.onclick = function() { openDukaPair(dukaIdx, padaIdx1, padaIdx2); };
-    })(dukaNumber, i, i + 1);
+    (function(padaIdx1, padaIdx2, dukaNum) {
+      card.onclick = function() { 
+        // දුකයේ පද දෙක පෙන්වීමට - දුකයේ පළමු පදයේ index එක හා දෙවන පදයේ index එක සොයා ගන්න
+        var allPadas = getGochhakaPadas(gochhaka);
+        var idx1 = allPadas.indexOf(pada1);
+        var idx2 = pada2 ? allPadas.indexOf(pada2) : -1;
+        openDukaPair(dukaNum, idx1, idx2, dukaName, dukaPali); 
+      };
+    })(0, 1, dukaNumber);
 
     card.innerHTML =
       '<div class="flex items-center justify-between mb-3">' +
-        '<div class="flex items-center gap-2">' +
+        '<div class="flex items-center gap-2 flex-1 min-w-0">' +
           '<span class="w-9 h-9 rounded-full bg-saffron-500 text-maroon-950 font-bold text-sm flex items-center justify-center shrink-0">' + dukaNumber + '</span>' +
-          '<div>' +
-            '<h3 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">දුක මාතිකා ' + dukaNumber + '</h3>' +
-            '<p class="text-[10px] text-slate-500">පද ' + (i + 1) + (pada2 ? ' සහ ' + (i + 2) : '') + '</p>' +
+          '<div class="flex-1 min-w-0">' +
+            '<h3 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + dukaName + '</h3>' +
+            (dukaPali ? '<p class="text-[10px] text-amber-700 dark:text-saffron-400 truncate">' + dukaPali + '</p>' : '') +
           '</div>' +
         '</div>' +
-        '<i class="fa-solid fa-chevron-right text-slate-400"></i>' +
+        '<i class="fa-solid fa-chevron-right text-slate-400 shrink-0"></i>' +
       '</div>' +
       '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">' +
-        '<div class="bg-gradient-to-br from-saffron-500/10 to-saffron-500/5 border border-saffron-500/30 rounded-lg p-3">' +
-          '<div class="text-[10px] font-bold text-saffron-600 dark:text-saffron-400 uppercase mb-1">පදය 1</div>' +
-          '<div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mb-1">' + pada1.name + '</div>' +
-          '<div class="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-2">' + (pada1.desc || '') + '</div>' +
-        '</div>' +
+        (pada1 ?
+          '<div class="bg-gradient-to-br from-saffron-500/10 to-saffron-500/5 border border-saffron-500/30 rounded-lg p-3">' +
+            '<div class="text-[10px] font-bold text-saffron-600 dark:text-saffron-400 uppercase mb-1">පදය 1</div>' +
+            '<div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mb-1">' + pada1.name + '</div>' +
+            '<div class="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-2">' + (pada1.desc || '') + '</div>' +
+          '</div>' : '') +
         (pada2 ?
           '<div class="bg-gradient-to-br from-saffron-500/10 to-saffron-500/5 border border-saffron-500/30 rounded-lg p-3">' +
             '<div class="text-[10px] font-bold text-saffron-600 dark:text-saffron-400 uppercase mb-1">පදය 2</div>' +
@@ -209,30 +235,34 @@ function renderDukaList(gochhaka) {
       '<div class="text-center mt-3 text-[10px] text-slate-400"><i class="fa-solid fa-hand-pointer"></i> පද දෙක බැලීමට click කරන්න</div>';
 
     container.appendChild(card);
-    dukaNumber++;
-  }
+  });
 }
 
 // ============================================================
 // 3. දුකයක් click → පද දෙක
 // ============================================================
-function openDukaPair(dukaNumber, padaIndex1, padaIndex2) {
+function openDukaPair(dukaNumber, padaIndex1, padaIndex2, dukaName, dukaPali) {
   var gochhaka = dukaState.currentGochhaka;
   if (!gochhaka) return;
 
-  var padas = getGochhakaPadas(gochhaka);
-  var pada1 = padas[padaIndex1];
-  var pada2 = (padaIndex2 < padas.length) ? padas[padaIndex2] : null;
+  var allPadas = getGochhakaPadas(gochhaka);
+  var pada1 = allPadas[padaIndex1];
+  var pada2 = (padaIndex2 >= 0 && padaIndex2 < allPadas.length) ? allPadas[padaIndex2] : null;
 
   dukaState.currentDukaPair = {
-    number: dukaNumber, pada1: pada1, pada2: pada2,
-    padaIndex1: padaIndex1, padaIndex2: padaIndex2
+    number: dukaNumber,
+    name: dukaName || ('දුක මාතිකා ' + dukaNumber),
+    pali: dukaPali || '',
+    pada1: pada1,
+    pada2: pada2,
+    padaIndex1: padaIndex1,
+    padaIndex2: padaIndex2
   };
 
   showDukaView('duka-view-pada-pair');
 
-  document.getElementById('duka-pair-title').innerText = gochhaka.title + ' → දුක මාතිකා ' + dukaNumber;
-  document.getElementById('duka-pair-subtitle').innerText = 'මෙම දුකයට අදාල මාතිකා පද දෙක';
+  document.getElementById('duka-pair-title').innerText = dukaState.currentDukaPair.name;
+  document.getElementById('duka-pair-subtitle').innerText = dukaState.currentDukaPair.pali || (gochhaka.title + ' → දුක මාතිකා ' + dukaNumber);
 
   renderDukaPair(pada1, pada2);
 
@@ -245,7 +275,7 @@ function renderDukaPair(pada1, pada2) {
   if (!container) return;
   container.innerHTML = '';
 
-  container.appendChild(createPadaPairCard(pada1, 1, dukaState.currentDukaPair.padaIndex1));
+  if (pada1) container.appendChild(createPadaPairCard(pada1, 1, dukaState.currentDukaPair.padaIndex1));
   if (pada2) container.appendChild(createPadaPairCard(pada2, 2, dukaState.currentDukaPair.padaIndex2));
 }
 
@@ -347,9 +377,6 @@ function switchDukaTab(tabName) {
   });
 }
 
-// ============================================================
-// ආපසු යාමේ functions
-// ============================================================
 function backToGochhakaList() {
   dukaState.currentGochhaka = null;
   dukaState.currentDukaPair = null;
@@ -376,12 +403,8 @@ function backToPadaPair() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ============================================================
-// Bookmarks
-// ============================================================
 function toggleDukaBookmark() {
   if (!dukaState.currentGochhaka || !dukaState.currentPada) return;
-
   var id = 'duka_' + dukaState.currentGochhaka.id + '_' + dukaState.currentPadaIndex;
   var existingIdx = dukaState.bookmarks.findIndex(function(b) { return b.id === id; });
 
@@ -422,31 +445,16 @@ function updateDukaBookmarkBadge() {
   }
 }
 
-// ============================================================
-// "දුක මාතිකා" බොත්තම click කිරීම → ගොච්ඡක 13 පෙන්වන්න
-// ============================================================
 function openDukaMatika() {
   var section = document.getElementById('gochhaka-section');
-  if (!section) {
-    console.error('[Duka App] gochhaka-section not found!');
-    return;
-  }
-
-  // section එක පෙන්වන්න
+  if (!section) return;
   section.classList.remove('hidden');
-
-  // ගොච්ඡක ලැයිස්තුව render කරන්න
   renderGochhakaList();
-
-  // section එකට scroll කරන්න
   setTimeout(function() {
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
 }
 
-// ============================================================
-// Auto Init
-// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   console.log('[Duka App] DOMContentLoaded fired');
   initDukaApp();
