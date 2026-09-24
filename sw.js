@@ -1,7 +1,7 @@
 // sw.js - Service Worker for Offline Support
 // දුක මාතිකා යෙදුම සඳහා නොබැඳි (Offline) සහාය
 
-const CACHE_NAME = 'duka-matika-v3.2.2'; // ✅ අලුත් version
+const CACHE_NAME = 'duka-matika-v3.2.3'; // ✅ අලුත් version
 const OFFLINE_URL = './index.html';
 
 // ============================================================
