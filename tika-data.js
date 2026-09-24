@@ -69,7 +69,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර මාර්ග සිත් 4 හි මාර්ගාංග 8'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අකුසලා ධම්මා',
@@ -89,7 +90,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අබ්‍යාකතා ධම්මා',
@@ -135,7 +137,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -164,7 +167,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'සුබ සහගත මාර්ග සිත් 16 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'දුක්ඛාය වේදනාය සම්පයුත්තා ධම්මා',
@@ -185,7 +189,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අදුක්ඛමසුබාය වේදනාය සම්පයුත්තා ධම්මා',
@@ -205,7 +210,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'උපේක්ෂා සහගත මාර්ග සිත් 4 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'සුබ වේදනා 63, දුක්ඛ වේදනා 3, උපේක්ඛා වේදනා 55, රූප, නිර්වාණය'
       }
     ]
   },
@@ -233,7 +239,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'විපාකධම්මධම්මා',
@@ -253,7 +260,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'නේව විපාක න විපාකධම්මධම්මා',
@@ -273,7 +281,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -327,7 +336,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අනුපාදින්නුපාදානියා ධම්මා',
@@ -373,7 +383,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අනුපාදින්නඅනුපාදානියා ධම්මා',
@@ -393,7 +404,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -421,7 +433,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අසංකිලිට්ඨසංකිලේසිකා ධම්මා',
@@ -441,7 +454,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අසංකිලිට්ඨඅසංකිලේසිකා ධම්මා',
@@ -461,7 +475,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -489,7 +504,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'ප්‍රථම ධ්‍යාන මාර්ග සිත් 4 හි මාර්ගාංග 8'}
-        ])
+        ]),
+        mukta: 'සවිතක්කසවිචාර සිත්වල ඇති විචාර 55'
       },
       {
         name: 'අවිතක්කවිචාරමත්තා ධම්මා',
@@ -509,7 +525,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'ලෝකෝත්තර ද්විතීය ධ්‍යාන මාර්ග සිත් 4 හි සම්මා සංකප්ප වර්ජිත මාර්ගාංග 7'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අවිතක්කඅවිචාරා ධම්මා',
@@ -529,7 +546,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'සතර මාර්ග අවිතර්ක අවිචාර සිත් 4 හි මාර්ගාංග 7'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -557,7 +575,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'පීති සහගත මාර්ග සිත් 16 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'සුබසහගතා ධම්මා',
@@ -578,7 +597,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'සුබ සහගත මාර්ග සිත් 16 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'උපේක්ඛාසහගතා ධම්මා',
@@ -598,7 +618,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'උපේක්ෂා සහගත මාර්ග සිත් 4 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -626,7 +647,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'භාවනාය පහාතබ්බා ධම්මා',
@@ -646,7 +668,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'නේව දස්සනේන න භාවනාය පහාතබ්බා ධම්මා',
@@ -692,7 +715,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -720,7 +744,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'භාවනාය පහාතබ්බහේතුකා ධම්මා',
@@ -740,7 +765,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'නේව දස්සනේන න භාවනාය පහාතබ්බහේතුකා ධම්මා',
@@ -786,7 +812,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -814,7 +841,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අපවයගාමිනෝ ධම්මා',
@@ -834,7 +862,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'සතර මාර්ග විත්තයේ මාර්ගාංග 8'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'නේවාවයගාමිනෝ නාපවයගාමිනෝ ධම්මා',
@@ -880,7 +909,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -908,7 +938,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 + ඵල සිත් 3 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අසේඛා ධම්මා',
@@ -928,7 +959,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'අර්හත් මාර්ග සිත් 1 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'නේවසේඛා නාසේඛා ධම්මා',
@@ -948,7 +980,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -976,7 +1009,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'මහග්ගතා ධම්මා',
@@ -996,7 +1030,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අප්පමාණා ධම්මා',
@@ -1016,7 +1051,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -1044,7 +1080,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'ප්‍රඥප්ති ඒකාන්ත, ප්‍රඥප්ති අනේකාන්ත, අප්පමාණ ඒකාන්ත, අප්පමාණ අනේකාන්ත, රූප, නිර්වාණ'
       },
       {
         name: 'මහග්ගතාරම්මණා ධම්මා',
@@ -1064,7 +1101,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අප්පමාණාරම්මණා ධම්මා',
@@ -1084,7 +1122,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -1112,7 +1151,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'මජ්ඣිමා ධම්මා',
@@ -1132,7 +1172,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'පණීතා ධම්මා',
@@ -1152,7 +1193,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'මාර්ග සිත් 4 හි මාර්ගාංග'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -1180,7 +1222,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'සම්මත්තනියතා ධම්මා',
@@ -1200,7 +1243,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'සතර මාර්ග විත්තයේ මාර්ගාංග 8'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අනියතා ධම්මා',
@@ -1220,7 +1264,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -1253,7 +1298,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       },
       {
         name: 'අනුප්පන්නා ධම්මා',
@@ -1273,7 +1319,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'උප්පාදිනෝ ධම්මා',
@@ -1293,7 +1340,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -1321,7 +1369,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       },
       {
         name: 'අනාගතා ධම්මා',
@@ -1341,7 +1390,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       },
       {
         name: 'පච්චුප්පන්නා ධම්මා',
@@ -1361,7 +1411,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       }
     ]
   },
@@ -1389,7 +1440,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'ප්‍රඥප්ති ඒකාන්ත, ප්‍රඥප්ති අනේකාන්ත, අප්පමාණ ඒකාන්ත, අප්පමාණ අනේකාන්ත, රූප, නිර්වාණ'
       },
       {
         name: 'අනාගතාරම්මණා ධම්මා',
@@ -1409,7 +1461,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'ප්‍රඥප්ති ඒකාන්ත, ප්‍රඥප්ති අනේකාන්ත, අප්පමාණ ඒකාන්ත, අප්පමාණ අනේකාන්ත, රූප, නිර්වාණ'
       },
       {
         name: 'පච්චුප්පන්නාරම්මණා ධම්මා',
@@ -1429,7 +1482,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -1457,7 +1511,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       },
       {
         name: 'බහිද්ධා ධම්මා',
@@ -1477,7 +1532,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       },
       {
         name: 'අජ්ඣත්තබහිද්ධා ධම්මා',
@@ -1497,7 +1553,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       }
     ]
   },
@@ -1525,7 +1582,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'ආකිඤ්චඤ්ඤායතන, අප්පමාණ අනේකාන්ත වශයෙන් අරමුණු කරන්නා වූ අකුසල් 12, මහාකුසල් 8, මහාක්‍රියා 8, මනෝද්වාරාවර්ජනය, අභිඥා 2, චෛතසික 46, රූප, නිර්වාණය'
       },
       {
         name: 'බහිද්ධාරම්මණා ධම්මා',
@@ -1545,7 +1603,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අජ්ඣත්තබහිද්ධාරම්මණා ධම්මා',
@@ -1565,7 +1624,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'ලෝභ චෛතසිකය'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       }
     ]
   },
@@ -1591,7 +1651,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අනිදස්සනසප්පටිඝා ධම්මා',
@@ -1627,7 +1688,8 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'-'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නැත'
       },
       {
         name: 'අනිදස්සනඅප්පටිඝා ධම්මා',
@@ -1647,8 +1709,219 @@ var tikaFullData = [
           {num:2,name:'සමුදය සත්‍යය',value:'-'},
           {num:3,name:'නිරෝධ සත්‍යය',value:'නිර්වාණය'},
           {num:4,name:'මාර්ග සත්‍යය',value:'-'}
-        ])
+        ]),
+        mukta: 'නිර්වාණය'
       }
     ]
   }
 ];
+
+// ============================================================
+// පුළුල් සෙවුම් ශ්‍රිතය - මාතිකා පද, දුක, ස්වරූපාර්ථ අනුව
+// ============================================================
+function searchDukaMatika(query) {
+  if (!query || query.trim() === '') return [];
+
+  var q = query.toLowerCase().trim();
+  var results = [];
+
+  dukaGochhakaData.forEach(function(gochhaka) {
+    if (!gochhaka) return;
+
+    var dukas = getGochhakaDukas(gochhaka);
+
+    // 1. ගොච්ඡකයේ නමින් සොයන්න
+    if (gochhaka.title.toLowerCase().indexOf(q) > -1) {
+      results.push({
+        type: 'gochhaka',
+        gochhakaId: gochhaka.id,
+        gochhakaTitle: gochhaka.title,
+        gochhakaIdNum: gochhaka.id,
+        matchText: gochhaka.title,
+        matchType: 'ගොච්ඡකය'
+      });
+    }
+
+    // 2. දුක්වල නමින් සහ පාලියෙන් සොයන්න
+    dukas.forEach(function(duka, dukaIdx) {
+      var dukaName = duka.name || ('දුක මාතිකා ' + (duka.number || (dukaIdx + 1)));
+      var dukaPali = duka.pali || '';
+
+      if (dukaName.toLowerCase().indexOf(q) > -1 ||
+          dukaPali.toLowerCase().indexOf(q) > -1) {
+        results.push({
+          type: 'duka',
+          gochhakaId: gochhaka.id,
+          gochhakaTitle: gochhaka.title,
+          dukaNumber: duka.number || (dukaIdx + 1),
+          dukaName: dukaName,
+          dukaPali: dukaPali,
+          matchText: dukaName,
+          matchType: 'දුක'
+        });
+      }
+    });
+
+    // 3. පදවල නමින්, desc සහ svartha වලින් සොයන්න
+    var allPadas = getGochhakaPadas(gochhaka);
+    allPadas.forEach(function(pada, padaIdx) {
+      if (!pada || !pada.name) return;
+
+      var nameMatch = pada.name.toLowerCase().indexOf(q) > -1;
+      var descMatch = pada.desc && pada.desc.toLowerCase().indexOf(q) > -1;
+      var svarthaMatch = pada.svartha && pada.svartha.toLowerCase().indexOf(q) > -1;
+
+      if (nameMatch || descMatch || svarthaMatch) {
+        // කුමන දුකට අයත්ද සොයා ගන්න
+        var dukaNumber = Math.floor(padaIdx / 2) + 1;
+        var dukaName = '';
+
+        // දුකයේ නම සොයා ගන්න
+        for (var i = 0; i < dukas.length; i++) {
+          var d = dukas[i];
+          if (d && d.padas && d.padas.indexOf(pada) > -1) {
+            dukaNumber = d.number || (i + 1);
+            dukaName = d.name || ('දුක මාතිකා ' + dukaNumber);
+            break;
+          }
+        }
+
+        var matchType = nameMatch ? 'පදය' : (descMatch ? 'විස්තරය' : 'ස්වරූපාර්ථය');
+
+        results.push({
+          type: 'pada',
+          gochhakaId: gochhaka.id,
+          gochhakaTitle: gochhaka.title,
+          dukaNumber: dukaNumber,
+          dukaName: dukaName,
+          padaIndex: padaIdx,
+          padaName: pada.name,
+          padaDesc: pada.desc || '',
+          matchText: pada.name,
+          matchType: matchType
+        });
+      }
+    });
+  });
+
+  return results;
+}
+
+// ============================================================
+// සෙවුම් ප්‍රතිඵල පෙන්වීම
+// ============================================================
+function renderDukaSearchResults(results) {
+  var container = document.getElementById('gochhaka-list');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  if (results.length === 0) {
+    container.innerHTML =
+      '<div class="text-center py-8 text-slate-500 text-sm">' +
+        '<i class="fa-solid fa-magnifying-glass text-2xl mb-2 opacity-30"></i><br>' +
+        'ගැලපෙන ප්‍රතිඵල හමු නොවීය.' +
+      '</div>';
+    return;
+  }
+
+  // ප්‍රතිඵල ගණන පෙන්වන්න
+  var summary = document.createElement('div');
+  summary.className = 'text-xs text-amber-800 dark:text-saffron-400 bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-3 mb-3';
+  summary.innerHTML =
+    '<i class="fa-solid fa-circle-info"></i> ' +
+    '<strong>' + results.length + '</strong> ප්‍රතිඵල හමු විය';
+  container.appendChild(summary);
+
+  // ප්‍රතිඵල පෙන්වන්න
+  results.forEach(function(result) {
+    var card = document.createElement('div');
+    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
+
+    if (result.type === 'pada') {
+      // පදයක් සොයා ගත්තා නම් - කෙලින්ම පදයට යන්න
+      card.onclick = function() {
+        dukaState.currentGochhaka = dukaGochhakaData.find(function(g) { return g.id === result.gochhakaId; });
+        openPadaDetail(result.padaIndex);
+      };
+
+      card.innerHTML =
+        '<div class="flex items-start gap-3">' +
+          '<div class="w-9 h-9 rounded-full bg-saffron-500 text-maroon-950 font-bold text-xs flex items-center justify-center shrink-0">' +
+            '<i class="fa-solid fa-book"></i>' +
+          '</div>' +
+          '<div class="flex-1 min-w-0">' +
+            '<div class="flex items-center gap-2 mb-1 flex-wrap">' +
+              '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-saffron-500/20 text-saffron-700 dark:text-saffron-300">' + result.matchType + '</span>' +
+              '<span class="text-[10px] text-slate-500">' + result.gochhakaTitle + '</span>' +
+            '</div>' +
+            '<h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 mb-1">' + result.padaName + '</h4>' +
+            (result.padaDesc ? '<p class="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-2">' + result.padaDesc + '</p>' : '') +
+            (result.dukaName ? '<p class="text-[10px] text-saffron-600 dark:text-saffron-400 mt-1"><i class="fa-solid fa-arrow-right"></i> ' + result.dukaName + '</p>' : '') +
+          '</div>' +
+          '<i class="fa-solid fa-chevron-right text-slate-400 shrink-0"></i>' +
+        '</div>';
+
+    } else if (result.type === 'duka') {
+      // දුකක් සොයා ගත්තා නම් - දුකට යන්න
+      card.onclick = function() {
+        openGochhaka(result.gochhakaId);
+        setTimeout(function() {
+          // දුකයට scroll කරන්න
+          var dukaCards = document.querySelectorAll('#duka-list-container > div');
+          if (dukaCards[result.dukaNumber - 1]) {
+            dukaCards[result.dukaNumber - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 500);
+      };
+
+      card.innerHTML =
+        '<div class="flex items-start gap-3">' +
+          '<div class="w-9 h-9 rounded-full bg-amber-600 text-white font-bold text-xs flex items-center justify-center shrink-0">' +
+            '<i class="fa-solid fa-layer-group"></i>' +
+          '</div>' +
+          '<div class="flex-1 min-w-0">' +
+            '<div class="flex items-center gap-2 mb-1 flex-wrap">' +
+              '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-700 dark:text-amber-300">දුක</span>' +
+              '<span class="text-[10px] text-slate-500">' + result.gochhakaTitle + '</span>' +
+            '</div>' +
+            '<h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 mb-1">' + result.dukaName + '</h4>' +
+            (result.dukaPali ? '<p class="text-[10px] text-saffron-600 dark:text-saffron-400 truncate">' + result.dukaPali + '</p>' : '') +
+          '</div>' +
+          '<i class="fa-solid fa-chevron-right text-slate-400 shrink-0"></i>' +
+        '</div>';
+
+    } else {
+      // ගොච්ඡකයක් සොයා ගත්තා නම්
+      card.onclick = function() { openGochhaka(result.gochhakaId); };
+
+      card.innerHTML =
+        '<div class="flex items-start gap-3">' +
+          '<div class="w-9 h-9 rounded-full bg-maroon-700 text-saffron-200 font-bold text-xs flex items-center justify-center shrink-0">' +
+            result.gochhakaIdNum +
+          '</div>' +
+          '<div class="flex-1 min-w-0">' +
+            '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-maroon-500/20 text-maroon-700 dark:text-maroon-300 mb-1 inline-block">ගොච්ඡකය</span>' +
+            '<h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + result.matchText + '</h4>' +
+          '</div>' +
+          '<i class="fa-solid fa-chevron-right text-slate-400 shrink-0"></i>' +
+        '</div>';
+    }
+
+    container.appendChild(card);
+  });
+}
+
+// ============================================================
+// Search with debounce (typing එකේදී ක්ෂණිකව සෙවීමට)
+// ============================================================
+var dukaSearchTimeout = null;
+
+function performDukaSearch(query) {
+  if (dukaSearchTimeout) clearTimeout(dukaSearchTimeout);
+
+  dukaSearchTimeout = setTimeout(function() {
+    var results = searchDukaMatika(query);
+    renderDukaSearchResults(results);
+  }, 200);
+}
