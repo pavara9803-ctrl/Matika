@@ -22,11 +22,34 @@
 <meta name="msapplication-TileColor" content="#3f0a0c">
 
 <!-- ============ DATA FILES ============ -->
-<!-- දුක මාතිකා දැන් duka-matika.html හි load වේ -->
+<!-- 1. Helper functions + data arrays + registerTika() -->
 <script src="sabbatika-data.js"></script>
-<script src="maggarammana-tika.js"></script>
-<script src="tika-data.js"></script>
+<script src="tika-app.js"></script>
 <script src="suttanta-data.js"></script>
+
+<!-- 2. තික ගොනු 22 (registerTika() call කරයි) -->
+<script src="tika/01-kusala-tika.js"></script>
+<script src="tika/02-vedana-tika.js"></script>
+<script src="tika/03-vipaka-tika.js"></script>
+<script src="tika/04-upadinnna-tika.js"></script>
+<script src="tika/05-sankilittha-tika.js"></script>
+<script src="tika/06-vitakka-tika.js"></script>
+<script src="tika/07-piti-tika.js"></script>
+<script src="tika/08-dassana-tika.js"></script>
+<script src="tika/09-dassanahetu-tika.js"></script>
+<script src="tika/10-avayagami-tika.js"></script>
+<script src="tika/11-sekha-tika.js"></script>
+<script src="tika/12-paritta-tika.js"></script>
+<script src="tika/13-parittarammana-tika.js"></script>
+<script src="tika/14-hina-tika.js"></script>
+<script src="tika/15-micchatta-tika.js"></script>
+<script src="tika/16-maggarammana-tika.js"></script>
+<script src="tika/17-uppanna-tika.js"></script>
+<script src="tika/18-atita-tika.js"></script>
+<script src="tika/19-atitarammana-tika.js"></script>
+<script src="tika/20-ajjhatta-tika.js"></script>
+<script src="tika/21-ajjhattarammana-tika.js"></script>
+<script src="tika/22-sanidassana-tika.js"></script>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -70,9 +93,9 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 
 #pwa-install-banner {
   position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, #3f0a0c, #78350f);
+  background: linear-gradient(135deg, #bc7d2f, #78350f);
   color: #fef3c7; padding: 12px 16px; border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid #f59e0b;
+  box-shadow: 0 10px 30px rgba(42, 5, 5, 0.13); border: 1px solid #f59e0b;
   display: none; align-items: center; gap: 12px; z-index: 100;
   max-width: calc(100% - 32px); width: 420px;
   animation: slideUp 0.4s ease-out;
@@ -158,7 +181,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <!-- සෙවුම් -->
 <div class="relative">
 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-amber-700 dark:text-saffron-400"><i class="fa-solid fa-magnifying-glass"></i></div>
-<input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="මාතිකා නම, ස්වරූපාර්ථ, පදය අනුව සොයන්න..." class="w-full pl-10 pr-10 py-3 bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-saffron-500 text-sm">
+<input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="සුත්තන්ත මාතිකා නම, ස්වරූපාර්ථ, පදය අනුව සොයන්න..." class="w-full pl-10 pr-10 py-3 bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-saffron-500 text-sm">
 <button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
 </div>
 <div id="search-results-container" class="hidden space-y-3">
@@ -182,15 +205,15 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <!-- තික + දුක + සුත්තන්ත -->
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-<!-- තික මාතිකා -->
-<button onclick="showMatikaList('tika')" class="group bg-gradient-to-r from-saffron-500 to-amber-600 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl">
+<!-- ✅ තික මාතිකා - tika-matika.html ට link කර ඇත -->
+<a href="tika-matika.html" class="group bg-gradient-to-r from-saffron-500 to-amber-600 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl block">
 <div class="flex items-center justify-between mb-3">
 <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-xl font-bold text-amber-100">22</div>
-<i class="fa-solid fa-arrow-right text-saffron-200 group-hover:translate-x-1"></i>
+<i class="fa-solid fa-arrow-right text-saffron-200 group-hover:translate-x-1 transition-transform"></i>
 </div>
 <h3 class="text-lg font-bold mb-1">තික මාතිකා</h3>
 <p class="text-xs text-amber-100/80">ත්‍රික කොටස් 22 කින් යුක්ත මාතිකා පද 66 සහ ස්වරූපාර්ථ</p>
-</button>
+</a>
 
 <!-- ✅ දුක මාතිකා - duka-matika.html ට link කර ඇත -->
 <a href="duka-matika.html" class="group bg-gradient-to-r from-amber-800 to-maroon-800 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl block">
@@ -301,7 +324,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </section>
 
 <!-- ============================================================ -->
-<!-- LIST VIEW (තික සහ සුත්තන්ත සඳහා පමණි) -->
+<!-- LIST VIEW (සුත්තන්ත සඳහා පමණි) -->
 <!-- ============================================================ -->
 <section id="view-list" class="hidden space-y-4">
 <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-3 gap-2">
@@ -314,7 +337,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </section>
 
 <!-- ============================================================ -->
-<!-- DETAILS VIEW (තික සහ සුත්තන්ත සඳහා පමණි) -->
+<!-- DETAILS VIEW (සුත්තන්ත සඳහා පමණි) -->
 <!-- ============================================================ -->
 <section id="view-details" class="hidden space-y-5">
 <div class="bg-amber-100/80 dark:bg-slate-800 border rounded-2xl p-4 shadow-sm flex items-center justify-between">
@@ -328,18 +351,41 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </div>
 <div id="pada-tabs-container" class="grid grid-cols-1 gap-2"></div>
 <div id="pada-detail-breakdown" class="hidden flex flex-col space-y-4 pt-2 w-full">
-<div class="bg-maroon-900 text-amber-50 p-4 rounded-xl shadow border border-saffron-500/40 w-full">
-<div class="flex justify-between items-start">
-<div><div class="text-xs text-saffron-300 font-medium mb-1">තෝරාගත් මාතිකා පදය</div><h3 id="current-pada-name" class="text-lg font-bold text-saffron-100"></h3></div>
+
+<div class="bg-gradient-to-br from-slate-600 to-gray-400 text-blue-50 p-4 rounded-xl shadow border border-blue-500/40 w-full">
+  <div class="flex justify-between items-start">
+    <div>
+      <div class="text-xs text-blue-300 font-medium mb-1">තෝරාගත් මාතිකා පදය</div>
+      <h3 id="current-pada-name" class="text-lg font-bold text-blue-100"></h3>
+    </div>
+    ...
+
 <div class="flex items-center gap-2">
 <button id="bookmark-toggle-btn" onclick="toggleCurrentBookmark()" class="text-2xl text-amber-300 hover:text-saffron-400 p-1"><i id="bookmark-icon" class="fa-regular fa-bookmark"></i></button>
 </div>
 </div>
 <p id="current-pada-desc" class="text-xs text-amber-200/90 mt-2"></p>
+
+<!-- ✅ පදයේ අර්ථය (padaArtha) -->
+<div id="pada-artha-section" class="hidden mt-3 pt-3 border-t border-emerald-500/30">
+  <span class="text-xs font-bold text-emerald-300 uppercase block mb-1">
+    <i class="fa-solid fa-book"></i> පදයේ අර්ථය:
+  </span>
+  <p id="current-pada-artha-text" class="text-xs text-emerald-100 leading-relaxed bg-black/20 p-2.5 rounded-lg border border-emerald-400/20 whitespace-pre-line"></p>
+</div>
+
 <div class="mt-3 pt-3 border-t border-saffron-500/30">
 <span class="text-xs font-bold text-saffron-300 uppercase block mb-1"><i class="fa-solid fa-book-bookmark"></i> ස්වරූපාර්ථ:</span>
 <p id="current-swaroopartha-text" class="text-xs text-amber-100 leading-relaxed bg-black/20 p-2.5 rounded-lg border border-saffron-400/20 whitespace-pre-line"></p>
+</div>‍
+
+<div class="mt-3 pt-3 border-t border-purple-500/30">
+  <span class="text-xs font-bold text-purple-300 uppercase block mb-1">
+    <i class="fa-solid fa-book-bookmark"></i> ස්වරූපාර්ථ:
+  </span>
+  <p id="current-swaroopartha-text" class="text-xs text-purple-100 leading-relaxed bg-black/20 p-2.5 rounded-lg border border-purple-400/20 whitespace-pre-line"></p>
 </div>
+
 </div>
 <div class="flex border-b space-x-1 space-x-reverse overflow-x-auto hide-scrollbar w-full">
 <button onclick="switchTab('skandha')" id="tab-btn-skandha" class="tab-btn border-b-2 border-saffron-600 text-saffron-700 dark:text-saffron-400 font-bold px-4 py-2 text-sm whitespace-nowrap"><i class="fa-solid fa-cubes text-xs"></i> ස්කන්ධ (5)</button>
@@ -366,9 +412,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </div></div>
 </div>
 
-<!-- ============================================================ -->
-<!-- ත්‍රික මුක්ත ධර්ම කොටස (NEW) -->
-<!-- ============================================================ -->
+<!-- ත්‍රික මුක්ත ධර්ම කොටස -->
 <div id="tika-mukta-section" class="hidden mt-4">
   <div class="bg-gradient-to-br from-purple-50 to-purple-100/60 dark:from-slate-800 dark:to-slate-800/60 border border-purple-300 dark:border-purple-800 rounded-2xl p-4 shadow-sm">
     <div class="flex items-center gap-2 mb-3 border-b border-purple-200 dark:border-purple-800 pb-2">
@@ -384,9 +428,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
   </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- මග්ගාරම්මණ තිකයට විශේෂිත අමතර කොටස -->
-<!-- ============================================================ -->
 <div id="maggarammana-extras" class="hidden space-y-4 mt-4">
 
   <div id="mg-nirukthi-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-3">
@@ -536,7 +578,7 @@ function triggerInstall() {
     } else if (isStandalone()) {
       alert('මෙම යෙදුම දැනටමත් ස්ථාපනය කර ඇත.');
     } else {
-      alert('ඔබගේ බ්‍රවුසරයේ මෙනුවෙන් (⋮) "Install App" හෝ "Add to Home Screen" තෝරන්න.');
+      alert('ඔබගේ බ්‍රව්සරයේ මෙනුවෙන් (⋮) "Install App" හෝ "Add to Home Screen" තෝරන්න.');
     }
   }
 }
@@ -628,7 +670,7 @@ function dismissUpdate() {
 // APPLICATION STATE
 // ============================================================
 var currentView = 'home';
-var currentCategory = null; // 'tika' හෝ 'suttanta' පමණි
+var currentCategory = null; // 'suttanta' පමණි
 var currentMatikaIndex = 0;
 var currentPadaIndex = 0;
 var activeTab = 'skandha';
@@ -712,19 +754,19 @@ function updateBreadcrumb() {
     } else if (currentView === 'list') {
       sep1.classList.remove('hidden');
       catBtn.classList.remove('hidden');
-      catBtn.innerText = currentCategory === 'tika' ? 'තික මාතිකා' : 'සුත්තන්ත මාතිකා';
+      catBtn.innerText = 'සුත්තන්ත මාතිකා';
       catBtn.onclick = function() { showMatikaList(currentCategory); };
       sep2.classList.add('hidden');
       matikaSpan.classList.add('hidden');
     } else if (currentView === 'details') {
       sep1.classList.remove('hidden');
       catBtn.classList.remove('hidden');
-      catBtn.innerText = currentCategory === 'tika' ? 'තික මාතිකා' : 'සුත්තන්ත මාතිකා';
+      catBtn.innerText = 'සුත්තන්ත මාතිකා';
       catBtn.onclick = function() { showMatikaList(currentCategory); };
       sep2.classList.remove('hidden');
       matikaSpan.classList.remove('hidden');
       
-      var dataList = currentCategory === 'tika' ? tikaFullData : suttantaFullData;
+      var dataList = suttantaFullData;
       if (dataList[currentMatikaIndex]) {
         matikaSpan.innerText = dataList[currentMatikaIndex].title;
       }
@@ -740,7 +782,7 @@ function updateBreadcrumb() {
 }
 
 // ============================================================
-// LIST VIEW - තික සහ සුත්තන්ත සඳහා පමණි
+// LIST VIEW - සුත්තන්ත සඳහා පමණි
 // ============================================================
 function showMatikaList(category) {
   currentCategory = category;
@@ -749,11 +791,7 @@ function showMatikaList(category) {
   var titleEl = document.getElementById('list-title');
   var subtitleEl = document.getElementById('list-subtitle');
   
-  if (category === 'tika') {
-    titleEl.innerText = 'තික මාතිකා (22)';
-    subtitleEl.innerText = 'ත්‍රික කොටස් 22 කින් යුක්ත මාතිකා පද සහ විස්තර';
-    renderMatikaCards('tika');
-  } else if (category === 'suttanta') {
+  if (category === 'suttanta') {
     titleEl.innerText = 'සුත්තන්ත මාතිකා';
     subtitleEl.innerText = 'සුත්තන්තික මාතිකා පද සහ විස්තර';
     renderMatikaCards('suttanta');
@@ -764,10 +802,15 @@ function renderMatikaCards(category) {
   var container = document.getElementById('matika-cards-container');
   container.innerHTML = '';
   
-  var dataList = category === 'tika' ? tikaFullData : suttantaFullData;
+  var dataList = suttantaFullData;
   
   if (dataList.length === 0) {
-    container.innerHTML = '<div class="text-center py-8 text-slate-500 text-sm">මෙම කාණ්ඩය සඳහා දත්ත නොමැත.</div>';
+    container.innerHTML = 
+      '<div class="text-center py-8 text-slate-500 text-sm">' +
+        '<i class="fa-solid fa-circle-info text-2xl mb-2 opacity-30"></i><br>' +
+        'මෙම කාණ්ඩය සඳහා දත්ත නොමැත.<br>' +
+        '<span class="text-xs">(ගොනු load වී නොමැති විය හැක)</span>' +
+      '</div>';
     return;
   }
   
@@ -792,11 +835,10 @@ function openMatikaDetails(category, matikaIndex, padaIndex) {
   
   navigateTo('details');
   
-  var dataList = category === 'tika' ? tikaFullData : suttantaFullData;
+  var dataList = suttantaFullData;
   var item = dataList[currentMatikaIndex];
   
-  document.getElementById('detail-category-tag').innerText = 
-    category === 'tika' ? 'තික මාතිකා' : 'සුත්තන්ත මාතිකා';
+  document.getElementById('detail-category-tag').innerText = 'සුත්තන්ත මාතිකා';
   
   document.getElementById('detail-matika-title').innerText = item.title;
   
@@ -829,7 +871,7 @@ function renderPadaTabs(padas) {
 
 function selectPada(padaIndex) {
   currentPadaIndex = padaIndex;
-  var dataList = currentCategory === 'tika' ? tikaFullData : suttantaFullData;
+  var dataList = suttantaFullData;
   var pada = dataList[currentMatikaIndex].padas[padaIndex];
   
   var item = dataList[currentMatikaIndex];
@@ -846,15 +888,24 @@ function selectPada(padaIndex) {
   
   document.getElementById('current-pada-name').innerText = pada.name;
   document.getElementById('current-pada-desc').innerText = pada.desc;
+  
+  var padaArthaSection = document.getElementById('pada-artha-section');
+  var padaArthaText = document.getElementById('current-pada-artha-text');
+  if (padaArthaSection && padaArthaText) {
+    if (pada.padaArtha && String(pada.padaArtha).trim() !== '') {
+      padaArthaText.innerText = pada.padaArtha;
+      padaArthaSection.classList.remove('hidden');
+    } else {
+      padaArthaSection.classList.add('hidden');
+    }
+  }
+  
   document.getElementById('current-swaroopartha-text').innerText = pada.svartha || 'ස්වරූපාර්ථ විස්තරය ඇතුළත් කර නැත.';
   
   updateBookmarkButtonState();
   renderBreakdownLists(pada);
   switchTab('skandha');
 
-  // ============================================================
-  // ත්‍රික මුක්ත ධර්ම පෙන්වීම (NEW)
-  // ============================================================
   var muktaSection = document.getElementById('tika-mukta-section');
   var muktaContent = document.getElementById('tika-mukta-content');
   if (muktaSection && muktaContent) {
@@ -866,304 +917,8 @@ function selectPada(padaIndex) {
     }
   }
 
-  // මග්ගාරම්මණ තිකය හඳුනා ගැනීම
-  if (currentCategory === 'tika' && item.title && item.title.indexOf('මග්ගාරම්මණ') > -1 && item.detailedAnalysis) {
-    renderMaggarammanaExtras(item, pada, padaIndex);
-  } else {
-    var extras = document.getElementById('maggarammana-extras');
-    if (extras) extras.classList.add('hidden');
-  }
-}
-
-// ============================================================
-// මග්ගාරම්මණ තිකයට විශේෂිත දත්ත පෙන්වීම
-// ============================================================
-function renderMaggarammanaExtras(item, pada, padaIndex) {
-  var container = document.getElementById('maggarammana-extras');
-  if (!container) return;
-  
-  container.classList.remove('hidden');
-  
-  renderNirukthiAnalysis(item.nirukthiAnalysis);
-  renderDetailedAnalysis(item.detailedAnalysis, padaIndex);
-  renderArthaVikalpa(item.detailedAnalysis, padaIndex);
-  renderPaccayaAnalysis(item.paccayaAnalysis);
-  renderMaggaNaKarana(item.maggaArammanaNaKarana);
-  renderRelatedTikas(item.relatedTikas);
-  renderSpecialNotes(item.specialNotes);
-}
-
-function renderNirukthiAnalysis(data) {
-  var section = document.getElementById('mg-nirukthi-section');
-  var intro = document.getElementById('mg-nirukthi-intro');
-  var list = document.getElementById('mg-nirukthi-list');
-  
-  if (!data || !data.items || data.items.length === 0) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  section.classList.remove('hidden');
-  intro.innerText = data.introduction || '';
-  list.innerHTML = '';
-  
-  data.items.forEach(function(item) {
-    var div = document.createElement('div');
-    div.className = 'bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-3 space-y-1.5';
-    div.innerHTML = 
-      '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' +
-        '<i class="fa-solid fa-bookmark text-saffron-600 text-xs"></i> ' + item.name +
-      '</div>' +
-      '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-white dark:bg-slate-800 p-2 rounded border border-amber-100 dark:border-slate-700">' +
-        '<i class="fa-solid fa-language"></i> ' + item.pali +
-      '</div>' +
-      '<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">' + item.description + '</p>' +
-      (item.vyakarana ? '<p class="text-xs text-slate-500 dark:text-slate-400"><strong>ව්‍යාකරණය:</strong> ' + item.vyakarana + '</p>' : '');
-    list.appendChild(div);
-  });
-}
-
-function renderDetailedAnalysis(data, padaIndex) {
-  var section = document.getElementById('mg-detailed-section');
-  var intro = document.getElementById('mg-detailed-intro');
-  var list = document.getElementById('mg-detailed-list');
-  
-  if (!data || !data.sections || data.sections.length === 0) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  section.classList.remove('hidden');
-  intro.innerText = data.introduction || '';
-  list.innerHTML = '';
-  
-  var sectionData = data.sections[padaIndex];
-  if (!sectionData) {
-    data.sections.forEach(function(sec) {
-      list.appendChild(createDetailedSection(sec));
-    });
-    return;
-  }
-  
-  list.appendChild(createDetailedSection(sectionData));
-}
-
-function createDetailedSection(sec) {
-  var div = document.createElement('div');
-  div.className = 'bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-4 space-y-3';
-  
-  var html = 
-    '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200 border-b border-amber-200 dark:border-slate-700 pb-2">' +
-      '<i class="fa-solid fa-cube text-saffron-600"></i> ' + sec.title +
-      (sec.subtitle ? ' <span class="text-xs text-saffron-600 font-medium ml-1">(' + sec.subtitle + ')</span>' : '') +
-    '</div>';
-  
-  if (sec.nirukthi) {
-    html += '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-white dark:bg-slate-800 p-2 rounded border border-amber-100 dark:border-slate-700">' +
-              '<i class="fa-solid fa-quote-left text-saffron-500"></i> ' + sec.nirukthi +
-            '</div>';
-  }
-  
-  if (sec.cittaBreakdown && sec.cittaBreakdown.length > 0) {
-    html += '<div class="space-y-2"><div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 uppercase">සිත් විස්තරය:</div>';
-    sec.cittaBreakdown.forEach(function(c) {
-      html += '<div class="breakdown-item">' +
-                '<span class="num"><i class="fa-solid fa-brain text-blue-500 text-xs"></i></span>' +
-                '<span class="name">' + c.name + ' <span class="text-xs text-saffron-600">(' + c.count + ')</span></span>' +
-                '<span class="value">' + c.description + '</span>' +
-              '</div>';
-    });
-    html += '</div>';
-  }
-  
-  if (sec.cetasikaBreakdown) {
-    html += '<div class="bg-white dark:bg-slate-800 border border-saffron-500/30 rounded-lg p-2">' +
-              '<div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-heart text-red-500"></i> චෛතසික විස්තරය:</div>' +
-              '<p class="text-xs text-slate-700 dark:text-slate-300">' + sec.cetasikaBreakdown + '</p>' +
-            '</div>';
-  }
-  
-  if (sec.puggalaBreakdown && sec.puggalaBreakdown.length > 0) {
-    html += '<div class="space-y-2"><div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 uppercase">පුද්ගල විස්තරය:</div>';
-    sec.puggalaBreakdown.forEach(function(p) {
-      html += '<div class="breakdown-item">' +
-                '<span class="num"><i class="fa-solid fa-user text-green-600 text-xs"></i></span>' +
-                '<span class="name">' + p.name + '</span>' +
-                '<span class="value">' + p.description + '</span>' +
-              '</div>';
-    });
-    html += '</div>';
-  }
-  
-  if (sec.puggalaNotes) {
-    html += '<div class="bg-amber-100 dark:bg-slate-800 border-l-4 border-saffron-500 p-3 rounded">' +
-              '<div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-lightbulb"></i> විශේෂ සටහන:</div>' +
-              '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' + sec.puggalaNotes + '</p>' +
-            '</div>';
-  }
-  
-  if (sec.adhipatiDhamma && sec.adhipatiDhamma.length > 0) {
-    html += '<div class="space-y-2"><div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 uppercase">අධිපති ධර්ම සතර:</div>';
-    sec.adhipatiDhamma.forEach(function(a) {
-      html += '<div class="breakdown-item">' +
-                '<span class="num"><i class="fa-solid fa-crown text-yellow-500 text-xs"></i></span>' +
-                '<span class="name">' + a.name + '</span>' +
-                '<span class="value">' + a.description + '</span>' +
-              '</div>';
-    });
-    html += '</div>';
-  }
-  
-  if (sec.adhipatiNotes) {
-    html += '<div class="bg-amber-100 dark:bg-slate-800 border-l-4 border-saffron-500 p-3 rounded">' +
-              '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' + sec.adhipatiNotes + '</p>' +
-            '</div>';
-  }
-  
-  div.innerHTML = html;
-  return div;
-}
-
-function renderArthaVikalpa(detailedAnalysis, padaIndex) {
-  var section = document.getElementById('mg-artavikalpa-section');
-  var list = document.getElementById('mg-artavikalpa-list');
-  
-  if (!detailedAnalysis || !detailedAnalysis.sections) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  var sectionData = detailedAnalysis.sections[padaIndex];
-  if (!sectionData || !sectionData.artaVikalpa || sectionData.artaVikalpa.length === 0) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  section.classList.remove('hidden');
-  list.innerHTML = '';
-  
-  sectionData.artaVikalpa.forEach(function(v, idx) {
-    var div = document.createElement('div');
-    div.className = 'bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-900 dark:to-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl p-4 space-y-2';
-    div.innerHTML = 
-      '<div class="flex items-center gap-2 mb-2">' +
-        '<span class="w-7 h-7 rounded-full bg-saffron-500 text-maroon-950 font-bold text-xs flex items-center justify-center shrink-0">' + (idx+1) + '</span>' +
-        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + v.name + '</div>' +
-      '</div>' +
-      '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-amber-100 dark:border-slate-700">' +
-        '<i class="fa-solid fa-language text-saffron-500"></i> ' + v.pali +
-      '</div>' +
-      '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' +
-        '<strong class="text-maroon-900 dark:text-saffron-300">අර්ථය:</strong> ' + v.description +
-      '</p>' +
-      '<div class="bg-saffron-500/10 border-l-4 border-saffron-500 p-3 rounded">' +
-        '<div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-check-circle text-green-600"></i> ප්‍රතිඵලය:</div>' +
-        '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">' + v.result + '</p>' +
-      '</div>';
-    list.appendChild(div);
-  });
-}
-
-function renderPaccayaAnalysis(data) {
-  var section = document.getElementById('mg-paccaya-section');
-  var intro = document.getElementById('mg-paccaya-intro');
-  var list = document.getElementById('mg-paccaya-list');
-  
-  if (!data || !data.items || data.items.length === 0) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  section.classList.remove('hidden');
-  intro.innerText = data.introduction || '';
-  list.innerHTML = '';
-  
-  data.items.forEach(function(item) {
-    var div = document.createElement('div');
-    div.className = 'breakdown-item';
-    div.innerHTML = 
-      '<span class="num"><i class="fa-solid fa-link text-saffron-600 text-xs"></i></span>' +
-      '<span class="name">' + item.name + '</span>' +
-      '<span class="value">' + item.description + '</span>';
-    list.appendChild(div);
-  });
-}
-
-function renderMaggaNaKarana(data) {
-  var section = document.getElementById('mg-maggaNaKarana-section');
-  var desc = document.getElementById('mg-maggaNaKarana-desc');
-  var list = document.getElementById('mg-maggaNaKarana-list');
-  var summary = document.getElementById('mg-maggaNaKarana-summary');
-  
-  if (!data || !data.items || data.items.length === 0) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  section.classList.remove('hidden');
-  desc.innerText = data.description || '';
-  summary.innerText = data.summary || '';
-  list.innerHTML = '';
-  
-  data.items.forEach(function(item) {
-    var div = document.createElement('div');
-    div.className = 'breakdown-item';
-    div.innerHTML = 
-      '<span class="num">' + item.count + '</span>' +
-      '<span class="name">' + item.name + '</span>' +
-      '<span class="value">' + item.description + '</span>';
-    list.appendChild(div);
-  });
-}
-
-function renderRelatedTikas(data) {
-  var section = document.getElementById('mg-related-section');
-  var list = document.getElementById('mg-related-list');
-  
-  if (!data || data.length === 0) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  section.classList.remove('hidden');
-  list.innerHTML = '';
-  
-  data.forEach(function(item) {
-    var div = document.createElement('div');
-    div.className = 'bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-3';
-    div.innerHTML = 
-      '<div class="flex items-center gap-2 mb-1.5">' +
-        '<span class="w-7 h-7 rounded-full bg-saffron-500/20 text-saffron-600 font-bold text-xs flex items-center justify-center shrink-0">' + item.number + '</span>' +
-        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + item.name + '</div>' +
-      '</div>' +
-      '<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed ml-9">' + item.relation + '</p>';
-    list.appendChild(div);
-  });
-}
-
-function renderSpecialNotes(data) {
-  var section = document.getElementById('mg-specialnotes-section');
-  var list = document.getElementById('mg-specialnotes-list');
-  
-  if (!data || data.length === 0) {
-    section.classList.add('hidden');
-    return;
-  }
-  
-  section.classList.remove('hidden');
-  list.innerHTML = '';
-  
-  data.forEach(function(item, idx) {
-    var div = document.createElement('div');
-    div.className = 'bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-900 dark:to-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl p-4';
-    div.innerHTML = 
-      '<div class="flex items-start gap-2 mb-2">' +
-        '<span class="w-6 h-6 rounded-full bg-saffron-500 text-maroon-950 font-bold text-xs flex items-center justify-center shrink-0">' + (idx+1) + '</span>' +
-        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + item.title + '</div>' +
-      '</div>' +
-      '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed ml-8">' + item.content + '</p>';
-    list.appendChild(div);
-  });
+  var extras = document.getElementById('maggarammana-extras');
+  if (extras) extras.classList.add('hidden');
 }
 
 // ============================================================
@@ -1203,7 +958,7 @@ function switchSabbatikaTab(tabName) {
 }
 
 // ============================================================
-// BREAKDOWN LISTS (තික සහ සුත්තන්ත සඳහා පමණි)
+// BREAKDOWN LISTS (සුත්තන්ත සඳහා පමණි)
 // ============================================================
 function renderBreakdownLists(pada) {
   // ස්කන්ධ
@@ -1223,83 +978,27 @@ function renderBreakdownLists(pada) {
   var aList = document.getElementById('ayatana-list');
   aList.innerHTML = '';
   var aCount = 0;
-
-  if (pada.ayatanaTable && pada.ayatanaTable.length > 0) {
-    aCount = pada.ayatanaTable.length;
-    var table = document.createElement('table');
-    table.className = 'min-w-full text-sm border border-amber-200 dark:border-slate-700 rounded-lg overflow-hidden';
-    table.innerHTML = 
-      '<thead class="bg-amber-100 dark:bg-slate-900">' +
-        '<tr>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700 w-12">අංකය</th>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ආයතනය</th>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ගණන</th>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">විස්තරය</th>' +
-        '</tr>' +
-      '</thead>' +
-      '<tbody>' +
-        pada.ayatanaTable.map(function(a) {
-          return '<tr class="bg-white dark:bg-slate-800 hover:bg-amber-50 dark:hover:bg-slate-700">' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 font-bold text-amber-900 dark:text-saffron-300">' + a.num + '</td>' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-amber-900 dark:text-saffron-200 font-semibold">' + a.name + '</td>' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-saffron-600 dark:text-saffron-400 font-bold">' + a.count + '</td>' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs">' + a.value + '</td>' +
-          '</tr>';
-        }).join('') +
-      '</tbody>';
-    aList.appendChild(table);
-    document.getElementById('ayatana-count').innerText = aCount + ' / ' + aCount;
-  } else {
-    pada.ayatana.forEach(function(a) {
-      aCount++;
-      var div = document.createElement('div');
-      div.className = 'breakdown-item';
-      div.innerHTML = '<span class="num">' + a.num + '.</span><span class="name">' + a.name + '</span><span class="value">' + a.value + '</span>';
-      aList.appendChild(div);
-    });
-    document.getElementById('ayatana-count').innerText = aCount + ' / ' + pada.ayatana.length;
-  }
+  pada.ayatana.forEach(function(a) {
+    aCount++;
+    var div = document.createElement('div');
+    div.className = 'breakdown-item';
+    div.innerHTML = '<span class="num">' + a.num + '.</span><span class="name">' + a.name + '</span><span class="value">' + a.value + '</span>';
+    aList.appendChild(div);
+  });
+  document.getElementById('ayatana-count').innerText = aCount + ' / ' + pada.ayatana.length;
 
   // ධාතු
   var dList = document.getElementById('dhatu-list');
   dList.innerHTML = '';
   var dCount = 0;
-
-  if (pada.dhatuTable && pada.dhatuTable.length > 0) {
-    dCount = pada.dhatuTable.length;
-    var table = document.createElement('table');
-    table.className = 'min-w-full text-sm border border-amber-200 dark:border-slate-700 rounded-lg overflow-hidden';
-    table.innerHTML = 
-      '<thead class="bg-amber-100 dark:bg-slate-900">' +
-        '<tr>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700 w-12">අංකය</th>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ධාතුව</th>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">ගණන</th>' +
-          '<th class="px-3 py-2 text-left font-bold text-maroon-900 dark:text-saffron-300 border-b border-amber-200 dark:border-slate-700">විස්තරය</th>' +
-        '</tr>' +
-      '</thead>' +
-      '<tbody>' +
-        pada.dhatuTable.map(function(d) {
-          return '<tr class="bg-white dark:bg-slate-800 hover:bg-amber-50 dark:hover:bg-slate-700">' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 font-bold text-amber-900 dark:text-saffron-300">' + d.num + '</td>' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-amber-900 dark:text-saffron-200 font-semibold">' + d.name + '</td>' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-saffron-600 dark:text-saffron-400 font-bold">' + d.count + '</td>' +
-            '<td class="px-3 py-2 border-b border-amber-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs">' + d.value + '</td>' +
-          '</tr>';
-        }).join('') +
-      '</tbody>';
-    dList.appendChild(table);
-    document.getElementById('dhatu-count').innerText = dCount + ' / ' + dCount;
-  } else {
-    pada.dhatu.forEach(function(d) {
-      dCount++;
-      var div = document.createElement('div');
-      div.className = 'breakdown-item';
-      div.innerHTML = '<span class="num">' + d.num + '.</span><span class="name">' + d.name + '</span><span class="value">' + d.value + '</span>';
-      dList.appendChild(div);
-    });
-    document.getElementById('dhatu-count').innerText = dCount + ' / ' + pada.dhatu.length;
-  }
+  pada.dhatu.forEach(function(d) {
+    dCount++;
+    var div = document.createElement('div');
+    div.className = 'breakdown-item';
+    div.innerHTML = '<span class="num">' + d.num + '.</span><span class="name">' + d.name + '</span><span class="value">' + d.value + '</span>';
+    dList.appendChild(div);
+  });
+  document.getElementById('dhatu-count').innerText = dCount + ' / ' + pada.dhatu.length;
 
   // සත්‍ය
   var satList = document.getElementById('sathya-list');
@@ -1491,7 +1190,7 @@ function menuAction(action) {
 // ============================================================
 function toggleCurrentBookmark() {
   var id = currentCategory + '_' + currentMatikaIndex + '_' + currentPadaIndex;
-  var dataList = currentCategory === 'tika' ? tikaFullData : suttantaFullData;
+  var dataList = suttantaFullData;
   var matika = dataList[currentMatikaIndex];
   var pada = matika.padas[currentPadaIndex];
   
@@ -1555,16 +1254,16 @@ function showBookmarks() {
       currentMatikaIndex = b.matikaIndex;
       currentPadaIndex = b.padaIndex;
       navigateTo('details');
-      var dataList = currentCategory === 'tika' ? tikaFullData : suttantaFullData;
+      var dataList = suttantaFullData;
       var item = dataList[currentMatikaIndex];
-      document.getElementById('detail-category-tag').innerText = currentCategory === 'tika' ? 'තික මාතිකා' : 'සුත්තන්ත මාතිකා';
+      document.getElementById('detail-category-tag').innerText = 'සුත්තන්ත මාතිකා';
       document.getElementById('detail-matika-title').innerText = item.title;
       
       renderPadaTabs(item.padas);
       selectPada(currentPadaIndex);
     };
     
-    card.innerHTML = '<div><span class="text-[10px] font-bold px-2 py-0.5 rounded bg-saffron-500/20 text-saffron-600 mb-1 inline-block">' + (b.category === 'tika' ? 'තික මාතිකා' : 'සුත්තන්ත මාතිකා') + '</span><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + b.matikaTitle + ' - <span class="text-saffron-600">' + b.padaName + '</span></h4></div><button onclick="event.stopPropagation(); removeBookmark(\'' + b.id + '\')" class="text-slate-400 hover:text-red-500 p-2"><i class="fa-solid fa-trash-can text-sm"></i></button>';
+    card.innerHTML = '<div><span class="text-[10px] font-bold px-2 py-0.5 rounded bg-saffron-500/20 text-saffron-600 mb-1 inline-block">සුත්තන්ත මාතිකා</span><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + b.matikaTitle + ' - <span class="text-saffron-600">' + b.padaName + '</span></h4></div><button onclick="event.stopPropagation(); removeBookmark(\'' + b.id + '\')" class="text-slate-400 hover:text-red-500 p-2"><i class="fa-solid fa-trash-can text-sm"></i></button>';
     container.appendChild(card);
   });
 }
@@ -1577,7 +1276,7 @@ function removeBookmark(id) {
 }
 
 // ============================================================
-// SEARCH LOGIC (තික සහ සුත්තන්ත පමණි)
+// SEARCH LOGIC (සුත්තන්ත පමණි)
 // ============================================================
 function handleSearch(query) {
   var container = document.getElementById('search-results-container');
@@ -1597,23 +1296,16 @@ function handleSearch(query) {
   var q = query.toLowerCase();
   var results = [];
   
-  var categories = [
-    {name: 'tika', label: 'තික මාතිකා', data: tikaFullData},
-    {name: 'suttanta', label: 'සුත්තන්ත මාතිකා', data: suttantaFullData}
-  ];
-  
-  categories.forEach(function(cat) {
-    cat.data.forEach(function(matika, mIdx) {
-      if (matika.title.toLowerCase().indexOf(q) > -1) {
-        results.push({ category: cat.name, categoryLabel: cat.label, matikaIndex: mIdx, padaIndex: 0, title: matika.title, matchType: 'මාතිකා නම' });
-      }
-      matika.padas.forEach(function(pada, pIdx) {
-if (pada.name.toLowerCase().indexOf(q) > -1 || (pada.svartha && pada.svartha.toLowerCase().indexOf(q) > -1) || (pada.desc && pada.desc.toLowerCase().indexOf(q) > -1) || (pada.mukta && String(pada.mukta).toLowerCase().indexOf(q) > -1)) {
-          if (!results.some(function(r) { return r.category === cat.name && r.matikaIndex === mIdx && r.padaIndex === pIdx; })) {
-            results.push({ category: cat.name, categoryLabel: cat.label, matikaIndex: mIdx, padaIndex: pIdx, title: matika.title + ' -> ' + pada.name, matchType: 'පදය / ස්වරූපාර්ථය' });
-          }
+  suttantaFullData.forEach(function(matika, mIdx) {
+    if (matika.title.toLowerCase().indexOf(q) > -1) {
+      results.push({ matikaIndex: mIdx, padaIndex: 0, title: matika.title, matchType: 'මාතිකා නම' });
+    }
+    matika.padas.forEach(function(pada, pIdx) {
+      if (pada.name.toLowerCase().indexOf(q) > -1 || (pada.svartha && pada.svartha.toLowerCase().indexOf(q) > -1) || (pada.desc && pada.desc.toLowerCase().indexOf(q) > -1) || (pada.padaArtha && String(pada.padaArtha).toLowerCase().indexOf(q) > -1)) {
+        if (!results.some(function(r) { return r.matikaIndex === mIdx && r.padaIndex === pIdx; })) {
+          results.push({ matikaIndex: mIdx, padaIndex: pIdx, title: matika.title + ' -> ' + pada.name, matchType: 'පදය / ස්වරූපාර්ථය' });
         }
-      });
+      }
     });
   });
   
@@ -1629,13 +1321,12 @@ if (pada.name.toLowerCase().indexOf(q) > -1 || (pada.svartha && pada.svartha.toL
     var div = document.createElement('div');
     div.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-3 shadow-sm cursor-pointer hover:border-saffron-500 flex items-center justify-between';
     div.onclick = function() {
-      currentCategory = r.category;
+      currentCategory = 'suttanta';
       currentMatikaIndex = r.matikaIndex;
       currentPadaIndex = r.padaIndex;
       navigateTo('details');
-      var dataList = currentCategory === 'tika' ? tikaFullData : suttantaFullData;
-      var item = dataList[currentMatikaIndex];
-      document.getElementById('detail-category-tag').innerText = r.categoryLabel;
+      var item = suttantaFullData[currentMatikaIndex];
+      document.getElementById('detail-category-tag').innerText = 'සුත්තන්ත මාතිකා';
       document.getElementById('detail-matika-title').innerText = item.title;
       
       renderPadaTabs(item.padas);
@@ -1644,7 +1335,7 @@ if (pada.name.toLowerCase().indexOf(q) > -1 || (pada.svartha && pada.svartha.toL
       document.getElementById('global-search').value = '';
       clearBtn.classList.add('hidden');
     };
-    div.innerHTML = '<div><span class="text-[10px] font-bold px-2 py-0.5 rounded bg-saffron-500/25 text-saffron-600 mb-1 inline-block">' + r.categoryLabel + ' (' + r.matchType + ')</span><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + r.title + '</h4></div><i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>';
+    div.innerHTML = '<div><span class="text-[10px] font-bold px-2 py-0.5 rounded bg-saffron-500/25 text-saffron-600 mb-1 inline-block">සුත්තන්ත මාතිකා (' + r.matchType + ')</span><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + r.title + '</h4></div><i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>';
     list.appendChild(div);
   });
 }

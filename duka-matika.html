@@ -74,18 +74,18 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 }
 
 .dark .breakdown-item { border-bottom-color: #334155; }
-.dark .breakdown-item .num { color: #fcd34d; background: rgba(252, 211, 77, 0.15); }
+.dark .breakdown-item .num { color: #1d190a; background: rgba(252, 211, 77, 0.15); }
 .dark .breakdown-item .name { color: #fde68a; }
 .dark .breakdown-item .value { color: #fbbf24; }
 
 .svartha-box {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: rgba(121, 52, 6, 0.53);
+  border: 1px solid rgba(95, 72, 16, 0.436);
   border-radius: 0.75rem;
   padding: 1rem;
   white-space: pre-line;
   line-height: 1.7;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 @keyframes fadeIn {
@@ -163,8 +163,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
             100
           </div>
           <div class="flex-1 min-w-0">
-            <h3 class="text-xl sm:text-2xl font-bold mb-1 drop-shadow-md">දුක මාතිකා</h3>
-            <p class="text-xs sm:text-sm text-white/90 leading-snug">
+           <h3 class="text-xl sm:text-2xl font-bold mb-1 drop-shadow-md">දුක මාතිකා 100</h3>
               ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි පද, ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම්
             </p>
           </div>
@@ -187,7 +186,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <input type="text" id="duka-search" oninput="handleDukaSearch(this.value)"
-               placeholder="මාතිකා පදය, ස්වරූපාර්ථ අනුව සොයන්න..."
+               placeholder="මාතිකා පදය, දුක, ස්වරූපාර්ථ අනුව සොයන්න..."
                class="w-full pl-10 pr-10 py-3 bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-saffron-500 text-sm">
         <button id="duka-search-clear" onclick="clearDukaSearch()" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -359,8 +358,9 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
   <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා අධ්‍යයනය &copy; 2024</p>
 </footer>
 
-<!-- SCRIPT ගොනු -->
-<!-- SCRIPT ගොනු -->
+<!-- ============================================================ -->
+<!-- SCRIPT ගොනු - මෙතැන වැදගත් ! සියලුම ගොනු root folder එකේ ! -->
+<!-- ============================================================ -->
 <script src="js/duka/gochhaka-01-hetu.js"></script>
 <script src="js/duka/gochhaka-02-cullantara.js"></script>
 <script src="js/duka/gochhaka-03-asava.js"></script>
@@ -377,25 +377,25 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <script src="duka-app.js"></script>
 
 <script>
+// ============================================================
 // දුක මාතිකා බොත්තම click කිරීම
+// ============================================================
 function openDukaMatika() {
   var section = document.getElementById('gochhaka-section');
   if (!section) return;
-
-  if (section.classList.contains('hidden')) {
-    section.classList.remove('hidden');
-    if (typeof renderGochhakaList === 'function') {
-      renderGochhakaList();
-    }
-    setTimeout(function() {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  } else {
-    section.classList.add('hidden');
-  }
+  
+  section.classList.remove('hidden');
+  renderGochhakaList();
+  
+  setTimeout(function() {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
 }
+  
 
+// ============================================================
 // THEME TOGGLE
+// ============================================================
 function toggleDarkMode() {
   var html = document.documentElement;
   var icon = document.getElementById('theme-toggle-icon');
@@ -416,11 +416,11 @@ if (localStorage.getItem('duka_theme') === 'dark' ||
   document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
 }
 
-// SEARCH
+// ============================================================
+// SEARCH - පුළුල් කළ සෙවුම
+// ============================================================
 function handleDukaSearch(query) {
-  var container = document.getElementById('gochhaka-list');
   var clearBtn = document.getElementById('duka-search-clear');
-  if (!container) return;
 
   if (!query || query.trim() === '') {
     clearBtn.classList.add('hidden');
@@ -429,53 +429,14 @@ function handleDukaSearch(query) {
   }
 
   clearBtn.classList.remove('hidden');
-  var q = query.toLowerCase();
-  var results = [];
 
-  dukaGochhakaData.forEach(function(gochhaka) {
-    var padas = getGochhakaPadas(gochhaka);
-    var matchedPadas = [];
-    padas.forEach(function(pada, idx) {
-      if (pada.name.toLowerCase().indexOf(q) > -1 ||
-          (pada.desc && pada.desc.toLowerCase().indexOf(q) > -1) ||
-          (pada.svartha && pada.svartha.toLowerCase().indexOf(q) > -1)) {
-        matchedPadas.push(idx);
-      }
-    });
-    if (matchedPadas.length > 0 || gochhaka.title.toLowerCase().indexOf(q) > -1) {
-      results.push({ gochhaka: gochhaka, matchedPadas: matchedPadas });
-    }
-  });
-
-  container.innerHTML = '';
-
-  if (results.length === 0) {
-    container.innerHTML = '<div class="text-center py-8 text-slate-500 text-sm"><i class="fa-solid fa-magnifying-glass text-2xl mb-2 opacity-30"></i><br>ගැලපෙන ප්‍රතිඵල හමු නොවීය.</div>';
-    return;
+  if (typeof performDukaSearch === 'function') {
+    performDukaSearch(query);
+  } else {
+    console.warn('[Duka App] performDukaSearch not found, using fallback');
+    var results = searchDukaMatika(query);
+    renderDukaSearchResults(results);
   }
-
-  results.forEach(function(item) {
-    var gochhaka = item.gochhaka;
-    var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
-    card.onclick = function() { openGochhaka(gochhaka.id); };
-
-    var matchInfo = item.matchedPadas.length > 0
-      ? '<div class="text-xs text-saffron-600 dark:text-saffron-400 mt-2"><i class="fa-solid fa-check-circle"></i> ' + item.matchedPadas.length + ' පදයක් ගැලපේ</div>'
-      : '';
-
-    card.innerHTML =
-      '<div class="flex items-center gap-3 mb-2">' +
-        '<span class="w-9 h-9 rounded-full bg-saffron-500 text-maroon-950 font-bold text-sm flex items-center justify-center shrink-0">' + gochhaka.id + '</span>' +
-        '<div class="flex-1 min-w-0">' +
-          '<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 truncate">' + gochhaka.title + '</h3>' +
-          '<p class="text-xs text-slate-500">දුක මාතිකා ' + gochhaka.dukaCount + '</p>' +
-        '</div>' +
-        '<i class="fa-solid fa-chevron-right text-slate-400"></i>' +
-      '</div>' +
-      matchInfo;
-    container.appendChild(card);
-  });
 }
 
 function clearDukaSearch() {
@@ -484,7 +445,9 @@ function clearDukaSearch() {
   renderGochhakaList();
 }
 
+// ============================================================
 // BOOKMARKS VIEW
+// ============================================================
 function showDukaBookmarksView() {
   showDukaView('duka-view-bookmarks');
   updateBreadcrumbDuka('bookmarks');
@@ -535,7 +498,9 @@ function removeDukaBookmark(id) {
   renderDukaBookmarks();
 }
 
+// ============================================================
 // BREADCRUMB UPDATE
+// ============================================================
 function updateBreadcrumbDuka(view) {
   var sep = document.getElementById('bc-sep-gochhaka');
   var gochhakaSpan = document.getElementById('bc-gochhaka');
@@ -546,7 +511,7 @@ function updateBreadcrumbDuka(view) {
   if (view === 'duka-list' && dukaState.currentGochhaka) {
     text = dukaState.currentGochhaka.title;
   } else if (view === 'pada-pair' && dukaState.currentDukaPair) {
-    text = dukaState.currentGochhaka.title + ' → දුක ' + dukaState.currentDukaPair.number;
+    text = dukaState.currentDukaPair.name || dukaState.currentGochhaka.title;
   } else if (view === 'pada-detail' && dukaState.currentPada) {
     text = dukaState.currentGochhaka.title + ' → ' + dukaState.currentPada.name;
   } else if (view === 'bookmarks') {
@@ -563,7 +528,9 @@ function updateBreadcrumbDuka(view) {
   }
 }
 
+// ============================================================
 // INIT
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   if (typeof initDukaApp === 'function') {
     initDukaApp();
