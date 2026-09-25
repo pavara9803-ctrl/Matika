@@ -1,7 +1,7 @@
 // sw.js - Service Worker for Offline Support
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම සඳහා නොබැඳි (Offline) සහාය
 
-const CACHE_NAME = 'abhidhamma-matika-v3.8.0'; // v3.4.2 සිට v3.5.0 දක්වා යාවත්කාලීන කර ඇත
+const CACHE_NAME = 'abhidhamma-matika-v3.8.2'; // v3.4.2 සිට v3.5.0 දක්වා යාවත්කාලීන කර ඇත
 const OFFLINE_URL = './index.html';
 
 // ============================================================
