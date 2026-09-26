@@ -4,13 +4,6 @@
  * 
  * මෙය citta.html සමඟ භාවිතා කිරීමට නිර්මාණය කර ඇත.
  * සියලුම දත්ත සහ ක්‍රියාකාරීත්වය මෙහි අඩංගු වේ.
- * 
- * නිවැරදි කිරීම්:
- * - සියලුම සිත් සඳහා "සිත" යන පදය එක් කර ඇත.
- * - 'සොම්නස්' → 'සෝමනස්ස' ලෙස නිවැරදි කර ඇත.
- * - 'කාමාවචර කුසල් සිත් 24' → 'කාම සෝභන 24'
- * - 'රූපාවචර කුසල් සිත් 15' → 'රූපාවචර සිත් 15'
- * - 'අරූපාවචර කුසල් සිත් 12' → 'අරූපාවචර සිත් 12'
  */
 
 // ============================================================
@@ -48,10 +41,10 @@ const citta121Data = {
           "<div class='bg-red-100 dark:bg-red-900/40 px-4 py-2 font-bold text-red-800 dark:text-red-200 flex items-center gap-2'><i class='fa-solid fa-fire'></i> ලෝභ මූලික සිත් 8</div>" +
           "<div class='p-3 space-y-2'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const ditthi = (i === 1 || i === 2 || i === 5 || i === 6) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 1) ? 'අසංඛාරික' : 'සසංඛාරික';
-            return `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2'><span class='bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත දිට්ඨිගත ${ditthi} ${sankhara} සිත</span></div>`;
+            return `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2'><span class='bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත දිට්ඨිගත ${ditthi} ${sankhara}</span></div>`;
           }).join('') +
           "</div></div></div>" +
 
@@ -59,16 +52,16 @@ const citta121Data = {
           "<div class='mb-4 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-bolt'></i> දෝස මූලික සිත් 2</div>" +
           "<div class='p-3 space-y-2'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>9</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත අසංඛාරික සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>10</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත සසංඛාරික සිත</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>9</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත අසංඛාරික</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>10</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත සසංඛාරික</span></div>" +
           "</div></div></div>" +
 
           // මෝහ මූලික 2
           "<div class='bg-blue-50/50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800 overflow-hidden'>" +
           "<div class='bg-blue-100 dark:bg-blue-900/40 px-4 py-2 font-bold text-blue-800 dark:text-blue-200 flex items-center gap-2'><i class='fa-solid fa-cloud'></i> මෝහ මූලික සිත් 2</div>" +
           "<div class='p-3 space-y-2'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-blue-100 dark:border-blue-900/50 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>11</span><span class='text-sm'>උපේක්ෂා සහගත විචිකිච්ඡා සම්පයුත්ත සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-blue-100 dark:border-blue-900/50 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>12</span><span class='text-sm'>උපේක්ෂා සහගත උද්ධච්ච සම්පයුත්ත සිත</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-blue-100 dark:border-blue-900/50 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>11</span><span class='text-sm'>උපේක්ෂා සහගත විචිකිච්ඡා සම්පයුත්ත</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-blue-100 dark:border-blue-900/50 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>12</span><span class='text-sm'>උපේක්ෂා සහගත උද්ධච්ච සම්පයුත්ත</span></div>" +
           "</div></div></div>"
   },
 
@@ -81,43 +74,43 @@ const citta121Data = {
           "<div class='mb-4 bg-orange-50/50 dark:bg-orange-900/20 rounded-xl border border-orange-200 dark:border-orange-800 overflow-hidden'>" +
           "<div class='bg-orange-100 dark:bg-orange-900/40 px-4 py-2 font-bold text-orange-800 dark:text-orange-200 flex items-center gap-2'><i class='fa-solid fa-circle-exclamation'></i> අකුසල විපාක සිත් 7</div>" +
           "<div class='p-3 space-y-2'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>13</span><span class='text-sm'>උපේක්ෂා සහගත චක්ඛු විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>14</span><span class='text-sm'>උපේක්ෂා සහගත සෝත විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>15</span><span class='text-sm'>උපේක්ෂා සහගත ඝාන විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>16</span><span class='text-sm'>උපේක්ෂා සහගත ජිව්හා විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>17</span><span class='text-sm'>දුක්ඛ සහගත කාය විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>18</span><span class='text-sm'>උපේක්ෂා සහගත සම්පටිච්ඡන විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>19</span><span class='text-sm'>උපේක්ෂා සහගත සන්තීරණ විඤ්ඤාණ සිත</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>13</span><span class='text-sm'>උපේක්ෂා සහගත චක්ඛු විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>14</span><span class='text-sm'>උපේක්ෂා සහගත සෝත විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>15</span><span class='text-sm'>උපේක්ෂා සහගත ඝාන විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>16</span><span class='text-sm'>උපේක්ෂා සහගත ජිව්හා විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>17</span><span class='text-sm'>දුක්ඛ සහගත කාය විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>18</span><span class='text-sm'>උපේක්ෂා සහගත සම්පටිච්ඡන විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-orange-100 dark:border-orange-900/50 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>19</span><span class='text-sm'>උපේක්ෂා සහගත සන්තීරණ විඤ්ඤාණය</span></div>" +
           "</div></div></div>" +
 
           // කුසල අහේතුක විපාක 8
           "<div class='mb-4 bg-green-50/50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 overflow-hidden'>" +
           "<div class='bg-green-100 dark:bg-green-900/40 px-4 py-2 font-bold text-green-800 dark:text-green-200 flex items-center gap-2'><i class='fa-solid fa-check-circle'></i> කුසල අහේතුක විපාක සිත් 8</div>" +
           "<div class='p-3 space-y-2'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>20</span><span class='text-sm'>උපේක්ෂා සහගත චක්ඛු විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>21</span><span class='text-sm'>උපේක්ෂා සහගත සෝත විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>22</span><span class='text-sm'>උපේක්ෂා සහගත ඝාන විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>23</span><span class='text-sm'>උපේක්ෂා සහගත ජිව්හා විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>24</span><span class='text-sm'>සුඛ සහගත කාය විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>25</span><span class='text-sm'>උපේක්ෂා සහගත සම්පටිච්ඡන විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>26</span><span class='text-sm'>සෝමනස්ස සහගත සන්තීරණ විඤ්ඤාණ සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>27</span><span class='text-sm'>උපේක්ෂා සහගත සන්තීරණ විඤ්ඤාණ සිත</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>20</span><span class='text-sm'>උපේක්ෂා සහගත චක්ඛු විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>21</span><span class='text-sm'>උපේක්ෂා සහගත සෝත විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>22</span><span class='text-sm'>උපේක්ෂා සහගත ඝාන විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>23</span><span class='text-sm'>උපේක්ෂා සහගත ජිව්හා විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>24</span><span class='text-sm'>සුඛ සහගත කාය විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>25</span><span class='text-sm'>උපේක්ෂා සහගත සම්පටිච්ඡන විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>26</span><span class='text-sm'>සොම්නස් සහගත සන්තීරණ විඤ්ඤාණය</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>27</span><span class='text-sm'>උපේක්ෂා සහගත සන්තීරණ විඤ්ඤාණය</span></div>" +
           "</div></div></div>" +
 
           // අහේතුක ක්‍රියා 3
           "<div class='bg-purple-50/50 dark:bg-purple-900/20 rounded-xl border border-purple-200 dark:border-purple-800 overflow-hidden'>" +
           "<div class='bg-purple-100 dark:bg-purple-900/40 px-4 py-2 font-bold text-purple-800 dark:text-purple-200 flex items-center gap-2'><i class='fa-solid fa-person-running'></i> අහේතුක ක්‍රියා සිත් 3</div>" +
           "<div class='p-3 space-y-2'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>28</span><span class='text-sm'>උපේක්ෂා සහගත පංචද්වාරාවජ්ජන සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>29</span><span class='text-sm'>උපේක්ෂා සහගත මනෝද්වාරාවජ්ජන සිත</span></div>" +
-          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>30</span><span class='text-sm'>සෝමනස්ස සහගත හසිතුප්පාද සිත</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>28</span><span class='text-sm'>උපේක්ෂා සහගත පංචද්වාරාවජ්ජන</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>29</span><span class='text-sm'>උපේක්ෂා සහගත මනෝද්වාරාවජ්ජන</span></div>" +
+          "<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>30</span><span class='text-sm'>සොම්නස් සහගත හසිතුප්පාද</span></div>" +
           "</div></div></div>"
   },
 
-  // --- කාම සෝභන 24 ---
+  // --- කාමාවචර කුසල් සිත් 24 ---
   kamaKusala24Full: {
-    title: "කාම සෝභන 24",
-    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාම සෝභන සිත් 24 කි. (කුසල් 8, විපාක 8, ක්‍රියා 8)</p>" +
+    title: "කාමාවචර කුසල් සිත් 24",
+    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාමාවචර කුසල් සිත් 24 කි. (කුසල් 8, විපාක 8, ක්‍රියා 8)</p>" +
           "<div class='grid grid-cols-1 md:grid-cols-3 gap-3'>" +
           
           // කුසල් 8
@@ -125,10 +118,10 @@ const citta121Data = {
           "<div class='font-bold text-green-800 dark:text-green-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-seedling'></i> කුසල් සිත් 8</div>" +
           "<ul class='space-y-1 text-sm'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const nana = (i % 2 === 1) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 0) ? 'සසංඛාරික' : 'අසංඛාරික';
-            return `<li class='flex items-start gap-2'><span class='text-green-600 font-bold'>${i}.</span> ${feelings} සහගත ඤාණ${nana} ${sankhara} සිත</li>`;
+            return `<li class='flex items-start gap-2'><span class='text-green-600 font-bold'>${i}.</span> ${feelings} සහගත ඤාණ${nana} ${sankhara}</li>`;
           }).join('') +
           "</ul></div>" +
 
@@ -137,10 +130,10 @@ const citta121Data = {
           "<div class='font-bold text-blue-800 dark:text-blue-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-rotate-right'></i> විපාක සිත් 8</div>" +
           "<ul class='space-y-1 text-sm'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const nana = (i % 2 === 1) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 0) ? 'සසංඛාරික' : 'අසංඛාරික';
-            return `<li class='flex items-start gap-2'><span class='text-blue-600 font-bold'>${i}.</span> ${feelings} සහගත ඤාණ${nana} ${sankhara} සිත</li>`;
+            return `<li class='flex items-start gap-2'><span class='text-blue-600 font-bold'>${i}.</span> ${feelings} සහගත ඤාණ${nana} ${sankhara}</li>`;
           }).join('') +
           "</ul></div>" +
 
@@ -149,52 +142,52 @@ const citta121Data = {
           "<div class='font-bold text-purple-800 dark:text-purple-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-hand'></i> ක්‍රියා සිත් 8</div>" +
           "<ul class='space-y-1 text-sm'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const nana = (i % 2 === 1) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 0) ? 'සසංඛාරික' : 'අසංඛාරික';
-            return `<li class='flex items-start gap-2'><span class='text-purple-600 font-bold'>${i}.</span> ${feelings} සහගත ඤාණ${nana} ${sankhara} සිත</li>`;
+            return `<li class='flex items-start gap-2'><span class='text-purple-600 font-bold'>${i}.</span> ${feelings} සහගත ඤාණ${nana} ${sankhara}</li>`;
           }).join('') +
           "</ul></div></div>"
   },
 
-  // --- කාම සෝභන කුසල් 8 ---
+  // --- කාමාවචර කුසල් 8 ---
   kamaKusala8Full: {
-    title: "කාම සෝභන කුසල් සිත් 8",
-    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාම සෝභන කුසල් සිත් 8 කි. මේවා සෝමනස්ස හෝ උපේක්ෂා සහගත විය හැක. ඤාණසම්පයුත්ත හෝ ඤාණවිප්පයුත්ත විය හැක.</p>" +
+    title: "කාමාවචර කුසල් සිත් 8",
+    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාමාවචර කුසල් සිත් 8 කි. මේවා සොම්නස් හෝ උපේක්ෂා සහගත විය හැක. ඤාණසම්පයුත්ත හෝ ඤාණවිප්පයුත්ත විය හැක.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const nana = (i % 2 === 1) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 0) ? 'සසංඛාරික' : 'අසංඛාරික';
-            return `<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත ඤාණ${nana} ${sankhara} සිත</span></div>`;
+            return `<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත ඤාණ${nana} ${sankhara}</span></div>`;
           }).join('') +
           "</div>"
   },
 
-  // --- කාම සෝභන විපාක 8 ---
+  // --- කාමාවචර විපාක 8 ---
   kamaVipaka8Full: {
-    title: "කාම සෝභන විපාක සිත් 8",
-    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාම සෝභන විපාක සිත් 8 කි. මේවා කුසල් සිත් 8 හා සමාන ලක්ෂණ දරයි.</p>" +
+    title: "කාමාවචර විපාක සිත් 8",
+    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාමාවචර විපාක සිත් 8 කි. මේවා කුසල් සිත් 8 හා සමාන ලක්ෂණ දරයි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const nana = (i % 2 === 1) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 0) ? 'සසංඛාරික' : 'අසංඛාරික';
-            return `<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත ඤාණ${nana} ${sankhara} සිත</span></div>`;
+            return `<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත ඤාණ${nana} ${sankhara}</span></div>`;
           }).join('') +
           "</div>"
   },
 
-  // --- කාම සෝභන ක්‍රියා 8 ---
+  // --- කාමාවචර ක්‍රියා 8 ---
   kamaKriya8Full: {
-    title: "කාම සෝභන ක්‍රියා සිත් 8",
-    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාම සෝභන ක්‍රියා සිත් 8 කි. මේවා රහතන් වහන්සේට පමණක් උපදින සිත් වේ.</p>" +
+    title: "කාමාවචර ක්‍රියා සිත් 8",
+    desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>කාමාවචර ක්‍රියා සිත් 8 කි. මේවා රහතන් වහන්සේට පමණක් උපදින සිත් වේ.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const nana = (i % 2 === 1) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 0) ? 'සසංඛාරික' : 'අසංඛාරික';
-            return `<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත ඤාණ${nana} ${sankhara} සිත</span></div>`;
+            return `<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත ඤාණ${nana} ${sankhara}</span></div>`;
           }).join('') +
           "</div>"
   },
@@ -210,7 +203,7 @@ const citta121Data = {
           "<div class='font-bold text-green-800 dark:text-green-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-seedling'></i> කුසල් 5</div>" +
           "<ul class='space-y-1 text-sm'>" +
           ['පඨමධ්‍යාන', 'දුතියධ්‍යාන', 'තතියධ්‍යාන', 'චතුත්ථධ්‍යාන', 'පඤ්චමධ්‍යාන'].map((n, i) => 
-            `<li class='flex items-start gap-2'><span class='text-green-600 font-bold'>${i+1}.</span> ${n} කුසල් සිත</li>`
+            `<li class='flex items-start gap-2'><span class='text-green-600 font-bold'>${i+1}.</span> ${n} කුසල් සිත්</li>`
           ).join('') +
           "</ul></div>" +
 
@@ -219,7 +212,7 @@ const citta121Data = {
           "<div class='font-bold text-blue-800 dark:text-blue-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-rotate-right'></i> විපාක 5</div>" +
           "<ul class='space-y-1 text-sm'>" +
           ['පඨමධ්‍යාන', 'දුතියධ්‍යාන', 'තතියධ්‍යාන', 'චතුත්ථධ්‍යාන', 'පඤ්චමධ්‍යාන'].map((n, i) => 
-            `<li class='flex items-start gap-2'><span class='text-blue-600 font-bold'>${i+1}.</span> ${n} විපාක සිත</li>`
+            `<li class='flex items-start gap-2'><span class='text-blue-600 font-bold'>${i+1}.</span> ${n} විපාක සිත්</li>`
           ).join('') +
           "</ul></div>" +
 
@@ -228,7 +221,7 @@ const citta121Data = {
           "<div class='font-bold text-purple-800 dark:text-purple-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-hand'></i> ක්‍රියා 5</div>" +
           "<ul class='space-y-1 text-sm'>" +
           ['පඨමධ්‍යාන', 'දුතියධ්‍යාන', 'තතියධ්‍යාන', 'චතුත්ථධ්‍යාන', 'පඤ්චමධ්‍යාන'].map((n, i) => 
-            `<li class='flex items-start gap-2'><span class='text-purple-600 font-bold'>${i+1}.</span> ${n} ක්‍රියා සිත</li>`
+            `<li class='flex items-start gap-2'><span class='text-purple-600 font-bold'>${i+1}.</span> ${n} ක්‍රියා සිත්</li>`
           ).join('') +
           "</ul></div></div>"
   },
@@ -237,11 +230,11 @@ const citta121Data = {
     title: "රූපාවචර කුසල් සිත් 5",
     desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>රූපාවචර කුසල් සිත් 5 කි. මේවා ධ්‍යාන අංග මත පදනම්ව වර්ග කර ඇත.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>1</span><span class='text-sm'>පඨමධ්‍යාන කුසල් සිත (විතක්ක, විචාර, පීති, සුඛ, එකග්ගතා)</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>2</span><span class='text-sm'>දුතියධ්‍යාන කුසල් සිත (විචාර, පීති, සුඛ, එකග්ගතා)</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>3</span><span class='text-sm'>තතියධ්‍යාන කුසල් සිත (පීති, සුඛ, එකග්ගතා)</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>4</span><span class='text-sm'>චතුත්ථධ්‍යාන කුසල් සිත (සුඛ, එකග්ගතා)</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>5</span><span class='text-sm'>පඤ්චමධ්‍යාන කුසල් සිත (උපේක්ෂා, එකග්ගතා)</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>1</span><span class='text-sm'>පඨමධ්‍යාන කුසල් සිත් (විතක්ක, විචාර, පීති, සුඛ, එකග්ගතා)</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>2</span><span class='text-sm'>දුතියධ්‍යාන කුසල් සිත් (විචාර, පීති, සුඛ, එකග්ගතා)</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>3</span><span class='text-sm'>තතියධ්‍යාන කුසල් සිත් (පීති, සුඛ, එකග්ගතා)</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>4</span><span class='text-sm'>චතුත්ථධ්‍යාන කුසල් සිත් (සුඛ, එකග්ගතා)</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>5</span><span class='text-sm'>පඤ්චමධ්‍යාන කුසල් සිත් (උපේක්ෂා, එකග්ගතා)</span></div>" +
           "</div>"
   },
 
@@ -250,7 +243,7 @@ const citta121Data = {
     desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>රූපාවචර විපාක සිත් 5 කි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           ['පඨමධ්‍යාන', 'දුතියධ්‍යාන', 'තතියධ්‍යාන', 'චතුත්ථධ්‍යාන', 'පඤ්චමධ්‍යාන'].map((n, i) => 
-            `<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} විපාක සිත</span></div>`
+            `<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} විපාක සිත්</span></div>`
           ).join('') +
           "</div>"
   },
@@ -260,7 +253,7 @@ const citta121Data = {
     desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>රූපාවචර ක්‍රියා සිත් 5 කි. මේවා රහතන් වහන්සේට පමණක් උපදින සිත් වේ.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           ['පඨමධ්‍යාන', 'දුතියධ්‍යාන', 'තතියධ්‍යාන', 'චතුත්ථධ්‍යාන', 'පඤ්චමධ්‍යාන'].map((n, i) => 
-            `<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} ක්‍රියා සිත</span></div>`
+            `<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} ක්‍රියා සිත්</span></div>`
           ).join('') +
           "</div>"
   },
@@ -276,7 +269,7 @@ const citta121Data = {
           "<div class='font-bold text-green-800 dark:text-green-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-seedling'></i> කුසල් 4</div>" +
           "<ul class='space-y-1 text-sm'>" +
           ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => 
-            `<li class='flex items-start gap-2'><span class='text-green-600 font-bold'>${i+1}.</span> ${n} කුසල් සිත</li>`
+            `<li class='flex items-start gap-2'><span class='text-green-600 font-bold'>${i+1}.</span> ${n} කුසල් සිත්</li>`
           ).join('') +
           "</ul></div>" +
 
@@ -285,7 +278,7 @@ const citta121Data = {
           "<div class='font-bold text-blue-800 dark:text-blue-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-rotate-right'></i> විපාක 4</div>" +
           "<ul class='space-y-1 text-sm'>" +
           ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => 
-            `<li class='flex items-start gap-2'><span class='text-blue-600 font-bold'>${i+1}.</span> ${n} විපාක සිත</li>`
+            `<li class='flex items-start gap-2'><span class='text-blue-600 font-bold'>${i+1}.</span> ${n} විපාක සිත්</li>`
           ).join('') +
           "</ul></div>" +
 
@@ -294,7 +287,7 @@ const citta121Data = {
           "<div class='font-bold text-purple-800 dark:text-purple-200 mb-2 flex items-center gap-2'><i class='fa-solid fa-hand'></i> ක්‍රියා 4</div>" +
           "<ul class='space-y-1 text-sm'>" +
           ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => 
-            `<li class='flex items-start gap-2'><span class='text-purple-600 font-bold'>${i+1}.</span> ${n} ක්‍රියා සිත</li>`
+            `<li class='flex items-start gap-2'><span class='text-purple-600 font-bold'>${i+1}.</span> ${n} ක්‍රියා සිත්</li>`
           ).join('') +
           "</ul></div></div>"
   },
@@ -304,7 +297,7 @@ const citta121Data = {
     desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>අරූපාවචර කුසල් සිත් 4 කි. මේවා අරූප ධ්‍යාන සිත් වේ.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => 
-            `<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} කුසල් සිත</span></div>`
+            `<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} කුසල් සිත්</span></div>`
           ).join('') +
           "</div>"
   },
@@ -314,7 +307,7 @@ const citta121Data = {
     desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>අරූපාවචර විපාක සිත් 4 කි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => 
-            `<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} විපාක සිත</span></div>`
+            `<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} විපාක සිත්</span></div>`
           ).join('') +
           "</div>"
   },
@@ -324,7 +317,7 @@ const citta121Data = {
     desc: "<p class='mb-3 text-slate-600 dark:text-slate-400'>අරූපාවචර ක්‍රියා සිත් 4 කි. මේවා රහතන් වහන්සේට පමණක් උපදින සිත් වේ.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => 
-            `<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} ක්‍රියා සිත</span></div>`
+            `<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i+1}</span><span class='text-sm'>${n} ක්‍රියා සිත්</span></div>`
           ).join('') +
           "</div>"
   },
@@ -360,22 +353,22 @@ const citta121Data = {
           "<div class='mb-4 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> සෝතාපත්ති මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [1,2,3,4,5].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===1?'පඨම':i===2?'දුතිය':i===3?'තතිය':i===4?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සෝතාපත්ති මග්ග සිත</span></div>`).join('') +
+          [1,2,3,4,5].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===1?'පඨම':i===2?'දුතිය':i===3?'තතිය':i===4?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සෝතාපත්ති මග්ග සිත්</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> සකදාගාමි මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [6,7,8,9,10].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===6?'පඨම':i===7?'දුතිය':i===8?'තතිය':i===9?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සකදාගාමි මග්ග සිත</span></div>`).join('') +
+          [6,7,8,9,10].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===6?'පඨම':i===7?'දුතිය':i===8?'තතිය':i===9?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සකදාගාමි මග්ග සිත්</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> අනාගාමි මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [11,12,13,14,15].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===11?'පඨම':i===12?'දුතිය':i===13?'තතිය':i===14?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අනාගාමි මග්ග සිත</span></div>`).join('') +
+          [11,12,13,14,15].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===11?'පඨම':i===12?'දුතිය':i===13?'තතිය':i===14?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අනාගාමි මග්ග සිත්</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> අරහත් මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [16,17,18,19,20].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===16?'පඨම':i===17?'දුතිය':i===18?'තතිය':i===19?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අරහත් මග්ග සිත</span></div>`).join('') +
+          [16,17,18,19,20].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-sm'>${i}. ${i===16?'පඨම':i===17?'දුතිය':i===18?'තතිය':i===19?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අරහත් මග්ග සිත්</span></div>`).join('') +
           "</div></div></div>"
   },
 
@@ -385,22 +378,22 @@ const citta121Data = {
           "<div class='mb-4 bg-rose-50/50 dark:bg-rose-900/20 rounded-xl border border-rose-200 dark:border-rose-800 overflow-hidden'>" +
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> සෝතාපත්ති ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [1,2,3,4,5].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===1?'පඨම':i===2?'දුතිය':i===3?'තතිය':i===4?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සෝතාපත්ති ඵල සිත</span></div>`).join('') +
+          [1,2,3,4,5].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===1?'පඨම':i===2?'දුතිය':i===3?'තතිය':i===4?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සෝතාපත්ති ඵල සිත්</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-rose-50/50 dark:bg-rose-900/20 rounded-xl border border-rose-200 dark:border-rose-800 overflow-hidden'>" +
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> සකදාගාමි ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [6,7,8,9,10].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===6?'පඨම':i===7?'දුතිය':i===8?'තතිය':i===9?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සකදාගාමි ඵල සිත</span></div>`).join('') +
+          [6,7,8,9,10].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===6?'පඨම':i===7?'දුතිය':i===8?'තතිය':i===9?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන සකදාගාමි ඵල සිත්</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-rose-50/50 dark:bg-rose-900/20 rounded-xl border border-rose-200 dark:border-rose-800 overflow-hidden'>" +
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> අනාගාමි ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [11,12,13,14,15].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===11?'පඨම':i===12?'දුතිය':i===13?'තතිය':i===14?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අනාගාමි ඵල සිත</span></div>`).join('') +
+          [11,12,13,14,15].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===11?'පඨම':i===12?'දුතිය':i===13?'තතිය':i===14?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අනාගාමි ඵල සිත්</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='bg-rose-50/50 dark:bg-rose-900/20 rounded-xl border border-rose-200 dark:border-rose-800 overflow-hidden'>" +
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> අරහත් ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          [16,17,18,19,20].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===16?'පඨම':i===17?'දුතිය':i===18?'තතිය':i===19?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අරහත් ඵල සිත</span></div>`).join('') +
+          [16,17,18,19,20].map(i => `<div class='bg-white dark:bg-slate-800 p-2 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-sm'>${i}. ${i===16?'පඨම':i===17?'දුතිය':i===18?'තතිය':i===19?'චතුත්ථ':'පඤ්චම'}ධ්‍යාන අරහත් ඵල සිත්</span></div>`).join('') +
           "</div></div></div>"
   },
 
@@ -410,10 +403,10 @@ const citta121Data = {
     desc: "<p class='mb-2 text-slate-600 dark:text-slate-400'>ලෝභයෙන් හා මෝහයෙන් යුක්තව උපදින සිත් 8 කි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           [1,2,3,4,5,6,7,8].map(i => {
-            const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feelings = i <= 4 ? 'සොම්නස්' : 'උපේක්ෂා';
             const ditthi = (i === 1 || i === 2 || i === 5 || i === 6) ? 'සම්පයුත්ත' : 'විප්පයුත්ත';
             const sankhara = (i % 2 === 1) ? 'අසංඛාරික' : 'සසංඛාරික';
-            return `<div class='bg-red-50 dark:bg-red-900/20 p-2 rounded-lg border border-red-200 dark:border-red-800 flex items-start gap-2'><span class='bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත දිට්ඨිගත ${ditthi} ${sankhara} සිත</span></div>`;
+            return `<div class='bg-red-50 dark:bg-red-900/20 p-2 rounded-lg border border-red-200 dark:border-red-800 flex items-start gap-2'><span class='bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feelings} සහගත දිට්ඨිගත ${ditthi} ${sankhara}</span></div>`;
           }).join('') +
           "</div>"
   },
@@ -421,16 +414,16 @@ const citta121Data = {
     title: "දෝස මූලික සිත් 2 (අංක 9-10)",
     desc: "<p class='mb-2 text-slate-600 dark:text-slate-400'>දෝසයෙන් හා මෝහයෙන් යුක්තව උපදින සිත් 2 කි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-amber-50 dark:bg-amber-900/20 p-2 rounded-lg border border-amber-200 dark:border-amber-800 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>9</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත අසංඛාරික සිත</span></div>" +
-          "<div class='bg-amber-50 dark:bg-amber-900/20 p-2 rounded-lg border border-amber-200 dark:border-amber-800 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>10</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත සසංඛාරික සිත</span></div>" +
+          "<div class='bg-amber-50 dark:bg-amber-900/20 p-2 rounded-lg border border-amber-200 dark:border-amber-800 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>9</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත අසංඛාරික</span></div>" +
+          "<div class='bg-amber-50 dark:bg-amber-900/20 p-2 rounded-lg border border-amber-200 dark:border-amber-800 flex items-start gap-2'><span class='bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 text-xs font-bold px-2 py-0.5 rounded-full'>10</span><span class='text-sm'>දෝමනස්ස සහගත පටිඝ සම්පයුත්ත සසංඛාරික</span></div>" +
           "</div>"
   },
   moha2Full: {
     title: "මෝහ මූලික සිත් 2 (අංක 11-12)",
     desc: "<p class='mb-2 text-slate-600 dark:text-slate-400'>මෝහයෙන් පමණක් යුක්තව උපදින සිත් 2 කි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>11</span><span class='text-sm'>උපේක්ෂා සහගත විචිකිච්ඡා සම්පයුත්ත සිත</span></div>" +
-          "<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>12</span><span class='text-sm'>උපේක්ෂා සහගත උද්ධච්ච සම්පයුත්ත සිත</span></div>" +
+          "<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>11</span><span class='text-sm'>උපේක්ෂා සහගත විචිකිච්ඡා සම්පයුත්ත</span></div>" +
+          "<div class='bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full'>12</span><span class='text-sm'>උපේක්ෂා සහගත උද්ධච්ච සම්පයුත්ත</span></div>" +
           "</div>"
   },
   akusalaVipaka7Full: {
@@ -440,7 +433,7 @@ const citta121Data = {
           [13,14,15,16,17,18,19].map(i => {
             const feeling = (i === 17) ? 'දුක්ඛ' : 'උපේක්ෂා';
             const door = i === 13 ? 'චක්ඛු' : i === 14 ? 'සෝත' : i === 15 ? 'ඝාන' : i === 16 ? 'ජිව්හා' : i === 17 ? 'කාය' : i === 18 ? 'සම්පටිච්ඡන' : 'සන්තීරණ';
-            return `<div class='bg-orange-50 dark:bg-orange-900/20 p-2 rounded-lg border border-orange-200 dark:border-orange-800 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feeling} සහගත ${door} විඤ්ඤාණ සිත</span></div>`;
+            return `<div class='bg-orange-50 dark:bg-orange-900/20 p-2 rounded-lg border border-orange-200 dark:border-orange-800 flex items-start gap-2'><span class='bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feeling} සහගත ${door} විඤ්ඤාණය</span></div>`;
           }).join('') +
           "</div>"
   },
@@ -449,9 +442,9 @@ const citta121Data = {
     desc: "<p class='mb-2 text-slate-600 dark:text-slate-400'>කුසල කර්මයන්ගේ විපාක වශයෙන් උපදින සිත් 8 කි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
           [20,21,22,23,24,25,26,27].map(i => {
-            const feeling = (i === 24) ? 'සුඛ' : (i === 26) ? 'සෝමනස්ස' : 'උපේක්ෂා';
+            const feeling = (i === 24) ? 'සුඛ' : (i === 26) ? 'සොම්නස්' : 'උපේක්ෂා';
             const door = i === 20 ? 'චක්ඛු' : i === 21 ? 'සෝත' : i === 22 ? 'ඝාන' : i === 23 ? 'ජිව්හා' : i === 24 ? 'කාය' : i === 25 ? 'සම්පටිච්ඡන' : 'සන්තීරණ';
-            return `<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feeling} සහගත ${door} විඤ්ඤාණ සිත</span></div>`;
+            return `<div class='bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-xs font-bold px-2 py-0.5 rounded-full'>${i}</span><span class='text-sm'>${feeling} සහගත ${door} විඤ්ඤාණය</span></div>`;
           }).join('') +
           "</div>"
   },
@@ -459,9 +452,9 @@ const citta121Data = {
     title: "අහේතුක ක්‍රියා සිත් 3 (අංක 28-30)",
     desc: "<p class='mb-2 text-slate-600 dark:text-slate-400'>රහතන් වහන්සේට පමණක් උපදින ක්‍රියා සිත් 3 කි.</p>" +
           "<div class='grid grid-cols-1 sm:grid-cols-2 gap-2'>" +
-          "<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>28</span><span class='text-sm'>උපේක්ෂා සහගත පංචද්වාරාවජ්ජන සිත</span></div>" +
-          "<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>29</span><span class='text-sm'>උපේක්ෂා සහගත මනෝද්වාරාවජ්ජන සිත</span></div>" +
-          "<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>30</span><span class='text-sm'>සෝමනස්ස සහගත හසිතුප්පාද සිත</span></div>" +
+          "<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>28</span><span class='text-sm'>උපේක්ෂා සහගත පංචද්වාරාවජ්ජන</span></div>" +
+          "<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>29</span><span class='text-sm'>උපේක්ෂා සහගත මනෝද්වාරාවජ්ජන</span></div>" +
+          "<div class='bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full'>30</span><span class='text-sm'>සොම්නස් සහගත හසිතුප්පාද</span></div>" +
           "</div>"
   }
 };
@@ -484,7 +477,7 @@ const cittaData = [
     category: "අකුසල් සිත් 12",
     description: "ලෝභ, දෝස, මෝහ යන අකුසල මූලයන් මත පදනම්ව උපදින සිත් 12 කි.",
     items: [
-      { name: "ලෝභ මූලික සිත් 8", meaning: "ලෝභයෙන් හා මෝහයෙන් යුක්තව උපදින සිත්", role: "සෝමනස්ස/උපේක්ෂා සහගත, දිට්ඨිගත සම්පයුත්ත/විප්පයුත්ත, සසංඛාරික/අසංඛාරික" },
+      { name: "ලෝභ මූලික සිත් 8", meaning: "ලෝභයෙන් හා මෝහයෙන් යුක්තව උපදින සිත්", role: "සොම්නස්/උපේක්ෂා සහගත, දිට්ඨිගත සම්පයුත්ත/විප්පයුත්ත, සසංඛාරික/අසංඛාරික" },
       { name: "දෝස මූලික සිත් 2", meaning: "දෝසයෙන් හා මෝහයෙන් යුක්තව උපදින සිත්", role: "දෝමනස්ස සහගත, පටිඝ සම්පයුත්ත, සසංඛාරික/අසංඛාරික" },
       { name: "මෝහ මූලික සිත් 2", meaning: "මෝහයෙන් පමණක් යුක්තව උපදින සිත්", role: "උපේක්ෂා සහගත, විචිකිච්ඡා/උද්ධච්ච සම්පයුත්ත" }
     ]
@@ -494,17 +487,17 @@ const cittaData = [
     description: "හේතු රහිතව (ලෝභ, දෝස, මෝහ, අලෝභ, අදෝස, අමෝහ යන හේතු 6 නොමැතිව) උපදින සිත් 18 කි.",
     items: [
       { name: "අකුසල විපාක සිත් 7", meaning: "අකුසල කර්මයන්ගේ විපාක වශයෙන් උපදින සිත්", role: "චක්ඛු, සෝත, ඝාන, ජිව්හා, කාය, සම්පටිච්ඡන, සන්තීරණ" },
-      { name: "කුසල අහේතුක විපාක සිත් 8", meaning: "කුසල කර්මයන්ගේ විපාක වශයෙන් උපදින සිත්", role: "චක්ඛු, සෝත, ඝාන, ජිව්හා, කාය, සම්පටිච්ඡන, සන්තීරණ (සෝමනස්ස/උපේක්ෂා)" },
+      { name: "කුසල අහේතුක විපාක සිත් 8", meaning: "කුසල කර්මයන්ගේ විපාක වශයෙන් උපදින සිත්", role: "චක්ඛු, සෝත, ඝාන, ජිව්හා, කාය, සම්පටිච්ඡන, සන්තීරණ (සොම්නස්/උපේක්ෂා)" },
       { name: "අහේතුක ක්‍රියා සිත් 3", meaning: "රහතන් වහන්සේට පමණක් උපදින ක්‍රියා සිත්", role: "පංචද්වාරාවජ්ජන, මනෝද්වාරාවජ්ජන, හසිතුප්පාද" }
     ]
   },
   {
     category: "කාමාවචර සිත් 54",
-    description: "කාම ලෝකයට අයත් සිත් 54 කි. (අකුසල් 12, අහේතුක 18, කාම සෝභන 24)",
+    description: "කාම ලෝකයට අයත් සිත් 54 කි. (අකුසල් 12, අහේතුක 18, කාමාවචර සෝභන 24)",
     items: [
       { name: "අකුසල් සිත්", meaning: "ලෝභ, දෝස, මෝහ මූලික සිත්", role: "12" },
       { name: "අහේතුක සිත්", meaning: "හේතු රහිත සිත්", role: "18" },
-      { name: "කාම සෝභන සිත්", meaning: "කුසල් 8, විපාක 8, ක්‍රියා 8", role: "24" }
+      { name: "කාමාවචර සෝභන සිත්", meaning: "කුසල් 8, විපාක 8, ක්‍රියා 8", role: "24" }
     ]
   },
   {
@@ -543,7 +536,7 @@ const cittaData = [
     category: "සෝභන සිත් 59",
     description: "අකුසල් සිත් 12 සහ අහේතුක සිත් 18 හැර ඉතිරි සිත් 59 සෝභන සිත් වේ.",
     items: [
-      { name: "කාම සෝභන සිත්", meaning: "කුසල් 8, විපාක 8, ක්‍රියා 8", role: "24" },
+      { name: "කාමාවචර සෝභන සිත්", meaning: "කුසල් 8, විපාක 8, ක්‍රියා 8", role: "24" },
       { name: "රූපාවචර සිත්", meaning: "කුසල් 5, විපාක 5, ක්‍රියා 5", role: "15" },
       { name: "අරූපාවචර සිත්", meaning: "කුසල් 4, විපාක 4, ක්‍රියා 4", role: "12" },
       { name: "ලෝකෝත්තර සිත්", meaning: "මාර්ග 4, ඵල 4", role: "8" }
@@ -554,7 +547,7 @@ const cittaData = [
     description: "කර්මයක් හෝ විපාකයක් නොවන, ක්‍රියාමාත්‍රයක් වූ සිත් 20 කි.",
     items: [
       { name: "අහේතුක ක්‍රියා සිත්", meaning: "පංචද්වාරාවජ්ජන, මනෝද්වාරාවජ්ජන, හසිතුප්පාද", role: "3" },
-      { name: "කාම සෝභන ක්‍රියා සිත්", meaning: "සෝමනස්ස සහගත හා උපේක්ෂා සහගත ක්‍රියා සිත්", role: "8" },
+      { name: "කාමාවචර සෝභන ක්‍රියා සිත්", meaning: "සොම්නස් සහගත හා උපේක්ෂා සහගත ක්‍රියා සිත්", role: "8" },
       { name: "රූපාවචර ක්‍රියා සිත්", meaning: "ධ්‍යාන ක්‍රියා සිත්", role: "5" },
       { name: "අරූපාවචර ක්‍රියා සිත්", meaning: "අරූපාවචර ක්‍රියා සිත්", role: "4" }
     ]
@@ -565,7 +558,7 @@ const cittaData = [
     items: [
       { name: "අකුසල විපාක සිත්", meaning: "අකුසල කර්මයන්ගේ විපාක", role: "7" },
       { name: "කුසල අහේතුක විපාක සිත්", meaning: "කුසල කර්මයන්ගේ අහේතුක විපාක", role: "8" },
-      { name: "කාම සෝභන විපාක සිත්", meaning: "කාම සෝභන කුසලයන්ගේ සහේතුක විපාක", role: "8" },
+      { name: "කාමාවචර සෝභන විපාක සිත්", meaning: "කාමාවචර කුසලයන්ගේ සහේතුක විපාක", role: "8" },
       { name: "රූපාවචර විපාක සිත්", meaning: "රූපාවචර කුසලයන්ගේ විපාක", role: "5" },
       { name: "අරූපාවචර විපාක සිත්", meaning: "අරූපාවචර කුසලයන්ගේ විපාක", role: "4" },
       { name: "ලෝකෝත්තර ඵල සිත්", meaning: "ලෝකෝත්තර මාර්ගයන්ගේ ඵල", role: "4" }
