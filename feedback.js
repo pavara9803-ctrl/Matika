@@ -1,9 +1,18 @@
 // ============================================================
 // feedback.js
 // Feedback හා යෝජනා පද්ධතිය
-// දත්ත LocalStorage එකේ ගබඩා වේ
+// EmailJS මගින් Email එකට යවයි + LocalStorage එකේ ගබඩා කරයි
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම
 // ============================================================
+
+// ============================================================
+// 🔧 EMAILJS CONFIGURATION (මෙතන ඔබගේ ID යොදන්න)
+// ============================================================
+const EMAILJS_CONFIG = {
+  PUBLIC_KEY: '7x_FOGFJJO8JY6Hmg',      // ← ඔබගේ Public Key
+  SERVICE_ID: 'service_x00ykdo',      // ← ඔබගේ Service ID
+  TEMPLATE_ID: 'service_x00ykdo'     // ← ඔබගේ Template ID
+};
 
 // ============================================================
 // 1. CONSTANTS
@@ -12,12 +21,34 @@ const FEEDBACK_STORAGE_KEY = 'abhidhamma_feedback_data';
 const FEEDBACK_META_KEY = 'abhidhamma_feedback_meta';
 
 // ============================================================
-// 2. MODAL OPEN/CLOSE
+// 2. EMAILJS INITIALIZATION
+// ============================================================
+(function initEmailJS() {
+  // EmailJS library එක load කරන්න
+  if (typeof emailjs === 'undefined') {
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    script.onload = function() {
+      try {
+        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        console.log('[feedback.js] EmailJS initialized successfully');
+      } catch (error) {
+        console.warn('[feedback.js] EmailJS init failed:', error);
+      }
+    };
+    script.onerror = function() {
+      console.warn('[feedback.js] EmailJS script load failed - offline mode');
+    };
+    document.head.appendChild(script);
+  } else {
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+  }
+})();
+
+// ============================================================
+// 3. MODAL OPEN/CLOSE
 // ============================================================
 
-/**
- * Feedback Modal එක විවෘත කරයි
- */
 function openFeedbackModal() {
   var modal = document.getElementById('feedback-modal');
   if (!modal) {
@@ -28,10 +59,8 @@ function openFeedbackModal() {
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
   
-  // පෝරමය නැවත පිරිසිදු කරන්න
   resetFeedbackForm();
   
-  // පළමු input එකට focus කරන්න
   setTimeout(function() {
     var firstInput = document.getElementById('feedback-type');
     if (firstInput) firstInput.focus();
@@ -40,9 +69,6 @@ function openFeedbackModal() {
   console.log('[feedback.js] Feedback modal opened');
 }
 
-/**
- * Feedback Modal එක වසා දමයි
- */
 function closeFeedbackModal() {
   var modal = document.getElementById('feedback-modal');
   if (!modal) return;
@@ -53,9 +79,6 @@ function closeFeedbackModal() {
   console.log('[feedback.js] Feedback modal closed');
 }
 
-/**
- * පෝරමය නැවත පිරිසිදු කරයි
- */
 function resetFeedbackForm() {
   var nameInput = document.getElementById('feedback-name');
   var typeInput = document.getElementById('feedback-type');
@@ -67,7 +90,6 @@ function resetFeedbackForm() {
   if (messageInput) messageInput.value = '';
   if (emailInput) emailInput.value = '';
   
-  // Submit බොත්තම නැවත සක්‍රීය කරන්න
   var submitBtn = document.getElementById('feedback-submit-btn');
   if (submitBtn) {
     submitBtn.disabled = false;
@@ -76,13 +98,9 @@ function resetFeedbackForm() {
 }
 
 // ============================================================
-// 3. FEEDBACK SUBMISSION
+// 4. FEEDBACK SUBMISSION - Email + LocalStorage
 // ============================================================
 
-/**
- * Feedback එක submit කරයි
- * දත්ත LocalStorage එකේ ගබඩා කරයි
- */
 function submitFeedback(event) {
   if (event) event.preventDefault();
   
@@ -98,7 +116,6 @@ function submitFeedback(event) {
   message = message.trim();
   email = email.trim();
   
-  // Required fields
   if (!type) {
     showFeedbackMessage('කරුණාකර ප්‍රතිචාරයේ වර්ගය තෝරන්න', 'error');
     return;
@@ -119,7 +136,6 @@ function submitFeedback(event) {
     return;
   }
   
-  // Email validation (optional but if provided, must be valid)
   if (email && !isValidEmail(email)) {
     showFeedbackMessage('කරුණාකර වලංගු ඊමේල් ලිපිනයක් ඇතුළත් කරන්න', 'error');
     return;
@@ -133,77 +149,129 @@ function submitFeedback(event) {
   }
   
   // ========== 4. DATA OBJECT එක සාදන්න ==========
+  var now = new Date();
   var feedbackData = {
+    // EmailJS Template සඳහා
+    feedback_id: generateFeedbackId(),
+    from_name: name || 'නම් නොකියූ',
+    from_email: email || 'නොමැත',
+    feedback_type: getFeedbackTypeLabel(type),
+    feedback_date: formatDate(now),
+    message: message,
+    language: navigator.language || 'unknown',
+    page_url: window.location.href,
+    screen_size: window.innerWidth + 'x' + window.innerHeight,
+    app_version: '1.0.0',
+    
+    // LocalStorage සඳහා
     id: generateFeedbackId(),
     name: name || 'නම් නොකියූ',
     type: type,
     typeLabel: getFeedbackTypeLabel(type),
-    message: message,
     email: email || 'නොමැත',
-    timestamp: new Date().toISOString(),
-    dateFormatted: formatDate(new Date()),
+    timestamp: now.toISOString(),
+    dateFormatted: formatDate(now),
     userAgent: navigator.userAgent,
-    language: navigator.language,
+    languageFull: navigator.language,
     pageUrl: window.location.href,
     screenSize: window.innerWidth + 'x' + window.innerHeight,
     version: '1.0.0'
   };
   
-  // ========== 5. LOCALSTORAGE එකේ SAVE කරන්න ==========
+  // ========== 5. LOCALSTORAGE එකේ SAVE කරන්න (backup) ==========
   try {
     saveFeedbackToStorage(feedbackData);
-    
-    // ========== 6. SUCCESS MESSAGE ==========
-    setTimeout(function() {
-      showFeedbackMessage('ඔබගේ අදහස් සාර්ථකව ලැබුණි! ස්තූතියි 🙏', 'success');
-      
-      // Modal එක 2.5s පසුව වසා දමන්න
-      setTimeout(function() {
-        closeFeedbackModal();
-      }, 2000);
-      
-    }, 500);
-    
-    console.log('[feedback.js] Feedback saved:', feedbackData);
-    
   } catch (error) {
-    console.error('[feedback.js] Error saving feedback:', error);
-    
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> එවන්න';
-    }
-    
-    showFeedbackMessage('දෝෂයක් ඇතිවිය. කරුණාකර නැවත උත්සාහ කරන්න.', 'error');
+    console.warn('[feedback.js] LocalStorage save failed:', error);
+  }
+  
+  // ========== 6. EMAIL එකට යවන්න (EmailJS) ==========
+  sendFeedbackEmail(feedbackData, submitBtn);
+}
+
+// ============================================================
+// 5. EMAIL SENDING (EmailJS)
+// ============================================================
+
+function sendFeedbackEmail(feedbackData, submitBtn) {
+  // EmailJS පවතිනවාද පරීක්ෂා කරන්න
+  if (typeof emailjs === 'undefined') {
+    console.warn('[feedback.js] EmailJS not loaded - saving locally only');
+    handleEmailSuccess(submitBtn, true);
+    return;
+  }
+  
+  // EmailJS config එක පරීක්ෂා කරන්න
+  if (EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' ||
+      EMAILJS_CONFIG.SERVICE_ID === 'YOUR_SERVICE_ID_HERE' ||
+      EMAILJS_CONFIG.TEMPLATE_ID === 'YOUR_TEMPLATE_ID_HERE') {
+    console.warn('[feedback.js] EmailJS not configured - saving locally only');
+    console.log('[feedback.js] Please configure EMAILJS_CONFIG in feedback.js');
+    handleEmailSuccess(submitBtn, true);
+    return;
+  }
+  
+  // EmailJS එකට යවන්න
+  console.log('[feedback.js] Sending email via EmailJS...');
+  
+  emailjs.send(
+    EMAILJS_CONFIG.SERVICE_ID,
+    EMAILJS_CONFIG.TEMPLATE_ID,
+    feedbackData
+  )
+  .then(function(response) {
+    console.log('[feedback.js] ✅ Email sent successfully!', response.status, response.text);
+    handleEmailSuccess(submitBtn, false);
+  })
+  .catch(function(error) {
+    console.error('[feedback.js] ❌ Email send failed:', error);
+    handleEmailError(submitBtn, error);
+  });
+}
+
+function handleEmailSuccess(submitBtn, isLocalOnly) {
+  // Success message
+  var successMsg = isLocalOnly 
+    ? 'ඔබගේ අදහස් සාර්ථකව ලැබුණි! (Offline mode) 🙏'
+    : 'ඔබගේ අදහස් සාර්ථකව ලැබුණි! ස්තූතියි 🙏';
+  
+  showFeedbackMessage(successMsg, 'success');
+  
+  // Modal එක 2.5s පසුව වසා දමන්න
+  setTimeout(function() {
+    closeFeedbackModal();
+  }, 2000);
+}
+
+function handleEmailError(submitBtn, error) {
+  // Error message පෙන්වන්න - නමුත් දත්ත LocalStorage එකේ save වී ඇත
+  var errorMsg = 'දෝෂයක් ඇතිවිය. දත්ත save වී ඇත. නැවත උත්සාහ කරන්න.';
+  
+  if (error && error.text) {
+    console.warn('[feedback.js] Email error details:', error.text);
+  }
+  
+  showFeedbackMessage(errorMsg, 'warning');
+  
+  // Submit button නැවත සක්‍රීය කරන්න
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> නැවත එවන්න';
   }
 }
 
 // ============================================================
-// 4. STORAGE FUNCTIONS
+// 6. STORAGE FUNCTIONS (Backup)
 // ============================================================
 
-/**
- * Feedback දත්ත LocalStorage එකේ ගබඩා කරයි
- */
 function saveFeedbackToStorage(feedbackData) {
-  // පවතින දත්ත ලබා ගන්න
   var existingData = getAllFeedbackFromStorage();
-  
-  // නව දත්ත එකතු කරන්න
   existingData.push(feedbackData);
-  
-  // LocalStorage එකේ save කරන්න
   localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(existingData));
-  
-  // Metadata update කරන්න
   updateFeedbackMetadata(existingData.length);
-  
   console.log('[feedback.js] Total feedback items:', existingData.length);
 }
 
-/**
- * සියලු feedback දත්ත ලබා ගනී
- */
 function getAllFeedbackFromStorage() {
   try {
     var data = localStorage.getItem(FEEDBACK_STORAGE_KEY);
@@ -215,9 +283,6 @@ function getAllFeedbackFromStorage() {
   }
 }
 
-/**
- * Metadata update කරයි
- */
 function updateFeedbackMetadata(count) {
   var meta = {
     totalCount: count,
@@ -227,9 +292,6 @@ function updateFeedbackMetadata(count) {
   localStorage.setItem(FEEDBACK_META_KEY, JSON.stringify(meta));
 }
 
-/**
- * Feedback Metadata ලබා ගනී
- */
 function getFeedbackMetadata() {
   try {
     var meta = localStorage.getItem(FEEDBACK_META_KEY);
@@ -241,15 +303,11 @@ function getFeedbackMetadata() {
 }
 
 // ============================================================
-// 5. EXPORT/DOWNLOAD FUNCTIONS
+// 7. EXPORT/DOWNLOAD FUNCTIONS
 // ============================================================
 
-/**
- * සියලු feedback දත්ත JSON ගොනුවක් ලෙස download කරයි
- */
 function downloadFeedbackAsJSON() {
   var allData = getAllFeedbackFromStorage();
-  
   if (allData.length === 0) {
     showFeedbackMessage('Download කිරීමට දත්ත නොමැත', 'error');
     return;
@@ -279,22 +337,16 @@ function downloadFeedbackAsJSON() {
   console.log('[feedback.js] Feedback downloaded as JSON');
 }
 
-/**
- * සියලු feedback දත්ත CSV ගොනුවක් ලෙස download කරයි
- */
 function downloadFeedbackAsCSV() {
   var allData = getAllFeedbackFromStorage();
-  
   if (allData.length === 0) {
     showFeedbackMessage('Download කිරීමට දත්ත නොමැත', 'error');
     return;
   }
   
-  // CSV header
   var headers = ['ID', 'Date', 'Name', 'Type', 'Message', 'Email', 'Language', 'Page URL'];
   var csvRows = [headers.join(',')];
   
-  // CSV rows
   allData.forEach(function(item) {
     var row = [
       escapeCSV(item.id),
@@ -303,13 +355,13 @@ function downloadFeedbackAsCSV() {
       escapeCSV(item.typeLabel),
       escapeCSV(item.message),
       escapeCSV(item.email),
-      escapeCSV(item.language),
+      escapeCSV(item.languageFull || item.language),
       escapeCSV(item.pageUrl)
     ];
     csvRows.push(row.join(','));
   });
   
-  var csvString = '\uFEFF' + csvRows.join('\n'); // BOM for UTF-8
+  var csvString = '\uFEFF' + csvRows.join('\n');
   var blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
   var url = URL.createObjectURL(blob);
   
@@ -324,12 +376,8 @@ function downloadFeedbackAsCSV() {
   console.log('[feedback.js] Feedback downloaded as CSV');
 }
 
-/**
- * සියලු feedback දත්ත Clipboard එකට copy කරයි
- */
 function copyFeedbackToClipboard() {
   var allData = getAllFeedbackFromStorage();
-  
   if (allData.length === 0) {
     showFeedbackMessage('Copy කිරීමට දත්ත නොමැත', 'error');
     return;
@@ -363,9 +411,6 @@ function copyFeedbackToClipboard() {
   }
 }
 
-/**
- * Fallback clipboard copy
- */
 function fallbackCopyToClipboard(text) {
   var textarea = document.createElement('textarea');
   textarea.value = text;
@@ -386,15 +431,11 @@ function fallbackCopyToClipboard(text) {
 }
 
 // ============================================================
-// 6. VIEW FEEDBACK FUNCTIONS
+// 8. VIEW FEEDBACK FUNCTIONS
 // ============================================================
 
-/**
- * සියලු feedback දත්ත Console එකේ පෙන්වයි
- */
 function viewAllFeedback() {
   var allData = getAllFeedbackFromStorage();
-  
   if (allData.length === 0) {
     console.log('[feedback.js] No feedback data found');
     return;
@@ -418,21 +459,15 @@ function viewAllFeedback() {
   console.log('='.repeat(60));
 }
 
-/**
- * Feedback සංඛ්‍යාව ලබා දෙයි
- */
 function getFeedbackCount() {
   var meta = getFeedbackMetadata();
   return meta.totalCount || 0;
 }
 
 // ============================================================
-// 7. DELETE FUNCTIONS
+// 9. DELETE FUNCTIONS
 // ============================================================
 
-/**
- * එක් feedback එකක් delete කරයි
- */
 function deleteFeedback(feedbackId) {
   var allData = getAllFeedbackFromStorage();
   var filteredData = allData.filter(function(item) {
@@ -445,9 +480,6 @@ function deleteFeedback(feedbackId) {
   console.log('[feedback.js] Feedback deleted:', feedbackId);
 }
 
-/**
- * සියලු feedback දත්ත delete කරයි
- */
 function clearAllFeedback() {
   if (!confirm('සියලු feedback දත්ත delete කිරීමට ඔබට විශ්වාසද?')) {
     return;
@@ -461,29 +493,20 @@ function clearAllFeedback() {
 }
 
 // ============================================================
-// 8. UTILITY FUNCTIONS
+// 10. UTILITY FUNCTIONS
 // ============================================================
 
-/**
- * නව Feedback ID එකක් සාදයි
- */
 function generateFeedbackId() {
   var timestamp = Date.now().toString(36);
   var random = Math.random().toString(36).substring(2, 8);
   return 'FB-' + timestamp + '-' + random;
 }
 
-/**
- * ඊමේල් ලිපිනය වලංගු ද පරීක්ෂා කරයි
- */
 function isValidEmail(email) {
   var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
 
-/**
- * Feedback වර්ගයේ ලේබලය ලබා දෙයි
- */
 function getFeedbackTypeLabel(type) {
   var labels = {
     'bug': '🐞 දෝෂයක්',
@@ -496,9 +519,6 @@ function getFeedbackTypeLabel(type) {
   return labels[type] || 'වෙනත්';
 }
 
-/**
- * දිනය format කරයි
- */
 function formatDate(date) {
   var d = new Date(date);
   var year = d.getFullYear();
@@ -510,9 +530,6 @@ function formatDate(date) {
   return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
 }
 
-/**
- * දිනය stamp එකක් සාදයි (file name සඳහා)
- */
 function getDateStamp() {
   var d = new Date();
   var year = d.getFullYear();
@@ -523,9 +540,6 @@ function getDateStamp() {
   return year + month + day + '-' + hours + minutes;
 }
 
-/**
- * CSV සඳහා escape කරයි
- */
 function escapeCSV(str) {
   if (str === null || str === undefined) return '';
   str = String(str);
@@ -536,12 +550,9 @@ function escapeCSV(str) {
 }
 
 // ============================================================
-// 9. MESSAGE DISPLAY
+// 11. MESSAGE DISPLAY
 // ============================================================
 
-/**
- * පණිවිඩයක් පෙන්වයි (modal එක ඇතුළේ)
- */
 function showFeedbackMessage(message, type) {
   type = type || 'info';
   
@@ -566,7 +577,6 @@ function showFeedbackMessage(message, type) {
   toast.style.animation = 'slideDown 0.3s ease-out';
   toast.innerHTML = '<i class="fa-solid ' + (icons[type] || icons.info) + '"></i> ' + message;
   
-  // Animation style එක එකතු කරන්න (එක් වරක් පමණි)
   if (!document.getElementById('feedback-toast-animation')) {
     var style = document.createElement('style');
     style.id = 'feedback-toast-animation';
@@ -576,7 +586,6 @@ function showFeedbackMessage(message, type) {
   
   document.body.appendChild(toast);
   
-  // 3 seconds පසුව ඉවත් කරන්න
   setTimeout(function() {
     toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     toast.style.opacity = '0';
@@ -590,12 +599,9 @@ function showFeedbackMessage(message, type) {
 }
 
 // ============================================================
-// 10. KEYBOARD SHORTCUTS
+// 12. KEYBOARD SHORTCUTS
 // ============================================================
 
-/**
- * ESC යතුර එබූ විට modal එක වසා දමයි
- */
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
     var modal = document.getElementById('feedback-modal');
@@ -605,9 +611,6 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-/**
- * Modal එකේ එළියේ click කළ විට වසා දමයි
- */
 document.addEventListener('click', function(event) {
   var modal = document.getElementById('feedback-modal');
   if (!modal) return;
@@ -618,7 +621,7 @@ document.addEventListener('click', function(event) {
 });
 
 // ============================================================
-// 11. WINDOW EXPORTS
+// 13. WINDOW EXPORTS
 // ============================================================
 window.openFeedbackModal = openFeedbackModal;
 window.closeFeedbackModal = closeFeedbackModal;
@@ -632,10 +635,9 @@ window.deleteFeedback = deleteFeedback;
 window.clearAllFeedback = clearAllFeedback;
 
 // ============================================================
-// 12. INITIALIZATION
+// 14. INITIALIZATION
 // ============================================================
 (function initFeedback() {
-  // පවතින දත්ත පරීක්ෂා කරන්න
   var existingData = getAllFeedbackFromStorage();
   var meta = getFeedbackMetadata();
   
@@ -643,7 +645,18 @@ window.clearAllFeedback = clearAllFeedback;
   console.log('[feedback.js] Total feedback items:', existingData.length);
   console.log('[feedback.js] Last updated:', meta.lastUpdatedFormatted || 'Never');
   
-  // පරිශීලකයාට console commands පෙන්වන්න
+  // EmailJS config පරීක්ෂා කරන්න
+  var emailConfigured = EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY_HERE' &&
+                        EMAILJS_CONFIG.SERVICE_ID !== 'YOUR_SERVICE_ID_HERE' &&
+                        EMAILJS_CONFIG.TEMPLATE_ID !== 'YOUR_TEMPLATE_ID_HERE';
+  
+  if (emailConfigured) {
+    console.log('[feedback.js] ✅ EmailJS configured - emails will be sent to admin');
+  } else {
+    console.warn('[feedback.js] ⚠️ EmailJS NOT configured - saving to LocalStorage only');
+    console.warn('[feedback.js] Please set EMAILJS_CONFIG in feedback.js');
+  }
+  
   console.log('');
   console.log('%c📋 FEEDBACK CONSOLE COMMANDS', 'background: #f59e0b; color: #3f0a0c; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
   console.log('');
