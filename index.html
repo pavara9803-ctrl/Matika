@@ -50,6 +50,9 @@
 <script src="tika/21-ajjhattarammana-tika.js"></script>
 <script src="tika/22-sanidassana-tika.js"></script>
 
+<!-- 3. Feedback Logic -->
+<script src="feedback.js"></script>
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 <script>
@@ -90,6 +93,17 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 .dark .breakdown-item .name { color: #fde68a; }
 .dark .breakdown-item .value { color: #fbbf24; }
 
+/* ============================================================ */
+/* FEEDBACK BUTTON ANIMATION */
+/* ============================================================ */
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+  50% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+}
+.feedback-pulse {
+  animation: pulse-soft 2.5s infinite;
+}
+
 #pwa-install-banner {
   position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
   background: linear-gradient(135deg, #bc7d2f, #78350f);
@@ -128,6 +142,12 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
  <P> <h2 class="text-xs sm:text-sm text-amber-100/90 ml-2"> Currently under development </h2></P>
 </div>
 <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="තේමාව"><i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i></button>
+
+<!-- ✅ නව: Feedback බොත්තම -->
+<button onclick="openFeedbackModal()" class="p-2 rounded-lg bg-gradient-to-br from-saffron-500 to-amber-600 hover:from-saffron-400 hover:to-amber-500 text-maroon-950 feedback-pulse transition-all ml-1" title="ඔබගේ අදහස් එවන්න">
+  <i class="fa-solid fa-comment-dots text-lg"></i>
+</button>
+
 <button onclick="toggleMenu()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 ml-1" title="මෙනුව">
     <i class="fa-solid fa-bars text-lg"></i>
 </button>
@@ -149,6 +169,12 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
         <button onclick="menuAction('help')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i class="fa-solid fa-circle-question text-purple-600 text-lg w-5"></i> උදව්
         </button>
+
+        <!-- ✅ නව: Feedback (මෙනුවේ) -->
+        <button onclick="menuAction('feedback')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+            <i class="fa-solid fa-comment-dots text-saffron-600 text-lg w-5"></i> අදහස් එවන්න
+        </button>
+
         <button onclick="menuAction('facebook')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200">
             <i class="fa-brands fa-facebook text-blue-700 text-lg w-5"></i> Facebook පිටුව
         </button>
@@ -331,6 +357,100 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <div class="flex justify-end gap-2 pt-2"><button type="button" onclick="closeEditSabbatikaModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 rounded-lg text-xs">අවලංගු කරන්න</button><button type="submit" class="px-4 py-2 bg-saffron-500 text-maroon-950 font-bold rounded-lg text-xs shadow">සුරකින්න</button></div>
 </form>
 </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FEEDBACK MODAL (feedback.js මගින් පාලනය වේ) -->
+<!-- ============================================================ -->
+<div id="feedback-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white dark:bg-slate-800 w-full max-w-lg rounded-2xl p-5 shadow-2xl border border-amber-300 dark:border-slate-700 max-h-[90vh] overflow-y-auto space-y-4">
+    
+    <!-- Modal Header -->
+    <div class="flex justify-between items-center border-b border-amber-200 dark:border-slate-700 pb-3">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-saffron-500 to-amber-600 flex items-center justify-center text-maroon-950">
+          <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200">ඔබගේ අදහස් එවන්න</h3>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400">Feedback & Suggestions</p>
+        </div>
+      </div>
+      <button onclick="closeFeedbackModal()" class="text-slate-400 hover:text-red-500 text-lg transition-colors">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Modal Form -->
+    <form id="feedback-form" onsubmit="submitFeedback(event)" class="space-y-4 text-sm">
+      
+      <!-- නම -->
+      <div>
+        <label class="block font-semibold mb-1.5 text-xs text-maroon-900 dark:text-saffron-200">
+          <i class="fa-solid fa-user text-saffron-600"></i> ඔබගේ නම <span class="text-slate-400 font-normal">(අවශ්‍ය නැත)</span>
+        </label>
+        <input type="text" id="feedback-name" 
+               placeholder="උදා: සුනිල් පෙරේරා"
+               class="w-full p-2.5 rounded-lg border border-amber-200 dark:border-slate-700 dark:bg-slate-900 text-xs focus:ring-2 focus:ring-saffron-500 focus:border-transparent outline-none transition-all">
+      </div>
+
+      <!-- විශේෂය -->
+      <div>
+        <label class="block font-semibold mb-1.5 text-xs text-maroon-900 dark:text-saffron-200">
+          <i class="fa-solid fa-tag text-saffron-600"></i> ප්‍රතිචාරයේ වර්ගය <span class="text-red-500">*</span>
+        </label>
+        <select id="feedback-type" required
+                class="w-full p-2.5 rounded-lg border border-amber-200 dark:border-slate-700 dark:bg-slate-900 text-xs focus:ring-2 focus:ring-saffron-500 focus:border-transparent outline-none transition-all">
+          <option value="">-- තෝරන්න --</option>
+          <option value="bug">🐞 දෝෂයක් (Bug)</option>
+          <option value="suggestion">💡 යෝජනාවක් (Suggestion)</option>
+          <option value="content">📖 අන්තර්ගතය ගැන (Content)</option>
+          <option value="design">🎨 නිර්මාණය ගැන (Design)</option>
+          <option value="praise">👏 ප්‍රශංසාවක් (Praise)</option>
+          <option value="other">📝 වෙනත් (Other)</option>
+        </select>
+      </div>
+
+      <!-- පණිවිඩය -->
+      <div>
+        <label class="block font-semibold mb-1.5 text-xs text-maroon-900 dark:text-saffron-200">
+          <i class="fa-solid fa-message text-saffron-600"></i> ඔබගේ පණිවිඩය <span class="text-red-500">*</span>
+        </label>
+        <textarea id="feedback-message" required rows="5"
+                  placeholder="ඔබගේ අදහස්, යෝජනා, හෝ දෝෂ පිළිබඳ විස්තරය මෙහි ලියන්න..."
+                  class="w-full p-2.5 rounded-lg border border-amber-200 dark:border-slate-700 dark:bg-slate-900 text-xs focus:ring-2 focus:ring-saffron-500 focus:border-transparent outline-none transition-all resize-none"></textarea>
+      </div>
+
+      <!-- Email (Optional) -->
+      <div>
+        <label class="block font-semibold mb-1.5 text-xs text-maroon-900 dark:text-saffron-200">
+          <i class="fa-solid fa-envelope text-saffron-600"></i> ඊමේල් ලිපිනය <span class="text-slate-400 font-normal">(පිළිතුරු ලබා ගැනීමට)</span>
+        </label>
+        <input type="email" id="feedback-email" 
+               placeholder="your.email@example.com"
+               class="w-full p-2.5 rounded-lg border border-amber-200 dark:border-slate-700 dark:bg-slate-900 text-xs focus:ring-2 focus:ring-saffron-500 focus:border-transparent outline-none transition-all">
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-end gap-2 pt-2 border-t border-amber-100 dark:border-slate-700">
+        <button type="button" onclick="closeFeedbackModal()" 
+                class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg text-xs font-medium transition-colors">
+          අවලංගු කරන්න
+        </button>
+        <button type="submit" id="feedback-submit-btn"
+                class="px-4 py-2 bg-gradient-to-r from-saffron-500 to-amber-600 hover:from-saffron-400 hover:to-amber-500 text-maroon-950 font-bold rounded-lg text-xs shadow hover:shadow-lg transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-paper-plane"></i> එවන්න
+        </button>
+      </div>
+    </form>
+
+    <!-- Info Note -->
+    <div class="bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 rounded-lg p-3 text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed">
+      <i class="fa-solid fa-circle-info text-saffron-600"></i>
+      ඔබගේ අදහස් අපගේ යෙදුම වැඩිදියුණු කිරීමට උපකාරී වේ. ස්තූතියි! 🙏
+    </div>
+
+  </div>
 </div>
 
 <!-- PWA INSTALL BANNER -->
@@ -720,6 +840,14 @@ function menuAction(action) {
             break;
         case 'help':
             alert('උදව්\n\n1. මුල් පිටුවේ ඇති මාතිකා කාණ්ඩ තෝරන්න.\n2. අදාළ මාතිකාව ක්ලික් කරන්න.\n3. පද තෝරා එහි ස්වරූපාර්ථ බලන්න.');
+            break;
+        case 'feedback':
+            // ✅ feedback.js හි function එක call කරයි
+            if (typeof openFeedbackModal === 'function') {
+                openFeedbackModal();
+            } else {
+                alert('Feedback module loading... කරුණාකර නැවත උත්සාහ කරන්න.');
+            }
             break;
         case 'facebook':
             window.open('https://www.facebook.com/', '_blank');
