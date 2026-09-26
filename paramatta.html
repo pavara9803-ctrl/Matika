@@ -51,8 +51,8 @@ body {
   border-radius: 1.25rem;
   padding: 1.5rem;
   color: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   display: block;
   text-decoration: none;
@@ -60,87 +60,129 @@ body {
 }
 
 .paramattha-card:hover {
-  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
-  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.25);
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.35);
 }
 
 .paramattha-card .bg-icon {
   position: absolute;
   right: -1rem;
   bottom: -1.5rem;
-  font-size: 8rem;
-  opacity: 0.12;
+  font-size: 9rem;
+  opacity: 0.14;
   pointer-events: none;
-  transition: all 0.4s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .paramattha-card:hover .bg-icon {
-  opacity: 0.2;
-  transform: scale(1.1) rotate(-8deg);
+  opacity: 0.24;
+  transform: scale(1.15) rotate(-10deg);
 }
 
 .paramattha-card .icon-wrapper {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 1rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 1.125rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.3);
-  backdrop-filter: blur(4px);
+  font-size: 1.875rem;
+  background: rgba(255,255,255,0.24);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.15);
 }
 
 .paramattha-card .count-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 9999px;
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.24);
+  border: 1px solid rgba(255,255,255,0.4);
   font-size: 0.75rem;
-  font-weight: 700;
-  backdrop-filter: blur(4px);
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.02em;
 }
 
 /* ============================================================ */
-/* COLOR VARIATIONS */
+/* ✨ COLOR VARIATIONS - 4 DIFFERENT COLORS ✨ */
 /* ============================================================ */
+
+/* 1. චිත්ත පරමාර්ථය - කොළ (Emerald → Teal) */
 .card-citta {
-  background: linear-gradient(135deg, #047857 0%, #065f46 50%, #064e3b 100%);
+  background: linear-gradient(135deg, #059669 0%, #047857 40%, #064e3b 100%);
 }
 .card-citta .bg-icon { color: #6ee7b7; }
+.card-citta .icon-wrapper {
+  background: linear-gradient(135deg, rgba(110, 231, 183, 0.4), rgba(110, 231, 183, 0.15));
+  border-color: rgba(110, 231, 183, 0.5);
+}
 
+/* 2. චෛතසික පරමාර්ථය - රතු-තැඹිලි (Rose → Orange) */
 .card-cetasika {
-  background: linear-gradient(135deg, #c2410c 0%, #9a3412 50%, #7c2d12 100%);
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 40%, #7c2d12 100%);
 }
 .card-cetasika .bg-icon { color: #fdba74; }
-
-.card-rupa {
-  background: linear-gradient(135deg, #b45309 0%, #92400e 50%, #78350f 100%);
+.card-cetasika .icon-wrapper {
+  background: linear-gradient(135deg, rgba(253, 186, 116, 0.4), rgba(253, 186, 116, 0.15));
+  border-color: rgba(253, 186, 116, 0.5);
 }
-.card-rupa .bg-icon { color: #fcd34d; }
 
+/* 3. රූප පරමාර්ථය - රන්වන්-දුඹුරු (Amber → Brown) */
+.card-rupa {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 40%, #451a03 100%);
+}
+.card-rupa .bg-icon { color: #fde68a; }
+.card-rupa .icon-wrapper {
+  background: linear-gradient(135deg, rgba(253, 230, 138, 0.4), rgba(253, 230, 138, 0.15));
+  border-color: rgba(253, 230, 138, 0.5);
+}
+
+/* 4. නිබ්බාන පරමාර්ථය - දම්-නිල් (Violet → Indigo) */
 .card-nibbana {
-  background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 50%, #4c1d95 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 40%, #312e81 100%);
 }
 .card-nibbana .bg-icon { color: #c4b5fd; }
+.card-nibbana .icon-wrapper {
+  background: linear-gradient(135deg, rgba(196, 181, 253, 0.4), rgba(196, 181, 253, 0.15));
+  border-color: rgba(196, 181, 253, 0.5);
+}
+
+/* ============================================================ */
+/* NUMBER PILL - 4 colors */
+/* ============================================================ */
+.num-pill-citta { background: linear-gradient(135deg, #10b981, #047857); color: white; }
+.num-pill-cetasika { background: linear-gradient(135deg, #f43f5e, #be123c); color: white; }
+.num-pill-rupa { background: linear-gradient(135deg, #f59e0b, #b45309); color: white; }
+.num-pill-nibbana { background: linear-gradient(135deg, #a78bfa, #7c3aed); color: white; }
 
 /* ============================================================ */
 /* ANIMATIONS */
 /* ============================================================ */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.4s ease-out; }
 
-.paramattha-card:nth-child(1) { animation: fadeIn 0.3s ease-out 0.05s backwards; }
-.paramattha-card:nth-child(2) { animation: fadeIn 0.3s ease-out 0.1s backwards; }
-.paramattha-card:nth-child(3) { animation: fadeIn 0.3s ease-out 0.15s backwards; }
-.paramattha-card:nth-child(4) { animation: fadeIn 0.3s ease-out 0.2s backwards; }
+.paramattha-card:nth-child(1) { animation: fadeIn 0.4s ease-out 0.05s backwards; }
+.paramattha-card:nth-child(2) { animation: fadeIn 0.4s ease-out 0.12s backwards; }
+.paramattha-card:nth-child(3) { animation: fadeIn 0.4s ease-out 0.19s backwards; }
+.paramattha-card:nth-child(4) { animation: fadeIn 0.4s ease-out 0.26s backwards; }
+
+/* ============================================================ */
+/* ARROW ANIMATION */
+/* ============================================================ */
+.paramattha-card .arrow-icon {
+  transition: transform 0.3s ease;
+}
+.paramattha-card:hover .arrow-icon {
+  transform: translateX(6px);
+}
 </style>
 </head>
 
@@ -208,21 +250,21 @@ body {
       </p>
       
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 text-center">
+        <div class="bg-emerald-500/20 backdrop-blur-sm border border-emerald-300/30 rounded-xl p-3 text-center">
           <div class="text-2xl font-bold text-emerald-300">89/121</div>
-          <div class="text-[10px] text-amber-100/80 font-medium mt-1">චිත්ත</div>
+          <div class="text-[10px] text-emerald-100/90 font-medium mt-1">චිත්ත</div>
         </div>
-        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 text-center">
-          <div class="text-2xl font-bold text-orange-300">52</div>
-          <div class="text-[10px] text-amber-100/80 font-medium mt-1">චෛතසික</div>
+        <div class="bg-rose-500/20 backdrop-blur-sm border border-rose-300/30 rounded-xl p-3 text-center">
+          <div class="text-2xl font-bold text-rose-300">52</div>
+          <div class="text-[10px] text-rose-100/90 font-medium mt-1">චෛතසික</div>
         </div>
-        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 text-center">
+        <div class="bg-amber-500/20 backdrop-blur-sm border border-amber-300/30 rounded-xl p-3 text-center">
           <div class="text-2xl font-bold text-amber-300">28</div>
-          <div class="text-[10px] text-amber-100/80 font-medium mt-1">රූප</div>
+          <div class="text-[10px] text-amber-100/90 font-medium mt-1">රූප</div>
         </div>
-        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 text-center">
-          <div class="text-2xl font-bold text-purple-300">1</div>
-          <div class="text-[10px] text-amber-100/80 font-medium mt-1">නිබ්බාන</div>
+        <div class="bg-violet-500/20 backdrop-blur-sm border border-violet-300/30 rounded-xl p-3 text-center">
+          <div class="text-2xl font-bold text-violet-300">1</div>
+          <div class="text-[10px] text-violet-100/90 font-medium mt-1">නිබ්බාන</div>
         </div>
       </div>
     </div>
@@ -262,7 +304,7 @@ body {
     </div>
 
     <!-- ============================================================ -->
-    <!-- BUTTON 1: චිත්ත පරමාර්ථය → Citta/citta.html -->
+    <!-- BUTTON 1: චිත්ත පරමාර්ථය → Citta/citta.html (කොළ) -->
     <!-- ============================================================ -->
     <a href="./Citta/citta.html" class="paramattha-card card-citta">
       <div class="bg-icon"><i class="fa-solid fa-brain"></i></div>
@@ -275,24 +317,24 @@ body {
             <span class="count-badge">
               <i class="fa-solid fa-hashtag mr-1 text-[10px]"></i> 89 / 121
             </span>
-            <span class="text-[10px] uppercase tracking-wider opacity-80 font-bold">පරමාර්ථ ධර්ම 1</span>
+            <span class="text-[10px] uppercase tracking-wider opacity-90 font-bold">පරමාර්ථ ධර්ම 1</span>
           </div>
           <h3 class="text-xl sm:text-2xl font-bold mb-2 drop-shadow-md">චිත්ත පරමාර්ථය</h3>
           <p class="text-xs sm:text-sm opacity-95 leading-relaxed mb-3">
             අරමුණ දැන ගැනීමේ ස්වභාවය ඇති, සිත හෙවත් චිත්ත ධර්ම. සම්පූර්ණ සිත් 89ක් හෝ විස්තාර වශයෙන් 121ක් ඇත.
           </p>
-          <div class="flex items-center justify-between pt-3 border-t border-white/20">
-            <span class="text-[11px] opacity-90 font-medium">
+          <div class="flex items-center justify-between pt-3 border-t border-white/25">
+            <span class="text-[11px] opacity-95 font-medium">
               <i class="fa-solid fa-arrow-right mr-1"></i> චිත්ත විභාගය බලන්න
             </span>
-            <i class="fa-solid fa-circle-arrow-right text-2xl group-hover:translate-x-1 transition-transform"></i>
+            <i class="fa-solid fa-circle-arrow-right text-2xl arrow-icon"></i>
           </div>
         </div>
       </div>
     </a>
 
     <!-- ============================================================ -->
-    <!-- BUTTON 2: චෛතසික පරමාර්ථය → caitasika/caitasika.html -->
+    <!-- BUTTON 2: චෛතසික පරමාර්ථය → caitasika/caitasika.html (රතු-තැඹිලි) -->
     <!-- ============================================================ -->
     <a href="./caitasika/caitasika.html" class="paramattha-card card-cetasika">
       <div class="bg-icon"><i class="fa-solid fa-heart"></i></div>
@@ -305,24 +347,24 @@ body {
             <span class="count-badge">
               <i class="fa-solid fa-hashtag mr-1 text-[10px]"></i> 52
             </span>
-            <span class="text-[10px] uppercase tracking-wider opacity-80 font-bold">පරමාර්ථ ධර්ම 2</span>
+            <span class="text-[10px] uppercase tracking-wider opacity-90 font-bold">පරමාර්ථ ධර්ම 2</span>
           </div>
           <h3 class="text-xl sm:text-2xl font-bold mb-2 drop-shadow-md">චෛතසික පරමාර්ථය</h3>
           <p class="text-xs sm:text-sm opacity-95 leading-relaxed mb-3">
             සිත හා එකට උපදින, එකට නිරුද්ධ වන, එකම අරමුණක් ගන්නා ධර්ම. සම්පූර්ණ චෛතසික 52ක් ඇත.
           </p>
-          <div class="flex items-center justify-between pt-3 border-t border-white/20">
-            <span class="text-[11px] opacity-90 font-medium">
+          <div class="flex items-center justify-between pt-3 border-t border-white/25">
+            <span class="text-[11px] opacity-95 font-medium">
               <i class="fa-solid fa-arrow-right mr-1"></i> චෛතසික විභාගය බලන්න
             </span>
-            <i class="fa-solid fa-circle-arrow-right text-2xl group-hover:translate-x-1 transition-transform"></i>
+            <i class="fa-solid fa-circle-arrow-right text-2xl arrow-icon"></i>
           </div>
         </div>
       </div>
     </a>
 
     <!-- ============================================================ -->
-    <!-- BUTTON 3: රූප පරමාර්ථය → Rupa/rupa.html -->
+    <!-- BUTTON 3: රූප පරමාර්ථය → Rupa/rupa.html (රන්වන්-දුඹුරු) -->
     <!-- ============================================================ -->
     <a href="./Rupa/rupa.html" class="paramattha-card card-rupa">
       <div class="bg-icon"><i class="fa-solid fa-cube"></i></div>
@@ -335,24 +377,24 @@ body {
             <span class="count-badge">
               <i class="fa-solid fa-hashtag mr-1 text-[10px]"></i> 28
             </span>
-            <span class="text-[10px] uppercase tracking-wider opacity-80 font-bold">පරමාර්ථ ධර්ම 3</span>
+            <span class="text-[10px] uppercase tracking-wider opacity-90 font-bold">පරමාර්ථ ධර්ම 3</span>
           </div>
           <h3 class="text-xl sm:text-2xl font-bold mb-2 drop-shadow-md">රූප පරමාර්ථය</h3>
           <p class="text-xs sm:text-sm opacity-95 leading-relaxed mb-3">
             අරමුණ දැන ගැනීමේ ස්වභාවය නැති, කිසිවක් නොදන්නා, රූපී ස්වභාවය ඇති ධර්ම. සම්පූර්ණ රූප 28ක් ඇත.
           </p>
-          <div class="flex items-center justify-between pt-3 border-t border-white/20">
-            <span class="text-[11px] opacity-90 font-medium">
+          <div class="flex items-center justify-between pt-3 border-t border-white/25">
+            <span class="text-[11px] opacity-95 font-medium">
               <i class="fa-solid fa-arrow-right mr-1"></i> රූප විභාගය බලන්න
             </span>
-            <i class="fa-solid fa-circle-arrow-right text-2xl group-hover:translate-x-1 transition-transform"></i>
+            <i class="fa-solid fa-circle-arrow-right text-2xl arrow-icon"></i>
           </div>
         </div>
       </div>
     </a>
 
     <!-- ============================================================ -->
-    <!-- BUTTON 4: නිබ්බාන පරමාර්ථය → nibbana/nibbana.html -->
+    <!-- BUTTON 4: නිබ්බාන පරමාර්ථය → nibbana/nibbana.html (දම්-නිල්) -->
     <!-- ============================================================ -->
     <a href="./nibbana/nibbana.html" class="paramattha-card card-nibbana">
       <div class="bg-icon"><i class="fa-solid fa-circle-notch"></i></div>
@@ -365,17 +407,17 @@ body {
             <span class="count-badge">
               <i class="fa-solid fa-hashtag mr-1 text-[10px]"></i> 1
             </span>
-            <span class="text-[10px] uppercase tracking-wider opacity-80 font-bold">පරමාර්ථ ධර්ම 4</span>
+            <span class="text-[10px] uppercase tracking-wider opacity-90 font-bold">පරමාර්ථ ධර්ම 4</span>
           </div>
           <h3 class="text-xl sm:text-2xl font-bold mb-2 drop-shadow-md">නිබ්බාන පරමාර්ථය</h3>
           <p class="text-xs sm:text-sm opacity-95 leading-relaxed mb-3">
             අමතය ධාතුව, අජාත, අභූත, අකත, අසංඛත, නිරෝධ, නිබ්බාන යන නම්වලින් හැඳින්වෙන එකම එක පරමාර්ථ ධර්මයයි.
           </p>
-          <div class="flex items-center justify-between pt-3 border-t border-white/20">
-            <span class="text-[11px] opacity-90 font-medium">
+          <div class="flex items-center justify-between pt-3 border-t border-white/25">
+            <span class="text-[11px] opacity-95 font-medium">
               <i class="fa-solid fa-arrow-right mr-1"></i> නිබ්බානය ගැන බලන්න
             </span>
-            <i class="fa-solid fa-circle-arrow-right text-2xl group-hover:translate-x-1 transition-transform"></i>
+            <i class="fa-solid fa-circle-arrow-right text-2xl arrow-icon"></i>
           </div>
         </div>
       </div>
@@ -404,32 +446,32 @@ body {
           </tr>
         </thead>
         <tbody>
-          <tr class="border-b border-amber-100 dark:border-slate-700 hover:bg-amber-50/50 dark:hover:bg-slate-900/50 transition-colors">
+          <tr class="border-b border-amber-100 dark:border-slate-700 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 transition-colors">
             <td class="p-2.5 font-bold text-emerald-700 dark:text-emerald-400">
               <i class="fa-solid fa-brain mr-1.5"></i> චිත්ත
             </td>
             <td class="p-2.5 text-center font-bold text-emerald-700 dark:text-emerald-400">89/121</td>
             <td class="p-2.5 text-slate-600 dark:text-slate-300">අරමුණ දැන ගැනීමේ ස්වභාවය ඇති සිත</td>
           </tr>
-          <tr class="border-b border-amber-100 dark:border-slate-700 hover:bg-amber-50/50 dark:hover:bg-slate-900/50 transition-colors">
-            <td class="p-2.5 font-bold text-orange-700 dark:text-orange-400">
+          <tr class="border-b border-amber-100 dark:border-slate-700 hover:bg-rose-50/50 dark:hover:bg-rose-900/10 transition-colors">
+            <td class="p-2.5 font-bold text-rose-700 dark:text-rose-400">
               <i class="fa-solid fa-heart mr-1.5"></i> චෛතසික
             </td>
-            <td class="p-2.5 text-center font-bold text-orange-700 dark:text-orange-400">52</td>
+            <td class="p-2.5 text-center font-bold text-rose-700 dark:text-rose-400">52</td>
             <td class="p-2.5 text-slate-600 dark:text-slate-300">සිත හා එකට උපදින ධර්ම</td>
           </tr>
-          <tr class="border-b border-amber-100 dark:border-slate-700 hover:bg-amber-50/50 dark:hover:bg-slate-900/50 transition-colors">
+          <tr class="border-b border-amber-100 dark:border-slate-700 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition-colors">
             <td class="p-2.5 font-bold text-amber-700 dark:text-amber-400">
               <i class="fa-solid fa-cube mr-1.5"></i> රූප
             </td>
             <td class="p-2.5 text-center font-bold text-amber-700 dark:text-amber-400">28</td>
             <td class="p-2.5 text-slate-600 dark:text-slate-300">අරමුණ නොදන්නා රූපී ස්වභාවය</td>
           </tr>
-          <tr class="hover:bg-amber-50/50 dark:hover:bg-slate-900/50 transition-colors">
-            <td class="p-2.5 font-bold text-purple-700 dark:text-purple-400">
+          <tr class="hover:bg-violet-50/50 dark:hover:bg-violet-900/10 transition-colors">
+            <td class="p-2.5 font-bold text-violet-700 dark:text-violet-400">
               <i class="fa-solid fa-circle-notch mr-1.5"></i> නිබ්බාන
             </td>
-            <td class="p-2.5 text-center font-bold text-purple-700 dark:text-purple-400">1</td>
+            <td class="p-2.5 text-center font-bold text-violet-700 dark:text-violet-400">1</td>
             <td class="p-2.5 text-slate-600 dark:text-slate-300">අසංඛත ධාතුව, නිර්වාණය</td>
           </tr>
         </tbody>
