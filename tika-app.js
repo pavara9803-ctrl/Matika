@@ -5,6 +5,20 @@
 // ============================================================
 
 // ============================================================
+// Tika ලියාපදිංචි කිරීමේ ශ්‍රිතය
+// ============================================================
+var tikaFullData = window.tikaFullData || [];
+
+function registerTika(tikaData) {
+  if (!tikaData) {
+    console.warn('[tika-app] registerTika: No data provided');
+    return;
+  }
+  tikaFullData.push(tikaData);
+  console.log('[tika-app] Tika registered:', tikaData.title || tikaData.name || 'Unknown');
+}
+
+// ============================================================
 // APPLICATION STATE
 // ============================================================
 var currentTikaIndex = 0;
