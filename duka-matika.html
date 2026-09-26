@@ -37,6 +37,9 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ============================================================ */
+/* BREAKDOWN ITEMS */
+/* ============================================================ */
 .breakdown-item {
   display: flex;
   justify-content: space-between;
@@ -78,14 +81,39 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 .dark .breakdown-item .name { color: #fde68a; }
 .dark .breakdown-item .value { color: #fbbf24; }
 
+/* ============================================================ */
+/* ස්වරූපාර්ථ box - සාමාන්‍යයෙන් ලා කොළ, කළු අකුරු */
+/* අඳුරු තිරයේදී අඳුරු කොළ, සුදු අකුරු */
+/* ============================================================ */
 .svartha-box {
-  background: rgba(121, 52, 6, 0.53);
-  border: 1px solid rgba(95, 72, 16, 0.436);
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
   border-radius: 0.75rem;
   padding: 1rem;
   white-space: pre-line;
   line-height: 1.7;
   font-size: 0.9rem;
+  color: #052e16;
+}
+.dark .svartha-box {
+  background: #14532d;
+  border-color: #166534;
+  color: #dcfce7;
+}
+
+/* ============================================================ */
+/* තෝරාගත් පදය box - සාමාන්‍යයෙන් ලා මාරූන්, කළු අකුරු */
+/* අඳුරු තිරයේදී අඳුරු මාරූන්, සුදු අකුරු */
+/* ============================================================ */
+.pada-box {
+  background: #fdf2f2;
+  border: 1px solid #fecaca;
+  color: #1e1b1b;
+}
+.dark .pada-box {
+  background: linear-gradient(135deg, #4a1a1c, #2a0a0c);
+  border-color: rgba(217, 119, 6, 0.4);
+  color: #fef3c7;
 }
 
 @keyframes fadeIn {
@@ -246,27 +274,29 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
       </div>
     </div>
 
-    <div class="bg-maroon-900 text-amber-50 p-4 rounded-xl shadow border border-saffron-500/40">
+    <!-- තෝරාගත් පදය - ලා මාරූන් (light) / අඳුරු මාරූන් (dark) -->
+    <div class="pada-box p-4 rounded-xl shadow-lg w-full">
       <div class="flex justify-between items-start gap-3">
         <div class="flex-1 min-w-0">
-          <div class="text-xs text-saffron-300 font-medium mb-1 flex items-center gap-1.5">
+          <div class="text-xs font-medium mb-1 flex items-center gap-1.5 text-rose-700 dark:text-saffron-300">
             <i class="fa-solid fa-bookmark"></i> තෝරාගත් මාතිකා පදය
           </div>
-          <h3 id="duka-pada-name" class="text-lg font-bold text-saffron-100"></h3>
+          <h3 id="duka-pada-name" class="text-lg font-bold text-maroon-900 dark:text-saffron-100"></h3>
         </div>
-        <button onclick="toggleDukaBookmark()" class="text-2xl text-amber-300 hover:text-saffron-400 p-1 transition-colors shrink-0" title="සුරකින්න">
+        <button onclick="toggleDukaBookmark()" class="text-2xl text-rose-500 dark:text-amber-300 hover:text-rose-700 dark:hover:text-saffron-400 p-1 transition-colors shrink-0" title="සුරකින්න">
           <i id="duka-bookmark-icon" class="fa-regular fa-bookmark"></i>
         </button>
       </div>
-      <p id="duka-pada-desc" class="text-xs text-amber-200/90 mt-2"></p>
+      <p id="duka-pada-desc" class="text-xs mt-2 text-slate-600 dark:text-amber-200/90"></p>
     </div>
 
-    <div class="bg-maroon-900 text-amber-50 p-4 rounded-xl shadow border border-saffron-500/40">
-      <div class="flex items-center gap-2 mb-2 pb-2 border-b border-saffron-500/30">
-        <i class="fa-solid fa-book-bookmark text-saffron-400"></i>
-        <span class="text-sm font-bold text-saffron-300">ස්වරූපාර්ථ</span>
+    <!-- ස්වරූපාර්ථ - ලා කොළ (light) / අඳුරු කොළ (dark) -->
+    <div class="bg-emerald-50 dark:bg-gradient-to-br dark:from-emerald-900 dark:to-green-950 text-slate-900 dark:text-emerald-50 p-4 rounded-xl shadow-lg border border-emerald-200 dark:border-emerald-600/40 w-full">
+      <div class="flex items-center gap-2 mb-3 pb-2 border-b border-emerald-200 dark:border-emerald-500/30">
+        <i class="fa-solid fa-book-bookmark text-emerald-600 dark:text-emerald-300"></i>
+        <span class="text-sm font-bold text-emerald-800 dark:text-emerald-200">ස්වරූපාර්ථ</span>
       </div>
-      <div id="duka-pada-svartha" class="svartha-box text-amber-100"></div>
+      <div id="duka-pada-svartha" class="svartha-box"></div>
     </div>
 
     <div class="bg-white dark:bg-slate-800 rounded-2xl border border-amber-200 dark:border-slate-700 shadow-sm overflow-hidden">
