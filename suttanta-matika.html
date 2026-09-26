@@ -21,7 +21,6 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        /* 🎨 වර්ණ පට්ටලය - මෙතැනින් ගෝලීය වර්ණ වෙනස් කළ හැක */
         saffron: { 50:'#fffbeedb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03' },
         maroon: { 700:'#701a1d',800:'#581113',900:'#3f0a0c',950:'#260507' }
       },
@@ -34,69 +33,107 @@ tailwind.config = {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ============================================================ */
-/* 🎨 ගෝලීය අකුරු වර්ණය සහ ප්‍රමාණය - මෙතැනින් වෙනස් කරන්න */
-/* ============================================================ */
 body { 
   font-family: 'Noto Serif Sinhala', 'Inter', serif; 
   -webkit-tap-highlight-color: transparent; 
-  font-size: 16px;   /* 🎨 මුළු යෙදුමේ මූලික අකුරු ප්‍රමාණය */
+  font-size: 16px;
 }
 
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* ============================================================ */
-/* 🎨 Breakdown අයිතම - වර්ණ සහ ප්‍රමාණය */
+/* BREAKDOWN අයිතම */
 /* ============================================================ */
 .breakdown-item {
   display: flex; justify-content: space-between; align-items: flex-start;
   padding: 0.65rem 0.5rem; 
-  border-bottom: 1px solid #fef3c7;   /* 🎨 ඉරි වර්ණය */
+  border-bottom: 1px solid #fef3c7;
   gap: 0.75rem; border-radius: 0.5rem; transition: background 0.15s;
 }
-.breakdown-item:hover { background: rgba(251, 191, 36, 0.06); }   /* 🎨 Hover පසුබිම */
+.breakdown-item:hover { background: rgba(251, 191, 36, 0.06); }
 .breakdown-item:last-child { border-bottom: none; }
 
 .breakdown-item .num {
   font-weight: 700; 
-  color: #92400e;                     /* 🎨 අංකයේ වර්ණය */
+  color: #92400e;
   min-width: 1.8rem; flex-shrink: 0;
-  background: rgba(251, 191, 36, 0.15);  /* 🎨 අංකයේ පසුබිම */
+  background: rgba(251, 191, 36, 0.15);
   border-radius: 50%;
   width: 1.8rem; height: 1.8rem;
   display: flex; align-items: center; justify-content: center; 
-  font-size: 0.75rem;                 /* 🎨 අංකයේ ප්‍රමාණය */
+  font-size: 0.75rem;
 }
 .breakdown-item .name { 
-  color: #78350f;                     /* 🎨 නමේ වර්ණය */
+  color: #78350f;
   flex: 1; font-weight: 500; 
-  font-size: 0.9rem;                  /* 🎨 නමේ ප්‍රමාණය */
+  font-size: 0.9rem;
 }
 .breakdown-item .value {
-  color: #b45309;                     /* 🎨 අගයේ වර්ණය */
+  color: #b45309;
   font-weight: 600; text-align: right;
   flex-shrink: 0; max-width: 60%; 
-  font-size: 0.85rem;                 /* 🎨 අගයේ ප්‍රමාණය */
+  font-size: 0.85rem;
 }
 
-/* 🎨 Dark mode Breakdown වර්ණ */
 .dark .breakdown-item { border-bottom-color: #334155; }
-.dark .breakdown-item .num { color: #fcd34d; background: rgba(252, 211, 77, 0.15); }
+.dark .breakdown-item .num { color: #1d190a; background: rgba(252, 211, 77, 0.15); }
 .dark .breakdown-item .name { color: #fde68a; }
 .dark .breakdown-item .value { color: #fbbf24; }
 
 /* ============================================================ */
-/* 🎨 ස්වරූපාර්ථ / පදයේ අර්ථය පෙට්ටිය - වර්ණ සහ ප්‍රමාණය */
+/* පදයේ අර්ථය box - සාමාන්‍යයෙන් ලා නිල්-අළු, කළු අකුරු */
+/* අඳුරු තිරයේදී අඳුරු නිල්-අළු, සුදු අකුරු */
 /* ============================================================ */
-.svartha-box {
-  background: rgba(148, 65, 17, 0.362);   /* 🎨 පෙට්ටියේ පසුබිම් වර්ණය */
-  border: 1px solid rgba(251, 191, 36, 0.2);  /* 🎨 මායිම් වර්ණය */
+.artha-box {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
   border-radius: 0.75rem;
   padding: 1rem;
   white-space: pre-line;
-  line-height: 1.7;                       /* 🎨 පේළි අතර පරතරය */
-  font-size: 0.9rem;                      /* 🎨 අකුරු ප්‍රමාණය ← මෙතැනින් වෙනස් කරන්න */
+  line-height: 1.8;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+.dark .artha-box {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+/* ============================================================ */
+/* ස්වරූපාර්ථ box - සාමාන්‍යයෙන් ලා කොළ, කළු අකුරු */
+/* අඳුරු තිරයේදී අඳුරු කොළ, සුදු අකුරු */
+/* ============================================================ */
+.svartha-box {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  white-space: pre-line;
+  line-height: 1.8;
+  font-size: 0.9rem;
+  color: #052e16;
+}
+.dark .svartha-box {
+  background: #14532d;
+  border-color: #166534;
+  color: #dcfce7;
+}
+
+/* ============================================================ */
+/* තෝරාගත් පදය box - සාමාන්‍යයෙන් ලා මාරූන්, කළු අකුරු */
+/* අඳුරු තිරයේදී අඳුරු මාරූන්, සුදු අකුරු */
+/* ============================================================ */
+.pada-box {
+  background: #fdf2f2;
+  border: 1px solid #fecaca;
+  color: #1e1b1b;
+}
+.dark .pada-box {
+  background: linear-gradient(135deg, #4a1a1c, #2a0a0c);
+  border-color: rgba(217, 119, 6, 0.4);
+  color: #fef3c7;
 }
 
 @keyframes fadeIn {
@@ -110,7 +147,7 @@ body {
 <body class="h-full flex flex-col text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased">
 
 <!-- ============================================================ -->
-<!-- 🎨 HEADER - ඉහළම තීරුව -->
+<!-- HEADER -->
 <!-- ============================================================ -->
 <header class="sticky top-0 z-30 
   bg-maroon-900 text-amber-100
@@ -151,7 +188,7 @@ body {
 </header>
 
 <!-- ============================================================ -->
-<!-- 🎨 BREADCRUMB - මාර්ග දර්ශකය -->
+<!-- BREADCRUMB -->
 <!-- ============================================================ -->
 <nav class="max-w-3xl w-full mx-auto px-4 pt-3 text-xs 
   text-amber-800 dark:text-saffron-300
@@ -178,7 +215,7 @@ body {
   <!-- ============================================================ -->
   <section id="suttanta-view-list" class="space-y-4 fade-in">
     
-    <!-- 🎨 බැනරය -->
+    <!-- බැනරය -->
     <button onclick="scrollToSuttantaList()" class="w-full text-left 
       bg-gradient-to-br from-maroon-900 to-amber-900
       text-amber-50
@@ -211,7 +248,7 @@ body {
       </div>
     </button>
 
-    <!-- 🎨 සෙවුම් තීරුව -->
+    <!-- සෙවුම් තීරුව -->
     <div class="relative">
       <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none 
         text-amber-700 dark:text-saffron-400">
@@ -239,7 +276,7 @@ body {
   <!-- ============================================================ -->
   <section id="suttanta-view-pada-detail" class="hidden space-y-4 fade-in">
     
-    <!-- 🎨 ඉහළ මාතෘකා පෙට්ටිය -->
+    <!-- ඉහළ මාතෘකා පෙට්ටිය -->
     <div class="bg-amber-100/80 dark:bg-slate-800
       border border-amber-300 dark:border-slate-700
       rounded-2xl p-4 shadow-sm">
@@ -273,55 +310,55 @@ body {
 
     <div id="suttanta-pada-detail-breakdown" class="hidden flex flex-col space-y-4 pt-2 w-full">
       
-      <!-- 🎨 තෝරාගත් පදය -->
-      <div class="bg-maroon-900 text-amber-300
-        p-4 rounded-xl shadow 
-        border border-saffron-500/40 w-full">
+      <!-- තෝරාගත් පදය - ලා මාරූන් (light) / අඳුරු මාරූන් (dark) -->
+      <div class="pada-box p-4 rounded-xl shadow-lg w-full">
         <div class="flex justify-between items-start gap-3">
           <div class="flex-1 min-w-0">
-            <div class="text-xs text-saffron-300 font-medium mb-1 flex items-center gap-1.5">
+            <div class="text-xs font-medium mb-1 flex items-center gap-1.5 text-rose-700 dark:text-saffron-300">
               <i class="fa-solid fa-bookmark"></i> තෝරාගත් මාතිකා පදය
             </div>
-            <h3 id="suttanta-pada-name" class="text-lg font-bold text-saffron-100"></h3>
+            <h3 id="suttanta-pada-name" class="text-lg font-bold text-maroon-900 dark:text-saffron-100"></h3>
           </div>
-          <button onclick="toggleSuttantaBookmark()" class="text-2xl text-amber-300 hover:text-saffron-400 p-1 transition-colors shrink-0" title="සුරකින්න">
+          <button onclick="toggleSuttantaBookmark()" class="text-2xl text-rose-500 dark:text-amber-300 hover:text-rose-700 dark:hover:text-saffron-400 p-1 transition-colors shrink-0" title="සුරකින්න">
             <i id="suttanta-bookmark-icon" class="fa-regular fa-bookmark"></i>
           </button>
         </div>
-        <p id="suttanta-pada-desc" class="text-xs text-amber-100/90 mt-2"></p>
+        <p id="suttanta-pada-desc" class="text-xs mt-2 text-slate-600 dark:text-amber-200/90"></p>
       </div>
 
-      <!-- 🎨 පදයේ අර්ථය පෙට්ටිය -->
+      <!-- පදයේ අර්ථය - ලා නිල්-අළු (light) / අඳුරු නිල්-අළු (dark) -->
       <div id="suttanta-pada-artha-section" class="hidden 
-        bg-maroon-900 text-amber-300
-        p-4 rounded-xl shadow 
-        border border-saffron-500/40 w-full">
-        <div class="flex items-center gap-2 mb-2 pb-2 
-          border-b border-saffron-500/30">
-          <i class="fa-solid fa-book text-saffron-400"></i>
-          <span class="text-sm font-bold text-saffron-300">
+        bg-slate-100 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 
+        text-slate-900 dark:text-slate-100
+        p-4 rounded-xl shadow-lg 
+        border border-slate-300 dark:border-slate-600/40 w-full">
+        <div class="flex items-center gap-2 mb-3 pb-2 
+          border-b border-slate-300 dark:border-slate-500/30">
+          <i class="fa-solid fa-book text-blue-600 dark:text-blue-300"></i>
+          <span class="text-sm font-bold text-slate-800 dark:text-blue-200">
             පදයේ අර්ථය
           </span>
         </div>
-        <div id="suttanta-pada-artha-text" class="svartha-box text-amber-100"></div>
+        <div id="suttanta-pada-artha-text" class="artha-box"></div>
       </div>
 
-      <!-- 🎨 ස්වරූපාර්ථ පෙට්ටිය -->
-      <div class="bg-maroon-900 text-amber-300
-        p-4 rounded-xl shadow 
-        border border-saffron-500/40 w-full">
-        <div class="flex items-center gap-2 mb-2 pb-2 
-          border-b border-saffron-500/30">
-          <i class="fa-solid fa-book-bookmark text-saffron-400"></i>
-          <span class="text-sm font-bold text-saffron-300">
+      <!-- ස්වරූපාර්ථ - ලා කොළ (light) / අඳුරු කොළ (dark) -->
+      <div class="bg-emerald-50 dark:bg-gradient-to-br dark:from-emerald-900 dark:to-green-950 
+        text-slate-900 dark:text-emerald-50
+        p-4 rounded-xl shadow-lg 
+        border border-emerald-200 dark:border-emerald-600/40 w-full">
+        <div class="flex items-center gap-2 mb-3 pb-2 
+          border-b border-emerald-200 dark:border-emerald-500/30">
+          <i class="fa-solid fa-book-bookmark text-emerald-600 dark:text-emerald-300"></i>
+          <span class="text-sm font-bold text-emerald-800 dark:text-emerald-200">
             ස්වරූපාර්ථ
           </span>
         </div>
-        <div id="suttanta-pada-svartha" class="svartha-box text-amber-100"></div>
+        <div id="suttanta-pada-svartha" class="svartha-box"></div>
       </div>
 
       <!-- ============================================================ -->
-      <!-- 🎨 TAB බොත්තම් -->
+      <!-- TAB බොත්තම් -->
       <!-- ============================================================ -->
       <div class="bg-white dark:bg-slate-800 
         rounded-2xl border border-amber-200 dark:border-slate-700
@@ -462,7 +499,7 @@ body {
 
 </main>
 
-<!-- 🎨 Footer -->
+<!-- Footer -->
 <footer class="bg-maroon-900 text-amber-100 text-center py-4 
   border-t-2 border-saffron-500">
   <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා අධ්‍යයනය &copy; 2024</p>
