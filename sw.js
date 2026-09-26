@@ -1,20 +1,23 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම සඳහා නොබැඳි (Offline) සහාය
-// Version: 8.0.0
+// Version: 9.1.0
 // ============================================================
 
-const CACHE_NAME = 'abhidhamma-matika-v10.1.1';
+const CACHE_NAME = 'abhidhamma-matika-v9.1.0';
 const OFFLINE_URL = './index.html';
 
 // ============================================================
-// Cache කළ යුතු සියලුම ස්ථිතික ගොනු
+// යෙදුමට අවශ්‍ය සියලුම ස්ථිතික ගොනු
 // ============================================================
 const ASSETS_TO_CACHE = [
   // ========== ප්‍රධාන ගොනු ==========
   './',
   './index.html',
   './manifest.json',
+
+  // ========== සතර පරමාර්ථ ==========
+  './paramatta.html',
 
   // ========== දත්ත ගොනු ==========
   './sabbatika-data.js',
@@ -25,20 +28,29 @@ const ASSETS_TO_CACHE = [
   './duka-app.js',
   './suttanta-app.js',
 
-  // ========== HTML ගොනු ==========
+  // ========== HTML ගොනු (root) ==========
   './tika-matika.html',
   './duka-matika.html',
   './suttanta-matika.html',
 
-  // ========== රූප විභාගය ගොනු (Rupa ෆෝල්ඩරය) ==========
-  './Rupa/rupa.html',
-  './Rupa/rupa.js',
+  // ========== චෛතසික ගොනු (caitasika folder) ==========
+  './caitasika/caitasika.html',
+  './caitasika/caitasika.js',
+  './caitasika/samprayoga.js',
 
-  // ========== චිත්ත විභාගය ගොනු (Citta ෆෝල්ඩරය) ==========
+  // ========== චිත්ත ගොනු (Citta folder) ==========
   './Citta/citta.html',
   './Citta/citta.js',
 
-  // ========== තික ගොනු 22 (tika ෆෝල්ඩරය) ==========
+  // ========== රූප ගොනු (Rupa folder) ==========
+  './Rupa/rupa.html',
+  './Rupa/rupa.js',
+
+  // ========== නිබ්බාන ගොනු (nibbana folder) ==========
+  './nibbana/nibbana.html',
+  './nibbana/nibbana.js',
+
+  // ========== තික ගොනු 22 (tika folder) ==========
   './tika/01-kusala-tika.js',
   './tika/02-vedana-tika.js',
   './tika/03-vipaka-tika.js',
@@ -62,8 +74,7 @@ const ASSETS_TO_CACHE = [
   './tika/21-ajjhattarammana-tika.js',
   './tika/22-sanidassana-tika.js',
 
-  // ========== දුක ගොනු 13 (js/duka ෆෝල්ඩරය) ==========
-  // ⚠️ HTML ගොනුවේ ඇති නම් වලට ගැලපෙන ලෙස නිවැරදි කර ඇත
+  // ========== දුක ගොනු 13 (js/duka folder) ==========
   './js/duka/gochhaka-01-hetu.js',
   './js/duka/gochhaka-02-cullantara.js',
   './js/duka/gochhaka-03-asava.js',
@@ -78,10 +89,11 @@ const ASSETS_TO_CACHE = [
   './js/duka/gochhaka-12-kilesa.js',
   './js/duka/gochhaka-13-pitthi.js',
 
-  // ========== අයිකන ගොනු (ඇති ඒවා පමණි) ==========
+  // ========== අයිකන ගොනු ==========
   './launchericon-48x48.png',
   './launchericon-192x192.png',
-  './launchericon-512x512.png'
+  './launchericon-512x512.png',
+  './screenshot1.png'
 ];
 
 // ============================================================
@@ -90,9 +102,10 @@ const ASSETS_TO_CACHE = [
 const CDN_ASSETS = [
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2',
   'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
-  'https://fonts.gstatic.com/s/notoserifsinhala/v26/DtV2J6xEfN4Vv-C1sLbA9W-pQ.woff2'
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
 ];
 
 // ============================================================
