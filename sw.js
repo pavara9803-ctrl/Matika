@@ -1,34 +1,78 @@
 // sw.js - Service Worker for Offline Support
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම සඳහා නොබැඳි (Offline) සහාය
 
-const CACHE_NAME = 'abhidhamma-matika-v6.0.0'; // citta ගොනු එක් කර යාවත්කාලීන කර ඇත
+const CACHE_NAME = 'abhidhamma-matika-v7.0.0'; // සියලුම ගොනු ඇතුළත් කර යාවත්කාලීන කර ඇත
 const OFFLINE_URL = './index.html';
 
 // ============================================================
 // ඔබගේ යෙදුමට අවශ්‍ය සියලුම ස්ථිතික ගොනු මෙහි ලැයිස්තුගත කරන්න
 // ============================================================
 const ASSETS_TO_CACHE = [
-  // ප්‍රධාන ගොනු
+  // ========== ප්‍රධාන ගොනු ==========
   './',
   './index.html',
   './manifest.json',
 
-  // දත්ත ගොනු (sabbatika-data.js පළමුව - එහි helper functions ඇත)
+  // ========== දත්ත ගොනු ==========
   './sabbatika-data.js',
-  './maggarammana-tika.js', 
   './tika-data.js',
   './duka-data.js',
   './suttanta-data.js',
+  './tika-app.js',
 
-  // ✅ රූප විභාගය ගොනු (Rupa ෆෝල්ඩරය)
+  // ========== HTML ගොනු ==========
+  './tika-matika.html',
+  './duka-matika.html',
+  './suttanta-matika.html',
+
+  // ========== රූප විභාගය ගොනු (Rupa ෆෝල්ඩරය) ==========
   './Rupa/rupa.html',
   './Rupa/rupa.js',
 
-  // ✅ නවතම: චිත්ත විභාගය ගොනු (Citta ෆෝල්ඩරය)
+  // ========== චිත්ත විභාගය ගොනු (Citta ෆෝල්ඩරය) ==========
   './Citta/citta.html',
   './Citta/citta.js',
 
-  // අයිකන ගොනු (index.html හි භාවිතා කරන නම් වලට ගැලපෙන පරිදි)
+  // ========== තික ගොනු 22 (tika ෆෝල්ඩරය) ==========
+  './tika/01-kusala-tika.js',
+  './tika/02-vedana-tika.js',
+  './tika/03-vipaka-tika.js',
+  './tika/04-upadinnna-tika.js',
+  './tika/05-sankilittha-tika.js',
+  './tika/06-vitakka-tika.js',
+  './tika/07-piti-tika.js',
+  './tika/08-dassana-tika.js',
+  './tika/09-dassanahetu-tika.js',
+  './tika/10-avayagami-tika.js',
+  './tika/11-sekha-tika.js',
+  './tika/12-paritta-tika.js',
+  './tika/13-parittarammana-tika.js',
+  './tika/14-hina-tika.js',
+  './tika/15-micchatta-tika.js',
+  './tika/16-maggarammana-tika.js',
+  './tika/17-uppanna-tika.js',
+  './tika/18-atita-tika.js',
+  './tika/19-atitarammana-tika.js',
+  './tika/20-ajjhatta-tika.js',
+  './tika/21-ajjhattarammana-tika.js',
+  './tika/22-sanidassana-tika.js',
+
+  // ========== දුක ගොනු 13 (js/duka ෆෝල්ඩරය) ==========
+  './js/duka/gochhaka-01-hetu.js',
+  './js/duka/gochhaka-02-culla.js',
+  './js/duka/gochhaka-03-asav.js',
+  './js/duka/gochhaka-04-samyojana.js',
+  './js/duka/gochhaka-05-gantha.js',
+  './js/duka/gochhaka-06-ogha.js',
+  './js/duka/gochhaka-07-yoga.js',
+  './js/duka/gochhaka-08-nivarana.js',
+  './js/duka/gochhaka-09-para.js',
+  './js/duka/gochhaka-10-maha.js',
+  './js/duka/gochhaka-11-upadana.js',
+  './js/duka/gochhaka-12-kilesa.js',
+  './js/duka/gochhaka-13-pitthi.js',
+
+  // ========== අයිකන ගොනු ==========
   './launchericon-48x48.png',
   './launchericon-72x72.png',
   './launchericon-96x96.png',
@@ -37,8 +81,9 @@ const ASSETS_TO_CACHE = [
   './launchericon-256x256.png',
   './launchericon-384x384.png',
   './launchericon-512x512.png',
+  './screenshot1.png',
 
-  // Tailwind CSS සහ Font Awesome CDN ලින්ක්ස්
+  // ========== Tailwind CSS සහ Font Awesome CDN ලින්ක්ස් ==========
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
