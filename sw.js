@@ -1,11 +1,14 @@
+// ============================================================
 // sw.js - Service Worker for Offline Support
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම සඳහා නොබැඳි (Offline) සහාය
+// Version: 8.0.0
+// ============================================================
 
-const CACHE_NAME = 'abhidhamma-matika-v7.7.0'; // සියලුම ගොනු ඇතුළත් කර යාවත්කාලීන කර ඇත
+const CACHE_NAME = 'abhidhamma-matika-v8.0.0';
 const OFFLINE_URL = './index.html';
 
 // ============================================================
-// ඔබගේ යෙදුමට අවශ්‍ය සියලුම ස්ථිතික ගොනු මෙහි ලැයිස්තුගත කරන්න
+// Cache කළ යුතු සියලුම ස්ථිතික ගොනු
 // ============================================================
 const ASSETS_TO_CACHE = [
   // ========== ප්‍රධාන ගොනු ==========
@@ -19,6 +22,8 @@ const ASSETS_TO_CACHE = [
   './duka-data.js',
   './suttanta-data.js',
   './tika-app.js',
+  './duka-app.js',
+  './suttanta-app.js',
 
   // ========== HTML ගොනු ==========
   './tika-matika.html',
@@ -58,65 +63,75 @@ const ASSETS_TO_CACHE = [
   './tika/22-sanidassana-tika.js',
 
   // ========== දුක ගොනු 13 (js/duka ෆෝල්ඩරය) ==========
+  // ⚠️ HTML ගොනුවේ ඇති නම් වලට ගැලපෙන ලෙස නිවැරදි කර ඇත
   './js/duka/gochhaka-01-hetu.js',
-  './js/duka/gochhaka-02-culla.js',
-  './js/duka/gochhaka-03-asav.js',
+  './js/duka/gochhaka-02-cullantara.js',
+  './js/duka/gochhaka-03-asava.js',
   './js/duka/gochhaka-04-samyojana.js',
   './js/duka/gochhaka-05-gantha.js',
   './js/duka/gochhaka-06-ogha.js',
   './js/duka/gochhaka-07-yoga.js',
   './js/duka/gochhaka-08-nivarana.js',
-  './js/duka/gochhaka-09-para.js',
-  './js/duka/gochhaka-10-maha.js',
+  './js/duka/gochhaka-09-paramasa.js',
+  './js/duka/gochhaka-10-mahantara.js',
   './js/duka/gochhaka-11-upadana.js',
   './js/duka/gochhaka-12-kilesa.js',
   './js/duka/gochhaka-13-pitthi.js',
 
-  // ========== අයිකන ගොනු ==========
+  // ========== අයිකන ගොනු (ඇති ඒවා පමණි) ==========
   './launchericon-48x48.png',
-  './launchericon-72x72.png',
-  './launchericon-96x96.png',
-  './launchericon-144x144.png',
   './launchericon-192x192.png',
-  './launchericon-256x256.png',
-  './launchericon-384x384.png',
-  './launchericon-512x512.png',
-  './screenshot1.png',
+  './launchericon-512x512.png'
+];
 
-  // ========== Tailwind CSS සහ Font Awesome CDN ලින්ක්ස් ==========
+// ============================================================
+// CDN සම්පත් (Optional - අසාර්ථක වුවද යෙදුම ක්‍රියාත්මක වේ)
+// ============================================================
+const CDN_ASSETS = [
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2',
   'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+  'https://fonts.gstatic.com/s/notoserifsinhala/v26/DtV2J6xEfN4Vv-C1sLbA9W-pQ.woff2'
 ];
 
 // ============================================================
 // 1. INSTALL EVENT - සියලුම ගොනු Cache කිරීම
 // ============================================================
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing...');
+  console.log('[SW] Installing version ' + CACHE_NAME + '...');
+  
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('[Service Worker] Caching all assets...');
-        // addAll අසාර්ථක වුවද යෙදුම ක්‍රියාත්මක වන පරිදි එක් එක් ගොනුව වෙන් වෙන්ව Cache කරන්න
-        return Promise.all(
-          ASSETS_TO_CACHE.map((url) => {
-            return cache.add(url).catch((error) => {
-              console.warn('[Service Worker] Failed to cache:', url, error);
-            });
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      
+      // ප්‍රධාන ගොනු - අසාර්ථක වුවත් අනෙක්වා දිගටම කරන්න
+      console.log('[SW] Caching local assets...');
+      const localResults = await Promise.allSettled(
+        ASSETS_TO_CACHE.map((url) => 
+          cache.add(url).catch((err) => {
+            console.warn('[SW] Failed to cache (local):', url, err.message);
           })
-        );
-      })
-      .then(() => {
-        console.log('[Service Worker] Installation complete. Skipping waiting...');
-        return self.skipWaiting(); // නව Service Worker එක වහාම සක්‍රීය කරන්න
-      })
-      .catch((error) => {
-        console.error('[Service Worker] Installation failed:', error);
-      })
+        )
+      );
+      
+      // CDN සම්පත් - අසාර්ථක වුවත් ගණන් නොගන්න
+      console.log('[SW] Caching CDN assets...');
+      await Promise.allSettled(
+        CDN_ASSETS.map((url) => 
+          cache.add(url).catch((err) => {
+            console.warn('[SW] Failed to cache (CDN):', url, err.message);
+          })
+        )
+      );
+      
+      const successCount = localResults.filter(r => r.status === 'fulfilled').length;
+      console.log('[SW] Cached ' + successCount + '/' + ASSETS_TO_CACHE.length + ' local assets');
+      
+      // නව Service Worker එක වහාම සක්‍රීය කරන්න
+      await self.skipWaiting();
+      console.log('[SW] Installation complete.');
+    })()
   );
 });
 
@@ -124,23 +139,25 @@ self.addEventListener('install', (event) => {
 // 2. ACTIVATE EVENT - පැරණි Cache ඉවත් කිරීම
 // ============================================================
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating...');
+  console.log('[SW] Activating...');
+  
   event.waitUntil(
-    caches.keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cache) => {
-            if (cache !== CACHE_NAME) {
-              console.log('[Service Worker] Deleting old cache:', cache);
-              return caches.delete(cache);
-            }
-          })
-        );
-      })
-      .then(() => {
-        console.log('[Service Worker] Activation complete. Claiming clients...');
-        return self.clients.claim(); // සියලුම clients පාලනය කරන්න
-      })
+    (async () => {
+      // පැරණි cache ඉවත් කරන්න
+      const cacheNames = await caches.keys();
+      await Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log('[SW] Deleting old cache:', cache);
+            return caches.delete(cache);
+          }
+        })
+      );
+      
+      // සියලුම clients පාලනය කරන්න
+      await self.clients.claim();
+      console.log('[SW] Activation complete.');
+    })()
   );
 });
 
@@ -148,98 +165,168 @@ self.addEventListener('activate', (event) => {
 // 3. FETCH EVENT - Offline විට Cache එකෙන් දත්ත ලබා දීම
 // ============================================================
 self.addEventListener('fetch', (event) => {
-  // අපි ඉල්ලීම් සිදු කරන්නේ GET වලට පමණි
-  if (event.request.method !== 'GET') return;
+  const { request } = event;
+  
+  // GET ඉල්ලීම් පමණක් හසුරුවන්න
+  if (request.method !== 'GET') return;
+  
+  // http/https ඉල්ලීම් පමණක් හසුරුවන්න
+  if (!request.url.startsWith('http')) return;
+  
+  // Chrome extension සහ අනෙකුත් non-http ඉල්ලීම් මඟ හරින්න
+  const url = new URL(request.url);
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
-  // chrome-extension වැනි ඉල්ලීම් මඟ හරින්න
-  if (!event.request.url.startsWith('http')) return;
+  // HTML navigation ඉල්ලීම් - Network-first
+  const isHTMLNavigation = request.mode === 'navigate' || 
+    (request.headers.get('accept') || '').includes('text/html');
 
-  event.respondWith(
-    caches.match(event.request, { ignoreSearch: true })
-      .then((cachedResponse) => {
-        // HTML නම් Network-first, අනෙක්වා Cache-first
-        const isHTML = event.request.headers.get('accept')?.includes('text/html');
+  if (isHTMLNavigation) {
+    event.respondWith(handleHTMLRequest(request));
+    return;
+  }
 
-        if (isHTML) {
-          // HTML සඳහා Network-first (නවතම අන්තර්ගතය ලබා ගැනීමට)
-          return fetch(event.request)
-            .then((networkResponse) => {
-              if (networkResponse && networkResponse.status === 200) {
-                const responseToCache = networkResponse.clone();
-                caches.open(CACHE_NAME).then((cache) => {
-                  cache.put(event.request, responseToCache);
-                });
-              }
-              return networkResponse;
-            })
-            .catch(() => {
-              // Offline නම් Cache එකෙන් ලබා දෙන්න
-              return cachedResponse || caches.match(OFFLINE_URL);
-            });
-        }
-
-        // අනෙක් ගොනු සඳහා Cache-first
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-
-        // Cache එකේ නැත්නම් අන්තර්ජාලයෙන් ලබාගෙන, එය Cache කරන්න
-        return fetch(event.request)
-          .then((networkResponse) => {
-            // අවලංගු ප්‍රතිචාර Cache නොකරන්න
-            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'opaque') {
-              return networkResponse;
-            }
-
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-
-            return networkResponse;
-          })
-          .catch((error) => {
-            console.warn('[Service Worker] Fetch failed for:', event.request.url, error);
-
-            // Offline විට සහ Cache එකේ නොමැති විට
-            if (event.request.headers.get('accept')?.includes('text/html')) {
-              return caches.match(OFFLINE_URL);
-            }
-
-            // අනෙක් ගොනු සඳහා හිස් ප්‍රතිචාරයක් ලබා දෙන්න
-            return new Response('', {
-              status: 408,
-              statusText: 'Offline - Resource not available'
-            });
-          });
-      })
-  );
+  // අනෙක් සම්පත් - Cache-first with network fallback
+  event.respondWith(handleAssetRequest(request));
 });
+
+// ============================================================
+// HTML ඉල්ලීම් සඳහා - Network-first strategy
+// ============================================================
+async function handleHTMLRequest(request) {
+  try {
+    // අන්තර්ජාලයෙන් ලබා ගැනීමට උත්සාහ කරන්න
+    const networkResponse = await fetch(request);
+    
+    // සාර්ථක නම් cache එකේ save කරන්න
+    if (networkResponse && networkResponse.status === 200) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+    }
+    
+    return networkResponse;
+  } catch (error) {
+    // Offline නම් cache එකෙන් ලබා දෙන්න
+    console.log('[SW] Network failed for HTML, using cache:', request.url);
+    
+    const cachedResponse = await caches.match(request, { ignoreSearch: true });
+    if (cachedResponse) return cachedResponse;
+    
+    // Cache එකේ නැත්නම් offline page එක ලබා දෙන්න
+    const offlinePage = await caches.match(OFFLINE_URL);
+    if (offlinePage) return offlinePage;
+    
+    // කිසිවක් නැත්නම් error response එකක්
+    return new Response(
+      '<html><body style="font-family:sans-serif;text-align:center;padding:2rem;">' +
+      '<h1>නොබැඳි තත්ත්වයේ සිටී</h1>' +
+      '<p>කරුණාකර අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කරන්න.</p>' +
+      '</body></html>',
+      { 
+        status: 503,
+        statusText: 'Service Unavailable',
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      }
+    );
+  }
+}
+
+// ============================================================
+// අනෙක් සම්පත් සඳහා - Cache-first strategy
+// ============================================================
+async function handleAssetRequest(request) {
+  try {
+    // මුලින්ම cache එකේ බලන්න
+    const cachedResponse = await caches.match(request, { ignoreSearch: true });
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    
+    // Cache එකේ නැත්නම් අන්තර්ජාලයෙන් ලබා ගන්න
+    const networkResponse = await fetch(request);
+    
+    // සාර්ථක ප්‍රතිචාර පමණක් cache කරන්න
+    if (networkResponse && 
+        networkResponse.status === 200 && 
+        networkResponse.type !== 'opaque') {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+    }
+    
+    return networkResponse;
+  } catch (error) {
+    console.warn('[SW] Fetch failed:', request.url, error.message);
+    
+    // Offline සහ cache එකේ නැති විට
+    return new Response('', {
+      status: 408,
+      statusText: 'Offline - Resource not available'
+    });
+  }
+}
 
 // ============================================================
 // 4. MESSAGE EVENT - SKIP_WAITING සහ අනෙකුත් පණිවිඩ
 // ============================================================
 self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    console.log('[Service Worker] Received SKIP_WAITING message');
+  if (!event.data) return;
+  
+  const { type, urls } = event.data;
+  
+  // නව Service Worker එක වහාම සක්‍රීය කරන්න
+  if (type === 'SKIP_WAITING') {
+    console.log('[SW] Received SKIP_WAITING message');
     self.skipWaiting();
+    return;
   }
-
-  if (event.data && event.data.type === 'CACHE_URLS') {
+  
+  // නිශ්චිත URL cache කරන්න
+  if (type === 'CACHE_URLS' && Array.isArray(urls)) {
+    console.log('[SW] Caching requested URLs:', urls.length);
     event.waitUntil(
       caches.open(CACHE_NAME).then((cache) => {
-        return cache.addAll(event.data.urls);
-      })
-    );
-  }
-
-  if (event.data && event.data.type === 'CLEAR_CACHE') {
-    event.waitUntil(
-      caches.keys().then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cache) => caches.delete(cache))
+        return Promise.allSettled(
+          urls.map((url) => 
+            cache.add(url).catch((err) => {
+              console.warn('[SW] Failed to cache:', url, err.message);
+            })
+          )
         );
       })
     );
+    return;
   }
+  
+  // සියලුම cache ඉවත් කරන්න
+  if (type === 'CLEAR_CACHE') {
+    console.log('[SW] Clearing all caches...');
+    event.waitUntil(
+      caches.keys().then((cacheNames) => {
+        return Promise.all(cacheNames.map((cache) => caches.delete(cache)));
+      }).then(() => {
+        console.log('[SW] All caches cleared.');
+      })
+    );
+    return;
+  }
+  
+  // Cache තොරතුරු ලබා දෙන්න (debug සඳහා)
+  if (type === 'GET_CACHE_INFO') {
+    event.waitUntil(
+      caches.keys().then((names) => {
+        console.log('[SW] Cache names:', names);
+      })
+    );
+  }
+});
+
+// ============================================================
+// 5. ERROR HANDLING - Global error handler
+// ============================================================
+self.addEventListener('error', (event) => {
+  console.error('[SW] Global error:', event.error);
+});
+
+self.addEventListener('unhandledrejection', (event) => {
+  console.error('[SW] Unhandled promise rejection:', event.reason);
 });
