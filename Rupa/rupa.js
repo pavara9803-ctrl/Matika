@@ -1,8 +1,13 @@
 /**
  * අභිධර්ම රූප විභාගය සහ සමුට්ඨාන නය - Universal Search & Logic
+ * 
+ * මෙම ගොනුව citta.js ආකාරයටම සකස් කර ඇත.
+ * උප බොත්තම් ක්ලික් කල විට අදාළ තොරතුරු එම බොත්තමට යටින්ම පෙන්වයි.
  */
 
+// ============================================================
 // 1. මූලික පරමාර්ථ රූප 28 දත්ත එකතුව
+// ============================================================
 const rupaData = [
   {
     category: "භූත රූප (මහා භූත 4)",
@@ -100,7 +105,9 @@ const rupaData = [
   }
 ];
 
+// ============================================================
 // 2. රූප විභාගය සහ සමුට්ඨාන නය විස්තර දත්ත
+// ============================================================
 const vibhagaCategories = {
   // --- මූලික වර්ගීකරණය ---
   rupa28: {
@@ -300,14 +307,18 @@ const vibhagaCategories = {
   }
 };
 
-// HTML ටැග් ඉවත් කර සෙවීමට සුදුසු Plain Text ලබාගැනීම
+// ============================================================
+// 3. සහායක ශ්‍රිත
+// ============================================================
 function stripHtml(html) {
   const tmp = document.createElement("DIV");
   tmp.innerHTML = html;
   return tmp.textContent || tmp.innerText || "";
 }
 
-// 3. UI ටොගල් ක්‍රියාකාරීත්වය
+// ============================================================
+// 4. UI ටොගල් ක්‍රියාකාරීත්වය
+// ============================================================
 function toggleMainSection() {
   const subContainer = document.getElementById("subContainer");
   const arrowIcon = document.getElementById("vibhaga-arrow");
@@ -320,35 +331,54 @@ function toggleMainSection() {
   }
 }
 
-// 4. උප බොත්තම් ක්ලික් කළ විට තොරතුරු පෙන්වීම
+// ============================================================
+// 5. උප බොත්තම් ක්ලික් කළ විට තොරතුරු පෙන්වීම (බොත්තමට යටින්ම)
+// ============================================================
 function showInfo(event, key) {
   const data = vibhagaCategories[key];
-  if (!data) return;
+  if (!data) {
+    console.warn('No data found for key:', key);
+    return;
+  }
 
-  const titleEl = document.getElementById("infoTitle");
-  const detailsEl = document.getElementById("infoDetails");
-  const displayBox = document.getElementById("contentDisplay");
+  const button = event.currentTarget;
+  // බොත්තම අයත් කාණ්ඩය (rupa-group) හඳුනා ගැනීම
+  const group = button.closest('.rupa-group');
+  
+  if (!group) {
+    console.warn('Group not found for button:', button);
+    return;
+  }
 
-  if (titleEl && detailsEl && displayBox) {
-    titleEl.innerText = data.title;
-    detailsEl.innerHTML = data.desc;
+  // සියලුම කාණ්ඩවල තොරතුරු සඟවන්න
+  document.querySelectorAll('[id^="rupaDisplayGroup"]').forEach(el => el.classList.add("hidden"));
+
+  // අදාළ කාණ්ඩයේ තොරතුරු පෙන්වන්න
+  const displayBox = group.querySelector('[id^="rupaDisplayGroup"]');
+  if (displayBox) {
+    const titleEl = displayBox.querySelector('h3');
+    const detailsEl = displayBox.querySelector('div');
+    if (titleEl) titleEl.innerText = data.title;
+    if (detailsEl) detailsEl.innerHTML = data.desc;
     displayBox.classList.remove("hidden");
   }
 
-  // බොත්තම Active බව දැක්වීම
-  const buttons = document.querySelectorAll(".sub-btn");
+  // බොත්තම් සක්‍රීය/අක්‍රීය කිරීම
+  const buttons = group.querySelectorAll(".sub-btn-1, .sub-btn-2");
   buttons.forEach(btn => {
     btn.classList.remove("bg-saffron-500", "text-white", "border-saffron-600");
     btn.classList.add("bg-white", "dark:bg-slate-900", "text-amber-950", "dark:text-slate-200");
   });
 
-  if (event && event.currentTarget) {
-    event.currentTarget.classList.add("bg-saffron-500", "text-white", "border-saffron-600");
-    event.currentTarget.classList.remove("bg-white", "dark:bg-slate-900", "text-amber-950", "dark:text-slate-200");
+  if (button) {
+    button.classList.add("bg-saffron-500", "text-white", "border-saffron-600");
+    button.classList.remove("bg-white", "dark:bg-slate-900", "text-amber-950", "dark:text-slate-200");
   }
 }
 
-// 5. සර්ව සම්පූර්ණ Universal Search & Dynamic Rendering
+// ============================================================
+// 6. Universal Search & Dynamic Rendering
+// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("rupa-container");
   const searchInput = document.getElementById("search-input");
@@ -410,11 +440,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // සෙවුම් පදයක් ඇති විට: රූප 28 + විභාග සහ සමුට්ඨාන කාණ්ඩ සියල්ලම එකවර සෙවීම
+    // සෙවුම් පදයක් ඇති විට
     let matchedRupaCount = 0;
     let matchedVibhagaCount = 0;
 
-    // A. රූප 28 තුළ සෙවීම
     const matchedSections = [];
     rupaData.forEach((section) => {
       const filtered = section.items.filter(item => 
@@ -429,7 +458,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // B. රූප විභාග හා සමුට්ඨාන කාණ්ඩ තුළ සෙවීම
     const matchedVibhagas = [];
     Object.keys(vibhagaCategories).forEach(key => {
       const item = vibhagaCategories[key];
@@ -440,12 +468,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // ප්‍රධාන Counter යාවත්කාලීන කිරීම
     if (totalCountEl) {
       totalCountEl.textContent = `සෙවුම් ප්‍රතිඵල: රූප ${matchedRupaCount} | වර්ගීකරණ ${matchedVibhagaCount}`;
     }
 
-    // ප්‍රතිඵල කිසිවක් නැති විට
     if (matchedRupaCount === 0 && matchedVibhagaCount === 0) {
       container.innerHTML = `
         <div class="text-center py-12 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-800 rounded-2xl border border-amber-200 dark:border-slate-700 p-6">
@@ -456,7 +482,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 1. ගැලපෙන රූප විභාග / සමුට්ඨාන කාණ්ඩ පෙන්වීම
     if (matchedVibhagas.length > 0) {
       const vibhagaHeader = document.createElement("div");
       vibhagaHeader.className = "flex items-center gap-2 text-sm font-bold text-maroon-900 dark:text-saffron-300 pt-2 border-b border-amber-200 dark:border-slate-700 pb-2";
@@ -478,7 +503,6 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(vGrid);
     }
 
-    // 2. ගැලපෙන රූප 28 වගු පෙන්වීම
     if (matchedSections.length > 0) {
       const rupaHeader = document.createElement("div");
       rupaHeader.className = "flex items-center gap-2 text-sm font-bold text-maroon-900 dark:text-saffron-300 pt-4 border-b border-amber-200 dark:border-slate-700 pb-2";
@@ -525,13 +549,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // සෙවුම් කොටුව input වන සෑම අවස්ථාවකදීම Live Update වීම
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       renderUnifiedSearch(e.target.value);
     });
   }
 
-  // ආරම්භක Rendering ක්‍රියාවලිය
   renderUnifiedSearch();
 });
