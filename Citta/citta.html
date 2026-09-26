@@ -138,125 +138,133 @@
             <i id="citta121-arrow" class="fa-solid fa-chevron-down text-emerald-200 transition-transform duration-200"></i>
         </button>
 
-       <!-- Citta 121 Sub-Buttons Box -->
-<div id="citta121SubContainer" class="hidden bg-emerald-50/60 dark:bg-slate-800 p-4 rounded-2xl border border-emerald-200 dark:border-slate-700 shadow-sm space-y-4">
-    
-    <!-- Group 1: මූලික බෙදීම් -->
-    <div class="citta-group border border-emerald-200 dark:border-slate-700 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="1">
-        <div class="text-xs font-bold text-emerald-900 dark:text-emerald-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-list-ol text-emerald-600"></i> මූලික බෙදීම්:
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'citta121Summary')">සිත් 121 සාරාංශය</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusala12Full')">අකුසල් 12</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetuka18Full')">අහේතුක 18</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala24Full')">කාමාවචර කුසල් 24</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupa15Full')">රූපාවචර 15</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupa12Full')">අරූපාවචර 12</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttara40Full')">ලෝකෝත්තර 40</button>
-        </div>
-        <div id="citta121DisplayGroup1" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-emerald-500 border border-emerald-200 dark:border-slate-700 shadow-sm space-y-2">
-            <h3 id="infoTitle121Group1" class="text-base font-bold text-emerald-900 dark:text-emerald-200"></h3>
-            <div id="infoDetails121Group1" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+        <!-- Citta 121 Sub-Buttons Box -->
+        <div id="citta121SubContainer" class="hidden bg-emerald-50/60 dark:bg-slate-800 p-4 rounded-2xl border border-emerald-200 dark:border-slate-700 shadow-sm space-y-4">
+            
+            <!-- Group 1: මූලික බෙදීම් -->
+            <div class="citta-group border border-emerald-200 dark:border-slate-700 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="1">
+                <div class="text-xs font-bold text-emerald-900 dark:text-emerald-300 mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-ol text-emerald-600"></i> මූලික බෙදීම්:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'citta121Summary')">සිත් 121 සාරාංශය</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusala12Full')">අකුසල් 12</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetuka18Full')">අහේතුක 18</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala24Full')">කාම සෝභන 24</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupa15Full')">රූපාවචර සිත් 15</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupa12Full')">අරූපාවචර සිත් 12</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttara40Full')">ලෝකෝත්තර 40</button>
+                </div>
+                <!-- මෙම කාණ්ඩයට අදාළ තොරතුරු පෙන්වන කොටස -->
+                <div id="citta121DisplayGroup1" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-emerald-500 border border-emerald-200 dark:border-slate-700 shadow-sm space-y-2">
+                    <h3 id="infoTitle121Group1" class="text-base font-bold text-emerald-900 dark:text-emerald-200"></h3>
+                    <div id="infoDetails121Group1" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- Group 2: අකුසල් සිත් විස්තර -->
+            <div class="citta-group border border-red-200 dark:border-red-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="2">
+                <div class="text-xs font-bold text-red-900 dark:text-red-300 mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-fire text-red-600"></i> අකුසල් සිත් 12 විස්තර:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lobha8Full')">ලෝභ මූලික 8</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'dosa2Full')">දෝස මූලික 2</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'moha2Full')">මෝහ මූලික 2</button>
+                </div>
+                <!-- මෙම කාණ්ඩයට අදාළ තොරතුරු පෙන්වන කොටස -->
+                <div id="citta121DisplayGroup2" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-red-500 border border-red-200 dark:border-slate-700 shadow-sm space-y-2">
+                    <h3 id="infoTitle121Group2" class="text-base font-bold text-red-900 dark:text-red-200"></h3>
+                    <div id="infoDetails121Group2" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- Group 3: අහේතුක සිත් විස්තර -->
+            <div class="citta-group border border-orange-200 dark:border-orange-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="3">
+                <div class="text-xs font-bold text-orange-900 dark:text-orange-300 mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-exclamation text-orange-600"></i> අහේතුක සිත් 18 විස්තර:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusalaVipaka7Full')">අකුසල විපාක 7</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kusalaAhetuka8Full')">කුසල අහේතුක විපාක 8</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetukaKriya3Full')">අහේතුක ක්‍රියා 3</button>
+                </div>
+                <!-- මෙම කාණ්ඩයට අදාළ තොරතුරු පෙන්වන කොටස -->
+                <div id="citta121DisplayGroup3" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-orange-500 border border-orange-200 dark:border-slate-700 shadow-sm space-y-2">
+                    <h3 id="infoTitle121Group3" class="text-base font-bold text-orange-900 dark:text-orange-200"></h3>
+                    <div id="infoDetails121Group3" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- Group 4: කාම සෝභන 24 විස්තර -->
+            <div class="citta-group border border-green-200 dark:border-green-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="4">
+                <div class="text-xs font-bold text-green-900 dark:text-green-300 mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-seedling text-green-600"></i> කාම සෝභන 24 විස්තර:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala8Full')">කාම සෝභන කුසල් 8</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaVipaka8Full')">කාම සෝභන විපාක 8</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKriya8Full')">කාම සෝභන ක්‍රියා 8</button>
+                </div>
+                <!-- මෙම කාණ්ඩයට අදාළ තොරතුරු පෙන්වන කොටස -->
+                <div id="citta121DisplayGroup4" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-green-500 border border-green-200 dark:border-slate-700 shadow-sm space-y-2">
+                    <h3 id="infoTitle121Group4" class="text-base font-bold text-green-900 dark:text-green-200"></h3>
+                    <div id="infoDetails121Group4" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- Group 5: රූපාවචර සිත් 15 විස්තර -->
+            <div class="citta-group border border-amber-200 dark:border-amber-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="5">
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-300 mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-om text-amber-600"></i> රූපාවචර සිත් 15 විස්තර:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKusala5Full')">රූපාවචර කුසල් 5</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaVipaka5Full')">රූපාවචර විපාක 5</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKriya5Full')">රූපාවචර ක්‍රියා 5</button>
+                </div>
+                <!-- මෙම කාණ්ඩයට අදාළ තොරතුරු පෙන්වන කොටස -->
+                <div id="citta121DisplayGroup5" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-amber-500 border border-amber-200 dark:border-slate-700 shadow-sm space-y-2">
+                    <h3 id="infoTitle121Group5" class="text-base font-bold text-amber-900 dark:text-amber-200"></h3>
+                    <div id="infoDetails121Group5" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- Group 6: අරූපාවචර සිත් 12 විස්තර -->
+            <div class="citta-group border border-purple-200 dark:border-purple-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="6">
+                <div class="text-xs font-bold text-purple-900 dark:text-purple-300 mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-infinity text-purple-600"></i> අරූපාවචර සිත් 12 විස්තර:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKusala4Full')">අරූපාවචර කුසල් 4</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaVipaka4Full')">අරූපාවචර විපාක 4</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKriya4Full')">අරූපාවචර ක්‍රියා 4</button>
+                </div>
+                <!-- මෙම කාණ්ඩයට අදාළ තොරතුරු පෙන්වන කොටස -->
+                <div id="citta121DisplayGroup6" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-purple-500 border border-purple-200 dark:border-slate-700 shadow-sm space-y-2">
+                    <h3 id="infoTitle121Group6" class="text-base font-bold text-purple-900 dark:text-purple-200"></h3>
+                    <div id="infoDetails121Group6" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- Group 7: ලෝකෝත්තර 40 විස්තර -->
+            <div class="citta-group border border-rose-200 dark:border-rose-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="7">
+                <div class="text-xs font-bold text-rose-900 dark:text-rose-300 mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star text-rose-600"></i> ලෝකෝත්තර 40 විස්තර:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraMagga20Full')">ලෝකෝත්තර මාර්ග 20</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraPhala20Full')">ලෝකෝත්තර ඵල 20</button>
+                </div>
+                <!-- මෙම කාණ්ඩයට අදාළ තොරතුරු පෙන්වන කොටස -->
+                <div id="citta121DisplayGroup7" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-rose-500 border border-rose-200 dark:border-slate-700 shadow-sm space-y-2">
+                    <h3 id="infoTitle121Group7" class="text-base font-bold text-rose-900 dark:text-rose-200"></h3>
+                    <div id="infoDetails121Group7" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                </div>
+            </div>
+
         </div>
     </div>
-
-    <!-- Group 2: අකුසල් සිත් විස්තර -->
-    <div class="citta-group border border-red-200 dark:border-red-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="2">
-        <div class="text-xs font-bold text-red-900 dark:text-red-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-fire text-red-600"></i> අකුසල් සිත් 12 විස්තර:
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lobha8Full')">ලෝභ මූලික 8</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'dosa2Full')">දෝස මූලික 2</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'moha2Full')">මෝහ මූලික 2</button>
-        </div>
-        <div id="citta121DisplayGroup2" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-red-500 border border-red-200 dark:border-slate-700 shadow-sm space-y-2">
-            <h3 id="infoTitle121Group2" class="text-base font-bold text-red-900 dark:text-red-200"></h3>
-            <div id="infoDetails121Group2" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
-        </div>
-    </div>
-
-    <!-- Group 3: අහේතුක සිත් විස්තර -->
-    <div class="citta-group border border-orange-200 dark:border-orange-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="3">
-        <div class="text-xs font-bold text-orange-900 dark:text-orange-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-exclamation text-orange-600"></i> අහේතුක සිත් 18 විස්තර:
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusalaVipaka7Full')">අකුසල විපාක 7</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kusalaAhetuka8Full')">කුසල අහේතුක විපාක 8</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetukaKriya3Full')">අහේතුක ක්‍රියා 3</button>
-        </div>
-        <div id="citta121DisplayGroup3" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-orange-500 border border-orange-200 dark:border-slate-700 shadow-sm space-y-2">
-            <h3 id="infoTitle121Group3" class="text-base font-bold text-orange-900 dark:text-orange-200"></h3>
-            <div id="infoDetails121Group3" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
-        </div>
-    </div>
-
-    <!-- Group 4: කාමාවචර කුසල් සිත් 24 විස්තර -->
-    <div class="citta-group border border-green-200 dark:border-green-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="4">
-        <div class="text-xs font-bold text-green-900 dark:text-green-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-seedling text-green-600"></i> කාමාවචර කුසල් සිත් 24 විස්තර:
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala8Full')">කාමාවචර කුසල් 8</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaVipaka8Full')">කාමාවචර විපාක 8</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKriya8Full')">කාමාවචර ක්‍රියා 8</button>
-        </div>
-        <div id="citta121DisplayGroup4" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-green-500 border border-green-200 dark:border-slate-700 shadow-sm space-y-2">
-            <h3 id="infoTitle121Group4" class="text-base font-bold text-green-900 dark:text-green-200"></h3>
-            <div id="infoDetails121Group4" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
-        </div>
-    </div>
-
-    <!-- Group 5: රූපාවචර කුසල් සිත් 15 විස්තර -->
-    <div class="citta-group border border-amber-200 dark:border-amber-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="5">
-        <div class="text-xs font-bold text-amber-900 dark:text-amber-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-om text-amber-600"></i> රූපාවචර කුසල් සිත් 15 විස්තර:
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKusala5Full')">රූපාවචර කුසල් 5</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaVipaka5Full')">රූපාවචර විපාක 5</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKriya5Full')">රූපාවචර ක්‍රියා 5</button>
-        </div>
-        <div id="citta121DisplayGroup5" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-amber-500 border border-amber-200 dark:border-slate-700 shadow-sm space-y-2">
-            <h3 id="infoTitle121Group5" class="text-base font-bold text-amber-900 dark:text-amber-200"></h3>
-            <div id="infoDetails121Group5" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
-        </div>
-    </div>
-
-    <!-- Group 6: අරූපාවචර කුසල් සිත් 12 විස්තර -->
-    <div class="citta-group border border-purple-200 dark:border-purple-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="6">
-        <div class="text-xs font-bold text-purple-900 dark:text-purple-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-infinity text-purple-600"></i> අරූපාවචර කුසල් සිත් 12 විස්තර:
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKusala4Full')">අරූපාවචර කුසල් 4</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaVipaka4Full')">අරූපාවචර විපාක 4</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKriya4Full')">අරූපාවචර ක්‍රියා 4</button>
-        </div>
-        <div id="citta121DisplayGroup6" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-purple-500 border border-purple-200 dark:border-slate-700 shadow-sm space-y-2">
-            <h3 id="infoTitle121Group6" class="text-base font-bold text-purple-900 dark:text-purple-200"></h3>
-            <div id="infoDetails121Group6" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
-        </div>
-    </div>
-
-    <!-- Group 7: ලෝකෝත්තර 40 විස්තර -->
-    <div class="citta-group border border-rose-200 dark:border-rose-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="7">
-        <div class="text-xs font-bold text-rose-900 dark:text-rose-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-star text-rose-600"></i> ලෝකෝත්තර 40 විස්තර:
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraMagga20Full')">ලෝකෝත්තර මාර්ග 20</button>
-            <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraPhala20Full')">ලෝකෝත්තර ඵල 20</button>
-        </div>
-        <div id="citta121DisplayGroup7" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-rose-500 border border-rose-200 dark:border-slate-700 shadow-sm space-y-2">
-            <h3 id="infoTitle121Group7" class="text-base font-bold text-rose-900 dark:text-rose-200"></h3>
-            <div id="infoDetails121Group7" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
-        </div>
-    </div>
-
-</div>
 
     <!-- Citta Vibhagaya Section (තොරතුරු ඉවත් කර ඇත) -->
     <div class="space-y-4">
