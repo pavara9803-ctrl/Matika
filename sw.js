@@ -1,7 +1,7 @@
 // sw.js - Service Worker for Offline Support
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම සඳහා නොබැඳි (Offline) සහාය
 
-const CACHE_NAME = 'abhidhamma-matika-v3.8.2'; // v3.4.2 සිට v3.5.0 දක්වා යාවත්කාලීන කර ඇත
+const CACHE_NAME = 'abhidhamma-matika-v5.2.0'; // citta ගොනු එක් කර යාවත්කාලීන කර ඇත
 const OFFLINE_URL = './index.html';
 
 // ============================================================
@@ -20,9 +20,13 @@ const ASSETS_TO_CACHE = [
   './duka-data.js',
   './suttanta-data.js',
 
-  // ✅ නවතම: රූප විභාගය ගොනු (Rupa ෆෝල්ඩරය)
+  // ✅ රූප විභාගය ගොනු (Rupa ෆෝල්ඩරය)
   './Rupa/rupa.html',
   './Rupa/rupa.js',
+
+  // ✅ නවතම: චිත්ත විභාගය ගොනු (Citta ෆෝල්ඩරය)
+  './Citta/citta.html',
+  './Citta/citta.js',
 
   // අයිකන ගොනු (index.html හි භාවිතා කරන නම් වලට ගැලපෙන පරිදි)
   './launchericon-48x48.png',
