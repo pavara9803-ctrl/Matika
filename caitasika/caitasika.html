@@ -349,7 +349,6 @@ body {
 <header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
   <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-2">
-      <!-- ✅ නිවැරදි කළ Home බොත්තම -->
       <a href="../index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="මුල් පිටුවට">
         <i class="fa-solid fa-house text-lg"></i>
       </a>
@@ -375,7 +374,6 @@ body {
 <!-- BREADCRUMB -->
 <!-- ============================================================ -->
 <nav class="max-w-4xl w-full mx-auto px-4 pt-3 text-xs text-amber-800 dark:text-saffron-300 flex items-center gap-2 flex-wrap">
-  <!-- ✅ නිවැරදි කළ Home link -->
   <a href="../index.html" class="hover:underline flex items-center gap-1">
     <i class="fa-solid fa-house text-[10px]"></i> මුල් පිටුව
   </a>
@@ -675,6 +673,7 @@ body {
         </div>
       </div>
 
+      <!-- ✅ නිවැරදි කළ ID: pakirnaka-cetasika-cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pakirnaka-cetasika-cards"></div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
@@ -725,7 +724,8 @@ body {
                 <th>විස්තරය</th>
               </tr>
             </thead>
-            <tbody id="pakirnaka-cetasika-table-body"></tbody>
+            <!-- ✅ නිවැරදි කළ ID: pakirnaka-table-body (JavaScript එකට ගැලපේ) -->
+            <tbody id="pakirnaka-table-body"></tbody>
           </table>
         </div>
       </div>
@@ -791,6 +791,7 @@ body {
                 <th style="text-align:center;">යෙදෙන සිත්</th>
               </tr>
             </thead>
+            <!-- ✅ නිවැරදි කළ ID: akusala-cetasika-table-body -->
             <tbody id="akusala-cetasika-table-body"></tbody>
           </table>
         </div>
@@ -849,6 +850,7 @@ body {
                 <th style="text-align:center;">යෙදෙන සිත්</th>
               </tr>
             </thead>
+            <!-- ✅ නිවැරදි කළ ID: sobhana-cetasika-table-body -->
             <tbody id="sobhana-cetasika-table-body"></tbody>
           </table>
         </div>
@@ -1478,7 +1480,7 @@ body {
 <script src="caitasika.js"></script>
 
 <!-- ============================================================ -->
-<!-- MAIN TAB SWITCHING (නව function) -->
+<!-- MAIN TAB SWITCHING -->
 <!-- ============================================================ -->
 <script>
 // ============================================================

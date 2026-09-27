@@ -2,30 +2,38 @@
 // caitasika.js
 // චෛතසික හා සම්ප්‍රයෝග සංග්‍රහනය
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම
+// Version: 2.0.0 (Conflict-free)
 // ============================================================
 
 // ============================================================
-// 1. DARK MODE TOGGLE (samprayoga.js සමඟ සම්බන්ධ)
+// 1. DARK MODE TOGGLE - caitasika.html සඳහා පමණි
 // ============================================================
 function caitasikaToggleDarkMode() {
   var html = document.documentElement;
   var icon = document.getElementById('theme-toggle-icon');
   if (html.classList.contains('dark')) {
     html.classList.remove('dark');
-    localStorage.setItem('caitasika_theme', 'light');
     localStorage.setItem('abhidhamma_theme', 'light');
+    localStorage.setItem('theme', 'light');
     if (icon) icon.className = 'fa-solid fa-moon text-lg';
   } else {
     html.classList.add('dark');
-    localStorage.setItem('caitasika_theme', 'dark');
     localStorage.setItem('abhidhamma_theme', 'dark');
+    localStorage.setItem('theme', 'dark');
     if (icon) icon.className = 'fa-solid fa-sun text-lg';
   }
 }
 
-// Theme initialize
+// ✅ ගැටුම වැළැක්වීමට - caitasika.html එකේ toggleDarkMode ලෙස call කරයි නම්
+// මෙය samprayoga.js එකේ function එකට override නොවන ලෙස කරන්න
+if (typeof window.toggleDarkMode === 'undefined') {
+  window.toggleDarkMode = caitasikaToggleDarkMode;
+}
+window.caitasikaToggleDarkMode = caitasikaToggleDarkMode;
+
+// Theme initialize - caitasika.html එකේ පමණක්
 (function initCaitasikaTheme() {
-  var savedTheme = localStorage.getItem('caitasika_theme') || localStorage.getItem('abhidhamma_theme');
+  var savedTheme = localStorage.getItem('abhidhamma_theme') || localStorage.getItem('theme');
   if (savedTheme === 'dark' ||
       (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');
@@ -35,30 +43,9 @@ function caitasikaToggleDarkMode() {
 })();
 
 // ============================================================
-// 2. TAB SWITCHING
+// 2. TAB SWITCHING - caitasika.html සඳහා (samprayoga.js සමඟ ගැටුමක් නැත)
 // ============================================================
-var caitasikaTabs = ['intro', 'sabbacitta', 'pakirnaka', 'akusala', 'sobhana', 'samprayoga'];
-
-function switchCaitasikaTab(tabName) {
-  caitasikaTabs.forEach(function(t) {
-    var btn = document.getElementById('ctab-btn-' + t);
-    var content = document.getElementById('ctab-content-' + t);
-    
-    if (!btn || !content) return;
-    
-    if (t === tabName) {
-      btn.className = 'ctab-btn flex-1 min-w-[120px] px-3 py-3 text-xs font-bold whitespace-nowrap transition-colors border-b-2 border-saffron-600 text-saffron-700 dark:text-saffron-400 bg-saffron-500/10';
-      content.classList.remove('hidden');
-      content.classList.add('fade-in');
-    } else {
-      btn.className = 'ctab-btn flex-1 min-w-[120px] px-3 py-3 text-xs font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700';
-      content.classList.add('hidden');
-      content.classList.remove('fade-in');
-    }
-  });
-  
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+// Note: caitasika.html එකේ switchMainTab() function එක inline script එකේ ඇත
 
 // ============================================================
 // 3. DATA: සර්වචිත්ත සාධාරණ චෛතසික 7
@@ -70,7 +57,7 @@ var sabbacittaData = [
     pali: 'Phassa',
     lakshana: 'අරමුණ සැපෙන ස්වභාවය',
     yedena: 'සියලු සිත් 89/121',
-    desc: 'අරමුණින් සැපෙන ස්වභාවය ඵස්ස නම් වේ. සැපීම ය යනු අතරක් නො සිටින පරිදි ළං වීම ය. එයට ගැවීම යයි ද කියනු ලැබේ.'
+    desc: 'අරමුණින් සැපෙන ස්වභාවය ඵස්ස නම් වේ. සැපීම ය යනු අතරක් නො සිටින පරිදි ළං වීම ය. එයට ගැවීම යයි ද කියනු ලැබේ. අඳුරෙහි අත ගාන කෙනකුට දත හැකි වන්නේ අතේ ගැවුණු දෙයක් පමණකි. එමෙන් සිතට දෙනන්නේ ද සිතෙහි ගැවුණු දෙය පමණකි. එබැවින් සිතක් හෙවත් දැනීමක් ඇති වීමට දතයුත්ත හා සැපීමක් විය යුතුම ය. සැපීමෙන් තොර ව දැනීමක් නො විය හැකි බැවින් මේ "ඵස්ස චෛතසිකය" සියලු ම සිත් වලට වුවමනා අඩිගයක් බව දත යුතුය. සිත පිළිබඳ වූ මේ ඵස්සය වස්තු දෙකක් එකට සැපීම බඳු සැපීමක් නොව, සැපීමය යන නාමයෙන් හඳුන්වන එක්තරා සුක්ෂ්ම ස්වභාවයෙකි. තේරුම් ගැනීමට අපහසු චෛතසිකයෙකි.'
   },
   {
     num: 2,
@@ -78,7 +65,7 @@ var sabbacittaData = [
     pali: 'Vedanā',
     lakshana: 'අරමුණෙහි රසය විඳින ස්වභාවය',
     yedena: 'සියලු සිත් 89/121',
-    desc: 'අරමුණෙහි හොඳ බව වූ හෝ නරක බව වූ හෝ මධ්‍යස්ථ බව වූ හෝ රසය විඳින ස්වභාවය වේදනා නම් වේ. සෝමනස්ස, දෝමනස්ස, උපෙක්ඛා, සුඛ, දුක්ඛ යන නම්වලින් කියවේ.'
+    desc: 'අරමුණෙහි හොඳ බව වූ හෝ නරක බව වූ හෝ මධ්‍යස්ථ බව වූ හෝ රසය විඳින ස්වභාවය වේදනා නම් වේ. චිත්ත පරිච්ඡේදයේ දී සෝමනස්ස - දෝමනස්ස - උපෙක්ඛා - සුඛ - දුක්ඛ යන නම් වලින් කියවූණේ මේ වේදනා චෛතසිකය ය.'
   },
   {
     num: 3,
@@ -86,7 +73,7 @@ var sabbacittaData = [
     pali: 'Saññā',
     lakshana: 'අරමුණෙහි ආකාරය ගන්නා ස්වභාවය',
     yedena: 'සියලු සිත් 89/121',
-    desc: 'අරමුණාගේ ආකාරය ගන්නා ස්වභාවය සඤ්ඤා නම් වේ. ඒ ඒ දෙය අනික් දේවලින් වෙන් කොට හඳින ගැනීමට උපකාර වන විශේෂ ආකාරයක් සැම දෙයක ම ඇත්තේ ය. "අරමුණු හඳින ගන්නා ස්වභාවය සඤ්ඤාවය" යි කියා ද තිබේ.'
+    desc: 'අරමුණාගේ ආකාරය ගන්නා ස්වභාවය සඤ්ඤා නම් වේ. ඒ ඒ දෙය අනික් දේවලින් වෙන් කොට හඳින ගැනීමට උපකාර වන විශේෂ ආකාරයක් සැම දෙයක ම ඇත්තේ ය. අරමුණක් ගැනීම් වශයෙන් සිතක් උපදනා කල්හි ඒ සිත සමඟ අරමුණෙන් ආකාරය ගන්නා සඤ්ඤා චෛතසිකය ද සැම කල්හි ම ඇති වේ. ඒ සඤ්ඤා කලින් ඇති වූ සඤ්ඤා අනුව ඒ ඒ දෙය හඳින ගැනීමක් ද, මතුවට හඳින ගැනීමට සලකුණක් කිරීමක් ද වේ. අරමුණාගේ ආකාරය ගැනීම හඳිනීමක් ද වන බැවින් බොහෝ පොත් වල "අරමුණු හඳින ගන්නා ස්වභාවය සඤ්ඤාවය" යි කියා ද තිබේ.'
   },
   {
     num: 4,
@@ -94,7 +81,7 @@ var sabbacittaData = [
     pali: 'Cetanā',
     lakshana: 'ක්‍රියා සිදු කිරීමේ උත්සාහය',
     yedena: 'සියලු සිත් 89/121',
-    desc: 'බැලීම්-ඇසීම්-කැම-පීම්-යැම්-ර්ම්-දීම්-ගැනීම් ආදී ක්‍රියා සිදු කිරීමේ උත්සාහය චේතනා නම් වේ. සත්ත්වයන් විසින් සිදු කරන අපුමාණ ක්‍රියා ඇත්තේ ය. "කර්මය" යි කියනුයේ ද මේ චේතනා චෛතසිකයට ය. චේතනාව සේනාපතියකු වැනි ය.'
+    desc: 'බැලීම්-ඇසීම්-කැම-පීම්-යැම්-ර්ම්-දීම්-ගැනීම් ආදී ක්‍රියා සිදු කිරීමේ උත්සාහය චේතනා නම් වේ. සත්ත්වයන් විසින් සිදු කරන අප්‍රමාණ ක්‍රියා ඇත්තේ ය. ඒ හැම ක්‍රියාවක් ම සිදු කිරීමේ උත්සාහය චේතනා චෛතසිකය ය. ප්‍රාණඝාත චේතනා - අදත්තාදාන චේතනා - දාන චේතනා යනාදීන් අප්‍රමාණ චේතනා ඇත්තේ ය. චේතනා භාවයෙන් ඒ සියල්ල ම චේතනා චෛතසිකය වශයෙන් සලකනු ලැබේ. යම් කිසි ක්‍රියාවක් සිදු කිරීමේ උත්සාහය ඇති වන කල්හි එයට අනුකූල ව සිතක් ද ඇති වේ. ඒ ක්‍රියාව සිදු කිරීමට වුවමනා චෛතසික රාශියක් ද, චේතනාව අනුව එය හා බැඳී ඇති වේ. චේතනාව ඒ සියල්ලට ප්‍රධානය. එබැවින් "චේතනාව සේනාපතියකු වැනි ය" යි ද කියා තිබේ. සැම සිතක් ම ඇති වන්නේ යම් කිසි ක්‍රියාවක් සිදු කිරීම් වශයෙනි. එබැවින් සැම සිතකම චේතනාවක් ඇත්තේ ය. ක්‍රියා සිදු කිරීමේ දී චේතනාව ප්‍රධාන ය. අරමුණ ගැනීමේ දී සිත ප්‍රධාන ය. "කර්මය" යි කියනුයේ ද මේ චේතනා චෛතසිකයට ය.'
   },
   {
     num: 5,
@@ -102,7 +89,7 @@ var sabbacittaData = [
     pali: 'Ekaggatā',
     lakshana: 'සිත අරමුණෙහි මනා කොට පිහිටවන ස්වභාවය',
     yedena: 'සියලු සිත් 89/121',
-    desc: 'නො සැලෙන පරිදි සිත අරමුණෙහි මනා කොට පිහිටවන ස්වභාවය ඒකග්ගතා නම් වේ. "සමාධිය" යනු ද ඒකග්ගතා චෛතසිකයට කියන තවත් නමකි.'
+    desc: 'නො සැලෙන පරිදි සිත අරමුණෙහි මනා කොට පිහිටවන ස්වභාවය ඒකග්ගතා නම් වේ. එක අරමුණක වූව ද, ඒ අරමුණ සිතට ගත හැකි, සිතින් සලකා ගත හැකි, නොයෙක් ආකාර ඇත්තේ ය. එක් වස්තුවක් දෙස එක් තැනක සිට බලන කල්හි ඒ වස්තුව එක් ආකාරයකින් පෙනේ. අන් තැනක සිට බලත හොත් ඒ වස්තුව ම තවත් ආකාරයකින් පෙනේ. මෙසේ ස්ථාන සියයක සිට බලත හොත්, එක ම වස්තුව ආකාර සියයකින් පෙනේ. ඒ පෙනෙන සැම ආකාරයක් ම ඒ වස්තුව සිතින් ගත හැකි ආකාරයෝ ය. එක් දෙයක් සිතින් ගැනීමේ දී අරමුණෙහි ඇති ඒ අනේකාකාරයන්ගෙන් එක් ආකාරයකින් ඒ අරමුණ ගත යුතු ය. කීප ආකාරයකින් එක වර එක සිතකට එක අරමුණක් ගත නො හැකි ය. සිතට අරමුණ ගත හැකි වීමට අරමුණෙහි ඇති එක් ආකාරයක පිහිටිය යුතු ය. ඒකග්ගතාවෙන් කෙරෙනුයේ අරමුණෙහි යම්කිසි එක් ආකාරයක පිහිටීම ය. ඒ පිහිටීම නිසා සිතට එක් ආකාරයකින් අරමුණ ගතහැකි වන්නේ ය. අරමුණුවල අනේකාකාර ඇති බැවින් ඒකග්ගතාව නැති ව සිතකට අරමුණක් නො ගත හැකිය. එබැවින් ඒකග්ගතාව සෑම සිතකට ම වුවමනා ය. "සමාධිය" යනු ද ඒකග්ගතා චෛතසිකයට කියන තවත් නමකි. බොහෝ සෙයින් ඒ නම ව්‍යවහාර වන්නේ දියුණු වූ ඒකග්ගතාවට ය.'
   },
   {
     num: 6,
@@ -110,7 +97,7 @@ var sabbacittaData = [
     pali: 'Jīvitindriya',
     lakshana: 'චිත්ත චෛතසිකයන්ගේ ජීවන බලය',
     yedena: 'සියලු සිත් 89/121',
-    desc: 'චිත්ත චෛතසිකයන්ගේ ජීවන බලය - ජීවත් වීමේ ශක්තිය ජීවිතින්ද්‍රිය නම් වේ. නිවනට පැමිණීම දක්වා සත්ත්වයාගේ චිත්ත පරම්පරාව පැවැත්මට උපකාර වන, එය පාලනය කරන දේ මේ ජීවිතින්ද්‍රිය චෛතසිකය ය.'
+    desc: 'චිත්ත චෛතසිකයන්ගේ ජීවන බලය - ජීවත් වීමේ ශක්තිය ජීවිතින්ද්‍රිය නම් වේ. ශරීරය ආහාර පානයන්ගේ උපස්තම්භනයෙන් විර කාලයක් ඇද නො වැටී පවතී. සිතේ පැවැත්මට උපකාර වන, පිටතින් ගන්නා දෙයක් නැත. එහෙත් චිත්ත පරම්පරාවේ පැවැත්මට උපකාර වන යම් කිසි දෙයක් ද තිබිය යුතු ය. එබන්දක් නැති ව නිවනට පැමිණීම දක්වා මේ චිත්ත පරම්පරාවට නො සිඳී නො පැවතිය හැකි ය. නිවනට පැමිණීම දක්වා සත්ත්වයාගේ චිත්ත පරම්පරාව පැවැත්මට උපකාර වන, එය පාලනය කරන දේ, මේ ජීවිතින්ද්‍රිය චෛතසික ය ය. එයින් කෙරෙන පාලනය නිසා චිත්ත පරම්පරාව මරණයෙනුදු නො සිඳී පරිනිර්වාණය තෙක් පවතී.'
   },
   {
     num: 7,
@@ -118,7 +105,7 @@ var sabbacittaData = [
     pali: 'Manasikāra',
     lakshana: 'සිත අරමුණෙන් ඉවත් නොවී යොදවන ධර්මය',
     yedena: 'සියලු සිත් 89/121',
-    desc: 'සිතට අරමුණෙන් ඉවත් වන්නට නො දී නැවත නැවත අරමුණු ගැනීමෙහි සිත යොදවන ධර්මය මනසිකාර නම් වේ. ප්‍රතිසන්ධියෙහි පටන් ම ක්ෂණයක් පාසා බිඳෙමින් අරමුණෙන් ඉවත් වන චිත්ත පරම්පරාව, මේ චෛතසිකය නිසා නැවත නැවතත් ඉපද ඉපද අරමුණු ගැනීමෙහි යෙදෙන බව කියනු ලැබේ.'
+    desc: 'සිතට අරමුණෙන් ඉවත් වන්නට නො දී නැවත නැවත අරමුණු ගැනීමෙහි සිත යොදවන ධර්මය මනසිකාර නම් වේ. ප්‍රතිසන්ධියෙහි පටන් ම ක්ෂණයක් පාසා බිඳෙමින් අරමුණෙන් ඉවත් වන චිත්ත පරම්පරාව, මේ චෛතසිකය නිසා නැවත නැවතත් ඉපද ඉපද අරමුණු ගැනීමෙහි යෙදෙන බව කියනු ලැබේ. මෙය තේරුම් ගැනීමට දුෂ්කර අප්‍රකට චෛතසිකයෙකි.'
   }
 ];
 
@@ -133,7 +120,7 @@ var pakirnakaData2 = [
     lakshana: 'අරමුණ කරා යන, අරමුණට පැමිණෙන ස්වභාවය',
     yedena: 55,
     noyedena: 66,
-    desc: 'අරමුණ කරා යන, අරමුණට පැමිණෙන ස්වභාවය විතක්ක නම් වේ. විතක්කය අරමුණට පැමිණෙන කල්හි එය හා උපදනා චිත්ත චෛතසිකයෝ ද එය අනුව අරමුණට පැමිණෙති. එබැවින් චිත්ත චෛතසිකයන් අරමුණට පමුණුවන ධර්මය විතක්කය යි ද කියන් ලැබේ. දුබල විතක්කය අපුකට ය. එය පුකට වන්නේ දීනැ කමින් විතක්ක උපදවන කල්හි ය. කර්මඤ්ඤ වීම ය යි කියන්නේ එසේ වීමට ය.'
+    desc: 'අරමුණ කරා යන, අරමුණට පැමිණෙන ස්වභාවය විතක්ක නම් වේ. විතක්කය අරමුණට පැමිණෙන කල්හි එය හා උපදනා චිත්ත චෛතසිකයෝ ද එය අනුව අරමුණට පැමිණෙති. එබැවින් චිත්ත චෛතසිකයන් අරමුණට පමුණුවන ධර්මය විතක්කය යි ද කියනු ලැබේ. දුබල විතක්කය අපුකට ය. එය පුකට වන්නේ දීනැ කමින් විතක්ක උපදවන කල්හි ය. කර්මඤ්ඤ වීම ය යි කියන්නේ එසේ වීමට ය.'
   },
   {
     num: 2,
@@ -304,7 +291,6 @@ var akusalaData2 = [
 // 6. DATA: සොභන චෛතසික 25
 // ============================================================
 var sobhanaData = [
-  // සොභන සාධාරණ 19
   { num: 1, name: 'සද්ධා', pali: 'Saddhā', lakshana: 'බුද්ධාදීන් කෙරෙහි විශ්වාසය', yedena: 'සියලු සොභන සිත් 59', desc: 'බුද්ධාදීන් කෙරෙහි විශ්වාසය, බුද්ධ ගුණාදිය පිළිගන්නා ස්වභාවය සද්ධා නම් වේ. එයට ශ්‍රද්ධාව යයි ද කියනු ලැබේ. කුසල් කිරීමේ දී මහා බලයකි.' },
   { num: 2, name: 'සති', pali: 'Sati', lakshana: 'සිහිය', yedena: 'සියලු සොභන සිත් 59', desc: 'සිහිය සති නම් වේ. අකුශල පක්ෂයෙහි ම ගමන් කිරීම - පැවතීම සත්ත්වයාගේ සිතෙහි ස්වභාවය ය. මේ චෛතසිකයෙන් සත්ත්වයාගේ සිතට අකුශල පක්ෂයෙහි ම ගමන් කරන්නට නො දී, කුශල පක්ෂයෙහි පිහිටුවීම සිදු කරනු ලැබේ.' },
   { num: 3, name: 'හිරි', pali: 'Hiri', lakshana: 'පාපයට ලජ්ජා වන ස්වභාවය', yedena: 'සියලු සොභන සිත් 59', desc: 'පාපය පිළිකුල් කරන පාපයට ලජ්ජා වන ස්වභාවය හිරි නම් වේ.' },
@@ -324,17 +310,11 @@ var sobhanaData = [
   { num: 17, name: 'චිත්තපාගුඤ්ඤතා', pali: 'Cittapāguññatā', lakshana: 'සිතේ හුරු බව', yedena: 'සියලු සොභන සිත් 59', desc: 'සිතෙහි හුරු බව චිත්තපාගුඤ්ඤතා නම් වේ.' },
   { num: 18, name: 'කායුජුකතා', pali: 'Kāyujukatā', lakshana: 'චෛතසිකයන්ගේ ඍජු බව', yedena: 'සියලු සොභන සිත් 59', desc: 'චෛතසිකයන්ගේ සෘජු බව (ඇද නැති බව) කායුජුකතා නම් වේ.' },
   { num: 19, name: 'චිත්තුජුකතා', pali: 'Cittujukatā', lakshana: 'සිතේ ඍජු බව', yedena: 'සියලු සොභන සිත් 59', desc: 'සිතේ සෘජු බව චිත්තුජුකතා නම් වේ. මේ ධර්ම දෙක මායා - සාඨෙය්‍යාදියට විපක්ෂ ය.' },
-  
-  // විරති 3
   { num: 20, name: 'සම්මා වාචා', pali: 'Sammā Vācā', lakshana: 'වචනයෙන් සිදුවන පව්වලින් වැළකීම', yedena: 'සිත් 16', desc: 'බොරු කීම - කේලාම් කීම - ඵරුෂ වචන කීම - නිෂ්ඵල වචන කීම යන කටින් සිදුවන පවි කම් සතරින් වැළක්නා ස්වභාවය සම්මා වාචා නම් වේ.' },
   { num: 21, name: 'සම්මා කම්මන්ත', pali: 'Sammā Kammanta', lakshana: 'කයින් සිදුවන පව්වලින් වැළකීම', yedena: 'සිත් 16', desc: 'සතුන් මැරීම - සොරකම් කිරීම - පරදර සේවනය යන කයින් සිදුවන පවි කම් තුනෙන් වැළක්නා ස්වභාවය සම්මා කම්මන්ත නමි.' },
   { num: 22, name: 'සම්මා ආජීව', pali: 'Sammā Ājīva', lakshana: 'දිවි පැවැත්වීමේ දුශ්චරිතවලින් වැළකීම', yedena: 'සිත් 16', desc: 'දිවි පැවැත්වීම සඳහා කරන කාය වාග් දුශ්චරිතවලින් වැළක්නා ස්වභාවය සම්මා ආජීව නමි.' },
-  
-  // අප්පමඤ්ඤා 2
   { num: 23, name: 'කරුණා', pali: 'Karuṇā', lakshana: 'අනුන් දුකින් මුදවනු කැමැති ස්වභාවය', yedena: 'සිත් 28', desc: 'තමාට දුක් ඇති වෙනවට නො කැමති වන්නාක් මෙන් ම, අනුන් දුක් වීමත් නො කැමති වන, අනුන් දුකින් මුදවනු කැමැති ස්වභාවය කරුණා නම් වේ.' },
   { num: 24, name: 'මුදිතා', pali: 'Muditā', lakshana: 'අනුන්ගේ සම්පත් ගැන සතුටු වන ස්වභාවය', yedena: 'සිත් 28', desc: 'තමාට යම් සම්පතක් ලැබුණ හොත් ඒ ගැන සතුටු වන්නාක් මෙන්, අනුන්ගේ සම්පත් ගැන සතුටු වන්නා වූ ස්වභාවය මුදිතා නම් වේ.' },
-  
-  // පඤ්ඤා 1
   { num: 25, name: 'පඤ්ඤා', pali: 'Paññā', lakshana: 'අරමුණු ගැඹුරින් දක්නා ස්වභාවය', yedena: 'සිත් 47', desc: 'සිතින් දන ගන්නවාට වඩා හොඳින්, වඩා පිරිසිදු ලෙස - වඩා ගැඹුරු ලෙස අරමුණු දක්නා ස්වභාවය පඤ්ඤා චෛතසිකයයි. එයට "අමෝහය" යි ද, "විද්‍යාව" යයි ද කියනු ලැබේ.' }
 ];
 
@@ -353,7 +333,7 @@ var quickSamprayogaData = [
 ];
 
 // ============================================================
-// 8. RENDER FUNCTIONS
+// 8. RENDER FUNCTIONS - caitasika.html සඳහා පමණි
 // ============================================================
 
 /**
@@ -407,7 +387,7 @@ function renderSabbacittaTable() {
  * ප්‍රකීර්ණක චෛතසික 6 - කාඩ්පත්
  */
 function renderPakirnakaCards() {
-  var container = document.getElementById('pakirnaka-cards');
+  var container = document.getElementById('pakirnaka-cetasika-cards');
   if (!container) return;
   container.innerHTML = '';
   
@@ -429,6 +409,7 @@ function renderPakirnakaCards() {
 
 /**
  * ප්‍රකීර්ණක චෛතසික 6 - වගුව
+ * ✅ HTML එකේ ID: pakirnaka-table-body (caitasika.html නිවැරදි කළා)
  */
 function renderPakirnakaTable() {
   var tbody = document.getElementById('pakirnaka-table-body');
@@ -450,7 +431,7 @@ function renderPakirnakaTable() {
  * අකුසල චෛතසික 14 - කාඩ්පත්
  */
 function renderAkusalaCards() {
-  var container = document.getElementById('akusala-cards');
+  var container = document.getElementById('akusala-cetasika-cards');
   if (!container) return;
   container.innerHTML = '';
   
@@ -472,9 +453,10 @@ function renderAkusalaCards() {
 
 /**
  * අකුසල චෛතසික 14 - වගුව
+ * ✅ HTML එකේ ID: akusala-cetasika-table-body
  */
 function renderAkusalaTable() {
-  var tbody = document.getElementById('akusala-table-body');
+  var tbody = document.getElementById('akusala-cetasika-table-body');
   if (!tbody) return;
   tbody.innerHTML = '';
   
@@ -495,9 +477,10 @@ function renderAkusalaTable() {
 
 /**
  * සොභන චෛතසික 25 - වගුව
+ * ✅ HTML එකේ ID: sobhana-cetasika-table-body
  */
 function renderSobhanaTable() {
-  var tbody = document.getElementById('sobhana-table-body');
+  var tbody = document.getElementById('sobhana-cetasika-table-body');
   if (!tbody) return;
   tbody.innerHTML = '';
   
@@ -518,6 +501,7 @@ function renderSobhanaTable() {
 
 /**
  * ඉක්මන් සම්ප්‍රයෝග සාරාංශ වගුව
+ * ✅ HTML එකේ ID: quick-samprayoga-body
  */
 function renderQuickSamprayogaTable() {
   var tbody = document.getElementById('quick-samprayoga-body');
@@ -535,12 +519,12 @@ function renderQuickSamprayogaTable() {
 }
 
 // ============================================================
-// 9. INITIALIZE APP
+// 9. INITIALIZE APP - caitasika.html සඳහා පමණි
 // ============================================================
 function initCaitasikaApp() {
   console.log('[caitasika] Initializing...');
   
-  // Render all sections
+  // Render all CAITASIKA sections
   renderSabbacittaCards();
   renderSabbacittaTable();
   renderPakirnakaCards();
@@ -554,15 +538,21 @@ function initCaitasikaApp() {
   console.log('[caitasika] චෛතසික 52: සර්වචිත්ත 7 + ප්‍රකීර්ණක 6 + අකුසල 14 + සොභන 25');
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initCaitasikaApp);
-} else {
-  initCaitasikaApp();
+// ✅ දෙවන වරට call වීම වැළැක්වීමට
+if (typeof window._caitasikaInitialized === 'undefined') {
+  window._caitasikaInitialized = true;
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaitasikaApp);
+  } else {
+    initCaitasikaApp();
+  }
 }
 
 // ============================================================
 // 10. GLOBAL EXPORTS
 // ============================================================
-window.switchCaitasikaTab = switchCaitasikaTab;
-window.toggleDarkMode = caitasikaToggleDarkMode;
+// ⚠️ සටහන: window.toggleDarkMode export නොකරන්න, එය samprayoga.js එකේ ඇත
 window.caitasikaToggleDarkMode = caitasikaToggleDarkMode;
+
+console.log('[caitasika.js] Loaded successfully - ready for caitasika.html');
