@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>අභිධර්ම රූප විභාගය (Rupa Vibhagaya App)</title>
+    
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../launchericon-48x48.png">
+    <meta name="theme-color" content="#3f0a0c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,23 +20,12 @@
                 extend: {
                     colors: {
                         saffron: {
-                            50: '#fffbeedb',
-                            100: '#fef3c7',
-                            200: '#fde68a',
-                            300: '#fcd34d',
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                            700: '#b45309',
-                            800: '#92400e',
-                            900: '#78350f',
-                            950: '#451a03',
+                            50: '#fffbeedb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d',
+                            400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309',
+                            800: '#92400e', 900: '#78350f', 950: '#451a03',
                         },
                         maroon: {
-                            700: '#701a1d',
-                            800: '#581113',
-                            900: '#3f0a0c',
-                            950: '#260507',
+                            700: '#701a1d', 800: '#581113', 900: '#3f0a0c', 950: '#260507',
                         }
                     },
                     fontFamily: {
@@ -44,6 +40,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body {
             font-family: 'Noto Serif Sinhala', 'Inter', serif;
@@ -56,22 +53,50 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        
+        /* ============================================================ */
+        /* SCROLL TABLE */
+        /* ============================================================ */
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 0.75rem;
+        }
+        .table-scroll::-webkit-scrollbar { height: 6px; }
+        .table-scroll::-webkit-scrollbar-track { background: #fef3c7; border-radius: 3px; }
+        .table-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 3px; }
+        .dark .table-scroll::-webkit-scrollbar-track { background: #334155; }
+        .dark .table-scroll::-webkit-scrollbar-thumb { background: #f59e0b; }
+        
+        /* ============================================================ */
+        /* ANIMATIONS */
+        /* ============================================================ */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
     </style>
 </head>
 <body class="h-full flex flex-col justify-between text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased selection:bg-saffron-200 selection:text-maroon-900 transition-colors duration-200">
 
-<!-- Header -->
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
 <header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
     <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between relative">
         <div class="flex items-center space-x-2">
-            <button onclick="window.location.href='../index.html'" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="මුල් පිටුවට">
+            <a href="../index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="මුල් පිටුවට">
                 <i class="fa-solid fa-house text-lg"></i>
-            </button>
+            </a>
+            <a href="../paramatta.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="සතර පරමාර්ථ">
+                <i class="fa-solid fa-gem text-lg"></i>
+            </a>
         </div>
 
         <div class="flex items-center space-x-2 mx-auto text-center cursor-pointer" onclick="window.location.href='../index.html'">
             <div class="w-9 h-9 rounded-full bg-saffron-500/20 border border-saffron-400 flex items-center justify-center text-saffron-300 shadow-inner shrink-0">
-                <i class="fa-solid fa-dharmachakra text-xl"></i>
+                <i class="fa-solid fa-cube text-xl"></i>
             </div>
             <div>
                 <h1 class="font-bold text-xl sm:text-2xl leading-tight text-saffron-100 tracking-wide">අභිධර්ම රූප විභාගය</h1>
@@ -86,22 +111,66 @@
     </div>
 </header>
 
-<!-- Main Container -->
-<main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 pb-12 space-y-6">
+<!-- ============================================================ -->
+<!-- BREADCRUMB -->
+<!-- ============================================================ -->
+<nav class="max-w-4xl w-full mx-auto px-4 pt-3 text-xs text-amber-800 dark:text-saffron-300 flex items-center gap-2 flex-wrap">
+    <a href="../index.html" class="hover:underline flex items-center gap-1">
+        <i class="fa-solid fa-house text-[10px]"></i> මුල් පිටුව
+    </a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-amber-400"></i>
+    <a href="../paramatta.html" class="hover:underline flex items-center gap-1">
+        <i class="fa-solid fa-gem text-[10px]"></i> සතර පරමාර්ථ
+    </a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-amber-400"></i>
+    <span class="font-bold text-amber-900 dark:text-saffron-200">රූප පරමාර්ථය</span>
+</nav>
 
-    <!-- Hero / Intro Banner -->
-    <div class="bg-gradient-to-br from-amber-800 to-maroon-900 text-amber-50 rounded-2xl p-5 shadow-lg border border-amber-600/30 relative overflow-hidden">
-        <div class="absolute -right-6 -bottom-6 opacity-10 text-amber-100 text-9xl pointer-events-none">
-            <i class="fa-solid fa-dharmachakra"></i>
+<!-- ============================================================ -->
+<!-- MAIN CONTAINER -->
+<!-- ============================================================ -->
+<main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 pb-12 space-y-6 fade-in">
+
+    <!-- ============================================================ -->
+    <!-- HERO / INTRO BANNER -->
+    <!-- ============================================================ -->
+    <div class="bg-gradient-to-br from-amber-700 via-saffron-600 to-amber-700 text-white rounded-2xl p-6 shadow-xl border border-saffron-400/60 relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 opacity-15 text-white text-9xl pointer-events-none">
+            <i class="fa-solid fa-cube"></i>
         </div>
-        <span class="inline-block px-3 py-1 bg-saffron-500/20 border border-saffron-400/40 rounded-full text-xs text-saffron-300 font-medium mb-2">අභිධර්මාර්ථ සංග්‍රහය</span>
-        <h2 class="text-xl sm:text-2xl font-bold text-saffron-200 mb-2">රූප විභාගය සහ සමුට්ඨාන නය</h2>
-        <p class="text-sm text-amber-100/90 leading-relaxed">
-            රූප 28 වර්ගීකරණයට අමතරව කර්ම, චිත්ත, සෘතු, ආහාර යන සමුට්ඨාන සතරෙන් උපදින රූප (කර්මජ 20 සිට ඒකාන්ත ආහාරජ නොවන දක්වා) නය ක්‍රමයන් පහත බොත්තම් භාවිතයෙන් අධ්‍යයනය කළ හැක.
-        </p>
+        <div class="relative">
+            <span class="inline-block px-3 py-1 bg-white/25 border border-white/40 rounded-full text-xs text-white font-medium mb-2 backdrop-blur-sm">
+                අභිධර්ම පිටකය • පරමාර්ථ ධර්ම 3
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2 drop-shadow-md">රූප පරමාර්ථය</h2>
+            <p class="text-sm sm:text-base text-white/95 leading-relaxed mb-4">
+                අරමුණ නොදන්නා, රූපී ස්වභාවය ඇති ධර්ම. රූප 28 වර්ගීකරණයට අමතරව කර්ම, චිත්ත, සෘතු, ආහාර යන සමුට්ඨාන සතරෙන් උපදින රූප නය ක්‍රමයන් පහත බොත්තම් භාවිතයෙන් අධ්‍යයනය කළ හැක.
+            </p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-3 text-center">
+                    <div class="text-2xl font-bold text-white">28</div>
+                    <div class="text-[10px] text-white/90 font-medium mt-1">රූප</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-3 text-center">
+                    <div class="text-2xl font-bold text-white">4</div>
+                    <div class="text-[10px] text-white/90 font-medium mt-1">මහාභූත</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-3 text-center">
+                    <div class="text-2xl font-bold text-white">4</div>
+                    <div class="text-[10px] text-white/90 font-medium mt-1">සමුට්ඨාන</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-3 text-center">
+                    <div class="text-2xl font-bold text-white">4</div>
+                    <div class="text-[10px] text-white/90 font-medium mt-1">ලක්ඛණ</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Search Panel -->
+    <!-- ============================================================ -->
+    <!-- SEARCH PANEL -->
+    <!-- ============================================================ -->
     <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white dark:bg-slate-800 p-4 rounded-xl border border-amber-200 dark:border-slate-700 shadow-sm">
         <div class="relative w-full sm:flex-1">
             <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-amber-700 dark:text-saffron-400">
@@ -115,9 +184,12 @@
         </div>
     </div>
 
-    <!-- Rupa Vibhagaya Section -->
+    <!-- ============================================================ -->
+    <!-- RUPA VIBHAGAYA SECTION -->
+    <!-- ============================================================ -->
     <div class="space-y-4">
-        <!-- Main Toggle Button -->
+        
+        <!-- ✅ බොත්තම 1: රූප විභාගය වර්ගීකරණය -->
         <button type="button" onclick="toggleMainSection()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-amber-700 via-saffron-600 to-amber-700 hover:from-amber-800 hover:to-saffron-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all">
             <span class="flex items-center gap-2">
                 <i class="fa-solid fa-layer-group text-saffron-200"></i> රූප විභාගය වර්ගීකරණය
@@ -182,25 +254,59 @@
             </div>
 
         </div>
+
+        <!-- ============================================================ -->
+        <!-- ✅ නව බොත්තම 2: රූප - සවිස්තරාත්මක තොරතුරු -->
+        <!-- ============================================================ -->
+        <button type="button" onclick="toggleRupaDetaSection()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-700 hover:from-emerald-800 hover:to-teal-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all">
+            <span class="flex items-center gap-2">
+                <i class="fa-solid fa-book-open-reader text-emerald-200"></i> රූප - සවිස්තරාත්මක තොරතුරු
+            </span>
+            <i id="rupa-deta-arrow" class="fa-solid fa-chevron-down text-emerald-200 transition-transform duration-200"></i>
+        </button>
+
+        <!-- ✅ නව Sub-Container: rupa-deta.js මගින් පාලනය වේ -->
+        <div id="rupaDetaContainer" class="hidden bg-emerald-50/60 dark:bg-slate-800 p-4 rounded-2xl border border-emerald-200 dark:border-slate-700 shadow-sm space-y-4">
+            
+            <!-- ✅ rupa-deta.js මගින් මෙම කොන්ටේනරය populate කරයි -->
+            <div id="rupa-deta-content" class="space-y-4">
+                
+                <!-- Loading Placeholder -->
+                <div class="text-center py-8 text-slate-400 dark:text-slate-500">
+                    <i class="fa-solid fa-spinner fa-spin text-2xl mb-2 text-emerald-500"></i>
+                    <p class="text-sm">සවිස්තරාත්මක තොරතුරු load වෙමින්...</p>
+                </div>
+                
+            </div>
+            
+        </div>
+
     </div>
 
-    <!-- Dynamic 28 Rupa Cards Container -->
+    <!-- ============================================================ -->
+    <!-- DYNAMIC RUPA CARDS CONTAINER -->
+    <!-- ============================================================ -->
     <section id="rupa-container" class="space-y-4 pt-2">
         <!-- Javascript මඟින් dynamic ලෙස card හා table මෙතැනට ජනනය වේ -->
     </section>
 
 </main>
 
-<!-- Footer -->
-<footer class="text-center py-5 border-t border-amber-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
-    අභිධර්ම රූප විභාගය අධ්‍යයන යෙදුම | පරමාර්ථ රූප 28 සහ සමුට්ඨාන නය
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-maroon-900 text-amber-100 text-center py-4 border-t-2 border-saffron-500">
+    <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා අධ්‍යයනය &copy; 2024 | රූප පරමාර්ථය</p>
 </footer>
 
-<!-- Theme Toggle Support Script -->
+<!-- ============================================================ -->
+<!-- THEME TOGGLE SUPPORT SCRIPT -->
+<!-- ============================================================ -->
 <script>
     function initTheme() {
-        const isDark = localStorage.getItem('theme') === 'dark' || 
-            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const isDark = localStorage.getItem('abhidhamma_theme') === 'dark' ||
+                       localStorage.getItem('theme') === 'dark' ||
+                       (!localStorage.getItem('abhidhamma_theme') && !localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
         if (isDark) {
             document.documentElement.classList.add('dark');
             document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
@@ -213,20 +319,49 @@
     function toggleDarkMode() {
         if (document.documentElement.classList.contains('dark')) {
             document.documentElement.classList.remove('dark');
+            localStorage.setItem('abhidhamma_theme', 'light');
             localStorage.setItem('theme', 'light');
             document.getElementById('theme-toggle-icon').className = 'fa-solid fa-moon text-lg';
         } else {
             document.documentElement.classList.add('dark');
+            localStorage.setItem('abhidhamma_theme', 'dark');
             localStorage.setItem('theme', 'dark');
             document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
+        }
+    }
+
+    // ============================================================
+    // ✅ නව: රූප - සවිස්තරාත්මක තොරතුරු ටොගල් function
+    // ============================================================
+    function toggleRupaDetaSection() {
+        const container = document.getElementById("rupaDetaContainer");
+        const arrowIcon = document.getElementById("rupa-deta-arrow");
+        
+        if (container) {
+            container.classList.toggle("hidden");
+            if (arrowIcon) {
+                arrowIcon.classList.toggle("rotate-180");
+            }
+            
+            // ✅ rupa-deta.js එකේ init function එක call කරන්න (පළමු වරට පමණක්)
+            if (!container.classList.contains('hidden')) {
+                if (typeof initRupaDeta === 'function') {
+                    initRupaDeta();
+                } else {
+                    console.warn('[rupa.html] initRupaDeta function not found - rupa-deta.js load වී නැත');
+                }
+            }
         }
     }
 
     window.addEventListener('DOMContentLoaded', initTheme);
 </script>
 
-<!-- External Data & Logic -->
+<!-- ============================================================ -->
+<!-- EXTERNAL DATA & LOGIC -->
+<!-- ============================================================ -->
 <script src="rupa.js"></script>
+<script src="rupa-deta.js"></script>
 
 </body>
 </html>
