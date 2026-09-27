@@ -46,12 +46,86 @@
             font-family: 'Noto Serif Sinhala', 'Inter', serif;
             -webkit-tap-highlight-color: transparent;
         }
+        
+        /* ============================================================ */
+        /* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
+        /* ============================================================ */
+        p {
+            text-align: justify;
+            text-justify: inter-word;
+            word-spacing: 0.05em;
+            line-height: 1.8;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+        
+        li {
+            text-align: justify;
+            text-justify: inter-word;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            text-align: left;
+        }
+        
+        button, .btn, .badge {
+            text-align: center;
+        }
+        
+        th {
+            text-align: left;
+        }
+        
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+        
+        /* Dynamic content justify */
+        #rupa-container p,
+        #rupa-deta-content p,
+        #rupa-container td,
+        #rupa-deta-content td,
+        #rupa-container li,
+        #rupa-deta-content li,
+        [id^="infoDetailsGroup"] {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
         .hide-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+        
+        /* ============================================================ */
+        /* ✅ රූපය විස්තර කාඩ්පත - විශේෂ ස්ටයිල් (රන්වන්-දුඹුරු) */
+        /* ============================================================ */
+        .rupa-intro-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+            border: 1px solid #fcd34d;
+            border-left: 5px solid #d97706;
+        }
+        .dark .rupa-intro-card {
+            background: linear-gradient(135deg, #451a03 0%, #78350f 50%, #92400e 100%);
+            border-color: #b45309;
+            border-left-color: #fbbf24;
+        }
+        
+        .rupa-intro-card .gatha-box {
+            background: rgba(255, 255, 255, 0.7);
+            border-left: 4px solid #d97706;
+            border-radius: 0.5rem;
+        }
+        .dark .rupa-intro-card .gatha-box {
+            background: rgba(0, 0, 0, 0.25);
+            border-left-color: #fbbf24;
         }
         
         /* ============================================================ */
@@ -143,7 +217,7 @@
                 අභිධර්ම පිටකය • පරමාර්ථ ධර්ම 3
             </span>
             <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2 drop-shadow-md">රූප පරමාර්ථය</h2>
-            <p class="text-sm sm:text-base text-white/95 leading-relaxed mb-4">
+            <p class="text-sm sm:text-base text-white/95 leading-relaxed mb-4 text-justify">
                 අරමුණ නොදන්නා, රූපී ස්වභාවය ඇති ධර්ම. රූප 28 වර්ගීකරණයට අමතරව කර්ම, චිත්ත, සෘතු, ආහාර යන සමුට්ඨාන සතරෙන් උපදින රූප නය ක්‍රමයන් පහත බොත්තම් භාවිතයෙන් අධ්‍යයනය කළ හැක.
             </p>
             
@@ -167,6 +241,64 @@
             </div>
         </div>
     </div>
+
+    <!-- ============================================================ -->
+    <!-- ✅ රූපය විස්තර කාඩ්පත (Hero එකට යටින්) -->
+    <!-- ============================================================ -->
+    <section class="rupa-intro-card rounded-2xl p-5 sm:p-6 shadow-md fade-in">
+        <div class="flex items-start gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-600 to-orange-700 text-white flex items-center justify-center text-xl shrink-0 shadow-md">
+                <i class="fa-solid fa-cube"></i>
+            </div>
+            <div class="flex-1">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-600 text-white">පරමාර්ථ ධර්ම 3</span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-800 dark:text-amber-200">28</span>
+                </div>
+                <h3 class="font-bold text-xl text-amber-900 dark:text-amber-100">රූපය</h3>
+            </div>
+        </div>
+
+        <!-- ගාථාව - විශේෂ box -->
+        <div class="gatha-box p-4 mb-4">
+            <p class="text-sm sm:text-base italic text-amber-900 dark:text-amber-100 leading-relaxed text-justify">
+                <i class="fa-solid fa-quote-left text-amber-500 mr-2 opacity-60"></i>
+                <strong>“රුප්පතීති රූපං, සීතුණ්හාදිවිරොධිපච්චයෙහි විකාරමාපජ්ජති, ආපාදීයතීති වා අත්ථො.”</strong>
+                <span class="text-xs text-amber-700 dark:text-amber-300 ml-2">(අභි.සං)</span>
+            </p>
+        </div>
+
+        <!-- විස්තරය -->
+        <div class="space-y-3">
+            <p class="text-sm sm:text-base text-amber-900 dark:text-amber-50 leading-relaxed text-justify">
+                සත්ත්ව ශරීර හා බාහිර වස්තූන් සෑදී ඇති මූලික ධර්ම රාශිය <strong>රූපයෝ</strong> ය. රූප විසි අටක් (28) ඇත්තේ ය. එයින් ඇසට පෙනෙන්නේ වර්ණ ධාතුව නැමති එක් රූපයක් පමණෙකි. ඉතිරි සත්විස්ස ඇසට පෙනෙන රූප නො වේ.
+            </p>
+
+            <p class="text-sm sm:text-base text-amber-900 dark:text-amber-50 leading-relaxed text-justify">
+                රූප යන වචනයේ තේරුම <strong>ශීතෝෂ්ණාදි විරුද්ධ දෙය හා එක් වීමෙන් විකාරයට පැමිණෙන දෙය</strong> ය යනුයි. චිත්ත චෛතසිකයන් ඉතා සියුම් බැවින් ශීතෝෂ්ණාදිය හා ඒවායේ ගැටීමක් සිදු නොවේ. 
+                <span class="text-xs text-amber-700 dark:text-amber-300 italic">(අභි,ච)</span>
+            </p>
+        </div>
+
+        <!-- විශේෂාංග ලැයිස්තුව -->
+        <div class="mt-4 pt-4 border-t border-amber-300/60 dark:border-amber-500/30 grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div class="bg-white/60 dark:bg-amber-950/40 rounded-lg p-3 text-center">
+                <i class="fa-solid fa-cube text-amber-600 dark:text-amber-300 text-lg mb-1"></i>
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-200">28 ක් ඇත</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-300">රූප වර්ග</div>
+            </div>
+            <div class="bg-white/60 dark:bg-amber-950/40 rounded-lg p-3 text-center">
+                <i class="fa-solid fa-eye-slash text-amber-600 dark:text-amber-300 text-lg mb-1"></i>
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-200">අරමුණ නොදනී</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-300">රූපයේ ස්වභාවය</div>
+            </div>
+            <div class="bg-white/60 dark:bg-amber-950/40 rounded-lg p-3 text-center">
+                <i class="fa-solid fa-temperature-half text-amber-600 dark:text-amber-300 text-lg mb-1"></i>
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-200">විකාරයට පැමිණේ</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-300">ශීතෝෂ්ණාදියෙන්</div>
+            </div>
+        </div>
+    </section>
 
     <!-- ============================================================ -->
     <!-- SEARCH PANEL -->
@@ -222,7 +354,7 @@
                 </div>
                 <div id="rupaDisplayGroup1" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-saffron-500 border border-amber-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitleGroup1" class="text-base font-bold text-maroon-900 dark:text-saffron-200"></h3>
-                    <div id="infoDetailsGroup1" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                    <div id="infoDetailsGroup1" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto text-justify"></div>
                 </div>
             </div>
 
@@ -249,7 +381,7 @@
                 </div>
                 <div id="rupaDisplayGroup2" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-saffron-500 border border-amber-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitleGroup2" class="text-base font-bold text-maroon-900 dark:text-saffron-200"></h3>
-                    <div id="infoDetailsGroup2" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto"></div>
+                    <div id="infoDetailsGroup2" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto text-justify"></div>
                 </div>
             </div>
 
@@ -269,7 +401,7 @@
         <div id="rupaDetaContainer" class="hidden bg-emerald-50/60 dark:bg-slate-800 p-4 rounded-2xl border border-emerald-200 dark:border-slate-700 shadow-sm space-y-4">
             
             <!-- ✅ rupa-deta.js මගින් මෙම කොන්ටේනරය populate කරයි -->
-            <div id="rupa-deta-content" class="space-y-4">
+            <div id="rupa-deta-content" class="space-y-4 text-justify">
                 
                 <!-- Loading Placeholder -->
                 <div class="text-center py-8 text-slate-400 dark:text-slate-500">
@@ -286,7 +418,7 @@
     <!-- ============================================================ -->
     <!-- DYNAMIC RUPA CARDS CONTAINER -->
     <!-- ============================================================ -->
-    <section id="rupa-container" class="space-y-4 pt-2">
+    <section id="rupa-container" class="space-y-4 pt-2 text-justify">
         <!-- Javascript මඟින් dynamic ලෙස card හා table මෙතැනට ජනනය වේ -->
     </section>
 
