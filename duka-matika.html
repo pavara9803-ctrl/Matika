@@ -34,6 +34,94 @@ tailwind.config = {
 
 <style>
 body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-color: transparent; }
+
+/* ============================================================ */
+/* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
+/* ============================================================ */
+
+/* සියලුම ඡේද (paragraphs) justify කරන්න */
+p {
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing: 0.05em;
+  line-height: 1.8;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ලැයිස්තු අයිතම justify කරන්න */
+li {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+}
+
+/* ස්වරූපාර්ථ box එකේ වචන justify කරන්න */
+.svartha-box {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-spacing: 0.05em;
+}
+
+/* අර්ථය box එකේ වචන justify කරන්න */
+#duka-pada-svartha,
+#duka-pada-desc {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Breakdown items වල text justify කරන්න */
+.breakdown-item .name {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Breakdown ලැයිස්තු justify කරන්න */
+#duka-skandha-list,
+#duka-ayatana-list,
+#duka-dhatu-list,
+#duka-sathya-list {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* දුක ලැයිස්තු සහ පද ලැයිස්තු justify කරන්න */
+#gochhaka-list,
+#duka-list-container,
+#duka-pair-container,
+#duka-bookmarks-container {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* ශීර්ෂක left aligned තබන්න */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+}
+
+/* බටන් center aligned තබන්න */
+button, .btn, .badge {
+  text-align: center;
+}
+
+/* ටේබල් හෙඩර් left aligned තබන්න */
+th {
+  text-align: left;
+}
+
+/* Tailwind text-justify class override */
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ============================================================ */
+/* වෙනත් ස්ටයිල් */
+/* ============================================================ */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -82,8 +170,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 .dark .breakdown-item .value { color: #fbbf24; }
 
 /* ============================================================ */
-/* ස්වරූපාර්ථ box - සාමාන්‍යයෙන් ලා කොළ, කළු අකුරු */
-/* අඳුරු තිරයේදී අඳුරු කොළ, සුදු අකුරු */
+/* ස්වරූපාර්ථ box */
 /* ============================================================ */
 .svartha-box {
   background: #ecfdf5;
@@ -94,6 +181,8 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
   line-height: 1.7;
   font-size: 0.9rem;
   color: #052e16;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .dark .svartha-box {
   background: #14532d;
@@ -102,8 +191,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 }
 
 /* ============================================================ */
-/* තෝරාගත් පදය box - සාමාන්‍යයෙන් ලා මාරූන්, කළු අකුරු */
-/* අඳුරු තිරයේදී අඳුරු මාරූන්, සුදු අකුරු */
+/* තෝරාගත් පදය box */
 /* ============================================================ */
 .pada-box {
   background: #fdf2f2;
@@ -176,7 +264,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
         අභිධර්ම පිටකය
       </span>
       <h2 class="text-xl sm:text-2xl font-bold text-saffron-200 mb-2">දුක මාතිකා (100)</h2>
-      <p class="text-sm text-amber-100/90 leading-relaxed">
+      <p class="text-sm text-amber-100/90 leading-relaxed text-justify">
         ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.
       </p>
     </div>
@@ -192,6 +280,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
           </div>
           <div class="flex-1 min-w-0">
            <h3 class="text-xl sm:text-2xl font-bold mb-1 drop-shadow-md">දුක මාතිකා 100</h3>
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed text-justify">
               ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි පද, ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම්
             </p>
           </div>
@@ -274,7 +363,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
       </div>
     </div>
 
-    <!-- තෝරාගත් පදය - ලා මාරූන් (light) / අඳුරු මාරූන් (dark) -->
+    <!-- තෝරාගත් පදය -->
     <div class="pada-box p-4 rounded-xl shadow-lg w-full">
       <div class="flex justify-between items-start gap-3">
         <div class="flex-1 min-w-0">
@@ -287,10 +376,10 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
           <i id="duka-bookmark-icon" class="fa-regular fa-bookmark"></i>
         </button>
       </div>
-      <p id="duka-pada-desc" class="text-xs mt-2 text-slate-600 dark:text-amber-200/90"></p>
+      <p id="duka-pada-desc" class="text-xs mt-2 text-slate-600 dark:text-amber-200/90 text-justify"></p>
     </div>
 
-    <!-- ස්වරූපාර්ථ - ලා කොළ (light) / අඳුරු කොළ (dark) -->
+    <!-- ස්වරූපාර්ථ -->
     <div class="bg-emerald-50 dark:bg-gradient-to-br dark:from-emerald-900 dark:to-green-950 text-slate-900 dark:text-emerald-50 p-4 rounded-xl shadow-lg border border-emerald-200 dark:border-emerald-600/40 w-full">
       <div class="flex items-center gap-2 mb-3 pb-2 border-b border-emerald-200 dark:border-emerald-500/30">
         <i class="fa-solid fa-book-bookmark text-emerald-600 dark:text-emerald-300"></i>
@@ -374,7 +463,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
         <i class="fa-solid fa-bookmark text-saffron-300 text-2xl"></i>
         <h2 class="text-xl font-bold text-saffron-200">සුරැකි මාතිකා</h2>
       </div>
-      <p class="text-xs text-amber-100/90">ඔබ විසින් සුරකිමින් අධ්‍යයනය කරන මාතිකා පද</p>
+      <p class="text-xs text-amber-100/90 text-justify">ඔබ විසින් සුරකිමින් අධ්‍යයනය කරන මාතිකා පද</p>
     </div>
     <button onclick="backToGochhakaList()" class="w-full text-xs text-amber-900 dark:text-saffron-200 bg-white dark:bg-slate-900 border border-amber-300 dark:border-slate-700 px-3 py-2 rounded-lg hover:bg-amber-50 dark:hover:bg-slate-800 transition-colors">
       <i class="fa-solid fa-arrow-left"></i> ලැයිස්තුවට
@@ -389,7 +478,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </footer>
 
 <!-- ============================================================ -->
-<!-- SCRIPT ගොනු - මෙතැන වැදගත් ! සියලුම ගොනු root folder එකේ ! -->
+<!-- SCRIPT ගොනු -->
 <!-- ============================================================ -->
 <script src="js/duka/gochhaka-01-hetu.js"></script>
 <script src="js/duka/gochhaka-02-cullantara.js"></script>

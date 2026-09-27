@@ -39,6 +39,94 @@ body {
   font-size: 16px;
 }
 
+/* ============================================================ */
+/* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
+/* ============================================================ */
+
+/* සියලුම ඡේද (paragraphs) justify කරන්න */
+p {
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing: 0.05em;
+  line-height: 1.8;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ලැයිස්තු අයිතම justify කරන්න */
+li {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+}
+
+/* ස්වරූපාර්ථ box එකේ වචන justify කරන්න */
+.svartha-box,
+.artha-box {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-spacing: 0.05em;
+}
+
+/* අර්ථ box එකේ වචන justify කරන්න */
+#suttanta-pada-artha-text,
+#suttanta-pada-svartha,
+#suttanta-pada-desc {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Breakdown items වල text justify කරන්න */
+.breakdown-item .name {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Breakdown ලැයිස්තු justify කරන්න */
+#suttanta-skandha-list,
+#suttanta-ayatana-list,
+#suttanta-dhatu-list,
+#suttanta-sathya-list {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Search ප්‍රතිඵල justify කරන්න */
+#suttanta-list-container,
+#suttanta-bookmarks-container,
+#suttanta-pada-tabs-container {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* ශීර්ෂක left aligned තබන්න */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+}
+
+/* බටන් center aligned තබන්න */
+button, .btn, .badge {
+  text-align: center;
+}
+
+/* ටේබල් හෙඩර් left aligned තබන්න */
+th {
+  text-align: left;
+}
+
+/* Tailwind text-justify class override */
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ============================================================ */
+/* වෙනත් ස්ටයිල් */
+/* ============================================================ */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -82,8 +170,7 @@ body {
 .dark .breakdown-item .value { color: #fbbf24; }
 
 /* ============================================================ */
-/* පදයේ අර්ථය box - සාමාන්‍යයෙන් ලා නිල්-අළු, කළු අකුරු */
-/* අඳුරු තිරයේදී අඳුරු නිල්-අළු, සුදු අකුරු */
+/* පදයේ අර්ථය box */
 /* ============================================================ */
 .artha-box {
   background: #f1f5f9;
@@ -94,6 +181,8 @@ body {
   line-height: 1.8;
   font-size: 0.9rem;
   color: #0f172a;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .dark .artha-box {
   background: #1e293b;
@@ -102,8 +191,7 @@ body {
 }
 
 /* ============================================================ */
-/* ස්වරූපාර්ථ box - සාමාන්‍යයෙන් ලා කොළ, කළු අකුරු */
-/* අඳුරු තිරයේදී අඳුරු කොළ, සුදු අකුරු */
+/* ස්වරූපාර්ථ box */
 /* ============================================================ */
 .svartha-box {
   background: #ecfdf5;
@@ -114,6 +202,8 @@ body {
   line-height: 1.8;
   font-size: 0.9rem;
   color: #052e16;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .dark .svartha-box {
   background: #14532d;
@@ -122,8 +212,7 @@ body {
 }
 
 /* ============================================================ */
-/* තෝරාගත් පදය box - සාමාන්‍යයෙන් ලා මාරූන්, කළු අකුරු */
-/* අඳුරු තිරයේදී අඳුරු මාරූන්, සුදු අකුරු */
+/* තෝරාගත් පදය box */
 /* ============================================================ */
 .pada-box {
   background: #fdf2f2;
@@ -236,7 +325,7 @@ body {
       <div class="flex items-center justify-between gap-3">
         <div class="flex-1 min-w-0">
           <h2 class="text-xl sm:text-2xl font-bold text-saffron-200 mb-2">සුත්තන්ත මාතිකා</h2>
-          <p class="text-sm text-amber-100/90 leading-relaxed">
+          <p class="text-sm text-amber-100/90 leading-relaxed text-justify">
             සුත්තන්තික මාතිකා පද සහ ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.
           </p>
         </div>
@@ -310,7 +399,7 @@ body {
 
     <div id="suttanta-pada-detail-breakdown" class="hidden flex flex-col space-y-4 pt-2 w-full">
       
-      <!-- තෝරාගත් පදය - ලා මාරූන් (light) / අඳුරු මාරූන් (dark) -->
+      <!-- තෝරාගත් පදය -->
       <div class="pada-box p-4 rounded-xl shadow-lg w-full">
         <div class="flex justify-between items-start gap-3">
           <div class="flex-1 min-w-0">
@@ -323,10 +412,10 @@ body {
             <i id="suttanta-bookmark-icon" class="fa-regular fa-bookmark"></i>
           </button>
         </div>
-        <p id="suttanta-pada-desc" class="text-xs mt-2 text-slate-600 dark:text-amber-200/90"></p>
+        <p id="suttanta-pada-desc" class="text-xs mt-2 text-slate-600 dark:text-amber-200/90 text-justify"></p>
       </div>
 
-      <!-- පදයේ අර්ථය - ලා නිල්-අළු (light) / අඳුරු නිල්-අළු (dark) -->
+      <!-- පදයේ අර්ථය -->
       <div id="suttanta-pada-artha-section" class="hidden 
         bg-slate-100 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 
         text-slate-900 dark:text-slate-100
@@ -342,7 +431,7 @@ body {
         <div id="suttanta-pada-artha-text" class="artha-box"></div>
       </div>
 
-      <!-- ස්වරූපාර්ථ - ලා කොළ (light) / අඳුරු කොළ (dark) -->
+      <!-- ස්වරූපාර්ථ -->
       <div class="bg-emerald-50 dark:bg-gradient-to-br dark:from-emerald-900 dark:to-green-950 
         text-slate-900 dark:text-emerald-50
         p-4 rounded-xl shadow-lg 
@@ -484,7 +573,7 @@ body {
         <i class="fa-solid fa-bookmark text-saffron-300 text-2xl"></i>
         <h2 class="text-xl font-bold text-saffron-200">සුරැකි මාතිකා</h2>
       </div>
-      <p class="text-xs text-amber-100/90">ඔබ විසින් සුරකිමින් අධ්‍යයනය කරන මාතිකා පද</p>
+      <p class="text-xs text-amber-100/90 text-justify">ඔබ විසින් සුරකිමින් අධ්‍යයනය කරන මාතිකා පද</p>
     </div>
     
     <button onclick="backToSuttantaList()" class="w-full text-xs 

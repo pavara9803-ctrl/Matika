@@ -34,6 +34,96 @@ tailwind.config = {
 
 <style>
 body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-color: transparent; }
+
+/* ============================================================ */
+/* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
+/* ============================================================ */
+
+/* සියලුම ඡේද (paragraphs) justify කරන්න */
+p {
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing: 0.05em;
+  line-height: 1.8;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ලැයිස්තු අයිතම justify කරන්න */
+li {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+}
+
+/* ස්වරූපාර්ථ box එකේ වචන justify කරන්න */
+.svartha-box,
+.artha-box {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-spacing: 0.05em;
+}
+
+/* අර්ථ box එකේ වචන justify කරන්න */
+#tika-pada-artha-text,
+#tika-pada-svartha,
+#tika-pada-desc {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* විස්තර දත්ත කොටස් justify කරන්න */
+#tika-skandha-list,
+#tika-ayatana-list,
+#tika-dhatu-list,
+#tika-sathya-list,
+#tika-mukta-content,
+#mg-nirukthi-list,
+#mg-detailed-list,
+#mg-artavikalpa-list,
+#mg-paccaya-list,
+#mg-maggaNaKarana-list,
+#mg-related-list,
+#mg-specialnotes-list,
+#tika-bookmarks-container {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Breakdown items වල text justify කරන්න */
+.breakdown-item .name {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* ශීර්ෂක left aligned තබන්න */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+}
+
+/* බටන් center aligned තබන්න */
+button, .btn, .badge {
+  text-align: center;
+}
+
+/* ටේබල් හෙඩර් left aligned තබන්න */
+th {
+  text-align: left;
+}
+
+/* Tailwind text-justify class override */
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ============================================================ */
+/* වෙනත් ස්ටයිල් */
+/* ============================================================ */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -64,8 +154,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 .dark .breakdown-item .value { color: #fbbf24; }
 
 /* ============================================================ */
-/* පදයේ අර්ථය box - සාමාන්‍යයෙන් ලා නිල්-අළු, කළු අකුරු */
-/* අඳුරු තිරයේදී අඳුරු නිල්-අළු, සුදු අකුරු */
+/* පදයේ අර්ථය box */
 /* ============================================================ */
 .artha-box {
   background: #f1f5f9;
@@ -76,6 +165,8 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
   line-height: 1.8;
   font-size: 0.9rem;
   color: #0f172a;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .dark .artha-box {
   background: #1e293b;
@@ -84,8 +175,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 }
 
 /* ============================================================ */
-/* ස්වරූපාර්ථ box - සාමාන්‍යයෙන් ලා කොළ, කළු අකුරු */
-/* අඳුරු තිරයේදී අඳුරු කොළ, සුදු අකුරු */
+/* ස්වරූපාර්ථ box */
 /* ============================================================ */
 .svartha-box {
   background: #ecfdf5;
@@ -96,6 +186,8 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
   line-height: 1.8;
   font-size: 0.9rem;
   color: #052e16;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .dark .svartha-box {
   background: #14532d;
@@ -169,7 +261,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
       <div class="flex items-center justify-between gap-3">
         <div class="flex-1 min-w-0">
           <h2 class="text-xl sm:text-2xl font-bold text-saffron-200 mb-2">තික මාතිකා (22)</h2>
-          <p class="text-sm text-amber-100/90 leading-relaxed">
+          <p class="text-sm text-amber-100/90 leading-relaxed text-justify">
             ත්‍රික කොටස් 22 කින් යුක්ත මාතිකා පද 66 හි ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.
           </p>
         </div>
@@ -224,7 +316,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
     <div id="tika-pada-detail-breakdown" class="hidden flex flex-col space-y-4 pt-2 w-full">
       
       <!-- ============================================================ -->
-      <!-- තෝරාගත් පදය - ලා මාරූන්, කළු අකුරු / dark: අඳුරු මාරූන්, සුදු අකුරු -->
+      <!-- තෝරාගත් පදය -->
       <!-- ============================================================ -->
       <div class="bg-[#fdf2f2] dark:bg-gradient-to-br dark:from-[#4a1a1c] dark:to-[#2a0a0c] text-slate-900 dark:text-amber-50 p-4 rounded-xl shadow-lg border border-rose-200 dark:border-amber-600/40 w-full">
         <div class="flex justify-between items-start gap-3">
@@ -238,11 +330,11 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
             <i id="tika-bookmark-icon" class="fa-regular fa-bookmark"></i>
           </button>
         </div>
-        <p id="tika-pada-desc" class="text-xs text-slate-600 dark:text-amber-200/90 mt-2"></p>
+        <p id="tika-pada-desc" class="text-xs text-slate-600 dark:text-amber-200/90 mt-2 text-justify"></p>
       </div>
 
       <!-- ============================================================ -->
-      <!-- පදයේ අර්ථය - සාමාන්‍යයෙන් ලා නිල්-අළු, කළු අකුරු / dark: අඳුරු නිල්-අළු, සුදු අකුරු -->
+      <!-- පදයේ අර්ථය -->
       <!-- ============================================================ -->
       <div id="tika-pada-artha-section" class="hidden bg-slate-100 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-100 p-4 rounded-xl shadow-lg border border-slate-300 dark:border-slate-600/40 w-full">
         <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-300 dark:border-slate-500/30">
@@ -253,7 +345,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
       </div>
 
       <!-- ============================================================ -->
-      <!-- ස්වරූපාර්ථ - සාමාන්‍යයෙන් ලා කොළ, කළු අකුරු / dark: අඳුරු කොළ, සුදු අකුරු -->
+      <!-- ස්වරූපාර්ථ -->
       <!-- ============================================================ -->
       <div class="bg-emerald-50 dark:bg-gradient-to-br dark:from-emerald-900 dark:to-green-950 text-slate-900 dark:text-emerald-50 p-4 rounded-xl shadow-lg border border-emerald-200 dark:border-emerald-600/40 w-full">
         <div class="flex items-center gap-2 mb-3 pb-2 border-b border-emerald-200 dark:border-emerald-500/30">
@@ -338,7 +430,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
       </div>
 
       <!-- ============================================================ -->
-      <!-- ත්‍රික මුක්ත ධර්ම - ලා දම්, කළු අකුරු / dark: අඳුරු දම්, සුදු අකුරු -->
+      <!-- ත්‍රික මුක්ත ධර්ම -->
       <!-- ============================================================ -->
       <div id="tika-mukta-section" class="hidden bg-purple-50 dark:bg-gradient-to-br dark:from-purple-900 dark:to-indigo-950 border border-purple-200 dark:border-purple-600/40 rounded-2xl p-4 shadow-lg">
         <div class="flex items-center gap-2 mb-3 border-b border-purple-200 dark:border-purple-500/30 pb-2">
@@ -350,7 +442,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
             <p class="text-[10px] text-purple-700 dark:text-purple-300/80">මෙම තිකයට ඇතුළත් නොවන ධර්ම</p>
           </div>
         </div>
-        <p id="tika-mukta-content" class="text-xs text-purple-900 dark:text-purple-100 leading-relaxed whitespace-pre-line"></p>
+        <p id="tika-mukta-content" class="text-xs text-purple-900 dark:text-purple-100 leading-relaxed whitespace-pre-line text-justify"></p>
       </div>
 
       <!-- ============================================================ -->
@@ -363,7 +455,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
           <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
             <i class="fa-solid fa-book text-blue-600"></i> නිරුක්ති විශ්ලේෂණය
           </h3>
-          <p id="mg-nirukthi-intro" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+          <p id="mg-nirukthi-intro" class="text-xs text-slate-600 dark:text-slate-300 italic text-justify"></p>
           <div id="mg-nirukthi-list" class="space-y-3"></div>
         </div>
 
@@ -372,7 +464,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
           <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
             <i class="fa-solid fa-magnifying-glass-chart text-purple-600"></i> විස්තරාත්මක විශ්ලේෂණය
           </h3>
-          <p id="mg-detailed-intro" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+          <p id="mg-detailed-intro" class="text-xs text-slate-600 dark:text-slate-300 italic text-justify"></p>
           <div id="mg-detailed-list" class="space-y-4"></div>
         </div>
 
@@ -389,7 +481,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
           <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
             <i class="fa-solid fa-link text-saffron-600"></i> ප්‍රත්‍ය විශ්ලේෂණය
           </h3>
-          <p id="mg-paccaya-intro" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+          <p id="mg-paccaya-intro" class="text-xs text-slate-600 dark:text-slate-300 italic text-justify"></p>
           <div id="mg-paccaya-list" class="space-y-2"></div>
         </div>
 
@@ -398,11 +490,11 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
           <h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">
             <i class="fa-solid fa-ban text-red-600"></i> මාර්ගය අරමුණු නොකරන ධර්ම
           </h3>
-          <p id="mg-maggaNaKarana-desc" class="text-xs text-slate-600 dark:text-slate-300 italic"></p>
+          <p id="mg-maggaNaKarana-desc" class="text-xs text-slate-600 dark:text-slate-300 italic text-justify"></p>
           <div id="mg-maggaNaKarana-list" class="space-y-1 text-sm"></div>
           <div class="bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 p-3 rounded-lg mt-2">
             <div class="text-xs font-bold text-maroon-900 dark:text-saffron-300 mb-1"><i class="fa-solid fa-lightbulb"></i> සාරාංශය:</div>
-            <p id="mg-maggaNaKarana-summary" class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+            <p id="mg-maggaNaKarana-summary" class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed text-justify"></p>
           </div>
         </div>
 
@@ -434,7 +526,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
         <i class="fa-solid fa-bookmark text-saffron-300 text-2xl"></i>
         <h2 class="text-xl font-bold text-saffron-200">සුරැකි මාතිකා</h2>
       </div>
-      <p class="text-xs text-amber-100/90">ඔබ විසින් සුරකිමින් අධ්‍යයනය කරන මාතිකා පද</p>
+      <p class="text-xs text-amber-100/90 text-justify">ඔබ විසින් සුරකිමින් අධ්‍යයනය කරන මාතිකා පද</p>
     </div>
     <button onclick="backToTikaList()" class="w-full text-xs text-amber-900 dark:text-saffron-200 bg-white dark:bg-slate-900 border border-amber-300 dark:border-slate-700 px-3 py-2 rounded-lg hover:bg-amber-50 dark:hover:bg-slate-800 transition-colors">
       <i class="fa-solid fa-arrow-left"></i> ලැයිස්තුවට
