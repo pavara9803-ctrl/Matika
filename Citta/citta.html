@@ -66,6 +66,15 @@
         .table-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 3px; }
         .dark .table-scroll::-webkit-scrollbar-track { background: #334155; }
         .dark .table-scroll::-webkit-scrollbar-thumb { background: #f59e0b; }
+        
+        /* ============================================================ */
+        /* ANIMATIONS */
+        /* ============================================================ */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
     </style>
 </head>
 <body class="h-full flex flex-col justify-between text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased selection:bg-saffron-200 selection:text-maroon-900 transition-colors duration-200">
@@ -178,6 +187,8 @@
     <!-- සිත් 89/121 BUTTON SECTION -->
     <!-- ============================================================ -->
     <div class="space-y-4">
+        
+        <!-- ✅ බොත්තම 1: සිත් 89/121 -->
         <button type="button" onclick="toggleCitta121Section()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-700 hover:from-emerald-800 hover:to-teal-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all">
             <span class="flex items-center gap-2">
                 <i class="fa-solid fa-calculator text-emerald-200"></i> සිත් 89/121
@@ -304,62 +315,127 @@
             </div>
 
         </div>
+
+        <!-- ============================================================ -->
+        <!-- ✅ බොත්තම 2: සිත් - විස්තරාත්මක විග්‍රහය (නව එකතු කිරීම) -->
+        <!-- ============================================================ -->
+        <button type="button" onclick="toggleCittaDetailSection()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-indigo-700 via-blue-600 to-indigo-700 hover:from-indigo-800 hover:to-blue-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all mt-3">
+            <span class="flex items-center gap-2">
+                <i class="fa-solid fa-book-open text-indigo-200"></i> සිත් - විස්තරාත්මක විග්‍රහය
+            </span>
+            <i id="cittaDetail-arrow" class="fa-solid fa-chevron-down text-indigo-200 transition-transform duration-200"></i>
+        </button>
+
+        <!-- Citta Detail Sub-Container (නව එකතු කිරීම) -->
+        <div id="cittaDetailSubContainer" class="hidden bg-indigo-50/60 dark:bg-slate-800 p-4 rounded-2xl border border-indigo-200 dark:border-slate-700 shadow-sm space-y-4 mt-3">
+            
+            <!-- citta-data.js මගින් දත්ත පූරණය වන කොටස -->
+            <div id="cittaDetailContent" class="space-y-4">
+                <!-- Dynamic content will be loaded here by citta-data.js -->
+                <div class="text-center py-8 text-slate-400 dark:text-slate-500">
+                    <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
+                    <p class="text-sm">දත්ත පූරණය වෙමින්...</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- ============================================================ -->
-    <!-- DYNAMIC CITTA CARDS CONTAINER -->
+    <!-- DYNAMIC CONTENT CONTAINER (Search Results) -->
     <!-- ============================================================ -->
-    <section id="citta-container" class="space-y-4 pt-2">
-        <!-- JavaScript මගින් dynamic ලෙස card හා table මෙතැනට ජනනය වේ -->
-    </section>
+    <div id="citta-container" class="space-y-4"></div>
 
 </main>
 
 <!-- ============================================================ -->
 <!-- FOOTER -->
 <!-- ============================================================ -->
-<footer class="bg-maroon-900 text-amber-100 text-center py-4 border-t-2 border-saffron-500 mt-auto">
-    <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා අධ්‍යයනය &copy; 2024 | චිත්ත පරමාර්ථය</p>
+<footer class="bg-maroon-900 text-amber-200/80 text-center text-xs py-4 border-t-2 border-saffron-500 mt-auto">
+    <p>අභිධර්ම චිත්ත විභාගය • සියලු සිත් 89/121</p>
 </footer>
 
 <!-- ============================================================ -->
-<!-- THEME TOGGLE SCRIPT -->
+<!-- SCRIPTS -->
 <!-- ============================================================ -->
-<script>
-    function initTheme() {
-        const isDark = localStorage.getItem('theme') === 'dark' || 
-            localStorage.getItem('abhidhamma_theme') === 'dark' ||
-            (!localStorage.getItem('theme') && !localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-moon text-lg';
-        }
-    }
 
-    function toggleDarkMode() {
-        if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('abhidhamma_theme', 'light');
-            localStorage.setItem('theme', 'light');
-            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-moon text-lg';
-        } else {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('abhidhamma_theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
-        }
-    }
+<!-- Citta Data JS (නව ගොනුව) -->
+<script src="citta-data.js"></script>
 
-    window.addEventListener('DOMContentLoaded', initTheme);
-</script>
-
-<!-- ============================================================ -->
-<!-- EXTERNAL DATA & LOGIC -->
-<!-- ============================================================ -->
+<!-- Main Citta Logic JS -->
 <script src="citta.js"></script>
+
+<!-- Inline Script for Theme Toggle & Citta Detail Toggle -->
+<script>
+    // ============================================================
+    // Theme Toggle
+    // ============================================================
+    function toggleDarkMode() {
+        const html = document.documentElement;
+        const icon = document.getElementById('theme-toggle-icon');
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            if (icon) icon.className = 'fa-solid fa-moon text-lg';
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.classList.add('dark');
+            if (icon) icon.className = 'fa-solid fa-sun text-lg';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // Load saved theme
+    (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const icon = document.getElementById('theme-toggle-icon');
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (icon) icon.className = 'fa-solid fa-sun text-lg';
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (icon) icon.className = 'fa-solid fa-moon text-lg';
+        }
+    })();
+
+    // ============================================================
+    // සිත් - විස්තරාත්මක විග්‍රහය ටොගල් කිරීම
+    // ============================================================
+    function toggleCittaDetailSection() {
+        const subContainer = document.getElementById("cittaDetailSubContainer");
+        const arrowIcon = document.getElementById("cittaDetail-arrow");
+        if (subContainer) {
+            subContainer.classList.toggle("hidden");
+            if (arrowIcon) arrowIcon.classList.toggle("rotate-180");
+        }
+    }
+
+    // ============================================================
+    // citta-data.js හි දත්ත පූරණය කිරීම (උදාහරණය)
+    // ============================================================
+    document.addEventListener("DOMContentLoaded", function() {
+        const detailContainer = document.getElementById("cittaDetailContent");
+        if (!detailContainer) return;
+
+        // citta-data.js හි cittaDetailData විචල්‍යය තිබේ නම් එය පෙන්වන්න
+        if (typeof cittaDetailData !== 'undefined' && Array.isArray(cittaDetailData) && cittaDetailData.length > 0) {
+            detailContainer.innerHTML = cittaDetailData.map(item => `
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-indigo-200 dark:border-slate-700 shadow-sm">
+                    <h3 class="font-bold text-indigo-900 dark:text-indigo-200 text-base mb-1">${item.title || ''}</h3>
+                    <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${item.desc || ''}</div>
+                </div>
+            `).join('');
+        } else {
+            // දත්ත නොමැති නම් පණිවිඩයක් පෙන්වන්න
+            detailContainer.innerHTML = `
+                <div class="text-center py-8 text-slate-400 dark:text-slate-500">
+                    <i class="fa-solid fa-inbox text-3xl mb-2 text-indigo-300 dark:text-slate-600"></i>
+                    <p class="text-sm">විස්තරාත්මක දත්ත තවම එක් කර නැත.</p>
+                    <p class="text-xs mt-1">citta-data.js ගොනුවේ cittaDetailData විචල්‍යයට දත්ත එක් කරන්න.</p>
+                </div>
+            `;
+        }
+    });
+</script>
 
 </body>
 </html>
