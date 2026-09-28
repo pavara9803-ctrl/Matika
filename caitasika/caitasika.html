@@ -42,8 +42,6 @@ body {
 /* ============================================================ */
 /* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
 /* ============================================================ */
-
-/* සියලුම ඡේද (paragraphs) justify කරන්න */
 p {
   text-align: justify;
   text-justify: inter-word;
@@ -53,29 +51,24 @@ p {
   -webkit-hyphens: auto;
 }
 
-/* ලැයිස්තු අයිතම justify කරන්න */
 li {
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.7;
 }
 
-/* ශීර්ෂක left aligned තබන්න */
 h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
-/* බටන් center aligned තබන්න */
 button, .btn, .badge {
   text-align: center;
 }
 
-/* ටේබල් හෙඩර් left aligned තබන්න */
 th {
   text-align: left;
 }
 
-/* Tailwind text-justify class override */
 .text-justify {
   text-align: justify;
   text-justify: inter-word;
@@ -284,9 +277,6 @@ th {
 .cetasika-card.pakirnaka::before { background: linear-gradient(180deg, #6366f1, #4f46e5); }
 .cetasika-card.sabbacitta::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
 
-/* ============================================================ */
-/* PADA BOX */
-/* ============================================================ */
 .pada-box {
   background: #fdf2f2;
   border: 1px solid #fecaca;
@@ -298,38 +288,6 @@ th {
   background: linear-gradient(135deg, #4a1a1c, #2a0a0c);
   border-color: rgba(217, 119, 6, 0.4);
   color: #fef3c7;
-}
-
-.artha-box {
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  border-radius: 0.75rem;
-  padding: 1rem;
-  white-space: pre-line;
-  line-height: 1.8;
-  font-size: 0.9rem;
-  color: #0f172a;
-}
-.dark .artha-box {
-  background: #1e293b;
-  border-color: #334155;
-  color: #e2e8f0;
-}
-
-.svartha-box {
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  border-radius: 0.75rem;
-  padding: 1rem;
-  white-space: pre-line;
-  line-height: 1.8;
-  font-size: 0.9rem;
-  color: #052e16;
-}
-.dark .svartha-box {
-  background: #14532d;
-  border-color: #166534;
-  color: #dcfce7;
 }
 
 /* ============================================================ */
@@ -353,18 +311,12 @@ th {
 .badge-amber { background: #fef3c7; color: #92400e; }
 .dark .badge-amber { background: #78350f; color: #fde68a; }
 
-/* ============================================================ */
-/* ANIMATIONS */
-/* ============================================================ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.3s ease-out; }
 
-/* ============================================================ */
-/* SCROLL TABLE */
-/* ============================================================ */
 .table-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -376,9 +328,6 @@ th {
 .dark .table-scroll::-webkit-scrollbar-track { background: #334155; }
 .dark .table-scroll::-webkit-scrollbar-thumb { background: #f59e0b; }
 
-/* ============================================================ */
-/* ACCORDION */
-/* ============================================================ */
 .accordion-content {
   max-height: 0;
   overflow: hidden;
@@ -388,9 +337,6 @@ th {
   max-height: 10000px;
 }
 
-/* ============================================================ */
-/* LESSON CARD */
-/* ============================================================ */
 .lesson-card {
   border: 1px solid #fde68a;
   border-radius: 1rem;
@@ -523,7 +469,7 @@ th {
       </p>
     </div>
 
-    <!-- විස්තරය -->
+    <!-- මුල් විස්තරය -->
     <div class="space-y-3">
       <p class="text-sm sm:text-base text-rose-900 dark:text-rose-50 leading-relaxed text-justify">
         සිතක් හෙවත් අරමුණු දැනීමක් ඇති වන කල්හි ඒ දැනීම් ක්‍රියාව හා මිශ්‍ර ව ඇති වන්නා වූ අන්‍ය ක්‍රියාවෝ <strong>චෛතසිකයෝ ය</strong>. චෛතසික දෙපනසක් ඇත්තේ ය.
@@ -537,6 +483,47 @@ th {
         සිතින් වෙන්ව කිසි කලෙක චෛතසිකයෝ නූපදිති. සිතක් නැති ව ඉපදිය හැකි ශක්තියක් ඒවාට ඇත්තේ ද නැත. සම්පූර්ණයෙන් ම චෛතසිකයන්ගෙන් තොරව ඉපදීමේ ශක්තියක් සිතට ද නැත. එහෙත් සිත සමහර චෛතසිකයන්ගෙන් තොරව ද උපදී. එක් සිතක් සියලු ම චෛතසිකයන් සමග උපදින්නේ ද නැත. 
         <span class="text-xs text-rose-700 dark:text-rose-300 italic">(අභි,ච)</span>
       </p>
+    </div>
+
+    <!-- ✅ අලුතින් එක් කරන ලද පරමත්ථ දීපනී ටීකා විවරණය (කළු පැහැති අකුරින්) -->
+    <div class="bg-amber-50/95 border border-amber-300 rounded-xl p-4 sm:p-5 my-4 space-y-3 text-slate-900 shadow-sm">
+      <div class="border-b border-amber-300/80 pb-2">
+        <span class="text-xs uppercase tracking-wider font-bold text-amber-900">පරමත්ථ දීපනී ටීකා පාඨය</span>
+        <p class="text-xs sm:text-sm italic leading-relaxed text-justify mt-1 text-slate-900">
+          "චෙතසිකන්‌ති එත්‌ථ චෙතසි භවං තදායත්‌තවුත්‌තිතායාති චෙතසිකං. ඵස්‌සාදි ධම්‌මජාතං. එත්‌ථ ච තදායත්‌තවුත්‌තිතා නාම එකුප්‌පාදතාදීහි ලක්‌ඛණෙහි චිත්‌තෙන සහ එකීභූතස්‌ස විය පවත්‌ති. එතෙන යා චිත්‌තස්‌ස ජාති. සා එව ඵස්‌සාදීනං. යා චිත්‌තස්‌ස ජරා, යං චිත්‌තස්‌ස මරණං, යං චිත්‌තස්‌ස ආරම්‌මණං, යං චිත්‌තස්‌ස වත්‌ථු, තදෙව ඵස්‌සාදීනන්‌ති එවං එකපුප්‌ඵමඤ්‌ජරියං එකවණ්‌ටුපනිබ්‌බන්‌ධානි පුප්‌ඵානි විය චිත්‌තෙන සහ එකජාතියාදි උපනිබ්‌බන්‌ධා ඵස්‌සාදයො ධම්‌මා ඉධ චෙතසිකං නාමාති සිද්‌ධා හොන්‌ති. එවඤ්‌ච සති චිත්‌තංපි තෙහි ඵස්‌සාදීහි සහ තථෙවආයත්‌තං පවත්‌තතීති තංපි ඵස්‌සිකං වෙදනිකන්‌ති ආදිනා වත්‌තබ්‌බන්‌ති චෙ. න. චිත්‌තස්‌සෙව ජෙට්‌ඨකත්‌තා. මනොපුබ්‌බඞ්‌ගමා ධම්‌මා, මනොසෙට්‌ඨා මනොමයාති හි වුත්‌තං. එත්‌ථ ච මනොමයාති මනසා එව පකතා නිම්‌මිතා චිත්‌තක්‍රියාභූතාති අත්‌ථො. එතෙන තෙ ඵස්‌සාදයො ධම්‌මා චිත්‌තෙන විනා නුපලබ්‌භන්‌තීති දස්‌සෙති. චිත්‌තං පන තෙහි කෙහිචි විනාපි පවත්‌තති යෙව. පඤ්‌ච විඤ්‌ඤාණචිත්‌තඤ්‌හි තෙහි කෙහිචි විතක්‌කාදීහි විනා උප්‌පජ්‌ජතීති. තස්‌මා තෙසඤ්‌ඤෙව තදායත්‌තවුත්‌තිතා වත්‌තබ්‌බා න චිත්‌තස්‌සාති."
+        </p>
+      </div>
+
+      <div class="pt-1">
+        <span class="text-xs uppercase tracking-wider font-bold text-amber-900">සිංහල අර්ථ විවරණය</span>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-1 text-slate-900">
+          "මෙහි 'චෛතසික' යනු: සිතෙහි හටගන්නා බැවින් ද, ඒ සිතට අයත් ව (සිත ඇසුරු කොට) පැවැත්මක් ඇති බැවින් ද 'චෛතසික' නම් වේ. එනම් ඵස්සාදී ධර්ම සමූහයයි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          මෙහි 'තදායත්තවුත්තිතා' (ඒ සිතට අයත් ව පැවැත්ම) නම්: එකට ඉපදීම (එකුප්පාද) ආදී වූ සම්ප්‍රයෝග ලක්ෂණයන්ගෙන් සිත සමඟ එක්තැන් වූවාක් මෙන් පැවතීමයි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          එබැවින් යම් උපතක් (ජාතියක්) සිතට වේ ද, එයම ඵස්සාදීන්ට ද වේ. යම් දිරීමක් (ජරාවක්/ඨිතියක්) සිතට වේ ද, යම් බිඳීමක් (මරණයක්/භංගයක්) සිතට වේ ද, යම් අරමුණක් සිතට වේ ද, යම් වස්තු රූපයක් සිතට නිශ්‍රය වේ ද, එයම ඵස්සාදී චෛතසිකයන්ට ද වේ.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          මෙසේ එක් මල් පොකුරක එක් නටුවක බැඳී පවත්නා මල් මෙන්, සිත සමඟ එකම ඉපදීම ආදියෙන් බැඳී පවත්නා ඵස්සාදී ධර්මයෝ මෙහි 'චෛතසික' නම් වෙති යි සිද්ධ වේ.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          මෙසේ ඇති කල්හි, 'සිත ද ඒ ඵස්සාදී චෛතසිකයන් හා එලෙසින්ම බැඳී පවතින බැවින්, සිතට ද ඵාස්සික (ඵස්සයට අයත් වූව), වේදනික (වේදනාවට අයත් වූව) යනාදී වශයෙන් කිව යුතු නොවේ ද?' යත්;
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          නැත, එසේ නොකිය යුතුය. මක්නිසාද යත් සිත ම ප්‍රධාන (ජ්‍යෙෂ්ඨ) වන බැවිනි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 font-medium">
+          'මනෝපුබ්බංගමා ධම්මා, මනෝසෙට්ඨා මනෝමයා' (සියලු ධර්මයනට සිත පෙරටු වන්නේය, සිත ශ්‍රේෂ්ඨ වන්නේය, සිතින් ම උපදින්නේය) යැයි වදාරන ලද්දේ නොවේ ද? මෙහි 'මනෝමයා' යනු සිතින් ම මවන ලද්දාක් මෙන් සිතේ ම ක්‍රියාකාරීත්වයක් බවට පත්වන බැවිනි යන අර්ථයයි. මෙයින් ඒ ඵස්සාදී ධර්මයෝ සිතින් තොරව නොලැබෙන බව (නූපදින බව) දක්වයි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          නමුත් සිත වනාහි ඒ ඇතැම් චෛතසිකයන්ගෙන් තොරව ද පවතින්නේ ම ය. පංච විඤ්ඤාණ සිත් (ඇස, කන, නාසය, දිව, කය යන ද්විපංච විඤ්ඤාණ සිත්) විතර්කාදී වූ ඇතැම් චෛතසිකයන්ගෙන් තොරව ද උපදින බැවිනි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 font-semibold">
+          එහෙයින් ඒ ඵස්සාදී චෛතසිකයන්ගේ ම සිතට අයත් පැවැත්ම (තදායත්තවුත්තිතාව) ප්‍රකාශ කළ යුතු ය, සිතෙහි චෛතසිකයන්ට අයත් පැවැත්මක් ප්‍රකාශ නොකළ යුතු ය."
+        </p>
+      </div>
     </div>
 
     <!-- විශේෂාංග ලැයිස්තුව -->
@@ -1635,9 +1622,6 @@ th {
 <!-- MAIN TAB SWITCHING -->
 <!-- ============================================================ -->
 <script>
-// ============================================================
-// MAIN TAB SWITCHING - සියලු tabs එකට
-// ============================================================
 var allMainTabs = [
   'intro', 'sabbacitta', 'pakirnaka-cetasika', 'akusala-cetasika', 'sobhana-cetasika',
   'samprayoga', 'sangrahana', 'sangraha-5', 'athara', 'citta-sangaha', 'mahaggata-lokuttara'
@@ -1666,9 +1650,6 @@ function switchMainTab(tabName) {
 
 window.switchMainTab = switchMainTab;
 
-// ============================================================
-// THEME TOGGLE
-// ============================================================
 function toggleDarkMode() {
   var html = document.documentElement;
   var icon = document.getElementById('theme-toggle-icon');
@@ -1683,7 +1664,6 @@ function toggleDarkMode() {
   }
 }
 
-// Theme initialize
 (function initTheme() {
   var savedTheme = localStorage.getItem('caitasika_theme');
   if (savedTheme === 'dark' ||
@@ -1694,16 +1674,10 @@ function toggleDarkMode() {
   }
 })();
 
-// ============================================================
-// SCROLL TO TOP
-// ============================================================
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ============================================================
-// ACCORDION TOGGLE
-// ============================================================
 function toggleAccordion(id) {
   var content = document.getElementById('accordion-' + id);
   var icon = document.getElementById('accordion-icon-' + id);
