@@ -1,23 +1,13 @@
 /**
- * අභිධර්ම චිත්ත විභාගය - විස්තරාත්මක දත්ත
+ * අභිධර්ම චිත්ත විභාගය - පූර්ණ විස්තරාත්මක දත්ත
  * citta-data.js
  * 
  * මෙම ගොනුව citta.html සමඟ භාවිතා කිරීමට නිර්මාණය කර ඇත.
- * PDF "චිත්ත පරමාර්ථය" හි සියලු තොරතුරු දීර්ඝ වශයෙන් ඇතුළත් කර ඇත.
- * 
- * අඩංගු කරුණු:
- * - වාතුර්භූමක සිත් 89/121
- * - අකුසල් සිත් 12 (ලෝභ 8, දෝස 2, මෝහ 2) - දීර්ඝ විස්තර සමඟ
- * - අහේතුක සිත් 18 - දීර්ඝ විස්තර සමඟ
- * - කාම සෝභන සිත් 24 - දීර්ඝ විස්තර සමඟ
- * - රූපාවචර සිත් 15 - දීර්ඝ විස්තර සමඟ
- * - අරූපාවචර සිත් 12 - දීර්ඝ විස්තර සමඟ
- * - ලෝකෝත්තර සිත් 40 - දීර්ඝ විස්තර සමඟ
- * - සංග්‍රහ ගාථා
+ * PDF "චිත්ත පරමාර්ථය" හි සියලු තොරතුරු, නිදසුන් සහ විග්‍රහයන් කිසිවක් අඩු නොකොට ඇතුළත් කර ඇත.
  */
 
 // ============================================================
-// 1. සිත් - විස්තරාත්මක විග්‍රහය සඳහා දත්ත
+// 1. සිත් - විස්තරාත්මක විග්‍රහය සඳහා දත්ත (cittaDetailData)
 // ============================================================
 
 const cittaDetailData = [
@@ -112,30 +102,50 @@ const cittaDetailData = [
             <i class="fa-solid fa-fire"></i> ලෝභ මූලික සිත් 8 හැඳින්වීම
           </h4>
           <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-            ලෝභ මූලික සිත් 8 කි. මේවා <strong>වේදනා - දිට්ඨි - සංඛාර</strong> යන අංග තුනින් 
-            ආකාර 8 කට බෙදී ගියේ ය.
+            ලෝභ මූලික සිත් 8 කි. මේවා <strong>වේදනා - දිට්ඨි - සංඛාර</strong> යන අංග තුනින් ආකාර 8 කට බෙදී ගියේ ය.
           </p>
         </div>
 
-        <!-- ලෝභ මූලික සිත් 8 ලැයිස්තුව -->
         <div class="bg-white dark:bg-slate-800 rounded-xl border border-red-200 dark:border-red-800 overflow-hidden">
           <div class="bg-red-100 dark:bg-red-900/40 px-4 py-2 font-bold text-base text-red-800 dark:text-red-200">
             <i class="fa-solid fa-list-ol mr-2"></i> ලෝභ මූලික සිත් 8
           </div>
           <div class="p-3 space-y-2">
-            ${[1,2,3,4,5,6,7,8].map(i => {
-              const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
-              const ditthi = (i === 1 || i === 2 || i === 5 || i === 6) ? 'දිට්ඨිගත සම්පයුත්ත' : 'දිට්ඨිගත විප්පයුත්ත';
-              const sankhara = (i % 2 === 1) ? 'අසංඛාරික' : 'සසංඛාරික';
-              return `<div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
-                <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">${i}</span>
-                <span class="text-base">${feelings} සහගත ${ditthi} ${sankhara} සිත</span>
-              </div>`;
-            }).join('')}
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">1</span>
+              <span class="text-base">සෝමනස්ස සහගත දිට්ඨිගත සම්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">2</span>
+              <span class="text-base">සෝමනස්ස සහගත දිට්ඨිගත සම්පයුත්ත සසංඛාරික සිත</span>
+            </div>
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">3</span>
+              <span class="text-base">සෝමනස්ස සහගත දිට්ඨිගත විප්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">4</span>
+              <span class="text-base">සෝමනස්ස සහගත දිට්ඨිගත විප්පයුත්ත සසංඛාරික සිත</span>
+            </div>
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">5</span>
+              <span class="text-base">උපේක්ෂා සහගත දිට්ඨිගත සම්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">6</span>
+              <span class="text-base">උපේක්ෂා සහගත දිට්ඨිගත සම්පයුත්ත සසංඛාරික සිත</span>
+            </div>
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">7</span>
+              <span class="text-base">උපේක්ෂා සහගත දිට්ඨිගත විප්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-lg border border-red-100 dark:border-red-900/50 flex items-start gap-2">
+              <span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200 text-sm font-bold px-2.5 py-0.5 rounded-full">8</span>
+              <span class="text-base">උපේක්ෂා සහගත දිට්ඨිගත විප්පයුත්ත සසංඛාරික සිත</span>
+            </div>
           </div>
         </div>
 
-        <!-- විස්තරාත්මක පැහැදිලි කිරීම් -->
         <div class="space-y-3">
           <div class="bg-gradient-to-r from-red-50 to-pink-50 dark:from-slate-800 dark:to-slate-900 p-4 rounded-xl border border-red-200 dark:border-slate-700">
             <h4 class="font-bold text-base text-red-900 dark:text-red-200 mb-2 flex items-center gap-2">
@@ -144,7 +154,7 @@ const cittaDetailData = [
             <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
               <strong>සෝමනස්ස සහගත</strong> නම් සන්තෝෂයෙන් යුක්ත බව ය. 
               <strong>දිට්ඨිගත සම්පයුත්ත</strong> නම් කර්ම-ඵල නොඇදහීම් සම්බන්ධ මිථ්‍යාදෘෂ්ටියෙන් යුක්ත බව ය. 
-              <strong>අසංඛාරික</strong> නම් තම විසින් හෝ අනුන් විසින් කරුණු ලබන පූර්ව ප්‍රයෝගයක් අනුබල දීමක් නැති වැ 
+              <strong>අසංඛාරික</strong> නම් තමා විසින් හෝ අනුන් විසින් කරනු ලබන පූර්ව ප්‍රයෝගයක් අනුබල දීමක් නැති වැ 
               ස්වභාවයෙන්ම යුහුසුලු වූ සිතින් කරනු ලබන බව ය.
             </p>
             <div class="bg-white/50 dark:bg-slate-800/50 p-2.5 rounded-lg mt-2">
@@ -161,7 +171,7 @@ const cittaDetailData = [
               <i class="fa-solid fa-2"></i> දෙවන සිත - සෝමනස්ස සහගත දිට්ඨිගත සම්පයුත්ත සසංඛාරික
             </h4>
             <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-              <strong>සසංඛාරික</strong> නම් තමා විසින් හෝ අනුන් විසින් හෝ කරුණු ලබන පූර්ව ප්‍රයෝග සහිත බව ය. 
+              <strong>සසංඛාරික</strong> නම් තමා විසින් හෝ අනුන් විසින් හෝ කරනු ලබන පූර්ව ප්‍රයෝග සහිත බව ය. 
               එනම්, අනුන්ගේ මෙහෙයීමෙන් හෝ තමා ම පසුබැසීමෙන් හෝ කරනු ලබන බව ය.
             </p>
             <div class="bg-white/50 dark:bg-slate-800/50 p-2.5 rounded-lg mt-2">
@@ -409,16 +419,17 @@ const cittaDetailData = [
             <i class="fa-solid fa-2"></i> උද්ධච්ච සිත
           </h4>
           <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-           මේ සිත් දෙක එකම මෝහ හේතුක බැවින් ද, ස්වභාව චංචල බැවින් ද සොම්නස් දොම්නස් වේදනා භේද නොලබයි, එසේ ම විශේෂ තීක්‍ෂණ බවක් හෝ අතීක්‍ෂණ බවක් හෝ නැති හෙයින් සංඛාර භේදය ද නො ලබයි.
+            මේ සිත් දෙක එකම මෝහ හේතුක බැවින් ද, ස්වභාව චංචල බැවින් ද සොම්නස් දොම්නස් වේදනා භේද නොලබයි, 
+            එසේ ම විශේෂ තීක්‍ෂණ බවක් හෝ අතීක්‍ෂණ බවක් හෝ නැති හෙයින් සංඛාර භේදය ද නො ලබයි.
           </p>
         </div>
 
         <div class="bg-blue-50 dark:bg-slate-900/50 p-4 rounded-lg border border-blue-200 dark:border-slate-700">
           <p class="text-base text-blue-800 dark:text-blue-300">
             <i class="fa-solid fa-lightbulb mr-1"></i>
-            <strong>විශේෂ:</strong> මේ සිත් දෙක එකම මෝහ හේතුක බැවින් ද, ස්වභාව වංගල බැවින් ද 
-            සොම්නස් දොම්නස් වේදනා හෝ නොලබයි, එසේ ම විශේෂ ඥාණ බවක් හෝ අඥාණ බවක් හෝ නැති හෙයින් 
-            සංඛාර හේතුව ද නො ලබයි.
+            <strong>විශේෂ:</strong> මේ සිත් දෙක එකම මෝහ හේතුක බැවින් ද, ස්වභාව චංචල බැවින් ද 
+            සොම්නස් දොම්නස් වේදනා භේද නොලබයි, එසේ ම විශේෂ තීක්‍ෂණ බවක් හෝ අතීක්‍ෂණ බවක් හෝ නැති හෙයින් 
+            සංඛාර භේදය ද නො ලබයි.
           </p>
         </div>
       </div>
@@ -495,7 +506,7 @@ const cittaDetailData = [
                 කර්මයෙන් හටගත් කය නිසා පවත්නා ස්පර්ශ විඳගැනීමේ ශක්තිය යි. ඒ කාය ප්‍රසාදය අනිෂ්ට 
                 ස්පෘෂ්ටව්‍යයක් හා ගැටුණු විට අකුසල විපාක දුක්ඛ සහගත කාය විඤ්ඤාණය ලැබේ.
                 <br><br>
-               එය දුක්ඛ සහගතවීමේ හේතු කිම යත්? ස්ප්‍රෂ්ටව්‍ය නම්; පඨවි, තෙජො වායු යන භූත රූප තුන යි. ඒ භූත රූපාත්මක වූ ස්ප්‍රෂ්ටව්‍යය කාය ප්‍රශාදයේ හැපෙන විට ඒ කාය ප්‍රශාදය ඉක්ම ඒ නිසා පවත්නා භූත රූපයන්හි ද හැපෙයි. එවිට කිණිහිරක් උඩ පුලුන් පෙඳක් තබා කුළකින් පහරන කල්හි කුළ පුලුන් පෙඳ ඉක්ම කිණිහිරෙහි ද හැපෙන්නා සේ හැපීම බලවත් වෙයි. එබැවින් ඉෂ්ටස්ප්‍රෂ්ටව්‍යයක් හැපිණි නම් සුඛ වේදනා උපදී, අනිෂ්ටස්ප්‍රෂ්ටව්‍යයක් හැපිණි නම් දුක්ඛ වේදනා උපදී. මෙය අකුශල විපාක ප්‍රස්තාව හෙයින් දුක්ඛ වේදනා සහගත වූ බව දතයුතු යි.
+                එය දුක්ඛ සහගතවීමේ හේතු කිම යත්? ස්ප්‍රෂ්ටව්‍ය නම්; පඨවි, තෙජො වායු යන භූත රූප තුන යි. ඒ භූත රූපාත්මක වූ ස්ප්‍රෂ්ටව්‍යය කාය ප්‍රශාදයේ හැපෙන විට ඒ කාය ප්‍රශාදය ඉක්ම ඒ නිසා පවත්නා භූත රූපයන්හි ද හැපෙයි. එවිට කිණිහිරක් උඩ පුලුන් පෙඳක් තබා කුළකින් පහරන කල්හි කුළ පුලුන් පෙඳ ඉක්ම කිණිහිරෙහි ද හැපෙන්නා සේ හැපීම බලවත් වෙයි. එබැවින් ඉෂ්ටස්ප්‍රෂ්ටව්‍යයක් හැපිණි නම් සුඛ වේදනා උපදී, අනිෂ්ටස්ප්‍රෂ්ටව්‍යයක් හැපිණි නම් දුක්ඛ වේදනා උපදී. මෙය අකුශල විපාක ප්‍රස්තාව හෙයින් දුක්ඛ වේදනා සහගත වූ බව දතයුතු යි.
               </p>
             </div>
             <div class="bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg border border-orange-100 dark:border-orange-900/50">
@@ -602,38 +613,38 @@ const cittaDetailData = [
                 භවාංග විත්තය යි කියනු ලැබේ. නොයෙක් දිගට නූල් ඇදගෙන ඒ මැදට වී නිසල වැ 
                 සිටිනා මකුළුවකු මෙනි.
                 <br><br>
-              පංචද්වාරයන් අතුරෙන් යම් ද්වාරයෙක අරමුණක් හැපුණු විට ඒ භවාඞ්ග සන්තතිය සෙලවී සිඳී පස්දොරන අතුරෙන් කවර දොරකින් මේ අරමුණ ආයේ දැ යි බලන්නාක් මෙන් උපදින සිත පඤ්චද්වාරාවජ්ජන චිත්තය යි. මකුළු නූලේ සතකු රැඳුණු කල තමා සෙලවුම් කෑයෙන් කවර නූලකින් ඒ සතා රැඳුණේ දැයි පරීක්‍ෂා කොට බලන මකුළුවා මෙනි. එ ද සොම්නස් හෝ දොම්නස් වන්නට ශක්ති මඳ හෙයින් උපේක්‍ෂා සහගත ම වේ. 
+                පංචද්වාරයන් අතුරෙන් යම් ද්වාරයෙක අරමුණක් හැපුණු විට ඒ භවාඞ්ග සන්තතිය සෙලවී සිඳී පස්දොරන අතුරෙන් කවර දොරකින් මේ අරමුණ ආයේ දැ යි බලන්නාක් මෙන් උපදින සිත පඤ්චද්වාරාවජ්ජන චිත්තය යි. මකුළු නූලේ සතකු රැඳුණු කල තමා සෙලවුම් කෑයෙන් කවර නූලකින් ඒ සතා රැඳුණේ දැයි පරීක්‍ෂා කොට බලන මකුළුවා මෙනි. එ ද සොම්නස් හෝ දොම්නස් වන්නට ශක්ති මඳ හෙයින් උපේක්‍ෂා සහගත ම වේ. 
                 <br><br>
-               මේ උපෙක්ඛා සහගත පඤ්චද්වාරාවජ්ජන චිත්තය පූර්ව කුසලාකුසලයෙක විපාක නොවේ. එසේ ම ඊට මතු විපාක නො ලැබෙන හෙයින් කුශලාකුශල කර්මයක් ද නොවේ. හුදෙක් ක්‍රියා මාත්‍රයෙකැ යි දතයුතු
+                මේ උපෙක්ඛා සහගත පඤ්චද්වාරාවජ්ජන චිත්තය පූර්ව කුසලාකුසලයෙක විපාක නොවේ. එසේ ම ඊට මතු විපාක නො ලැබෙන හෙයින් කුශලාකුශල කර්මයක් ද නොවේ. හුදෙක් ක්‍රියා මාත්‍රයෙකැ යි දතයුතු.
               </p>
             </div>
             <div class="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg border border-purple-100 dark:border-purple-900/50">
               <h5 class="font-bold text-purple-900 dark:text-purple-200 text-base mb-1">29. උපේක්ෂා සහගත මනෝද්වාරාවජ්ජන විත්තය</h5>
               <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-              මනොද්වාරයෙහි වැටුණු අරමුණ ආවර්ජනය කරන චිත්තය මනොද්වාරාවජ්ජන චිත්තය යි. එ ද උපෙක්ඛා සහගත ම හෙයින් උපෙක්ඛා සහගත මනොද්වාරාවජ්ජන චිත්තය යි කියනු ලැබේ. මනොද්වාරය නම් ආවර්ජනයට නැමුණු භවාඞ්ග චිත්තය යි. මෙය ම පංචද්වාරික චිත්ත වීථින්හි දී “වොත්‍ථපන චිත්තය”යි කියනු ලැබේ. මෙ ද කර්මයක් හෝ විපාකයක් නො වන ක්‍රියා මාත්‍රයෙකි.
+                මනොද්වාරයෙහි වැටුණු අරමුණ ආවර්ජනය කරන චිත්තය මනොද්වාරාවජ්ජන චිත්තය යි. එ ද උපෙක්ඛා සහගත ම හෙයින් උපෙක්ඛා සහගත මනොද්වාරාවජ්ජන චිත්තය යි කියනු ලැබේ. මනොද්වාරය නම් ආවර්ජනයට නැමුණු භවාඞ්ග චිත්තය යි. මෙය ම පංචද්වාරික චිත්ත වීථින්හි දී “වොත්‍ථපන චිත්තය”යි කියනු ලැබේ. මෙ ද කර්මයක් හෝ විපාකයක් නො වන ක්‍රියා මාත්‍රයෙකි.
               </p>
             </div>
             <div class="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg border border-purple-100 dark:border-purple-900/50">
               <h5 class="font-bold text-purple-900 dark:text-purple-200 text-base mb-1">30. සෝමනස්ස සහගත හසිතුප්පාද විත්තය</h5>
               <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-               හසිතුප්පාද නම් සිනා ඉපැදවීම ය. රහතන් වහන්සේට අනෞදාරීකාරම්මණයෙහි (-සුළු අරමුණුවලදී සිනා උපදවන සිත “සොමනස්ස සහගත හසිතුප්පාද චිත්තය” යි. මේ ද, ක්‍රියාවෙක, කර්ම හෝ විපාක නොවේ. මේ අටළොස් චිත්තයන්ගේ විශේෂ විභාග මතු පැහැදිලි වන බව දතයුතු යි.
+                හසිතුප්පාද නම් සිනා ඉපැදවීම ය. රහතන් වහන්සේට අනෞදාරීකාරම්මණයෙහි (-සුළු අරමුණුවලදී) සිනා උපදවන සිත “සොමනස්ස සහගත හසිතුප්පාද චිත්තය” යි. මේ ද, ක්‍රියාවෙක, කර්ම හෝ විපාක නොවේ. මේ අටළොස් චිත්තයන්ගේ විශේෂ විභාග මතු පැහැදිලි වන බව දතයුතු යි.
               </p>
             </div>
           </div>
         </div>
 
         <div class="bg-amber-50 dark:bg-slate-900/50 p-4 rounded-lg border border-amber-200 dark:border-slate-700">
-          <p class="text-base text-amber-800 dark:text-saffron-300">
+          <p class="text-base text-amber-800 dark:text-saffron-300 mb-2">
             <i class="fa-solid fa-lightbulb mr-1"></i>
-            <strong>සාරාංශය:</strong> 
-            
-        <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed">
-          <strong>   “පාපාහෙතූක මුත්තානි සොභනානීති වුච්චරෙ,<br>
-             එකූනසට්ඨිචිත්තානි අථෙකනවුතිපි වා."</strong>
-        </p>
-            
-           <p> අකුසල සිත් 12 හා මේ අහේතුක සිත් 18 හැර මතු කියනු ලබන සිත් 59 හෝ 
-            91 සෝභන සිත් නම් වේ.</p>
+            <strong>සාරාංශය:</strong>
+          </p>
+          <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed">
+            “පාපාහෙතූක මුත්තානි සොභනානීති වුච්චරෙ,<br>
+            එකූනසට්ඨිචිත්තානි අථෙකනවුතිපි වා."
+          </p>
+          <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed mt-2">
+            අකුසල සිත් 12 හා මේ අහේතුක සිත් 18 හැර මතු කියනු ලබන සිත් 59 හෝ 
+            91 සෝභන සිත් නම් වේ.
           </p>
         </div>
       </div>
@@ -661,15 +672,38 @@ const cittaDetailData = [
             <i class="fa-solid fa-list-ol mr-2"></i> කාමාවචර කුසල සිත් 8
           </div>
           <div class="p-3 space-y-2">
-            ${[1,2,3,4,5,6,7,8].map(i => {
-              const feelings = i <= 4 ? 'සෝමනස්ස' : 'උපේක්ෂා';
-              const nana = (i % 2 === 1) ? 'ඤාණ සම්පයුත්ත' : 'ඤාණ විප්පයුත්ත';
-              const sankhara = (i % 2 === 0) ? 'සසංඛාරික' : 'අසංඛාරික';
-              return `<div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
-                <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">${i}</span>
-                <span class="text-base">${feelings} සහගත ${nana} ${sankhara} සිත</span>
-              </div>`;
-            }).join('')}
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">1</span>
+              <span class="text-base">සෝමනස්ස සහගත ඤාණසම්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">2</span>
+              <span class="text-base">සෝමනස්ස සහගත ඤාණසම්පයුත්ත සසංඛාරික සිත</span>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">3</span>
+              <span class="text-base">සෝමනස්ස සහගත ඤාණවිප්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">4</span>
+              <span class="text-base">සෝමනස්ස සහගත ඤාණවිප්පයුත්ත සසංඛාරික සිත</span>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">5</span>
+              <span class="text-base">උපේක්ෂා සහගත ඤාණසම්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">6</span>
+              <span class="text-base">උපේක්ෂා සහගත ඤාණසම්පයුත්ත සසංඛාරික සිත</span>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">7</span>
+              <span class="text-base">උපේක්ෂා සහගත ඤාණවිප්පයුත්ත අසංඛාරික සිත</span>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-2.5 rounded-lg border border-green-100 dark:border-green-900/50 flex items-start gap-2">
+              <span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full">8</span>
+              <span class="text-base">උපේක්ෂා සහගත ඤාණවිප්පයුත්ත සසංඛාරික සිත</span>
+            </div>
           </div>
         </div>
 
@@ -678,12 +712,11 @@ const cittaDetailData = [
             <i class="fa-solid fa-circle-info"></i> ලක්ෂණ විස්තරය
           </h4>
           <ul class="text-base text-slate-700 dark:text-slate-300 space-y-2">
-            <li><strong>සෝමනස්ස සහගත:</strong> සුඛ වේදනාවෙන් - සොම්නසින් - සතුටින් යුක්ත බව ය.බලවත් ශ්‍රද්ධාව හා දර්ශන සම්පත්, ප්‍රත්‍යය සම්පත්, 
-              ප්‍රතිග්‍රාහක සම්පත්, ප්‍රදේශ සම්පත්, කාල සම්පත් ලැබීම යනාදී කරුණු නොලැබීම 
-              සෝමනස්ස සහගත වීමේ හේතු ය.</li>
-            <li><strong>ඤාණ සම්පයුත්ත:</strong> නම් යථා ස්වභාවය දැන්මෙන් හෙවත් දානාදී කුසලයන්ගෙන් ඉෂ්ටවිපාක ලැබෙන්නේ ය. යනාදිය දැන්මෙන් යුක්ත බව ය. ප්‍රඥාව ලැබීමට හේතු කර්මය, බඹලොව ඉපද සිටීම ය, ඉඳුරන් බිහිකිරීම ය, ක්ලේශයන්ගෙන් දුරුව සිටීම ය යන මොව්හු ඥානසම්ප්‍රයුක්ත වීමේ හේතු වෙති. 
-              හෙවත් ඥානය නොයොදෙන බව ය. ඥාන සම්පයුත්ත වීමට හේතු ය යි කරුණු නො ලැබීම ඥාන සම්පයුත්ත වීමට හේතු ය.</li>
-            <li><strong>අසංඛාරික:</strong> අසංඛාර නම් පූර්වප්‍රයෝග රහිත බව ය. හෙවත් අනුන්ගේ නියෝගය නිසාත් නො වැ තමාගේ ම පසුබැසීමෙනුත් නො වැ ස්වභාව තීක්‍ෂණ (=ඉබේ ම තියුණු) වූ සිතින් යුක්ත බව ය. ආවාස සප්පාය සෘතු සප්පාය භොජන සප්පාය ලැබීම, දන්දී පුරුදු බව යනාදිය අසංඛාර වීමේ හේතු යි.</li>
+            <li><strong>සෝමනස්ස සහගත:</strong> සුඛ වේදනාවෙන් - සොම්නසින් - සතුටින් යුක්ත බව ය. බලවත් ශ්‍රද්ධාව හා දර්ශන සම්පත්, ප්‍රත්‍යය සම්පත්, 
+              ප්‍රතිග්‍රාහක සම්පත්, ප්‍රදේශ සම්පත්, කාල සම්පත් ලැබීම යනාදී කරුණු සෝමනස්ස සහගත වීමේ හේතු ය.</li>
+            <li><strong>ඤාණ සම්පයුත්ත:</strong> යථා ස්වභාවය දැන්මෙන් හෙවත් දානාදී කුසලයන්ගෙන් ඉෂ්ටවිපාක ලැබෙන්නේ ය යනාදිය දැන්මෙන් යුක්ත බව ය. ප්‍රඥාව ලැබීමට හේතු කර්මය, බඹලොව ඉපද සිටීම ය, ඉඳුරන් බිහිකිරීම ය, ක්ලේශයන්ගෙන් දුරුව සිටීම ය යන මොව්හු ඥානසම්ප්‍රයුක්ත වීමේ හේතු වෙති. 
+              විප්පයුත්ත නම් ඥානය නොයෙදෙන බව ය. ඥාන සම්පයුත්ත වීමට හේතු නොලැබීම ඥාන විප්පයුත්ත වීමට හේතු ය.</li>
+            <li><strong>අසංඛාරික:</strong> අසංඛාර නම් පූර්වප්‍රයෝග රහිත බව ය. හෙවත් අනුන්ගේ නියෝගය නිසාත් නො වැ තමාගේ ම පසුබැසීමෙනුත් නො වැ ස්වභාව තීක්‍ෂණ (=ඉබේ ම තියුණු) වූ සිතින් යුක්ත බව ය. ආවාස සප්පාය, සෘතු සප්පාය, භෝජන සප්පාය ලැබීම, දන්දී පුරුදු බව යනාදිය අසංඛාර වීමේ හේතු යි.</li>
           </ul>
         </div>
 
@@ -792,10 +825,83 @@ const cittaDetailData = [
   },
 
   // ============================================================
-  // 8. ලෝකෝත්තර මාර්ග සිත් 4 - දීර්ඝ විස්තර
+  // 8. අරූපාවචර කුසල සිත් 4 - දීර්ඝ විස්තර
   // ============================================================
   {
-    title: "8. ලෝකෝත්තර මාර්ග සිත් 4 - දීර්ඝ විස්තරය",
+    title: "8. අරූපාවචර කුසල සිත් 4 - දීර්ඝ විස්තරය",
+    desc: `
+      <div class="space-y-4">
+        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-4 rounded-xl border border-purple-200 dark:border-purple-800">
+          <h4 class="font-bold text-lg text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-om"></i> අරූපාවචර කුසල සිත් 4 හැඳින්වීම
+          </h4>
+          <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+            රූප ධර්මයන් කෙරෙහි කලකිරී, රූප විරාග භාවනාව වඩා අරූප ධ්‍යාන උපදවා ගැනීමෙන් පහළ වන කුසල් සිත් <strong>අරූපාවචර කුසල් සිත්</strong> නම් වේ. මේවා ධ්‍යාන අංග වශයෙන් වෙනස් නොවන අතර, අරමුණු කරන <strong>ආරම්මණ (අරමුණ)</strong> අනුව සිත් 4ක් ලෙස ප්‍රභේද වේ.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-xl border border-purple-200 dark:border-purple-800 overflow-hidden">
+          <div class="bg-purple-100 dark:bg-purple-900/40 px-4 py-2 font-bold text-base text-purple-800 dark:text-purple-200">
+            <i class="fa-solid fa-list-ol mr-2"></i> අරූපාවචර කුසල සිත් 4
+          </div>
+          <div class="p-3 space-y-2">
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-2.5 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2">
+              <span class="bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-sm font-bold px-2.5 py-0.5 rounded-full">1</span>
+              <span class="text-base">අනන්ත වූ ආකාශය අරමුණු කොට උපදනා <strong>ආකාසානඤ්චායතන කුසල සිත</strong></span>
+            </div>
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-2.5 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2">
+              <span class="bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-sm font-bold px-2.5 py-0.5 rounded-full">2</span>
+              <span class="text-base">ප්‍රථම අරූප විඤ්ඤාණය අරමුණු කොට උපදනා <strong>විඤ්ඤාණඤ්චායතන කුසල සිත</strong></span>
+            </div>
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-2.5 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2">
+              <span class="bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-sm font-bold px-2.5 py-0.5 rounded-full">3</span>
+              <span class="text-base">පළමු විඤ්ඤාණයේ කිසිවක් නැති බව (නත්ථිභාවය) අරමුණු කොට උපදනා <strong>ආකිඤ්චඤ්ඤායතන කුසල සිත</strong></span>
+            </div>
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-2.5 rounded-lg border border-purple-100 dark:border-purple-900/50 flex items-start gap-2">
+              <span class="bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-sm font-bold px-2.5 py-0.5 rounded-full">4</span>
+              <span class="text-base">ඖදාරික සංඥා නැති, ඉතා සියුම් සංඥා සහිත වූ <strong>නෙවසඤ්ඤානාසඤ්ඤායතන කුසල සිත</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 p-4 rounded-xl border border-purple-200 dark:border-slate-700">
+          <h4 class="font-bold text-base text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-book-open"></i> අරූප ධ්‍යාන අංග සහ විශේෂ ලක්ෂණ
+          </h4>
+          <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+            රූපාවචර ධ්‍යාන මෙන් අරූපාවචර සිත් ධ්‍යාන අංග වෙනස් වීමෙන් බෙදී නොයයි. මේ සියලු අරූප ධ්‍යාන සිත්හි යෙදෙන්නේ රූපාවචර පස්වන ධ්‍යානයට අයත් <strong>උපේක්ෂා</strong> සහ <strong>ඒකග්ගතා</strong> යන ධ්‍යාන අංග 2 පමණි. 
+            <br><br>
+            එබැවින් ධ්‍යාන අංග විභාගයේදී මේවා රූපාවචර පඤ්චම ධ්‍යානයට ම ඇතුළත් වේ. වෙනස පවතින්නේ ඒවා විසින් ගනු ලබන අරමුණුවල සියුම් බව (ආරම්මණ භේදය) මත පමණි.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 p-4 rounded-xl border border-purple-200 dark:border-slate-700">
+          <h4 class="font-bold text-base text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> සිත් සතරේ ආරම්මණ (අරමුණු) විග්‍රහය
+          </h4>
+          <ul class="text-base text-slate-700 dark:text-slate-300 space-y-2 mt-2">
+            <li>• <strong>ආකාසානඤ්චායතනය:</strong> කසිණ රූපය ඉවත් කොට අනන්ත වූ හිස් ආකාශය අරමුණු කරයි.</li>
+            <li>• <strong>විඤ්ඤාණඤ්චායතනය:</strong> පෙර ආකාශය අරමුණු කළ ප්‍රථම අරූප විඤ්ඤාණය අනන්තය යි සලකා අරමුණු කරයි.</li>
+            <li>• <strong>ආකිඤ්චඤ්ඤායතනය:</strong> ප්‍රථම අරූප විඤ්ඤාණයේ කිසිවක් නැති බව (අභාවය/හිස් බව) අරමුණු කරයි.</li>
+            <li>• <strong>නෙවසඤ්ඤානාසඤ්ඤායතනය:</strong> ආකිඤ්චඤ්ඤායතන සිත අරමුණු කරමින්, සංඥාව නොපවත්නා තරම් අතිශය සියුම් වූ තත්ත්වයකට පත්වේ.</li>
+          </ul>
+        </div>
+
+        <div class="bg-amber-50 dark:bg-slate-900/50 p-4 rounded-lg border border-amber-200 dark:border-slate-700">
+          <p class="text-base text-amber-800 dark:text-saffron-300">
+            <i class="fa-solid fa-lightbulb mr-1"></i>
+            <strong>සාරාංශය:</strong> උපේක්ෂා, ඒකග්ගතා යන අංග දෙකින් යුක්ත වන අරූපාවචර කුසල් සිත්, ආරම්මණ භේදය අනුව සිව් වැදෑරුම් වන අතර සියුම් බවින් එකකට වඩා එකක් උසස් වේ.
+          </p>
+        </div>
+      </div>
+    `
+  },
+
+  // ============================================================
+  // 9. ලෝකෝත්තර මාර්ග සිත් 4 - දීර්ඝ විස්තර
+  // ============================================================
+  {
+    title: "9. ලෝකෝත්තර මාර්ග සිත් 4 - දීර්ඝ විස්තරය",
     desc: `
       <div class="space-y-4">
         <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 p-4 rounded-xl border border-amber-200 dark:border-amber-800">
@@ -844,10 +950,10 @@ const cittaDetailData = [
                 <strong>සකෘදාගාමි පුද්ගලයා පස් ආකාරයකට බෙදේ:</strong>
                 <ol class="list-decimal list-inside space-y-1 mt-2">
                   <li>මෙබඳි සකෘදාගාමි මාර්ගය ලබා මෙබඳි ම රහත්වැ පිරිනිවන්නා ය.</li>
-                  <li>මෙබඳි සකෘදාගාමි මාර්ගය ලබා මිය අනය භවයක ඉපිද එබඳි රහත් වැ පිරිනිවන්නා ය.</li>
-                  <li>අනය භවයක දී සකෘදාගාමි මාර්ගය ලබා එබඳි ම රහත්වැ පිරිනිවන්නා ය.</li>
-                  <li>අනය භවයක දී සකෘදාගාමි මාර්ගය ලබා එයින් මිය මෙබඳි ඉපිද රහත් වැ පිරිනිවන්නා ය.</li>
-                  <li>මෙබඳි දී සකෘදාගාමි මාර්ගය ලබා අනය භවයක ඉපිද එයින් මිය නැවත මෙබඳි ඉපිද 
+                  <li>මෙබඳි සකෘදාගාමි මාර්ගය ලබා මිය අන්‍ය භවයක ඉපිද එබඳි රහත් වැ පිරිනිවන්නා ය.</li>
+                  <li>අන්‍ය භවයක දී සකෘදාගාමි මාර්ගය ලබා එබඳි ම රහත්වැ පිරිනිවන්නා ය.</li>
+                  <li>අන්‍ය භවයක දී සකෘදාගාමි මාර්ගය ලබා එයින් මිය මෙබඳි ඉපිද රහත් වැ පිරිනිවන්නා ය.</li>
+                  <li>මෙබඳි දී සකෘදාගාමි මාර්ගය ලබා අන්‍ය භවයක ඉපිද එයින් මිය නැවත මෙබඳි ඉපිද 
                     රහත්වැ පිරිනිවන්නා ය යි සකෘදාගාමි පුද්ගලයා පස් ආකාරයකට බෙදේ.</li>
                 </ol>
               </p>
@@ -857,7 +963,7 @@ const cittaDetailData = [
               <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                 <strong>'න ආගාමි - අනාගාමි'</strong> ප්‍රතිසන්ධි වශයෙන් නැවත මේ කාමලෝකයට 
                 නො එන්නේ අනාගාමි නම් වේ. ඔහුගේ මාර්ග විත්තය අනාගාමි මාර්ග විත්තය යි. 
-                වන්දාලෝකයෙන් යෙරෝක්ත ස්වර්ණ භාජනය දුටුවා සේ හෙතෙම නිර්වාණය දකින්නේ ය. 
+                චන්ද්‍රාලෝකයෙන් පෙර කී ස්වර්ණ භාජනය දුටුවා සේ හෙතෙම නිර්වාණය දකින්නේ ය. 
                 ඒ හා සමගම ඔහුගේ විත්ත සන්තානයෙහි පැවැති කාමරාග, ව්‍යාපාද යන තුනීවූ 
                 සංයෝජන දෙක මූලෝච්ඡින්න වන්නේ ය. හෙතෙම ඉදින් මේ ජන්මයෙහිදී ම රහත් නුවූයේ නම් 
                 ශුද්ධාවාස බ්‍රහ්මලෝකයෙක ඉපිද එහිදී රහත්වන්නේ ය. නැවත කිසිලෙසක 
@@ -867,10 +973,10 @@ const cittaDetailData = [
             <div class="bg-amber-50 dark:bg-amber-900/20 p-3 rounded-lg border border-amber-100 dark:border-amber-900/50">
               <h5 class="font-bold text-amber-900 dark:text-amber-200 text-base mb-1">4. අරහත් මග්ග විත්තය</h5>
               <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                අගුදක්ෂණාර්හ හෙයින් පූජාවන් ලබන්නට අර්හ (සුදුසු වූයේ හෝ සංසාර චක්‍රයෙහි 
-                කෙලෙස් අර කැපූ හෙයින් හෝ රහසින් වත් පවි නොකරන හෙයින් හෝ) අර්හත් නම් වේ. 
+                අග්‍රදක්ෂිණාර්හ හෙයින් පූජාවන් ලබන්නට අර්හ (සුදුසු වූයේ හෝ සංසාර චක්‍රයෙහි 
+                කෙලෙස් අර කැපූ හෙයින් හෝ රහසින් වත් පව් නොකරන හෙයින් හෝ) අර්හත් නම් වේ. 
                 ඔහුගේ මාර්ග විත්තය අර්හත් මාර්ග විත්තය යි. මේ විත්තය ලැබූයේ මධ්‍යාහ්න 
-                සූර්යාලෝකයෙන් යෙරෝක්ත ස්වර්ණ භාජනය දුටුවා සේ නිර්වාණය දකින්නේ ය. 
+                සූර්යාලෝකයෙන් පෙර කී ස්වර්ණ භාජනය දුටුවා සේ නිර්වාණය දකින්නේ ය. 
                 ඒ හා සමග ම උන්වහන්සේගේ විත්ත සන්තානයෙහි පැවැති සෙසු සියලු ක්ලේශයෝ 
                 විනාශයට යන්නාහ. උන්වහන්සේ මරණයෙන් පසු පුනර්භවයෙක නො ඉපිද 
                 නිරුපධිශේෂ නිර්වාණධාතු බවට පැමිණෙන සේක.
@@ -890,10 +996,10 @@ const cittaDetailData = [
   },
 
   // ============================================================
-  // 9. ලෝකෝත්තර ඵල සිත් 4 - දීර්ඝ විස්තර
+  // 10. ලෝකෝත්තර ඵල සිත් 4 - දීර්ඝ විස්තර
   // ============================================================
   {
-    title: "9. ලෝකෝත්තර ඵල සිත් 4 - දීර්ඝ විස්තරය",
+    title: "10. ලෝකෝත්තර ඵල සිත් 4 - දීර්ඝ විස්තරය",
     desc: `
       <div class="space-y-4">
         <div class="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 p-4 rounded-xl border border-rose-200 dark:border-rose-800">
@@ -942,7 +1048,7 @@ const cittaDetailData = [
                 අර්හත් මාර්ගයට අනතුරු වැ ලැබෙන විත්තය අර්හත් ඵල විත්තය යි. 
                 මෙහිදු මාර්ග සිත් කුසල් ය. ඵල සිත් විපාකය යි දතයුතු. 
                 මේ ලෝකෝත්තර කුසල් සිත් එක් වරක විනා දෙවරක කිසිවිටෙක නූපදනා බැවින් 
-                ලෝකෝත්තර කියා නම් සිත් වර්ගයක් නැත්තේ ය.
+                ලෝකෝත්තර ක්‍රියා නම් සිත් වර්ගයක් නැත්තේ ය.
               </p>
             </div>
           </div>
@@ -959,10 +1065,10 @@ const cittaDetailData = [
   },
 
   // ============================================================
-  // 10. සංග්‍රහ ගාථා - දීර්ඝ විස්තර
+  // 11. සංග්‍රහ ගාථා - දීර්ඝ විස්තර
   // ============================================================
   {
-    title: "10. සංග්‍රහ ගාථා - දීර්ඝ විස්තරය",
+    title: "11. සංග්‍රහ ගාථා - දීර්ඝ විස්තරය",
     desc: `
       <div class="space-y-4">
         <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-slate-800 dark:to-slate-900 p-4 rounded-xl border border-amber-200 dark:border-slate-700">
@@ -1001,11 +1107,10 @@ const cittaDetailData = [
             සහෙතුකාමාවචරපුඤ්ඤපාකක්රියා මතා"
           </p>
             
-          <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed mt-2">
             "කාමෙ තෙවීස පාකානි, පුඤ්ඤාපුඤ්ඤානි වීසති,<br>
             එකාදස ක්රියා චෙති, චතුපඤ්ඤාස සබ්බථා"
           </p>
-
 
           <p class="text-sm text-green-700 dark:text-green-300 mt-2">
             කාමාවචර කුසල් ය, සහේතුක කාමාවචර විපාක ය, සහේතුක කාමාවචර ක්‍රියා ය යන මේ චිත්තයෝ වේදනා ඤාණ සංඛාර භේදයෙන් සූවිසි වැදෑරුම් වෙත්.
@@ -1048,26 +1153,28 @@ const cittaDetailData = [
             පාකං තස්ස ඵලත්තාති, අට්ඨධානුත්තරං මතං"
           </p>
           <p class="text-sm text-indigo-700 dark:text-indigo-300 mt-2">
-            ලෝකෝත්තර සිත් සතර මාර්ග හේදයෙන් චතුර්විධ ය. විපාක වනාහි ඔහුගේ ම ඵල බැවින් 
-            හේද චතුර්විධ ය. මෙසේ ලෝකෝත්තර සිත් ද අෂ්ටවිධ ය.
+            ලෝකෝත්තර සිත් සතර මාර්ග භේදයෙන් චතුර්විධ ය. විපාක වනාහි ඔහුගේ ම ඵල බැවින් 
+            භේද චතුර්විධ ය. මෙසේ ලෝකෝත්තර සිත් ද අෂ්ටවිධ ය.
           </p>
         </div>
 
         <div class="bg-amber-50 dark:bg-slate-900/50 p-4 rounded-lg border border-amber-200 dark:border-slate-700">
-          <p class="text-base text-amber-800 dark:text-saffron-300">
+          <p class="text-base text-amber-800 dark:text-saffron-300 mb-2">
             <i class="fa-solid fa-lightbulb mr-1"></i>
-            <strong>සාරාංශය:</strong> 
-           <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed">
-            " චතුපඤ්ඤාසධා කාමෙ, රූපෙ පන්නරසීරයෙ,<br>
-            චිත්තානි ද්වාදසාරුප්පෙ, අට්ඨධානුත්තරෙ තථා,
-           </p> 
+            <strong>සාරාංශය:</strong>
+          </p>
+          <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed">
+            "චතුපඤ්ඤාසධා කාමෙ, රූපෙ පන්නරසීරයෙ,<br>
+            චිත්තානි ද්වාදසාරුප්පෙ, අට්ඨධානුත්තරෙ තථා,"
+          </p> 
             
-           <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-base italic text-slate-700 dark:text-slate-300 leading-relaxed mt-2">
             "ඉත්ථමෙකූනනවුතිපභෙදං පන මානසං,<br>
-            එකවීසසතං වාථ, විභජන්ති විචක්ඛණා.
-           </p> 
+            එකවීසසතං වාථ, විභජන්ති විචක්ඛණා."
+          </p> 
           
-            කාමාවචර සිත් 54 ක, රූපාවචර සිත් 15 ක, අරූපාවචර සිත් 12 ක. ලෝකෝත්තර සිත් 8 කැ යි භූමිහෙද වශයෙන් සිත් 89 දතයුතු.
+          <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed mt-2">
+            කාමාවචර සිත් 54 ක, රූපාවචර සිත් 15 ක, අරූපාවචර සිත් 12 ක, ලෝකෝත්තර සිත් 8 කැ යි භූමිභේද වශයෙන් සිත් 89 දතයුතු.
             උක්ත ප්‍රකාරයෙන් කාමාවචරාදි චාතුර්භූමික සිත් සියල්ල 89 ක් වන්නේ ය. වැළි එය 121 ආකාරයට ද බෙදනු ලැබේ.
           </p>
         </div>
@@ -1199,15 +1306,30 @@ const citta121Data = {
           "</ul></div></div>"
   },
 
+  rupa15Full: {
+    title: "B - රූපාවචර සිත් 15",
+    desc: "<p class='mb-3 text-base text-slate-600 dark:text-slate-400'>රූපාවචර සිත් 15 කි. කුසල් 5, විපාක 5, ක්‍රියා 5 වශයෙනි.</p>" +
+          "<div class='grid grid-cols-1 md:grid-cols-3 gap-3'>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-xl border border-green-200 dark:border-green-800'><strong class='text-green-800 dark:text-green-200 block mb-2'>B1. කුසල් සිත් 5</strong><ul class='space-y-1 text-sm'>" +
+          ['ප්‍රථම ධ්‍යාන', 'දුතිය ධ්‍යාන', 'තෘතීය ධ්‍යාන', 'චතුර්ථ ධ්‍යාන', 'පඤ්චම ධ්‍යාන'].map((n, i) => `<li>${i+1}. ${n} කුසල් සිත</li>`).join('') +
+          "</ul></div>" +
+          "<div class='bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl border border-blue-200 dark:border-blue-800'><strong class='text-blue-800 dark:text-blue-200 block mb-2'>B2. විපාක සිත් 5</strong><ul class='space-y-1 text-sm'>" +
+          ['ප්‍රථම ධ්‍යාන', 'දුතිය ධ්‍යාන', 'තෘතීය ධ්‍යාන', 'චතුර්ථ ධ්‍යාන', 'පඤ්චම ධ්‍යාන'].map((n, i) => `<li>${i+1}. ${n} විපාක සිත</li>`).join('') +
+          "</ul></div>" +
+          "<div class='bg-purple-50 dark:bg-purple-900/20 p-3 rounded-xl border border-purple-200 dark:border-purple-800'><strong class='text-purple-800 dark:text-purple-200 block mb-2'>B3. ක්‍රියා සිත් 5</strong><ul class='space-y-1 text-sm'>" +
+          ['ප්‍රථම ධ්‍යාන', 'දුතිය ධ්‍යාන', 'තෘතීය ධ්‍යාන', 'චතුර්ථ ධ්‍යාන', 'පඤ්චම ධ්‍යාන'].map((n, i) => `<li>${i+1}. ${n} ක්‍රියා සිත</li>`).join('') +
+          "</ul></div></div>"
+  },
+
   rupaKusala5Full: {
     title: "B1 - රූපාවචර කුසල් සිත් 5",
     desc: "<p class='mb-3 text-base text-slate-600 dark:text-slate-400'>රූපාවචර කුසල් සිත් 5 කි.</p>" +
           "<div class='grid grid-cols-1 gap-2'>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>1</span><span class='text-base'><strong>විතක්ක, විචාර, පීති, සුඛ, ඒකග්ගතා</strong> සහිත ප්‍රථම ධ්‍යානය කුසල් සිත</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>2</span><span class='text-base'><strong>විචාර, පීති, සුඛ, ඒකග්ගතා</strong> සහිත දුතිය ධ්‍යානය කුසල් සිත</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>3</span><span class='text-base'><strong>පීති, සුඛ, ඒකග්ගතා</strong> සහිත තෘතීය ධ්‍යානය කුසල් සිත</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>4</span><span class='text-base'><strong>සුඛ, ඒකග්ගතා</strong> සහිත චතුර්ථ ධ්‍යානය කුසල් සිත</span></div>" +
-          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>5</span><span class='text-base'><strong>උපේක්ෂා, ඒකග්ගතා</strong> සහිත පඤ්චම ධ්‍යානය කුසල් සිත</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>1</span><span class='text-base'><strong>විතක්ක, විචාර, පීති, සුඛ, ඒකග්ගතා</strong> සහිත ප්‍රථම ධ්‍යාන කුසල් සිත</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>2</span><span class='text-base'><strong>විචාර, පීති, සුඛ, ඒකග්ගතා</strong> සහිත දුතිය ධ්‍යාන කුසල් සිත</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>3</span><span class='text-base'><strong>පීති, සුඛ, ඒකග්ගතා</strong> සහිත තෘතීය ධ්‍යාන කුසල් සිත</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>4</span><span class='text-base'><strong>සුඛ, ඒකග්ගතා</strong> සහිත චතුර්ථ ධ්‍යාන කුසල් සිත</span></div>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800 flex items-start gap-2'><span class='bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>5</span><span class='text-base'><strong>උපේක්ෂා, ඒකග්ගතා</strong> සහිත පඤ්චම ධ්‍යාන කුසල් සිත</span></div>" +
           "</div>"
   },
 
@@ -1216,11 +1338,11 @@ const citta121Data = {
     desc: "<p class='mb-3 text-base text-slate-600 dark:text-slate-400'>රූපාවචර විපාක සිත් 5 කි.</p>" +
           "<div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => 
             `<div class='bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-200 dark:border-blue-800 flex items-start gap-2'><span class='bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>${i+1}</span><span class='text-base'>${n} විපාක සිත</span></div>`
           ).join('') +
@@ -1232,15 +1354,30 @@ const citta121Data = {
     desc: "<p class='mb-3 text-base text-slate-600 dark:text-slate-400'>රූපාවචර ක්‍රියා සිත් 5 කි. මේවා රහතන් වහන්සේට පමණක් උපදින සිත් වේ.</p>" +
           "<div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => 
             `<div class='bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg border border-purple-200 dark:border-purple-800 flex items-start gap-2'><span class='bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 text-sm font-bold px-2.5 py-0.5 rounded-full'>${i+1}</span><span class='text-base'>${n} ක්‍රියා සිත</span></div>`
           ).join('') +
           "</div>"
+  },
+
+  arupa12Full: {
+    title: "C - අරූපාවචර සිත් 12",
+    desc: "<p class='mb-3 text-base text-slate-600 dark:text-slate-400'>අරූපාවචර සිත් 12 කි. කුසල් 4, විපාක 4, ක්‍රියා 4 වශයෙනි.</p>" +
+          "<div class='grid grid-cols-1 md:grid-cols-3 gap-3'>" +
+          "<div class='bg-green-50 dark:bg-green-900/20 p-3 rounded-xl border border-green-200 dark:border-green-800'><strong class='text-green-800 dark:text-green-200 block mb-2'>C1. කුසල් සිත් 4</strong><ul class='space-y-1 text-sm'>" +
+          ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => `<li>${i+1}. ${n} කුසල්</li>`).join('') +
+          "</ul></div>" +
+          "<div class='bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl border border-blue-200 dark:border-blue-800'><strong class='text-blue-800 dark:text-blue-200 block mb-2'>C2. විපාක සිත් 4</strong><ul class='space-y-1 text-sm'>" +
+          ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => `<li>${i+1}. ${n} විපාක</li>`).join('') +
+          "</ul></div>" +
+          "<div class='bg-purple-50 dark:bg-purple-900/20 p-3 rounded-xl border border-purple-200 dark:border-purple-800'><strong class='text-purple-800 dark:text-purple-200 block mb-2'>C3. ක්‍රියා සිත් 4</strong><ul class='space-y-1 text-sm'>" +
+          ['ආකාසානඤ්චායතන', 'විඤ්ඤාණඤ්චායතන', 'ආකිඤ්චඤ්ඤායතන', 'නේවසඤ්ඤානාසඤ්ඤායතන'].map((n, i) => `<li>${i+1}. ${n} ක්‍රියා</li>`).join('') +
+          "</ul></div></div>"
   },
 
   arupaKusala4Full: {
@@ -1273,6 +1410,15 @@ const citta121Data = {
           "</div>"
   },
 
+  lokuttara40Full: {
+    title: "D - ලෝකෝත්තර සිත් 40",
+    desc: "<p class='mb-3 text-base text-slate-600 dark:text-slate-400'>ලෝකෝත්තර සිත් 40 කි. මාර්ග සිත් 20 ක් සහ ඵල සිත් 20 ක් වශයෙනි.</p>" +
+          "<div class='grid grid-cols-1 md:grid-cols-2 gap-3'>" +
+          "<div class='bg-amber-50 dark:bg-amber-900/20 p-3 rounded-xl border border-amber-200 dark:border-amber-800'><strong class='text-amber-800 dark:text-amber-200 block mb-2'>D1. මාර්ග සිත් 20</strong><p class='text-sm'>සෝතාපත්ති, සකදාගාමි, අනාගාමි, අරහත් යන මාර්ග 4 ධ්‍යාන 5 බැගින් ගුණනය වීමෙන් 20 කි.</p></div>" +
+          "<div class='bg-rose-50 dark:bg-rose-900/20 p-3 rounded-xl border border-rose-200 dark:border-rose-800'><strong class='text-rose-800 dark:text-rose-200 block mb-2'>D2. ඵල සිත් 20</strong><p class='text-sm'>සෝතාපත්ති, සකදාගාමි, අනාගාමි, අරහත් යන ඵල 4 ධ්‍යාන 5 බැගින් ගුණනය වීමෙන් 20 කි.</p></div>" +
+          "</div>"
+  },
+
   lokuttaraMagga20Full: {
     title: "D1 - ලෝකෝත්තර මාර්ග සිත් 20",
     desc: "<p class='mb-3 text-base text-slate-600 dark:text-slate-400'>ලෝකෝත්තර මාර්ග සිත් 20 කි. (ලෝකෝත්තර සිත් 8 ම ධ්‍යාන 5 සමඟ = 40)</p>" +
@@ -1280,44 +1426,44 @@ const citta121Data = {
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-base text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> සෝතාපත්ති මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-base'>${i+1}. සෝතාපත්ති මග්ග සිත - ${n}</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-base text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> සකදාගාමි මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-base'>${i+6}. සකදාගාමි මග්ග සිත - ${n}</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-base text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> අනාගාමි මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-base'>${i+11}. අනාගාමි මග්ග සිත - ${n}</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800 overflow-hidden'>" +
           "<div class='bg-amber-100 dark:bg-amber-900/40 px-4 py-2 font-bold text-base text-amber-800 dark:text-amber-200 flex items-center gap-2'><i class='fa-solid fa-road'></i> අරහත් මග්ග සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-amber-100 dark:border-amber-900/50'><span class='text-base'>${i+16}. අරහත් මග්ග සිත - ${n}</span></div>`).join('') +
           "</div></div></div>"
   },
@@ -1329,44 +1475,44 @@ const citta121Data = {
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-base text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> සෝතාපත්ති ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-base'>${i+1}. සෝතාපත්ති ඵල සිත - ${n}</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-rose-50/50 dark:bg-rose-900/20 rounded-xl border border-rose-200 dark:border-rose-800 overflow-hidden'>" +
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-base text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> සකදාගාමි ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-base'>${i+6}. සකදාගාමි ඵල සිත - ${n}</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-rose-50/50 dark:bg-rose-900/20 rounded-xl border border-rose-200 dark:border-rose-800 overflow-hidden'>" +
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-base text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> අනාගාමි ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-base'>${i+11}. අනාගාමි ඵල සිත - ${n}</span></div>`).join('') +
           "</div></div></div>" +
           "<div class='mb-4 bg-rose-50/50 dark:bg-rose-900/20 rounded-xl border border-rose-200 dark:border-rose-800 overflow-hidden'>" +
           "<div class='bg-rose-100 dark:bg-rose-900/40 px-4 py-2 font-bold text-base text-rose-800 dark:text-rose-200 flex items-center gap-2'><i class='fa-solid fa-trophy'></i> අරහත් ඵල සිත් 5</div>" +
           "<div class='p-3'><div class='grid grid-cols-1 gap-2'>" +
           [
-            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යානය',
-            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යානය',
-            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යානය',
-            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යානය',
-            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යානය'
+            'විතක්ක විචාර පීති සුඛ ඒකග්ගතා සහිත ප්‍රථම ධ්‍යාන',
+            'විචාර පීති සුඛ ඒකග්ගතා සහිත දුතිය ධ්‍යාන',
+            'පීති සුඛ ඒකග්ගතා සහිත තෘතීය ධ්‍යාන',
+            'සුඛ ඒකග්ගතා සහිත චතුර්ථ ධ්‍යාන',
+            'උපේක්ෂා ඒකග්ගතා සහිත පඤ්චම ධ්‍යාන'
           ].map((n, i) => `<div class='bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-rose-100 dark:border-rose-900/50'><span class='text-base'>${i+16}. අරහත් ඵල සිත - ${n}</span></div>`).join('') +
           "</div></div></div>"
   },
@@ -1470,7 +1616,7 @@ const citta121Data = {
 };
 
 // ============================================================
-// 3. චිත්ත විභාගයට අදාළ මූලික දත්ත
+// 3. චිත්ත විභාගයට අදාළ මූලික දත්ත (cittaData)
 // ============================================================
 
 const cittaData = [
@@ -1486,11 +1632,11 @@ const cittaData = [
   },
   {
     category: "A. කාමාවචර සිත් 54",
-    description: "කාම ලෝකයට අයත් සිත් 54 කි. (අකුසල් 12, අහේතුක 18, කාම සෝහන 24)",
+    description: "කාම ලෝකයට අයත් සිත් 54 කි. (අකුසල් 12, අහේතුක 18, කාම සෝභන 24)",
     items: [
       { name: "A1. අකුසල් සිත්", role: "12" },
       { name: "A2. අහේතුක සිත්", role: "18" },
-      { name: "A3. කාම සෝහන සිත්", role: "24" }
+      { name: "A3. කාම සෝභන සිත්", role: "24" }
     ]
   },
   {
@@ -1512,7 +1658,7 @@ const cittaData = [
     ]
   },
   {
-    category: "A3. කාම සෝහන සිත් 24",
+    category: "A3. කාම සෝභන සිත් 24",
     description: "කාම සෝභන සිත් 24 කි.",
     items: [
       { name: "a. කුසල් සිත්", role: "8" },
