@@ -1,10 +1,10 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම සඳහා නොබැඳි (Offline) සහාය
-// Version: 10.21.0
+// Version: 11.3.0
 // ============================================================
 
-const CACHE_NAME = 'abhidhamma-matika-v11.0.2';
+const CACHE_NAME = 'abhidhamma-matika-v11.3.0';
 const OFFLINE_URL = './index.html';
 
 // ============================================================
@@ -36,6 +36,8 @@ const ASSETS_TO_CACHE = [
   // ========== චෛතසික ගොනු (caitasika folder) ==========
   './caitasika/caitasika.html',
   './caitasika/caitasika.js',
+  './caitasika/caitasika.lr.html',
+  './caitasika/caitasika.lr.js',
   './caitasika/samprayoga.js',
 
   // ========== චිත්ත ගොනු (Citta folder) ==========
@@ -43,6 +45,9 @@ const ASSETS_TO_CACHE = [
   './Citta/citta.js',
 
   // ========== රූප ගොනු (Rupa folder) ==========
+  './Rupa/rupa-deta.js',
+  './Rupa/rupa-lr.html',
+  './Rupa/rupa-lr.js',
   './Rupa/rupa.html',
   './Rupa/rupa.js',
 
