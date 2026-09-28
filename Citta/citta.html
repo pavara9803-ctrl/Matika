@@ -39,76 +39,56 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body {
             font-family: 'Noto Serif Sinhala', 'Inter', serif;
             -webkit-tap-highlight-color: transparent;
+            font-size: 15px;
         }
         
         /* ============================================================ */
         /* ✅ සිංහල පෙළ සඳහා Justify සැකසුම */
         /* ============================================================ */
-        
-        /* සියලුම ඡේද (paragraphs) justify කරන්න */
-        p {
+        p, .text-justify {
             text-align: justify;
             text-justify: inter-word;
-            word-spacing: 0.05em;
+            word-spacing: 0.04em;
             line-height: 1.8;
             hyphens: auto;
             -webkit-hyphens: auto;
         }
         
-        /* Dynamic content containers */
-        #cittaDetailContent,
-        #citta-container,
-        [id^="infoDetails121Group"] {
-            text-align: justify;
-            text-justify: inter-word;
-        }
-        
-        /* ලැයිස්තු අයිතම justify කරන්න */
-        #cittaDetailContent li,
-        #citta-container li {
+        li {
             text-align: justify;
             text-justify: inter-word;
             line-height: 1.7;
         }
         
-        /* ටේබල් සෛල justify කරන්න */
-        #cittaDetailContent td,
-        #citta-container td {
+        #cittaDetailContent,
+        [id^="infoDetails121Group"] {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        #cittaDetailContent td {
             text-align: justify;
             text-justify: inter-word;
             line-height: 1.6;
         }
         
-        /* ශීර්ෂක left aligned තබන්න */
         h1, h2, h3, h4, h5, h6 {
             text-align: left;
         }
         
-        /* ටේබල් හෙඩර් left aligned තබන්න */
         th {
             text-align: left;
         }
         
-        /* බටන් සහ ලේබල් center aligned තබන්න */
         button, .btn, .badge, .inline-block {
             text-align: center;
-        }
-        
-        /* ============================================================ */
-        /* Tailwind utility override */
-        /* ============================================================ */
-        .text-justify {
-            text-align: justify;
-            text-justify: inter-word;
-            hyphens: auto;
-            -webkit-hyphens: auto;
         }
         
         /* ============================================================ */
@@ -117,7 +97,7 @@
         .citta-intro-card {
             background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
             border: 1px solid #6ee7b7;
-            border-left: 5px solid #059669;
+            border-left: 6px solid #059669;
         }
         .dark .citta-intro-card {
             background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
@@ -126,18 +106,15 @@
         }
         
         .citta-intro-card .gatha-box {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.85);
             border-left: 4px solid #059669;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
         }
         .dark .citta-intro-card .gatha-box {
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.35);
             border-left-color: #34d399;
         }
         
-        /* ============================================================ */
-        /* වෙනත් ස්ටයිල් */
-        /* ============================================================ */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -147,20 +124,11 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
         
-        /* Scroll Table Styles */
         .table-scroll {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
-        .table-scroll::-webkit-scrollbar { height: 6px; }
-        .table-scroll::-webkit-scrollbar-track { background: #fef3c7; border-radius: 3px; }
-        .table-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 3px; }
-        .dark .table-scroll::-webkit-scrollbar-track { background: #334155; }
-        .dark .table-scroll::-webkit-scrollbar-thumb { background: #f59e0b; }
         
-        /* ============================================================ */
-        /* ANIMATIONS */
-        /* ============================================================ */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -248,11 +216,11 @@
                 </div>
                 <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-3 text-center">
                     <div class="text-2xl font-bold text-white">12</div>
-                    <div class="text-[10px] text-white/90 font-medium mt-1">අරූපාවචර</div>
+                    <div class="text-[10px] text-white/90 font-medium mt-1">අරූපාවචර[cite: 12]</div>
                 </div>
                 <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-3 text-center">
                     <div class="text-2xl font-bold text-white">8/40</div>
-                    <div class="text-[10px] text-white/90 font-medium mt-1">ලෝකෝත්තර</div>
+                    <div class="text-[10px] text-white/90 font-medium mt-1">ලෝකෝත්තර[cite: 12]</div>
                 </div>
             </div>
         </div>
@@ -270,12 +238,12 @@
                    class="w-full pl-10 pr-4 py-2.5 bg-amber-50/50 dark:bg-slate-900 border border-amber-300 dark:border-slate-700 rounded-lg text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-saffron-500">
         </div>
         <div id="total-count" class="shrink-0 bg-saffron-500/20 dark:bg-slate-700 text-maroon-900 dark:text-saffron-300 font-bold px-4 py-2 rounded-lg text-xs border border-saffron-400/30">
-            ප්‍රදර්ශනය වන සිත් ගණන: 89
+            ප්‍රදර්ශනය වන සිත් ගණන: 89[cite: 12]
         </div>
     </div>
 
     <!-- ============================================================ -->
-    <!-- ✅ චිත්තය විස්තර කාඩ්පත (සෙවුම් තීරුවට යටින්) -->
+    <!-- ✅ චිත්තය විස්තර කාඩ්පත (සවිස්තරාත්මක පාලි සහ සිංහල සහිතව) -->
     <!-- ============================================================ -->
     <section class="citta-intro-card rounded-2xl p-5 sm:p-6 shadow-md fade-in">
         <div class="flex items-start gap-3 mb-4">
@@ -284,54 +252,106 @@
             </div>
             <div class="flex-1">
                 <div class="flex items-center gap-2 mb-1 flex-wrap">
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white">පරමාර්ථ ධර්ම 1</span>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">89 / 121</span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white">පරමාර්ථ ධර්ම 1[cite: 12]</span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">89 / 121[cite: 12]</span>
                 </div>
                 <h3 class="font-bold text-xl text-emerald-900 dark:text-emerald-100">චිත්තය</h3>
             </div>
         </div>
 
-        <!-- ගාථාව - විශේෂ box -->
+        <!-- ගාථාව -->
         <div class="gatha-box p-4 mb-4">
             <p class="text-sm sm:text-base italic text-emerald-900 dark:text-emerald-100 leading-relaxed text-justify">
                 <i class="fa-solid fa-quote-left text-emerald-500 mr-2 opacity-60"></i>
                 <strong>“චින්තෙතීති චිත්තං, ආරම්මණං විජානාතීති අත්ථො.”</strong>
-                <span class="text-xs text-emerald-700 dark:text-emerald-300 ml-2">(අභි.සං)</span>
+                <span class="text-xs text-emerald-700 dark:text-emerald-300 ml-2">(අභි.සං)[cite: 12]</span>
             </p>
         </div>
 
-        <!-- විස්තරය -->
+        <!-- මුල් විස්තරය -->
         <div class="space-y-3">
             <p class="text-sm sm:text-base text-emerald-900 dark:text-emerald-50 leading-relaxed text-justify">
-                පරමාර්ථ සතර අතුරෙන් චිත්තය යනු දැනීම ය. සිතය කියනුයේ ද එයට ය. ඇස, කන, නාසය, දිව, කය යන මේ ඉන්ද්‍රිය පස නිසාත්, ශුද්ධ මනෝද්වාරය නිසාත් ඒ දැනීම ඇති වේ. ඇස නිසා ඇති වන දැනීමට දැකීමය යි ද, කන නිසා ඇති වන දැනීමට ඇසීම යයි ද කියති. දැකීම පෙනීම කල්පනා වීම අදහස් පහළ වීම යන මේ වචනවලින් කියැවෙන්නේ චිත්තය හෙවත් සිත ය.
+                පරමාර්ථ සතර අතුරෙන් චිත්තය යනු දැනීම ය[cite: 12]. සිතය කියනුයේ ද එයට ය[cite: 12]. ඇස, කන, නාසය, දිව, කය යන මේ ඉන්ද්‍රිය පස නිසාත්, ශුද්ධ මනෝද්වාරය නිසාත් ඒ දැනීම ඇති වේ[cite: 12]. ඇස නිසා ඇති වන දැනීමට දැකීමය යි ද, කන නිසා ඇති වන දැනීමට ඇසීම යයි ද කියති[cite: 12]. දැකීම පෙනීම කල්පනා වීම අදහස් පහළ වීම යන මේ වචනවලින් කියැවෙන්නේ චිත්තය හෙවත් සිත ය[cite: 12].
             </p>
 
             <p class="text-sm sm:text-base text-emerald-900 dark:text-emerald-50 leading-relaxed text-justify">
-                දැනෙන දේවලට <strong>අරමුණ</strong> යයි කියනු ලැබේ. අරමුණක සම්බන්ධයක් නැතිව කිසි කලෙක සිතක් ඇති නොවේ. බෙරයකට ගසන කල්හි වදින පහරින් වෙන වෙන ම බෙර හඬ ඇති වන්නාක් මෙන් ඉන්ද්‍රියයන්හි අරමුණු ගැටෙන කල්හි ඒවා සම්බන්ධයෙන් වෙන වෙන ම සිත් ඇති වේ.
+                දැනෙන දේවලට <strong>අරමුණ</strong> යයි කියනු ලැබේ[cite: 12]. අරමුණක සම්බන්ධයක් නැතිව කිසි කලෙක සිතක් ඇති නොවේ[cite: 12]. බෙරයකට ගසන කල්හි වදින පහරින් වෙන වෙන ම බෙර හඬ ඇති වන්නාක් මෙන් ඉන්ද්‍රියයන්හි අරමුණු ගැටෙන කල්හි ඒවා සම්බන්ධයෙන් වෙන වෙන ම සිත් ඇති වේ[cite: 12].
             </p>
 
             <p class="text-sm sm:text-base text-emerald-900 dark:text-emerald-50 leading-relaxed text-justify">
-                ඒ දැනීම් සියල්ල ම ක්‍රියාවෝ ය. එබැවින් ඇති වන සිත් සියල්ල ම එකෙණෙහි ම නැති වේ. <strong>දැනීම් මාත්‍රය ම චිත්තය හෙවත් සිත</strong> බව මතක තබා ගත යුතුය. 
-                <span class="text-xs text-emerald-700 dark:text-emerald-300 italic">(අභි,ච)</span>
+                ඒ දැනීම් සියල්ල ම ක්‍රියාවෝ ය[cite: 12]. එබැවින් ඇති වන සිත් සියල්ල ම එකෙණෙහි ම නැති වේ[cite: 12]. <strong>දැනීම් මාත්‍රය ම චිත්තය හෙවත් සිත</strong> බව මතක තබා ගත යුතුය[cite: 12]. 
+                <span class="text-xs text-emerald-700 dark:text-emerald-300 italic">(අභි,ච)[cite: 12]</span>
             </p>
+        </div>
+
+        <!-- ✅ අලුතින් එක් කරන ලද සම්පූර්ණ අටුවා/ටීකා විවරණය -->
+        <div class="bg-emerald-50/95 dark:bg-slate-900/90 border border-emerald-300 dark:border-emerald-700 rounded-xl p-4 sm:p-5 my-4 space-y-3 text-slate-900 dark:text-slate-100 shadow-sm">
+            <div class="border-b border-emerald-300/80 dark:border-slate-700 pb-2">
+                <span class="text-xs uppercase tracking-wider font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-scroll text-emerald-700 dark:text-emerald-400"></i> චිත්ත නිර්වචන පාලි පාඨය
+                </span>
+                <p class="text-xs sm:text-sm italic leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    "චින්‌තෙතීති චිත්‌තං, ආරම්‌මණං විජානාතීති අත්‌ථො. යථාහ ‘‘විසයවිජානනලක්‌ඛණං චිත්‌ත’’න්‌ති (ධ. ස. අට්‌ඨ. 1 ධම්‌මුදෙසවාරඵස්‌සපඤ්‌චමකරාසිවණ්‌ණනා). සතිපි හි නිස්‌සයසමනන්‌තරාදිපච්‌චයෙන විනා ආරම්‌මණෙන චිත්‌තමුප්‌පජ්‌ජතීති තස්‌ස තංලක්‌ඛණතා වුත්‌තා, එතෙන නිරාරම්‌මණවාදිමතං පටික්‌ඛිත්‌තං හොති. චින්‌තෙන්‌ති වා එතෙන කරණභූතෙන සම්‌පයුත්‌තධම්‌මාති චිත්‌තං. අථ වා චින්‌තනමත්‌තං චිත්‌තං. යථාපච්‌චයං හි පවත්‌තිමත්‌තමෙව යදිදං සභාවධම්‌මො නාම. එවඤ්‌ච කත්‌වා සබ්‌බෙසම්‌පි පරමත්‌ථධම්‌මානං භාවසාධනමෙව නිප්‌පරියායතො ලබ්‌භති, කත්‌තුකරණවසෙන පන නිබ්‌බචනං පරියායකථාති දට්‌ඨබ්‌බං. සකසකකිච්‌චෙසු හි ධම්‌මානං අත්‌තප්‌පධානතාසමාරොපනෙන කත්‌තුභාවො ච, තදනුකූලභාවෙන සහජාතධම්‌මසමූහෙ කත්‌තුභාවසමාරොපනෙන පටිපාදෙතබ්‌බධම්‌මස්‌ස කරණත්‌තඤ්‌ච පරියායතොව ලබ්‌භති, තථානිදස්‌සනං පන ධම්‌මසභාවවිනිමුත්‌තස්‌ස කත්‌තාදිනො අභාවපරිදීපනත්‌ථන්‌ති වෙදිතබ්‌බං. විචිත්‌තකරණාදිතොපි චිත්‌තසද්‌දත්‌ථං පපඤ්‌චෙන්‌ති. අයං පනෙත්‌ථ සඞ්‌ගහො –
+                    <br><br>
+                    ‘‘විචිත්‌තකරණා චිත්‌තං, අත්‌තනො චිත්‌තතාය වා;
+                    <br>
+                    චිතං කම්‌මකිලෙසෙහි, චිතං තායති වා තථා;
+                    <br>
+                    චිනොති අත්‌තසන්‌තානං, විචිත්‌තාරම්‌මණන්‌ති චා’’ති."
+                </p>
+            </div>
+
+            <div class="pt-1">
+                <span class="text-xs uppercase tracking-wider font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-open text-emerald-700 dark:text-emerald-400"></i> සිංහල අර්ථ විවරණය
+                </span>
+                <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    "අරමුණ සිතන්නේනුයි (විශේෂයෙන් දැනගන්නේනුයි) <strong>'චිත්ත'</strong> නම් වේ. එනම් අරමුණ විජානනය කරයි (දැනගනියි) යන අර්ථයයි. එහෙයින් අටුවාචාරීන් වහන්සේ <em>'විසයවිජානනලක්ඛණං චිත්තං'</em> (විෂයය හෙවත් අරමුණ දැනගැනීම ලක්ෂණය කොට ඇත්තේ චිත්තයයි) යනුවෙන් වදාළ සේක (ධම්මසංගණී අටුවාව 1, ධම්මුද්දේසවාර, ඵස්සපඤ්චමක රාශි වර්ණනාව). නිශ්‍රය ප්‍රත්‍යය, සමනන්තර ප්‍රත්‍යය ආදී ප්‍රත්‍යයන් තිබුණ ද, අරමුණ නැතිව සිතක් නූපදින බැවින් සිතට එම ලක්ෂණය කියන ලදී. මෙයින් (අරමුණක් නැතිව ද සිත උපදී යැයි කියන) නිරාරම්මණවාදීන්ගේ මතය බැහැර වේ.
+                </p>
+                <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    නැතහොත්, සම්ප්‍රයුක්ත ධර්මයෝ මේ කරණභූත වූ සිත මගින් අරමුණ සිතත්නුයි (දැනගනිත්නුයි) <strong>'චිත්ත'</strong> නම් වේ (කරණ සාධනය).
+                </p>
+                <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    එසේත් නැතිනම්, සිතීම් මාත්‍රයම (හුදු දැනගැනීම් ක්‍රියාවලියම) <strong>'චිත්ත'</strong> නම් වේ (භාව සාධනය). යම් මේ ස්වභාවධර්මයක් වේ ද, එය ප්‍රත්‍යයන්ට අනුව සිදුවන පැවැත්මක් පමණි. මෙසේ සලකන කල සියලු පරමාර්ථ ධර්මයන් සම්බන්ධයෙන් නිපරියාය වශයෙන් (සෘජු මුඛ්‍ය අර්ථයෙන්) ලැබෙන්නේ භාව සාධනයම වේ. කර්තෘ, කරණ වශයෙන් දක්වන නිර්වචන වනාහි පරියාය කථා (උපචාර වශයෙන් කියන ලද විවරණ) ලෙස දත යුතුය.
+                </p>
+                <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    ඒ ඒ ධර්මයන් තම තමන්ගේ කෘත්‍යයන්හි ස්වයං ප්‍රධාන බව ආරෝපණය කිරීමෙන් කර්තෘ භාවය ද, ඊට අනුකූල වීමෙන් සහජාත ධර්ම සමූහයෙහි කර්තෘ භාවය ආරෝපණය කොට පමුණුවනු ලබන (උපකාරක) ධර්මයාගේ කරණ භාවය ද උපචාර වශයෙන්ම ලැබේ. එබඳු දැක්වීමක් කර ඇත්තේ ධර්ම ස්වභාවයෙන් තොර වූ (බාහිර) ආත්මයක් හෝ කර්තෘ කෙනෙකු නොමැති බව ප්‍රකාශ කිරීම පිණිස යැයි දත යුතුය.
+                </p>
+                <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    විචිත්‍ර කිරීම් ආදී අර්ථයන්ගෙන් ද 'චිත්ත' යන වචනයේ අර්ථය විස්තර කෙරේ. මෙහිලා සංග්‍රහය (සාරාංශ ගාථාව) මෙසේය:
+                </p>
+                <div class="bg-white/80 dark:bg-slate-800/80 p-3 rounded-lg border border-emerald-200 dark:border-slate-700 my-2">
+                    <p class="text-xs sm:text-sm font-semibold italic text-emerald-950 dark:text-emerald-300">
+                        'විචිත්තකරණා චිත්තං, අත්තනෝ චිත්තතාය වා; චිතං කම්මකිලේසේහි, චිතං තායති වා තථා; චිනෝති අත්තසන්තානං, විචිත්තාරම්මණන්ති චා'ති.
+                    </p>
+                    <ul class="text-xs sm:text-sm space-y-1 mt-2 list-decimal list-inside text-slate-800 dark:text-slate-200">
+                        <li>ලෝකයෙහි විචිත්‍ර වූ දෑ සිදු කරන බැවින් ද,</li>
+                        <li>තමාගේ ම විචිත්‍ර භාවය නිසා ද,</li>
+                        <li>කර්ම ක්ලේශයන්ගෙන් රැස් කරන ලද (සකස් කරන ලද) බැවින් ද,</li>
+                        <li>එසේ රැස් කරන ලද කර්ම විපාකයන් රකින (පවත්වන) බැවින් ද,</li>
+                        <li>ස්වකීය සන්තානයෙහි කුසලාකුසල කර්මයන් රැස් කරන බැවින් ද,</li>
+                        <li>විචිත්‍ර වූ අරමුණු ගන්නා බැවින් ද සිතට <strong>'චිත්ත'</strong> යැයි කියනු ලැබේ."</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <!-- විශේෂාංග ලැයිස්තුව -->
         <div class="mt-4 pt-4 border-t border-emerald-300/60 dark:border-emerald-500/30 grid grid-cols-1 sm:grid-cols-3 gap-2">
             <div class="bg-white/60 dark:bg-emerald-950/40 rounded-lg p-3 text-center">
                 <i class="fa-solid fa-circle-dot text-emerald-600 dark:text-emerald-300 text-lg mb-1"></i>
-                <div class="text-xs font-bold text-emerald-900 dark:text-emerald-200">දැනීම</div>
-                <div class="text-[10px] text-emerald-700 dark:text-emerald-300">චිත්තයේ ස්වභාවය</div>
+                <div class="text-xs font-bold text-emerald-900 dark:text-emerald-200">දැනීම[cite: 12]</div>
+                <div class="text-[10px] text-emerald-700 dark:text-emerald-300">චිත්තයේ ස්වභාවය[cite: 12]</div>
             </div>
             <div class="bg-white/60 dark:bg-emerald-950/40 rounded-lg p-3 text-center">
                 <i class="fa-solid fa-bullseye text-emerald-600 dark:text-emerald-300 text-lg mb-1"></i>
-                <div class="text-xs font-bold text-emerald-900 dark:text-emerald-200">අරමුණ</div>
-                <div class="text-[10px] text-emerald-700 dark:text-emerald-300">සිතට අවශ්‍ය වේ</div>
+                <div class="text-xs font-bold text-emerald-900 dark:text-emerald-200">අරමුණ[cite: 12]</div>
+                <div class="text-[10px] text-emerald-700 dark:text-emerald-300">සිතට අවශ්‍ය වේ[cite: 12]</div>
             </div>
             <div class="bg-white/60 dark:bg-emerald-950/40 rounded-lg p-3 text-center">
                 <i class="fa-solid fa-bolt text-emerald-600 dark:text-emerald-300 text-lg mb-1"></i>
-                <div class="text-xs font-bold text-emerald-900 dark:text-emerald-200">ක්ෂණික</div>
-                <div class="text-[10px] text-emerald-700 dark:text-emerald-300">එකෙණෙහි නැති වේ</div>
+                <div class="text-xs font-bold text-emerald-900 dark:text-emerald-200">ක්ෂණික[cite: 12]</div>
+                <div class="text-[10px] text-emerald-700 dark:text-emerald-300">එකෙණෙහි නැති වේ[cite: 12]</div>
             </div>
         </div>
     </section>
@@ -344,7 +364,7 @@
         <!-- ✅ බොත්තම 1: සිත් 89/121 -->
         <button type="button" onclick="toggleCitta121Section()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-700 hover:from-emerald-800 hover:to-teal-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all">
             <span class="flex items-center gap-2">
-                <i class="fa-solid fa-calculator text-emerald-200"></i> සිත් 89/121
+                <i class="fa-solid fa-calculator text-emerald-200"></i> සිත් 89/121[cite: 12]
             </span>
             <i id="citta121-arrow" class="fa-solid fa-chevron-down text-emerald-200 transition-transform duration-200"></i>
         </button>
@@ -355,16 +375,16 @@
             <!-- Group 1: මූලික බෙදීම් -->
             <div class="citta-group border border-emerald-200 dark:border-slate-700 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="1">
                 <div class="text-xs font-bold text-emerald-900 dark:text-emerald-300 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-list-ol text-emerald-600"></i> මූලික බෙදීම්:
+                    <i class="fa-solid fa-list-ol text-emerald-600"></i> මූලික බෙදීම්:[cite: 12]
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'citta121Summary')">සිත් 121 සාරාංශය</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusala12Full')">A1. අකුසල් 12</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetuka18Full')">A2. අහේතුක 18</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala24Full')">A3. කාම සෝභන 24</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupa15Full')">B. රූපාවචර 15</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupa12Full')">C. අරූපාවචර 12</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttara40Full')">D. ලෝකෝත්තර 40</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'citta121Summary')">සිත් 121 සාරාංශය[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusala12Full')">A1. අකුසල් 12[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetuka18Full')">A2. අහේතුක 18[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala24Full')">A3. කාම සෝභන 24[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupa15Full')">B. රූපාවචර 15[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupa12Full')">C. අරූපාවචර 12[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-emerald-950 dark:text-slate-200 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttara40Full')">D. ලෝකෝත්තර 40[cite: 12]</button>
                 </div>
                 <div id="citta121DisplayGroup1" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-emerald-500 border border-emerald-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitle121Group1" class="text-base font-bold text-emerald-900 dark:text-emerald-200"></h3>
@@ -375,12 +395,12 @@
             <!-- Group 2: අකුසල් සිත් 12 (A1) -->
             <div class="citta-group border border-red-200 dark:border-red-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="2">
                 <div class="text-xs font-bold text-red-900 dark:text-red-300 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-fire text-red-600"></i> A1. අකුසල් සිත් 12:
+                    <i class="fa-solid fa-fire text-red-600"></i> A1. අකුසල් සිත් 12:[cite: 12]
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lobha8Full')">a. ලෝභ මූලික 8</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'dosa2Full')">b. දෝස මූලික 2</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'moha2Full')">c. මෝහ මූලික 2</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lobha8Full')">a. ලෝභ මූලික 8[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'dosa2Full')">b. දෝස මූලික 2[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-red-950 dark:text-slate-200 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-red-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'moha2Full')">c. මෝහ මූලික 2[cite: 12]</button>
                 </div>
                 <div id="citta121DisplayGroup2" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-red-500 border border-red-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitle121Group2" class="text-base font-bold text-red-900 dark:text-red-200"></h3>
@@ -391,12 +411,12 @@
             <!-- Group 3: අහේතුක සිත් 18 (A2) -->
             <div class="citta-group border border-orange-200 dark:border-orange-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="3">
                 <div class="text-xs font-bold text-orange-900 dark:text-orange-300 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle-exclamation text-orange-600"></i> A2. අහේතුක සිත් 18:
+                    <i class="fa-solid fa-circle-exclamation text-orange-600"></i> A2. අහේතුක සිත් 18:[cite: 12]
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusalaVipaka7Full')">a. අකුසල විපාක 7</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kusalaAhetuka8Full')">b. කුසල අහේතුක විපාක 8</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetukaKriya3Full')">c. අහේතුක ක්‍රියා 3</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'akusalaVipaka7Full')">a. අකුසල විපාක 7[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kusalaAhetuka8Full')">b. කුසල අහේතුක විපාක 8[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-orange-950 dark:text-slate-200 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-orange-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'ahetukaKriya3Full')">c. අහේතුක ක්‍රියා 3[cite: 12]</button>
                 </div>
                 <div id="citta121DisplayGroup3" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-orange-500 border border-orange-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitle121Group3" class="text-base font-bold text-orange-900 dark:text-orange-200"></h3>
@@ -407,12 +427,12 @@
             <!-- Group 4: කාම සෝභන 24 (A3) -->
             <div class="citta-group border border-green-200 dark:border-green-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="4">
                 <div class="text-xs font-bold text-green-900 dark:text-green-300 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-seedling text-green-600"></i> A3. කාම සෝභන සිත් 24:
+                    <i class="fa-solid fa-seedling text-green-600"></i> A3. කාම සෝභන සිත් 24:[cite: 12]
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala8Full')">a. කුසල් 8</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaVipaka8Full')">b. විපාක 8</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKriya8Full')">c. ක්‍රියා 8</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKusala8Full')">a. කුසල් 8[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaVipaka8Full')">b. විපාක 8[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-green-950 dark:text-slate-200 hover:bg-green-500 hover:text-white dark:hover:bg-green-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-green-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'kamaKriya8Full')">c. ක්‍රියා 8[cite: 12]</button>
                 </div>
                 <div id="citta121DisplayGroup4" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-green-500 border border-green-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitle121Group4" class="text-base font-bold text-green-900 dark:text-green-200"></h3>
@@ -423,12 +443,12 @@
             <!-- Group 5: රූපාවචර සිත් 15 (B) -->
             <div class="citta-group border border-amber-200 dark:border-amber-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="5">
                 <div class="text-xs font-bold text-amber-900 dark:text-amber-300 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-om text-amber-600"></i> B. රූපාවචර සිත් 15:
+                    <i class="fa-solid fa-om text-amber-600"></i> B. රූපාවචර සිත් 15:[cite: 12]
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKusala5Full')">B1. කුසල් 5</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaVipaka5Full')">B2. විපාක 5</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKriya5Full')">B3. ක්‍රියා 5</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKusala5Full')">B1. කුසල් 5[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaVipaka5Full')">B2. විපාක 5[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-amber-950 dark:text-slate-200 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-amber-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'rupaKriya5Full')">B3. ක්‍රියා 5[cite: 12]</button>
                 </div>
                 <div id="citta121DisplayGroup5" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-amber-500 border border-amber-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitle121Group5" class="text-base font-bold text-amber-900 dark:text-amber-200"></h3>
@@ -439,12 +459,12 @@
             <!-- Group 6: අරූපාවචර සිත් 12 (C) -->
             <div class="citta-group border border-purple-200 dark:border-purple-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="6">
                 <div class="text-xs font-bold text-purple-900 dark:text-purple-300 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-infinity text-purple-600"></i> C. අරූපාවචර සිත් 12:
+                    <i class="fa-solid fa-infinity text-purple-600"></i> C. අරූපාවචර සිත් 12:[cite: 12]
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKusala4Full')">C1. කුසල් 4</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaVipaka4Full')">C2. විපාක 4</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKriya4Full')">C3. ක්‍රියා 4</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKusala4Full')">C1. කුසල් 4[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaVipaka4Full')">C2. විපාක 4[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-purple-950 dark:text-slate-200 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-purple-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'arupaKriya4Full')">C3. ක්‍රියා 4[cite: 12]</button>
                 </div>
                 <div id="citta121DisplayGroup6" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-purple-500 border border-purple-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitle121Group6" class="text-base font-bold text-purple-900 dark:text-purple-200"></h3>
@@ -455,11 +475,11 @@
             <!-- Group 7: ලෝකෝත්තර 40 (D) -->
             <div class="citta-group border border-rose-200 dark:border-rose-800 rounded-xl p-3 bg-white/50 dark:bg-slate-900/30" data-group="7">
                 <div class="text-xs font-bold text-rose-900 dark:text-rose-300 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-star text-rose-600"></i> D. ලෝකෝත්තර 40:
+                    <i class="fa-solid fa-star text-rose-600"></i> D. ලෝකෝත්තර 40:[cite: 12]
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraMagga20Full')">D1. මාර්ග 20</button>
-                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraPhala20Full')">D2. ඵල 20</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraMagga20Full')">D1. මාර්ග 20[cite: 12]</button>
+                    <button type="button" class="sub-btn-121 bg-white dark:bg-slate-900 text-rose-950 dark:text-slate-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg border border-rose-300 dark:border-slate-700 shadow-sm transition-all" onclick="showInfo121(event, 'lokuttaraPhala20Full')">D2. ඵල 20[cite: 12]</button>
                 </div>
                 <div id="citta121DisplayGroup7" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl p-4 border-l-4 border-l-rose-500 border border-rose-200 dark:border-slate-700 shadow-sm space-y-2">
                     <h3 id="infoTitle121Group7" class="text-base font-bold text-rose-900 dark:text-rose-200"></h3>
@@ -474,7 +494,7 @@
         <!-- ============================================================ -->
         <button type="button" onclick="toggleCittaDetailSection()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-indigo-700 via-blue-600 to-indigo-700 hover:from-indigo-800 hover:to-blue-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all mt-3">
             <span class="flex items-center gap-2">
-                <i class="fa-solid fa-book-open text-indigo-200"></i> සිත් - විස්තරාත්මක විග්‍රහය
+                <i class="fa-solid fa-book-open text-indigo-200"></i> සිත් - විස්තරාත්මක විග්‍රහය[cite: 12]
             </span>
             <i id="cittaDetail-arrow" class="fa-solid fa-chevron-down text-indigo-200 transition-transform duration-200"></i>
         </button>
@@ -484,20 +504,14 @@
             
             <!-- citta-data.js මගින් දත්ත පූරණය වන කොටස -->
             <div id="cittaDetailContent" class="space-y-4 text-justify">
-                <!-- Dynamic content will be loaded here by citta-data.js -->
                 <div class="text-center py-8 text-slate-400 dark:text-slate-500">
                     <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
-                    <p class="text-sm">දත්ත පූරණය වෙමින්...</p>
+                    <p class="text-sm">දත්ත පූරණය වෙමින්...[cite: 12]</p>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <!-- ============================================================ -->
-    <!-- DYNAMIC CONTENT CONTAINER (Search Results) -->
-    <!-- ============================================================ -->
-    <div id="citta-container" class="space-y-4 text-justify"></div>
 
 </main>
 
@@ -505,24 +519,17 @@
 <!-- FOOTER -->
 <!-- ============================================================ -->
 <footer class="bg-maroon-900 text-amber-200/80 text-center text-xs py-4 border-t-2 border-saffron-500 mt-auto">
-    <p>අභිධර්ම චිත්ත විභාගය • සියලු සිත් 89/121</p>
+    <p>අභිධර්ම චිත්ත විභාගය • සියලු සිත් 89/121[cite: 12]</p>
 </footer>
 
 <!-- ============================================================ -->
 <!-- SCRIPTS -->
 <!-- ============================================================ -->
-
-<!-- Citta Data JS (නව ගොනුව) -->
 <script src="citta-data.js"></script>
-
-<!-- Main Citta Logic JS -->
 <script src="citta.js"></script>
 
-<!-- Inline Script for Theme Toggle & Citta Detail Toggle -->
 <script>
-    // ============================================================
     // Theme Toggle
-    // ============================================================
     function toggleDarkMode() {
         const html = document.documentElement;
         const icon = document.getElementById('theme-toggle-icon');
@@ -550,9 +557,7 @@
         }
     })();
 
-    // ============================================================
     // සිත් - විස්තරාත්මක විග්‍රහය ටොගල් කිරීම
-    // ============================================================
     function toggleCittaDetailSection() {
         const subContainer = document.getElementById("cittaDetailSubContainer");
         const arrowIcon = document.getElementById("cittaDetail-arrow");
@@ -562,14 +567,11 @@
         }
     }
 
-    // ============================================================
     // citta-data.js හි දත්ත පූරණය කිරීම
-    // ============================================================
     document.addEventListener("DOMContentLoaded", function() {
         const detailContainer = document.getElementById("cittaDetailContent");
         if (!detailContainer) return;
 
-        // citta-data.js හි cittaDetailData විචල්‍යය තිබේ නම් එය පෙන්වන්න
         if (typeof cittaDetailData !== 'undefined' && Array.isArray(cittaDetailData) && cittaDetailData.length > 0) {
             detailContainer.innerHTML = cittaDetailData.map(item => `
                 <div class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-indigo-200 dark:border-slate-700 shadow-sm">
@@ -580,12 +582,11 @@
                 </div>
             `).join('');
         } else {
-            // දත්ත නොමැති නම් පණිවිඩයක් පෙන්වන්න
             detailContainer.innerHTML = `
                 <div class="text-center py-8 text-slate-400 dark:text-slate-500">
                     <i class="fa-solid fa-inbox text-3xl mb-2 text-indigo-300 dark:text-slate-600"></i>
-                    <p class="text-sm">විස්තරාත්මක දත්ත තවම එක් කර නැත.</p>
-                    <p class="text-xs mt-1">citta-data.js ගොනුවේ cittaDetailData විචල්‍යයට දත්ත එක් කරන්න.</p>
+                    <p class="text-sm">විස්තරාත්මක දත්ත තවම එක් කර නැත.[cite: 12]</p>
+                    <p class="text-xs mt-1">citta-data.js ගොනුවේ cittaDetailData විචල්‍යයට දත්ත එක් කරන්න.[cite: 12]</p>
                 </div>
             `;
         }
