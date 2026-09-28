@@ -485,7 +485,7 @@ th {
       </p>
     </div>
 
-    <!-- ✅ අලුතින් එක් කරන ලද පරමත්ථ දීපනී ටීකා විවරණය (කළු පැහැති අකුරින්) -->
+    <!-- ✅ පරමත්ථ දීපනී ටීකා විවරණය (කළු පැහැති අකුරින්) -->
     <div class="bg-amber-50/95 border border-amber-300 rounded-xl p-4 sm:p-5 my-4 space-y-3 text-slate-900 shadow-sm">
       <div class="border-b border-amber-300/80 pb-2">
         <span class="text-xs uppercase tracking-wider font-bold text-amber-900">පරමත්ථ දීපනී ටීකා පාඨය</span>
@@ -575,7 +575,7 @@ th {
   <!-- ============================================================ -->
   <!-- NAVIGATION TABS -->
   <!-- ============================================================ -->
-  <section class="bg-white dark:bg-slate-800 rounded-2xl border border-amber-200 dark:border-slate-700 shadow-sm overflow-hidden">
+  <section id="tab-navigation-section" class="bg-white dark:bg-slate-800 rounded-2xl border border-amber-200 dark:border-slate-700 shadow-sm overflow-hidden scroll-mt-20">
     
     <!-- Tabs Row 1 -->
     <div class="flex border-b border-amber-200 dark:border-slate-700 overflow-x-auto hide-scrollbar">
@@ -1645,7 +1645,11 @@ function switchMainTab(tabName) {
     }
   });
   
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // ✅ ටැබ් බටන් එක ක්ලික් කළ විට පිටුවේ මුදුනටම නොගොස්, ටැබ් තොරතුරු පෙන්වන කොටසට ස්මූත් ලෙස ස්ක්‍රෝල් කර පෙන්වීම
+  var targetSection = document.getElementById('tab-navigation-section');
+  if (targetSection) {
+    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 window.switchMainTab = switchMainTab;
