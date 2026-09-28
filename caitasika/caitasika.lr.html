@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>සංඛාරක්ඛන්ධ කථා - චෛතසික ලක්ඛණාදි විවරණය</title>
+  <title>චෛතසික 52 නාමාවලිය සහ ලක්ඛණාදි විවරණය</title>
   <link rel="manifest" href="../manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -25,48 +25,33 @@
     .sinhala-font {
       font-family: 'Noto Serif Sinhala', serif;
     }
-
-    /* ============================================================ */
-    /* ✅ සියලු ඡේද සහ විස්තර Justify කිරීම                         */
-    /* ============================================================ */
     p, .justify-text {
       text-align: justify;
       text-justify: inter-word;
       word-spacing: 0.04em;
       line-height: 1.75;
-      hyphens: auto;
-      -webkit-hyphens: auto;
     }
-
     li {
       text-align: justify;
       text-justify: inter-word;
       line-height: 1.65;
     }
-
-    /* පාලි පාඨ විශේෂිත මෝස්තරය */
     .pali-box {
       font-family: 'Noto Serif Sinhala', 'Tiro Devanagari Sanskrit', serif;
       letter-spacing: 0.02em;
     }
 
-    /* Dark Mode Styling */
+    /* Dark Mode */
     html.dark body {
       background-color: #0b1120;
       color: #f1f5f9;
     }
-    html.dark .glass-card {
-      background: rgba(30, 41, 59, 0.78);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    html.dark .list-item-card {
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    html.dark .glass-card:hover {
+    html.dark .list-item-card:hover {
       border-color: rgba(245, 158, 11, 0.45);
-    }
-    html.dark .nav-bg {
-      background-color: rgba(15, 23, 42, 0.92);
-      border-color: #1e293b;
     }
     html.dark .sub-box {
       background-color: rgba(15, 23, 42, 0.65);
@@ -83,25 +68,18 @@
       border: 1px solid rgba(245, 158, 11, 0.25);
     }
 
-    /* Colorful Light Mode Styling */
+    /* Light Mode */
     html:not(.dark) body {
       background: linear-gradient(135deg, #fdfbf7 0%, #fff7ed 50%, #fef3c7 100%);
       color: #1e293b;
     }
-    html:not(.dark) .glass-card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    html:not(.dark) .list-item-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
-    html:not(.dark) .glass-card:hover {
-      border-color: rgba(217, 119, 6, 0.65);
-      box-shadow: 0 15px 30px -5px rgba(217, 119, 6, 0.2);
-    }
-    html:not(.dark) .nav-bg {
-      background-color: rgba(255, 255, 255, 0.96);
-      border-color: #fde68a;
-      box-shadow: 0 2px 10px rgba(217, 119, 6, 0.08);
+    html:not(.dark) .list-item-card:hover {
+      border-color: rgba(217, 119, 6, 0.5);
     }
     html:not(.dark) .sub-box {
       background-color: #fffbeb;
@@ -117,19 +95,6 @@
       color: #92400e;
       border: 1px solid #fde68a;
     }
-    html:not(.dark) .text-amber-300 {
-      color: #b45309 !important;
-    }
-    html:not(.dark) .text-amber-400 {
-      color: #d97706 !important;
-    }
-    html:not(.dark) .text-slate-300,
-    html:not(.dark) .text-slate-200 {
-      color: #334155 !important;
-    }
-    html:not(.dark) .text-slate-400 {
-      color: #475569 !important;
-    }
 
     /* Badges */
     .badge-amber {
@@ -137,173 +102,128 @@
       color: #d97706;
       border: 1px solid rgba(245, 158, 11, 0.35);
     }
-    html.dark .badge-amber {
-      color: #fbbf24;
-    }
+    html.dark .badge-amber { color: #fbbf24; }
 
     .badge-emerald {
       background-color: rgba(16, 185, 129, 0.15);
       color: #059669;
       border: 1px solid rgba(16, 185, 129, 0.35);
     }
-    html.dark .badge-emerald {
-      color: #34d399;
-    }
+    html.dark .badge-emerald { color: #34d399; }
 
     .badge-rose {
       background-color: rgba(244, 63, 94, 0.15);
       color: #e11d48;
       border: 1px solid rgba(244, 63, 94, 0.35);
     }
-    html.dark .badge-rose {
-      color: #fb7185;
-    }
+    html.dark .badge-rose { color: #fb7185; }
 
     .badge-sky {
       background-color: rgba(14, 165, 233, 0.15);
       color: #0284c7;
       border: 1px solid rgba(14, 165, 233, 0.35);
     }
-    html.dark .badge-sky {
-      color: #38bdf8;
-    }
+    html.dark .badge-sky { color: #38bdf8; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 nav-bg backdrop-blur-md border-b transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md border-b border-amber-200/50 dark:border-slate-800 transition">
+    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <!-- ✅ ඊතලය ක්ලික් කළ විට caitasika.html වෙත යොමු කෙරේ -->
-        <a href="./caitasika.html" class="text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 p-2 rounded-xl hover:bg-amber-100/50 dark:hover:bg-slate-800 transition" title="චෛතසික හා සම්ප්‍රයෝග පිටුවට">
+        <a href="./caitasika.html" class="text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 p-2 rounded-xl hover:bg-amber-100/50 dark:hover:bg-slate-800 transition">
           <i class="fa-solid fa-arrow-left text-lg"></i>
         </a>
         <div>
-          <h1 class="text-base sm:text-lg font-bold text-amber-600 dark:text-amber-400 tracking-wide sinhala-font" id="app-title">සංඛාරක්ඛන්ධ කථා</h1>
-          <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">චෛතසික ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන</p>
+          <h1 class="text-base sm:text-lg font-bold text-amber-600 dark:text-amber-400 tracking-wide sinhala-font">චෛතසික 52 නාමාවලිය</h1>
+          <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">ක්ලික් කර විස්තර නරඹන්න (ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන)</p>
         </div>
       </div>
 
-      <!-- Action Controls -->
-      <div class="flex items-center space-x-2 sm:space-x-3">
-        <!-- Theme Toggle Button -->
+      <div class="flex items-center space-x-2">
         <button 
           id="theme-toggle" 
           onclick="toggleTheme()" 
           title="වර්ණ මාදිලිය මාරු කරන්න"
-          class="relative p-2 rounded-xl border border-amber-300 dark:border-slate-700 bg-amber-50 dark:bg-slate-800 text-amber-600 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition">
+          class="p-2 rounded-xl border border-amber-300 dark:border-slate-700 bg-amber-50 dark:bg-slate-800 text-amber-600 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition">
           <i id="theme-toggle-icon" class="fa-solid fa-sun text-base"></i>
         </button>
-
-        <!-- Jump to Bhavana -->
-        <a href="#bhavana-section" class="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-100/80 dark:bg-emerald-950/60 px-3 py-1.5 rounded-xl border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5 hover:bg-emerald-200/80 dark:hover:bg-emerald-900/60 transition shadow-sm">
-          <i class="fa-solid fa-dharmachakra"></i>
-          <span class="hidden sm:inline">භාවනා ක්‍රමය</span>
-        </a>
       </div>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-
-    <!-- Intro Card -->
-    <section class="glass-card rounded-2xl p-5 md:p-6 shadow-xl relative overflow-hidden transition-all duration-300">
-      <div class="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
-        <i class="fa-solid fa-dharmachakra text-9xl text-amber-500"></i>
-      </div>
-      <div class="space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-amber-200/40 dark:border-slate-700/60 pb-3">
-          <h2 class="text-lg sm:text-xl font-bold text-amber-700 dark:text-amber-300 sinhala-font flex items-center gap-2">
-            <i class="fa-solid fa-book-open-reader text-amber-500"></i>
-            චෛතසික 50 විවරණය
-          </h2>
-          <div class="flex flex-wrap items-center gap-2" id="summary-badges"></div>
-        </div>
-        <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base sinhala-font" id="intro-desc"></p>
-        <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-200 bg-amber-100/70 dark:bg-amber-950/30 p-3 rounded-xl border border-amber-300/60 dark:border-amber-900/40 sinhala-font" id="intro-note"></p>
-      </div>
-    </section>
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-6 space-y-5">
 
     <!-- Search & Filter Controls -->
-    <section class="flex flex-col md:flex-row gap-3 items-center justify-between">
-      <div class="relative w-full md:w-96">
+    <section class="space-y-3">
+      <div class="relative w-full">
         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
         <input 
           type="text" 
           id="search-input" 
-          placeholder="චෛතසිකය, පාලි පාඨය හෝ ලක්ෂණය සොයන්න..." 
-          class="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-800/80 border border-amber-200 dark:border-slate-700 rounded-xl text-sm text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 shadow-sm transition">
-      </div>
-      <div class="flex flex-wrap gap-2 w-full md:w-auto" id="category-tabs">
-        <button onclick="filterCategory('ALL')" class="category-btn active px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-amber-500 text-white dark:text-slate-900 transition shadow">සියල්ල</button>
-        <button onclick="filterCategory('සබ්බචිත්ත සාධාරණ')" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200/60 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700 transition">සබ්බචිත්ත සාධාරණ</button>
-        <button onclick="filterCategory('ප්‍රකීර්ණක')" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200/60 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700 transition">ප්‍රකීර්ණක</button>
-        <button onclick="filterCategory('අකුසල')" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200/60 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700 transition">අකුසල</button>
-        <button onclick="filterCategory('සෝභන')" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200/60 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700 transition">සෝභන</button>
-      </div>
-    </section>
-
-    <!-- Cards Grid -->
-    <section id="caitasika-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></section>
-
-    <!-- Meditation Guide Section -->
-    <section id="bhavana-section" class="glass-card rounded-2xl p-6 md:p-8 space-y-6 border-emerald-300 dark:border-emerald-900/40 shadow-xl transition-all duration-300">
-      <div class="flex items-center gap-3 border-b border-emerald-200 dark:border-emerald-900/60 pb-4">
-        <span class="p-2.5 bg-emerald-100 dark:bg-emerald-950/80 rounded-xl text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
-          <i class="fa-solid fa-dharmachakra text-xl"></i>
-        </span>
-        <div>
-          <h2 class="text-lg sm:text-xl font-bold text-emerald-700 dark:text-emerald-300 sinhala-font" id="bhavana-title">භාවනා ක්‍රමය</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400">ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන වශයෙන් විපස්සනාවෙහි යෙදෙන අයුරු</p>
-        </div>
+          placeholder="චෛතසිකයේ නම හෝ පාලි පාඨය සොයන්න..." 
+          class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl text-sm text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 shadow-sm transition">
       </div>
 
-      <div class="space-y-4" id="bhavana-steps-container"></div>
-
-      <!-- Ekatta Method Box -->
-      <div class="bg-amber-50/80 dark:bg-slate-900/90 rounded-xl p-5 border border-amber-300 dark:border-amber-900/50 space-y-2">
-        <h3 class="text-base font-bold text-amber-700 dark:text-amber-400 sinhala-font flex items-center gap-2" id="ekatta-title">
-          <i class="fa-solid fa-lightbulb"></i>
-          ඒකත්ත ක්‍රමය වටහා ගැනීම
-        </h3>
-        <p class="text-sm text-slate-600 dark:text-slate-300 sinhala-font" id="ekatta-desc"></p>
-      </div>
-
-      <div class="text-center pt-2">
-        <span class="inline-block px-4 py-1.5 bg-amber-100 dark:bg-slate-800 text-amber-800 dark:text-amber-300 font-bold text-sm rounded-full border border-amber-300 dark:border-slate-700 sinhala-font shadow-sm" id="bhavana-conclusion">
-          සංඛාරස්කන්ධය නිමියේය.
-        </span>
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2" id="category-tabs">
+        <button onclick="filterCategory('ALL', this)" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-amber-500 text-white dark:text-slate-900 shadow">සියල්ල (52)</button>
+        <button onclick="filterCategory('සබ්බචිත්ත සාධාරණ', this)" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700">සබ්බචිත්ත සාධාරණ (7)</button>
+        <button onclick="filterCategory('ප්‍රකීර්ණක', this)" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700">ප්‍රකීර්ණක (6)</button>
+        <button onclick="filterCategory('අකුසල', this)" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700">අකුසල (14)</button>
+        <button onclick="filterCategory('සෝභන', this)" class="category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700">සෝභන (25)</button>
       </div>
     </section>
+
+    <!-- Accordion List Container -->
+    <section id="caitasika-list-container" class="space-y-2.5"></section>
 
   </main>
 
-  <!-- Footer -->
-  <footer class="mt-auto border-t border-amber-200/60 dark:border-slate-800 bg-white/70 dark:bg-slate-950/80 py-4 text-center text-xs text-slate-500 transition-colors">
-    අභිධර්ම මාතිකා අධ්‍යයන යෙදුම • Offline සහාය සහිතයි
+  <footer class="mt-auto border-t border-amber-200/60 dark:border-slate-800 bg-white/70 dark:bg-slate-950/80 py-4 text-center text-xs text-slate-500">
+    අභිධර්ම මාතිකා අධ්‍යයන යෙදුම • චෛතසික 52 නාමාවලිය
   </footer>
 
-  <!-- Script Files -->
   <script src="./caitasika.lr.js"></script>
   <script>
     let activeFilter = 'ALL';
     let searchQuery = '';
+    let openItemId = null;
 
-    // ============================================================
-    // Theme Switcher (Dark & Light Mode)
-    // ============================================================
+    // ඵස්ස සහ වේදනා දත්ත (දත්ත ගොනුවේ නොමැති නම් ස්වයංක්‍රීයව එක් කිරීමට)
+    const phassaVedanaData = [
+      {
+        id: "1",
+        name: "ඵස්ස",
+        group: "සබ්බචිත්ත සාධාරණ",
+        pali_definition: "ඵුසතීති ඵස්සෝ. ආරම්මණං ඵුසන්තෝ විය පවත්ති.",
+        lakkhana: { sinhala: "ආරම්මණය ස්පර්ශ කිරීම (හැපීම) ලක්ෂණයයි.", pali: "ඵුසන ලක්ඛණෝ" },
+        rasa: { sinhala: "ආරම්මණය හා සිත ගැටීම සිදු කිරීම (සංඝට්ටන) රසයයි.", pali: "සංඝට්ටන රසෝ" },
+        paccupatthana: { sinhala: "චිත්ත, චේතසික, අරමුණු එකතු වීම හෝ ස්පර්ශය පහළවීම පෙනෙන ආකාරයයි.", pali: "සන්නිපාත පච්චුපට්ඨානෝ" },
+        padatthana: { sinhala: "උපදින විඤ්ඤාණය හෝ ආයතන තුනක එකතු වීම ආසන්න කාරණයයි.", pali: "ආපාථගත විසය පදට්ඨානෝ" },
+        notes: ["සියලු සිත් 89/121 හි අනිවාර්යයෙන්ම යෙදෙන ප්‍රධාන චෛතසිකයකි."]
+      },
+      {
+        id: "2",
+        name: "වේදනා",
+        group: "සබ්බචිත්ත සාධාරණ",
+        pali_definition: "ආරම්මණ රසං අනුභවතීති වේදනා.",
+        lakkhana: { sinhala: "ආරම්මණයේ රසය විඳීම ලක්ෂණයයි.", pali: "අනුභවන ලක්ඛණා" },
+        rasa: { sinhala: "අරමුණෙහි ඉෂ්ට හෝ අනිෂ්ට රසය අනුභව කිරීම රසයයි.", pali: "ආරම්මණ රස සම්භෝග රසෝ" },
+        paccupatthana: { sinhala: "චෛතසික සැප, දුක් හෝ උපේක්ෂා වශයෙන් ප්‍රකට වීම පෙනෙන ආකාරයයි.", pali: "චේතසික අස්සාද පච්චුපට්ඨානා" },
+        padatthana: { sinhala: "ඵස්සය (ස්පර්ශය) ආසන්න කාරණයයි.", pali: "පස්ස පදට්ඨානා" },
+        notes: ["සංඛාරක්ඛන්ධයට අයත් නොවන අතර වේදනාක්ඛන්ධය ලෙස වෙනම ස්කන්ධයක් වේ."]
+      }
+    ];
+
     function initTheme() {
       const savedTheme = localStorage.getItem('abhidhamma_theme');
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
       if (savedTheme === 'light') {
         document.documentElement.classList.remove('dark');
         updateThemeIcon(false);
-      } else if (savedTheme === 'dark' || prefersDark) {
-        document.documentElement.classList.add('dark');
-        updateThemeIcon(true);
       } else {
         document.documentElement.classList.add('dark');
         updateThemeIcon(true);
@@ -319,109 +239,66 @@
     function updateThemeIcon(isDark) {
       const icon = document.getElementById('theme-toggle-icon');
       if (icon) {
-        if (isDark) {
-          icon.className = 'fa-solid fa-sun text-base';
-          icon.parentElement.setAttribute('title', 'වර්ණවත් තිරයට මාරු වන්න');
-        } else {
-          icon.className = 'fa-solid fa-moon text-base';
-          icon.parentElement.setAttribute('title', 'අඳුරු තිරයට මාරු වන්න');
-        }
+        icon.className = isDark ? 'fa-solid fa-sun text-base' : 'fa-solid fa-moon text-base';
       }
-    }
-
-    // ============================================================
-    // Data Loading & Initialization
-    // ============================================================
-    document.addEventListener('DOMContentLoaded', () => {
-      initTheme();
-
-      if (typeof CAITASIKA_LR_DATA === 'undefined') {
-        console.error("දත්ත ගොනුව (caitasika.lr.js) හමු නොවීය.");
-        return;
-      }
-      initData();
-    });
-
-    function initData() {
-      const data = CAITASIKA_LR_DATA;
-      document.getElementById('app-title').textContent = data.title || "සංඛාරක්ඛන්ධ කථා";
-      document.getElementById('intro-desc').textContent = data.intro.description || "";
-      document.getElementById('intro-note').textContent = data.intro.note || "";
-
-      // Summary Badges
-      const badgesContainer = document.getElementById('summary-badges');
-      badgesContainer.innerHTML = data.intro.summary.map(s => `
-        <span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${s.category === 'සියල්ල' ? 'badge-amber font-bold' : 'bg-amber-100/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-amber-200 dark:border-slate-700'}">
-          ${s.category}: ${s.count}
-        </span>
-      `).join('');
-
-      // Bhavana Section
-      if (data.bhavanaMethod) {
-        document.getElementById('bhavana-title').textContent = data.bhavanaMethod.title;
-        const stepsContainer = document.getElementById('bhavana-steps-container');
-        stepsContainer.innerHTML = data.bhavanaMethod.steps.map(s => `
-          <div class="sub-box p-4 rounded-xl border flex gap-3 shadow-sm transition">
-            <span class="flex-shrink-0 w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-400 font-bold flex items-center justify-center text-sm border border-emerald-300 dark:border-emerald-700/50">
-              ${s.step}
-            </span>
-            <div class="space-y-1">
-              <h4 class="text-sm font-semibold text-emerald-800 dark:text-emerald-200 sinhala-font">${s.title}</h4>
-              <p class="text-xs text-slate-600 dark:text-slate-300 sinhala-font">${s.details}</p>
-            </div>
-          </div>
-        `).join('');
-
-        if (data.bhavanaMethod.ekattaMethod) {
-          document.getElementById('ekatta-title').textContent = data.bhavanaMethod.ekattaMethod.title;
-          document.getElementById('ekatta-desc').textContent = data.bhavanaMethod.ekattaMethod.explanation;
-        }
-        document.getElementById('bhavana-conclusion').textContent = data.bhavanaMethod.conclusion;
-      }
-
-      renderCards();
-
-      // Search Event Listener
-      document.getElementById('search-input').addEventListener('input', (e) => {
-        searchQuery = e.target.value.toLowerCase().trim();
-        renderCards();
-      });
     }
 
     function flattenItems() {
-      const flatList = [];
-      CAITASIKA_LR_DATA.categories.forEach(cat => {
-        if (cat.items) {
-          cat.items.forEach(item => {
-            flatList.push({ ...item, group: cat.categoryName });
-          });
-        }
-        if (cat.subCategories) {
-          cat.subCategories.forEach(sub => {
-            if (sub.items) {
-              sub.items.forEach(item => {
-                flatList.push({ ...item, group: cat.categoryName, subGroup: sub.subCategoryName });
-              });
-            }
-          });
-        }
+      let flatList = [];
+      if (typeof CAITASIKA_LR_DATA !== 'undefined' && CAITASIKA_LR_DATA.categories) {
+        CAITASIKA_LR_DATA.categories.forEach(cat => {
+          if (cat.items) {
+            cat.items.forEach(item => flatList.push({ ...item, group: cat.categoryName }));
+          }
+          if (cat.subCategories) {
+            cat.subCategories.forEach(sub => {
+              if (sub.items) {
+                sub.items.forEach(item => flatList.push({ ...item, group: cat.categoryName, subGroup: sub.subCategoryName }));
+              }
+            });
+          }
+        });
+      }
+
+      // ඵස්ස හෝ වේදනා නොමැති නම් මුලට එක් කර අංකනය 1 සිට 52 දක්වා පෙළගස්වයි
+      const hasPhassa = flatList.some(i => i.name.includes("ඵස්ස"));
+      const hasVedana = flatList.some(i => i.name.includes("වේදනා") || i.name.includes("වෙදනා"));
+
+      if (!hasPhassa && !hasVedana) {
+        flatList = [...phassaVedanaData, ...flatList];
+      }
+
+      // අංකනය 1-52 සකස් කිරීම
+      flatList.forEach((item, index) => {
+        item.displayIndex = index + 1;
       });
+
       return flatList;
     }
 
-    function filterCategory(catKey) {
-      activeFilter = catKey;
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('bg-amber-500', 'text-white', 'dark:text-slate-900');
-        btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
-      });
-      event.target.classList.add('bg-amber-500', 'text-white', 'dark:text-slate-900');
-      event.target.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
-      renderCards();
+    function toggleAccordion(id) {
+      openItemId = openItemId === id ? null : id;
+      renderList();
     }
 
-    function renderCards() {
-      const container = document.getElementById('caitasika-cards-grid');
+    function filterCategory(catKey, btnElement) {
+      activeFilter = catKey;
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.className = 'category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-amber-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700 transition';
+      });
+      btnElement.className = 'category-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-amber-500 text-white dark:text-slate-900 shadow transition';
+      renderList();
+    }
+
+    function getBadgeClass(group) {
+      if (group.includes('අකුසල')) return 'badge-rose';
+      if (group.includes('සෝභන')) return 'badge-emerald';
+      if (group.includes('ප්‍රකීර්ණක')) return 'badge-sky';
+      return 'badge-amber';
+    }
+
+    function renderList() {
+      const container = document.getElementById('caitasika-list-container');
       const allItems = flattenItems();
 
       const filtered = allItems.filter(item => {
@@ -436,156 +313,132 @@
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-12 text-center text-slate-500 text-sm">
+          <div class="py-12 text-center text-slate-500 text-sm">
             <i class="fa-regular fa-folder-open text-3xl mb-2 block"></i>
-            සොයන ලද චෛතසිකය හෝ පාලි පාඨය හමු නොවීය.
+            චෛතසිකයක් හමු නොවීය.
           </div>
         `;
         return;
       }
 
-      container.innerHTML = filtered.map(item => `
-        <article class="glass-card rounded-2xl p-5 md:p-6 space-y-4 hover:shadow-2xl transition duration-200 flex flex-col justify-between">
-          <div class="space-y-3.5">
-            
-            <!-- Card Header -->
-            <div class="flex items-start justify-between gap-3 border-b border-amber-200/50 dark:border-slate-700/60 pb-3">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs font-bold px-2 py-0.5 rounded-md ${getBadgeClass(item.group)}">
-                    ${item.subGroup ? item.subGroup : item.group}
-                  </span>
-                  ${item.id ? `<span class="text-xs font-semibold text-slate-400">#${item.id}</span>` : ''}
-                </div>
-                <h3 class="text-lg md:text-xl font-bold text-amber-700 dark:text-amber-300 sinhala-font mt-1">${item.name}</h3>
-              </div>
-              ${item.source ? `<span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 bg-amber-50 dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-amber-200 dark:border-slate-700">${item.source}</span>` : ''}
-            </div>
-
-            <!-- ප්‍රධාන පාලි පාඨය -->
-            ${item.pali_definition ? `
-              <div class="pali-quote p-3.5 rounded-xl text-sm md:text-[15px] font-semibold leading-relaxed shadow-sm">
-                <div class="flex items-start gap-2">
-                  <i class="fa-solid fa-quote-left text-amber-500 text-base mt-0.5 opacity-80"></i>
-                  <div class="pali-box flex-1">
-                    <span class="block text-[11px] uppercase tracking-wider opacity-75 mb-1 font-bold">පාලි නිද්දේසය:</span>
-                    <span class="leading-relaxed">${item.pali_definition}</span>
-                  </div>
-                </div>
-              </div>
-            ` : ''}
-
-            <!-- ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන කොටස් -->
-            <div class="space-y-2.5 text-xs md:text-sm pt-1">
+      container.innerHTML = filtered.map(item => {
+        const isOpen = openItemId === String(item.displayIndex);
+        return `
+          <div class="list-item-card rounded-2xl overflow-hidden transition-all duration-200">
+            <!-- Clickable Row Header (මූලාශ්‍ර කොටස් ඉවත් කර ඇත) -->
+            <button 
+              type="button" 
+              onclick="toggleAccordion('${item.displayIndex}')" 
+              class="w-full px-4 py-3.5 flex items-center justify-between text-left focus:outline-none transition hover:bg-amber-50/40 dark:hover:bg-slate-800/40">
               
-              <!-- 1. ලක්ඛණ -->
-              ${item.lakkhana ? `
-                <div class="sub-box p-3 rounded-xl border space-y-1.5 shadow-sm">
-                  <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-amber-200/40 dark:border-slate-700/50 pb-1">
-                    <span class="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-bold text-xs uppercase tracking-wide">
-                      <span class="w-2 h-2 rounded-full bg-amber-500"></span> 1. ලක්ඛණ
-                    </span>
-                    ${item.lakkhana.pali ? `
-                      <span class="pali-sub-badge px-2 py-0.5 rounded text-xs font-semibold pali-box">
-                        ${item.lakkhana.pali}
-                      </span>
-                    ` : ''}
-                  </div>
-                  <p class="text-slate-700 dark:text-slate-200 sinhala-font pt-0.5">${item.lakkhana.sinhala}</p>
-                </div>
-              ` : ''}
-
-              <!-- 2. රස -->
-              ${item.rasa ? `
-                <div class="sub-box p-3 rounded-xl border space-y-1.5 shadow-sm">
-                  <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-sky-200/40 dark:border-slate-700/50 pb-1">
-                    <span class="flex items-center gap-1.5 text-sky-600 dark:text-sky-400 font-bold text-xs uppercase tracking-wide">
-                      <span class="w-2 h-2 rounded-full bg-sky-500"></span> 2. රස (කිච්ච/සම්පත්ති)
-                    </span>
-                    ${item.rasa.pali ? `
-                      <span class="pali-sub-badge px-2 py-0.5 rounded text-xs font-semibold pali-box">
-                        ${item.rasa.pali}
-                      </span>
-                    ` : ''}
-                  </div>
-                  <p class="text-slate-700 dark:text-slate-200 sinhala-font pt-0.5">${item.rasa.sinhala}</p>
-                </div>
-              ` : ''}
-
-              <!-- 3. පච්චුපට්ඨාන -->
-              ${item.paccupatthana ? `
-                <div class="sub-box p-3 rounded-xl border space-y-1.5 shadow-sm">
-                  <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-emerald-200/40 dark:border-slate-700/50 pb-1">
-                    <span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase tracking-wide">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 3. පච්චුපට්ඨාන
-                    </span>
-                    ${item.paccupatthana.pali ? `
-                      <span class="pali-sub-badge px-2 py-0.5 rounded text-xs font-semibold pali-box">
-                        ${item.paccupatthana.pali}
-                      </span>
-                    ` : ''}
-                  </div>
-                  <p class="text-slate-700 dark:text-slate-200 sinhala-font pt-0.5">${item.paccupatthana.sinhala}</p>
-                </div>
-              ` : ''}
-
-              <!-- 4. පදට්ඨාන -->
-              ${item.padatthana ? `
-                <div class="sub-box p-3 rounded-xl border space-y-1.5 shadow-sm">
-                  <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-rose-200/40 dark:border-slate-700/50 pb-1">
-                    <span class="flex items-center gap-1.5 text-rose-600 dark:text-rose-400 font-bold text-xs uppercase tracking-wide">
-                      <span class="w-2 h-2 rounded-full bg-rose-500"></span> 4. පදට්ඨාන
-                    </span>
-                    ${item.padatthana.pali ? `
-                      <span class="pali-sub-badge px-2 py-0.5 rounded text-xs font-semibold pali-box">
-                        ${item.padatthana.pali}
-                      </span>
-                    ` : ''}
-                  </div>
-                  <p class="text-slate-700 dark:text-slate-200 sinhala-font pt-0.5">${item.padatthana.sinhala}</p>
-                </div>
-              ` : ''}
-
-              <!-- විරති භාවනා නිදසුන -->
-              ${item.meditation_example ? `
-                <div class="pali-quote p-3 rounded-xl text-xs space-y-1">
-                  <span class="font-bold block text-amber-700 dark:text-amber-300">${item.meditation_example.title}:</span>
-                  <p class="pali-box font-medium">${item.meditation_example.pali}</p>
-                </div>
-              ` : ''}
-
-              <!-- සම්පත්ති - විපත්ති (බ්‍රහ්මවිහාර සඳහා) -->
-              ${item.sampatti_vipatti ? `
-                <div class="bg-amber-100/70 dark:bg-amber-950/25 p-3 rounded-xl border border-amber-300 dark:border-amber-900/40 text-amber-900 dark:text-amber-200 text-xs sinhala-font">
-                  <span class="font-bold text-amber-700 dark:text-amber-400">සම්පත්ති / විපත්ති:</span> ${item.sampatti_vipatti}
-                </div>
-              ` : ''}
-
-            </div>
-
-            <!-- Notes & Additional References -->
-            ${item.notes && item.notes.length > 0 ? `
-              <div class="pt-2 border-t border-amber-200/40 dark:border-slate-800 space-y-1.5">
-                <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                  <i class="fa-solid fa-circle-info text-amber-500"></i> විශේෂ විස්තර හා අර්ථ වර්ණනා:
+              <div class="flex items-center space-x-3 sm:space-x-4">
+                <span class="w-7 h-7 flex items-center justify-center rounded-xl bg-amber-100 dark:bg-slate-800 text-amber-700 dark:text-amber-300 font-bold text-xs border border-amber-200 dark:border-slate-700 flex-shrink-0">
+                  ${item.displayIndex}
                 </span>
-                <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-1.5 sinhala-font pl-1">
-                  ${item.notes.map(n => `<li>${n}</li>`).join('')}
-                </ul>
+                <div>
+                  <h3 class="font-bold text-base sm:text-lg text-slate-800 dark:text-slate-100 sinhala-font">${item.name}</h3>
+                  <div class="flex items-center gap-2 mt-0.5">
+                    <span class="text-[11px] font-semibold px-2 py-0.5 rounded ${getBadgeClass(item.group)}">
+                      ${item.subGroup ? item.subGroup : item.group} චෛතසික
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-2 text-slate-400 pr-1">
+                <i class="fa-solid fa-chevron-down text-sm transition-transform duration-200 ${isOpen ? 'rotate-180 text-amber-500' : ''}"></i>
+              </div>
+            </button>
+
+            <!-- Expanded Details -->
+            ${isOpen ? `
+              <div class="p-5 border-t border-amber-200/40 dark:border-slate-700/60 space-y-4 bg-amber-50/20 dark:bg-slate-900/40">
+                
+                ${item.pali_definition ? `
+                  <div class="pali-quote p-3.5 rounded-xl text-sm font-semibold leading-relaxed shadow-sm">
+                    <div class="flex items-start gap-2">
+                      <i class="fa-solid fa-quote-left text-amber-500 text-sm mt-0.5 opacity-80"></i>
+                      <div class="pali-box flex-1">
+                        <span class="block text-[11px] uppercase tracking-wider opacity-75 mb-1 font-bold">පාලි නිද්දේසය:</span>
+                        <span>${item.pali_definition}</span>
+                      </div>
+                    </div>
+                  </div>
+                ` : ''}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm">
+                  <!-- 1. ලක්ඛණ -->
+                  ${item.lakkhana ? `
+                    <div class="sub-box p-3 rounded-xl border space-y-1">
+                      <div class="flex justify-between items-center border-b border-amber-200/40 dark:border-slate-700/50 pb-1">
+                        <span class="font-bold text-amber-600 dark:text-amber-400 text-xs">1. ලක්ඛණ</span>
+                        ${item.lakkhana.pali ? `<span class="pali-sub-badge px-2 py-0.5 rounded text-[11px] font-semibold pali-box">${item.lakkhana.pali}</span>` : ''}
+                      </div>
+                      <p class="text-slate-700 dark:text-slate-200 pt-1">${item.lakkhana.sinhala}</p>
+                    </div>
+                  ` : ''}
+
+                  <!-- 2. රස -->
+                  ${item.rasa ? `
+                    <div class="sub-box p-3 rounded-xl border space-y-1">
+                      <div class="flex justify-between items-center border-b border-sky-200/40 dark:border-slate-700/50 pb-1">
+                        <span class="font-bold text-sky-600 dark:text-sky-400 text-xs">2. රස (කිච්ච/සම්පත්ති)</span>
+                        ${item.rasa.pali ? `<span class="pali-sub-badge px-2 py-0.5 rounded text-[11px] font-semibold pali-box">${item.rasa.pali}</span>` : ''}
+                      </div>
+                      <p class="text-slate-700 dark:text-slate-200 pt-1">${item.rasa.sinhala}</p>
+                    </div>
+                  ` : ''}
+
+                  <!-- 3. පච්චුපට්ඨාන -->
+                  ${item.paccupatthana ? `
+                    <div class="sub-box p-3 rounded-xl border space-y-1">
+                      <div class="flex justify-between items-center border-b border-emerald-200/40 dark:border-slate-700/50 pb-1">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400 text-xs">3. පච්චුපට්ඨාන</span>
+                        ${item.paccupatthana.pali ? `<span class="pali-sub-badge px-2 py-0.5 rounded text-[11px] font-semibold pali-box">${item.paccupatthana.pali}</span>` : ''}
+                      </div>
+                      <p class="text-slate-700 dark:text-slate-200 pt-1">${item.paccupatthana.sinhala}</p>
+                    </div>
+                  ` : ''}
+
+                  <!-- 4. පදට්ඨාන -->
+                  ${item.padatthana ? `
+                    <div class="sub-box p-3 rounded-xl border space-y-1">
+                      <div class="flex justify-between items-center border-b border-rose-200/40 dark:border-slate-700/50 pb-1">
+                        <span class="font-bold text-rose-600 dark:text-rose-400 text-xs">4. පදට්ඨාන</span>
+                        ${item.padatthana.pali ? `<span class="pali-sub-badge px-2 py-0.5 rounded text-[11px] font-semibold pali-box">${item.padatthana.pali}</span>` : ''}
+                      </div>
+                      <p class="text-slate-700 dark:text-slate-200 pt-1">${item.padatthana.sinhala}</p>
+                    </div>
+                  ` : ''}
+                </div>
+
+                <!-- විශේෂ විස්තර -->
+                ${item.notes && item.notes.length > 0 ? `
+                  <div class="pt-2 border-t border-amber-200/30 dark:border-slate-800">
+                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-1">
+                      <i class="fa-solid fa-circle-info text-amber-500"></i> විශේෂ අර්ථ විවරණ:
+                    </span>
+                    <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-1 pl-1">
+                      ${item.notes.map(n => `<li>${n}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+
               </div>
             ` : ''}
-
           </div>
-        </article>
-      `).join('');
+        `;
+      }).join('');
     }
 
-    function getBadgeClass(group) {
-      if (group.includes('අකුසල')) return 'badge-rose';
-      if (group.includes('සෝභන')) return 'badge-emerald';
-      if (group.includes('ප්‍රකීර්ණක')) return 'badge-sky';
-      return 'badge-amber';
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      renderList();
+      document.getElementById('search-input').addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderList();
+      });
+    });
   </script>
 </body>
 </html>
