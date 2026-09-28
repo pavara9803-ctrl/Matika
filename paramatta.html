@@ -42,8 +42,6 @@ body {
 /* ============================================================ */
 /* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
 /* ============================================================ */
-
-/* සියලුම ඡේද (paragraphs) justify කරන්න */
 p {
   text-align: justify;
   text-justify: inter-word;
@@ -53,29 +51,24 @@ p {
   -webkit-hyphens: auto;
 }
 
-/* ලැයිස්තු අයිතම justify කරන්න */
 li {
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.7;
 }
 
-/* ශීර්ෂක left aligned තබන්න */
 h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
-/* බටන් center aligned තබන්න */
 button, .btn, .badge {
   text-align: center;
 }
 
-/* ටේබල් හෙඩර් left aligned තබන්න */
 th {
   text-align: left;
 }
 
-/* Tailwind text-justify class override */
 .text-justify {
   text-align: justify;
   text-justify: inter-word;
@@ -83,9 +76,6 @@ th {
   -webkit-hyphens: auto;
 }
 
-/* ============================================================ */
-/* වෙනත් ස්ටයිල් */
-/* ============================================================ */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -156,10 +146,8 @@ th {
 }
 
 /* ============================================================ */
-/* ✨ COLOR VARIATIONS - 4 DIFFERENT COLORS ✨ */
+/* COLOR VARIATIONS */
 /* ============================================================ */
-
-/* 1. චිත්ත පරමාර්ථය - කොළ (Emerald → Teal) */
 .card-citta {
   background: linear-gradient(135deg, #059669 0%, #047857 40%, #064e3b 100%);
 }
@@ -169,7 +157,6 @@ th {
   border-color: rgba(110, 231, 183, 0.5);
 }
 
-/* 2. චෛතසික පරමාර්ථය - රතු-තැඹිලි (Rose → Orange) */
 .card-cetasika {
   background: linear-gradient(135deg, #e11d48 0%, #be123c 40%, #7c2d12 100%);
 }
@@ -179,7 +166,6 @@ th {
   border-color: rgba(253, 186, 116, 0.5);
 }
 
-/* 3. රූප පරමාර්ථය - රන්වන්-දුඹුරු (Amber → Brown) */
 .card-rupa {
   background: linear-gradient(135deg, #d97706 0%, #b45309 40%, #451a03 100%);
 }
@@ -189,7 +175,6 @@ th {
   border-color: rgba(253, 230, 138, 0.5);
 }
 
-/* 4. නිබ්බාන පරමාර්ථය - දම්-නිල් (Violet → Indigo) */
 .card-nibbana {
   background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 40%, #312e81 100%);
 }
@@ -200,10 +185,8 @@ th {
 }
 
 /* ============================================================ */
-/* ✅ පරමාර්ථ ධර්ම විස්තර කාඩ්පත් - වර්ණ වෙන් කර */
+/* DETAILS BOX STYLES */
 /* ============================================================ */
-
-/* චිත්ත - කොළ පැහැති */
 .paramattha-detail-citta {
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
@@ -215,7 +198,6 @@ th {
   border-left-color: #10b981;
 }
 
-/* චෛතසික - රතු පැහැති */
 .paramattha-detail-cetasika {
   background: #fff1f2;
   border: 1px solid #fecdd3;
@@ -227,7 +209,6 @@ th {
   border-left-color: #f43f5e;
 }
 
-/* රූප - රන්වන් පැහැති */
 .paramattha-detail-rupa {
   background: #fffbeb;
   border: 1px solid #fde68a;
@@ -239,7 +220,6 @@ th {
   border-left-color: #f59e0b;
 }
 
-/* නිර්වාණ - දම් පැහැති */
 .paramattha-detail-nibbana {
   background: #f5f3ff;
   border: 1px solid #ddd6fe;
@@ -251,31 +231,17 @@ th {
   border-left-color: #a78bfa;
 }
 
-/* ============================================================ */
-/* NUMBER PILL - 4 colors */
-/* ============================================================ */
 .num-pill-citta { background: linear-gradient(135deg, #10b981, #047857); color: white; }
 .num-pill-cetasika { background: linear-gradient(135deg, #f43f5e, #be123c); color: white; }
 .num-pill-rupa { background: linear-gradient(135deg, #f59e0b, #b45309); color: white; }
 .num-pill-nibbana { background: linear-gradient(135deg, #a78bfa, #7c3aed); color: white; }
 
-/* ============================================================ */
-/* ANIMATIONS */
-/* ============================================================ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.4s ease-out; }
 
-.paramattha-card:nth-child(1) { animation: fadeIn 0.4s ease-out 0.05s backwards; }
-.paramattha-card:nth-child(2) { animation: fadeIn 0.4s ease-out 0.12s backwards; }
-.paramattha-card:nth-child(3) { animation: fadeIn 0.4s ease-out 0.19s backwards; }
-.paramattha-card:nth-child(4) { animation: fadeIn 0.4s ease-out 0.26s backwards; }
-
-/* ============================================================ */
-/* ARROW ANIMATION */
-/* ============================================================ */
 .paramattha-card .arrow-icon {
   transition: transform 0.3s ease;
 }
@@ -345,6 +311,7 @@ th {
         සතර පරමාර්ථ
       </h1>
       
+      <!-- මුල් ගාථාව -->
       <div class="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-4 mb-4">
         <p class="text-sm sm:text-base text-white/95 leading-relaxed italic text-justify">
           <strong>“තත්ථ වුත්තාභිධම්මත්ථා - චතූධා පරමත්ථතො,<br>
@@ -355,8 +322,35 @@ th {
       <p class="text-sm sm:text-base text-white/95 leading-relaxed mb-4 text-justify">
         1-චිත්ත, 2-චෛතසික, 3-රූප, 4-නිර්වාණය යි අභිධර්මපිටකයෙහි වදාළ තාක් අර්ථ පරමාර්ථ වශයෙන් සිව් වැදෑරුම් වේ. මෙහි අර්ථ නම් කුශලාදිය හා ස්කන්ධාදිය යි. (අභිධර්ම චන්ද්‍රිකාව)
       </p>
+
+      <!-- ✅ අලුතින් එක් කරන ලද පාලි විවරණය සහ සිංහල පරිවර්තනය (කළු පාට අකුරින්) -->
+      <div class="bg-amber-50/95 backdrop-blur-md border border-amber-300 rounded-xl p-4 sm:p-5 mt-4 space-y-3 text-slate-900 shadow-md">
+        <div class="border-b border-amber-300/80 pb-2">
+          <span class="text-xs uppercase tracking-wider font-bold text-amber-900">අභිධම්මත්ථ විවරණය • පාලි පාඨය</span>
+          <p class="text-xs sm:text-sm italic leading-relaxed text-justify mt-1 text-slate-900">
+            "තත්‌ථ තස්‌මිං අභිධම්‌මෙ සබ්‌බථා කුසලාදිවසෙන, ඛන්‌ධාදිවසෙන ච වුත්‌තා අභිධම්‌මත්‌ථා පරමත්‌ථතො සම්‌මුතිං ඨපෙත්‌වා නිබ්‌බත්‌තිතපරමත්‌ථවසෙන චිත්‌තං විඤ්‌ඤාණක්‌ඛන්‌ධො, චෙතසිකං වෙදනාදික්‌ඛන්‌ධත්‌තයං, රූපං භූතුපාදායභෙදභින්‌නො රූපක්‌ඛන්‌ධො, නිබ්‌බානං මග්‌ගඵලානමාරම්‌මණභූතො අසඞ්‌ඛතධම්‌මොති එවං චතුධා චතූහාකාරෙහි ඨිතාති යොජනා. තත්‌ථ පරමො උත්‌තමො අවිපරීතො අත්‌ථො, පරමස්‌ස වා උත්‌තමස්‌ස ඤාණස්‌ස අත්‌ථො ගොචරොති පරමත්‌ථො."
+          </p>
+        </div>
+
+        <div class="pt-1">
+          <span class="text-xs uppercase tracking-wider font-bold text-amber-900">සිංහල අර්ථ විවරණය</span>
+          <p class="text-xs sm:text-sm leading-relaxed text-justify mt-1 text-slate-900">
+            "එහි (එම අභිධර්ම සංග්‍රහයෙහි), ඒ අභිධර්මය තුළ සියලු ආකාරයෙන් කුසල් ආදී වශයෙන් ද, ස්කන්ධ ආදී වශයෙන් ද දේශනා කරන ලද අභිධර්මාර්ථයෝ සම්මුතිය බැහැර කොට (සම්මුතිය පසෙක තබා), යථාර්ථ වශයෙන් පහළ වූ පරමාර්ථ වශයෙන්:
+          </p>
+          <ul class="list-disc list-inside text-xs sm:text-sm pl-2 my-2 space-y-1 text-slate-900 font-medium">
+            <li><strong>චිත්තය</strong> — විඤ්ඤාණස්කන්ධය යි,</li>
+            <li><strong>චෛතසිකය</strong> — වේදනාදී වූ (වේදනා, සඤ්ඤා, සංඛාර යන) ස්කන්ධත්‍රය යි,</li>
+            <li><strong>රූපය</strong> — භූත (මහාභූත) සහ උපාදාය වශයෙන් භේදයට පැමිණි රූපස්කන්ධය යි,</li>
+            <li><strong>නිර්වාණය</strong> — මාර්ග ඵලයන්ට අරමුණු වූ අසංඛත ධර්මය යි.</li>
+          </ul>
+          <p class="text-xs sm:text-sm leading-relaxed text-justify text-slate-900">
+            මෙසේ සිව් ආකාරයකින්, ආකාර සතරකින් පිහිටා තිබේ යැයි යෙදුම (යෝජනාව) දත යුතුය. එහි 'පරමාර්ථ' යනු: පරම වූ හෙවත් උතුම් වූ, අවිපරීත වූ (වෙනස් නොවන සත්‍ය) අර්ථය 'පරමාර්ථ' නම් වේ. නැතහොත් පරම වූ, උතුම් වූ (සර්වඥතා/ලෝකෝත්තර) ඥානයාගේ අර්ථය හෙවත් ගෝචරය (අරමුණ) වන බැවින් 'පරමාර්ථ' නම් වේ."
+          </p>
+        </div>
+      </div>
       
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <!-- ගණන් සාරාංශ කොටු -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
         <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-3 text-center">
           <div class="text-2xl font-bold text-white drop-shadow-sm">89/121</div>
           <div class="text-[10px] text-white/90 font-medium mt-1">චිත්ත</div>
@@ -412,9 +406,7 @@ th {
       <span class="ml-auto text-xs bg-saffron-500/20 text-saffron-700 dark:text-saffron-300 px-2 py-0.5 rounded-full font-bold">4 ධර්ම</span>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- 1. චිත්තය - කොළ පැහැති -->
-    <!-- ============================================================ -->
+    <!-- 1. චිත්තය -->
     <div class="paramattha-detail-citta rounded-xl p-5 shadow-sm fade-in">
       <div class="flex items-start gap-3 mb-3">
         <div class="w-12 h-12 rounded-xl num-pill-citta flex items-center justify-center text-xl shrink-0 shadow-md">
@@ -433,9 +425,7 @@ th {
       </p>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- 2. චෛතසිකය - රතු පැහැති -->
-    <!-- ============================================================ -->
+    <!-- 2. චෛතසිකය -->
     <div class="paramattha-detail-cetasika rounded-xl p-5 shadow-sm fade-in">
       <div class="flex items-start gap-3 mb-3">
         <div class="w-12 h-12 rounded-xl num-pill-cetasika flex items-center justify-center text-xl shrink-0 shadow-md">
@@ -457,9 +447,7 @@ th {
       </p>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- 3. රූපය - රන්වන් පැහැති -->
-    <!-- ============================================================ -->
+    <!-- 3. රූපය -->
     <div class="paramattha-detail-rupa rounded-xl p-5 shadow-sm fade-in">
       <div class="flex items-start gap-3 mb-3">
         <div class="w-12 h-12 rounded-xl num-pill-rupa flex items-center justify-center text-xl shrink-0 shadow-md">
@@ -478,9 +466,7 @@ th {
       </p>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- 4. නිර්වාණය - දම් පැහැති -->
-    <!-- ============================================================ -->
+    <!-- 4. නිර්වාණය -->
     <div class="paramattha-detail-nibbana rounded-xl p-5 shadow-sm fade-in">
       <div class="flex items-start gap-3 mb-3">
         <div class="w-12 h-12 rounded-xl num-pill-nibbana flex items-center justify-center text-xl shrink-0 shadow-md">
@@ -509,7 +495,6 @@ th {
   <!-- ============================================================ -->
   <section class="space-y-4">
     
-    <!-- Section Title -->
     <div class="flex items-center gap-3 pb-2 border-b-2 border-amber-200 dark:border-slate-700">
       <div class="w-8 h-8 rounded-lg bg-saffron-500/20 flex items-center justify-center text-saffron-600 dark:text-saffron-400">
         <i class="fa-solid fa-list-ul text-sm"></i>
@@ -704,9 +689,6 @@ th {
 <!-- SCRIPT -->
 <!-- ============================================================ -->
 <script>
-// ============================================================
-// DARK MODE TOGGLE
-// ============================================================
 function toggleDarkMode() {
   var html = document.documentElement;
   var icon = document.getElementById('theme-toggle-icon');
@@ -721,7 +703,6 @@ function toggleDarkMode() {
   }
 }
 
-// Theme initialize
 (function initTheme() {
   var savedTheme = localStorage.getItem('abhidhamma_theme');
   if (savedTheme === 'dark' ||
@@ -732,9 +713,6 @@ function toggleDarkMode() {
   }
 })();
 
-// ============================================================
-// SCROLL TO TOP
-// ============================================================
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
