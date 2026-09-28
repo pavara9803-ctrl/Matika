@@ -38,19 +38,20 @@
     <!-- Google Fonts: Noto Serif Sinhala & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body {
             font-family: 'Noto Serif Sinhala', 'Inter', serif;
             -webkit-tap-highlight-color: transparent;
+            font-size: 15px;
         }
         
         /* ============================================================ */
-        /* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
+        /* ✅ සිංහල පෙළ සඳහා Justify සැකසුම */
         /* ============================================================ */
-        p {
+        p, .text-justify {
             text-align: justify;
             text-justify: inter-word;
             word-spacing: 0.05em;
@@ -77,19 +78,9 @@
             text-align: left;
         }
         
-        .text-justify {
-            text-align: justify;
-            text-justify: inter-word;
-            hyphens: auto;
-            -webkit-hyphens: auto;
-        }
-        
         /* Dynamic content justify */
-        #rupa-container p,
         #rupa-deta-content p,
-        #rupa-container td,
         #rupa-deta-content td,
-        #rupa-container li,
         #rupa-deta-content li,
         [id^="infoDetailsGroup"] {
             text-align: justify;
@@ -110,7 +101,7 @@
         .rupa-intro-card {
             background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
             border: 1px solid #fcd34d;
-            border-left: 5px solid #d97706;
+            border-left: 6px solid #d97706;
         }
         .dark .rupa-intro-card {
             background: linear-gradient(135deg, #451a03 0%, #78350f 50%, #92400e 100%);
@@ -119,12 +110,12 @@
         }
         
         .rupa-intro-card .gatha-box {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.85);
             border-left: 4px solid #d97706;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
         }
         .dark .rupa-intro-card .gatha-box {
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.35);
             border-left-color: #fbbf24;
         }
         
@@ -259,16 +250,16 @@
             </div>
         </div>
 
-        <!-- ගාථාව - විශේෂ box -->
+        <!-- ගාථාව -->
         <div class="gatha-box p-4 mb-4">
             <p class="text-sm sm:text-base italic text-amber-900 dark:text-amber-100 leading-relaxed text-justify">
                 <i class="fa-solid fa-quote-left text-amber-500 mr-2 opacity-60"></i>
-                <strong>“රුප්පතීති රූපං, සීතුණ්හාදිවිරොධිපච්චයෙහි විකාරමාපජ්ජති, ආපාදීයතීති වා අත්ථො.”</strong>
+                <strong>"රුප්පතීති රූපං, සීතුණ්හාදිවිරොධිපච්චයෙහි විකාරමාපජ්ජති, ආපාදීයතීති වා අත්ථො."</strong>
                 <span class="text-xs text-amber-700 dark:text-amber-300 ml-2">(අභි.සං)</span>
             </p>
         </div>
 
-        <!-- විස්තරය -->
+        <!-- මුල් විස්තරය -->
         <div class="space-y-3">
             <p class="text-sm sm:text-base text-amber-900 dark:text-amber-50 leading-relaxed text-justify">
                 සත්ත්ව ශරීර හා බාහිර වස්තූන් සෑදී ඇති මූලික ධර්ම රාශිය <strong>රූපයෝ</strong> ය. රූප විසි අටක් (28) ඇත්තේ ය. එයින් ඇසට පෙනෙන්නේ වර්ණ ධාතුව නැමති එක් රූපයක් පමණෙකි. ඉතිරි සත්විස්ස ඇසට පෙනෙන රූප නො වේ.
@@ -278,6 +269,41 @@
                 රූප යන වචනයේ තේරුම <strong>ශීතෝෂ්ණාදි විරුද්ධ දෙය හා එක් වීමෙන් විකාරයට පැමිණෙන දෙය</strong> ය යනුයි. චිත්ත චෛතසිකයන් ඉතා සියුම් බැවින් ශීතෝෂ්ණාදිය හා ඒවායේ ගැටීමක් සිදු නොවේ. 
                 <span class="text-xs text-amber-700 dark:text-amber-300 italic">(අභි,ච)</span>
             </p>
+        </div>
+
+        <!-- අලුතින් එක් කරන ලද රූප නිර්වචන පාලි සහ සිංහල විවරණය -->
+        <div class="bg-amber-50/95 dark:bg-slate-900/90 border border-amber-300 dark:border-amber-700 rounded-xl p-4 sm:p-5 my-4 space-y-3 text-slate-900 dark:text-slate-100 shadow-sm">
+            <div class="border-b border-amber-300/80 dark:border-slate-700 pb-2">
+                <span class="text-xs uppercase tracking-wider font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-scroll text-amber-700 dark:text-amber-400"></i> රූප නිර්වචන පාලි පාඨය
+                </span>
+                <p class="text-xs sm:text-sm italic leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    "රුප්‌පතීති රූපං, සීතුණ්‌හාදිවිරොධිපච්‌චයෙහි විකාරමාපජ්‌ජති, ආපාදීයතීති වා අත්‌ථො. තෙනාහ භගවා ‘‘සීතෙනපි රුප්‌පති, උණ්‌හෙනපි රුප්‌පතී’’ත්‍යාදි (සං. නි. 3.79), රුප්‌පනඤ්‌චෙත්‌ථ සීතාදිවිරොධිපච්‌චයසමවායෙ විසදිසුප්‌පත්‌තියෙව. යදි එවං අරූපධම්‌මානම්‌පි රූපවොහාරො ආපජ්‌ජතීති? නාපජ්‌ජති සීතාදිග්‌ගහණසාමත්‌ථියතො විභූතතරස්‌සෙව රුප්‌පනස්‌සාධිප්‌පෙතත්‌තා. ඉතරථා හි ‘‘රුප්‌පතී’’ති අවිසෙසවචනෙනෙව පරියත්‌තන්‌ති කිං සීතාදිග්‌ගහණෙන, තං පන සීතාදිනා ඵුට්‌ඨස්‌ස රුප්‌පනං විභූතතරං, තස්‌මා තදෙවෙත්‌ථාධිප්‌පෙතන්‌ති ඤාපනත්‌ථං සීතාදිග්‌ගහණං කතං. යදි එවං කථං බ්‍රහ්‌මලොකෙ රූපවොහාරො, න හි තත්‌ථ උපඝාතකා සීතාදයො අත්‌ථීති? කිඤ්‌චාපි උපඝාතකා නත්‌ථි, අනුග්‌ගාහකා පන අත්‌ථි, තස්‌මා තංවසෙනෙත්‌ථ රුප්‌පනං සම්‌භවතීති, අථ වා තංසභාවානතිවත්‌තනතො තත්‌ථ රූපවොහාරොති අලමතිප්‌පපඤ්‌චෙන."
+                </p>
+            </div>
+
+            <div class="pt-1">
+                <span class="text-xs uppercase tracking-wider font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-open text-amber-700 dark:text-amber-400"></i> සිංහල අර්ථ විවරණය
+                </span>
+                <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    "විකාරයට පත්වේනුයි (වෙනස් වීමට භාජනය වේනුයි) <strong>'රූප'</strong> නම් වේ. එනම් ශීත, උෂ්ණ ආදී වූ පටහැනි (විරුද්ධ) ප්‍රත්‍යයන් හේතුවෙන් විකාරයට පැමිණේ, පමුණුවනු ලැබේ යන අර්ථයයි. එහෙයින් භාග්‍යවතුන් වහන්සේ <em>'සීතේනපි රුප්පති, උණ්හේනපි රුප්පති'</em> (ශීතලෙන් ද විකාරයට පත්වේ, උෂ්ණයෙන් ද විකාරයට පත්වේ) යනාදී වශයෙන් වදාළ සේක (සංයුක්ත නිකාය 3.79 - ඛජ්ජනීය සූත්‍රය). මෙහිලා 'රුප්පනය' (විකාරයට පත්වීම) යනු ශීතාදී විරුද්ධ ප්‍රත්‍යයන් එක්රැස් වූ කල්හි (පෙර පැවති රූප සන්තතියට) අසමාන වූ (විසදෘශ) රූපයන්ගේ පහළවීම ම ය.
+                </p>
+                <div class="bg-white/80 dark:bg-slate-800/80 p-3 rounded-lg border border-amber-200 dark:border-slate-700 my-2 space-y-2">
+                    <div>
+                        <strong class="text-amber-950 dark:text-amber-300">ප්‍රශ්නය:</strong> ඉදින් එසේ නම් (පෙර සිතට අසමාන පසු සිත් පහළවීම් ආදිය හේතුවෙන්) අරූප ධර්මයන්ට ද (නාම ධර්මයන්ට ද) 'රූප' යන ව්‍යවහාරය පැමිණිය යුතු නොවේ ද?
+                    </div>
+                    <div>
+                        <strong class="text-emerald-800 dark:text-emerald-400">පිළිතුර:</strong> නැත, එසේ නොපැමිණේ. ශීත-උෂ්ණාදිය ගැනීමෙහි සමර්ථතාව අනුව (ඇසට, කයට) අතිශයින්ම ප්‍රකට වූවක් ම 'රුප්පනය' වශයෙන් මෙහි අදහස් කර ඇති බැවිනි. එසේ නොවන්නේ නම්, 'රුප්පති' (විකාරයට පත්වේ) යන විශේෂණයක් නැති සාමාන්‍ය වචනයෙන්ම ප්‍රමාණවත් වන බැවින් 'ශීතාදී' වශයෙන් ගැනීමෙන් කුමන ඵලයක් ද? ශීත-උෂ්ණාදිය හා ගැටීමෙන් වන විකාරය අතිශයින්ම ප්‍රකට ය. එබැවින් මෙහි අදහස් කරන ලද්දේ එයම බව දැනවීම සඳහා ශීතාදී වශයෙන් ගැනීම කරන ලදී.
+                    </div>
+                    <div class="pt-1">
+                        <strong class="text-amber-950 dark:text-amber-300">ප්‍රශ්නය:</strong> ඉදින් එසේ නම් බ්‍රහ්ම ලෝකයෙහි 'රූප' යන ව්‍යවහාරය කෙසේ වේ ද? එහි රූපයන්ට හානි පමුණුවන (උපඝාතක වූ) ශීත-උෂ්ණාදිය නැත්තේ නොවේ ද?
+                    </div>
+                    <div>
+                        <strong class="text-emerald-800 dark:text-emerald-400">පිළිතුර:</strong> හානි පමුණුවන උපඝාතක ධර්මයන් එහි නැතත්, අනුග්‍රහ කරන (අනුකූල වූ) ශීත-උෂ්ණාදී ප්‍රත්‍යයෝ ඇත්තාහ. එබැවින් ඒ අනුග්‍රාහක ප්‍රත්‍යයන්ගේ බලයෙන් එහි ද 'රුප්පනය' (වෙනස් වී පහළවීම) සම්භවය වේ (සිදුවේ). නැතහොත්, (කාම ලෝකයේදී පවතින) එම රූප ස්වභාවය ඉක්මවා නොපවතින බැවින් ද එහි 'රූප' යන ව්‍යවහාරය වේ. එබැවින් මේ සම්බන්ධයෙන් අනවශ්‍ය ලෙස දීර්ඝ විස්තර කිරීම් ප්‍රමාණවත් වේ."
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- විශේෂාංග ලැයිස්තුව -->
@@ -321,13 +347,24 @@
     <!-- ============================================================ -->
     <div class="space-y-4">
         
-        <!-- ✅ බොත්තම 1: රූප විභාගය වර්ගීකරණය -->
-        <button type="button" onclick="toggleMainSection()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-amber-700 via-saffron-600 to-amber-700 hover:from-amber-800 hover:to-saffron-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all">
-            <span class="flex items-center gap-2">
-                <i class="fa-solid fa-layer-group text-saffron-200"></i> රූප විභාගය වර්ගීකරණය
-            </span>
-            <i id="vibhaga-arrow" class="fa-solid fa-chevron-down text-saffron-200 transition-transform duration-200"></i>
-        </button>
+        <!-- බොත්තම් පේළිය: රූප විභාගය + ලක්ඛණ රස -->
+        <div class="flex flex-col sm:flex-row gap-2">
+            <!-- බොත්තම 1: රූප විභාගය වර්ගීකරණය -->
+            <button type="button" onclick="toggleMainSection()" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-amber-700 via-saffron-600 to-amber-700 hover:from-amber-800 hover:to-saffron-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-saffron-200"></i> රූප විභාගය වර්ගීකරණය
+                </span>
+                <i id="vibhaga-arrow" class="fa-solid fa-chevron-down text-saffron-200 transition-transform duration-200"></i>
+            </button>
+
+            <!-- නව බොත්තම: ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන -->
+            <a href="rupa-lr.html" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-3 bg-gradient-to-r from-purple-700 via-violet-600 to-purple-700 hover:from-purple-800 hover:to-violet-700 text-white px-5 py-3 rounded-xl font-bold text-base shadow-md transition-all">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-purple-200"></i> ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන
+                </span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-purple-200 text-sm"></i>
+            </a>
+        </div>
 
         <!-- Sub-Buttons Box -->
         <div id="subContainer" class="hidden bg-amber-100/60 dark:bg-slate-800 p-4 rounded-2xl border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
@@ -397,10 +434,9 @@
             <i id="rupa-deta-arrow" class="fa-solid fa-chevron-down text-emerald-200 transition-transform duration-200"></i>
         </button>
 
-        <!-- ✅ නව Sub-Container: rupa-deta.js මගින් පාලනය වේ -->
+        <!-- නව Sub-Container: rupa-deta.js මගින් පාලනය වේ -->
         <div id="rupaDetaContainer" class="hidden bg-emerald-50/60 dark:bg-slate-800 p-4 rounded-2xl border border-emerald-200 dark:border-slate-700 shadow-sm space-y-4">
             
-            <!-- ✅ rupa-deta.js මගින් මෙම කොන්ටේනරය populate කරයි -->
             <div id="rupa-deta-content" class="space-y-4 text-justify">
                 
                 <!-- Loading Placeholder -->
@@ -414,13 +450,6 @@
         </div>
 
     </div>
-
-    <!-- ============================================================ -->
-    <!-- DYNAMIC RUPA CARDS CONTAINER -->
-    <!-- ============================================================ -->
-    <section id="rupa-container" class="space-y-4 pt-2 text-justify">
-        <!-- Javascript මඟින් dynamic ලෙස card හා table මෙතැනට ජනනය වේ -->
-    </section>
 
 </main>
 
@@ -462,9 +491,6 @@
         }
     }
 
-    // ============================================================
-    // ✅ නව: රූප - සවිස්තරාත්මක තොරතුරු ටොගල් function
-    // ============================================================
     function toggleRupaDetaSection() {
         const container = document.getElementById("rupaDetaContainer");
         const arrowIcon = document.getElementById("rupa-deta-arrow");
@@ -475,7 +501,6 @@
                 arrowIcon.classList.toggle("rotate-180");
             }
             
-            // ✅ rupa-deta.js එකේ init function එක call කරන්න (පළමු වරට පමණක්)
             if (!container.classList.contains('hidden')) {
                 if (typeof initRupaDeta === 'function') {
                     initRupaDeta();
