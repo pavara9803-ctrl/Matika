@@ -14,7 +14,7 @@
 //     - specialNotes
 
 registerTika({
-  title: '16. මග්ගාරම්මණ තිකය',
+  title: '16. මග්ගාරම්මණ ත්‍රිකය',
   
   // ✅ විශේෂ ලකුණු
   isSpecial: true,
