@@ -5,26 +5,20 @@
 // ============================================================
 
 // ============================================================
-// Tika ලියාපදිංචි කිරීමේ ශ්‍රිතය
-// ============================================================
-var tikaFullData = window.tikaFullData || [];
-
-function registerTika(tikaData) {
-  if (!tikaData) {
-    console.warn('[tika-app] registerTika: No data provided');
-    return;
-  }
-  tikaFullData.push(tikaData);
-  console.log('[tika-app] Tika registered:', tikaData.title || tikaData.name || 'Unknown');
-}
-
-// ============================================================
 // APPLICATION STATE
 // ============================================================
 var currentTikaIndex = 0;
 var currentPadaIndex = 0;
 var activeTikaTab = 'skandha';
 var tikaBookmarks = JSON.parse(localStorage.getItem('tika_bookmarks') || '[]');
+
+// ═══ NEW: අර්ථ විස්තර accordion තත්ත්වය ═══
+var arthaVistaraOpenState = {
+  nirukthi: true,   // පළමුවැන්න default විවෘත
+  abhidheya: false,
+  sangraha: false,
+  vishesha: false
+};
 
 // ============================================================
 // VIEW MANAGEMENT
@@ -49,10 +43,7 @@ function backToTikaList() {
 // SCROLL TO TIKA LIST (බැනරය ක්ලික් කළ විට)
 // ============================================================
 function scrollToTikaList() {
-  // ලැයිස්තුව නැවත render කරන්න
   renderTikaList();
-  
-  // ලැයිස්තුවට scroll කරන්න
   var listContainer = document.getElementById('tika-list-container');
   if (listContainer) {
     setTimeout(function() {
@@ -186,12 +177,16 @@ function selectTikaPada(padaIndex) {
   var padaArthaText = document.getElementById('tika-pada-artha-text');
   if (padaArthaSection && padaArthaText) {
     if (pada.padaArtha && String(pada.padaArtha).trim() !== '') {
-      padaArthaText.innerText = pada.padaArtha;
+      // Markdown බෝල්ඩ් (**text**) HTML බවට පරිවර්තනය කරන්න
+      padaArthaText.innerHTML = formatPadaArtha(pada.padaArtha);
       padaArthaSection.classList.remove('hidden');
     } else {
       padaArthaSection.classList.add('hidden');
     }
   }
+
+  // ═══ NEW: විස්තරාත්මක විවරණය (arthaVistara) render කරන්න ═══
+  renderArthaVistara(pada);
 
   // ============================================================
   // ස්වරූපාර්ථය පෙන්වීම
@@ -230,6 +225,258 @@ function selectTikaPada(padaIndex) {
   } else {
     var extras = document.getElementById('maggarammana-extras');
     if (extras) extras.classList.add('hidden');
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// ═══ NEW: PADA ARTHA FORMAT HELPER ═══
+// ════════════════════════════════════════════════════════════
+function formatPadaArtha(text) {
+  if (!text) return '';
+  // **bold** → <strong>
+  var formatted = String(text)
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-maroon-900 dark:text-saffron-300">$1</strong>')
+    // newlines → <br>
+    .replace(/\n/g, '<br>');
+  return formatted;
+}
+
+// ════════════════════════════════════════════════════════════
+// ═══ NEW: ARTHA VISTARA RENDERING ═══
+// ════════════════════════════════════════════════════════════
+
+/**
+ * විස්තරාත්මක විවරණය (arthaVistara) render කරයි.
+ * pada.arthaVistara නොමැති නම් section එක සඟවයි.
+ */
+function renderArthaVistara(pada) {
+  var section = document.getElementById('tika-artha-vistara-section');
+  var content = document.getElementById('artha-vistara-content');
+  var chevron = document.getElementById('artha-vistara-chevron');
+
+  if (!section || !content) return;
+
+  if (!pada || !pada.arthaVistara) {
+    section.classList.add('hidden');
+    return;
+  }
+
+  section.classList.remove('hidden');
+
+  var av = pada.arthaVistara;
+  var html = '';
+
+  // --- නිරුක්ති විශ්ලේෂණය ---
+  if (av.nirukthi && av.nirukthi.items && av.nirukthi.items.length > 0) {
+    html += renderArthaVistaraBlock(
+      'nirukthi',
+      'නිරුක්ති විශ්ලේෂණය',
+      'fa-book',
+      'text-blue-600 dark:text-blue-400',
+      av.nirukthi.intro,
+      renderNirukthiItems(av.nirukthi.items)
+    );
+  }
+
+  // --- අභිධෙය්‍යාර්ථ විස්තරය ---
+  if (av.abhidheya && av.abhidheya.items && av.abhidheya.items.length > 0) {
+    html += renderArthaVistaraBlock(
+      'abhidheya',
+      'අභිධෙය්‍යාර්ථ විස්තරය',
+      'fa-magnifying-glass-chart',
+      'text-purple-600 dark:text-purple-400',
+      av.abhidheya.intro,
+      renderAbhidheyaItems(av.abhidheya.items)
+    );
+  }
+
+  // --- සංග්‍රහ විස්තරය ---
+  if (av.sangraha && av.sangraha.items && av.sangraha.items.length > 0) {
+    html += renderArthaVistaraBlock(
+      'sangraha',
+      'සංග්‍රහ විස්තරය',
+      'fa-layer-group',
+      'text-amber-600 dark:text-amber-400',
+      av.sangraha.intro,
+      renderSangrahaItems(av.sangraha.items)
+    );
+  }
+
+  // --- විශේෂ සටහන් ---
+  if (av.vishesha && av.vishesha.items && av.vishesha.items.length > 0) {
+    html += renderArthaVistaraBlock(
+      'vishesha',
+      'විශේෂ සටහන්',
+      'fa-circle-info',
+      'text-saffron-600 dark:text-saffron-400',
+      av.vishesha.intro,
+      renderVisheshaItems(av.vishesha.items)
+    );
+  }
+
+  if (html === '') {
+    section.classList.add('hidden');
+    return;
+  }
+
+  content.innerHTML = html;
+
+  // Default open state යාවත්කාලීන කරන්න
+  Object.keys(arthaVistaraOpenState).forEach(function(key) {
+    var body = document.getElementById('av-body-' + key);
+    var chev = document.getElementById('av-chevron-' + key);
+    if (!body) return;
+    if (arthaVistaraOpenState[key]) {
+      body.classList.remove('hidden');
+      if (chev) chev.classList.add('rotate-180');
+    } else {
+      body.classList.add('hidden');
+      if (chev) chev.classList.remove('rotate-180');
+    }
+  });
+
+  // Chevron එක reset කරන්න (main section)
+  if (chevron) chevron.classList.remove('rotate-180');
+}
+
+/**
+ * එක් විවරණ කොටසක් (accordion block) HTML ලෙස ජනනය කරයි.
+ */
+function renderArthaVistaraBlock(key, title, icon, iconColor, intro, bodyHtml) {
+  var isOpen = arthaVistaraOpenState[key] ? '' : 'hidden';
+  var chevRotate = arthaVistaraOpenState[key] ? 'rotate-180' : '';
+
+  return '' +
+    '<div class="border border-amber-200 dark:border-slate-700 rounded-xl overflow-hidden bg-amber-50/50 dark:bg-slate-900/50">' +
+      '<button onclick="toggleArthaVistaraBlock(\'' + key + '\')" ' +
+              'class="w-full flex items-center justify-between gap-2 p-3 text-left hover:bg-amber-100/60 dark:hover:bg-slate-800 transition-colors">' +
+        '<span class="flex items-center gap-2 min-w-0">' +
+          '<i class="fa-solid ' + icon + ' ' + iconColor + ' text-sm shrink-0"></i>' +
+          '<span class="font-bold text-sm text-maroon-900 dark:text-saffron-200 truncate">' + title + '</span>' +
+        '</span>' +
+        '<i id="av-chevron-' + key + '" class="fa-solid fa-chevron-down text-saffron-600 text-xs transition-transform ' + chevRotate + '"></i>' +
+      '</button>' +
+      '<div id="av-body-' + key + '" class="' + isOpen + ' p-3 pt-0 space-y-3">' +
+        (intro ? '<p class="text-xs text-slate-600 dark:text-slate-400 italic mt-1 text-justify">' + intro + '</p>' : '') +
+        bodyHtml +
+      '</div>' +
+    '</div>';
+}
+
+/**
+ * නිරුක්ති අයිතම render කරයි.
+ */
+function renderNirukthiItems(items) {
+  var html = '<div class="space-y-3">';
+  items.forEach(function(item) {
+    html += '' +
+      '<div class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-lg p-3 space-y-2">' +
+        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200 flex items-center gap-1.5">' +
+          '<i class="fa-solid fa-tag text-saffron-600 text-xs"></i> ' + item.name +
+        '</div>' +
+        (item.pali ? 
+          '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-amber-50 dark:bg-slate-900 p-2 rounded border border-amber-100 dark:border-slate-700">' +
+            '<i class="fa-solid fa-language text-saffron-500"></i> ' + item.pali +
+          '</div>' : '') +
+        (item.artha ? 
+          '<p class="text-xs text-slate-700 dark:text-slate-300">' +
+            '<strong class="text-maroon-900 dark:text-saffron-300">අර්ථය:</strong> ' + item.artha +
+          '</p>' : '') +
+        (item.vistara ? 
+          '<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed text-justify">' + item.vistara + '</p>' : '') +
+      '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+/**
+ * අභිධෙය්‍යාර්ථ අයිතම render කරයි.
+ */
+function renderAbhidheyaItems(items) {
+  var html = '<div class="space-y-2">';
+  items.forEach(function(item) {
+    html += '' +
+      '<div class="breakdown-item">' +
+        '<span class="num"><i class="fa-solid fa-cube text-saffron-600 text-xs"></i></span>' +
+        '<span class="name">' + item.name +
+          (item.count ? ' <span class="text-xs text-saffron-600 font-bold">(' + item.count + ')</span>' : '') +
+        '</span>' +
+        '<span class="value">' + item.vistara + '</span>' +
+      '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+/**
+ * සංග්‍රහ අයිතම render කරයි.
+ */
+function renderSangrahaItems(items) {
+  var html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">';
+  items.forEach(function(item) {
+    html += '' +
+      '<div class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-lg p-3">' +
+        '<div class="flex items-center justify-between mb-1">' +
+          '<span class="font-bold text-xs text-maroon-900 dark:text-saffron-200">' + item.name + '</span>' +
+          '<span class="bg-saffron-500 text-maroon-950 font-bold px-2 py-0.5 rounded-full text-[10px]">' + item.count + '</span>' +
+        '</div>' +
+        '<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed text-justify">' + item.vistara + '</p>' +
+      '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+/**
+ * විශේෂ සටහන් render කරයි.
+ */
+function renderVisheshaItems(items) {
+  var html = '<div class="space-y-2">';
+  items.forEach(function(item, idx) {
+    html += '' +
+      '<div class="bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-900 dark:to-slate-800 border border-amber-300 dark:border-slate-700 rounded-lg p-3">' +
+        '<div class="flex items-start gap-2 mb-1.5">' +
+          '<span class="w-5 h-5 rounded-full bg-saffron-500 text-maroon-950 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">' + (idx + 1) + '</span>' +
+          '<div class="font-bold text-xs text-maroon-900 dark:text-saffron-200">' + item.title + '</div>' +
+        '</div>' +
+        '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed ml-7 text-justify">' + item.content + '</p>' +
+      '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+/**
+ * එක් විවරණ කොටසක් toggle කරයි (accordion).
+ */
+function toggleArthaVistaraBlock(key) {
+  arthaVistaraOpenState[key] = !arthaVistaraOpenState[key];
+  var body = document.getElementById('av-body-' + key);
+  var chev = document.getElementById('av-chevron-' + key);
+  if (!body) return;
+  if (arthaVistaraOpenState[key]) {
+    body.classList.remove('hidden');
+    if (chev) chev.classList.add('rotate-180');
+  } else {
+    body.classList.add('hidden');
+    if (chev) chev.classList.remove('rotate-180');
+  }
+}
+
+/**
+ * මුළු විස්තරාත්මක විවරණ කොටසම toggle කරයි.
+ */
+function toggleArthaVistaraSection() {
+  var content = document.getElementById('artha-vistara-content');
+  var chevron = document.getElementById('artha-vistara-chevron');
+  if (!content) return;
+  if (content.classList.contains('hidden')) {
+    content.classList.remove('hidden');
+    if (chevron) chevron.classList.add('rotate-180');
+  } else {
+    content.classList.add('hidden');
+    if (chevron) chevron.classList.remove('rotate-180');
   }
 }
 
@@ -862,6 +1109,5 @@ function initTikaApp() {
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initTikaApp);
 } else {
-  // DOM දැනටමත් load වී ඇත්නම් කෙලින්ම ක්‍රියාත්මක කරන්න
   initTikaApp();
 }

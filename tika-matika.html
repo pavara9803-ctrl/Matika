@@ -87,7 +87,8 @@ li {
 #mg-maggaNaKarana-list,
 #mg-related-list,
 #mg-specialnotes-list,
-#tika-bookmarks-container {
+#tika-bookmarks-container,
+#artha-vistara-content {
   text-align: justify;
   text-justify: inter-word;
 }
@@ -193,6 +194,36 @@ th {
   background: #14532d;
   border-color: #166534;
   color: #dcfce7;
+}
+
+/* ═══ NEW: විස්තරාත්මක විවරණය box ═══ */
+.artha-vistara-box {
+  background: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  line-height: 1.8;
+  font-size: 0.9rem;
+  color: #3b0764;
+}
+.dark .artha-vistara-box {
+  background: #2e1065;
+  border-color: #6b21a8;
+  color: #e9d5ff;
+}
+
+/* ═══ NEW: Accordion transition ═══ */
+#artha-vistara-content {
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+#artha-vistara-chevron,
+[id^="av-chevron-"] {
+  transition: transform 0.25s ease;
+}
+
+/* ═══ NEW: Artha Vistara block hover ═══ */
+[id^="av-body-"] {
+  animation: fadeIn 0.25s ease-out;
 }
 
 @keyframes fadeIn {
@@ -342,6 +373,29 @@ th {
           <span class="text-sm font-bold text-slate-800 dark:text-blue-200">පදයේ අර්ථය</span>
         </div>
         <div id="tika-pada-artha-text" class="artha-box"></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- ═══ NEW: විස්තරාත්මක විවරණය (Artha Vistara) ═══ -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <div id="tika-artha-vistara-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl border border-purple-200 dark:border-purple-700/40 shadow-sm overflow-hidden w-full">
+        <!-- Section header (toggle) -->
+        <button onclick="toggleArthaVistaraSection()" 
+                class="w-full flex items-center justify-between gap-2 p-4 hover:bg-purple-50 dark:hover:bg-slate-700 transition-colors">
+          <span class="flex items-center gap-2 min-w-0">
+            <span class="w-8 h-8 rounded-lg bg-purple-200 dark:bg-purple-700 text-purple-700 dark:text-purple-100 flex items-center justify-center text-sm shrink-0">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+            </span>
+            <span class="text-left min-w-0">
+              <span class="block font-bold text-sm text-maroon-900 dark:text-purple-200 truncate">විස්තරාත්මක විවරණය</span>
+              <span class="block text-[10px] text-purple-700 dark:text-purple-300/80">නිරුක්ති · අභිධෙය්‍ය · සංග්‍රහ · විශේෂ සටහන්</span>
+            </span>
+          </span>
+          <i id="artha-vistara-chevron" class="fa-solid fa-chevron-down text-purple-600 dark:text-purple-300 text-sm transition-transform shrink-0"></i>
+        </button>
+
+        <!-- Section body (dynamic content) -->
+        <div id="artha-vistara-content" class="hidden p-4 pt-0 space-y-3"></div>
       </div>
 
       <!-- ============================================================ -->
