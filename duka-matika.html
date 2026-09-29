@@ -35,173 +35,107 @@ tailwind.config = {
 <style>
 body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-color: transparent; }
 
-/* ============================================================ */
-/* ✅ Justify සැකසුම් - සියලුම වචන පේළි */
-/* ============================================================ */
-
-/* සියලුම ඡේද (paragraphs) justify කරන්න */
-p {
+/* Justify සැකසුම් */
+p, li {
   text-align: justify;
   text-justify: inter-word;
   word-spacing: 0.05em;
   line-height: 1.8;
-  hyphens: auto;
-  -webkit-hyphens: auto;
 }
 
-/* ලැයිස්තු අයිතම justify කරන්න */
-li {
-  text-align: justify;
-  text-justify: inter-word;
-  line-height: 1.7;
-}
-
-/* ස්වරූපාර්ථ box එකේ වචන justify කරන්න */
-.svartha-box {
+.svartha-box, .artha-box {
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
   -webkit-hyphens: auto;
-  word-spacing: 0.05em;
 }
 
-/* අර්ථය box එකේ වචන justify කරන්න */
+#duka-pada-artha-text,
 #duka-pada-svartha,
-#duka-pada-desc {
+#duka-pada-desc,
+#duka-artha-vistara-content,
+#duka-mukta-content {
   text-align: justify;
   text-justify: inter-word;
 }
 
-/* Breakdown items වල text justify කරන්න */
+#duka-skandha-list, #duka-ayatana-list, #duka-dhatu-list, #duka-sathya-list,
+#gochhaka-list, #duka-list-container, #duka-pair-container, #duka-bookmarks-container,
+#duka-list-notes, #duka-mishraka-container {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .breakdown-item .name {
   text-align: justify;
   text-justify: inter-word;
 }
 
-/* Breakdown ලැයිස්තු justify කරන්න */
-#duka-skandha-list,
-#duka-ayatana-list,
-#duka-dhatu-list,
-#duka-sathya-list {
-  text-align: justify;
-  text-justify: inter-word;
-}
+h1, h2, h3, h4, h5, h6 { text-align: left; }
+button, .btn, .badge { text-align: center; }
+th { text-align: left; }
 
-/* දුක ලැයිස්තු සහ පද ලැයිස්තු justify කරන්න */
-#gochhaka-list,
-#duka-list-container,
-#duka-pair-container,
-#duka-bookmarks-container {
-  text-align: justify;
-  text-justify: inter-word;
-}
-
-/* ශීර්ෂක left aligned තබන්න */
-h1, h2, h3, h4, h5, h6 {
-  text-align: left;
-}
-
-/* බටන් center aligned තබන්න */
-button, .btn, .badge {
-  text-align: center;
-}
-
-/* ටේබල් හෙඩර් left aligned තබන්න */
-th {
-  text-align: left;
-}
-
-/* Tailwind text-justify class override */
-.text-justify {
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-}
-
-/* ============================================================ */
-/* වෙනත් ස්ටයිල් */
-/* ============================================================ */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ============================================================ */
 /* BREAKDOWN ITEMS */
-/* ============================================================ */
 .breakdown-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 0.65rem 0.5rem;
-  border-bottom: 1px solid #fef3c7;
-  gap: 0.75rem;
-  border-radius: 0.5rem;
-  transition: background 0.15s;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 0.65rem 0.5rem; border-bottom: 1px solid #fef3c7;
+  gap: 0.75rem; border-radius: 0.5rem; transition: background 0.15s;
 }
 .breakdown-item:hover { background: rgba(251, 191, 36, 0.06); }
 .breakdown-item:last-child { border-bottom: none; }
 .breakdown-item .num {
-  font-weight: 700;
-  color: #92400e;
-  min-width: 1.8rem;
-  flex-shrink: 0;
-  background: rgba(251, 191, 36, 0.15);
-  border-radius: 50%;
-  width: 1.8rem;
-  height: 1.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
+  font-weight: 700; color: #92400e; min-width: 1.8rem; flex-shrink: 0;
+  background: rgba(251, 191, 36, 0.15); border-radius: 50%;
+  width: 1.8rem; height: 1.8rem;
+  display: flex; align-items: center; justify-content: center; font-size: 0.75rem;
 }
 .breakdown-item .name { color: #78350f; flex: 1; font-weight: 500; }
 .breakdown-item .value {
-  color: #b45309;
-  font-weight: 600;
-  text-align: right;
-  flex-shrink: 0;
-  max-width: 60%;
-  font-size: 0.85rem;
+  color: #b45309; font-weight: 600; text-align: right;
+  flex-shrink: 0; max-width: 60%; font-size: 0.85rem;
 }
-
 .dark .breakdown-item { border-bottom-color: #334155; }
-.dark .breakdown-item .num { color: #1d190a; background: rgba(252, 211, 77, 0.15); }
+.dark .breakdown-item .num { color: #fcd34d; background: rgba(252, 211, 77, 0.15); }
 .dark .breakdown-item .name { color: #fde68a; }
 .dark .breakdown-item .value { color: #fbbf24; }
 
-/* ============================================================ */
+/* පදයේ අර්ථය box */
+.artha-box {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  white-space: pre-line;
+  line-height: 1.8;
+  font-size: 0.9rem;
+  color: #0f172a;
+  text-align: justify;
+}
+.dark .artha-box {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
 /* ස්වරූපාර්ථ box */
-/* ============================================================ */
 .svartha-box {
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
   border-radius: 0.75rem;
   padding: 1rem;
   white-space: pre-line;
-  line-height: 1.7;
+  line-height: 1.8;
   font-size: 0.9rem;
   color: #052e16;
   text-align: justify;
-  text-justify: inter-word;
 }
 .dark .svartha-box {
   background: #14532d;
   border-color: #166534;
   color: #dcfce7;
-}
-
-/* ============================================================ */
-/* තෝරාගත් පදය box */
-/* ============================================================ */
-.pada-box {
-  background: #fdf2f2;
-  border: 1px solid #fecaca;
-  color: #1e1b1b;
-}
-.dark .pada-box {
-  background: linear-gradient(135deg, #4a1a1c, #2a0a0c);
-  border-color: rgba(217, 119, 6, 0.4);
-  color: #fef3c7;
 }
 
 @keyframes fadeIn {
@@ -260,9 +194,7 @@ th {
       <div class="absolute -right-6 -bottom-6 opacity-10 text-amber-100 text-9xl pointer-events-none">
         <i class="fa-solid fa-dharmachakra"></i>
       </div>
-      <span class="inline-block px-3 py-1 bg-saffron-500/20 border border-saffron-400/40 rounded-full text-xs text-saffron-300 font-medium mb-2">
-        අභිධර්ම පිටකය
-      </span>
+      <span class="inline-block px-3 py-1 bg-saffron-500/20 border border-saffron-400/40 rounded-full text-xs text-saffron-300 font-medium mb-2">අභිධර්ම පිටකය</span>
       <h2 class="text-xl sm:text-2xl font-bold text-saffron-200 mb-2">දුක මාතිකා (100)</h2>
       <p class="text-sm text-amber-100/90 leading-relaxed text-justify">
         ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.
@@ -275,11 +207,9 @@ th {
       </div>
       <div class="relative flex items-center justify-between gap-3">
         <div class="flex items-center gap-3 flex-1 min-w-0">
-          <div class="w-14 h-14 rounded-2xl bg-white/25 border-2 border-white/40 flex items-center justify-center text-3xl font-bold text-white shrink-0 shadow-lg">
-            100
-          </div>
+          <div class="w-14 h-14 rounded-2xl bg-white/25 border-2 border-white/40 flex items-center justify-center text-3xl font-bold text-white shrink-0 shadow-lg">100</div>
           <div class="flex-1 min-w-0">
-           <h3 class="text-xl sm:text-2xl font-bold mb-1 drop-shadow-md">දුක මාතිකා 100</h3>
+            <h3 class="text-xl sm:text-2xl font-bold mb-1 drop-shadow-md">දුක මාතිකා 100</h3>
             <p class="text-xs sm:text-sm text-white/90 leading-relaxed text-justify">
               ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි පද, ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම්
             </p>
@@ -329,6 +259,12 @@ th {
       </div>
     </div>
     <div id="duka-list-container" class="space-y-3"></div>
+    
+    <!-- ✅ NEW: ගොච්ඡක සටහන් -->
+    <div id="duka-list-notes" class="hidden"></div>
+    
+    <!-- ✅ NEW: මිශ්‍රක දුක -->
+    <div id="duka-mishraka-container" class="hidden space-y-2"></div>
   </section>
 
   <!-- VIEW 3: පද දෙක -->
@@ -364,10 +300,10 @@ th {
     </div>
 
     <!-- තෝරාගත් පදය -->
-    <div class="pada-box p-4 rounded-xl shadow-lg w-full">
+    <div class="bg-[#fdf2f2] dark:bg-gradient-to-br dark:from-[#4a1a1c] dark:to-[#2a0a0c] text-slate-900 dark:text-amber-50 p-4 rounded-xl shadow-lg border border-rose-200 dark:border-amber-600/40 w-full">
       <div class="flex justify-between items-start gap-3">
         <div class="flex-1 min-w-0">
-          <div class="text-xs font-medium mb-1 flex items-center gap-1.5 text-rose-700 dark:text-saffron-300">
+          <div class="text-xs text-rose-700 dark:text-saffron-300 font-medium mb-1 flex items-center gap-1.5">
             <i class="fa-solid fa-bookmark"></i> තෝරාගත් මාතිකා පදය
           </div>
           <h3 id="duka-pada-name" class="text-lg font-bold text-maroon-900 dark:text-saffron-100"></h3>
@@ -376,7 +312,33 @@ th {
           <i id="duka-bookmark-icon" class="fa-regular fa-bookmark"></i>
         </button>
       </div>
-      <p id="duka-pada-desc" class="text-xs mt-2 text-slate-600 dark:text-amber-200/90 text-justify"></p>
+      <p id="duka-pada-desc" class="text-xs text-slate-600 dark:text-amber-200/90 mt-2 text-justify"></p>
+    </div>
+
+    <!-- ✅ NEW: පදයේ අර්ථය (padaArtha) -->
+    <div id="duka-pada-artha-section" class="hidden bg-slate-100 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-100 p-4 rounded-xl shadow-lg border border-slate-300 dark:border-slate-600/40 w-full">
+      <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-300 dark:border-slate-500/30">
+        <i class="fa-solid fa-book text-blue-600 dark:text-blue-300"></i>
+        <span class="text-sm font-bold text-slate-800 dark:text-blue-200">පදයේ අර්ථය</span>
+      </div>
+      <div id="duka-pada-artha-text" class="artha-box"></div>
+    </div>
+
+    <!-- ✅ NEW: විස්තරාත්මක විවරණය (arthaVistara) -->
+    <div id="duka-artha-vistara-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl border border-purple-200 dark:border-purple-700/40 shadow-sm overflow-hidden w-full">
+      <button onclick="toggleDukaArthaVistaraSection()" class="w-full flex items-center justify-between gap-2 p-4 hover:bg-purple-50 dark:hover:bg-slate-700 transition-colors">
+        <span class="flex items-center gap-2 min-w-0">
+          <span class="w-8 h-8 rounded-lg bg-purple-200 dark:bg-purple-700 text-purple-700 dark:text-purple-100 flex items-center justify-center text-sm shrink-0">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+          </span>
+          <span class="text-left min-w-0">
+            <span class="block font-bold text-sm text-maroon-900 dark:text-purple-200 truncate">විස්තරාත්මක විවරණය</span>
+            <span class="block text-[10px] text-purple-700 dark:text-purple-300/80">නිරුක්ති · අභිධෙය්‍ය · සංග්‍රහ · විශේෂ සටහන්</span>
+          </span>
+        </span>
+        <i id="duka-artha-vistara-chevron" class="fa-solid fa-chevron-down text-purple-600 dark:text-purple-300 text-sm transition-transform shrink-0"></i>
+      </button>
+      <div id="duka-artha-vistara-content" class="hidden p-4 pt-0 space-y-3"></div>
     </div>
 
     <!-- ස්වරූපාර්ථ -->
@@ -388,25 +350,36 @@ th {
       <div id="duka-pada-svartha" class="svartha-box"></div>
     </div>
 
+    <!-- ✅ NEW: දුක මුක්ත ධර්ම -->
+    <div id="duka-mukta-section" class="hidden bg-purple-50 dark:bg-gradient-to-br dark:from-purple-900 dark:to-indigo-950 border border-purple-200 dark:border-purple-600/40 rounded-2xl p-4 shadow-lg">
+      <div class="flex items-center gap-2 mb-3 border-b border-purple-200 dark:border-purple-500/30 pb-2">
+        <span class="w-9 h-9 rounded-xl bg-purple-200 dark:bg-purple-700 text-purple-700 dark:text-purple-100 flex items-center justify-center text-sm shrink-0">
+          <i class="fa-solid fa-circle-notch"></i>
+        </span>
+        <div>
+          <h3 class="font-bold text-sm text-purple-900 dark:text-purple-200">දුක මුක්ත ධර්ම</h3>
+          <p class="text-[10px] text-purple-700 dark:text-purple-300/80">මෙම දුකයට ඇතුළත් නොවන ධර්ම</p>
+        </div>
+      </div>
+      <p id="duka-mukta-content" class="text-xs text-purple-900 dark:text-purple-100 leading-relaxed whitespace-pre-line text-justify"></p>
+    </div>
+
+    <!-- Tabs -->
     <div class="bg-white dark:bg-slate-800 rounded-2xl border border-amber-200 dark:border-slate-700 shadow-sm overflow-hidden">
       <div class="flex border-b border-amber-200 dark:border-slate-700 overflow-x-auto hide-scrollbar">
-        <button onclick="switchDukaTab('skandha')" id="duka-tab-btn-skandha"
-                class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-bold whitespace-nowrap transition-colors border-b-2 border-saffron-600 text-saffron-700 dark:text-saffron-400 bg-saffron-500/10">
+        <button onclick="switchDukaTab('skandha')" id="duka-tab-btn-skandha" class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-bold whitespace-nowrap transition-colors border-b-2 border-saffron-600 text-saffron-700 dark:text-saffron-400 bg-saffron-500/10">
           <i class="fa-solid fa-cubes"></i> ස්කන්ධ
           <span class="block text-[10px] font-normal opacity-75">(5)</span>
         </button>
-        <button onclick="switchDukaTab('ayatana')" id="duka-tab-btn-ayatana"
-                class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700">
+        <button onclick="switchDukaTab('ayatana')" id="duka-tab-btn-ayatana" class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700">
           <i class="fa-solid fa-door-open"></i> ආයතන
           <span class="block text-[10px] font-normal opacity-75">(12)</span>
         </button>
-        <button onclick="switchDukaTab('dhatu')" id="duka-tab-btn-dhatu"
-                class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700">
+        <button onclick="switchDukaTab('dhatu')" id="duka-tab-btn-dhatu" class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700">
           <i class="fa-solid fa-circle-nodes"></i> ධාතු
           <span class="block text-[10px] font-normal opacity-75">(18)</span>
         </button>
-        <button onclick="switchDukaTab('sathya')" id="duka-tab-btn-sathya"
-                class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700">
+        <button onclick="switchDukaTab('sathya')" id="duka-tab-btn-sathya" class="tab-btn flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700">
           <i class="fa-solid fa-scale-balanced"></i> සත්‍ය
           <span class="block text-[10px] font-normal opacity-75">(4)</span>
         </button>
@@ -415,40 +388,32 @@ th {
       <div class="p-4 sm:p-5">
         <div id="duka-panel-skandha" class="space-y-3">
           <div class="flex items-center justify-between bg-amber-50 dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700">
-            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm">
-              <i class="fa-solid fa-cubes text-saffron-600"></i> පරමාර්ථ ධර්ම ස්කන්ධ 5 ට බෙදීම
-            </span>
-            <span id="duka-skandha-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0</span>
+            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm"><i class="fa-solid fa-cubes text-saffron-600"></i> පරමාර්ථ ධර්ම ස්කන්ධ 5 ට බෙදීම</span>
+            <span id="duka-skandha-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0 / 5</span>
           </div>
           <div id="duka-skandha-list" class="text-sm"></div>
         </div>
 
         <div id="duka-panel-ayatana" class="hidden space-y-3">
           <div class="flex items-center justify-between bg-amber-50 dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700">
-            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm">
-              <i class="fa-solid fa-door-open text-saffron-600"></i> පරමාර්ථ ධර්ම ආයතන 12 ට බෙදීම
-            </span>
-            <span id="duka-ayatana-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0</span>
+            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm"><i class="fa-solid fa-door-open text-saffron-600"></i> පරමාර්ථ ධර්ම ආයතන 12 ට බෙදීම</span>
+            <span id="duka-ayatana-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0 / 12</span>
           </div>
           <div id="duka-ayatana-list" class="text-sm"></div>
         </div>
 
         <div id="duka-panel-dhatu" class="hidden space-y-3">
           <div class="flex items-center justify-between bg-amber-50 dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700">
-            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm">
-              <i class="fa-solid fa-circle-nodes text-saffron-600"></i> පරමාර්ථ ධර්ම ධාතු 18 ට බෙදීම
-            </span>
-            <span id="duka-dhatu-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0</span>
+            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm"><i class="fa-solid fa-circle-nodes text-saffron-600"></i> පරමාර්ථ ධර්ම ධාතු 18 ට බෙදීම</span>
+            <span id="duka-dhatu-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0 / 18</span>
           </div>
           <div id="duka-dhatu-list" class="text-sm"></div>
         </div>
 
         <div id="duka-panel-sathya" class="hidden space-y-3">
           <div class="flex items-center justify-between bg-amber-50 dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700">
-            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm">
-              <i class="fa-solid fa-scale-balanced text-saffron-600"></i> චතුරාර්ය සත්‍යය
-            </span>
-            <span id="duka-sathya-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0</span>
+            <span class="font-bold text-amber-900 dark:text-saffron-300 text-sm"><i class="fa-solid fa-scale-balanced text-saffron-600"></i> චතුරාර්ය සත්‍යය</span>
+            <span id="duka-sathya-count" class="bg-saffron-500 text-maroon-950 font-bold px-3 py-0.5 rounded-full text-xs">0 / 4</span>
           </div>
           <div id="duka-sathya-list" class="text-sm"></div>
         </div>
@@ -477,9 +442,7 @@ th {
   <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා අධ්‍යයනය &copy; 2024</p>
 </footer>
 
-<!-- ============================================================ -->
 <!-- SCRIPT ගොනු -->
-<!-- ============================================================ -->
 <script src="js/duka/gochhaka-01-hetu.js"></script>
 <script src="js/duka/gochhaka-02-cullantara.js"></script>
 <script src="js/duka/gochhaka-03-asava.js"></script>
@@ -496,25 +459,30 @@ th {
 <script src="duka-app.js"></script>
 
 <script>
-// ============================================================
-// දුක මාතිකා බොත්තම click කිරීම
-// ============================================================
+// ═══ NEW: arthaVistara section toggle ═══
+function toggleDukaArthaVistaraSection() {
+  var content = document.getElementById('duka-artha-vistara-content');
+  var chevron = document.getElementById('duka-artha-vistara-chevron');
+  if (!content) return;
+  if (content.classList.contains('hidden')) {
+    content.classList.remove('hidden');
+    if (chevron) chevron.classList.add('rotate-180');
+  } else {
+    content.classList.add('hidden');
+    if (chevron) chevron.classList.remove('rotate-180');
+  }
+}
+
 function openDukaMatika() {
   var section = document.getElementById('gochhaka-section');
   if (!section) return;
-  
   section.classList.remove('hidden');
   renderGochhakaList();
-  
   setTimeout(function() {
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
 }
-  
 
-// ============================================================
-// THEME TOGGLE
-// ============================================================
 function toggleDarkMode() {
   var html = document.documentElement;
   var icon = document.getElementById('theme-toggle-icon');
@@ -535,121 +503,6 @@ if (localStorage.getItem('duka_theme') === 'dark' ||
   document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
 }
 
-// ============================================================
-// SEARCH - පුළුල් කළ සෙවුම
-// ============================================================
-function handleDukaSearch(query) {
-  var clearBtn = document.getElementById('duka-search-clear');
-
-  if (!query || query.trim() === '') {
-    clearBtn.classList.add('hidden');
-    renderGochhakaList();
-    return;
-  }
-
-  clearBtn.classList.remove('hidden');
-
-  if (typeof performDukaSearch === 'function') {
-    performDukaSearch(query);
-  } else {
-    console.warn('[Duka App] performDukaSearch not found, using fallback');
-    var results = searchDukaMatika(query);
-    renderDukaSearchResults(results);
-  }
-}
-
-function clearDukaSearch() {
-  document.getElementById('duka-search').value = '';
-  document.getElementById('duka-search-clear').classList.add('hidden');
-  renderGochhakaList();
-}
-
-// ============================================================
-// BOOKMARKS VIEW
-// ============================================================
-function showDukaBookmarksView() {
-  showDukaView('duka-view-bookmarks');
-  updateBreadcrumbDuka('bookmarks');
-  renderDukaBookmarks();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function renderDukaBookmarks() {
-  var container = document.getElementById('duka-bookmarks-container');
-  if (!container) return;
-  container.innerHTML = '';
-
-  if (dukaState.bookmarks.length === 0) {
-    container.innerHTML = '<div class="text-center py-12 text-slate-500 text-sm"><i class="fa-regular fa-bookmark text-4xl mb-3 opacity-30"></i><br>සුරැකි මාතිකා පද කිසිවක් නොමැත.</div>';
-    return;
-  }
-
-  dukaState.bookmarks.forEach(function(b) {
-    var gochhaka = dukaGochhakaData.find(function(g) { return g.id === b.gochhakaId; });
-    if (!gochhaka) return;
-
-    var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all flex items-center justify-between gap-2';
-
-    card.onclick = function(e) {
-      if (e.target.closest('button')) return;
-      dukaState.currentGochhaka = gochhaka;
-      showDukaView('duka-view-pada-detail');
-      openPadaDetail(b.padaIndex);
-    };
-
-    card.innerHTML =
-      '<div class="flex-1 min-w-0">' +
-        '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-saffron-500/20 text-saffron-700 dark:text-saffron-300 mb-1 inline-block">' + gochhaka.title + '</span>' +
-        '<h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 truncate">' + b.padaName + '</h4>' +
-      '</div>' +
-      '<button onclick="event.stopPropagation(); removeDukaBookmark(\'' + b.id + '\')" class="text-slate-400 hover:text-red-500 p-2 transition-colors shrink-0">' +
-        '<i class="fa-solid fa-trash-can text-sm"></i>' +
-      '</button>';
-    container.appendChild(card);
-  });
-}
-
-function removeDukaBookmark(id) {
-  dukaState.bookmarks = dukaState.bookmarks.filter(function(b) { return b.id !== id; });
-  localStorage.setItem('duka_bookmarks', JSON.stringify(dukaState.bookmarks));
-  updateDukaBookmarkBadge();
-  renderDukaBookmarks();
-}
-
-// ============================================================
-// BREADCRUMB UPDATE
-// ============================================================
-function updateBreadcrumbDuka(view) {
-  var sep = document.getElementById('bc-sep-gochhaka');
-  var gochhakaSpan = document.getElementById('bc-gochhaka');
-  if (!sep || !gochhakaSpan) return;
-
-  var text = '';
-
-  if (view === 'duka-list' && dukaState.currentGochhaka) {
-    text = dukaState.currentGochhaka.title;
-  } else if (view === 'pada-pair' && dukaState.currentDukaPair) {
-    text = dukaState.currentDukaPair.name || dukaState.currentGochhaka.title;
-  } else if (view === 'pada-detail' && dukaState.currentPada) {
-    text = dukaState.currentGochhaka.title + ' → ' + dukaState.currentPada.name;
-  } else if (view === 'bookmarks') {
-    text = 'සුරැකි මාතිකා';
-  }
-
-  if (text) {
-    sep.classList.remove('hidden');
-    gochhakaSpan.classList.remove('hidden');
-    gochhakaSpan.innerText = text;
-  } else {
-    sep.classList.add('hidden');
-    gochhakaSpan.classList.add('hidden');
-  }
-}
-
-// ============================================================
-// INIT
-// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   if (typeof initDukaApp === 'function') {
     initDukaApp();
