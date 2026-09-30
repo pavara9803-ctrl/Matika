@@ -4,7 +4,7 @@
 // Version: 13.0.0
 // ============================================================
 
-const CACHE_NAME = 'abhidhamma-matika-v13.18.0';
+const CACHE_NAME = 'abhidhamma-matika-v13.20.0';
 const OFFLINE_URL = './index.html';
 
 // ============================================================
