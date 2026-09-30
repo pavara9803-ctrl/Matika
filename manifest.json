@@ -4,7 +4,7 @@
   "description": "සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22, දුක මාතිකා 100 සහ රූප 28 වර්ගීකරණය හා සමුට්ඨාන නය විස්තරාත්මකව අධ්‍යයනය කරන්න.",
   "start_url": "./index.html",
   "scope": "./",
-  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "any",
   "background_color": "#fffbeedb",
   "theme_color": "#3f0a0c",
@@ -138,5 +138,49 @@
     }
   ],
   "prefer_related_applications": false,
-  "id": " abhidhamma-matika-app"
+  "id": "abhidhamma-matika-app",
+  "screenshots": [
+    {
+      "src": "./screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "මුල් පිටුව - ජංගම දුරකථනය"
+    },
+    {
+      "src": "./screenshot2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "තික මාතිකා - ජංගම දුරකථනය"
+    },
+    {
+      "src": "./screenshot3.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "දුක මාතිකා - ජංගම දුරකථනය"
+    },
+    {
+      "src": "./screenshot4.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "මුල් පිටුව - පරිගණකය"
+    },
+    {
+      "src": "./screenshot5.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "තික මාතිකා - පරිගණකය"
+    },
+    {
+      "src": "./screenshot6.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "දුක මාතිකා - පරිගණකය"
+    }
+  ]
 }
