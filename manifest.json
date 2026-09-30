@@ -164,27 +164,6 @@
       "type": "image/png",
       "form_factor": "narrow",
       "label": "දුක මාතිකා - ජංගම දුරකථනය"
-    },
-    {
-      "src": "./screenshots/screenshot4.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "මුල් පිටුව - පරිගණකය"
-    },
-    {
-      "src": "./screenshots/screenshot5.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "තික මාතිකා - පරිගණකය"
-    },
-    {
-      "src": "./screenshots/screenshot6.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "දුක මාතිකා - පරිගණකය"
     }
   ],
   "display": "fullscreen"
