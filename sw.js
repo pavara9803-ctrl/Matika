@@ -1,13 +1,14 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
-// Version: 15.0.0 (Final update for complete file structure)
+// අභිධර්ම මාතිකා අධ්‍යයන යෙදුම සඳහා නොබැඳි (Offline) සහාය
+// Version: 12.0.0
 // ============================================================
 
-const CACHE_NAME = 'abhidhamma-matika-v17.0.0';
+const CACHE_NAME = 'abhidhamma-matika-v12.9.0';
 const OFFLINE_URL = './index.html';
 
 // ============================================================
-// යෙදුමට අවශ්‍ය සියලුම ස්ථිතික ගොනු (ඔබගේ නව ලැයිස්තුවට අනුව)
+// යෙදුමට අවශ්‍ය සියලුම ස්ථිතික ගොනු
 // ============================================================
 const ASSETS_TO_CACHE = [
   // ========== ප්‍රධාන ගොනු ==========
@@ -15,20 +16,44 @@ const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',
 
+  // ========== සතර පරමාර්ථ ==========
+  './paramatta.html',
+
+  // ========== දත්ත ගොනු ==========
+  './sabbatika-data.js',
+  './tika-data.js',
+  './duka-data.js',
+  './suttanta-data.js',
+  './tika-app.js',
+  './duka-app.js',
+  './suttanta-app.js',
+
   // ========== HTML ගොනු (root) ==========
-  './sabbattika.html',
   './tika-matika.html',
   './duka-matika.html',
   './suttanta-matika.html',
-  './paramatta.html',
 
-  // ========== දත්ත ගොනු (root) ==========
-  './sabbatika-data.js',
-  './tika-data.js',
-  './tika-app.js',
-  './duka-app.js',
-  './suttanta-data.js',
-  './feedback.js',
+  // ========== චෛතසික ගොනු (caitasika folder) ==========
+  './caitasika/caitasika.html',
+  './caitasika/caitasika.js',
+  './caitasika/caitasika.lr.html',
+  './caitasika/caitasika.lr.js',
+  './caitasika/samprayoga.js',
+
+  // ========== චිත්ත ගොනු (Citta folder) ==========
+  './Citta/citta.html',
+  './Citta/citta.js',
+
+  // ========== රූප ගොනු (Rupa folder) ==========
+  './Rupa/rupa-deta.js',
+  './Rupa/rupa-lr.html',
+  './Rupa/rupa-lr.js',
+  './Rupa/rupa.html',
+  './Rupa/rupa.js',
+
+  // ========== නිබ්බාන ගොනු (nibbana folder) ==========
+  './nibbana/nibbana.html',
+  './nibbana/nibbana.js',
 
   // ========== තික ගොනු 22 (tika folder) ==========
   './tika/01-kusala-tika.js',
@@ -54,71 +79,42 @@ const ASSETS_TO_CACHE = [
   './tika/21-ajjhattarammana-tika.js',
   './tika/22-sanidassana-tika.js',
 
-  // ========== Citta folder ==========
-  './Citta/citta.html',
-  './Citta/citta-data.js',
-  './Citta/citta.js',
+  // ========== දුක ගොනු 13 (js/duka folder) ==========
+  './js/duka/gochhaka-01-hetu.js',
+  './js/duka/gochhaka-02-cullantara.js',
+  './js/duka/gochhaka-03-asava.js',
+  './js/duka/gochhaka-04-samyojana.js',
+  './js/duka/gochhaka-05-gantha.js',
+  './js/duka/gochhaka-06-ogha.js',
+  './js/duka/gochhaka-07-yoga.js',
+  './js/duka/gochhaka-08-nivarana.js',
+  './js/duka/gochhaka-09-paramasa.js',
+  './js/duka/gochhaka-10-mahantara.js',
+  './js/duka/gochhaka-11-upadana.js',
+  './js/duka/gochhaka-12-kilesa.js',
+  './js/duka/gochhaka-13-pitthi.js',
 
-  // ========== Rupa folder ==========
-  './Rupa/rupa.html',
-  './Rupa/rupa-deta.js',
-  './Rupa/rupa.js',
-  './Rupa/rupa-lr.html',
-  './Rupa/rupa-lr.js',
-
-  // ========== caitasika folder ==========
-  './caitasika/caitasika.html',
-  './caitasika/caitasika.js',
-  './caitasika/caitasika.lr.html',
-  './caitasika/caitasika.lr.js',
-  './caitasika/samprayoga.js',
-
-  // ========== js folder (දුක ගොනු) ==========
-  // (ඔබගේ js folder එකේ ඇති ගොනු මෙහි ඇතුළත් කරන්න. උදා: )
-  // './js/duka/gochhaka-01-hetu.js',
-  // ... (ඔබගේ js folder එකේ ඇති සියලුම ගොනු මෙහි ලැයිස්තුගත කරන්න)
-
-  // ========== nibbana folder ==========
-  // (ඔබගේ nibbana folder එකේ ඇති ගොනු මෙහි ඇතුළත් කරන්න)
-  // './nibbana/nibbana.html',
-  // './nibbana/nibbana.js',
-
-  // ========== අයිකන ගොනු (ප්‍රධාන) ==========
-  './launchericon-48x48.png',
-  './launchericon-192x192.png',
-  './launchericon-512x512.png',
-  
-  // ========== අයිකන ගොනු (icons folder) ==========
-  './icons/16.png',
-  './icons/32.png',
-  './icons/48.png',
-  './icons/72.png',
-  './icons/96.png',
-  './icons/128.png',
-  './icons/144.png',
-  './icons/152.png',
-  './icons/167.png',
-  './icons/180.png',
-  './icons/192.png',
-  './icons/256.png',
-  './icons/512.png',
-  './icons/1024.png',
-
-  // ========== Offline Tailwind (ඔබ භාවිතා කරන්නේ නම්) ==========
-  './tailwind.min.js',
+  // ========== අයිකන ගොනු ==========
+  './icons/launchericon-48x48.png',
+  './icons/launchericon-192x192.png',
+  './icons/launchericon-512x512.png',
+  './screenshot1.png'
 ];
 
 // ============================================================
-// CDN සම්පත් (අසාර්ථක වුවද යෙදුම ක්‍රියාත්මක වේ)
+// CDN සම්පත් (Optional - අසාර්ථක වුවද යෙදුම ක්‍රියාත්මක වේ)
 // ============================================================
 const CDN_ASSETS = [
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2',
+  'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap',
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
 ];
 
 // ============================================================
-// 1. INSTALL EVENT
+// 1. INSTALL EVENT - සියලුම ගොනු Cache කිරීම
 // ============================================================
 self.addEventListener('install', (event) => {
   console.log('[SW] Installing version ' + CACHE_NAME + '...');
@@ -127,8 +123,9 @@ self.addEventListener('install', (event) => {
     (async () => {
       const cache = await caches.open(CACHE_NAME);
       
+      // ප්‍රධාන ගොනු - අසාර්ථක වුවත් අනෙක්වා දිගටම කරන්න
       console.log('[SW] Caching local assets...');
-      await Promise.allSettled(
+      const localResults = await Promise.allSettled(
         ASSETS_TO_CACHE.map((url) => 
           cache.add(url).catch((err) => {
             console.warn('[SW] Failed to cache (local):', url, err.message);
@@ -136,6 +133,7 @@ self.addEventListener('install', (event) => {
         )
       );
       
+      // CDN සම්පත් - අසාර්ථක වුවත් ගණන් නොගන්න
       console.log('[SW] Caching CDN assets...');
       await Promise.allSettled(
         CDN_ASSETS.map((url) => 
@@ -145,6 +143,10 @@ self.addEventListener('install', (event) => {
         )
       );
       
+      const successCount = localResults.filter(r => r.status === 'fulfilled').length;
+      console.log('[SW] Cached ' + successCount + '/' + ASSETS_TO_CACHE.length + ' local assets');
+      
+      // නව Service Worker එක වහාම සක්‍රීය කරන්න
       await self.skipWaiting();
       console.log('[SW] Installation complete.');
     })()
@@ -152,13 +154,14 @@ self.addEventListener('install', (event) => {
 });
 
 // ============================================================
-// 2. ACTIVATE EVENT
+// 2. ACTIVATE EVENT - පැරණි Cache ඉවත් කිරීම
 // ============================================================
 self.addEventListener('activate', (event) => {
   console.log('[SW] Activating...');
   
   event.waitUntil(
     (async () => {
+      // පැරණි cache ඉවත් කරන්න
       const cacheNames = await caches.keys();
       await Promise.all(
         cacheNames.map((cache) => {
@@ -169,6 +172,7 @@ self.addEventListener('activate', (event) => {
         })
       );
       
+      // සියලුම clients පාලනය කරන්න
       await self.clients.claim();
       console.log('[SW] Activation complete.');
     })()
@@ -176,18 +180,22 @@ self.addEventListener('activate', (event) => {
 });
 
 // ============================================================
-// 3. FETCH EVENT
+// 3. FETCH EVENT - Offline විට Cache එකෙන් දත්ත ලබා දීම
 // ============================================================
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   
+  // GET ඉල්ලීම් පමණක් හසුරුවන්න
   if (request.method !== 'GET') return;
+  
+  // http/https ඉල්ලීම් පමණක් හසුරුවන්න
   if (!request.url.startsWith('http')) return;
   
+  // Chrome extension සහ අනෙකුත් non-http ඉල්ලීම් මඟ හරින්න
   const url = new URL(request.url);
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
-  // HTML navigation - Network-first
+  // HTML navigation ඉල්ලීම් - Network-first
   const isHTMLNavigation = request.mode === 'navigate' || 
     (request.headers.get('accept') || '').includes('text/html');
 
@@ -196,73 +204,147 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Assets - Cache-first
+  // අනෙක් සම්පත් - Cache-first with network fallback
   event.respondWith(handleAssetRequest(request));
 });
 
+// ============================================================
+// HTML ඉල්ලීම් සඳහා - Network-first strategy
+// ============================================================
 async function handleHTMLRequest(request) {
   try {
+    // අන්තර්ජාලයෙන් ලබා ගැනීමට උත්සාහ කරන්න
     const networkResponse = await fetch(request);
+    
+    // සාර්ථක නම් cache එකේ save කරන්න
     if (networkResponse && networkResponse.status === 200) {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, networkResponse.clone());
     }
+    
     return networkResponse;
   } catch (error) {
+    // Offline නම් cache එකෙන් ලබා දෙන්න
     console.log('[SW] Network failed for HTML, using cache:', request.url);
+    
     const cachedResponse = await caches.match(request, { ignoreSearch: true });
     if (cachedResponse) return cachedResponse;
     
+    // Cache එකේ නැත්නම් offline page එක ලබා දෙන්න
     const offlinePage = await caches.match(OFFLINE_URL);
     if (offlinePage) return offlinePage;
     
+    // කිසිවක් නැත්නම් error response එකක්
     return new Response(
       '<html><body style="font-family:sans-serif;text-align:center;padding:2rem;">' +
       '<h1>නොබැඳි තත්ත්වයේ සිටී</h1>' +
       '<p>කරුණාකර අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කරන්න.</p>' +
       '</body></html>',
-      { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+      { 
+        status: 503,
+        statusText: 'Service Unavailable',
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      }
     );
   }
 }
 
+// ============================================================
+// අනෙක් සම්පත් සඳහා - Cache-first strategy
+// ============================================================
 async function handleAssetRequest(request) {
   try {
+    // මුලින්ම cache එකේ බලන්න
     const cachedResponse = await caches.match(request, { ignoreSearch: true });
-    if (cachedResponse) return cachedResponse;
+    if (cachedResponse) {
+      return cachedResponse;
+    }
     
+    // Cache එකේ නැත්නම් අන්තර්ජාලයෙන් ලබා ගන්න
     const networkResponse = await fetch(request);
-    if (networkResponse && networkResponse.status === 200 && networkResponse.type !== 'opaque') {
+    
+    // සාර්ථක ප්‍රතිචාර පමණක් cache කරන්න
+    if (networkResponse && 
+        networkResponse.status === 200 && 
+        networkResponse.type !== 'opaque') {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, networkResponse.clone());
     }
+    
     return networkResponse;
   } catch (error) {
     console.warn('[SW] Fetch failed:', request.url, error.message);
-    return new Response('', { status: 408, statusText: 'Offline - Resource not available' });
+    
+    // Offline සහ cache එකේ නැති විට
+    return new Response('', {
+      status: 408,
+      statusText: 'Offline - Resource not available'
+    });
   }
 }
 
 // ============================================================
-// 4. MESSAGE EVENT
+// 4. MESSAGE EVENT - SKIP_WAITING සහ අනෙකුත් පණිවිඩ
 // ============================================================
 self.addEventListener('message', (event) => {
   if (!event.data) return;
+  
   const { type, urls } = event.data;
   
+  // නව Service Worker එක වහාම සක්‍රීය කරන්න
   if (type === 'SKIP_WAITING') {
+    console.log('[SW] Received SKIP_WAITING message');
     self.skipWaiting();
     return;
   }
   
+  // නිශ්චිත URL cache කරන්න
   if (type === 'CACHE_URLS' && Array.isArray(urls)) {
+    console.log('[SW] Caching requested URLs:', urls.length);
     event.waitUntil(
       caches.open(CACHE_NAME).then((cache) => {
-        return Promise.allSettled(urls.map((url) => cache.add(url)));
+        return Promise.allSettled(
+          urls.map((url) => 
+            cache.add(url).catch((err) => {
+              console.warn('[SW] Failed to cache:', url, err.message);
+            })
+          )
+        );
+      })
+    );
+    return;
+  }
+  
+  // සියලුම cache ඉවත් කරන්න
+  if (type === 'CLEAR_CACHE') {
+    console.log('[SW] Clearing all caches...');
+    event.waitUntil(
+      caches.keys().then((cacheNames) => {
+        return Promise.all(cacheNames.map((cache) => caches.delete(cache)));
+      }).then(() => {
+        console.log('[SW] All caches cleared.');
+      })
+    );
+    return;
+  }
+  
+  // Cache තොරතුරු ලබා දෙන්න (debug සඳහා)
+  if (type === 'GET_CACHE_INFO') {
+    event.waitUntil(
+      caches.keys().then((names) => {
+        console.log('[SW] Cache names:', names);
       })
     );
   }
 });
 
-self.addEventListener('error', (event) => console.error('[SW] Global error:', event.error));
-self.addEventListener('unhandledrejection', (event) => console.error('[SW] Unhandled rejection:', event.reason));
+// ============================================================
+// 5. ERROR HANDLING - Global error handler
+// ============================================================
+self.addEventListener('error', (event) => {
+  console.error('[SW] Global error:', event.error);
+});
+
+self.addEventListener('unhandledrejection', (event) => {
+  console.error('[SW] Unhandled promise rejection:', event.reason);
+});
