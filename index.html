@@ -6,7 +6,7 @@
 <title>අභිධර්ම මාතිකා අධ්‍යයනය</title>
 
 <link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./icons/launchericon-48x48.png">
+<link rel="icon" href="./launchericon-48x48.png">
 
 <!-- ============ PWA META TAGS ============ -->
 <meta name="description" content="සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22 සහ ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.">
@@ -16,15 +16,15 @@
 <meta name="apple-mobile-web-app-title" content="මාතිකා">
 <meta name="mobile-web-app-capable" content="yes">
 
-<link rel="apple-touch-icon" sizes="180x180" href="./icons/launchericon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./icons/launchericon-48x48.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./icons/launchericon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="launchericon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="launchericon-48x48.png">
+<link rel="icon" type="image/png" sizes="16x16" href="launchericon-48x48.png">
 <meta name="msapplication-TileColor" content="#3f0a0c">
 
 <!-- ============ DATA FILES ============ -->
 <!-- 1. Helper functions + data arrays + registerTika() -->
 <script src="sabbatika-data.js"></script>
-<script src="tika-data.js"></script>          <!-- ← අලුතින් එකතු කරන්න! -->
+<script src="tika-data.js"></script>
 <script src="tika-app.js"></script>
 
 <!-- 2. තික ගොනු 22 (registerTika() call කරයි) -->
@@ -54,8 +54,7 @@
 <!-- 3. Feedback Logic -->
 <script src="feedback.js"></script>
 
-<script src="https://cdn.tailwindcss.com"></script>
-
+<script src="https://cdn.tailwindcss.com"></script><script src="./tailwind.min.js"></script>
 <script>
 tailwind.config = {
   darkMode: 'class',
@@ -201,14 +200,14 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <div class="grid grid-cols-1 gap-4">
 
 <!-- සබ්බත්තික මාතිකා -->
-<button onclick="navigateTo('sabbatika')" class="group bg-gradient-to-r from-amber-700 via-saffron-600 to-amber-700 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl w-full">
+<a href="sabbattika.html" class="group bg-gradient-to-r from-amber-700 via-saffron-600 to-amber-700 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl w-full block">
 <div class="flex items-center justify-between mb-2">
 <div class="w-10 h-10 rounded-xl bg-white/25 flex items-center justify-center text-xl text-saffron-100"><i class="fa-solid fa-book-open"></i></div>
 <i class="fa-solid fa-arrow-right text-saffron-200 text-xl group-hover:translate-x-1 transition-transform"></i>
 </div>
 <h3 class="text-lg font-bold mb-1">සබ්බත්තික මාතිකා සහ ස්වරූපාර්ථ</h3>
 <p class="text-xs text-amber-100/90">සියලු තිකදුකයන්හි සමස්ත පද සහ පරමාර්ථ ධර්ම විශ්ලේෂණය</p>
-</button>
+</a>
 
 <!-- තික + දුක + සුත්තන්ත + සතර පරමාර්ථ -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -274,91 +273,8 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SABBATIKA VIEW -->
-<!-- ============================================================ -->
-<section id="view-sabbatika" class="hidden space-y-5">
-<div class="flex justify-end gap-2">
-<button onclick="openEditSabbatikaModal()" class="text-xs text-maroon-950 bg-saffron-500 hover:bg-saffron-600 font-bold px-3 py-1.5 rounded-lg shadow-sm flex items-center gap-1"><i class="fa-solid fa-pen"></i> සංස්කරණය</button>
-</div>
-<div class="bg-gradient-to-r from-maroon-900 to-amber-900 text-amber-50 p-5 rounded-2xl shadow border border-saffron-500/40 space-y-3">
-<span class="inline-block text-sm font-bold px-3 py-1 rounded-lg bg-saffron-500 text-maroon-950">සබ්බත්තික මාතිකා</span>
-<p id="sab-desc-main" class="text-sm font-medium text-saffron-100 leading-relaxed"></p>
-<div id="sab-desc-sub" class="text-xs sm:text-sm space-y-2 text-amber-100/90 pt-1"></div>
-</div>
-
-<div class="bg-amber-100/80 dark:bg-slate-800 border border-amber-300 dark:border-slate-700 p-4 rounded-xl shadow-sm space-y-2">
-<h3 class="font-bold text-base sm:text-lg flex items-center gap-2"><i class="fa-solid fa-network-wired text-saffron-600"></i> සප්පදේශ සහ නිප්පදේශ කොටස්</h3>
-<div id="sab-sappadesa-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-2"></div>
-</div>
-
-<div id="sab-sabbathika-info" class="space-y-3"></div>
-
-<div class="bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-800 dark:to-slate-800/60 border border-amber-300 dark:border-slate-700 p-4 rounded-2xl shadow-sm">
-<h3 class="font-bold text-base sm:text-lg flex items-center gap-2 mb-3"><i class="fa-solid fa-gem text-saffron-600"></i> පරමාර්ථ ධර්ම 04:</h3>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-<div class="bg-white dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700 text-center"><div class="text-xs text-amber-700 dark:text-saffron-400 font-bold">චිත්ත</div><div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mt-1">සිත් 89/121</div></div>
-<div class="bg-white dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700 text-center"><div class="text-xs text-amber-700 dark:text-saffron-400 font-bold">චෛතසික</div><div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mt-1">52</div></div>
-<div class="bg-white dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700 text-center"><div class="text-xs text-amber-700 dark:text-saffron-400 font-bold">රූප</div><div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mt-1">28</div></div>
-<div class="bg-white dark:bg-slate-900 p-3 rounded-lg border border-amber-200 dark:border-slate-700 text-center"><div class="text-xs text-amber-700 dark:text-saffron-400 font-bold">නිබ්බාණ</div><div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mt-1">නිර්වාණය</div></div>
-</div>
-</div>
-
-<div class="flex border-b border-amber-200 dark:border-slate-700 space-x-1 space-x-reverse overflow-x-auto hide-scrollbar w-full bg-white dark:bg-slate-800 p-2 rounded-xl shadow-sm">
-<button onclick="switchSabbatikaTab('skandha')" id="sab-tab-skandha" class="flex-1 py-2 px-3 rounded-lg font-bold text-xs bg-saffron-500 text-maroon-950 flex items-center justify-center gap-1"><i class="fa-solid fa-cubes text-xs"></i> ස්කන්ධ (5)</button>
-<button onclick="switchSabbatikaTab('ayatana')" id="sab-tab-ayatana" class="flex-1 py-2 px-3 rounded-lg font-medium text-xs text-amber-900 dark:text-slate-300 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center justify-center gap-1"><i class="fa-solid fa-door-open text-xs"></i> ආයතන (12)</button>
-<button onclick="switchSabbatikaTab('dhatu')" id="sab-tab-dhatu" class="flex-1 py-2 px-3 rounded-lg font-medium text-xs text-amber-900 dark:text-slate-300 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center justify-center gap-1"><i class="fa-solid fa-circle-nodes text-xs"></i> ධාතු (18)</button>
-<button onclick="switchSabbatikaTab('sathya')" id="sab-tab-sathya" class="flex-1 py-2 px-3 rounded-lg font-medium text-xs text-amber-900 dark:text-slate-300 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center justify-center gap-1"><i class="fa-solid fa-scale-balanced text-xs"></i> සත්‍ය (4)</button>
-</div>
-<div class="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
-<div id="sab-panel-skandha" class="sab-panel space-y-3"><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">පරමාර්ථ ධර්ම ස්කන්ධ 5 ට බෙදීම:</h4><div id="sab-skandha-list" class="space-y-1 text-sm"></div></div>
-<div id="sab-panel-ayatana" class="sab-panel hidden space-y-3"><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">පරමාර්ථ ධර්ම ආයතන 12 ට බෙදීම:</h4><div id="sab-ayatana-list" class="space-y-1 text-sm"></div></div>
-<div id="sab-panel-dhatu" class="sab-panel hidden space-y-3"><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">පරමාර්ථ ධර්ම ධාතු 18 ට බෙදීම:</h4><div id="sab-dhatu-list" class="space-y-1 text-sm"></div></div>
-<div id="sab-panel-sathya" class="sab-panel hidden space-y-3"><h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2">චතුරාර්ය සත්‍යය:</h4><div id="sab-sathya-list" class="space-y-1 text-sm"></div></div>
-</div>
-
-<div id="sab-kusala-section" class="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
-<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2"><i class="fa-solid fa-leaf text-green-600"></i> කුසලා ධම්මා</h3>
-<p id="sab-kusala-desc" class="text-xs text-slate-600 dark:text-slate-300"></p>
-<div id="sab-kusala-content" class="space-y-3"></div>
-</div>
-
-<div id="sab-akusala-section" class="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
-<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2"><i class="fa-solid fa-fire text-red-600"></i> අකුසලා ධම්මා</h3>
-<p id="sab-akusala-desc" class="text-xs text-slate-600 dark:text-slate-300"></p>
-<div id="sab-akusala-content" class="space-y-3"></div>
-</div>
-
-<div id="sab-abyakata-section" class="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
-<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2"><i class="fa-solid fa-circle-half-stroke text-blue-600"></i> අබ්‍යාකතා ධම්මා</h3>
-<p id="sab-abyakata-desc" class="text-xs text-slate-600 dark:text-slate-300"></p>
-<div id="sab-abyakata-content" class="space-y-3"></div>
-</div>
-
-<div id="sab-sathya-vinirmuktha-section" class="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
-<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2"><i class="fa-solid fa-circle-exclamation text-purple-600"></i> සත්‍ය විනිර්මුක්ත ධර්ම</h3>
-<p id="sab-sathya-vinirmuktha-desc" class="text-xs text-slate-600 dark:text-slate-300"></p>
-</div>
-
-<div id="sab-magga-anga-section" class="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-amber-200 dark:border-slate-700 shadow-sm space-y-4">
-<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 border-b border-amber-100 dark:border-slate-700 pb-2"><i class="fa-solid fa-road text-saffron-600"></i> මාර්ග අංග 08 සහ චෛතසික</h3>
-<div id="sab-magga-anga-list" class="space-y-1 text-sm"></div>
-</div>
-</section>
-
 </div>
 </main>
-
-<!-- EDIT MODAL -->
-<div id="edit-sabbatika-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-<div class="bg-white dark:bg-slate-800 w-full max-w-lg rounded-2xl p-5 shadow-2xl border max-h-[90vh] overflow-y-auto space-y-4">
-<div class="flex justify-between items-center border-b pb-3"><h3 class="font-bold text-lg text-maroon-900 dark:text-saffron-200">සබ්බත්තික මාතිකා සංස්කරණය</h3><button onclick="closeEditSabbatikaModal()" class="text-slate-400 text-lg"><i class="fa-solid fa-xmark"></i></button></div>
-<form id="edit-sabbatika-form" onsubmit="saveSabbatikaData(event)" class="space-y-3 text-sm">
-<div><label class="block font-semibold mb-1">ප්‍රධාන හැඳින්වීම</label><textarea id="edit-sab-desc-main" rows="3" class="w-full p-2.5 rounded-lg border dark:bg-slate-900 dark:border-slate-700 text-xs"></textarea></div>
-<div class="flex justify-end gap-2 pt-2"><button type="button" onclick="closeEditSabbatikaModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 rounded-lg text-xs">අවලංගු කරන්න</button><button type="submit" class="px-4 py-2 bg-saffron-500 text-maroon-950 font-bold rounded-lg text-xs shadow">සුරකින්න</button></div>
-</form>
-</div>
-</div>
 
 <!-- ============================================================ -->
 <!-- FEEDBACK MODAL (feedback.js මගින් පාලනය වේ) -->
@@ -608,13 +524,9 @@ function dismissUpdate() {
 // APPLICATION STATE
 // ============================================================
 var currentView = 'home';
-var activeSabbatikaTab = 'skandha';
 
 function initApp() {
-  loadSabbatikaDataFromStorage();
   updateOnlineStatus();
-  renderSabbatikaBreakdowns();
-  renderSabbatikaExtraSections();
   checkIfInstalled();
 }
 
@@ -632,18 +544,6 @@ function checkIfInstalled() {
   }
 }
 
-function loadSabbatikaDataFromStorage() {
-  var saved = localStorage.getItem('sabbatika_custom_data');
-  if (saved) {
-    try {
-      var parsed = JSON.parse(saved);
-      if (parsed.descMain) sabbatikaFullData.descMain = parsed.descMain;
-    } catch(e) {}
-  }
-  document.getElementById('sab-desc-main').innerText = sabbatikaFullData.descMain;
-  document.getElementById('sab-sappadesa-text').innerHTML = '<p>' + sabbatikaFullData.sappadesa + '</p>';
-}
-
 function navigateTo(viewName) {
   currentView = viewName;
   document.querySelectorAll('#view-container > section').forEach(function(sec) {
@@ -654,158 +554,6 @@ function navigateTo(viewName) {
   if (targetSec) targetSec.classList.remove('hidden');
   
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ============================================================
-// TAB SWITCHING
-// ============================================================
-function switchSabbatikaTab(tabName) {
-  activeSabbatikaTab = tabName;
-  ['skandha', 'ayatana', 'dhatu', 'sathya'].forEach(function(t) {
-    var btn = document.getElementById('sab-tab-' + t);
-    var panel = document.getElementById('sab-panel-' + t);
-    if (t === tabName) {
-      btn.className = 'flex-1 py-2 px-3 rounded-lg font-bold text-xs bg-saffron-500 text-maroon-950 flex items-center justify-center gap-1';
-    } else {
-      btn.className = 'flex-1 py-2 px-3 rounded-lg font-medium text-xs text-amber-900 dark:text-slate-300 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center justify-center gap-1';
-    }
-    if (t === tabName) {
-      panel.classList.remove('hidden');
-    } else {
-      panel.classList.add('hidden');
-    }
-  });
-}
-
-// ============================================================
-// SABBATIKA RENDER FUNCTIONS
-// ============================================================
-function renderSabbatikaExtraSections() {
-  var infoContainer = document.getElementById('sab-sabbathika-info');
-  if (infoContainer && sabbatikaFullData.sabbathikaInfo) {
-    infoContainer.innerHTML = '';
-    sabbatikaFullData.sabbathikaInfo.forEach(function(item) {
-      var div = document.createElement('div');
-      div.className = 'bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm';
-      div.innerHTML = '<h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200 mb-2"><i class="fa-solid fa-info-circle text-saffron-600"></i> ' + item.title + '</h4><p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">' + item.desc + '</p>';
-      infoContainer.appendChild(div);
-    });
-  }
-
-  var kusalaDesc = document.getElementById('sab-kusala-desc');
-  var kusalaContent = document.getElementById('sab-kusala-content');
-  if (kusalaDesc && kusalaContent && sabbatikaFullData.kusala) {
-    kusalaDesc.innerText = sabbatikaFullData.kusala.desc;
-    kusalaContent.innerHTML = '';
-    kusalaContent.appendChild(createBreakdownSection('ස්කන්ධ', sabbatikaFullData.kusala.skandha));
-    kusalaContent.appendChild(createBreakdownSection('ආයතන', sabbatikaFullData.kusala.ayatana));
-    kusalaContent.appendChild(createBreakdownSection('ධාතු', sabbatikaFullData.kusala.dhatu));
-    kusalaContent.appendChild(createBreakdownSection('සත්‍ය', sabbatikaFullData.kusala.sathya));
-  }
-
-  var akusalaDesc = document.getElementById('sab-akusala-desc');
-  var akusalaContent = document.getElementById('sab-akusala-content');
-  if (akusalaDesc && akusalaContent && sabbatikaFullData.akusala) {
-    akusalaDesc.innerText = sabbatikaFullData.akusala.desc;
-    akusalaContent.innerHTML = '';
-    akusalaContent.appendChild(createBreakdownSection('ස්කන්ධ', sabbatikaFullData.akusala.skandha));
-    akusalaContent.appendChild(createBreakdownSection('ආයතන', sabbatikaFullData.akusala.ayatana));
-    akusalaContent.appendChild(createBreakdownSection('ධාතු', sabbatikaFullData.akusala.dhatu));
-    akusalaContent.appendChild(createBreakdownSection('සත්‍ය', sabbatikaFullData.akusala.sathya));
-  }
-
-  var abyakataDesc = document.getElementById('sab-abyakata-desc');
-  var abyakataContent = document.getElementById('sab-abyakata-content');
-  if (abyakataDesc && abyakataContent && sabbatikaFullData.abyakata) {
-    abyakataDesc.innerText = sabbatikaFullData.abyakata.desc;
-    abyakataContent.innerHTML = '';
-    abyakataContent.appendChild(createBreakdownSection('ස්කන්ධ', sabbatikaFullData.abyakata.skandha));
-    abyakataContent.appendChild(createBreakdownSection('ආයතන', sabbatikaFullData.abyakata.ayatana));
-    abyakataContent.appendChild(createBreakdownSection('ධාතු', sabbatikaFullData.abyakata.dhatu));
-    abyakataContent.appendChild(createBreakdownSection('සත්‍ය', sabbatikaFullData.abyakata.sathya));
-  }
-
-  var svDesc = document.getElementById('sab-sathya-vinirmuktha-desc');
-  if (svDesc && sabbatikaFullData.sathyaVinirmuktha) {
-    svDesc.innerText = sabbatikaFullData.sathyaVinirmuktha.desc;
-  }
-
-  var maggaList = document.getElementById('sab-magga-anga-list');
-  if (maggaList && sabbatikaFullData.maggaAnga) {
-    maggaList.innerHTML = '';
-    sabbatikaFullData.maggaAnga.forEach(function(m) {
-      var div = document.createElement('div');
-      div.className = 'breakdown-item';
-      div.innerHTML = '<span class="num">' + m.num + '.</span><span class="name">' + m.name + '</span><span class="value">' + m.value + '</span>';
-      maggaList.appendChild(div);
-    });
-  }
-}
-
-function createBreakdownSection(title, items) {
-  var div = document.createElement('div');
-  div.className = 'space-y-1';
-  var h = document.createElement('h4');
-  h.className = 'font-bold text-xs text-maroon-900 dark:text-saffron-300 uppercase border-b border-amber-100 dark:border-slate-700 pb-1 mb-2';
-  h.innerText = title;
-  div.appendChild(h);
-  if (items) {
-    items.forEach(function(item) {
-      var row = document.createElement('div');
-      row.className = 'breakdown-item';
-      row.innerHTML = '<span class="num">' + item.num + '.</span><span class="name">' + item.name + '</span><span class="value">' + item.value + '</span>';
-      div.appendChild(row);
-    });
-  }
-  return div;
-}
-
-function renderSabbatikaBreakdowns() {
-  if (!sabbatikaFullData.breakdowns) return;
-
-  var sList = document.getElementById('sab-skandha-list');
-  if (sList && sabbatikaFullData.breakdowns.skandha) {
-    sList.innerHTML = '';
-    sabbatikaFullData.breakdowns.skandha.forEach(function(s) {
-      var div = document.createElement('div');
-      div.className = 'breakdown-item';
-      div.innerHTML = '<span class="num">' + s.num + '.</span><span class="name">' + s.name + '</span><span class="value">' + s.value + '</span>';
-      sList.appendChild(div);
-    });
-  }
-
-  var aList = document.getElementById('sab-ayatana-list');
-  if (aList && sabbatikaFullData.breakdowns.ayatana) {
-    aList.innerHTML = '';
-    sabbatikaFullData.breakdowns.ayatana.forEach(function(a) {
-      var div = document.createElement('div');
-      div.className = 'breakdown-item';
-      div.innerHTML = '<span class="num">' + a.num + '.</span><span class="name">' + a.name + '</span><span class="value">' + a.value + '</span>';
-      aList.appendChild(div);
-    });
-  }
-
-  var dList = document.getElementById('sab-dhatu-list');
-  if (dList && sabbatikaFullData.breakdowns.dhatu) {
-    dList.innerHTML = '';
-    sabbatikaFullData.breakdowns.dhatu.forEach(function(d) {
-      var div = document.createElement('div');
-      div.className = 'breakdown-item';
-      div.innerHTML = '<span class="num">' + d.num + '.</span><span class="name">' + d.name + '</span><span class="value">' + d.value + '</span>';
-      dList.appendChild(div);
-    });
-  }
-
-  var satList = document.getElementById('sab-sathya-list');
-  if (satList && sabbatikaFullData.breakdowns.sathya) {
-    satList.innerHTML = '';
-    sabbatikaFullData.breakdowns.sathya.forEach(function(sat) {
-      var div = document.createElement('div');
-      div.className = 'breakdown-item';
-      div.innerHTML = '<span class="num">' + sat.num + '.</span><span class="name">' + sat.name + '</span><span class="value">' + sat.value + '</span>';
-      satList.appendChild(div);
-    });
-  }
 }
 
 // ============================================================
@@ -843,7 +591,6 @@ function menuAction(action) {
             alert('උදව්\n\n1. මුල් පිටුවේ ඇති මාතිකා කාණ්ඩ තෝරන්න.\n2. අදාළ මාතිකාව ක්ලික් කරන්න.\n3. පද තෝරා එහි ස්වරූපාර්ථ බලන්න.');
             break;
         case 'feedback':
-            // ✅ feedback.js හි function එක call කරයි
             if (typeof openFeedbackModal === 'function') {
                 openFeedbackModal();
             } else {
@@ -854,26 +601,6 @@ function menuAction(action) {
             window.open('https://www.facebook.com/', '_blank');
             break;
     }
-}
-
-// ============================================================
-// EDIT MODAL LOGIC
-// ============================================================
-function openEditSabbatikaModal() {
-  document.getElementById('edit-sab-desc-main').value = sabbatikaFullData.descMain;
-  document.getElementById('edit-sabbatika-modal').classList.remove('hidden');
-}
-
-function closeEditSabbatikaModal() {
-  document.getElementById('edit-sabbatika-modal').classList.add('hidden');
-}
-
-function saveSabbatikaData(e) {
-  e.preventDefault();
-  sabbatikaFullData.descMain = document.getElementById('edit-sab-desc-main').value;
-  localStorage.setItem('sabbatika_custom_data', JSON.stringify({ descMain: sabbatikaFullData.descMain }));
-  loadSabbatikaDataFromStorage();
-  closeEditSabbatikaModal();
 }
 
 // ============================================================
