@@ -141,6 +141,11 @@
       ]
     }
   ],
+  "related_applications": [{
+  "platform": "play",
+  "url": "https://play.google.com/store/apps/details?id=com.abhidha_mamatika.twa"
+}
+  ],
   "prefer_related_applications": false,
   "id": "abhidhamma-matika-app",
   "screenshots": [
