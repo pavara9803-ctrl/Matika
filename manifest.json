@@ -1,16 +1,13 @@
 {
+  "id": "./index.html",
   "name": "අභිධර්ම මාතිකා අධ්‍යයනය",
   "short_name": "මාතිකා",
   "description": "සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22, දුක මාතිකා 100 සහ රූප 28 වර්ගීකරණය හා සමුට්ඨාන නය විස්තරාත්මකව අධ්‍යයනය කරන්න.",
   "start_url": "./index.html",
   "scope": "./",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone",
-    "minimal-ui"
-  ],
+  "display": "standalone",
   "orientation": "any",
-  "background_color": "#fffbeedb",
+  "background_color": "#fffbee",
   "theme_color": "#3f0a0c",
   "lang": "si",
   "dir": "ltr",
@@ -21,70 +18,52 @@
   ],
   "icons": [
     {
-      "src": "./icons/16.png",
-      "sizes": "16x16",
+      "src": "./launchericon-48x48.png",
+      "sizes": "48x48",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/100.png",
-      "sizes": "100x100",
+      "src": "./launchericon-72x72.png",
+      "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/114.png",
-      "sizes": "114x114",
+      "src": "./launchericon-96x96.png",
+      "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/120.png",
-      "sizes": "120x120",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/144.png",
+      "src": "./launchericon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/167.png",
-      "sizes": "167x167",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/180.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/192.png",
+      "src": "./launchericon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "./icons/1024.png",
-      "sizes": "1024x1024",
+      "src": "./launchericon-256x256.png",
+      "sizes": "256x256",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./launchericon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./launchericon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -95,8 +74,8 @@
       "url": "./tika-matika.html",
       "icons": [
         {
-          "src": "./icons/192.png",
-          "sizes": "192x192",
+          "src": "./launchericon-96x96.png",
+          "sizes": "96x96",
           "type": "image/png"
         }
       ]
@@ -108,8 +87,8 @@
       "url": "./duka-matika.html",
       "icons": [
         {
-          "src": "./icons/192.png",
-          "sizes": "192x192",
+          "src": "./launchericon-96x96.png",
+          "sizes": "96x96",
           "type": "image/png"
         }
       ]
@@ -121,8 +100,8 @@
       "url": "./suttanta-matika.html",
       "icons": [
         {
-          "src": "./icons/192.png",
-          "sizes": "192x192",
+          "src": "./launchericon-96x96.png",
+          "sizes": "96x96",
           "type": "image/png"
         }
       ]
@@ -134,42 +113,12 @@
       "url": "./Rupa/rupa.html",
       "icons": [
         {
-          "src": "./icons/192.png",
-          "sizes": "192x192",
+          "src": "./launchericon-96x96.png",
+          "sizes": "96x96",
           "type": "image/png"
         }
       ]
     }
   ],
-  "screenshots": [
-    {
-      "src": "./screenshots/screenshot2.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "තික මාතිකා - ජංගම දුරකථනය"
-    },
-    {
-      "src": "./screenshots/screenshot3.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "දුක මාතිකා - ජංගම දුරකථනය"
-    },
-    {
-      "src": "./screenshots/screenshot4.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "සුත්තන්ත මාතිකා - ජංගම දුරකථනය"
-    },
-    {
-      "src": "./screenshots/screenshot5.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "රූප විභාගය - ජංගම දුරකථනය"
-    }
-  ],
-  "display": "fullscreen"
+  "prefer_related_applications": false
 }
