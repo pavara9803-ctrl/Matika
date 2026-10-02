@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.abhidha_mamatika.twa",
+      "package_name": "app.vercel.matika_snowy.twa",
       "sha256_cert_fingerprints":
-        ["37:0B:CD:21:55:E0:1A:32:18:33:8A:EC:EB:5D:F0:3B:D3:38:1F:09:4A:04:B0:8D:6D:A9:A7:CC:71:1C:7F:82"]
+        ["E6:D6:EB:88:34:AB:E3:01:E0:E1:16:2F:E3:37:59:BE:21:37:11:A9:A4:D4:46:D1:F0:E2:60:6F:F4:C8:8F:FE"]
     }
   }
 ]
