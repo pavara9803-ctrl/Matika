@@ -13,7 +13,7 @@ const sabbattikaMatika = {
     title: "පරමාර්ථ ධර්ම 04",
     items: [
       { id: 1, name: "චිත්තං", description: "සිත් 89/121" },
-      { id: 2, name: "චෛතසිකං", description: "චෛතසික 52" },
+      { id: 2, name: "චෙතසිකං", description: "චෛතසික 52" },
       { id: 3, name: "රූපං", description: "රූප 28" },
       { id: 4, name: "නිබ්බාණං", description: "නිර්වාණය" }
     ],
