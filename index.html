@@ -147,23 +147,16 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
         <button onclick="menuAction('star')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i class="fa-solid fa-star text-yellow-500 text-lg w-5"></i> 0 තරු යෙදුම
         </button>
-        <button onclick="menuAction('pali')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
-            <i class="fa-solid fa-language text-blue-600 text-lg w-5"></i> පාලි අකුරු පරිවර්තකය
-        </button>
         <button onclick="menuAction('about')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
-            <i class="fa-solid fa-circle-info text-saffron-600 text-lg w-5"></i> අප ගැන
+            <i class="fa-solid fa-circle-info text-saffron-600 text-lg w-5"></i> මෙම යෙදුම ගැන
         </button>
         <button onclick="menuAction('help')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i class="fa-solid fa-circle-question text-purple-600 text-lg w-5"></i> උදව්
         </button>
 
         <!-- ✅ නව: Feedback (මෙනුවේ) -->
-        <button onclick="menuAction('feedback')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+        <button onclick="menuAction('feedback')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200">
             <i class="fa-solid fa-comment-dots text-saffron-600 text-lg w-5"></i> අදහස් එවන්න
-        </button>
-
-        <button onclick="menuAction('facebook')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200">
-            <i class="fa-brands fa-facebook text-blue-700 text-lg w-5"></i> Facebook පිටුව
         </button>
     </div>
 </div>
@@ -468,11 +461,9 @@ function menuAction(action) {
         case 'star':
             alert('තරු යෙදුම - මෙය ඉදිරියේදී එක් කළ හැක.');
             break;
-        case 'pali':
-            window.open('https://www.google.com/search?q=pali+unicode+converter', '_blank');
-            break;
         case 'about':
-            alert('අභිධර්ම මාතිකා අධ්‍යයන යෙදුම\n\nමෙය අභිධර්ම පිටකයේ මාතිකා පද අධ්‍යයනය සඳහා නිර්මාණය කරන ලද යෙදුමකි.');
+            // ✅ නව page එකට යොමු කරයි
+            window.location.href = 'about.html';
             break;
         case 'help':
             alert('උදව්\n\n1. මුල් පිටුවේ ඇති මාතිකා කාණ්ඩ තෝරන්න.\n2. අදාළ මාතිකාව ක්ලික් කරන්න.\n3. පද තෝරා එහි ස්වරූපාර්ථ බලන්න.');
@@ -483,9 +474,6 @@ function menuAction(action) {
             } else {
                 alert('Feedback module loading... කරුණාකර නැවත උත්සාහ කරන්න.');
             }
-            break;
-        case 'facebook':
-            window.open('https://www.facebook.com/', '_blank');
             break;
     }
 }

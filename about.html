@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="si" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>මෙම යෙදුම ගැන - මාතිකා මෘදුකාංගය</title>
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./launchericon-48x48.png">
+<meta name="theme-color" content="#3f0a0c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="මාතිකා">
+
+<script src="https://cdn.tailwindcss.com"></script><script src="./tailwind.min.js"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        saffron: { 50:'#fffbeedb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03' },
+        maroon: { 700:'#701a1d',800:'#581113',900:'#3f0a0c',950:'#260507' }
+      },
+      fontFamily: { sans: ['Inter','Noto Serif Sinhala','Segoe UI','sans-serif'] }
+    }
+  }
+};
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-color: transparent; }
+
+/* Decorative dharmachakra spin */
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 40s linear infinite; }
+
+/* Source card hover */
+.source-card { transition: all 0.25s ease; }
+.source-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -8px rgba(120, 53, 15, 0.35); }
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.1s; }
+.delay-3 { animation-delay: 0.15s; }
+.delay-4 { animation-delay: 0.2s; }
+</style>
+</head>
+<body class="h-full flex flex-col text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased">
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
+  <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="ආපසු">
+      <i class="fa-solid fa-arrow-left text-lg"></i>
+    </a>
+    <div class="flex items-center mx-auto">
+      <div class="w-9 h-9 rounded-full bg-saffron-500/20 border border-saffron-400 flex items-center justify-center text-saffron-300 shrink-0">
+        <i class="fa-solid fa-circle-info text-xl"></i>
+      </div>
+      <h1 class="font-bold text-xl sm:text-2xl ml-2 text-saffron-100">මෙම යෙදුම ගැන</h1>
+    </div>
+    <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="තේමාව">
+      <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
+    </button>
+  </div>
+</header>
+
+<main class="flex-1 max-w-3xl w-full mx-auto p-4 sm:p-6 pb-12 space-y-6">
+
+  <!-- ============================================================ -->
+  <!-- 1. HERO - මාතිකා මෘදුකාංගය -->
+  <!-- ============================================================ -->
+  <div class="fade-in-up bg-gradient-to-br from-amber-800 via-maroon-900 to-maroon-950 text-amber-50 rounded-2xl p-6 shadow-xl border border-saffron-500/40 relative overflow-hidden">
+    <div class="absolute -right-10 -bottom-10 opacity-[0.08] text-amber-100 text-[10rem] pointer-events-none spin-slow">
+      <i class="fa-solid fa-dharmachakra"></i>
+    </div>
+    <div class="relative">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-saffron-500/25 border border-saffron-400/50 rounded-full text-[10px] text-saffron-200 font-bold tracking-wide mb-3">
+        <i class="fa-solid fa-leaf text-[8px]"></i> නිදහස් මෘදුකාංගය
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-saffron-200 mb-1">මාතිකා මෘදුකාංගය</h2>
+      <p class="text-[11px] text-amber-200/70 tracking-widest uppercase mb-4">Matika Dhamma Software</p>
+      <p class="text-sm sm:text-base text-amber-100/95 leading-relaxed">
+        අභිධර්ම පිටකය හැදෑරීමට බලාපොරොත්තු වන <strong class="text-saffron-200">ආධුනික සිසුන්ට</strong> උපකාර වන ආකාරයෙන් නිර්මාණය කර ඇති මෙම <strong class="text-saffron-200">‘මාතිකා’</strong> මෘදුකාංගය ධර්මකාමී සැමට පහසුවෙන් පරිහරණය කළ හැක.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-500/20 border border-emerald-400/40 rounded-lg text-[10px] text-emerald-200 font-semibold">
+          <i class="fa-solid fa-gift"></i> සැම විටම නොමිලේ
+        </span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-500/20 border border-blue-400/40 rounded-lg text-[10px] text-blue-200 font-semibold">
+          <i class="fa-solid fa-code"></i> නිදහස් මෘදුකාංගයකි
+        </span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-500/20 border border-purple-400/40 rounded-lg text-[10px] text-purple-200 font-semibold">
+          <i class="fa-solid fa-wifi"></i> Offline භාවිතයට
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 2. කරුණු අන්තර්ගතය -->
+  <!-- ============================================================ -->
+  <section class="fade-in-up delay-1 space-y-3">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-saffron-500 to-amber-600 flex items-center justify-center text-maroon-950 shadow">
+        <i class="fa-solid fa-list-check text-sm"></i>
+      </div>
+      <h3 class="font-bold text-lg text-maroon-900 dark:text-saffron-200">කරුණු අන්තර්ගතය</h3>
+    </div>
+    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pl-1">
+      මෙම යෙදුම තුළ පහත අංශ අඩංගු වේ:
+    </p>
+
+    <!-- Content Block 1 - සබ්බත්තික මාතිකා -->
+    <div class="fade-in-up delay-2 bg-white dark:bg-slate-800 rounded-2xl p-4 border-l-4 border-saffron-500 border-y border-r border-amber-200 dark:border-slate-700 shadow-sm">
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-saffron-600 flex items-center justify-center text-white shrink-0 shadow">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">සර්වසංග්‍රාහී සබ්බත්තික මාතිකා</h4>
+          <ul class="mt-2 space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-circle text-[5px] text-saffron-600 mt-1.5 shrink-0"></i>
+              <span>තික මාතිකා <strong class="text-maroon-800 dark:text-saffron-300">22</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-circle text-[5px] text-saffron-600 mt-1.5 shrink-0"></i>
+              <span>දුක මාතිකා <strong class="text-maroon-800 dark:text-saffron-300">100</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-circle text-[5px] text-saffron-600 mt-1.5 shrink-0"></i>
+              <span>සූත්‍රාන්ත මාතිකා <strong class="text-maroon-800 dark:text-saffron-300">42</strong> සහ ඒවාට අයත් පද, පද අර්ථ, ස්වරූපාර්ථ ඇතුළත් සවිස්තරාත්මක තොරතුරු</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Block 2 - සතර පරමාර්ථ -->
+    <div class="fade-in-up delay-3 bg-white dark:bg-slate-800 rounded-2xl p-4 border-l-4 border-purple-500 border-y border-r border-amber-200 dark:border-slate-700 shadow-sm">
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shrink-0 shadow">
+          <i class="fa-solid fa-gem"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">සතර පරමාර්ථ ධර්ම</h4>
+          <p class="mt-1.5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+            හැඳින්වීම, වර්ගීකරණය සහ ඒ ඒ පරමාර්ථ ධර්මයන්ගේ <strong class="text-maroon-800 dark:text-saffron-300">ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන</strong> සහිත මූලික විස්තර ඇතුළත්ව ඇත.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. මූලාශ්‍ර තොරතුරු -->
+  <!-- ============================================================ -->
+  <section class="fade-in-up delay-2 space-y-3">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow">
+        <i class="fa-solid fa-book-bookmark text-sm"></i>
+      </div>
+      <h3 class="font-bold text-lg text-maroon-900 dark:text-saffron-200">මූලාශ්‍ර තොරතුරු</h3>
+    </div>
+    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pl-1">
+      මෙම මෘදුකාංගය නිර්මාණය කිරීමේ දී පහත සඳහන් මූලාශ්‍ර තොරතුරු උපකාර කර ගනිමින් නිර්මාණය කර ඇත:
+    </p>
+
+    <div id="source-list" class="grid grid-cols-1 gap-2.5"></div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. අවසන් පණිවිඩය - ආශිර්වාදය -->
+  <!-- ============================================================ -->
+  <section class="fade-in-up delay-3">
+    <div class="bg-gradient-to-br from-saffron-500 via-amber-600 to-maroon-800 rounded-2xl p-6 text-center shadow-xl border border-saffron-400/50 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10 pointer-events-none">
+        <i class="fa-solid fa-dharmachakra absolute -right-8 -top-8 text-white text-9xl spin-slow"></i>
+        <i class="fa-solid fa-dharmachakra absolute -left-8 -bottom-8 text-white text-9xl spin-slow"></i>
+      </div>
+      <div class="relative">
+        <i class="fa-solid fa-hands-praying text-3xl text-maroon-950 mb-3"></i>
+        <p class="text-base sm:text-lg font-bold text-maroon-950 leading-relaxed mb-3">
+          මෙම යෙදුම අභිධර්මය හදාරන සැමට පහසුවක් හා උපකාරයක්ම වේවා!
+        </p>
+        <p class="text-lg sm:text-xl font-bold text-maroon-950 tracking-wide">
+          බුද්ධසාසනං චිරං තිට්ඨතු!
+        </p>
+        <div class="mt-4 flex justify-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-maroon-950/60"></span>
+          <span class="inline-block w-2 h-2 rounded-full bg-maroon-950/80"></span>
+          <span class="inline-block w-2 h-2 rounded-full bg-maroon-950"></span>
+          <span class="inline-block w-2 h-2 rounded-full bg-maroon-950/80"></span>
+          <span class="inline-block w-2 h-2 rounded-full bg-maroon-950/60"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back Button -->
+  <div class="pt-2">
+    <a href="index.html" class="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-saffron-500 to-amber-600 hover:from-saffron-400 hover:to-amber-500 text-maroon-950 font-bold rounded-xl shadow hover:shadow-lg transition-all text-sm">
+      <i class="fa-solid fa-house"></i> මුල් පිටුවට ආපසු
+    </a>
+  </div>
+
+</main>
+
+<script>
+// ============================================================
+// ✅ මූලාශ්‍ර දත්ත - මෙතැනින් පහසුවෙන් තොරතුරු එක් කරන්න / වෙනස් කරන්න
+// ============================================================
+var aboutSources = [
+  { name: 'අභිධර්ම මාතිකා අධ්‍යන ප්‍රවේශය',       author: 'පූජ්‍ය කඩුවෙල අතුලඤාණ හිමි',                          type: 'ග්‍රන්ථය' },
+  { name: 'අභිධර්ම චන්ද්‍රිකාව',                    author: 'පූජ්‍ය මාතර ශ්‍රී ධර්මවංශ මහනාහිමි',                    type: 'ග්‍රන්ථය' },
+  { name: 'අභිධර්ම මාර්ගය',                       author: 'පූජ්‍ය රේරුකානේ චන්දවිමල මහනාහිමි',                type: 'ග්‍රන්ථය' },
+  { name: 'ධම්මසඞ්ගණී අට්ඨකථාව',                   author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම අට්ඨකථා)',        type: 'අට්ඨකථා' },
+  { name: 'අභිධම්මත්ථවිභාවනී ටීකාව',               author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම ටීකා)',            type: 'ටීකා' },
+  { name: 'පරමත්ථ දීපනී ටීකාව',                    author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම ටීකා)',            type: 'ටීකා' },
+  { name: 'මොක්පුර රන්දොර',                        author: 'පූජ්‍ය උ ආචිණ්ණ හිමි (ඵා-ඖක් සයඩො)',                  type: 'ග්‍රන්ථය' },
+  { name: 'සහ තවත් සටහන්',                          author: 'විවිධ අභිධර්ම සටහන්',                                type: 'සටහන්' }
+];
+
+// Type අනුව පාට සහ icon
+function getSourceStyle(type) {
+  switch(type) {
+    case 'ග්‍රන්ථය':   return { color: 'from-amber-500 to-saffron-600',   icon: 'fa-solid fa-book',           badge: 'bg-saffron-100 text-saffron-800 dark:bg-saffron-900/40 dark:text-saffron-300' };
+    case 'අට්ඨකථා':  return { color: 'from-rose-500 to-red-600',        icon: 'fa-solid fa-scroll',         badge: 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300' };
+    case 'ටීකා':     return { color: 'from-purple-500 to-indigo-600',   icon: 'fa-solid fa-bookmark',       badge: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300' };
+    case 'සටහන්':    return { color: 'from-emerald-500 to-teal-600',    icon: 'fa-solid fa-pen-to-square',  badge: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' };
+    default:          return { color: 'from-slate-500 to-slate-700',     icon: 'fa-solid fa-circle',         badge: 'bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300' };
+  }
+}
+
+// ============================================================
+// RENDER - මූලාශ්‍ර ලැයිස්තුව
+// ============================================================
+function renderSources() {
+  var listEl = document.getElementById('source-list');
+  if (!listEl) return;
+  listEl.innerHTML = '';
+
+  aboutSources.forEach(function(src, idx) {
+    var style = getSourceStyle(src.type);
+    listEl.innerHTML +=
+      '<div class="source-card fade-in-up bg-white dark:bg-slate-800 rounded-xl p-3.5 border border-amber-200 dark:border-slate-700 flex items-center gap-3 shadow-sm">' +
+        '<div class="w-10 h-10 rounded-lg bg-gradient-to-br ' + style.color + ' flex items-center justify-center text-white shrink-0 shadow">' +
+          '<i class="' + style.icon + ' text-sm"></i>' +
+        '</div>' +
+        '<div class="flex-1 min-w-0">' +
+          '<p class="text-xs font-bold text-maroon-900 dark:text-saffron-200 leading-snug">' + src.name + '</p>' +
+          '<p class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">' + src.author + '</p>' +
+        '</div>' +
+        '<span class="text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ' + style.badge + '">' + src.type + '</span>' +
+      '</div>';
+  });
+}
+
+// ============================================================
+// THEME TOGGLE (localStorage එක index.html සමඟ බෙදාගනී)
+// ============================================================
+function toggleDarkMode() {
+  var html = document.documentElement;
+  var icon = document.getElementById('theme-toggle-icon');
+  if (html.classList.contains('dark')) {
+    html.classList.remove('dark');
+    localStorage.setItem('abhidhamma_theme', 'light');
+    icon.className = 'fa-solid fa-moon text-lg';
+  } else {
+    html.classList.add('dark');
+    localStorage.setItem('abhidhamma_theme', 'dark');
+    icon.className = 'fa-solid fa-sun text-lg';
+  }
+}
+
+if (localStorage.getItem('abhidhamma_theme') === 'dark' || 
+    (!localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark');
+  document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
+}
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', renderSources);
+</script>
+
+</body>
+</html>
