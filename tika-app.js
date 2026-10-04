@@ -479,73 +479,88 @@ function toggleArthaVistaraSection() {
     if (chevron) chevron.classList.remove('rotate-180');
   }
 }
-
 // ============================================================
-// BREAKDOWN LISTS
+// BREAKDOWN LISTS — පිරවූ ගණන / මුළු ගණන (නියත)
 // ============================================================
 function renderTikaBreakdownLists(pada) {
-  // ස්කන්ධ
+  // ─────────────────────────────────────────────
+  // ස්කන්ධ — පිරවූ / 5 (නියත)
+  // ─────────────────────────────────────────────
   var sList = document.getElementById('tika-skandha-list');
   if (sList) {
     sList.innerHTML = '';
-    var sCount = 0;
+    var sFilled = 0;
     (pada.skandha || []).forEach(function(s) {
-      if (s.value && s.value !== 'නැත' && s.value !== '-' && s.value !== '×') sCount++;
+      if (s.value && s.value !== 'නැත' && s.value !== '-' && s.value !== '×') {
+        sFilled++;
+      }
       var div = document.createElement('div');
       div.className = 'breakdown-item';
       div.innerHTML = '<span class="num">' + s.num + '</span><span class="name">' + s.name + '</span><span class="value">' + s.value + '</span>';
       sList.appendChild(div);
     });
     var scEl = document.getElementById('tika-skandha-count');
-    if (scEl) scEl.innerText = sCount + ' / 5';
+    if (scEl) scEl.innerText = sFilled + ' / 5';   // ← නියත 5
   }
 
-  // ආයතන
+  // ─────────────────────────────────────────────
+  // ආයතන — පිරවූ / 12 (නියත)
+  // ─────────────────────────────────────────────
   var aList = document.getElementById('tika-ayatana-list');
   if (aList) {
     aList.innerHTML = '';
-    var aCount = 0;
+    var aFilled = 0;
     (pada.ayatana || []).forEach(function(a) {
-      aCount++;
+      if (a.value && a.value !== 'නැත' && a.value !== '-' && a.value !== '×') {
+        aFilled++;
+      }
       var div = document.createElement('div');
       div.className = 'breakdown-item';
       div.innerHTML = '<span class="num">' + a.num + '</span><span class="name">' + a.name + '</span><span class="value">' + a.value + '</span>';
       aList.appendChild(div);
     });
     var acEl = document.getElementById('tika-ayatana-count');
-    if (acEl) acEl.innerText = aCount + ' / 12';
+    if (acEl) acEl.innerText = aFilled + ' / 12';   // ← නියත 12
   }
 
-  // ධාතු
+  // ─────────────────────────────────────────────
+  // ධාතු — පිරවූ / 18 (නියත)
+  // ─────────────────────────────────────────────
   var dList = document.getElementById('tika-dhatu-list');
   if (dList) {
     dList.innerHTML = '';
-    var dCount = 0;
+    var dFilled = 0;
     (pada.dhatu || []).forEach(function(d) {
-      dCount++;
+      if (d.value && d.value !== 'නැත' && d.value !== '-' && d.value !== '×') {
+        dFilled++;
+      }
       var div = document.createElement('div');
       div.className = 'breakdown-item';
       div.innerHTML = '<span class="num">' + d.num + '</span><span class="name">' + d.name + '</span><span class="value">' + d.value + '</span>';
       dList.appendChild(div);
     });
     var dcEl = document.getElementById('tika-dhatu-count');
-    if (dcEl) dcEl.innerText = dCount + ' / 18';
+    if (dcEl) dcEl.innerText = dFilled + ' / 18';   // ← නියත 18
   }
 
-  // සත්‍ය
+  // ─────────────────────────────────────────────
+  // සත්‍ය — පිරවූ / 4 (නියත)
+  // ─────────────────────────────────────────────
   var satList = document.getElementById('tika-sathya-list');
   if (satList) {
     satList.innerHTML = '';
-    var satCount = 0;
+    var satFilled = 0;
     (pada.sathya || []).forEach(function(sat) {
-      if (sat.value && sat.value !== 'නැත' && sat.value !== '-' && sat.value !== '×' && sat.value !== 'සතය විනිර්මුක්ත') satCount++;
+      if (sat.value && sat.value !== 'නැත' && sat.value !== '-' && sat.value !== '×' && sat.value !== 'සතය විනිර්මුක්ත') {
+        satFilled++;
+      }
       var div = document.createElement('div');
       div.className = 'breakdown-item';
       div.innerHTML = '<span class="num">' + sat.num + '</span><span class="name">' + sat.name + '</span><span class="value">' + sat.value + '</span>';
       satList.appendChild(div);
     });
     var satcEl = document.getElementById('tika-sathya-count');
-    if (satcEl) satcEl.innerText = satCount + ' / 4';
+    if (satcEl) satcEl.innerText = satFilled + ' / 4';   // ← නියත 4
   }
 }
 
@@ -1065,18 +1080,18 @@ function toggleDarkMode() {
   var icon = document.getElementById('theme-toggle-icon');
   if (html.classList.contains('dark')) {
     html.classList.remove('dark');
-    localStorage.setItem('tika_theme', 'light');
+    localStorage.setItem('abhidhamma_theme', 'light');
     if (icon) icon.className = 'fa-solid fa-moon text-lg';
   } else {
     html.classList.add('dark');
-    localStorage.setItem('tika_theme', 'dark');
+    localStorage.setItem('abhidhamma_theme', 'dark');
     if (icon) icon.className = 'fa-solid fa-sun text-lg';
   }
 }
 
 // Theme initialize
-if (localStorage.getItem('tika_theme') === 'dark' ||
-    (!localStorage.getItem('tika_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
+    (!localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   document.documentElement.classList.add('dark');
   var themeIcon = document.getElementById('theme-toggle-icon');
   if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-lg';

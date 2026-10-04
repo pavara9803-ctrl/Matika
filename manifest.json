@@ -4,13 +4,8 @@
   "description": "සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22, දුක මාතිකා 100 සහ රූප 28 වර්ගීකරණය හා සමුට්ඨාන නය විස්තරාත්මකව අධ්‍යයනය කරන්න.",
   "start_url": "./index.html",
   "scope": "./",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone",
-    "minimal-ui"
-  ],
   "orientation": "any",
-  "background_color": "#fffbeedb",
+  "background_color": "#fffbeb",
   "theme_color": "#3f0a0c",
   "lang": "si",
   "dir": "ltr",
@@ -78,13 +73,19 @@
       "src": "./icons/192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "./icons/1024.png",
       "sizes": "1024x1024",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -141,11 +142,6 @@
       ]
     }
   ],
-  "related_applications": [{
-  "platform": "play",
-  "url": "https://play.google.com/store/apps/details?id=com.abhidha_mamatika.twa"
-}
-  ],
   "prefer_related_applications": false,
   "id": "abhidhamma-matika-app",
   "screenshots": [
@@ -185,5 +181,5 @@
       "label": "රූප විභාගය - ජංගම දුරකථනය"
     }
   ],
-  "display": "fullscreen"
+  "display": "standalone"
 }

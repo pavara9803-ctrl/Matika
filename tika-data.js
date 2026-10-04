@@ -4,12 +4,6 @@
 // Helper functions + tikaFullData array + registerTika()
 // ============================================================
 
-// tika-data.js
-// ============================================================
-// අභිධර්ම මාතිකා අධ්‍යයන ප්‍රවේශය - තික මාතිකා 22
-// Helper functions + tikaFullData array + registerTika()
-// ============================================================
-
 // ============================================================
 // 1. HELPER FUNCTIONS
 // ============================================================
@@ -34,11 +28,6 @@ function makeAyatana(entries) {
 
 function makeDhatu(entries) {
   return entries;
-}
-
-// ═══ NEW: විස්තරාත්මක විවරණය සඳහා helper ═══
-function makeArthaVistara(nirukthi, abhidheya, sangraha, vishesha) {
-  return { nirukthi, abhidheya, sangraha, vishesha };
 }
 
 // ============================================================
@@ -73,36 +62,44 @@ function registerTika(tikaObject) {
 // ============================================================
 // 4. FALLBACK MECHANISM
 // ============================================================
+// තික ගොනු 22 සම්පූර්ණ නොවූයේ නම්, placeholder තික 22 පෙන්වන්න.
+
 var tikaPlaceholderTitles = [
-  '01. කුසල තිකය',
-  '02. වේදනා තිකය',
-  '03. විපාක තිකය',
-  '04. උපාදින්න තිකය',
-  '05. සංකිලිට්ඨ තිකය',
-  '06. විතක්ක තිකය',
-  '07. පීති තිකය',
-  '08. දස්සන තිකය',
-  '09. දස්සනහේතු තිකය',
-  '10. ආවයගාමි තිකය',
-  '11. සේඛ තිකය',
-  '12. පරිත්ත තිකය',
-  '13. පරිත්තාරම්මණ තිකය',
-  '14. හීන තිකය',
-  '15. මිච්ඡත්ත තිකය',
-  '16. මග්ගාරම්මණ තිකය',
-  '17. උප්පන්න තිකය',
-  '18. අතීත තිකය',
-  '19. අතීතාරම්මණ තිකය',
-  '20. අජ්ඣත්ත තිකය',
-  '21. අජ්ඣත්තාරම්මණ තිකය',
-  '22. සනිදස්සන තිකය'
+  '01. කුසල ත්‍රිකය',
+  '02. වේදනා ත්‍රිකය',
+  '03. විපාක ත්‍රිකය',
+  '04. උපාදින්න ත්‍රිකය',
+  '05. සංකිලිට්ඨ ත්‍රිකය',
+  '06. විතර්ක ත්‍රිකය',
+  '07. ප්‍රීති ත්‍රිකය',
+  '08. දස්සන ත්‍රිකය',
+  '09. දස්සනහේතු ත්‍රිකය',
+  '10. ආචයගාමී ත්‍රිකය',
+  '11. සෙක්ඛ ත්‍රිකය',
+  '12. පරිත්ත ත්‍රිකය',
+  '13. පරිත්තාරම්මණ ත්‍රිකය',
+  '14. හීන ත්‍රිකය',
+  '15. මිච්ඡත්ත ත්‍රිකය',
+  '16. මග්ගාරම්මණ ත්‍රිකය',
+  '17. උප්පන්න ත්‍රිකය',
+  '18. අතීත ත්‍රිකය',
+  '19. අතීතාරම්මණ ත්‍රිකය',
+  '20. අජ්ඣත්ත ත්‍රිකය',
+  '21. අජ්ඣත්තාරම්මණ ත්‍රිකය',
+  '22. සනිදස්සන ත්‍රිකය'
 ];
 
 function fillMissingTikas() {
-  var loadedTitles = tikaFullData.map(function(t) { return t.title; });
+  // දැනට load වී ඇති තිකවල title එකතුව
+  // title අකුරු/අක්ෂර වින්‍යාසය වෙනස් වුවත් ගැටළුවක් නොවන සේ, අංකය (01, 02...) අනුව ගැළපේ
+  var loadedNums = tikaFullData.map(function(t) {
+    var m = String(t.title || '').match(/^(\d+)/);
+    return m ? parseInt(m[1], 10) : -1;
+  });
   
+  // හිස් තික සඳහා placeholder එකතු කරන්න
   tikaPlaceholderTitles.forEach(function(title) {
-    if (loadedTitles.indexOf(title) === -1) {
+    if (loadedNums.indexOf(parseInt(title, 10)) === -1) {
       tikaFullData.push({
         title: title,
         isPlaceholder: true,
@@ -128,10 +125,10 @@ function fillMissingTikas() {
     }
   });
   
+  // title අනුව නැවත sort කරන්න (01, 02, 03... අනුපිළිවෙලට)
   tikaFullData.sort(function(a, b) {
-    var numA = parseInt(a.title.match(/^(\d+)/)[1], 10);
-    var numB = parseInt(b.title.match(/^(\d+)/)[1], 10);
-    return numA - numB;
+    var mA = String(a.title).match(/^(\d+)/), mB = String(b.title).match(/^(\d+)/);
+    return (mA ? parseInt(mA[1], 10) : 999) - (mB ? parseInt(mB[1], 10) : 999);
   });
   
   console.log('[tika-data.js] Fallback සම්පූර්ණයි. මුළු තික: ' + tikaFullData.length);

@@ -11,7 +11,7 @@
 const EMAILJS_CONFIG = {
   PUBLIC_KEY: '7x_FOGFJJO8JY6Hmg',      // ← ඔබගේ Public Key
   SERVICE_ID: 'service_x00ykdo',      // ← ඔබගේ Service ID
-  TEMPLATE_ID: 'service_x00ykdo'     // ← ඔබගේ Template ID
+  TEMPLATE_ID: 'template_REPLACE_ME'  // ← EmailJS > Email Templates වලින් 'template_' ලෙස ඇරඹෙන ID එක
 };
 
 // ============================================================
@@ -23,27 +23,36 @@ const FEEDBACK_META_KEY = 'abhidhamma_feedback_meta';
 // ============================================================
 // 2. EMAILJS INITIALIZATION
 // ============================================================
-(function initEmailJS() {
-  // EmailJS library එක load කරන්න
-  if (typeof emailjs === 'undefined') {
-    var script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-    script.onload = function() {
-      try {
-        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-        console.log('[feedback.js] EmailJS initialized successfully');
-      } catch (error) {
-        console.warn('[feedback.js] EmailJS init failed:', error);
-      }
-    };
-    script.onerror = function() {
-      console.warn('[feedback.js] EmailJS script load failed - offline mode');
-    };
-    document.head.appendChild(script);
-  } else {
-    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+var emailjsLoading = false;
+
+function isEmailConfigured() {
+  return !!EMAILJS_CONFIG.PUBLIC_KEY &&
+         /^service_/.test(EMAILJS_CONFIG.SERVICE_ID) &&
+         /^template_/.test(EMAILJS_CONFIG.TEMPLATE_ID) &&
+         EMAILJS_CONFIG.TEMPLATE_ID !== 'template_REPLACE_ME';
+}
+
+function loadEmailJS(cb) {
+  if (typeof emailjs !== 'undefined') {
+    try { emailjs.init({ publicKey: EMAILJS_CONFIG.PUBLIC_KEY }); } catch (e) { console.warn('[feedback.js] EmailJS init failed:', e); }
+    if (cb) cb();
+    return;
   }
-})();
+  if (emailjsLoading || !navigator.onLine) return;
+  emailjsLoading = true;
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  script.onload = function() {
+    emailjsLoading = false;
+    try { emailjs.init({ publicKey: EMAILJS_CONFIG.PUBLIC_KEY }); } catch (e) { console.warn('[feedback.js] EmailJS init failed:', e); }
+    if (cb) cb();
+  };
+  script.onerror = function() {
+    emailjsLoading = false;
+    console.warn('[feedback.js] EmailJS script load failed - offline mode');
+  };
+  document.head.appendChild(script);
+}
 
 // ============================================================
 // 3. MODAL OPEN/CLOSE
@@ -175,7 +184,8 @@ function submitFeedback(event) {
     languageFull: navigator.language,
     pageUrl: window.location.href,
     screenSize: window.innerWidth + 'x' + window.innerHeight,
-    version: '1.0.0'
+    version: '1.0.0',
+    sent: false
   };
   
   // ========== 5. LOCALSTORAGE එකේ SAVE කරන්න (backup) ==========
@@ -194,71 +204,75 @@ function submitFeedback(event) {
 // ============================================================
 
 function sendFeedbackEmail(feedbackData, submitBtn) {
-  // EmailJS පවතිනවාද පරීක්ෂා කරන්න
-  if (typeof emailjs === 'undefined') {
-    console.warn('[feedback.js] EmailJS not loaded - saving locally only');
-    handleEmailSuccess(submitBtn, true);
+  if (!isEmailConfigured()) {
+    console.warn('[feedback.js] EmailJS not configured (SERVICE_ID / TEMPLATE_ID පරීක්ෂා කරන්න) - saved locally');
+    handleQueued(submitBtn);
     return;
   }
-  
-  // EmailJS config එක පරීක්ෂා කරන්න
-  if (EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' ||
-      EMAILJS_CONFIG.SERVICE_ID === 'YOUR_SERVICE_ID_HERE' ||
-      EMAILJS_CONFIG.TEMPLATE_ID === 'YOUR_TEMPLATE_ID_HERE') {
-    console.warn('[feedback.js] EmailJS not configured - saving locally only');
-    console.log('[feedback.js] Please configure EMAILJS_CONFIG in feedback.js');
-    handleEmailSuccess(submitBtn, true);
+  if (!navigator.onLine || typeof emailjs === 'undefined') {
+    handleQueued(submitBtn);
+    loadEmailJS(retryPendingFeedback);
     return;
   }
-  
-  // EmailJS එකට යවන්න
-  console.log('[feedback.js] Sending email via EmailJS...');
-  
-  emailjs.send(
-    EMAILJS_CONFIG.SERVICE_ID,
-    EMAILJS_CONFIG.TEMPLATE_ID,
-    feedbackData
-  )
-  .then(function(response) {
-    console.log('[feedback.js] ✅ Email sent successfully!', response.status, response.text);
-    handleEmailSuccess(submitBtn, false);
-  })
-  .catch(function(error) {
-    console.error('[feedback.js] ❌ Email send failed:', error);
-    handleEmailError(submitBtn, error);
-  });
+
+  emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, feedbackData)
+    .then(function(response) {
+      console.log('[feedback.js] ✅ Email sent', response.status, response.text);
+      markFeedbackSent(feedbackData.id);
+      handleEmailSuccess(submitBtn);
+    })
+    .catch(function(error) {
+      console.error('[feedback.js] ❌ Email send failed:', error);
+      handleEmailError(submitBtn, error);
+    });
 }
 
-function handleEmailSuccess(submitBtn, isLocalOnly) {
-  // Success message
-  var successMsg = isLocalOnly 
-    ? 'ඔබගේ අදහස් සාර්ථකව ලැබුණි! (Offline mode) 🙏'
-    : 'ඔබගේ අදහස් සාර්ථකව ලැබුණි! ස්තූතියි 🙏';
-  
-  showFeedbackMessage(successMsg, 'success');
-  
-  // Modal එක 2.5s පසුව වසා දමන්න
-  setTimeout(function() {
-    closeFeedbackModal();
-  }, 2000);
+function handleEmailSuccess(submitBtn) {
+  showFeedbackMessage('ඔබගේ අදහස් සාර්ථකව ලැබුණි! ස්තූතියි 🙏', 'success');
+  setTimeout(closeFeedbackModal, 2000);
+}
+
+// යැවීමට නොහැකි විට: උපාංගයේ සුරකින අතර අන්තර්ජාලය ලැබුණු විට ස්වයංක්‍රීයව යවයි
+function handleQueued(submitBtn) {
+  showFeedbackMessage('අදහස් උපාංගයේ සුරකින ලදී. අන්තර්ජාලය ලැබුණු විට ස්වයංක්‍රීයව යවනු ඇත.', 'warning');
+  setTimeout(closeFeedbackModal, 2500);
 }
 
 function handleEmailError(submitBtn, error) {
-  // Error message පෙන්වන්න - නමුත් දත්ත LocalStorage එකේ save වී ඇත
-  var errorMsg = 'දෝෂයක් ඇතිවිය. දත්ත save වී ඇත. නැවත උත්සාහ කරන්න.';
-  
-  if (error && error.text) {
-    console.warn('[feedback.js] Email error details:', error.text);
-  }
-  
-  showFeedbackMessage(errorMsg, 'warning');
-  
-  // Submit button නැවත සක්‍රීය කරන්න
+  if (error && error.text) console.warn('[feedback.js] Email error details:', error.text);
+  showFeedbackMessage('යැවීම අසාර්ථකයි. දත්ත සුරකින ලදී; පසුව නැවත යවනු ඇත.', 'warning');
   if (submitBtn) {
     submitBtn.disabled = false;
     submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> නැවත එවන්න';
   }
 }
+
+function markFeedbackSent(id) {
+  try {
+    var all = getAllFeedbackFromStorage();
+    all.forEach(function(item) { if (item.id === id) item.sent = true; });
+    localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(all));
+  } catch (e) { console.warn('[feedback.js] markFeedbackSent failed:', e); }
+}
+
+var retryingFeedback = false;
+function retryPendingFeedback() {
+  if (retryingFeedback || !isEmailConfigured() || !navigator.onLine) return;
+  var pending = getAllFeedbackFromStorage().filter(function(i) { return i.sent === false; });
+  if (!pending.length) return;
+  if (typeof emailjs === 'undefined') { loadEmailJS(retryPendingFeedback); return; }
+  retryingFeedback = true;
+  pending.reduce(function(chain, item) {
+    return chain.then(function() {
+      return emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, item)
+        .then(function() { markFeedbackSent(item.id); });
+    });
+  }, Promise.resolve())
+  .catch(function(e) { console.warn('[feedback.js] Retry failed:', e); })
+  .then(function() { retryingFeedback = false; });
+}
+
+window.addEventListener('online', function() { loadEmailJS(retryPendingFeedback); });
 
 // ============================================================
 // 6. STORAGE FUNCTIONS (Backup)
@@ -645,18 +659,13 @@ window.clearAllFeedback = clearAllFeedback;
   console.log('[feedback.js] Total feedback items:', existingData.length);
   console.log('[feedback.js] Last updated:', meta.lastUpdatedFormatted || 'Never');
   
-  // EmailJS config පරීක්ෂා කරන්න
-  var emailConfigured = EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY_HERE' &&
-                        EMAILJS_CONFIG.SERVICE_ID !== 'YOUR_SERVICE_ID_HERE' &&
-                        EMAILJS_CONFIG.TEMPLATE_ID !== 'YOUR_TEMPLATE_ID_HERE';
-  
-  if (emailConfigured) {
-    console.log('[feedback.js] ✅ EmailJS configured - emails will be sent to admin');
+  if (isEmailConfigured()) {
+    console.log('[feedback.js] ✅ EmailJS configured');
+    loadEmailJS(retryPendingFeedback);
   } else {
-    console.warn('[feedback.js] ⚠️ EmailJS NOT configured - saving to LocalStorage only');
-    console.warn('[feedback.js] Please set EMAILJS_CONFIG in feedback.js');
+    console.warn('[feedback.js] ⚠️ EmailJS NOT configured - TEMPLATE_ID (template_...) සකසන්න');
   }
-  
+
   console.log('');
   console.log('%c📋 FEEDBACK CONSOLE COMMANDS', 'background: #f59e0b; color: #3f0a0c; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
   console.log('');

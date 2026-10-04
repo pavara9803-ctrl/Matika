@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#3f0a0c">
   <title>සබ්බත්තික මාතිකා - අභිධර්ම මාතිකා</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./tailwind.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            saffron: { 50:'#fffbeedb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03' },
+            saffron: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03' },
             maroon: { 700:'#701a1d',800:'#581113',900:'#3f0a0c',950:'#260507' }
           },
           fontFamily: { sans: ['Inter','Noto Serif Sinhala','sans-serif'] }
@@ -433,7 +435,7 @@
 
   <!-- ============ FOOTER ============ -->
   <footer class="bg-maroon-900 text-amber-100 text-center py-4 border-t-2 border-saffron-500">
-    <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා අධ්‍යයනය &copy; 2024</p>
+    <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා &copy; 2026</p>
   </footer>
 
   <!-- SCRIPT: sabbatika-data.js load කිරීම -->
@@ -444,7 +446,7 @@
     function toggleDarkMode() {
       const html = document.documentElement;
       const isDark = html.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      localStorage.setItem('abhidhamma_theme', isDark ? 'dark' : 'light');
       updateThemeIcon(isDark);
     }
 
@@ -456,7 +458,7 @@
     }
 
     (function initTheme() {
-      const saved = localStorage.getItem('theme');
+      const saved = localStorage.getItem('abhidhamma_theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const isDark = saved === 'dark' || (!saved && prefersDark);
       if (isDark) document.documentElement.classList.add('dark');

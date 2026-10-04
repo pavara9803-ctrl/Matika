@@ -2,21 +2,25 @@
 // දුක මාතිකා App Logic (යාවත්කාලීන)
 // ============================================================
 
+// ගොනුවක් නැතිවුවත් (js/duka/*.js) සම්පූර්ණ පිටුව කැඩී නොයන සේ safe load
 var dukaGochhakaData = [
-  gochhaka01Hetu,
-  gochhaka02Cullantara,
-  gochhaka03Asava,
-  gochhaka04Samyojana,
-  gochhaka05Gantha,
-  gochhaka06Ogha,
-  gochhaka07Yoga,
-  gochhaka08Nivarana,
-  gochhaka09Paramasa,
-  gochhaka10Mahantara,
-  gochhaka11Upadana,
-  gochhaka12Kilesa,
-  gochhaka13Pitthi
-];
+  (typeof gochhaka01Hetu !== 'undefined' ? gochhaka01Hetu : null),
+  (typeof gochhaka02Cullantara !== 'undefined' ? gochhaka02Cullantara : null),
+  (typeof gochhaka03Asava !== 'undefined' ? gochhaka03Asava : null),
+  (typeof gochhaka04Samyojana !== 'undefined' ? gochhaka04Samyojana : null),
+  (typeof gochhaka05Gantha !== 'undefined' ? gochhaka05Gantha : null),
+  (typeof gochhaka06Ogha !== 'undefined' ? gochhaka06Ogha : null),
+  (typeof gochhaka07Yoga !== 'undefined' ? gochhaka07Yoga : null),
+  (typeof gochhaka08Nivarana !== 'undefined' ? gochhaka08Nivarana : null),
+  (typeof gochhaka09Paramasa !== 'undefined' ? gochhaka09Paramasa : null),
+  (typeof gochhaka10Mahantara !== 'undefined' ? gochhaka10Mahantara : null),
+  (typeof gochhaka11Upadana !== 'undefined' ? gochhaka11Upadana : null),
+  (typeof gochhaka12Kilesa !== 'undefined' ? gochhaka12Kilesa : null),
+  (typeof gochhaka13Pitthi !== 'undefined' ? gochhaka13Pitthi : null)
+].filter(function(g, i) {
+  if (!g) console.warn('[Duka App] ගොකඡක ගොනුව load වී නැත: ගොච්ඡක ' + (i + 1));
+  return !!g;
+});
 
 var dukaState = {
   currentGochhaka: null,
@@ -579,13 +583,21 @@ function renderDukaMukta(pada) {
 
   if (!section || !content) return;
 
-  if (!pada.mukta) {
+  // දත්ත ගොනුවල 'mukta' ඇත්තේ පද (pada) මත නොව දුකය (duka) මතයි - එනිසා දුකයෙන් සොයයි
+  var mukta = pada && pada.mukta;
+  if (!mukta) {
+    getGochhakaDukas(dukaState.currentGochhaka).forEach(function(d) {
+      if (!mukta && d && d.mukta && d.padas && d.padas.indexOf(pada) !== -1) mukta = d.mukta;
+    });
+  }
+
+  if (!mukta) {
     section.classList.add('hidden');
     return;
   }
 
   section.classList.remove('hidden');
-  content.innerText = pada.mukta;
+  content.innerText = mukta;
 }
 
 // ============================================================
@@ -951,17 +963,17 @@ function toggleDarkMode() {
   var icon = document.getElementById('theme-toggle-icon');
   if (html.classList.contains('dark')) {
     html.classList.remove('dark');
-    localStorage.setItem('duka_theme', 'light');
+    localStorage.setItem('abhidhamma_theme', 'light');
     if (icon) icon.className = 'fa-solid fa-moon text-lg';
   } else {
     html.classList.add('dark');
-    localStorage.setItem('duka_theme', 'dark');
+    localStorage.setItem('abhidhamma_theme', 'dark');
     if (icon) icon.className = 'fa-solid fa-sun text-lg';
   }
 }
 
-if (localStorage.getItem('duka_theme') === 'dark' ||
-    (!localStorage.getItem('duka_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
+    (!localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   document.documentElement.classList.add('dark');
   var themeIcon = document.getElementById('theme-toggle-icon');
   if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-lg';
