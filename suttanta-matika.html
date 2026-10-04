@@ -521,7 +521,10 @@ th {
 <!-- ============================================================ -->
 
 <!-- 1. සුත්තන්ත දුක මාතිකා දත්ත -->
-<script src="suttanta-data.js"></script>
+<script src="suttanta-data-1.js"></script>
+<script src="suttanta-data-2.js"></script>
+<script src="suttanta-data-3.js"></script>
+<script src="suttanta-data-4.js"></script>
 
 <!-- 2. සුත්තන්ත යෙදුම් logic -->
 <script>
@@ -694,14 +697,14 @@ function selectSuttantaPada(padaIndex) {
   var arthaSection = document.getElementById('suttanta-pada-artha-section');
   var arthaText = document.getElementById('suttanta-pada-artha-text');
   if (pada.padaArtha && String(pada.padaArtha).trim() !== '') {
-    arthaText.innerText = pada.padaArtha;
+    arthaText.innerHTML = formatSuttantaText(pada.padaArtha);
     arthaSection.classList.remove('hidden');
   } else {
     arthaSection.classList.add('hidden');
   }
   
   // ස්වරූපාර්ථ
-  document.getElementById('suttanta-pada-svartha').innerText = pada.svartha || 'ස්වරූපාර්ථ විස්තරය ඇතුළත් කර නැත.';
+  document.getElementById('suttanta-pada-svartha').innerHTML = formatSuttantaText(pada.svartha || 'ස්වරූපාර්ථ විස්තරය ඇතුළත් කර නැත.');
   
   // ═══ NEW: විස්තරාත්මක විවරණය ═══
   renderArthaVistara(pada.arthaVistara);
@@ -717,6 +720,14 @@ function selectSuttantaPada(padaIndex) {
 // ============================================================
 // ARTHA VISTARA (විස්තරාත්මක විවරණය)
 // ============================================================
+// **bold** සහ නව පේළි පෙන්වීමට (HTML escape සහිත)
+function formatSuttantaText(text) {
+  var t = String(text == null ? '' : text)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  t = t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  return t.replace(/\n/g, '<br>');
+}
+
 function renderArthaVistara(arthaVistara) {
   var section = document.getElementById('suttanta-artha-vistara-section');
   var content = document.getElementById('artha-vistara-content');
@@ -744,7 +755,7 @@ function renderArthaVistara(arthaVistara) {
         '<div class="font-bold text-xs text-purple-900 dark:text-purple-100 mb-1">' + item.name + '</div>' +
         '<div class="text-[11px] text-purple-700 dark:text-purple-300/80 mb-1"><span class="font-semibold">පාලි:</span> ' + item.pali + '</div>' +
         '<div class="text-xs text-purple-900 dark:text-purple-100 mb-1"><span class="font-semibold">අර්ථය:</span> ' + item.artha + '</div>' +
-        '<div class="text-xs text-purple-800 dark:text-purple-200/90 leading-relaxed">' + item.vistara + '</div>' +
+        '<div class="text-xs text-purple-800 dark:text-purple-200/90 leading-relaxed" style="white-space:pre-line">' + item.vistara + '</div>' +
       '</div>';
     });
     
@@ -768,7 +779,7 @@ function renderArthaVistara(arthaVistara) {
         '<div class="flex-1">' +
           '<span class="font-semibold text-xs text-purple-900 dark:text-purple-100">' + item.name + '</span>' +
           (item.count ? '<span class="ml-1 text-[10px] bg-purple-200 dark:bg-purple-700 text-purple-800 dark:text-purple-200 px-1.5 py-0.5 rounded">' + item.count + '</span>' : '') +
-          '<div class="text-xs text-purple-700 dark:text-purple-300/80 mt-0.5">' + (item.vistara || '') + '</div>' +
+          '<div class="text-xs text-purple-700 dark:text-purple-300/80 mt-0.5" style="white-space:pre-line">' + (item.vistara || '') + '</div>' +
         '</div>' +
       '</div>';
     });
@@ -793,7 +804,7 @@ function renderArthaVistara(arthaVistara) {
         '<div class="flex-1">' +
           '<span class="font-semibold text-xs text-purple-900 dark:text-purple-100">' + item.name + '</span>' +
           (item.count ? '<span class="ml-1 text-[10px] bg-purple-200 dark:bg-purple-700 text-purple-800 dark:text-purple-200 px-1.5 py-0.5 rounded">' + item.count + '</span>' : '') +
-          '<div class="text-xs text-purple-700 dark:text-purple-300/80 mt-0.5">' + (item.vistara || '') + '</div>' +
+          '<div class="text-xs text-purple-700 dark:text-purple-300/80 mt-0.5" style="white-space:pre-line">' + (item.vistara || '') + '</div>' +
         '</div>' +
       '</div>';
     });
@@ -875,14 +886,14 @@ function renderSuttantaBreakdowns(pada) {
   var aCount = 0;
   if (pada.ayatana) {
     pada.ayatana.forEach(function(a) {
-      aCount++;
+      if (a.value && a.value !== 'නැත' && a.value !== '-' && a.value !== '×') aCount++;
       var div = document.createElement('div');
       div.className = 'breakdown-item';
       div.innerHTML = '<span class="num">' + a.num + '.</span><span class="name">' + a.name + '</span><span class="value">' + a.value + '</span>';
       aList.appendChild(div);
     });
   }
-  document.getElementById('suttanta-ayatana-count').innerText = aCount + ' / ' + (pada.ayatana ? pada.ayatana.length : 0);
+  document.getElementById('suttanta-ayatana-count').innerText = aCount + ' / 12';
 
   // ධාතු
   var dList = document.getElementById('suttanta-dhatu-list');
@@ -890,14 +901,14 @@ function renderSuttantaBreakdowns(pada) {
   var dCount = 0;
   if (pada.dhatu) {
     pada.dhatu.forEach(function(d) {
-      dCount++;
+      if (d.value && d.value !== 'නැත' && d.value !== '-' && d.value !== '×') dCount++;
       var div = document.createElement('div');
       div.className = 'breakdown-item';
       div.innerHTML = '<span class="num">' + d.num + '.</span><span class="name">' + d.name + '</span><span class="value">' + d.value + '</span>';
       dList.appendChild(div);
     });
   }
-  document.getElementById('suttanta-dhatu-count').innerText = dCount + ' / ' + (pada.dhatu ? pada.dhatu.length : 0);
+  document.getElementById('suttanta-dhatu-count').innerText = dCount + ' / 18';
 
   // සත්‍ය
   var satList = document.getElementById('suttanta-sathya-list');
