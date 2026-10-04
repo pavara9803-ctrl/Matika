@@ -5,7 +5,7 @@
 
 // precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
 try { importScripts('./precache-manifest.js'); } catch (e) { console.warn('[SW] precache-manifest.js not found - using static list only'); }
-const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v18.0.2');
+const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v18.0.0');
 const OFFLINE_URL = './index.html';
 
 // ============================================================
@@ -30,7 +30,10 @@ const ASSETS_TO_CACHE = [
   './tika-data.js',
   './tika-app.js',
   './duka-app.js',
-  './suttanta-data.js',
+  './suttanta-data-1.js',
+  './suttanta-data-2.js',
+  './suttanta-data-3.js',
+  './suttanta-data-4.js',
   './feedback.js',
 
   // ========== තික ගොනු 22 (tika folder) ==========
