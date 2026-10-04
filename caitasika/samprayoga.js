@@ -24,7 +24,7 @@ function toggleDarkMode() {
 }
 
 (function initTheme() {
-  var savedTheme = localStorage.getItem('samprayoga_theme') || localStorage.getItem('abhidhamma_theme');
+  var savedTheme = localStorage.getItem('abhidhamma_theme') || localStorage.getItem('samprayoga_theme');
   if (savedTheme === 'dark' ||
       (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');

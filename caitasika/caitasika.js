@@ -2,11 +2,58 @@
 // caitasika.js
 // චෛතසික හා සම්ප්‍රයෝග සංග්‍රහනය
 // අභිධර්ම මාතිකා අධ්‍යයන යෙදුම
-// Version: 2.0.0 (Conflict-free)
+// Version: 2.1.0 (Dynamic Font Scaler & Conflict-free)
 // ============================================================
 
 // ============================================================
-// 1. DARK MODE TOGGLE - caitasika.html සඳහා පමණි
+// 1. FONT SIZE CONTROLLER (අකුරු විශාල / කුඩා කිරීමේ සක්‍රීය පාලකය)
+// ============================================================
+var currentFontScale = 100;
+var defaultFontScale = 100;
+var minFontScale = 85;
+var maxFontScale = 160;
+var fontStep = 10; // එක් ක්ලික් එකකට 10% ක පැහැදිලි වෙනසක්
+
+function updateFontSizeUI() {
+  // Tailwind rem මිනුම් සියල්ල root font-size එක මත පදනම් වන බැවින්
+  // html element එකේ font-size ප්‍රතිශතය වෙනස් කිරීමෙන් සියලු අකුරු ක්ෂණිකව පරිමාණය වේ
+  document.documentElement.style.fontSize = currentFontScale + '%';
+
+  var display = document.getElementById('font-size-display');
+  if (display) {
+    display.textContent = currentFontScale + '%';
+  }
+}
+
+function changeFontSize(direction) {
+  var newScale = currentFontScale + (direction * fontStep);
+  if (newScale >= minFontScale && newScale <= maxFontScale) {
+    currentFontScale = newScale;
+    localStorage.setItem('caitasika_font_scale', currentFontScale);
+    updateFontSizeUI();
+  }
+}
+
+function resetFontSize() {
+  currentFontScale = defaultFontScale;
+  localStorage.setItem('caitasika_font_scale', currentFontScale);
+  updateFontSizeUI();
+}
+
+// පිටුව පූරණය වන විට සුරකින ලද අකුරු ප්‍රමාණය ක්‍රියාත්මක කිරීම
+(function initFontSize() {
+  var savedScale = localStorage.getItem('caitasika_font_scale');
+  if (savedScale) {
+    currentFontScale = parseInt(savedScale, 10);
+  }
+  updateFontSizeUI();
+})();
+
+window.changeFontSize = changeFontSize;
+window.resetFontSize = resetFontSize;
+
+// ============================================================
+// 2. DARK MODE TOGGLE - caitasika.html සඳහා
 // ============================================================
 function caitasikaToggleDarkMode() {
   var html = document.documentElement;
@@ -15,37 +62,29 @@ function caitasikaToggleDarkMode() {
     html.classList.remove('dark');
     localStorage.setItem('abhidhamma_theme', 'light');
     localStorage.setItem('theme', 'light');
-    if (icon) icon.className = 'fa-solid fa-moon text-lg';
+    if (icon) icon.className = 'fa-solid fa-moon text-base sm:text-lg';
   } else {
     html.classList.add('dark');
     localStorage.setItem('abhidhamma_theme', 'dark');
     localStorage.setItem('theme', 'dark');
-    if (icon) icon.className = 'fa-solid fa-sun text-lg';
+    if (icon) icon.className = 'fa-solid fa-sun text-base sm:text-lg';
   }
 }
 
-// ✅ ගැටුම වැළැක්වීමට - caitasika.html එකේ toggleDarkMode ලෙස call කරයි නම්
-// මෙය samprayoga.js එකේ function එකට override නොවන ලෙස කරන්න
 if (typeof window.toggleDarkMode === 'undefined') {
   window.toggleDarkMode = caitasikaToggleDarkMode;
 }
 window.caitasikaToggleDarkMode = caitasikaToggleDarkMode;
 
-// Theme initialize - caitasika.html එකේ පමණක්
 (function initCaitasikaTheme() {
   var savedTheme = localStorage.getItem('abhidhamma_theme') || localStorage.getItem('theme');
   if (savedTheme === 'dark' ||
       (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');
     var icon = document.getElementById('theme-toggle-icon');
-    if (icon) icon.className = 'fa-solid fa-sun text-lg';
+    if (icon) icon.className = 'fa-solid fa-sun text-base sm:text-lg';
   }
 })();
-
-// ============================================================
-// 2. TAB SWITCHING - caitasika.html සඳහා (samprayoga.js සමඟ ගැටුමක් නැත)
-// ============================================================
-// Note: caitasika.html එකේ switchMainTab() function එක inline script එකේ ඇත
 
 // ============================================================
 // 3. DATA: සර්වචිත්ත සාධාරණ චෛතසික 7
@@ -333,12 +372,8 @@ var quickSamprayogaData = [
 ];
 
 // ============================================================
-// 8. RENDER FUNCTIONS - caitasika.html සඳහා පමණි
+// 8. RENDER FUNCTIONS
 // ============================================================
-
-/**
- * සර්වචිත්ත සාධාරණ චෛතසික 7 - කාඩ්පත්
- */
 function renderSabbacittaCards() {
   var container = document.getElementById('sabbacitta-cards');
   if (!container) return;
@@ -360,9 +395,6 @@ function renderSabbacittaCards() {
   });
 }
 
-/**
- * සර්වචිත්ත සාධාරණ චෛතසික 7 - වගුව
- */
 function renderSabbacittaTable() {
   var tbody = document.getElementById('sabbacitta-table-body');
   if (!tbody) return;
@@ -371,21 +403,18 @@ function renderSabbacittaTable() {
   sabbacittaData.forEach(function(item) {
     var tr = document.createElement('tr');
     tr.innerHTML =
-      '<td class="num-col">' + item.num + '</td>' +
+      '<td class="num-col font-bold text-center">' + item.num + '</td>' +
       '<td>' +
-        '<div style="font-weight:700;">' + item.name + '</div>' +
-        '<div style="font-size:0.7rem;color:#8b5cf6;font-style:italic;">' + item.pali + '</div>' +
-        '<div style="font-size:0.7rem;line-height:1.5;margin-top:0.4rem;color:#666;" class="dark:text-slate-400">' + item.desc + '</div>' +
+        '<div class="font-bold">' + item.name + '</div>' +
+        '<div style="font-size:0.75em;color:#8b5cf6;font-style:italic;">' + item.pali + '</div>' +
+        '<div style="font-size:0.75em;line-height:1.6;margin-top:0.4rem;color:#666;" class="dark:text-slate-400">' + item.desc + '</div>' +
       '</td>' +
-      '<td style="font-size:0.75rem;line-height:1.5;">' + item.lakshana + '</td>' +
-      '<td class="count-col highlight">' + item.yedena + '</td>';
+      '<td style="font-size:0.8em;line-height:1.6;">' + item.lakshana + '</td>' +
+      '<td class="count-col highlight font-bold text-center">' + item.yedena + '</td>';
     tbody.appendChild(tr);
   });
 }
 
-/**
- * ප්‍රකීර්ණක චෛතසික 6 - කාඩ්පත්
- */
 function renderPakirnakaCards() {
   var container = document.getElementById('pakirnaka-cetasika-cards');
   if (!container) return;
@@ -407,10 +436,6 @@ function renderPakirnakaCards() {
   });
 }
 
-/**
- * ප්‍රකීර්ණක චෛතසික 6 - වගුව
- * ✅ HTML එකේ ID: pakirnaka-table-body (caitasika.html නිවැරදි කළා)
- */
 function renderPakirnakaTable() {
   var tbody = document.getElementById('pakirnaka-table-body');
   if (!tbody) return;
@@ -419,17 +444,14 @@ function renderPakirnakaTable() {
   pakirnakaData2.forEach(function(item) {
     var tr = document.createElement('tr');
     tr.innerHTML =
-      '<td style="font-weight:700;">' + item.name + '</td>' +
-      '<td class="count-col highlight">' + item.yedena + '</td>' +
+      '<td class="font-bold">' + item.name + '</td>' +
+      '<td class="count-col highlight font-bold text-center">' + item.yedena + '</td>' +
       '<td style="text-align:center;font-weight:600;color:#ef4444;">' + item.noyedena + '</td>' +
-      '<td style="font-size:0.75rem;line-height:1.5;">' + item.desc + '</td>';
+      '<td style="font-size:0.8em;line-height:1.6;">' + item.desc + '</td>';
     tbody.appendChild(tr);
   });
 }
 
-/**
- * අකුසල චෛතසික 14 - කාඩ්පත්
- */
 function renderAkusalaCards() {
   var container = document.getElementById('akusala-cetasika-cards');
   if (!container) return;
@@ -451,10 +473,6 @@ function renderAkusalaCards() {
   });
 }
 
-/**
- * අකුසල චෛතසික 14 - වගුව
- * ✅ HTML එකේ ID: akusala-cetasika-table-body
- */
 function renderAkusalaTable() {
   var tbody = document.getElementById('akusala-cetasika-table-body');
   if (!tbody) return;
@@ -463,22 +481,18 @@ function renderAkusalaTable() {
   akusalaData2.forEach(function(item) {
     var tr = document.createElement('tr');
     tr.innerHTML =
-      '<td class="num-col">' + item.num + '</td>' +
+      '<td class="num-col font-bold text-center">' + item.num + '</td>' +
       '<td>' +
-        '<div style="font-weight:700;">' + item.name + '</div>' +
-        '<div style="font-size:0.7rem;color:#ef4444;font-style:italic;">' + item.pali + '</div>' +
-        '<div style="font-size:0.7rem;line-height:1.5;margin-top:0.4rem;color:#666;" class="dark:text-slate-400">' + item.desc + '</div>' +
+        '<div class="font-bold">' + item.name + '</div>' +
+        '<div style="font-size:0.75em;color:#ef4444;font-style:italic;">' + item.pali + '</div>' +
+        '<div style="font-size:0.75em;line-height:1.6;margin-top:0.4rem;color:#666;" class="dark:text-slate-400">' + item.desc + '</div>' +
       '</td>' +
-      '<td style="font-size:0.75rem;line-height:1.5;">' + item.lakshana + '</td>' +
-      '<td style="font-size:0.75rem;font-weight:600;color:#dc2626;">' + item.yedena + '</td>';
+      '<td style="font-size:0.8em;line-height:1.6;">' + item.lakshana + '</td>' +
+      '<td style="font-size:0.8em;font-weight:600;color:#dc2626;text-align:center;">' + item.yedena + '</td>';
     tbody.appendChild(tr);
   });
 }
 
-/**
- * සොභන චෛතසික 25 - වගුව
- * ✅ HTML එකේ ID: sobhana-cetasika-table-body
- */
 function renderSobhanaTable() {
   var tbody = document.getElementById('sobhana-cetasika-table-body');
   if (!tbody) return;
@@ -487,22 +501,18 @@ function renderSobhanaTable() {
   sobhanaData.forEach(function(item) {
     var tr = document.createElement('tr');
     tr.innerHTML =
-      '<td class="num-col">' + item.num + '</td>' +
+      '<td class="num-col font-bold text-center">' + item.num + '</td>' +
       '<td>' +
-        '<div style="font-weight:700;">' + item.name + '</div>' +
-        '<div style="font-size:0.7rem;color:#10b981;font-style:italic;">' + item.pali + '</div>' +
-        '<div style="font-size:0.7rem;line-height:1.5;margin-top:0.4rem;color:#666;" class="dark:text-slate-400">' + item.desc + '</div>' +
+        '<div class="font-bold">' + item.name + '</div>' +
+        '<div style="font-size:0.75em;color:#10b981;font-style:italic;">' + item.pali + '</div>' +
+        '<div style="font-size:0.75em;line-height:1.6;margin-top:0.4rem;color:#666;" class="dark:text-slate-400">' + item.desc + '</div>' +
       '</td>' +
-      '<td style="font-size:0.75rem;line-height:1.5;">' + item.lakshana + '</td>' +
-      '<td style="font-size:0.75rem;font-weight:600;color:#059669;">' + item.yedena + '</td>';
+      '<td style="font-size:0.8em;line-height:1.6;">' + item.lakshana + '</td>' +
+      '<td style="font-size:0.8em;font-weight:600;color:#059669;text-align:center;">' + item.yedena + '</td>';
     tbody.appendChild(tr);
   });
 }
 
-/**
- * ඉක්මන් සම්ප්‍රයෝග සාරාංශ වගුව
- * ✅ HTML එකේ ID: quick-samprayoga-body
- */
 function renderQuickSamprayogaTable() {
   var tbody = document.getElementById('quick-samprayoga-body');
   if (!tbody) return;
@@ -511,20 +521,18 @@ function renderQuickSamprayogaTable() {
   quickSamprayogaData.forEach(function(item) {
     var tr = document.createElement('tr');
     tr.innerHTML =
-      '<td style="font-weight:700;">' + item.rashi + '</td>' +
-      '<td class="count-col highlight">' + item.count + '</td>' +
-      '<td style="font-size:0.75rem;line-height:1.5;">' + item.desc + '</td>';
+      '<td class="font-bold">' + item.rashi + '</td>' +
+      '<td class="count-col highlight font-bold text-center">' + item.count + '</td>' +
+      '<td style="font-size:0.8em;line-height:1.6;">' + item.desc + '</td>';
     tbody.appendChild(tr);
   });
 }
 
 // ============================================================
-// 9. INITIALIZE APP - caitasika.html සඳහා පමණි
+// 9. INITIALIZE APP
 // ============================================================
 function initCaitasikaApp() {
   console.log('[caitasika] Initializing...');
-  
-  // Render all CAITASIKA sections
   renderSabbacittaCards();
   renderSabbacittaTable();
   renderPakirnakaCards();
@@ -533,12 +541,9 @@ function initCaitasikaApp() {
   renderAkusalaTable();
   renderSobhanaTable();
   renderQuickSamprayogaTable();
-  
   console.log('[caitasika] Initialization complete');
-  console.log('[caitasika] චෛතසික 52: සර්වචිත්ත 7 + ප්‍රකීර්ණක 6 + අකුසල 14 + සොභන 25');
 }
 
-// ✅ දෙවන වරට call වීම වැළැක්වීමට
 if (typeof window._caitasikaInitialized === 'undefined') {
   window._caitasikaInitialized = true;
   
@@ -549,10 +554,4 @@ if (typeof window._caitasikaInitialized === 'undefined') {
   }
 }
 
-// ============================================================
-// 10. GLOBAL EXPORTS
-// ============================================================
-// ⚠️ සටහන: window.toggleDarkMode export නොකරන්න, එය samprayoga.js එකේ ඇත
-window.caitasikaToggleDarkMode = caitasikaToggleDarkMode;
-
-console.log('[caitasika.js] Loaded successfully - ready for caitasika.html');
+console.log('[caitasika.js] Loaded successfully - font scaler ready');
