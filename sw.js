@@ -3,7 +3,7 @@
 // Version: 17.0.0 (Added about.html + HTML pages)
 // ============================================================
 
-const CACHE_NAME = 'abhidhamma-matika-v17.4.0';
+const CACHE_NAME = 'abhidhamma-matika-v17.4.2';
 const OFFLINE_URL = './index.html';
 
 // ============================================================
