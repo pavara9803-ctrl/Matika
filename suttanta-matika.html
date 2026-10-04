@@ -704,7 +704,7 @@ function selectSuttantaPada(padaIndex) {
   }
   
   // ස්වරූපාර්ථ
-  document.getElementById('suttanta-pada-svartha').innerHTML = formatSuttantaText(pada.svartha || 'ස්වරූපාර්ථ විස්තරය ඇතුළත් කර නැත.');
+  document.getElementById('suttanta-pada-svartha').innerText = pada.svartha || 'ස්වරූපාර්ථය ඇතුළත් කර නැත.';
   
   // ═══ NEW: විස්තරාත්මක විවරණය ═══
   renderArthaVistara(pada.arthaVistara);
@@ -724,106 +724,188 @@ function selectSuttantaPada(padaIndex) {
 function formatSuttantaText(text) {
   var t = String(text == null ? '' : text)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  t = t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  t = t.replace(/\*\*(.+?)\*\*/g, '<strong class="text-maroon-900 dark:text-saffron-300">$1</strong>');
   return t.replace(/\n/g, '<br>');
 }
 
-function renderArthaVistara(arthaVistara) {
+// ============================================================
+// ARTHA VISTARA (විස්තරාත්මක විවරණය) - තික / දුක මාතිකා පිටු වලට සමානව
+// ============================================================
+var arthaVistaraOpenState = {
+  nirukthi: true,
+  abhidheya: false,
+  sangraha: false,
+  vishesha: false
+};
+
+function avBr(s) {
+  return String(s == null ? '' : s).replace(/\n/g, '<br>');
+}
+
+function renderArthaVistara(av) {
   var section = document.getElementById('suttanta-artha-vistara-section');
   var content = document.getElementById('artha-vistara-content');
-  
-  if (!arthaVistara || (!arthaVistara.nirukthi && !arthaVistara.abhidheya && !arthaVistara.sangraha)) {
+  var chevron = document.getElementById('artha-vistara-chevron');
+
+  if (!section || !content) return;
+
+  if (!av) {
     section.classList.add('hidden');
     return;
   }
-  
+
   section.classList.remove('hidden');
-  content.innerHTML = '';
-  
+  var html = '';
+
   // නිරුක්ති විශ්ලේෂණය
-  if (arthaVistara.nirukthi) {
-    var nirukthi = arthaVistara.nirukthi;
-    var nHtml = '<div class="artha-vistara-box">' +
-      '<div class="flex items-center gap-2 mb-2 pb-2 border-b border-purple-200 dark:border-purple-500/30">' +
-        '<i class="fa-solid fa-book text-purple-600 dark:text-purple-300"></i>' +
-        '<span class="font-bold text-sm text-purple-900 dark:text-purple-200">' + nirukthi.title + '</span>' +
-      '</div>' +
-      '<p class="text-xs text-purple-700 dark:text-purple-300/80 italic mb-3">' + nirukthi.intro + '</p>';
-    
-    nirukthi.items.forEach(function(item) {
-      nHtml += '<div class="mt-3 pt-3 border-t border-purple-100 dark:border-purple-800/40">' +
-        '<div class="font-bold text-xs text-purple-900 dark:text-purple-100 mb-1">' + item.name + '</div>' +
-        '<div class="text-[11px] text-purple-700 dark:text-purple-300/80 mb-1"><span class="font-semibold">පාලි:</span> ' + item.pali + '</div>' +
-        '<div class="text-xs text-purple-900 dark:text-purple-100 mb-1"><span class="font-semibold">අර්ථය:</span> ' + item.artha + '</div>' +
-        '<div class="text-xs text-purple-800 dark:text-purple-200/90 leading-relaxed" style="white-space:pre-line">' + item.vistara + '</div>' +
-      '</div>';
-    });
-    
-    nHtml += '</div>';
-    content.innerHTML += nHtml;
+  if (av.nirukthi && av.nirukthi.items && av.nirukthi.items.length > 0) {
+    html += renderArthaVistaraBlock('nirukthi', 'නිරුක්ති විශ්ලේෂණය', 'fa-book', 'text-blue-600 dark:text-blue-400', av.nirukthi.intro, renderNirukthiItems(av.nirukthi.items));
   }
-  
-  // අභිදෙය්‍යාර්ථ විස්තරය
-  if (arthaVistara.abhidheya) {
-    var abhidheya = arthaVistara.abhidheya;
-    var aHtml = '<div class="artha-vistara-box">' +
-      '<div class="flex items-center gap-2 mb-2 pb-2 border-b border-purple-200 dark:border-purple-500/30">' +
-        '<i class="fa-solid fa-list text-purple-600 dark:text-purple-300"></i>' +
-        '<span class="font-bold text-sm text-purple-900 dark:text-purple-200">' + abhidheya.title + '</span>' +
-      '</div>' +
-      '<p class="text-xs text-purple-700 dark:text-purple-300/80 italic mb-3">' + abhidheya.intro + '</p>';
-    
-    abhidheya.items.forEach(function(item) {
-      aHtml += '<div class="flex items-start gap-2 py-1.5 border-b border-purple-100 dark:border-purple-800/40 last:border-0">' +
-        '<i class="fa-solid fa-circle text-[6px] text-purple-500 mt-1.5"></i>' +
-        '<div class="flex-1">' +
-          '<span class="font-semibold text-xs text-purple-900 dark:text-purple-100">' + item.name + '</span>' +
-          (item.count ? '<span class="ml-1 text-[10px] bg-purple-200 dark:bg-purple-700 text-purple-800 dark:text-purple-200 px-1.5 py-0.5 rounded">' + item.count + '</span>' : '') +
-          '<div class="text-xs text-purple-700 dark:text-purple-300/80 mt-0.5" style="white-space:pre-line">' + (item.vistara || '') + '</div>' +
-        '</div>' +
-      '</div>';
-    });
-    
-    aHtml += '</div>';
-    content.innerHTML += aHtml;
+
+  // අභිධෙය්‍යාර්ථ විස්තරය
+  if (av.abhidheya && av.abhidheya.items && av.abhidheya.items.length > 0) {
+    html += renderArthaVistaraBlock('abhidheya', 'අභිධෙය්‍යාර්ථ විස්තරය', 'fa-magnifying-glass-chart', 'text-purple-600 dark:text-purple-400', av.abhidheya.intro, renderAbhidheyaItems(av.abhidheya.items));
   }
-  
+
   // සංග්‍රහ විස්තරය
-  if (arthaVistara.sangraha) {
-    var sangraha = arthaVistara.sangraha;
-    var sHtml = '<div class="artha-vistara-box">' +
-      '<div class="flex items-center gap-2 mb-2 pb-2 border-b border-purple-200 dark:border-purple-500/30">' +
-        '<i class="fa-solid fa-layer-group text-purple-600 dark:text-purple-300"></i>' +
-        '<span class="font-bold text-sm text-purple-900 dark:text-purple-200">' + sangraha.title + '</span>' +
+  if (av.sangraha && av.sangraha.items && av.sangraha.items.length > 0) {
+    html += renderArthaVistaraBlock('sangraha', 'සංග්‍රහ විස්තරය', 'fa-layer-group', 'text-amber-600 dark:text-amber-400', av.sangraha.intro, renderSangrahaItems(av.sangraha.items));
+  }
+
+  // විශේෂ සටහන්
+  if (av.vishesha && av.vishesha.items && av.vishesha.items.length > 0) {
+    html += renderArthaVistaraBlock('vishesha', 'විශේෂ සටහන්', 'fa-circle-info', 'text-saffron-600 dark:text-saffron-400', av.vishesha.intro, renderVisheshaItems(av.vishesha.items));
+  }
+
+  if (html === '') {
+    section.classList.add('hidden');
+    return;
+  }
+
+  content.innerHTML = html;
+
+  Object.keys(arthaVistaraOpenState).forEach(function(key) {
+    var body = document.getElementById('av-body-' + key);
+    var chev = document.getElementById('av-chevron-' + key);
+    if (!body) return;
+    if (arthaVistaraOpenState[key]) {
+      body.classList.remove('hidden');
+      if (chev) chev.classList.add('rotate-180');
+    } else {
+      body.classList.add('hidden');
+      if (chev) chev.classList.remove('rotate-180');
+    }
+  });
+
+  if (chevron) chevron.classList.remove('rotate-180');
+}
+
+function renderArthaVistaraBlock(key, title, icon, iconColor, intro, bodyHtml) {
+  var isOpen = arthaVistaraOpenState[key] ? '' : 'hidden';
+  var chevRotate = arthaVistaraOpenState[key] ? 'rotate-180' : '';
+
+  return '' +
+    '<div class="border border-amber-200 dark:border-slate-700 rounded-xl overflow-hidden bg-amber-50/50 dark:bg-slate-900/50">' +
+      '<button onclick="toggleArthaVistaraBlock(\'' + key + '\')" ' +
+              'class="w-full flex items-center justify-between gap-2 p-3 text-left hover:bg-amber-100/60 dark:hover:bg-slate-800 transition-colors">' +
+        '<span class="flex items-center gap-2 min-w-0">' +
+          '<i class="fa-solid ' + icon + ' ' + iconColor + ' text-sm shrink-0"></i>' +
+          '<span class="font-bold text-sm text-maroon-900 dark:text-saffron-200 truncate">' + title + '</span>' +
+        '</span>' +
+        '<i id="av-chevron-' + key + '" class="fa-solid fa-chevron-down text-saffron-600 text-xs transition-transform ' + chevRotate + '"></i>' +
+      '</button>' +
+      '<div id="av-body-' + key + '" class="' + isOpen + ' p-3 pt-0 space-y-3">' +
+        (intro ? '<p class="text-xs text-slate-600 dark:text-slate-400 italic mt-1 text-justify">' + intro + '</p>' : '') +
+        bodyHtml +
       '</div>' +
-      '<p class="text-xs text-purple-700 dark:text-purple-300/80 italic mb-3">' + sangraha.intro + '</p>';
-    
-    sangraha.items.forEach(function(item) {
-      sHtml += '<div class="flex items-start gap-2 py-1.5 border-b border-purple-100 dark:border-purple-800/40 last:border-0">' +
-        '<i class="fa-solid fa-circle text-[6px] text-purple-500 mt-1.5"></i>' +
-        '<div class="flex-1">' +
-          '<span class="font-semibold text-xs text-purple-900 dark:text-purple-100">' + item.name + '</span>' +
-          (item.count ? '<span class="ml-1 text-[10px] bg-purple-200 dark:bg-purple-700 text-purple-800 dark:text-purple-200 px-1.5 py-0.5 rounded">' + item.count + '</span>' : '') +
-          '<div class="text-xs text-purple-700 dark:text-purple-300/80 mt-0.5" style="white-space:pre-line">' + (item.vistara || '') + '</div>' +
+    '</div>';
+}
+function renderNirukthiItems(items) {
+  var html = '<div class="space-y-3">';
+  items.forEach(function(item) {
+    html += '' +
+      '<div class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-lg p-3 space-y-2">' +
+        '<div class="font-bold text-sm text-maroon-900 dark:text-saffron-200 flex items-center gap-1.5">' +
+          '<i class="fa-solid fa-tag text-saffron-600 text-xs"></i> ' + item.name +
         '</div>' +
+        (item.pali ? '<div class="text-xs text-amber-800 dark:text-amber-300 italic bg-amber-50 dark:bg-slate-900 p-2 rounded border border-amber-100 dark:border-slate-700"><i class="fa-solid fa-language text-saffron-500"></i> ' + item.pali + '</div>' : '') +
+        (item.artha ? '<p class="text-xs text-slate-700 dark:text-slate-300"><strong class="text-maroon-900 dark:text-saffron-300">අර්ථය:</strong> ' + avBr(item.artha) + '</p>' : '') +
+        (item.vistara ? '<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed text-justify">' + avBr(item.vistara) + '</p>' : '') +
       '</div>';
-    });
-    
-    sHtml += '</div>';
-    content.innerHTML += sHtml;
+  });
+  html += '</div>';
+  return html;
+}
+function renderAbhidheyaItems(items) {
+  var html = '<div class="space-y-2">';
+  items.forEach(function(item) {
+    html += '' +
+      '<div class="breakdown-item">' +
+        '<span class="num"><i class="fa-solid fa-cube text-saffron-600 text-xs"></i></span>' +
+        '<span class="name">' + item.name + (item.count ? ' <span class="text-xs text-saffron-600 font-bold">(' + item.count + ')</span>' : '') + '</span>' +
+        '<span class="value">' + avBr(item.vistara) + '</span>' +
+      '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+function renderSangrahaItems(items) {
+  var html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">';
+  items.forEach(function(item) {
+    html += '' +
+      '<div class="bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-lg p-3">' +
+        '<div class="flex items-center justify-between mb-1">' +
+          '<span class="font-bold text-xs text-maroon-900 dark:text-saffron-200">' + item.name + '</span>' +
+          '<span class="bg-saffron-500 text-maroon-950 font-bold px-2 py-0.5 rounded-full text-[10px]">' + item.count + '</span>' +
+        '</div>' +
+        '<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed text-justify">' + avBr(item.vistara) + '</p>' +
+      '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+function renderVisheshaItems(items) {
+  var html = '<div class="space-y-2">';
+  items.forEach(function(item, idx) {
+    html += '' +
+      '<div class="bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-slate-900 dark:to-slate-800 border border-amber-300 dark:border-slate-700 rounded-lg p-3">' +
+        '<div class="flex items-start gap-2 mb-1.5">' +
+          '<span class="w-5 h-5 rounded-full bg-saffron-500 text-maroon-950 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">' + (idx + 1) + '</span>' +
+          '<div class="font-bold text-xs text-maroon-900 dark:text-saffron-200">' + item.title + '</div>' +
+        '</div>' +
+        '<p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed ml-7 text-justify">' + item.content + '</p>' +
+      '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+function toggleArthaVistaraBlock(key) {
+  arthaVistaraOpenState[key] = !arthaVistaraOpenState[key];
+  var body = document.getElementById('av-body-' + key);
+  var chev = document.getElementById('av-chevron-' + key);
+  if (!body) return;
+  if (arthaVistaraOpenState[key]) {
+    body.classList.remove('hidden');
+    if (chev) chev.classList.add('rotate-180');
+  } else {
+    body.classList.add('hidden');
+    if (chev) chev.classList.remove('rotate-180');
   }
 }
 
+/**
+ * මුළු විස්තරාත්මක විවරණ කොටසම toggle කරයි.
+ */
 function toggleArthaVistaraSection() {
   var content = document.getElementById('artha-vistara-content');
   var chevron = document.getElementById('artha-vistara-chevron');
-  
+  if (!content) return;
   if (content.classList.contains('hidden')) {
     content.classList.remove('hidden');
-    chevron.style.transform = 'rotate(180deg)';
+    if (chevron) chevron.classList.add('rotate-180');
   } else {
     content.classList.add('hidden');
-    chevron.style.transform = 'rotate(0deg)';
+    if (chevron) chevron.classList.remove('rotate-180');
   }
 }
 
