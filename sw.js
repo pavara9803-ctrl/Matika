@@ -3,7 +3,9 @@
 // Version: 17.0.0 (Added about.html + HTML pages)
 // ============================================================
 
-const CACHE_NAME = 'abhidhamma-matika-v17.4.2';
+// precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
+try { importScripts('./precache-manifest.js'); } catch (e) { console.warn('[SW] precache-manifest.js not found - using static list only'); }
+const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v18.0.0');
 const OFFLINE_URL = './index.html';
 
 // ============================================================
@@ -107,13 +109,15 @@ const ASSETS_TO_CACHE = [
 
   // ========== Offline Tailwind (ඔබ භාවිතා කරන්නේ නම්) ==========
   './tailwind.min.js',
+  './privacy.html',
 ];
+
+const ALL_ASSETS = Array.from(new Set(ASSETS_TO_CACHE.concat(self.PRECACHE_URLS || [])));
 
 // ============================================================
 // CDN සම්පත් (අසාර්ථක වුවද යෙදුම ක්‍රියාත්මක වේ)
 // ============================================================
 const CDN_ASSETS = [
-  'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap'
 ];
@@ -130,7 +134,7 @@ self.addEventListener('install', (event) => {
       
       console.log('[SW] Caching local assets...');
       await Promise.allSettled(
-        ASSETS_TO_CACHE.map((url) => 
+        ALL_ASSETS.map((url) => 
           cache.add(url).catch((err) => {
             console.warn('[SW] Failed to cache (local):', url, err.message);
           })
@@ -203,7 +207,11 @@ self.addEventListener('fetch', (event) => {
 
 async function handleHTMLRequest(request) {
   try {
-    const networkResponse = await fetch(request);
+    // අන්තර්ජාලය අඩු/නැති විට තත්පර 4කින් පසු cache එකට මාරු වේ
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+    const networkResponse = await fetch(request, { signal: controller.signal });
+    clearTimeout(timer);
     if (networkResponse && networkResponse.status === 200) {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, networkResponse.clone());
