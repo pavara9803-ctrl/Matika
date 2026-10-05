@@ -1,11 +1,11 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
-// Version: 17.0.0 (Added about.html + HTML pages)
+// Version: 18.0.0 (Added about.html + HTML pages)
 // ============================================================
 
 // precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
 try { importScripts('./precache-manifest.js'); } catch (e) { console.warn('[SW] precache-manifest.js not found - using static list only'); }
-const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v18.0.0');
+const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v18.2.0');
 const OFFLINE_URL = './index.html';
 
 // ============================================================
