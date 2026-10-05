@@ -554,4 +554,47 @@ if (typeof window._caitasikaInitialized === 'undefined') {
   }
 }
 
-console.log('[caitasika.js] Loaded successfully - font scaler ready');
+console.log('[caitasika.js] Loaded successfully - font scaler ready');console.log('[caitasika.js] Loaded successfully - font scaler ready');
+
+// ============================================================
+// 10. TAB SWITCHING - caitasika.html සඳහා (switchMainTab)
+// ============================================================
+// ⚠️ මෙම ශ්‍රිතයේ window.scrollTo() නොමැත.
+// එමගින් ටැබය මාරු වූ විට පිටුව ඉහළට යාම වළකී.
+// ============================================================
+
+var caitasikaMainTabs = [
+  'intro', 'sabbacitta', 'pakirnaka-cetasika', 'akusala-cetasika', 'sobhana-cetasika',
+  'samprayoga', 'sangrahana', 'sangraha-5', 'athara', 'citta-sangaha', 'mahaggata-lokuttara'
+];
+
+function switchMainTab(tabName) {
+  caitasikaMainTabs.forEach(function(t) {
+    var btn = document.getElementById('mtab-btn-' + t);
+    var content = document.getElementById('mtab-content-' + t);
+    
+    if (!btn || !content) return;
+    
+    if (t === tabName) {
+      btn.className = 'mtab-btn flex-1 min-w-[120px] px-3 py-3 text-xs font-bold whitespace-nowrap transition-colors border-b-2 border-saffron-600 text-saffron-700 dark:text-saffron-400 bg-saffron-500/10';
+      content.classList.remove('hidden');
+      content.classList.add('fade-in');
+    } else {
+      btn.className = 'mtab-btn flex-1 min-w-[120px] px-3 py-3 text-xs font-medium whitespace-nowrap transition-colors border-b-2 border-transparent text-amber-800 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-slate-700';
+      content.classList.add('hidden');
+      content.classList.remove('fade-in');
+    }
+  });
+  
+  // ❌ මෙතැන window.scrollTo() නොමැත!
+}
+
+// ✅ ගෝලීය වශයෙන් අපනයනය
+window.switchMainTab = switchMainTab;
+
+// ============================================================
+// 11. ALIAS - switchTab (samprayoga.html සඳහා)
+// ============================================================
+if (typeof window.switchTab === 'undefined') {
+  window.switchTab = switchMainTab;
+}
