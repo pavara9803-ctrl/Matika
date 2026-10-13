@@ -1,11 +1,11 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
-// Version: 18.0.0 (Added about.html + HTML pages)
+// Version: 19.2.0 (Added app.js + install button support)
 // ============================================================
 
 // precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
 try { importScripts('./precache-manifest.js'); } catch (e) { console.warn('[SW] precache-manifest.js not found - using static list only'); }
-const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v18.2.4');
+const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v20.0.0');
 const OFFLINE_URL = './index.html';
 
 // ============================================================
@@ -15,7 +15,7 @@ const ASSETS_TO_CACHE = [
   // ========== ප්‍රධාන ගොනු ==========
   './',
   './index.html',
-  './about.html',        // ✅ අලුතින් එක් කරන ලදී
+  './about.html',
   './manifest.json',
 
   // ========== HTML ගොනු (root) ==========
@@ -29,6 +29,7 @@ const ASSETS_TO_CACHE = [
   './sabbatika-data.js',
   './tika-data.js',
   './tika-app.js',
+  './app.js',              // ✅ නව: PWA install + menu logic
   './duka-app.js',
   './suttanta-data-1.js',
   './suttanta-data-2.js',
@@ -59,6 +60,7 @@ const ASSETS_TO_CACHE = [
   './tika/20-ajjhatta-tika.js',
   './tika/21-ajjhattarammana-tika.js',
   './tika/22-sanidassana-tika.js',
+
 
   // ========== Citta folder ==========
   './Citta/citta.html',

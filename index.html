@@ -113,6 +113,19 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 #offline-indicator.show { transform: translateY(0); }
 </style>
 </head>
+<script>
+window.addEventListener('load', function() {
+  console.log('=== DEBUG ===');
+  console.log('app.js loaded?', typeof window.toggleMenu);
+  console.log('installApp?', typeof window.installApp);
+  console.log('menuAction?', typeof window.menuAction);
+  console.log('navigateTo?', typeof window.navigateTo);
+  console.log('toggleDarkMode?', typeof window.toggleDarkMode);
+  console.log('install-btn exists?', !!document.getElementById('install-btn'));
+  console.log('custom-menu exists?', !!document.getElementById('custom-menu'));
+  console.log('=============');
+});
+</script>
 <body class="h-full flex flex-col text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased">
 
 <div id="offline-indicator"><i class="fa-solid fa-wifi"></i> ඔබ දැන් නොබැඳි තත්ත්වයේ සිටී</div>
@@ -130,6 +143,11 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 </div>
 <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="තේමාව"><i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i></button>
 
+<!-- ✅ නව: Install බොත්තම (install කළ පසු නොපෙනේ) -->
+<button id="install-btn" onclick="installApp()" class="hidden p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white transition-all ml-1" title="යෙදුම install කරන්න">
+  <i class="fa-solid fa-download text-lg"></i>
+</button>
+
 <!-- ✅ නව: Feedback බොත්තම -->
 <button onclick="openFeedbackModal()" class="p-2 rounded-lg bg-gradient-to-br from-saffron-500 to-amber-600 hover:from-saffron-400 hover:to-amber-500 text-maroon-950 feedback-pulse transition-all ml-1" title="ඔබගේ අදහස් එවන්න">
   <i class="fa-solid fa-comment-dots text-lg"></i>
@@ -144,6 +162,10 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <!-- ============ මෙනු ලැයිස්තුව ============ -->
 <div id="custom-menu" class="hidden fixed top-16 right-4 z-50 bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 rounded-xl shadow-2xl w-64 overflow-hidden">
     <div class="py-1">
+        <!-- ✅ නව: Install (මෙනුවේ) -->
+        <button id="menu-install-btn" onclick="menuAction('install')" class="hidden w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+            <i class="fa-solid fa-download text-green-600 text-lg w-5"></i> යෙදුම install කරන්න
+        </button>
         <!-- ✅ නව: Rate This App -->
         <button onclick="menuAction('rate')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i class="fa-solid fa-star text-yellow-500 text-lg w-5"></i> මෙම යෙදුමට තරු යොදන්න
@@ -346,366 +368,8 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
   </div>
 </div>
 
-<script>
-// ============================================================
-// ONLINE/OFFLINE INDICATOR
-// ============================================================
-function updateOnlineStatus() {
-  var indicator = document.getElementById('offline-indicator');
-  if (navigator.onLine) {
-    indicator.classList.remove('show');
-  } else {
-    indicator.classList.add('show');
-  }
-}
-window.addEventListener('online', updateOnlineStatus);
-window.addEventListener('offline', updateOnlineStatus);
-
-// ============================================================
-// SERVICE WORKER REGISTRATION
-// ============================================================
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js')
-      .then(function(registration) {
-        console.log('[App] Service Worker registered:', registration.scope);
-        
-        registration.addEventListener('updatefound', function() {
-          var newWorker = registration.installing;
-          console.log('[App] New Service Worker installing...');
-          
-          newWorker.addEventListener('statechange', function() {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('[App] New version available!');
-              showUpdateNotification();
-            }
-          });
-        });
-        
-        setInterval(function() {
-          registration.update();
-        }, 60 * 60 * 1000);
-      })
-      .catch(function(error) {
-        console.warn('[App] Service Worker registration failed:', error);
-      });
-  });
-  
-  var refreshing = false;
-  var hadController = !!navigator.serviceWorker.controller;
-  navigator.serviceWorker.addEventListener('controllerchange', function() {
-    if (!hadController) { hadController = true; return; }
-    if (refreshing) return;
-    refreshing = true;
-    console.log('[App] Controller changed, reloading...');
-    window.location.reload();
-  });
-}
-
-function showUpdateNotification() {
-  var banner = document.createElement('div');
-  banner.id = 'update-banner';
-  banner.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold px-5 py-3 rounded-xl shadow-2xl border-2 border-maroon-900 flex items-center gap-3';
-  banner.innerHTML = 
-    '<i class="fa-solid fa-circle-down text-xl"></i>' +
-    '<span class="text-sm">නව අනුවාදයක් ලබාගත හැක!</span>' +
-    '<button onclick="applyUpdate()" class="bg-maroon-900 text-saffron-200 px-3 py-1.5 rounded-lg text-xs font-bold shadow">යාවත්කාලීන කරන්න</button>' +
-    '<button onclick="dismissUpdate()" class="text-maroon-900/60 hover:text-maroon-900 p-1"><i class="fa-solid fa-xmark"></i></button>';
-  document.body.appendChild(banner);
-}
-
-function applyUpdate() {
-  if (navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
-  }
-  window.location.reload();
-}
-
-function dismissUpdate() {
-  var banner = document.getElementById('update-banner');
-  if (banner) banner.remove();
-}
-
-// ============================================================
-// APPLICATION STATE
-// ============================================================
-var currentView = 'home';
-
-function initApp() {
-  updateOnlineStatus();
-}
-
-function navigateTo(viewName) {
-  currentView = viewName;
-  document.querySelectorAll('#view-container > section').forEach(function(sec) {
-    sec.classList.add('hidden');
-  });
-  
-  var targetSec = document.getElementById('view-' + viewName);
-  if (targetSec) targetSec.classList.remove('hidden');
-  
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ============================================================
-// මෙනු ක්‍රියාකාරීත්වය
-// ============================================================
-function toggleMenu() {
-    var menu = document.getElementById('custom-menu');
-    if (menu) menu.classList.toggle('hidden');
-}
-
-document.addEventListener('click', function(event) {
-    var menu = document.getElementById('custom-menu');
-    if (!menu) return;
-    var menuBtn = event.target.closest('button[onclick="toggleMenu()"]');
-    if (!menu.contains(event.target) && !menuBtn && !menu.classList.contains('hidden')) {
-        menu.classList.add('hidden');
-    }
-});
-
-// ============================================================
-// ✅ RATE THIS APP - Google Play Store එකට යොමු කරයි
-// ============================================================
-// ⚠️ මෙතන ඔබගේ App Package Name එක යොදන්න
-// උදා: com.yourname.abhidhamma
-var APP_PACKAGE_NAME = 'com.abhidhamma.matika';
-
-function rateThisApp() {
-  var playStoreUrl = 'https://play.google.com/store/apps/details?id=' + APP_PACKAGE_NAME;
-  
-  // Google Play Store එකට යොමු කරයි
-  try {
-    // Android Chrome හි intent:// භාවිතා කරන්න
-    if (/android/i.test(navigator.userAgent)) {
-      window.location.href = 'market://details?id=' + APP_PACKAGE_NAME;
-      // Fallback - Play Store app එක නොමැති නම් browser එකට යයි
-      setTimeout(function() {
-        window.location.href = playStoreUrl;
-      }, 1500);
-    } else {
-      // iOS හෝ Desktop - කෙලින්ම Play Store වෙබ් අඩවියට
-      window.open(playStoreUrl, '_blank');
-    }
-  } catch (e) {
-    console.warn('[App] Rate app failed:', e);
-    window.open(playStoreUrl, '_blank');
-  }
-  
-  console.log('[App] Rate this app clicked');
-}
-
-// ============================================================
-// ✅ SHARE THIS APP - Web Share API
-// ============================================================
-function shareThisApp() {
-  var shareData = {
-    title: 'අභිධර්ම මාතිකා අධ්‍යයනය',
-    text: 'අභිධර්ම මාතිකා අධ්‍යයනය සඳහා වූ මෙම යෙදුම භාවිතා කර බලන්න. සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, තික මාතිකා 22, දුක මාතිකා 100 සහ සුත්තන්ත මාතිකා ඇතුළත්ය.',
-    url: window.location.href
-  };
-  
-  // Web Share API සහාය දක්වන්නේ නම්
-  if (navigator.share) {
-    navigator.share(shareData)
-      .then(function() {
-        console.log('[App] Share successful');
-      })
-      .catch(function(err) {
-        if (err.name !== 'AbortError') {
-          console.warn('[App] Share failed:', err);
-          fallbackShare(shareData);
-        }
-      });
-  } else {
-    // Web Share API නොමැති නම් fallback
-    fallbackShare(shareData);
-  }
-}
-
-// ============================================================
-// ✅ FALLBACK SHARE - Web Share API නොමැති විට
-// ============================================================
-function fallbackShare(shareData) {
-  var text = shareData.title + '\n\n' + shareData.text + '\n\n' + shareData.url;
-  
-  // WhatsApp, Viber, Email ආදිය සඳහා
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function() {
-      showShareToast('✅ Link එක copy කරන ලදී! ඔබට කැමති යෙදුමකින් බෙදාගන්න.', 'success');
-    }).catch(function() {
-      showManualShareDialog(text);
-    });
-  } else {
-    showManualShareDialog(text);
-  }
-}
-
-// ============================================================
-// ✅ MANUAL SHARE DIALOG - Clipboard නොමැති විට
-// ============================================================
-function showManualShareDialog(text) {
-  // Modal එකක් සාදන්න
-  var modal = document.createElement('div');
-  modal.id = 'share-modal';
-  modal.className = 'fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4';
-  modal.innerHTML = 
-    '<div class="bg-white dark:bg-slate-800 w-full max-w-md rounded-2xl p-5 shadow-2xl border border-amber-300 dark:border-slate-700 space-y-4">' +
-      '<div class="flex justify-between items-center border-b border-amber-200 dark:border-slate-700 pb-3">' +
-        '<div class="flex items-center gap-2">' +
-          '<div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white">' +
-            '<i class="fa-solid fa-share-nodes"></i>' +
-          '</div>' +
-          '<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200">මෙම යෙදුම බෙදාගන්න</h3>' +
-        '</div>' +
-        '<button onclick="closeShareModal()" class="text-slate-400 hover:text-red-500 text-lg">' +
-          '<i class="fa-solid fa-xmark"></i>' +
-        '</button>' +
-      '</div>' +
-      '<p class="text-xs text-slate-600 dark:text-slate-300">පහත පෙළ copy කර ඔබට කැමති යෙදුමකින් (WhatsApp, Viber, Email ආදිය) බෙදාගන්න:</p>' +
-      '<textarea readonly rows="6" id="share-text-area" class="w-full p-3 rounded-lg border border-amber-200 dark:border-slate-700 dark:bg-slate-900 text-xs resize-none">' + text + '</textarea>' +
-      '<div class="flex justify-end gap-2 pt-2 border-t border-amber-100 dark:border-slate-700">' +
-        '<button onclick="closeShareModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg text-xs font-medium">වසන්න</button>' +
-        '<button onclick="copyShareText()" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-bold rounded-lg text-xs shadow">' +
-          '<i class="fa-solid fa-copy"></i> Copy කරන්න' +
-        '</button>' +
-      '</div>' +
-    '</div>';
-  
-  document.body.appendChild(modal);
-  document.body.style.overflow = 'hidden';
-}
-
-function closeShareModal() {
-  var modal = document.getElementById('share-modal');
-  if (modal) modal.remove();
-  document.body.style.overflow = '';
-}
-
-function copyShareText() {
-  var textarea = document.getElementById('share-text-area');
-  if (!textarea) return;
-  textarea.select();
-  textarea.setSelectionRange(0, 99999);
-  
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(textarea.value).then(function() {
-        showShareToast('✅ Copy කරන ලදී!', 'success');
-        closeShareModal();
-      });
-    } else {
-      document.execCommand('copy');
-      showShareToast('✅ Copy කරන ලදී!', 'success');
-      closeShareModal();
-    }
-  } catch (e) {
-    console.warn('[App] Copy failed:', e);
-    showShareToast('Copy කිරීමට නොහැකි විය', 'error');
-  }
-}
-
-// ============================================================
-// ✅ TOAST NOTIFICATION - Share සඳහා
-// ============================================================
-function showShareToast(message, type) {
-  type = type || 'info';
-  var colors = {
-    'success': 'bg-green-500',
-    'error': 'bg-red-500',
-    'info': 'bg-blue-500'
-  };
-  var icons = {
-    'success': 'fa-check-circle',
-    'error': 'fa-exclamation-circle',
-    'info': 'fa-info-circle'
-  };
-  
-  var toast = document.createElement('div');
-  toast.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 z-[110] ' +
-                    (colors[type] || colors.info) +
-                    ' text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-sm font-bold';
-  toast.style.animation = 'slideDown 0.3s ease-out';
-  toast.innerHTML = '<i class="fa-solid ' + (icons[type] || icons.info) + '"></i> ' + message;
-  
-  if (!document.getElementById('share-toast-animation')) {
-    var style = document.createElement('style');
-    style.id = 'share-toast-animation';
-    style.innerHTML = '@keyframes slideDown { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }';
-    document.head.appendChild(style);
-  }
-  
-  document.body.appendChild(toast);
-  
-  setTimeout(function() {
-    toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    toast.style.opacity = '0';
-    toast.style.transform = 'translate(-50%, -20px)';
-    setTimeout(function() {
-      if (toast.parentNode) toast.parentNode.removeChild(toast);
-    }, 300);
-  }, 3000);
-}
-
-// ============================================================
-// මෙනු ක්‍රියාකාරීත්වය (Rate + Share ඇතුළත්)
-// ============================================================
-function menuAction(action) {
-    var menu = document.getElementById('custom-menu');
-    if (menu) menu.classList.add('hidden');
-    
-    switch(action) {
-        case 'rate':
-            rateThisApp();
-            break;
-        case 'share':
-            shareThisApp();
-            break;
-        case 'star':
-            // පැරණි star ක්‍රියාව - ඉවත් කළ හැක හෝ තබා ගත හැක
-            rateThisApp();
-            break;
-        case 'about':
-            window.location.href = 'about.html';
-            break;
-        case 'help':
-            alert('උදව්\n\n1. මුල් පිටුවේ ඇති මාතිකා කාණ්ඩ තෝරන්න.\n2. අදාළ මාතිකාව ක්ලික් කරන්න.\n3. පද තෝරා එහි ස්වරූපාර්ථ බලන්න.');
-            break;
-        case 'feedback':
-            if (typeof openFeedbackModal === 'function') {
-                openFeedbackModal();
-            } else {
-                alert('Feedback module loading... කරුණාකර නැවත උත්සාහ කරන්න.');
-            }
-            break;
-    }
-}
-
-// ============================================================
-// THEME TOGGLE
-// ============================================================
-function toggleDarkMode() {
-  var html = document.documentElement;
-  var icon = document.getElementById('theme-toggle-icon');
-  if (html.classList.contains('dark')) {
-    html.classList.remove('dark');
-    localStorage.setItem('abhidhamma_theme', 'light');
-    icon.className = 'fa-solid fa-moon text-lg';
-  } else {
-    html.classList.add('dark');
-    localStorage.setItem('abhidhamma_theme', 'dark');
-    icon.className = 'fa-solid fa-sun text-lg';
-  }
-}
-
-if (localStorage.getItem('abhidhamma_theme') === 'dark' || 
-    (!localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-  document.documentElement.classList.add('dark');
-  document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
-}
-
-window.addEventListener('DOMContentLoaded', initApp);
-</script>
+<!-- ============ RENDERING APP LOGIC ============ -->
+<script src="app.js"></script>
 
 </body>
 </html>
