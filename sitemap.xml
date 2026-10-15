@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- මුල් පිටුව -->
+  <url>
+    <loc>https://matika-snowy.vercel.app/</loc>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- සබ්බත්තික මාතිකා -->
+  <url>
+    <loc>https://matika-snowy.vercel.app/sabbattika.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- තික මාතිකා -->
+  <url>
+    <loc>https://matika-snowy.vercel.app/tika-matika.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- දුක මාතිකා -->
+  <url>
+    <loc>https://matika-snowy.vercel.app/duka-matika.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- සුත්තන්ත මාතිකා -->
+  <url>
+    <loc>https://matika-snowy.vercel.app/suttanta-matika.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- සතර පරමාර්ථ -->
+  <url>
+    <loc>https://matika-snowy.vercel.app/paramatta.html</loc>
+    <priority>0.80</priority>
+  </url>
+</urlset>
