@@ -1,11 +1,11 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
-// Version: 19.2.0 (Added app.js + install button support)
+// Version: 22.1.0 (js/css/json network-first; install bypasses HTTP cache)
 // ============================================================
 
 // precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
 try { importScripts('./precache-manifest.js'); } catch (e) { console.warn('[SW] precache-manifest.js not found - using static list only'); }
-const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v20.0.0');
+const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v24.0.0');
 const OFFLINE_URL = './index.html';
 
 // ============================================================
@@ -140,7 +140,7 @@ self.addEventListener('install', (event) => {
       console.log('[SW] Caching local assets...');
       await Promise.allSettled(
         ALL_ASSETS.map((url) => 
-          cache.add(url).catch((err) => {
+          cache.add(new Request(url, { cache: 'reload' })).catch((err) => {
             console.warn('[SW] Failed to cache (local):', url, err.message);
           })
         )
@@ -240,7 +240,31 @@ async function handleHTMLRequest(request) {
   }
 }
 
+// js / css / json ගොනු සෑම විටම network-first (වෙනස්කම් වහාම පෙනේ; offline විට cache භාවිතා වේ)
+function isCodeAsset(url) {
+  return url.origin === self.location.origin && /\.(js|css|json)$/i.test(url.pathname);
+}
+
 async function handleAssetRequest(request) {
+  const url = new URL(request.url);
+
+  if (isCodeAsset(url)) {
+    try {
+      const networkResponse = await fetch(request, { cache: 'no-cache' });
+      if (networkResponse && networkResponse.status === 200) {
+        const cache = await caches.open(CACHE_NAME);
+        cache.put(request, networkResponse.clone());
+      }
+      return networkResponse;
+    } catch (error) {
+      const cached = await caches.match(request, { ignoreSearch: true });
+      if (cached) return cached;
+      console.warn('[SW] Fetch failed:', request.url, error.message);
+      return new Response('', { status: 408, statusText: 'Offline - Resource not available' });
+    }
+  }
+
+  // රූප, fonts, CDN - cache-first
   try {
     const cachedResponse = await caches.match(request, { ignoreSearch: true });
     if (cachedResponse) return cachedResponse;
