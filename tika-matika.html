@@ -237,6 +237,34 @@ th {
   opacity: 0.4; cursor: not-allowed; pointer-events: none; filter: grayscale(0.4);
 }
 #tika-prev-btn, #tika-next-btn { cursor: pointer; }
+
+/* ඉහළට බටනය විශේෂයෙන් ඉස්මතු කිරීම */
+#tika-scroll-top-btn {
+  background: linear-gradient(135deg, #9f1239, #701a35);
+  color: #fff;
+  border: 3px solid #fbbf24;
+  box-shadow: 0 0 0 5px rgba(251, 191, 36, .24), 0 8px 24px rgba(112, 26, 53, .4);
+  font-weight: 800;
+  padding: 14px 20px;
+}
+#tika-scroll-top-btn i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fbbf24;
+  color: #701a35;
+}
+#tika-scroll-top-btn:hover {
+  background: #881337;
+  box-shadow: 0 0 0 7px rgba(251, 191, 36, .3), 0 10px 28px rgba(112, 26, 53, .45);
+}
+#tika-scroll-top-btn:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 7px;
+}
 </style>
 </head>
 
@@ -588,6 +616,12 @@ th {
           <span class="truncate">පෙර ත්‍රිකය</span>
         </button>
 
+        <button type="button" id="tika-list-btn" onclick="backToTikaList()"
+                class="flex-1 min-w-0 flex flex-col sm:flex-row items-center justify-center gap-2 py-3 px-2 sm:px-4 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 text-maroon-900 dark:text-saffron-200 font-bold text-xs sm:text-sm hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition-all cursor-pointer">
+          <i class="fa-solid fa-list" aria-hidden="true"></i>
+          <span>ත්‍රික ලැයිස්තුව</span>
+        </button>
+
         <button type="button" id="tika-next-btn" 
                 class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-xs sm:text-sm hover:from-saffron-400 hover:to-amber-500 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed">
           <span class="truncate">ඊළඟ ත්‍රිකය</span>
@@ -654,6 +688,16 @@ th {
 
 <!-- 3. තික යෙදුම් logic -->
 <script src="tika-app.js"></script>
+
+<!-- දැනට සිටින පිටුවේ ඉහළට යාම -->
+<button type="button" id="tika-scroll-top-btn"
+        onclick="window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })"
+        aria-label="පිටුවේ ඉහළට යන්න" title="පිටුවේ ඉහළට යන්න"
+        style="position: fixed; right: 16px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 50; min-height: 44px; cursor: pointer;"
+        class="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-sm shadow-lg border border-amber-300 hover:from-saffron-400 hover:to-amber-500 transition-all">
+  <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  <span>ඉහළට</span>
+</button>
 
 </body>
 </html>

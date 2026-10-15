@@ -5,7 +5,7 @@
 
 // precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
 try { importScripts('./precache-manifest.js'); } catch (e) { console.warn('[SW] precache-manifest.js not found - using static list only'); }
-const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v25.0.0');
+const CACHE_NAME = 'abhidhamma-matika-' + (self.PRECACHE_VERSION || 'v26.0.0');
 const OFFLINE_URL = './index.html';
 
 // ============================================================
