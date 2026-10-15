@@ -483,6 +483,18 @@ th { text-align: left; }
       </button>
     </div>
 
+    <div class="pt-3">
+<!-- දැනට සිටින පිටුවේ ඉහළට යාම -->
+<button type="button" id="duka-scroll-top-btn"
+        onclick="window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })"
+        aria-label="පිටුවේ ඉහළට යන්න" title="පිටුවේ ඉහළට යන්න"
+        style="width: 100%; min-height: 48px; cursor: pointer;"
+        class="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-sm shadow-lg border border-amber-300 hover:from-saffron-400 hover:to-amber-500 transition-all">
+  <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  <span>ඉහළට</span>
+</button>
+    </div>
+
   </section>
 
   <!-- VIEW 5: සුරැකි මාතිකා -->
@@ -570,15 +582,7 @@ if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
 }
 </script>
 
-<!-- දැනට සිටින පිටුවේ ඉහළට යාම -->
-<button type="button" id="duka-scroll-top-btn"
-        onclick="window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })"
-        aria-label="පිටුවේ ඉහළට යන්න" title="පිටුවේ ඉහළට යන්න"
-        style="position: fixed; right: 16px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 50; min-height: 44px; cursor: pointer;"
-        class="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-sm shadow-lg border border-amber-300 hover:from-saffron-400 hover:to-amber-500 transition-all">
-  <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-  <span>ඉහළට</span>
-</button>
+
 
 </body>
 </html>
