@@ -89,47 +89,81 @@ var tikaPlaceholderTitles = [
   '22. සනිදස්සන ත්‍රිකය'
 ];
 
+// title එකෙන් අංකය සහ "ත්‍රිකය" අගට ඉවත් කර සසඳන්න සුදානම් කරයි
+function tikaTitleKey(title) {
+  var t = String(title || '').replace(/^\s*\d+\s*[.\-)]*\s*/, '');
+  t = t.replace(/\s*(ත්‍රිකය|තිකය|ත්‍රික|තික)\s*$/, '');
+  return t.replace(/\s+/g, '').trim();
+}
+
+function makePlaceholderTika(title) {
+  return {
+    title: title,
+    isPlaceholder: true,
+    padas: [
+      {
+        name: 'දත්ත ලබාගත නොහැක',
+        desc: 'මෙම තිකයට අදාළ ගොනුව තවම සාදා නැත.',
+        padaArtha: 'මෙම තිකයට අදාළ ගොනුව (tika/' + String(title.substring(0, 2)).trim() + '-...) තවම සාදා නැත. කරුණාකර ගොනුව සාදන්න.',
+        svartha: 'දත්ත නොමැත.',
+        skandha: makeSkandha('දත්ත නොමැත', 'දත්ත නොමැත', 'දත්ත නොමැත', 'දත්ත නොමැත', 'දත්ත නොමැත'),
+        ayatana: makeAyatana([{ num: 1, name: 'දත්ත නොමැත', value: '-' }]),
+        dhatu: makeDhatu([{ num: 1, name: 'දත්ත නොමැත', value: '-' }]),
+        sathya: makeSathya([
+          { num: 1, name: 'දුක්ඛ සත්‍යය', value: '-' },
+          { num: 2, name: 'සමුදය සත්‍යය', value: '-' },
+          { num: 3, name: 'නිරෝධ සත්‍යය', value: '-' },
+          { num: 4, name: 'මාර්ග සත්‍යය', value: '-' }
+        ]),
+        mukta: '-'
+      }
+    ]
+  };
+}
+
 function fillMissingTikas() {
-  // දැනට load වී ඇති තිකවල title එකතුව
-  // title අකුරු/අක්ෂර වින්‍යාසය වෙනස් වුවත් ගැටළුවක් නොවන සේ, අංකය (01, 02...) අනුව ගැළපේ
-  var loadedNums = tikaFullData.map(function(t) {
-    var m = String(t.title || '').match(/^(\d+)/);
-    return m ? parseInt(m[1], 10) : -1;
-  });
-  
-  // හිස් තික සඳහා placeholder එකතු කරන්න
-  tikaPlaceholderTitles.forEach(function(title) {
-    if (loadedNums.indexOf(parseInt(title, 10)) === -1) {
-      tikaFullData.push({
-        title: title,
-        isPlaceholder: true,
-        padas: [
-          {
-            name: 'දත්ත ලබාගත නොහැක',
-            desc: 'මෙම තිකයට අදාළ ගොනුව තවම සාදා නැත.',
-            padaArtha: 'මෙම තිකයට අදාළ ගොනුව (tika/' + String(title.substring(0,2)).trim() + '-...) තවම සාදා නැත. කරුණාකර ගොනුව සාදන්න.',
-            svartha: 'දත්ත නොමැත.',
-            skandha: makeSkandha('දත්ත නොමැත', 'දත්ත නොමැත', 'දත්ත නොමැත', 'දත්ත නොමැත', 'දත්ත නොමැත'),
-            ayatana: makeAyatana([{ num: 1, name: 'දත්ත නොමැත', value: '-' }]),
-            dhatu: makeDhatu([{ num: 1, name: 'දත්ත නොමැත', value: '-' }]),
-            sathya: makeSathya([
-              { num: 1, name: 'දුක්ඛ සත්‍යය', value: '-' },
-              { num: 2, name: 'සමුදය සත්‍යය', value: '-' },
-              { num: 3, name: 'නිරෝධ සත්‍යය', value: '-' },
-              { num: 4, name: 'මාර්ග සත්‍යය', value: '-' }
-            ]),
-            mukta: '-'
-          }
-        ]
-      });
+  var total = tikaPlaceholderTitles.length;
+  var slots = new Array(total);
+  var extras = [];
+
+  // 1) load වී ඇති එක් එක් තිකය නිවැරදි ස්ථානයට (1–22) ගැළපීම
+  tikaFullData.forEach(function(t) {
+    var idx = -1;
+
+    // (අ) title හි ආරම්භක අංකය අනුව
+    var m = String(t.title || '').match(/^\s*(\d+)/);
+    if (m) {
+      var n = parseInt(m[1], 10);
+      if (n >= 1 && n <= total && !slots[n - 1]) idx = n - 1;
     }
+
+    // (ආ) අංකයක් නැතිනම් නම අනුව
+    if (idx < 0) {
+      var key = tikaTitleKey(t.title);
+      for (var i = 0; i < total; i++) {
+        if (!slots[i] && tikaTitleKey(tikaPlaceholderTitles[i]) === key) { idx = i; break; }
+      }
+    }
+
+    if (idx >= 0) slots[idx] = t; else extras.push(t);
   });
-  
-  // title අනුව නැවත sort කරන්න (01, 02, 03... අනුපිළිවෙලට)
-  tikaFullData.sort(function(a, b) {
-    var mA = String(a.title).match(/^(\d+)/), mB = String(b.title).match(/^(\d+)/);
-    return (mA ? parseInt(mA[1], 10) : 999) - (mB ? parseInt(mB[1], 10) : 999);
-  });
-  
+
+  // 2) ගැළපුණේ නැති ඒවා (අක්ෂර වින්‍යාස වෙනස්) හිස් ස්ථාන වලට load පිළිවෙලින් දැමීම
+  if (extras.length > 0) {
+    console.warn('[tika-data.js] නම/අංකය ගැළපුණේ නැති තික ' + extras.length + ' ක්: ', extras.map(function(e) { return e.title; }));
+  }
+  for (var j = 0; j < total && extras.length > 0; j++) {
+    if (!slots[j]) slots[j] = extras.shift();
+  }
+
+  // 3) තවමත් හිස් ස්ථාන සඳහා placeholder
+  for (var k = 0; k < total; k++) {
+    if (!slots[k]) slots[k] = makePlaceholderTika(tikaPlaceholderTitles[k]);
+  }
+
+  // 4) array එක තැනින්ම නැවත පිරවීම (වෙනත් ස්ථානවල යොමු නොබිඳෙන සේ)
+  tikaFullData.length = 0;
+  slots.concat(extras).forEach(function(t) { tikaFullData.push(t); });
+
   console.log('[tika-data.js] Fallback සම්පූර්ණයි. මුළු තික: ' + tikaFullData.length);
 }

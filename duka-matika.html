@@ -260,10 +260,10 @@ th { text-align: left; }
     </div>
     <div id="duka-list-container" class="space-y-3"></div>
     
-    <!-- ✅ NEW: ගොච්ඡක සටහන් -->
+    <!-- ගොච්ඡක සටහන් -->
     <div id="duka-list-notes" class="hidden"></div>
     
-    <!-- ✅ NEW: මිශ්‍රක දුක -->
+    <!-- මිශ්‍රක දුක -->
     <div id="duka-mishraka-container" class="hidden space-y-2"></div>
   </section>
 
@@ -315,7 +315,7 @@ th { text-align: left; }
       <p id="duka-pada-desc" class="text-xs text-slate-600 dark:text-amber-200/90 mt-2 text-justify"></p>
     </div>
 
-    <!-- ✅ NEW: පදයේ අර්ථය (padaArtha) -->
+    <!-- පදයේ අර්ථය (padaArtha) -->
     <div id="duka-pada-artha-section" class="hidden bg-slate-100 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-100 p-4 rounded-xl shadow-lg border border-slate-300 dark:border-slate-600/40 w-full">
       <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-300 dark:border-slate-500/30">
         <i class="fa-solid fa-book text-blue-600 dark:text-blue-300"></i>
@@ -324,7 +324,7 @@ th { text-align: left; }
       <div id="duka-pada-artha-text" class="artha-box"></div>
     </div>
 
-    <!-- ✅ NEW: විස්තරාත්මක විවරණය (arthaVistara) -->
+    <!-- විස්තරාත්මක විවරණය (arthaVistara) -->
     <div id="duka-artha-vistara-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl border border-purple-200 dark:border-purple-700/40 shadow-sm overflow-hidden w-full">
       <button onclick="toggleDukaArthaVistaraSection()" class="w-full flex items-center justify-between gap-2 p-4 hover:bg-purple-50 dark:hover:bg-slate-700 transition-colors">
         <span class="flex items-center gap-2 min-w-0">
@@ -350,7 +350,7 @@ th { text-align: left; }
       <div id="duka-pada-svartha" class="svartha-box"></div>
     </div>
 
-    <!-- ✅ NEW: දුක මුක්ත ධර්ම -->
+    <!-- දුක මුක්ත ධර්ම -->
     <div id="duka-mukta-section" class="hidden bg-purple-50 dark:bg-gradient-to-br dark:from-purple-900 dark:to-indigo-950 border border-purple-200 dark:border-purple-600/40 rounded-2xl p-4 shadow-lg">
       <div class="flex items-center gap-2 mb-3 border-b border-purple-200 dark:border-purple-500/30 pb-2">
         <span class="w-9 h-9 rounded-xl bg-purple-200 dark:bg-purple-700 text-purple-700 dark:text-purple-100 flex items-center justify-center text-sm shrink-0">
@@ -419,6 +419,24 @@ th { text-align: left; }
         </div>
       </div>
     </div>
+
+    <!-- ============================================================ -->
+    <!-- ✅ පෙර දුකය / ඊළඟ දුකය NAVIGATION BUTTONS (පිටුවේ යටම කෙළවර) -->
+    <!-- ============================================================ -->
+    <div class="flex items-center justify-between gap-3 pt-4 border-t border-amber-200 dark:border-slate-700">
+      <button id="duka-prev-btn" onclick="goToPrevDuka()" 
+              class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 text-maroon-900 dark:text-saffron-200 font-bold text-xs sm:text-sm hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span class="truncate">පෙර දුකය</span>
+      </button>
+
+      <button id="duka-next-btn" onclick="goToNextDuka()" 
+              class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-xs sm:text-sm hover:from-saffron-400 hover:to-amber-500 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+        <span class="truncate">ඊළඟ දුකය</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
   </section>
 
   <!-- VIEW 5: සුරැකි මාතිකා -->
@@ -461,7 +479,7 @@ th { text-align: left; }
 <script src="duka-app.js"></script>
 
 <script>
-// ═══ NEW: arthaVistara section toggle ═══
+// arthaVistara section toggle
 function toggleDukaArthaVistaraSection() {
   var content = document.getElementById('duka-artha-vistara-content');
   var chevron = document.getElementById('duka-artha-vistara-chevron');
@@ -504,8 +522,6 @@ if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
   document.documentElement.classList.add('dark');
   document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
 }
-
-// initDukaApp() duka-app.js තුළම DOMContentLoaded හිදී call වේ (දෙවරක් call වීම ඉවත් කළා)
 </script>
 
 </body>

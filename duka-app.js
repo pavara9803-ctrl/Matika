@@ -1,5 +1,5 @@
 // ============================================================
-// දුක මාතිකා App Logic (යාවත්කාලීන)
+// දුක මාතිකා App Logic (duka-app.js)
 // ============================================================
 
 // ගොනුවක් නැතිවුවත් (js/duka/*.js) සම්පූර්ණ පිටුව කැඩී නොයන සේ safe load
@@ -18,7 +18,7 @@ var dukaGochhakaData = [
   (typeof gochhaka12Kilesa !== 'undefined' ? gochhaka12Kilesa : null),
   (typeof gochhaka13Pitthi !== 'undefined' ? gochhaka13Pitthi : null)
 ].filter(function(g, i) {
-  if (!g) console.warn('[Duka App] ගොකඡක ගොනුව load වී නැත: ගොච්ඡක ' + (i + 1));
+  if (!g) console.warn('[Duka App] ගොච්ඡක ගොනුව load වී නැත: ගොච්ඡක ' + (i + 1));
   return !!g;
 });
 
@@ -31,7 +31,7 @@ var dukaState = {
   bookmarks: JSON.parse(localStorage.getItem('duka_bookmarks') || '[]')
 };
 
-// ═══ NEW: අර්ථ විස්තර accordion තත්ත්වය ═══
+// ═══ අර්ථ විස්තර accordion තත්ත්වය ═══
 var dukaArthaVistaraOpenState = {
   nirukthi: true,
   abhidheya: false,
@@ -81,7 +81,6 @@ function getGochhakaDukas(gochhaka) {
   return [];
 }
 
-// ═══ NEW: මිශ්‍රක දුක ලබා ගැනීම ═══
 function getGochhakaMishrakaDukas(gochhaka) {
   if (!gochhaka || !gochhaka.mishrakaDukas) return [];
   return gochhaka.mishrakaDukas;
@@ -181,7 +180,6 @@ function openGochhaka(gochhakaId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ═══ NEW: ගොච්ඡක සටහන් render කිරීම ═══
 function renderGochhakaNotes(gochhaka) {
   var container = document.getElementById('duka-list-notes');
   if (!container) return;
@@ -204,7 +202,6 @@ function renderGochhakaNotes(gochhaka) {
   });
 }
 
-// ═══ NEW: මිශ්‍රක දුක render කිරීම ═══
 function renderMishrakaDukas(gochhaka) {
   var container = document.getElementById('duka-mishraka-container');
   if (!container) return;
@@ -263,14 +260,12 @@ function renderDukaList(gochhaka) {
     var card = document.createElement('div');
     card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
 
-    (function(padaIdx1, padaIdx2, dukaNum) {
-      card.onclick = function() {
-        var allPadas = getGochhakaPadas(gochhaka);
-        var idx1 = allPadas.indexOf(pada1);
-        var idx2 = pada2 ? allPadas.indexOf(pada2) : -1;
-        openDukaPair(dukaNum, idx1, idx2, dukaName, dukaPali);
-      };
-    })(0, 1, dukaNumber);
+    card.onclick = function() {
+      var allPadas = getGochhakaPadas(gochhaka);
+      var idx1 = allPadas.indexOf(pada1);
+      var idx2 = pada2 ? allPadas.indexOf(pada2) : -1;
+      openDukaPair(dukaNumber, idx1, idx2, dukaName, dukaPali);
+    };
 
     card.innerHTML =
       '<div class="flex items-center justify-between mb-3">' +
@@ -382,7 +377,7 @@ function openPadaDetail(padaIndex) {
   document.getElementById('duka-pada-name').innerText = pada.name;
   document.getElementById('duka-pada-desc').innerText = pada.desc || '';
 
-  // ═══ NEW: padaArtha පෙන්වීම ═══
+  // padaArtha පෙන්වීම
   var padaArthaSection = document.getElementById('duka-pada-artha-section');
   var padaArthaText = document.getElementById('duka-pada-artha-text');
   if (padaArthaSection && padaArthaText) {
@@ -394,7 +389,7 @@ function openPadaDetail(padaIndex) {
     }
   }
 
-  // ═══ NEW: arthaVistara render කිරීම ═══
+  // arthaVistara render කිරීම
   renderDukaArthaVistara(pada);
 
   // ස්වරූපාර්ථය
@@ -406,12 +401,109 @@ function openPadaDetail(padaIndex) {
   updateDukaBookmarkButton();
   renderDukaBreakdowns(pada);
   switchDukaTab('skandha');
+  updateDukaNavButtons();
 
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('pada-detail');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ═══ NEW: padaArtha format කිරීම ═══
+// ============================================================
+// PREV / NEXT DUKA NAVIGATION (පෙර දුකය සහ ඊළඟ දුකය)
+// ============================================================
+function goToPrevDuka() {
+  if (!dukaState.currentGochhaka || !dukaState.currentPada) return;
+
+  var currentGochhakaIdx = dukaGochhakaData.findIndex(function(g) {
+    return g.id === dukaState.currentGochhaka.id;
+  });
+  if (currentGochhakaIdx === -1) return;
+
+  var currentDukas = getGochhakaDukas(dukaState.currentGochhaka);
+  var currentDukaIdx = currentDukas.findIndex(function(d) {
+    return d.padas && d.padas.some(function(p) { return p === dukaState.currentPada; });
+  });
+
+  if (currentDukaIdx > 0) {
+    // එම ගොච්ඡකය තුළම පෙර දුකය
+    navigateToSpecificDuka(dukaState.currentGochhaka, currentDukas[currentDukaIdx - 1]);
+  } else if (currentGochhakaIdx > 0) {
+    // පෙර ගොච්ඡකයේ අවසාන දුකය
+    var prevGochhaka = dukaGochhakaData[currentGochhakaIdx - 1];
+    var prevDukas = getGochhakaDukas(prevGochhaka);
+    if (prevDukas.length > 0) {
+      navigateToSpecificDuka(prevGochhaka, prevDukas[prevDukas.length - 1]);
+    }
+  }
+}
+
+function goToNextDuka() {
+  if (!dukaState.currentGochhaka || !dukaState.currentPada) return;
+
+  var currentGochhakaIdx = dukaGochhakaData.findIndex(function(g) {
+    return g.id === dukaState.currentGochhaka.id;
+  });
+  if (currentGochhakaIdx === -1) return;
+
+  var currentDukas = getGochhakaDukas(dukaState.currentGochhaka);
+  var currentDukaIdx = currentDukas.findIndex(function(d) {
+    return d.padas && d.padas.some(function(p) { return p === dukaState.currentPada; });
+  });
+
+  if (currentDukaIdx > -1 && currentDukaIdx < currentDukas.length - 1) {
+    // එම ගොච්ඡකය තුළම ඊළඟ දුකය
+    navigateToSpecificDuka(dukaState.currentGochhaka, currentDukas[currentDukaIdx + 1]);
+  } else if (currentGochhakaIdx < dukaGochhakaData.length - 1) {
+    // ඊළඟ ගොච්ඡකයේ පළමු දුකය
+    var nextGochhaka = dukaGochhakaData[currentGochhakaIdx + 1];
+    var nextDukas = getGochhakaDukas(nextGochhaka);
+    if (nextDukas.length > 0) {
+      navigateToSpecificDuka(nextGochhaka, nextDukas[0]);
+    }
+  }
+}
+
+function navigateToSpecificDuka(gochhaka, duka) {
+  dukaState.currentGochhaka = gochhaka;
+  var allPadas = getGochhakaPadas(gochhaka);
+  var pada1 = duka.padas[0];
+  var pada2 = duka.padas[1] || null;
+  var idx1 = allPadas.indexOf(pada1);
+  var idx2 = pada2 ? allPadas.indexOf(pada2) : -1;
+
+  openDukaPair(duka.number, idx1, idx2, duka.name, duka.pali);
+  openPadaDetail(idx1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateDukaNavButtons() {
+  var prevBtn = document.getElementById('duka-prev-btn');
+  var nextBtn = document.getElementById('duka-next-btn');
+  if (!prevBtn || !nextBtn) return;
+
+  if (!dukaState.currentGochhaka || !dukaState.currentPada) {
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+    return;
+  }
+
+  var currentGochhakaIdx = dukaGochhakaData.findIndex(function(g) {
+    return g.id === dukaState.currentGochhaka.id;
+  });
+  var currentDukas = getGochhakaDukas(dukaState.currentGochhaka);
+  var currentDukaIdx = currentDukas.findIndex(function(d) {
+    return d.padas && d.padas.some(function(p) { return p === dukaState.currentPada; });
+  });
+
+  // පළමු ගොච්ඡකයේ පළමු දුකය නම් Prev අක්‍රියයි
+  prevBtn.disabled = (currentGochhakaIdx <= 0 && currentDukaIdx <= 0);
+
+  // අවසාන ගොච්ඡකයේ අවසාන දුකය නම් Next අක්‍රියයි
+  var isLastGochhaka = (currentGochhakaIdx >= dukaGochhakaData.length - 1);
+  var isLastDuka = (currentDukaIdx >= currentDukas.length - 1);
+  nextBtn.disabled = (isLastGochhaka && isLastDuka);
+}
+
+// ═══ padaArtha format කිරීම ═══
 function formatDukaPadaArtha(text) {
   if (!text) return '';
   return String(text)
@@ -419,7 +511,7 @@ function formatDukaPadaArtha(text) {
     .replace(/\n/g, '<br>');
 }
 
-// ═══ NEW: arthaVistara render කිරීම ═══
+// ═══ arthaVistara render කිරීම ═══
 function renderDukaArthaVistara(pada) {
   var section = document.getElementById('duka-artha-vistara-section');
   var content = document.getElementById('duka-artha-vistara-content');
@@ -436,22 +528,18 @@ function renderDukaArthaVistara(pada) {
   var av = pada.arthaVistara;
   var html = '';
 
-  // නිරුක්ති විශ්ලේෂණය
   if (av.nirukthi && av.nirukthi.items && av.nirukthi.items.length > 0) {
     html += renderDukaArthaVistaraBlock('nirukthi', 'නිරුක්ති විශ්ලේෂණය', 'fa-book', 'text-blue-600 dark:text-blue-400', av.nirukthi.intro, renderDukaNirukthiItems(av.nirukthi.items));
   }
 
-  // අභිධෙය්‍යාර්ථ විස්තරය
   if (av.abhidheya && av.abhidheya.items && av.abhidheya.items.length > 0) {
     html += renderDukaArthaVistaraBlock('abhidheya', 'අභිධෙය්‍යාර්ථ විස්තරය', 'fa-magnifying-glass-chart', 'text-purple-600 dark:text-purple-400', av.abhidheya.intro, renderDukaAbhidheyaItems(av.abhidheya.items));
   }
 
-  // සංග්‍රහ විස්තරය
   if (av.sangraha && av.sangraha.items && av.sangraha.items.length > 0) {
     html += renderDukaArthaVistaraBlock('sangraha', 'සංග්‍රහ විස්තරය', 'fa-layer-group', 'text-amber-600 dark:text-amber-400', av.sangraha.intro, renderDukaSangrahaItems(av.sangraha.items));
   }
 
-  // විශේෂ සටහන්
   if (av.vishesha && av.vishesha.items && av.vishesha.items.length > 0) {
     html += renderDukaArthaVistaraBlock('vishesha', 'විශේෂ සටහන්', 'fa-circle-info', 'text-saffron-600 dark:text-saffron-400', av.vishesha.intro, renderDukaVisheshaItems(av.vishesha.items));
   }
@@ -463,7 +551,6 @@ function renderDukaArthaVistara(pada) {
 
   content.innerHTML = html;
 
-  // Default open state යාවත්කාලීන කරන්න
   Object.keys(dukaArthaVistaraOpenState).forEach(function(key) {
     var body = document.getElementById('duka-av-body-' + key);
     var chev = document.getElementById('duka-av-chevron-' + key);
@@ -576,14 +663,13 @@ function toggleDukaArthaVistaraBlock(key) {
   }
 }
 
-// ═══ NEW: දුක මුක්ත ධර්ම render කිරීම ═══
+// ═══ දුක මුක්ත ධර්ම render කිරීම ═══
 function renderDukaMukta(pada) {
   var section = document.getElementById('duka-mukta-section');
   var content = document.getElementById('duka-mukta-content');
 
   if (!section || !content) return;
 
-  // දත්ත ගොනුවල 'mukta' ඇත්තේ පද (pada) මත නොව දුකය (duka) මතයි - එනිසා දුකයෙන් සොයයි
   var mukta = pada && pada.mukta;
   if (!mukta) {
     getGochhakaDukas(dukaState.currentGochhaka).forEach(function(d) {
@@ -601,7 +687,7 @@ function renderDukaMukta(pada) {
 }
 
 // ============================================================
-// BREAKDOWN LISTS - පිරවූ / මුළු
+// BREAKDOWN LISTS
 // ============================================================
 function renderDukaBreakdowns(pada) {
   renderBreakdown('duka-skandha-list', pada.skandha, 'duka-skandha-count', 5);
@@ -728,7 +814,7 @@ function updateDukaBookmarkBadge() {
 }
 
 // ============================================================
-// OPEN DUKA MATIKA (බැනරය ක්ලික් කිරීම)
+// OPEN DUKA MATIKA
 // ============================================================
 function openDukaMatika() {
   var section = document.getElementById('gochhaka-section');

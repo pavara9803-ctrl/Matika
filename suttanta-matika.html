@@ -490,6 +490,24 @@ th {
         </div>
         <p id="suttanta-mukta-content" class="text-xs text-purple-900 dark:text-purple-100 leading-relaxed whitespace-pre-line text-justify"></p>
       </div>
+
+      <!-- ============================================================ -->
+      <!-- ✅ පෙර දුකය / ඊළඟ දුකය NAVIGATION BUTTONS (පිටුවේ යටම කෙළවර) -->
+      <!-- ============================================================ -->
+      <div class="flex items-center justify-between gap-3 pt-4 border-t border-amber-200 dark:border-slate-700">
+        <button id="suttanta-prev-btn" onclick="goToPrevSuttanta()" 
+                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 text-maroon-900 dark:text-saffron-200 font-bold text-xs sm:text-sm hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span class="truncate">පෙර දුකය</span>
+        </button>
+
+        <button id="suttanta-next-btn" onclick="goToNextSuttanta()" 
+                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-xs sm:text-sm hover:from-saffron-400 hover:to-amber-500 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+          <span class="truncate">ඊළඟ දුකය</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
     </div>
   </section>
 
@@ -647,6 +665,32 @@ function openSuttantaMatikaDetails(matikaIndex, padaIndex) {
   
   renderSuttantaPadaTabs(item.padas);
   selectSuttantaPada(suttantaCurrentPadaIndex);
+  updateSuttantaNavButtons();
+}
+
+// පෙර සහ ඊළඟ සුත්තන්ත දුකයට යාම
+function goToPrevSuttanta() {
+  if (suttantaCurrentMatikaIndex > 0) {
+    openSuttantaMatikaDetails(suttantaCurrentMatikaIndex - 1, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function goToNextSuttanta() {
+  if (suttantaCurrentMatikaIndex < suttantaFullData.length - 1) {
+    openSuttantaMatikaDetails(suttantaCurrentMatikaIndex + 1, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// බොත්තම් වල සක්‍රීය/අක්‍රීය තත්ත්වය යාවත්කාලීන කිරීම
+function updateSuttantaNavButtons() {
+  var prevBtn = document.getElementById('suttanta-prev-btn');
+  var nextBtn = document.getElementById('suttanta-next-btn');
+  if (!prevBtn || !nextBtn) return;
+
+  prevBtn.disabled = (suttantaCurrentMatikaIndex <= 0);
+  nextBtn.disabled = (suttantaCurrentMatikaIndex >= suttantaFullData.length - 1);
 }
 
 // ============================================================
@@ -717,6 +761,7 @@ function selectSuttantaPada(padaIndex) {
   updateSuttantaBookmarkState();
   renderSuttantaBreakdowns(pada);
   switchSuttantaTab('skandha');
+  updateSuttantaNavButtons();
 }
 
 // ============================================================

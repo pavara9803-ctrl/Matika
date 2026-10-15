@@ -231,6 +231,12 @@ th {
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.3s ease-out; }
+
+/* ═══ ත්‍රික navigation බටන් - disabled තත්ත්වය (Tailwind variant නොමැති විටත් ක්‍රියා කරයි) ═══ */
+#tika-prev-btn:disabled, #tika-next-btn:disabled {
+  opacity: 0.4; cursor: not-allowed; pointer-events: none; filter: grayscale(0.4);
+}
+#tika-prev-btn, #tika-next-btn { cursor: pointer; }
 </style>
 </head>
 
@@ -568,7 +574,26 @@ th {
           <div id="mg-specialnotes-list" class="space-y-3"></div>
         </div>
       </div>
+
+
     </div>
+
+      <!-- ============================================================ -->
+      <!-- ✅ පෙර ත්‍රිකය / ඊළඟ ත්‍රිකය NAVIGATION BUTTONS (පිටුවේ යටම කෙළවර) -->
+      <!-- ============================================================ -->
+      <div class="flex items-center justify-between gap-3 pt-4 border-t border-amber-200 dark:border-slate-700">
+        <button type="button" id="tika-prev-btn" 
+                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 text-maroon-900 dark:text-saffron-200 font-bold text-xs sm:text-sm hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span class="truncate">පෙර ත්‍රිකය</span>
+        </button>
+
+        <button type="button" id="tika-next-btn" 
+                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-xs sm:text-sm hover:from-saffron-400 hover:to-amber-500 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+          <span class="truncate">ඊළඟ ත්‍රිකය</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
   </section>
 
   <!-- ============================================================ -->

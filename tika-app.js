@@ -12,7 +12,7 @@ var currentPadaIndex = 0;
 var activeTikaTab = 'skandha';
 var tikaBookmarks = JSON.parse(localStorage.getItem('tika_bookmarks') || '[]');
 
-// ═══ NEW: අර්ථ විස්තර accordion තත්ත්වය ═══
+// ═══ අර්ථ විස්තර accordion තත්ත්වය ═══
 var arthaVistaraOpenState = {
   nirukthi: true,   // පළමුවැන්න default විවෘත
   abhidheya: false,
@@ -30,13 +30,13 @@ function showTikaView(viewId) {
   });
   var target = document.getElementById(viewId);
   if (target) target.classList.remove('hidden');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function backToTikaList() {
   showTikaView('tika-view-list');
   updateBreadcrumbTika('list');
   renderTikaList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ============================================================
@@ -60,7 +60,7 @@ function renderTikaList() {
   if (!container) return;
   container.innerHTML = '';
 
-  if (typeof tikaFullData === 'undefined' || tikaFullData.length === 0) {
+  if (typeof tikaFullData === 'undefined' || !tikaFullData || tikaFullData.length === 0) {
     container.innerHTML = 
       '<div class="text-center py-12 text-slate-500 text-sm">' +
         '<i class="fa-solid fa-circle-info text-4xl mb-3 opacity-30"></i><br>' +
@@ -75,14 +75,14 @@ function renderTikaList() {
     card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all';
     card.onclick = function() { openTikaDetail(index); };
 
-    var padasHtml = tika.padas.map(function(p) {
+    var padasHtml = (tika.padas || []).map(function(p) {
       return '<span class="inline-block bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 text-amber-900 dark:text-saffron-300 text-xs px-2 py-1 rounded-lg mr-1 mb-1">' + p.name + '</span>';
     }).join('');
 
     card.innerHTML = 
       '<div class="flex items-center gap-2 mb-2">' +
         '<span class="w-8 h-8 rounded-full bg-saffron-500/20 text-saffron-600 font-bold text-sm flex items-center justify-center shrink-0">' + (index + 1) + '</span>' +
-        '<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200">' + tika.title + '</h3>' +
+        '<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200">' + (tika.title || '') + '</h3>' +
       '</div>' +
       '<div class="flex flex-wrap">' + padasHtml + '</div>';
     container.appendChild(card);
@@ -90,24 +90,107 @@ function renderTikaList() {
 }
 
 // ============================================================
-// OPEN TIKA DETAIL
+// OPEN TIKA DETAIL & NAVIGATION (සම්පූර්ණ විසඳුම)
 // ============================================================
 function openTikaDetail(tikaIndex) {
-  currentTikaIndex = tikaIndex;
-  var tika = tikaFullData[tikaIndex];
+  if (typeof tikaFullData === 'undefined' || !tikaFullData || tikaFullData.length === 0) {
+    console.error('[tika-app] tikaFullData හිස්ව පවතී.');
+    return;
+  }
+
+  // නිවැරදි Array Index එක ලබා ගැනීම
+  var idx = parseInt(tikaIndex, 10);
+  if (isNaN(idx)) idx = 0;
+  if (idx < 0) idx = 0;
+  if (idx >= tikaFullData.length) idx = tikaFullData.length - 1;
+
+  currentTikaIndex = idx;
+  currentPadaIndex = 0; // නව ත්‍රිකයකට පැමිණි විට පළමු පදය
+  
+  var tika = tikaFullData[currentTikaIndex];
   if (!tika) return;
 
+  // View එක පෙන්වීම
   showTikaView('tika-view-pada-detail');
   updateBreadcrumbTika('detail');
 
-  document.getElementById('tika-detail-title').innerText = tika.title;
-  document.getElementById('tika-detail-subtitle').innerText = 
-    'පද ' + tika.padas.length + ' කින් යුක්ත මාතිකා';
+  // Title සහ Subtitle
+  var titleEl = document.getElementById('tika-detail-title');
+  var subTitleEl = document.getElementById('tika-detail-subtitle');
+  if (titleEl) titleEl.innerText = tika.title || tika.name || ('ත්‍රිකය ' + (currentTikaIndex + 1));
+  if (subTitleEl) subTitleEl.innerText = 'පද ' + (tika.padas ? tika.padas.length : 3) + ' කින් යුක්ත මාතිකා';
 
-  renderTikaPadaTabs(tika.padas);
-  selectTikaPada(0);
+  // පද Tabs සහ පළමු පදයේ විස්තර render කිරීම
+  // (render එකේ error එකක් ඇති වුවත් navigation බටන් සහ scroll නොනවතින සේ)
+  try {
+    renderTikaPadaTabs(tika.padas);
+    selectTikaPada(0);
+  } catch (err) {
+    showTikaNavError('render: ' + (tika.title || currentTikaIndex), err);
+  }
+
+  // Navigation බොත්තම් සක්‍රීය/අක්‍රීය තත්ත්වය
+  updateTikaNavButtons();
+
+  // ඉහළට Scroll කිරීම (render අවසන් වූ පසු)
+  requestAnimationFrame(function() { window.scrollTo(0, 0); });
 }
 
+// ── Navigation debug: error එකක් ඇති වුවහොත් තිරයේම පෙන්වයි ──
+function showTikaNavError(where, err) {
+  console.error('[tika-nav] ' + where + ' error:', err);
+  var box = document.getElementById('tika-nav-error');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'tika-nav-error';
+    box.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:9999;background:#7f1d1d;color:#fff;padding:10px 12px;border-radius:10px;font:12px/1.5 monospace;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    box.onclick = function() { box.remove(); };
+    document.body.appendChild(box);
+  }
+  box.textContent = '[' + where + '] ' + (err && err.stack ? err.stack : String(err)) + '\n\n(ක්ලික් කර වසන්න)';
+}
+
+function goToTikaByOffset(offset) {
+  try {
+    var total = (typeof tikaFullData !== 'undefined') ? tikaFullData.length : 0;
+    var from = currentTikaIndex;
+    var to = from + offset;
+    console.log('[tika-nav] click offset=' + offset + ' from=' + from + ' to=' + to + ' total=' + total);
+    if (to < 0 || to >= total) {
+      console.warn('[tika-nav] සීමාවෙන් බැහැර - නවතා ඇත');
+      return;
+    }
+    openTikaDetail(to);
+    console.log('[tika-nav] දැන් currentTikaIndex=' + currentTikaIndex + ' title=' + (tikaFullData[currentTikaIndex] && tikaFullData[currentTikaIndex].title));
+  } catch (err) {
+    showTikaNavError('goToTikaByOffset', err);
+  }
+}
+
+// පෙර ත්‍රිකයට යාම (උදා: වේදනා ත්‍රිකයේ සිට කුසල ත්‍රිකයට)
+function goToPrevTika() { goToTikaByOffset(-1); }
+
+// ඊළඟ ත්‍රිකයට යාම (උදා: වේදනා ත්‍රිකයේ සිට විපාක ත්‍රිකයට)
+function goToNextTika() { goToTikaByOffset(1); }
+
+function updateTikaNavButtons() {
+  var prevBtn = document.getElementById('tika-prev-btn');
+  var nextBtn = document.getElementById('tika-next-btn');
+  if (!prevBtn || !nextBtn) return;
+
+  var current = parseInt(currentTikaIndex, 10);
+  var maxLimit = (typeof tikaFullData !== 'undefined' && tikaFullData.length > 0) ? tikaFullData.length - 1 : 21;
+
+  // පළමු ත්‍රිකයේදී පෙර ත්‍රිකය අක්‍රියයි
+  prevBtn.disabled = (current <= 0);
+
+  // අවසාන ත්‍රිකයේදී ඊළඟ ත්‍රිකය අක්‍රියයි
+  nextBtn.disabled = (current >= maxLimit);
+}
+
+// ============================================================
+// PADA TABS
+// ============================================================
 function renderTikaPadaTabs(padas) {
   var container = document.getElementById('tika-pada-tabs-container');
   if (!container) return;
@@ -115,11 +198,13 @@ function renderTikaPadaTabs(padas) {
 
   if (!padas || padas.length === 0) {
     container.innerHTML = '<div class="text-slate-500 text-xs">පද නොමැත.</div>';
-    document.getElementById('tika-pada-detail-breakdown').classList.add('hidden');
+    var breakdownSection = document.getElementById('tika-pada-detail-breakdown');
+    if (breakdownSection) breakdownSection.classList.add('hidden');
     return;
   }
 
-  document.getElementById('tika-pada-detail-breakdown').classList.remove('hidden');
+  var breakdownSection = document.getElementById('tika-pada-detail-breakdown');
+  if (breakdownSection) breakdownSection.classList.remove('hidden');
 
   padas.forEach(function(pada, index) {
     var btn = document.createElement('button');
@@ -144,18 +229,20 @@ function renderTikaPadaTabs(padas) {
 // SELECT PADA - පදයේ අර්ථය (padaArtha) ද පෙන්වයි
 // ============================================================
 function selectTikaPada(padaIndex) {
-  currentPadaIndex = padaIndex;
-  var tika = tikaFullData[currentTikaIndex];
-  if (!tika) return;
+  currentPadaIndex = parseInt(padaIndex, 10);
+  if (isNaN(currentPadaIndex)) currentPadaIndex = 0;
 
-  var pada = tika.padas[padaIndex];
+  var tika = (typeof tikaFullData !== 'undefined') ? tikaFullData[currentTikaIndex] : null;
+  if (!tika || !tika.padas) return;
+
+  var pada = tika.padas[currentPadaIndex];
   if (!pada) return;
 
-  // පද tabs යාවත්කාලීන කරන්න
+  // පද tabs යාවත්කාලීන කිරීම
   tika.padas.forEach(function(_, idx) {
     var b = document.getElementById('tika-pada-tab-' + idx);
     if (b) {
-      if (idx === padaIndex) {
+      if (idx === currentPadaIndex) {
         b.className = 'w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between bg-saffron-500/20 border-saffron-500 text-maroon-900 dark:text-saffron-200 font-bold';
       } else {
         b.className = 'w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between bg-white dark:bg-slate-800 border-amber-200 dark:border-slate-700 text-slate-700 dark:text-slate-300';
@@ -163,21 +250,18 @@ function selectTikaPada(padaIndex) {
     }
   });
 
-  // පදයේ නම සහ කෙටි විස්තරය
+  // පදයේ නම සහ විස්තරය
   var nameEl = document.getElementById('tika-pada-name');
   if (nameEl) nameEl.innerText = pada.name;
 
   var descEl = document.getElementById('tika-pada-desc');
   if (descEl) descEl.innerText = pada.desc || '';
 
-  // ============================================================
-  // පදයේ අර්ථය (padaArtha) පෙන්වීම
-  // ============================================================
+  // පදයේ අර්ථය (padaArtha)
   var padaArthaSection = document.getElementById('tika-pada-artha-section');
   var padaArthaText = document.getElementById('tika-pada-artha-text');
   if (padaArthaSection && padaArthaText) {
     if (pada.padaArtha && String(pada.padaArtha).trim() !== '') {
-      // Markdown බෝල්ඩ් (**text**) HTML බවට පරිවර්තනය කරන්න
       padaArthaText.innerHTML = formatPadaArtha(pada.padaArtha);
       padaArthaSection.classList.remove('hidden');
     } else {
@@ -185,27 +269,23 @@ function selectTikaPada(padaIndex) {
     }
   }
 
-  // ═══ NEW: විස්තරාත්මක විවරණය (arthaVistara) render කරන්න ═══
+  // විස්තරාත්මක විවරණය (arthaVistara)
   renderArthaVistara(pada);
 
-  // ============================================================
-  // ස්වරූපාර්ථය පෙන්වීම
-  // ============================================================
+  // ස්වරූපාර්ථය
   var svarthaText = document.getElementById('tika-pada-svartha');
   if (svarthaText) {
     svarthaText.innerText = pada.svartha || 'ස්වරූපාර්ථ විස්තරය ඇතුළත් කර නැත.';
   }
 
-  // Bookmark තත්ත්වය යාවත්කාලීන කරන්න
+  // Bookmark තත්ත්වය
   updateTikaBookmarkButtonState();
 
-  // Breakdown lists පෙන්වන්න
+  // Breakdown lists පෙන්වීම
   renderTikaBreakdownLists(pada);
   switchTikaTab('skandha');
 
-  // ============================================================
-  // ත්‍රික මුක්ත ධර්ම පෙන්වීම
-  // ============================================================
+  // ත්‍රික මුක්ත ධර්ම
   var muktaSection = document.getElementById('tika-mukta-section');
   var muktaContent = document.getElementById('tika-mukta-content');
   if (muktaSection && muktaContent) {
@@ -217,38 +297,32 @@ function selectTikaPada(padaIndex) {
     }
   }
 
-  // ============================================================
   // මග්ගාරම්මණ තිකය හඳුනා ගැනීම
-  // ============================================================
   if (tika.title && tika.title.indexOf('මග්ගාරම්මණ') > -1 && tika.detailedAnalysis) {
-    renderMaggarammanaExtras(tika, pada, padaIndex);
+    renderMaggarammanaExtras(tika, pada, currentPadaIndex);
   } else {
     var extras = document.getElementById('maggarammana-extras');
     if (extras) extras.classList.add('hidden');
   }
+
+  // Navigation Buttons Refresh
+  updateTikaNavButtons();
 }
 
 // ════════════════════════════════════════════════════════════
-// ═══ NEW: PADA ARTHA FORMAT HELPER ═══
+// PADA ARTHA FORMAT HELPER
 // ════════════════════════════════════════════════════════════
 function formatPadaArtha(text) {
   if (!text) return '';
-  // **bold** → <strong>
   var formatted = String(text)
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-maroon-900 dark:text-saffron-300">$1</strong>')
-    // newlines → <br>
     .replace(/\n/g, '<br>');
   return formatted;
 }
 
 // ════════════════════════════════════════════════════════════
-// ═══ NEW: ARTHA VISTARA RENDERING ═══
+// ARTHA VISTARA RENDERING
 // ════════════════════════════════════════════════════════════
-
-/**
- * විස්තරාත්මක විවරණය (arthaVistara) render කරයි.
- * pada.arthaVistara නොමැති නම් section එක සඟවයි.
- */
 function renderArthaVistara(pada) {
   var section = document.getElementById('tika-artha-vistara-section');
   var content = document.getElementById('artha-vistara-content');
@@ -266,7 +340,6 @@ function renderArthaVistara(pada) {
   var av = pada.arthaVistara;
   var html = '';
 
-  // --- නිරුක්ති විශ්ලේෂණය ---
   if (av.nirukthi && av.nirukthi.items && av.nirukthi.items.length > 0) {
     html += renderArthaVistaraBlock(
       'nirukthi',
@@ -278,7 +351,6 @@ function renderArthaVistara(pada) {
     );
   }
 
-  // --- අභිධෙය්‍යාර්ථ විස්තරය ---
   if (av.abhidheya && av.abhidheya.items && av.abhidheya.items.length > 0) {
     html += renderArthaVistaraBlock(
       'abhidheya',
@@ -290,7 +362,6 @@ function renderArthaVistara(pada) {
     );
   }
 
-  // --- සංග්‍රහ විස්තරය ---
   if (av.sangraha && av.sangraha.items && av.sangraha.items.length > 0) {
     html += renderArthaVistaraBlock(
       'sangraha',
@@ -302,7 +373,6 @@ function renderArthaVistara(pada) {
     );
   }
 
-  // --- විශේෂ සටහන් ---
   if (av.vishesha && av.vishesha.items && av.vishesha.items.length > 0) {
     html += renderArthaVistaraBlock(
       'vishesha',
@@ -321,7 +391,6 @@ function renderArthaVistara(pada) {
 
   content.innerHTML = html;
 
-  // Default open state යාවත්කාලීන කරන්න
   Object.keys(arthaVistaraOpenState).forEach(function(key) {
     var body = document.getElementById('av-body-' + key);
     var chev = document.getElementById('av-chevron-' + key);
@@ -335,13 +404,9 @@ function renderArthaVistara(pada) {
     }
   });
 
-  // Chevron එක reset කරන්න (main section)
   if (chevron) chevron.classList.remove('rotate-180');
 }
 
-/**
- * එක් විවරණ කොටසක් (accordion block) HTML ලෙස ජනනය කරයි.
- */
 function renderArthaVistaraBlock(key, title, icon, iconColor, intro, bodyHtml) {
   var isOpen = arthaVistaraOpenState[key] ? '' : 'hidden';
   var chevRotate = arthaVistaraOpenState[key] ? 'rotate-180' : '';
@@ -363,9 +428,6 @@ function renderArthaVistaraBlock(key, title, icon, iconColor, intro, bodyHtml) {
     '</div>';
 }
 
-/**
- * නිරුක්ති අයිතම render කරයි.
- */
 function renderNirukthiItems(items) {
   var html = '<div class="space-y-3">';
   items.forEach(function(item) {
@@ -390,9 +452,6 @@ function renderNirukthiItems(items) {
   return html;
 }
 
-/**
- * අභිධෙය්‍යාර්ථ අයිතම render කරයි.
- */
 function renderAbhidheyaItems(items) {
   var html = '<div class="space-y-2">';
   items.forEach(function(item) {
@@ -409,9 +468,6 @@ function renderAbhidheyaItems(items) {
   return html;
 }
 
-/**
- * සංග්‍රහ අයිතම render කරයි.
- */
 function renderSangrahaItems(items) {
   var html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">';
   items.forEach(function(item) {
@@ -428,9 +484,6 @@ function renderSangrahaItems(items) {
   return html;
 }
 
-/**
- * විශේෂ සටහන් render කරයි.
- */
 function renderVisheshaItems(items) {
   var html = '<div class="space-y-2">';
   items.forEach(function(item, idx) {
@@ -447,9 +500,6 @@ function renderVisheshaItems(items) {
   return html;
 }
 
-/**
- * එක් විවරණ කොටසක් toggle කරයි (accordion).
- */
 function toggleArthaVistaraBlock(key) {
   arthaVistaraOpenState[key] = !arthaVistaraOpenState[key];
   var body = document.getElementById('av-body-' + key);
@@ -464,9 +514,6 @@ function toggleArthaVistaraBlock(key) {
   }
 }
 
-/**
- * මුළු විස්තරාත්මක විවරණ කොටසම toggle කරයි.
- */
 function toggleArthaVistaraSection() {
   var content = document.getElementById('artha-vistara-content');
   var chevron = document.getElementById('artha-vistara-chevron');
@@ -479,13 +526,12 @@ function toggleArthaVistaraSection() {
     if (chevron) chevron.classList.remove('rotate-180');
   }
 }
+
 // ============================================================
-// BREAKDOWN LISTS — පිරවූ ගණන / මුළු ගණන (නියත)
+// BREAKDOWN LISTS
 // ============================================================
 function renderTikaBreakdownLists(pada) {
-  // ─────────────────────────────────────────────
-  // ස්කන්ධ — පිරවූ / 5 (නියත)
-  // ─────────────────────────────────────────────
+  // ස්කන්ධ (නියත 5)
   var sList = document.getElementById('tika-skandha-list');
   if (sList) {
     sList.innerHTML = '';
@@ -500,12 +546,10 @@ function renderTikaBreakdownLists(pada) {
       sList.appendChild(div);
     });
     var scEl = document.getElementById('tika-skandha-count');
-    if (scEl) scEl.innerText = sFilled + ' / 5';   // ← නියත 5
+    if (scEl) scEl.innerText = sFilled + ' / 5';
   }
 
-  // ─────────────────────────────────────────────
-  // ආයතන — පිරවූ / 12 (නියත)
-  // ─────────────────────────────────────────────
+  // ආයතන (නියත 12)
   var aList = document.getElementById('tika-ayatana-list');
   if (aList) {
     aList.innerHTML = '';
@@ -520,12 +564,10 @@ function renderTikaBreakdownLists(pada) {
       aList.appendChild(div);
     });
     var acEl = document.getElementById('tika-ayatana-count');
-    if (acEl) acEl.innerText = aFilled + ' / 12';   // ← නියත 12
+    if (acEl) acEl.innerText = aFilled + ' / 12';
   }
 
-  // ─────────────────────────────────────────────
-  // ධාතු — පිරවූ / 18 (නියත)
-  // ─────────────────────────────────────────────
+  // ධාතු (නියත 18)
   var dList = document.getElementById('tika-dhatu-list');
   if (dList) {
     dList.innerHTML = '';
@@ -540,12 +582,10 @@ function renderTikaBreakdownLists(pada) {
       dList.appendChild(div);
     });
     var dcEl = document.getElementById('tika-dhatu-count');
-    if (dcEl) dcEl.innerText = dFilled + ' / 18';   // ← නියත 18
+    if (dcEl) dcEl.innerText = dFilled + ' / 18';
   }
 
-  // ─────────────────────────────────────────────
-  // සත්‍ය — පිරවූ / 4 (නියත)
-  // ─────────────────────────────────────────────
+  // සත්‍ය (නියත 4)
   var satList = document.getElementById('tika-sathya-list');
   if (satList) {
     satList.innerHTML = '';
@@ -560,7 +600,7 @@ function renderTikaBreakdownLists(pada) {
       satList.appendChild(div);
     });
     var satcEl = document.getElementById('tika-sathya-count');
-    if (satcEl) satcEl.innerText = satFilled + ' / 4';   // ← නියත 4
+    if (satcEl) satcEl.innerText = satFilled + ' / 4';
   }
 }
 
@@ -592,10 +632,10 @@ function updateBreadcrumbTika(view) {
   var span = document.getElementById('bc-tika');
   if (!sep || !span) return;
 
-  if (view === 'detail' && tikaFullData[currentTikaIndex]) {
+  if (view === 'detail' && typeof tikaFullData !== 'undefined' && tikaFullData[currentTikaIndex]) {
     sep.classList.remove('hidden');
     span.classList.remove('hidden');
-    span.innerText = tikaFullData[currentTikaIndex].title;
+    span.innerText = tikaFullData[currentTikaIndex].title || '';
   } else if (view === 'bookmarks') {
     sep.classList.remove('hidden');
     span.classList.remove('hidden');
@@ -611,8 +651,8 @@ function updateBreadcrumbTika(view) {
 // ============================================================
 function toggleTikaBookmark() {
   var id = 'tika_' + currentTikaIndex + '_' + currentPadaIndex;
-  var tika = tikaFullData[currentTikaIndex];
-  if (!tika) return;
+  var tika = (typeof tikaFullData !== 'undefined') ? tikaFullData[currentTikaIndex] : null;
+  if (!tika || !tika.padas) return;
   var pada = tika.padas[currentPadaIndex];
   if (!pada) return;
 
@@ -657,6 +697,7 @@ function showTikaBookmarksView() {
   showTikaView('tika-view-bookmarks');
   updateBreadcrumbTika('bookmarks');
   renderTikaBookmarks();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderTikaBookmarks() {
@@ -678,8 +719,6 @@ function renderTikaBookmarks() {
     card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all flex items-center justify-between gap-2';
     card.onclick = function(e) {
       if (e.target.closest('button')) return;
-      currentTikaIndex = b.tikaIndex;
-      showTikaView('tika-view-pada-detail');
       openTikaDetail(b.tikaIndex);
       setTimeout(function() { selectTikaPada(b.padaIndex); }, 100);
     };
@@ -722,11 +761,11 @@ function handleTikaSearch(query) {
 
   var results = [];
   tikaFullData.forEach(function(tika, tIdx) {
-    var tikaMatch = tika.title.toLowerCase().indexOf(q) > -1;
+    var tikaMatch = (tika.title || '').toLowerCase().indexOf(q) > -1;
     if (tikaMatch) {
       results.push({ tikaIndex: tIdx, padaIndex: 0, title: tika.title, subtitle: 'තිකය', matchType: 'තිකය' });
     }
-    tika.padas.forEach(function(pada, pIdx) {
+    (tika.padas || []).forEach(function(pada, pIdx) {
       var nameMatch = pada.name.toLowerCase().indexOf(q) > -1;
       var descMatch = pada.desc && pada.desc.toLowerCase().indexOf(q) > -1;
       var svarthaMatch = pada.svartha && pada.svartha.toLowerCase().indexOf(q) > -1;
@@ -1103,7 +1142,6 @@ if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
 function initTikaApp() {
   console.log('[tika-app] initTikaApp called');
   
-  // Fallback පළමුව ක්‍රියාත්මක කරන්න
   if (typeof tikaFullData !== 'undefined' && tikaFullData.length < 22) {
     console.warn('[tika-app] තික ගොනු ' + tikaFullData.length + ' ක් පමණක් load වී ඇත. Fallback භාවිතා කරමින් තික 22ම පූරණය කරමින්...');
     
@@ -1116,8 +1154,11 @@ function initTikaApp() {
   
   renderTikaList();
   updateTikaBookmarkBadge();
-  
-  console.log('[tika-app] tikaFullData.length:', (typeof tikaFullData !== 'undefined' ? tikaFullData.length : 0));
+
+  var pb = document.getElementById('tika-prev-btn');
+  var nb = document.getElementById('tika-next-btn');
+  if (pb) pb.addEventListener('click', function(e) { e.preventDefault(); goToPrevTika(); });
+  if (nb) nb.addEventListener('click', function(e) { e.preventDefault(); goToNextTika(); });
 }
 
 // DOMContentLoaded event එකේදී යෙදුම initialize කරන්න
