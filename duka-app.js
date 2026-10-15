@@ -408,99 +408,99 @@ function openPadaDetail(padaIndex) {
 }
 
 // ============================================================
-// PREV / NEXT DUKA NAVIGATION (පෙර දුකය සහ ඊළඟ දුකය)
+// PREV / NEXT PADA NAVIGATION (පෙර පදය සහ ඊළඟ පදය)
+// ගොච්ඡක 13 පුරා සියලු පද එක දිගු පිළිවෙලක් ලෙස සලකා, එක් පදයක් බැගින් ඉදිරියට/පසුපසට යයි.
 // ============================================================
-function goToPrevDuka() {
-  if (!dukaState.currentGochhaka || !dukaState.currentPada) return;
 
-  var currentGochhakaIdx = dukaGochhakaData.findIndex(function(g) {
-    return g.id === dukaState.currentGochhaka.id;
+// සියලු ගොච්ඡක වල සියලු පද (පිළිවෙලින්) ලැයිස්තුවක් ලෙස
+function getAllPadaPositions() {
+  var list = [];
+  dukaGochhakaData.forEach(function(g) {
+    getGochhakaPadas(g).forEach(function(p, i) {
+      list.push({ gochhaka: g, padaIndex: i });
+    });
   });
-  if (currentGochhakaIdx === -1) return;
-
-  var currentDukas = getGochhakaDukas(dukaState.currentGochhaka);
-  var currentDukaIdx = currentDukas.findIndex(function(d) {
-    return d.padas && d.padas.some(function(p) { return p === dukaState.currentPada; });
-  });
-
-  if (currentDukaIdx > 0) {
-    // එම ගොච්ඡකය තුළම පෙර දුකය
-    navigateToSpecificDuka(dukaState.currentGochhaka, currentDukas[currentDukaIdx - 1]);
-  } else if (currentGochhakaIdx > 0) {
-    // පෙර ගොච්ඡකයේ අවසාන දුකය
-    var prevGochhaka = dukaGochhakaData[currentGochhakaIdx - 1];
-    var prevDukas = getGochhakaDukas(prevGochhaka);
-    if (prevDukas.length > 0) {
-      navigateToSpecificDuka(prevGochhaka, prevDukas[prevDukas.length - 1]);
-    }
-  }
+  return list;
 }
 
-function goToNextDuka() {
-  if (!dukaState.currentGochhaka || !dukaState.currentPada) return;
-
-  var currentGochhakaIdx = dukaGochhakaData.findIndex(function(g) {
-    return g.id === dukaState.currentGochhaka.id;
-  });
-  if (currentGochhakaIdx === -1) return;
-
-  var currentDukas = getGochhakaDukas(dukaState.currentGochhaka);
-  var currentDukaIdx = currentDukas.findIndex(function(d) {
-    return d.padas && d.padas.some(function(p) { return p === dukaState.currentPada; });
-  });
-
-  if (currentDukaIdx > -1 && currentDukaIdx < currentDukas.length - 1) {
-    // එම ගොච්ඡකය තුළම ඊළඟ දුකය
-    navigateToSpecificDuka(dukaState.currentGochhaka, currentDukas[currentDukaIdx + 1]);
-  } else if (currentGochhakaIdx < dukaGochhakaData.length - 1) {
-    // ඊළඟ ගොච්ඡකයේ පළමු දුකය
-    var nextGochhaka = dukaGochhakaData[currentGochhakaIdx + 1];
-    var nextDukas = getGochhakaDukas(nextGochhaka);
-    if (nextDukas.length > 0) {
-      navigateToSpecificDuka(nextGochhaka, nextDukas[0]);
+// දැනට විවෘතව ඇති පදයේ ස්ථානය (ලැයිස්තුවේ index)
+function getCurrentPadaPosition(list) {
+  if (!dukaState.currentGochhaka) return -1;
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].gochhaka.id === dukaState.currentGochhaka.id &&
+        list[i].padaIndex === dukaState.currentPadaIndex) {
+      return i;
     }
   }
+  return -1;
 }
 
-function navigateToSpecificDuka(gochhaka, duka) {
-  dukaState.currentGochhaka = gochhaka;
+// "පද දෙකට" ආපසු යන විට නිවැරදි දුකයේ පද දෙක පෙන්වන සේ pair දර්ශනය යාවත්කාලීන කිරීම
+function syncDukaPairForPada(gochhaka, padaIndex) {
   var allPadas = getGochhakaPadas(gochhaka);
-  var pada1 = duka.padas[0];
-  var pada2 = duka.padas[1] || null;
-  var idx1 = allPadas.indexOf(pada1);
-  var idx2 = pada2 ? allPadas.indexOf(pada2) : -1;
+  var pada = allPadas[padaIndex];
+  var dukas = getGochhakaDukas(gochhaka);
 
-  openDukaPair(duka.number, idx1, idx2, duka.name, duka.pali);
-  openPadaDetail(idx1);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  for (var i = 0; i < dukas.length; i++) {
+    var d = dukas[i];
+    if (d && d.padas && d.padas.indexOf(pada) > -1) {
+      var p1 = d.padas[0];
+      var p2 = d.padas[1] || null;
+      var number = d.number || (i + 1);
+
+      dukaState.currentDukaPair = {
+        number: number,
+        name: d.name || ('දුක මාතිකා ' + number),
+        pali: d.pali || '',
+        pada1: p1,
+        pada2: p2,
+        padaIndex1: allPadas.indexOf(p1),
+        padaIndex2: p2 ? allPadas.indexOf(p2) : -1
+      };
+
+      var t = document.getElementById('duka-pair-title');
+      var st = document.getElementById('duka-pair-subtitle');
+      if (t) t.innerText = dukaState.currentDukaPair.name;
+      if (st) st.innerText = dukaState.currentDukaPair.pali || (gochhaka.title + ' → දුක මාතිකා ' + number);
+      renderDukaPair(p1, p2);
+      return;
+    }
+  }
 }
+
+function goToAdjacentPada(offset) {
+  var list = getAllPadaPositions();
+  var pos = getCurrentPadaPosition(list);
+  if (pos === -1) return;
+
+  var target = pos + offset;
+  if (target < 0 || target >= list.length) return;
+
+  var t = list[target];
+  dukaState.currentGochhaka = t.gochhaka;
+  syncDukaPairForPada(t.gochhaka, t.padaIndex);
+  openPadaDetail(t.padaIndex);
+}
+
+function goToPrevPada() { goToAdjacentPada(-1); }
+function goToNextPada() { goToAdjacentPada(1); }
 
 function updateDukaNavButtons() {
   var prevBtn = document.getElementById('duka-prev-btn');
   var nextBtn = document.getElementById('duka-next-btn');
   if (!prevBtn || !nextBtn) return;
 
-  if (!dukaState.currentGochhaka || !dukaState.currentPada) {
+  var list = getAllPadaPositions();
+  var pos = getCurrentPadaPosition(list);
+
+  if (pos === -1) {
     prevBtn.disabled = true;
     nextBtn.disabled = true;
     return;
   }
 
-  var currentGochhakaIdx = dukaGochhakaData.findIndex(function(g) {
-    return g.id === dukaState.currentGochhaka.id;
-  });
-  var currentDukas = getGochhakaDukas(dukaState.currentGochhaka);
-  var currentDukaIdx = currentDukas.findIndex(function(d) {
-    return d.padas && d.padas.some(function(p) { return p === dukaState.currentPada; });
-  });
-
-  // පළමු ගොච්ඡකයේ පළමු දුකය නම් Prev අක්‍රියයි
-  prevBtn.disabled = (currentGochhakaIdx <= 0 && currentDukaIdx <= 0);
-
-  // අවසාන ගොච්ඡකයේ අවසාන දුකය නම් Next අක්‍රියයි
-  var isLastGochhaka = (currentGochhakaIdx >= dukaGochhakaData.length - 1);
-  var isLastDuka = (currentDukaIdx >= currentDukas.length - 1);
-  nextBtn.disabled = (isLastGochhaka && isLastDuka);
+  prevBtn.disabled = (pos <= 0);
+  nextBtn.disabled = (pos >= list.length - 1);
 }
 
 // ═══ padaArtha format කිරීම ═══

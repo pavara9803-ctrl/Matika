@@ -143,6 +143,11 @@ th { text-align: left; }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.3s ease-out; }
+
+/* පෙර/ඊළඟ පදය බටන් - disabled තත්ත්වය */
+#duka-prev-btn:disabled, #duka-next-btn:disabled {
+  opacity: 0.4; cursor: not-allowed; pointer-events: none; filter: grayscale(0.4);
+}
 </style>
 </head>
 
@@ -421,18 +426,18 @@ th { text-align: left; }
     </div>
 
     <!-- ============================================================ -->
-    <!-- ✅ පෙර දුකය / ඊළඟ දුකය NAVIGATION BUTTONS (පිටුවේ යටම කෙළවර) -->
+    <!-- ✅ පෙර පදය / ඊළඟ පදය NAVIGATION BUTTONS (පිටුවේ යටම කෙළවර) -->
     <!-- ============================================================ -->
     <div class="flex items-center justify-between gap-3 pt-4 border-t border-amber-200 dark:border-slate-700">
-      <button id="duka-prev-btn" onclick="goToPrevDuka()" 
+      <button id="duka-prev-btn" onclick="goToPrevPada()" 
               class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 text-maroon-900 dark:text-saffron-200 font-bold text-xs sm:text-sm hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
         <i class="fa-solid fa-arrow-left"></i>
-        <span class="truncate">පෙර දුකය</span>
+        <span class="truncate">පෙර පදය</span>
       </button>
 
-      <button id="duka-next-btn" onclick="goToNextDuka()" 
+      <button id="duka-next-btn" onclick="goToNextPada()" 
               class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-xs sm:text-sm hover:from-saffron-400 hover:to-amber-500 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed">
-        <span class="truncate">ඊළඟ දුකය</span>
+        <span class="truncate">ඊළඟ පදය</span>
         <i class="fa-solid fa-arrow-right"></i>
       </button>
     </div>
