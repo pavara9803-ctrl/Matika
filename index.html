@@ -190,7 +190,6 @@ window.addEventListener('load', function() {
   console.log('menuAction?', typeof window.menuAction);
   console.log('navigateTo?', typeof window.navigateTo);
   console.log('toggleDarkMode?', typeof window.toggleDarkMode);
-  console.log('install-btn exists?', !!document.getElementById('install-btn'));
   console.log('custom-menu exists?', !!document.getElementById('custom-menu'));
   console.log('=============');
 });
@@ -210,11 +209,6 @@ window.addEventListener('load', function() {
 <h1 class="font-bold text-xl sm:text-2xl ml-2 text-saffron-100">අභිධර්ම මාතිකා</h1>
 </div>
 <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="තේමාව"><i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i></button>
-
-<!-- Install බොත්තම -->
-<button id="install-btn" onclick="installApp()" class="hidden p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white transition-all ml-1" title="යෙදුම install කරන්න">
-  <i class="fa-solid fa-download text-lg"></i>
-</button>
 
 <!-- Feedback බොත්තම -->
 <button onclick="openFeedbackModal()" class="p-2 rounded-lg bg-gradient-to-br from-saffron-500 to-amber-600 hover:from-saffron-400 hover:to-amber-500 text-maroon-950 feedback-pulse transition-all ml-1" title="ඔබගේ අදහස් එවන්න">
