@@ -115,7 +115,7 @@
     a.addEventListener('click', function (e) {
       var t = document.querySelector(a.getAttribute('href')); if (!t) return;
       e.preventDefault();
-      var y = t.getBoundingClientRect().top + window.scrollY - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--m-header-h')) || 64) - 70;
+      var y = t.getBoundingClientRect().top + window.scrollY - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--m-header-h')) || 64) - ((document.querySelector('.ca-secbar') || {}).offsetHeight || 0) - 10;
       window.scrollTo({ top: y, behavior: 'smooth' });
     });
   });
