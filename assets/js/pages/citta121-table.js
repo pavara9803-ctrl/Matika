@@ -1,7 +1,7 @@
 // ============================================================
 // citta121-table.js — "සිත් 121 වගුව" කොටස (citta.html)
 //   දත්ත: data/paramattha/citta121-table.js (PDF වගුවේ පාඨය එලෙසම)
-//   පේළියක් එබූ විට සිත් සිතියමේ එම සිතේ විස්තරය විවෘත වේ.
+//   පේළියක් එබූ විට එම සිතේ විස්තර පත්‍රය විවෘත වේ (citta-atlas.js).
 // ============================================================
 (function () {
   'use strict';
@@ -15,22 +15,17 @@
     'පටිඝ සම්පයුත්ත': 'k-pat', 'අසඞ්ඛාරික': 's-a', 'සසඞ්ඛාරික': 's-s'
   };
   var JH = ['පඨම', 'දුතිය', 'තතිය', 'චතුත්ථ', 'පඤ්චම'];
+  // පෙරහන්: "a" = සිතේ ලක්ෂණය (සිත් 121 සියල්ලටම), "t" = වගුවේ පාඨය
   var FILTERS = [
-    { key: 'v', name: 'වේදනාව', opts: ['සෝමනස්ස සහගත', 'උපෙක්ඛා සහගත', 'දෝමනස්ස සහගත', 'සුඛ සහගත', 'දුක්ඛ සහගත'] },
-    { key: 'k', name: 'දිට්ඨි / ඥාණ', opts: ['දිට්ඨිගත සම්පයුත්ත', 'දිට්ඨිගත විප්පයුත්ත', 'ඥාණ සම්පයුත්ත', 'ඥාණ විප්පයුත්ත'] },
-    { key: 's', name: 'සඞ්ඛාර', opts: ['අසඞ්ඛාරික', 'සසඞ්ඛාරික'] },
-    { key: 'j', name: 'ධ්‍යානය', opts: JH.map(function (j) { return j + 'ජ්ඣාන'; }) }
+    { key: 'ved', mode: 'a', name: 'වේදනාව', opts: [['so', 'සෝමනස්ස'], ['up', 'උපෙක්ඛා'], ['dom', 'දෝමනස්ස'], ['su', 'සුඛ'], ['du', 'දුක්ඛ']] },
+    { key: 'jati', mode: 'a', name: 'ජාතිය', opts: [['ak', 'අකුසල'], ['ku', 'කුසල'], ['vi', 'විපාක'], ['ki', 'ක්‍රියා']] },
+    { key: 'hetu', mode: 'a', name: 'හේතු', opts: [['0', 'අහේතුක'], ['1', 'ඒකහේතුක'], ['2', 'ද්විහේතුක'], ['3', 'ත්‍රිහේතුක']] },
+    { key: 'k', mode: 't', name: 'දිට්ඨි / ඥාණ', opts: ['දිට්ඨිගත සම්පයුත්ත', 'දිට්ඨිගත විප්පයුත්ත', 'ඥාණ සම්පයුත්ත', 'ඥාණ විප්පයුත්ත'] },
+    { key: 's', mode: 't', name: 'සඞ්ඛාර', opts: ['අසඞ්ඛාරික', 'සසඞ්ඛාරික'] },
+    { key: 'j', mode: 'j', name: 'ධ්‍යානය', opts: JH.map(function (j) { return j + 'ජ්ඣාන'; }) }
   ];
-  var state = { v: null, k: null, s: null, j: null, q: '' };
-
-  // PDF අංකය → සිත් සිතියමේ හැඳුනුම් අංකය
-  // (PDF එකේ 26 උපෙක්ඛා සන්තීරණ / 27 සෝමනස්ස සන්තීරණ; සිතියමේ එය 26/27 මාරු වී ඇත)
-  function atlasId(n) {
-    if (n === 26) return '27';
-    if (n === 27) return '26';
-    if (n >= 82) return 'x' + n;
-    return String(n);
-  }
+  FILTERS.forEach(function (f) { f.opts = f.opts.map(function (o) { return Array.isArray(o) ? o : [o, o]; }); });
+  var state = { q: '' };
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
@@ -41,7 +36,7 @@
   h += '<label class="ca-search ct-search"><span class="sr-only">සිතක් හෝ අංකයක් සොයන්න</span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="ct-q" type="search" placeholder="සොයන්න: අංකය (උදා: 57) හෝ නම" autocomplete="off"></label>';
   h += FILTERS.map(function (f) {
     return '<div class="ct-frow"><span class="ct-flabel">' + f.name + '</span>' + f.opts.map(function (o) {
-      return '<button type="button" class="ca-opt ct-f" data-f="' + f.key + '" data-v="' + esc(o) + '" aria-pressed="false">' + o + '</button>'; }).join('') + '</div>';
+      return '<button type="button" class="ca-opt ct-f" data-f="' + f.key + '" data-v="' + esc(o[0]) + '" aria-pressed="false">' + o[1] + '</button>'; }).join('') + '</div>';
   }).join('');
   h += '<div class="ct-status" aria-live="polite"><span id="ct-count"></span><button type="button" id="ct-clear" class="ca-clear" hidden>පෙරහන් ඉවත් කරන්න</button></div>';
   h += '</div>';
@@ -57,9 +52,11 @@
         s.rows.forEach(function (row) {
           var multi = row.c.length > 1;
           var cells = row.c.map(function (c) { return '<span class="ct-cell ' + (CLS[c] || 'ct-name') + '">' + c + '</span>'; }).join('');
-          var data = 'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title) + '"' +
+          var inf = (window.CITTA_ATLAS && CITTA_ATLAS.info(row.n)) || {};
+          var data = 'data-ved="' + (inf.ved || '') + '" data-jati="' + (inf.jati || '') + '" data-hetu="' + (inf.hetu != null ? inf.hetu : '') + '" ' +
+            'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title) + '"' +
             (row.jh != null ? ' data-j="' + JH[row.jh] + 'ජ්ඣාන"' : '');
-          h += '<button type="button" class="ct-row' + (row.jh != null ? ' ct-jh' + row.jh : '') + '" ' + data + ' title="සිත් සිතියමේ විස්තරය">' +
+          h += '<button type="button" class="ct-row' + (row.jh != null ? ' ct-jh' + row.jh : '') + '" ' + data + ' title="විස්තරය බලන්න">' +
             '<span class="ct-n">' + row.n + '</span><span class="ct-cells' + (multi ? ' ct-c' + row.c.length : '') + '">' + cells + '</span></button>';
         });
         h += '</div>';
@@ -79,13 +76,16 @@
   var rows = Array.prototype.slice.call(box.querySelectorAll('.ct-row'));
   function norm(s) { return String(s || '').replace(/‍/g, '').toLowerCase(); }
   function apply() {
-    var q = norm(state.q.trim()), shown = 0, active = !!(q || state.v || state.k || state.s || state.j);
+    var q = norm(state.q.trim()), shown = 0, active = !!q;
+    FILTERS.forEach(function (f) { if (state[f.key]) active = true; });
     rows.forEach(function (r) {
       var t = r.getAttribute('data-txt'), ok = true;
-      if (state.v && t.indexOf(state.v) < 0) ok = false;
-      if (state.k && t.indexOf(state.k) < 0) ok = false;
-      if (state.s && t.indexOf(state.s) < 0) ok = false;
-      if (state.j && r.getAttribute('data-j') !== state.j) ok = false;
+      FILTERS.forEach(function (f) {
+        var v = state[f.key]; if (!v || !ok) return;
+        if (f.mode === 'a') ok = r.getAttribute('data-' + f.key) === v;
+        else if (f.mode === 'j') ok = r.getAttribute('data-j') === v;
+        else ok = t.indexOf(v) >= 0;
+      });
       if (q) { if (/^\d+$/.test(q)) ok = ok && r.getAttribute('data-n') === q; else ok = ok && norm(t).indexOf(q) >= 0; }
       r.hidden = !ok; if (ok) shown++;
     });
@@ -106,7 +106,7 @@
   });
   document.getElementById('ct-q').addEventListener('input', function (e) { state.q = e.target.value; apply(); });
   document.getElementById('ct-clear').addEventListener('click', function () {
-    state = { v: null, k: null, s: null, j: null, q: '' };
+    state = { q: '' };
     document.getElementById('ct-q').value = '';
     box.querySelectorAll('.ct-f').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
     apply();
@@ -123,8 +123,7 @@
   // ---------- පේළිය → සිතේ විස්තරය ----------
   box.addEventListener('click', function (e) {
     var r = e.target.closest('.ct-row'); if (!r || !window.CITTA_ATLAS) return;
-    var n = +r.getAttribute('data-n');
-    window.CITTA_ATLAS.openCitta(atlasId(n), n >= 82);
+    window.CITTA_ATLAS.open(+r.getAttribute('data-n'));
   });
   apply();
 })();
