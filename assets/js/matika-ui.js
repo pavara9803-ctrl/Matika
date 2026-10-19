@@ -54,6 +54,8 @@
     var html = document.documentElement;
 
     function headerH() { return header ? header.offsetHeight : 0; }
+    /* ශීර්ෂයට යටින් ඇලී සිටින කොටස් තීරුවක් ඇත්නම් එහි උසද */
+    function stickyH() { var b = document.querySelector('.ca-secbar'); return headerH() + (b ? b.offsetHeight : 0); }
     function setHeaderVar() { html.style.setProperty('--m-header-h', headerH() + 'px'); }
 
     /* ---- 1. ප්‍රගති රේඛාව ---- */
@@ -177,7 +179,7 @@
         a.addEventListener('click', function (e) {
           e.preventDefault();
           if (onPick) onPick();
-          var y = h.getBoundingClientRect().top + window.pageYOffset - headerH() - 14;
+          var y = h.getBoundingClientRect().top + window.pageYOffset - stickyH() - 14;
           window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
         });
         li.appendChild(a);
@@ -248,7 +250,7 @@
     });
 
     function markCurrent() {
-      var off = headerH() + 48;
+      var off = stickyH() + 48;
       var cur = -1;
       for (var i = 0; i < headings.length; i++) {
         if (headings[i].el.getBoundingClientRect().top <= off) cur = i; else break;
