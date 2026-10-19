@@ -33,6 +33,16 @@
   };
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var RAIL_MIN = 1280;
+
+  /* පෙර / ඊළඟ බොත්තම්වල ඊළඟ මාතිකාවේ නම පෙන්වීම (tika/duka/suttanta) */
+  window.mxPagerNames = function (prevBtn, nextBtn, prevName, nextName) {
+    [[prevBtn, prevName], [nextBtn, nextName]].forEach(function (x) {
+      var el = x[0] && x[0].querySelector('.mx-pager__name');
+      if (el) el.textContent = x[1] || '';
+      if (x[0] && x[1]) x[0].setAttribute('title', x[1]);
+    });
+  };
+
   function $(s, r) { return (r || document).querySelector(s); }
   function $all(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
 

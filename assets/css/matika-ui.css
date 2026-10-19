@@ -823,3 +823,28 @@
 :root.dark .les > summary, :root.dark .lr-cat > summary, :root.dark .lr-item h4 { color: #fcd34d; }
 :root.dark .lr-k, :root.dark .cet-more > summary { color: #fbbf24; }
 @media (max-width: 520px) { .lr-f { grid-template-columns: 1fr; gap: 2px; } .les-body { padding: 4px 12px 14px; } }
+
+/* ============================================================
+   14. පෙර / ඊළඟ පිටු-සංචාලනය (තික, දුක, සුත්තන්ත)
+   ============================================================ */
+.mx-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--m-rule); }
+.mx-pager__btn {
+  font: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 4px; min-width: 0;
+  padding: 12px 16px; border-radius: 14px; border: 1px solid var(--m-rule); background: var(--m-surface); color: var(--m-ink);
+  transition: border-color .15s, transform .15s;
+}
+.mx-pager__btn:hover { border-color: #f59e0b; transform: translateY(-1px); }
+.mx-pager__btn:focus-visible { outline: 2.5px solid #f59e0b; outline-offset: 2px; }
+.mx-pager__btn--prev { text-align: left; align-items: flex-start; }
+.mx-pager__btn--next { text-align: right; align-items: flex-end; border-color: rgba(245, 158, 11, .55); }
+.mx-pager__btn:disabled, .mx-pager__btn[disabled] { visibility: hidden; }
+.mx-pager__dir { font-size: 12.5px; color: var(--m-ink-soft); display: inline-flex; align-items: center; gap: 6px; }
+.mx-pager__name { font-size: 15px; font-weight: 700; line-height: 1.45; color: var(--m-lacquer); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-width: 100%; text-align: inherit !important; }
+:root.dark .mx-pager__name { color: #fcd34d; }
+.mx-pager__name:empty { display: none; }
+.mx-pager__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 14px; }
+.mx-pager__link { font: inherit; font-size: 14px; background: none; border: 0; padding: 6px 4px; cursor: pointer; color: var(--m-ink-soft); display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; text-underline-offset: 3px; }
+.mx-pager__link:hover { color: var(--m-lacquer); }
+:root.dark .mx-pager__link:hover { color: #fcd34d; }
+.mx-pager__link:focus-visible { outline: 2.5px solid #f59e0b; outline-offset: 2px; border-radius: 6px; }
+@media (max-width: 420px) { .mx-pager { gap: 8px; } .mx-pager__btn { padding: 10px 12px; } .mx-pager__name { font-size: 14px; } }
