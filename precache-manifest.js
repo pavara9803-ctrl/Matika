@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v83d8b9d546";
+self.PRECACHE_VERSION = "v5148042ae0";
 self.PRECACHE_URLS = [
   "./about.html",
   "./assets/css/matika-ui.css",
@@ -129,6 +129,7 @@ self.PRECACHE_URLS = [
   "./assets/js/pages/caitasika-atlas.js",
   "./assets/js/pages/caitasika.js",
   "./assets/js/pages/citta-atlas.js",
+  "./assets/js/pages/citta121-table.js",
   "./assets/js/pages/duka-app.js",
   "./assets/js/pages/nibbana.js",
   "./assets/js/pages/rupa-atlas.js",
@@ -179,6 +180,7 @@ self.PRECACHE_URLS = [
   "./data/matika/tika/tika-data.js",
   "./data/paramattha/caitasika-data.js",
   "./data/paramattha/citta-data.js",
+  "./data/paramattha/citta121-table.js",
   "./data/paramattha/rupa-data.js",
   "./data/paramattha/rupa-deta-full.js",
   "./data/paramattha/rupa-deta.js",

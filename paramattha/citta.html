@@ -223,6 +223,7 @@
 
   <nav id="ca-secnav" class="ca-secnav" role="tablist" aria-label="කොටස්">
     <button type="button" role="tab" data-sec="intro">හැඳින්වීම</button>
+    <button type="button" role="tab" data-sec="table">සිත් 121 වගුව</button>
     <button type="button" role="tab" data-sec="groups">සිත් කාණ්ඩ</button>
     <button type="button" role="tab" data-sec="essays">විස්තරාත්මක විග්‍රහය</button>
     <button type="button" role="tab" data-sec="cards">වර්ගීකරණ සාරාංශය</button>
@@ -320,6 +321,12 @@
     </section>
   </section>
 
+  <section id="sec-table" class="ca-sec" role="tabpanel" aria-label="සිත් 121 වගුව" hidden>
+    <h2 class="sr-only">සිත් 121 වගුව</h2>
+    <p class="ca-sec__intro">සිත් 121 එක් වගුවක: වේදනාව, දිට්ඨි / ඥාණ, සඞ්ඛාරය අනුව. පෙරහනක් තෝරා අදාළ සිත් පමණක් බලන්න. පේළියක් එබූ විට එම සිතේ විස්තරය විවෘත වේ.</p>
+    <div id="ct-root"></div>
+  </section>
+
   <section id="sec-groups" class="ca-sec" role="tabpanel" aria-label="සිත් කාණ්ඩ" hidden>
     <h2 class="sr-only">සිත් කාණ්ඩ</h2>
     <p class="ca-sec__intro">සිත් 121 කාණ්ඩ අනුව. මාතෘකාව එබූ විට විවෘත වේ.</p><div id="citta-groups"></div>
@@ -365,6 +372,8 @@
 <script src="../assets/js/pm-atlas.js"></script>
 <script src="../data/paramattha/citta-data.js"></script>
 <script src="../assets/js/pages/citta-atlas.js"></script>
+<script src="../data/paramattha/citta121-table.js"></script>
+<script src="../assets/js/pages/citta121-table.js"></script>
 <script>
     // Theme Toggle
     function toggleDarkMode() {
