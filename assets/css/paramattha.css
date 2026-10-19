@@ -100,10 +100,12 @@
 .ca-tile.is-on.is-opt { box-shadow: none; outline: 2.5px dashed var(--ca-ring); outline-offset: 1px; }
 
 /* ---------- කොටස් තීරුව ---------- */
+/* කොටස් තීරුව: ශීර්ෂයට යටින්ම ඇලී සිටින, පිටුව පුරා විහිදෙන පටියක් (යටින් ඇති අන්තර්ගතය එහි පිටුපසින් පෙනෙන්නේ නැත) */
+.ca-secbar { position: sticky; top: var(--m-header-h, 64px); z-index: 20; margin-top: 30px; padding: 8px 0; }
+.ca-secbar::before { content: ""; position: absolute; inset: 0 -100vmax; background: var(--m-leaf); border-bottom: 1px solid var(--m-rule); box-shadow: 0 8px 16px -14px rgba(63, 10, 12, .45); z-index: -1; }
 .ca-secnav {
-  position: sticky; top: calc(var(--m-header-h, 64px) + 6px); z-index: 20; margin-top: 30px;
   display: flex; gap: 4px; padding: 4px; border-radius: 14px; overflow-x: auto; scrollbar-width: none;
-  background: var(--ca-panel); border: 1px solid var(--m-rule); box-shadow: 0 6px 18px -12px rgba(63, 10, 12, .35);
+  background: var(--ca-panel); border: 1px solid var(--m-rule);
 }
 .ca-secnav::-webkit-scrollbar { display: none; }
 .ca-secnav button { flex: 1 0 auto; font: inherit; font-size: 14px; font-weight: 600; padding: 9px 14px; border: 0; border-radius: 10px; background: none; color: var(--m-ink-soft); cursor: pointer; white-space: nowrap; }
@@ -420,3 +422,10 @@ body > header > div > div:nth-child(2) { flex-shrink: 1; }
 a.mx-pager__btn { text-decoration: none; }
 a.mx-pager__link { color: var(--m-ink-soft); }
 @media (max-width: 520px) { .pm-sw__a { padding: 6px 10px; } .pm-sw__nm { font-size: 13.5px; } }
+
+/* ශීර්ෂ + කොටස් තීරුව යටට මාතෘකා නොයන ලෙස */
+.ca-sec { scroll-margin-top: calc(var(--m-header-h, 64px) + 80px); }
+.ca-sec h2, .ca-sec h3, .ca-sec h4, .ca-sec [id] { scroll-margin-top: calc(var(--m-header-h, 64px) + 80px); }
+@media (max-width: 520px) { .ca-secnav button { padding: 8px 12px; font-size: 13.5px; } .ca-secbar { padding: 6px 0; } }
+html, body { overflow-x: clip; }
+body { height: auto !important; min-height: 100vh; }

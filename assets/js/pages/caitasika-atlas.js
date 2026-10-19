@@ -333,7 +333,7 @@
       $all('.ca-sec').forEach(function (s) { s.hidden = s.id !== 'sec-' + key; });
       store('ca-sec', key);
       if (scroll) {
-        var y = nav.getBoundingClientRect().top + window.scrollY - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--m-header-h')) || 64) - 8;
+        var bar = nav.closest('.ca-secbar') || nav; var y = bar.getBoundingClientRect().top + window.scrollY - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--m-header-h')) || 64);
         if (window.scrollY > y) window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }
