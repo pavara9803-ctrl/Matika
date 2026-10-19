@@ -8,31 +8,57 @@
 
   <!-- සබ්බත්තික මාතිකා -->
   <url>
-    <loc>https://matika-snowy.vercel.app/sabbattika.html</loc>
+    <loc>https://matika-snowy.vercel.app/help.html</loc>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- සබ්බත්තික මාතිකා -->
+  <url>
+    <loc>https://matika-snowy.vercel.app/matika/sabbattika.html</loc>
     <priority>0.80</priority>
   </url>
 
   <!-- තික මාතිකා -->
   <url>
-    <loc>https://matika-snowy.vercel.app/tika-matika.html</loc>
+    <loc>https://matika-snowy.vercel.app/matika/tika-matika.html</loc>
     <priority>0.80</priority>
   </url>
 
   <!-- දුක මාතිකා -->
   <url>
-    <loc>https://matika-snowy.vercel.app/duka-matika.html</loc>
+    <loc>https://matika-snowy.vercel.app/matika/duka-matika.html</loc>
     <priority>0.80</priority>
   </url>
 
   <!-- සුත්තන්ත මාතිකා -->
   <url>
-    <loc>https://matika-snowy.vercel.app/suttanta-matika.html</loc>
+    <loc>https://matika-snowy.vercel.app/matika/suttanta-matika.html</loc>
     <priority>0.80</priority>
   </url>
 
   <!-- සතර පරමාර්ථ -->
   <url>
-    <loc>https://matika-snowy.vercel.app/paramatta.html</loc>
+    <loc>https://matika-snowy.vercel.app/paramattha/</loc>
     <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://matika-snowy.vercel.app/paramattha/citta.html</loc>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://matika-snowy.vercel.app/paramattha/caitasika.html</loc>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://matika-snowy.vercel.app/paramattha/rupa.html</loc>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://matika-snowy.vercel.app/paramattha/nibbana.html</loc>
+    <priority>0.70</priority>
   </url>
 </urlset>

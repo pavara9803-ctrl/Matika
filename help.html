@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="si" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>භාවිත කරන ආකාරය - මාතිකා මෘදුකාංගය</title>
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/180.png">
+<link rel="icon" href="./assets/icons/50.png">
+<meta name="theme-color" content="#3f0a0c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="මාතිකා">
+
+<script src="./assets/js/vendor/tailwind.min.js"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        saffron: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03' },
+        maroon: { 700:'#701a1d',800:'#581113',900:'#3f0a0c',950:'#260507' }
+      },
+      fontFamily: { sans: ['Inter','Noto Serif Sinhala','Segoe UI','sans-serif'] }
+    }
+  }
+};
+</script>
+<script src="assets/js/matika-theme.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-color: transparent; }
+.hp-keys { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); margin: 0; }
+@media (max-width: 420px) { .hp-keys > div { flex-direction: column; gap: 8px; } }
+.hp-keys > div { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--m-rule); border-radius: 14px; background: var(--ca-panel); }
+.hp-keys dt { flex: none; width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; background: var(--m-lacquer); color: #fde68a; font-size: 16px; }
+:root.dark .hp-keys dt { background: #fbbf24; color: #3f0a0c; }
+.hp-keys dd { margin: 0; font-size: 14px; line-height: 1.7; text-align: left !important; }
+.hp-keys dd strong { display: block; font-size: 15px; }
+.hp-steps { margin: 6px 0 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 10px; }
+.hp-steps > li { counter-increment: s; position: relative; padding-left: 40px; font-size: 15px; line-height: 1.85; }
+.hp-steps > li::before { content: counter(s); position: absolute; left: 0; top: 2px; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; border: 1.5px solid var(--ca-ring); background: var(--m-leaf); }
+.hp-tip { margin: 12px 0 0; padding: 10px 14px; border-left: 3px solid var(--ca-ring); background: var(--m-leaf); border-radius: 0 10px 10px 0; font-size: 14px; line-height: 1.8; }
+.hp-go { display: inline-block; margin-top: 10px; font-weight: 700; color: var(--m-lacquer); text-decoration: underline; text-underline-offset: 3px; }
+:root.dark .hp-go { color: #fcd34d; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/matika-ui.css">
+<link rel="stylesheet" href="assets/css/paramattha.css">
+</head>
+<body class="h-full flex flex-col text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased">
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
+  <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="ආපසු">
+      <i class="fa-solid fa-arrow-left text-lg"></i>
+    </a>
+    <div class="flex items-center mx-auto">
+      <div class="w-9 h-9 rounded-full bg-saffron-500/20 border border-saffron-400 flex items-center justify-center text-saffron-300 shrink-0">
+        <i class="fa-solid fa-circle-question text-xl"></i>
+      </div>
+      <h1 class="font-bold text-xl sm:text-2xl ml-2 text-saffron-100">භාවිත කරන ආකාරය</h1>
+    </div>
+    <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="තේමාව">
+      <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
+    </button>
+  </div>
+</header>
+
+<main class="flex-1 ca-main w-full mx-auto p-4 sm:p-6 pb-16" style="max-width:52rem">
+  <section class="ca-hero">
+    <p class="ca-hero__kicker">මාතිකා මෘදුකාංගය</p>
+    <h1>ඇප් එක භාවිත කරන ආකාරය</h1>
+    <p class="ca-hero__lead">අභිධර්ම මාතිකා සහ සතර පරමාර්ථ අධ්‍යයනය කිරීමට මෙම ඇප් එකේ ඇති පහසුකම් සහ ඒවා භාවිත කරන පියවර මෙහි ඇත. මාතෘකාවක් ඔබා විවෘත කරන්න.</p>
+  </section>
+  <section style="margin-top:22px">
+    <h2 class="ca-d__h" style="font-size:17px">නිතර භාවිත වන බොත්තම්</h2>
+    <dl class="hp-keys" aria-label="බොත්තම්">
+<div><dt><i class="fa-solid fa-house"></i></dt><dd><strong>මුල් පිටුව</strong>ඕනෑම තැනක සිට මුල් පිටුවට.</dd></div>
+<div><dt><i class="fa-solid fa-bars"></i></dt><dd><strong>මෙනුව</strong>Install, බෙදාගැනීම, අදහස් එවීම, උදව්.</dd></div>
+<div><dt><i class="fa-solid fa-moon"></i></dt><dd><strong>තේමාව</strong>ආලෝක / අඳුරු මාරු කිරීම.</dd></div>
+<div><dt><i class="fa-solid fa-list"></i></dt><dd><strong>පටුන</strong>පිටුවේ මාතෘකා ලැයිස්තුව.</dd></div>
+<div><dt><i class="fa-solid fa-arrow-up"></i></dt><dd><strong>ඉහළට</strong>පිටුවේ මුලට යාම.</dd></div>
+<div><dt><i class="fa-solid fa-bookmark"></i></dt><dd><strong>සුරකින්න</strong>මාතිකාවක් පසුව කියවීමට තබා ගැනීම.</dd></div>
+</dl>
+  </section>
+  <section style="margin-top:26px">
+    <h2 class="ca-d__h" style="font-size:17px">පියවරෙන් පියවර</h2>
+    <details class="ca-acc" open><summary><span class="ca-acc__n">1</span><span>මුල් පිටුවෙන් අරඹන්න</span></summary><div class="ca-acc__body"><ol class="hp-steps">
+<li>මුල් පිටුවේ <strong>මාතිකා</strong> කොටසින් සබ්බත්තික, තික (22), දුක (100) හෝ සුත්තන්ත මාතිකා තෝරන්න.</li>
+<li><strong>සතර පරමාර්ථ</strong> කොටසින් චිත්ත, චෛතසික, රූප, නිබ්බාන යන පිටු වෙත යන්න.</li>
+<li>ඕනෑම පිටුවක සිට මුල් පිටුවට ආපසු යාමට ඉහළ වම් කෙළවරේ <i class="fa-solid fa-house"></i> බොත්තම ඔබන්න.</li>
+</ol>
+<p class="hp-tip">Tablet සහ laptop තිරවල ශීර්ෂයට යටින් ඇති තීරුවෙන් ප්‍රධාන කොටස් අතර කෙලින්ම යා හැකියි.</p></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">2</span><span>තික, දුක සහ සුත්තන්ත මාතිකා</span></summary><div class="ca-acc__body"><ol class="hp-steps">
+<li>ලැයිස්තුවෙන් මාතිකාවක් තෝරන්න. දුක මාතිකාවලදී පළමුව ගොච්ඡකය, ඉන්පසු දුකය තෝරන්න.</li>
+<li><strong>මාතිකා පද තෝරන්න</strong> යටතේ ඇති පදයක් ඔබන්න. එහි අර්ථය, නිරුක්ති අර්ථය සහ අභිධෙය්‍යාර්ථය (ස්වරූපාර්ථ) පහළින් පෙන්වයි.</li>
+<li><strong>විස්තරාත්මක විවරණය</strong> ඔබා නිරුක්ති, අභිධෙය්‍ය, සංග්‍රහ, විශේෂ සටහන් විවෘත කරන්න.</li>
+<li>ස්කන්ධ, ආයතන, ධාතු, සත්‍ය ටැබ්වලින් ඒ පදය අයත් වන ධර්ම බලන්න.</li>
+<li><strong>පෙර</strong> / <strong>ඊළඟ</strong> බොත්තම්වලින් ඊළඟ මාතිකාවට යන්න. <strong>ලැයිස්තුවට</strong> ඔබා ආපසු ලැයිස්තුවට යන්න.</li>
+</ol>
+<p class="hp-tip">ලැයිස්තුවට ඉහළින් ඇති සෙවුම් කොටුවේ මාතිකා පදයක් හෝ ස්වරූපාර්ථයක කොටසක් ලියා ඉක්මනින් සොයාගත හැකියි.</p></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">3</span><span>මාතිකා සුරැකීම</span></summary><div class="ca-acc__body"><ol class="hp-steps">
+<li>මාතිකාවක් විවෘත කර <i class="fa-solid fa-bookmark"></i> <strong>සුරකින්න</strong> ඔබන්න.</li>
+<li>සුරැකි මාතිකා බැලීමට ශීර්ෂයේ <strong>සුරැකි මාතිකා</strong> බොත්තම ඔබන්න. එහි ඇති අංකයෙන් සුරැකි ගණන පෙනේ.</li>
+<li>ලැයිස්තුවෙන් ඉවත් කිරීමට නැවත එම බොත්තම ඔබන්න.</li>
+</ol>
+<p class="hp-tip">සුරැකි මාතිකා ගබඩා වන්නේ ඔබගේ දුරකථනයේ / browser එකේ පමණි. වෙනත් උපාංගයක ඒවා නොපෙනේ.</p></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">4</span><span>සබ්බත්තික මාතිකා</span></summary><div class="ca-acc__body"><ol class="hp-steps">
+<li>පරමාර්ථ ධර්ම 4 සහ සප්පදේස තික-දුක පිටුවේ පිළිවෙළින් කියවන්න.</li>
+<li><strong>ස්කන්ධ</strong>, <strong>ආයතන</strong>, <strong>ධාතු</strong>, <strong>සච්ච</strong> බොත්තම් ඔබා පරමාර්ථ ධර්ම ඒ ඒ ආකාරයෙන් බෙදෙන හැටි බලන්න.</li>
+</ol></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">5</span><span>සතර පරමාර්ථ සිතියම් (සිත්, චෛතසික, රූප)</span></summary><div class="ca-acc__body"><ol class="hp-steps">
+<li>සිත් 89, චෛතසික 52, රූප 28 සියල්ල එකම බැල්මකින් ටයිල් ලෙස වර්ගීකරණය අනුව පෙනේ. වර්ණයෙන් ඒවායේ කොටස වෙන් කර ඇත.</li>
+<li>ඕනෑම ටයිලයක් ඔබන්න. සම්පූර්ණ විස්තරය පත්‍රයක් ලෙස විවෘත වේ: phone එකේ පහළින්, laptop එකේ දකුණු පැත්තෙන්. <i class="fa-solid fa-chevron-left"></i> <i class="fa-solid fa-chevron-right"></i> බොත්තම්වලින් පෙර / ඊළඟ එක බලන්න, <i class="fa-solid fa-xmark"></i> ඔබා වසන්න.</li>
+<li><strong>අනුව බලන්න</strong> / <strong>සිතක් තෝරන්න</strong> යටතේ ඇති කොටසක් තෝරා, ඉන්පසු එහි විකල්පයක් ඔබන්න. ඊට අයත් ටයිල් පමණක් දීප්තිමත් වී ගණන පෙන්වයි. ඉරි රාමුවකින් පෙන්වන්නේ <em>විටෙක</em> පමණක් යෙදෙන ඒවායි.</li>
+<li><strong>සියල්ල පෙන්වන්න</strong> ඔබා නැවත සියල්ල බලන්න.</li>
+<li>සෙවුම් කොටුවේ නම සිංහලෙන් හෝ පාළි රෝම අකුරින් ලියන්න (උදා: <em>සති</em>, <em>phassa</em>).</li>
+</ol>
+<p class="hp-tip">සිත් පිටුවේ <strong>සිත් 89</strong> / <strong>සිත් 121</strong> අතර මාරු විය හැකියි. සිතක විස්තරයේ ඇති <strong>මේ සිත සමඟ යෙදෙන චෛතසික බලන්න</strong> සබැඳියෙන්, ඒ සිත තෝරාගත් චෛතසික සිතියමට යා හැකියි.</p>
+<p class="hp-tip">සිතියමට පහළින් ඇති කොටස් (හැඳින්වීම, පාඩම් ආදිය) ඔබා අදාළ කියවීම් කොටස විවෘත කරන්න. ඔබ අවසන් වරට කියවූ කොටස ඇප් එක මතක තබා ගනී.</p>
+<a class="hp-go" href="paramattha/caitasika.html">චෛතසික සිතියම විවෘත කරන්න</a></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">6</span><span>පටුන සහ කියවීම</span></summary><div class="ca-acc__body"><ol class="hp-steps">
+<li>දිගු පිටුවල පහළ දකුණු කෙළවරේ <i class="fa-solid fa-list"></i> <strong>පටුන</strong> බොත්තම ඔබා මාතෘකාවකට කෙලින්ම යන්න. Laptop එකේ පටුන පිටුවේ පැත්තෙන්ම පෙනේ.</li>
+<li><i class="fa-solid fa-arrow-up"></i> <strong>ඉහළට</strong> බොත්තමෙන් පිටුවේ මුලට යන්න.</li>
+<li>ශීර්ෂයට යටින් ඇති සිහින් රේඛාවෙන් පිටුවේ කොපමණ ප්‍රමාණයක් කියවා ඇත්දැයි පෙනේ.</li>
+</ol></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">7</span><span>අඳුරු තේමාව</span></summary><div class="ca-acc__body"><p>ශීර්ෂයේ <i class="fa-solid fa-moon"></i> / <i class="fa-solid fa-sun"></i> බොත්තම ඔබා ආලෝක සහ අඳුරු තේමාව අතර මාරු වන්න. රාත්‍රියේ කියවීමට අඳුරු තේමාව පහසුයි. ඔබ තෝරාගත් තේමාව සියලු පිටුවලට යෙදේ.</p></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">8</span><span>Install කිරීම සහ Internet නැතිව භාවිතය</span></summary><div class="ca-acc__body"><ol class="hp-steps">
+<li>Play Store එකෙන් හෝ මුල් පිටුවේ <i class="fa-solid fa-bars"></i> මෙනුවේ <strong>යෙදුම install කරන්න</strong> මගින් ඇප් එක දුරකථනයට ස්ථාපනය කරන්න.</li>
+<li>Internet සම්බන්ධතාවය ඇති විට එක් වරක් ඇප් එක විවෘත කළ පසු, පිටු දුරකථනයේ ගබඩා වේ. ඉන්පසු internet නැතිවද කියවිය හැකියි.</li>
+</ol>
+<p class="hp-tip">ඇප් එක යාවත්කාලීන වූ පසු අලුත් වෙනස්කම් නොපෙනේ නම්, ඇප් එක සම්පූර්ණයෙන් වසා නැවත විවෘත කරන්න.</p></div></details>
+    <details class="ca-acc"><summary><span class="ca-acc__n">9</span><span>අදහස් සහ දෝෂ දැනුම් දීම</span></summary><div class="ca-acc__body"><p>මුල් පිටුවේ <i class="fa-solid fa-bars"></i> මෙනුවෙන් <strong>අදහස් එවන්න</strong> තෝරා යෝජනා, වැරදි හෝ ප්‍රශ්න එවන්න. ඇප් එක ඔබට ප්‍රයෝජනවත් නම් <strong>මෙම යෙදුමට තරු යොදන්න</strong> සහ <strong>මෙම යෙදුම බෙදාගන්න</strong> මගින් අන් අයටද දැනුම් දෙන්න.</p></div></details>
+  </section>
+</main>
+
+<script>
+function toggleDarkMode() {
+  var html = document.documentElement;
+  var icon = document.getElementById('theme-toggle-icon');
+  if (html.classList.contains('dark')) {
+    html.classList.remove('dark');
+    localStorage.setItem('abhidhamma_theme', 'light');
+    if (icon) icon.className = 'fa-solid fa-moon text-lg';
+  } else {
+    html.classList.add('dark');
+    localStorage.setItem('abhidhamma_theme', 'dark');
+    if (icon) icon.className = 'fa-solid fa-sun text-lg';
+  }
+}
+try {
+  if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
+      (!localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    var ti = document.getElementById('theme-toggle-icon'); if (ti) ti.className = 'fa-solid fa-sun text-lg';
+  }
+} catch (e) {}
+</script>
+<script src="assets/js/matika-ui.js" defer></script>
+</body>
+</html>

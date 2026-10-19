@@ -1,0 +1,825 @@
+/* ============================================================
+   matika-ui.css — අභිධර්ම මාතිකා : පොදු පෙනුම් පද්ධතිය
+   ------------------------------------------------------------
+   • අන්තර්ගතයේ අකුරක්වත් වෙනස් නොකරයි — පෙනුම පමණි.
+   • සංකල්පය: පුස්කොළ පොත — මැරූන් තීන්ත, කහ නූල, පත්‍රයේ රේඛා.
+   • සිංහල අකුරු: Noto Serif Sinhala (මුල් ඇප් එකේ අකුරු)
+     පාළි පාඨ, ශීර්ෂ: Noto Serif Sinhala (මූලාශ්‍ර පාඨය බව පෙන්වයි)
+   ============================================================ */
+
+:root {
+  --m-ink: #2b1a12;
+  --m-ink-soft: #5e4d41;
+  --m-maroon: #3f0a0c;
+  --m-lacquer: #701a1d;
+  --m-saffron: #d97706;
+  --m-gold: #f59e0b;
+  --m-leaf: #fbf6ed;
+  --m-leaf-line: rgba(146, 64, 14, .035);
+  --m-surface: #fffdf9;
+  --m-rule: #eadfcd;
+  --m-header-h: 64px;
+  --m-radius-lg: 18px;
+  --m-radius-md: 12px;
+  color-scheme: light;
+}
+:root.dark {
+  --m-ink: #efe5d9;
+  --m-ink-soft: #c9b8a6;
+  --m-leaf: #1d1613;
+  --m-leaf-line: rgba(252, 211, 77, .028);
+  --m-surface: #2b211c;
+  --m-rule: #40332b;
+  color-scheme: dark;
+}
+
+/* ---------- 1. පදනම: අකුරු සහ පත්‍රය ---------- */
+:root body {
+  font-family: "Noto Serif Sinhala", "Iskoola Pota", Inter, serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--m-ink);
+  background-color: var(--m-leaf) !important;
+  /* පුස්කොළයේ තන්තු රේඛා — ඉතා සියුම්ව */
+  background-image: repeating-linear-gradient(180deg, transparent 0 31px, var(--m-leaf-line) 31px 32px);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ශීර්ෂ — serif මගින් ව්‍යුහය පැහැදිලි කරයි */
+:root header h1,
+:root main h1,
+:root main h2,
+:root main h3,
+:root main h4 {
+  font-family: "Noto Serif Sinhala", "Iskoola Pota", serif;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+:root main h2 { line-height: 1.35; }
+
+/* පාළි / මූල පාඨ — serif, ඇල අකුරු නැතිව (සිංහල ඇල අකුරු කියවීමට අපහසුය) */
+:root .pali-text,
+:root .pali-quote,
+:root .pali-font,
+:root .pali-box,
+:root .pali-line,
+:root .pali-line-sub,
+:root .gatha-box,
+:root .pali-card p {
+  font-family: "Noto Serif Sinhala", "Iskoola Pota", serif;
+  letter-spacing: .005em;
+}
+:root main .italic,
+:root main em { font-style: normal; }
+:root main blockquote,
+:root main .italic { font-family: "Noto Serif Sinhala", "Iskoola Pota", serif; }
+
+/* කුඩා අකුරු — ජංගම දුරකථනයේ කියවිය හැකි අවම ප්‍රමාණය */
+:root main .text-\[10px\] { font-size: 11.5px; line-height: 1.55; }
+:root main .text-\[11px\] { font-size: 12.5px; line-height: 1.6; }
+:root main .text-xs { line-height: 1.7; }
+:root main p.text-xs, :root main .text-xs p { font-size: 13.5px; }
+:root main p.text-sm, :root main .text-sm p { font-size: 15px; }
+
+/* පරිච්ඡේද — කියවීමට සුදුසු පේළි උස */
+:root main p { line-height: 1.85; }
+:root main li { line-height: 1.8; }
+
+/* ---------- 2. ශීර්ෂ තීරුව (Header) ---------- */
+:root body > header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: saturate(1.2);
+  box-shadow: 0 1px 0 rgba(0,0,0,.25), 0 6px 18px -8px rgba(63, 10, 12, .55);
+}
+:root body > header h1 {
+  font-weight: 700;
+  line-height: 1.3;
+}
+:root body > header button,
+:root body > header a {
+  min-width: 40px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* කියවීමේ ප්‍රගතිය — පොතේ කහ නූල */
+.m-progress {
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #fcd34d, #f59e0b 60%, #d97706);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 2;
+}
+
+/* බ්‍රෙඩ්ක්‍රම්බ් (මාර්ගය) */
+:root body > nav {
+  font-size: 13px;
+  row-gap: .25rem;
+  padding-bottom: .25rem;
+}
+:root body > nav a { text-underline-offset: 3px; }
+
+/* ---------- 3. ප්‍රධාන අන්තර්ගතය ---------- */
+:root main [id],
+:root main h2,
+:root main h3 { scroll-margin-top: calc(var(--m-header-h) + 16px); }
+
+/* කාඩ්පත්: එක් එක් ධූරාවලියට වෙනස් කෙළවර — එකම රවුම සෑම තැනම නොවේ */
+:root main > section.rounded-2xl,
+:root main > div > section.rounded-2xl { border-radius: var(--m-radius-lg); }
+
+/* සුදු කාඩ්පත් — පත්‍රය මත පත්‍රයක් */
+:root main .bg-white { background-color: var(--m-surface); }
+:root main .shadow-sm { box-shadow: 0 1px 0 rgba(120, 53, 15, .06), 0 2px 10px -6px rgba(120, 53, 15, .18); }
+:root.dark main .shadow-sm { box-shadow: 0 1px 0 rgba(0,0,0,.4); }
+
+/* වගු */
+:root main table { border-collapse: collapse; }
+:root main table th { font-weight: 700; }
+:root main table td, :root main table th { vertical-align: top; }
+
+/* ජංගම තිරයේ කාඩ්පත් තුළ කාඩ්පත් — පිරවුම අඩු කර පෙළට ඉඩ දීම */
+@media (max-width: 639px) {
+  :root main.p-4 { padding-left: .8rem; padding-right: .8rem; }
+  :root main section.p-5,
+  :root main section.p-6,
+  :root main div.p-5,
+  :root main div.p-6 { padding: 1rem; }
+  :root main .rounded-2xl .p-5,
+  :root main .rounded-2xl .p-4,
+  :root main .rounded-xl .p-4 { padding: .85rem; }
+  :root main .rounded-2xl .rounded-xl .p-4,
+  :root main .rounded-2xl .rounded-xl .p-3,
+  :root main .rounded-xl .rounded-xl .p-3 { padding: .7rem; }
+  :root main .rounded-2xl .rounded-xl .px-4 { padding-left: .75rem; padding-right: .75rem; }
+}
+
+/* ---------- 4. පාදකය (Footer) ---------- */
+:root body > footer {
+  margin-top: 2rem;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* ---------- 5. පාවෙන බොත්තම් + පටුන ---------- */
+.m-fab-stack {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+.m-fab {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  border: 1px solid rgba(252, 211, 77, .55);
+  background: var(--m-maroon);
+  color: #fde68a;
+  font-size: 18px;
+  box-shadow: 0 10px 24px -10px rgba(63, 10, 12, .7), 0 0 0 4px rgba(251, 191, 36, .12);
+  cursor: pointer;
+  transition: transform .18s ease, opacity .18s ease, background-color .18s ease;
+}
+.m-fab:hover { background: var(--m-lacquer); }
+.m-fab:active { transform: scale(.94); }
+.m-fab[hidden] { display: none; }
+.m-fab.m-fab--top { opacity: 0; transform: translateY(8px); pointer-events: none; }
+.m-fab.m-fab--top.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.m-fab svg { width: 20px; height: 20px; }
+
+.m-scrim {
+  position: fixed; inset: 0; z-index: 55;
+  background: rgba(26, 8, 6, .5);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+.m-scrim.is-open { opacity: 1; pointer-events: auto; }
+
+.m-sheet {
+  position: fixed; z-index: 60;
+  left: 0; right: 0; bottom: 0;
+  max-height: min(78vh, 640px);
+  display: flex; flex-direction: column;
+  background: var(--m-surface);
+  color: var(--m-ink);
+  border-top: 3px solid var(--m-gold);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -18px 40px -16px rgba(26, 8, 6, .55);
+  transform: translateY(102%);
+  visibility: hidden;
+  transition: transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s linear .26s;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.m-sheet.is-open { transform: none; visibility: visible; transition: transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+@media (min-width: 768px) {
+  .m-sheet {
+    left: auto; right: 20px; bottom: 20px; width: 380px;
+    border-radius: 18px; border: 1px solid var(--m-rule); border-top: 3px solid var(--m-gold);
+    transform: translateY(16px) scale(.98); opacity: 0; pointer-events: none;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .m-sheet.is-open { transform: none; opacity: 1; pointer-events: auto; }
+}
+.m-sheet__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--m-rule);
+}
+.m-sheet__title {
+  font-family: "Noto Serif Sinhala", serif;
+  font-weight: 700; font-size: 17px; color: var(--m-lacquer);
+  display: flex; align-items: center; gap: 10px;
+}
+:root.dark .m-sheet__title { color: #fcd34d; }
+.m-sheet__title svg { width: 18px; height: 18px; color: var(--m-saffron); }
+.m-sheet__close {
+  width: 40px; height: 40px; border-radius: 10px; border: 0;
+  background: transparent; color: var(--m-ink-soft); cursor: pointer;
+  display: grid; place-items: center;
+}
+.m-sheet__close:hover { background: rgba(217, 119, 6, .1); }
+.m-sheet__close svg { width: 18px; height: 18px; }
+.m-toc { list-style: none; margin: 0; padding: 8px 8px 14px; overflow-y: auto; overscroll-behavior: contain; }
+.m-toc li { margin: 0; }
+.m-toc a {
+  display: grid; grid-template-columns: 2.1rem 1fr; align-items: baseline;
+  gap: 4px; padding: 9px 10px; border-radius: 10px;
+  color: var(--m-ink); text-decoration: none; font-size: 15px; line-height: 1.5;
+}
+.m-toc a:hover, .m-toc a:focus-visible { background: rgba(245, 158, 11, .12); outline: none; }
+.m-toc a.is-current { background: rgba(245, 158, 11, .18); color: var(--m-lacquer); font-weight: 600; }
+:root.dark .m-toc a.is-current { color: #fde68a; }
+.m-toc__n {
+  font-variant-numeric: tabular-nums; font-size: 12.5px; font-weight: 700;
+  color: var(--m-saffron);
+}
+.m-toc li.lvl-3 a { padding-left: 2.6rem; font-size: 14px; color: var(--m-ink-soft); grid-template-columns: 1fr; }
+.m-toc li.lvl-3 .m-toc__n { display: none; }
+
+/* ---------- 6. ප්‍රවේශ්‍යතාව ---------- */
+:root a:focus-visible,
+:root button:focus-visible,
+:root summary:focus-visible,
+:root [tabindex]:focus-visible {
+  outline: 2.5px solid #f59e0b;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+::selection { background: rgba(245, 158, 11, .35); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- 7. මුද්‍රණය ---------- */
+@media print {
+  .m-fab-stack, .m-sheet, .m-scrim, .m-progress, body > header button { display: none !important; }
+  :root body { background: #fff !important; }
+}
+
+/* ============================================================
+   8. මුල් පිටුව (index.html) — පුස්කොළ පටුනක් ලෙස
+   ============================================================ */
+.home { display: grid; gap: 30px; }
+
+.home-leaf {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 22px 24px;
+  border-radius: 22px;
+  color: #fef3c7;
+  background:
+    radial-gradient(120% 90% at 100% 100%, rgba(217,119,6,.28), transparent 55%),
+    linear-gradient(160deg, #5a1416 0%, #3f0a0c 55%, #2a0607 100%);
+  box-shadow: inset 0 0 0 1px rgba(252,211,77,.22), 0 18px 34px -20px rgba(63,10,12,.8);
+}
+/* පත්‍රය වටා ඇති සියුම් රන් රේඛාව */
+.home-leaf::before {
+  content: ""; position: absolute; inset: 8px; border-radius: 16px;
+  border: 1px solid rgba(252,211,77,.18); pointer-events: none;
+}
+/* පුස්කොළ පොතේ නූල් සිදුර */
+.home-leaf__hole {
+  position: absolute; top: 22px; right: 24px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #1a0405; box-shadow: 0 0 0 2px rgba(252,211,77,.55);
+}
+.home-leaf__hole::after {
+  content: ""; position: absolute; left: 50%; bottom: 10px; width: 2px; height: 40px;
+  transform: translateX(-50%); background: linear-gradient(#f59e0b, rgba(245,158,11,0));
+}
+.home-leaf__wheel {
+  position: absolute; right: -28px; bottom: -34px;
+  font-size: 150px; line-height: 1; color: #fde68a; opacity: .07; pointer-events: none;
+}
+.home-leaf__badge {
+  display: inline-block; font-size: 12.5px; font-weight: 600;
+  padding: 3px 12px; border-radius: 999px;
+  color: #fcd34d; background: rgba(245,158,11,.14); border: 1px solid rgba(252,211,77,.35);
+}
+:root .home-leaf__title {
+  margin: 12px 0 10px; padding-right: 28px;
+  font-family: "Noto Serif Sinhala", serif; font-weight: 700;
+  font-size: clamp(1.55rem, 5.2vw, 2.1rem); line-height: 1.35; color: #fde68a;
+}
+:root .home-leaf__desc {
+  position: relative; max-width: 62ch; margin: 0;
+  font-size: 15.5px; line-height: 1.9; color: rgba(254,243,199,.92);
+}
+
+.home-group { display: grid; gap: 12px; }
+:root .home-group__title {
+  display: flex; align-items: center; gap: 10px; margin: 0 2px;
+  font-family: "Noto Serif Sinhala", serif; font-size: 1.2rem; font-weight: 700;
+  color: var(--m-lacquer);
+}
+:root.dark .home-group__title { color: #fcd34d; }
+.home-group__title::after {
+  content: ""; flex: 1; height: 1px; margin-left: 4px;
+  background: linear-gradient(90deg, rgba(217,119,6,.55), rgba(217,119,6,0));
+}
+.home-group__mark {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+  font-size: 14px; color: #92400e; background: #fef3c7; border: 1px solid #fcd34d;
+}
+.home-group__mark--gem { color: #6d28d9; background: #ede9fe; border-color: #c4b5fd; }
+:root.dark .home-group__mark { background: rgba(245,158,11,.14); color: #fcd34d; border-color: rgba(252,211,77,.35); }
+:root.dark .home-group__mark--gem { background: rgba(139,92,246,.18); color: #c4b5fd; border-color: rgba(196,181,253,.35); }
+
+.home-rows { display: grid; gap: 10px; }
+.home-row {
+  display: grid; grid-template-columns: 56px 1fr 18px; align-items: center; gap: 14px;
+  padding: 14px 16px 14px 14px; border-radius: 16px;
+  background: var(--m-surface); border: 1px solid var(--m-rule);
+  color: var(--m-ink); text-decoration: none;
+  box-shadow: 0 1px 0 rgba(120,53,15,.05);
+  transition: border-color .15s ease, background-color .15s ease, transform .15s ease;
+}
+.home-row:hover { border-color: #f59e0b; }
+.home-row:active { transform: scale(.99); }
+.home-row__tab {
+  width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center;
+  font-size: 20px; color: #92400e;
+  background: linear-gradient(180deg, #fffbeb, #fef3c7);
+  border: 1.5px solid #fbbf24;
+}
+.home-row__tab--num {
+  font-family: "Noto Serif Sinhala", Georgia, serif; font-weight: 700; font-size: 21px;
+  font-variant-numeric: lining-nums tabular-nums; color: #701a1d; letter-spacing: -.01em;
+}
+:root.dark .home-row__tab { background: rgba(245,158,11,.1); border-color: rgba(251,191,36,.55); color: #fcd34d; }
+.home-row__body { display: grid; gap: 3px; min-width: 0; }
+.home-row__title {
+  font-family: "Noto Serif Sinhala", serif; font-weight: 700; font-size: 1.08rem; line-height: 1.45;
+  color: var(--m-maroon);
+}
+:root.dark .home-row__title { color: #fde68a; }
+.home-row__desc { font-size: 14px; line-height: 1.7; color: var(--m-ink-soft); }
+.home-row__go { font-size: 14px; color: #d97706; justify-self: end; }
+
+/* සබ්බත්තික — අනෙක් සියල්ල ආවරණය කරන ප්‍රධාන පේළිය */
+.home-row--lead {
+  background: linear-gradient(120deg, #b45309, #d97706 55%, #b45309);
+  border-color: transparent; color: #fff;
+  box-shadow: 0 14px 28px -18px rgba(180,83,9,.9);
+}
+.home-row--lead:hover { border-color: #fde68a; }
+.home-row--lead .home-row__tab { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.55); color: #fff; }
+.home-row--lead .home-row__title { color: #fff; font-size: 1.15rem; }
+:root.dark .home-row--lead .home-row__title { color: #fff; }
+.home-row--lead .home-row__desc { color: rgba(255,251,235,.92); }
+.home-row--lead .home-row__go { color: #fef3c7; }
+
+/* සතර පරමාර්ථ */
+.home-param {
+  border-radius: 18px; overflow: hidden;
+  background: var(--m-surface); border: 1px solid var(--m-rule);
+}
+.home-param__head {
+  display: grid; grid-template-columns: 1fr 18px; align-items: center; gap: 14px;
+  padding: 16px 16px 14px; text-decoration: none; color: inherit;
+  background: linear-gradient(120deg, rgba(109,40,217,.08), rgba(37,99,235,.06));
+  border-bottom: 1px solid var(--m-rule);
+}
+.home-param__head:hover { background: linear-gradient(120deg, rgba(109,40,217,.14), rgba(37,99,235,.1)); }
+.home-param__head .home-row__go { color: #6d28d9; }
+:root.dark .home-param__head .home-row__go { color: #c4b5fd; }
+.home-param__text { display: grid; gap: 4px; }
+.home-param__grid { display: grid; grid-template-columns: 1fr 1fr; }
+@media (min-width: 640px) { .home-param__grid { grid-template-columns: repeat(4, 1fr); } }
+.home-p {
+  --c: #059669;
+  display: grid; gap: 2px; padding: 14px 16px 15px;
+  text-decoration: none; color: var(--m-ink);
+  border-top: 3px solid var(--c);
+  border-right: 1px solid var(--m-rule);
+  border-bottom: 1px solid var(--m-rule);
+  transition: background-color .15s ease;
+}
+.home-p:hover { background: color-mix(in srgb, var(--c) 8%, transparent); }
+.home-p__n {
+  font-family: "Noto Serif Sinhala", Georgia, serif; font-weight: 700; font-size: 1.35rem; line-height: 1.2;
+  font-variant-numeric: lining-nums tabular-nums; color: var(--c);
+}
+.home-p__name { font-family: "Noto Serif Sinhala", serif; font-weight: 600; font-size: 1rem; }
+.home-p--citta { --c: #059669; }
+.home-p--cet   { --c: #e11d48; }
+.home-p--rupa  { --c: #d97706; }
+.home-p--nib   { --c: #7c3aed; }
+:root.dark .home-p--citta { --c: #34d399; }
+:root.dark .home-p--cet   { --c: #fb7185; }
+:root.dark .home-p--rupa  { --c: #fbbf24; }
+:root.dark .home-p--nib   { --c: #a78bfa; }
+
+/* ශීර්ෂ මාතෘකාව එක් පේළියක තබා ගැනීම (කුඩා තිර) */
+:root body > header h1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+@media (max-width: 430px) {
+  :root body > header h1 { font-size: 1.12rem; }
+  :root body > header .px-4 { padding-left: .6rem; padding-right: .6rem; }
+}
+
+/* ============================================================
+   9. සතර පරමාර්ථ — පාට පද්ධතිය (accent tokens)
+   ============================================================ */
+.pm--citta,    .m-hero--citta,    .m-cta--citta    { --a: #059669; --a-ink: #065f46; --a-tint: #e7f8f0; }
+.pm--cetasika, .m-hero--cetasika, .m-cta--cetasika { --a: #e11d48; --a-ink: #9f1239; --a-tint: #fdecef; }
+.pm--rupa,     .m-hero--rupa,     .m-cta--rupa     { --a: #d97706; --a-ink: #92400e; --a-tint: #fdf3dc; }
+.pm--nibbana,  .m-hero--nibbana,  .m-cta--nibbana, .m-callout--nibbana { --a: #7c3aed; --a-ink: #5b21b6; --a-tint: #f1ecfe; }
+.m-cta--indigo { --a: #4f46e5; --a-ink: #3730a3; --a-tint: #eceefe; }
+:root.dark .pm--citta,    :root.dark .m-hero--citta,    :root.dark .m-cta--citta    { --a: #34d399; --a-ink: #a7f3d0; --a-tint: rgba(52,211,153,.12); }
+:root.dark .pm--cetasika, :root.dark .m-hero--cetasika, :root.dark .m-cta--cetasika { --a: #fb7185; --a-ink: #fecdd3; --a-tint: rgba(251,113,133,.12); }
+:root.dark .pm--rupa,     :root.dark .m-hero--rupa,     :root.dark .m-cta--rupa     { --a: #fbbf24; --a-ink: #fde68a; --a-tint: rgba(251,191,36,.12); }
+:root.dark .pm--nibbana,  :root.dark .m-hero--nibbana,  :root.dark .m-cta--nibbana, :root.dark .m-callout--nibbana { --a: #a78bfa; --a-ink: #ddd6fe; --a-tint: rgba(167,139,250,.13); }
+:root.dark .m-cta--indigo { --a: #818cf8; --a-ink: #c7d2fe; --a-tint: rgba(129,140,248,.13); }
+
+/* ---------- 9a. සතර පරමාර්ථ පිටුව (paramattha/index.html) ---------- */
+.pm-main { max-width: 56rem; padding: 20px 16px 56px; display: grid; gap: 40px; }
+@media (min-width: 640px)  { .pm-main { padding: 28px 28px 64px; } }
+@media (min-width: 1024px) { .pm-main { max-width: 68rem; padding: 36px 40px 80px; gap: 52px; } }
+
+.pm-intro { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--m-rule); }
+.pm-eyebrow { font-size: 13px; color: var(--m-saffron); font-weight: 600; }
+:root .pm-title {
+  margin: 0; font-family: "Noto Serif Sinhala", serif; font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3rem); line-height: 1.2; color: var(--m-maroon);
+}
+:root.dark .pm-title { color: #fde68a; }
+.pm-gatha { margin: 4px 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--m-gold); }
+:root .pm-gatha p { margin: 0; font-family: "Noto Serif Sinhala", serif; font-size: clamp(1.05rem, 2.6vw, 1.3rem); line-height: 1.9; color: var(--m-lacquer); }
+:root.dark .pm-gatha p { color: #fcd34d; }
+:root .pm-lede { margin: 0; max-width: 70ch; font-size: 16px; color: var(--m-ink-soft); }
+
+.pm-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
+@media (min-width: 640px) { .pm-stats { grid-template-columns: repeat(4, 1fr); } }
+.pm-stat {
+  display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; text-decoration: none;
+  background: var(--m-surface); border: 1px solid var(--m-rule); border-top: 3px solid var(--a);
+  transition: background-color .15s ease;
+}
+.pm-stat:hover { background: var(--a-tint); }
+.pm-stat__n { font-family: "Noto Serif Sinhala", Georgia, serif; font-weight: 700; font-size: 1.5rem; line-height: 1.25; color: var(--a); font-variant-numeric: lining-nums tabular-nums; }
+.pm-stat__l { font-size: 13.5px; color: var(--m-ink-soft); }
+
+.pm-sec { display: grid; gap: 16px; }
+:root .pm-h { margin: 0; font-family: "Noto Serif Sinhala", serif; font-size: clamp(1.25rem, 3vw, 1.55rem); font-weight: 700; color: var(--m-maroon); line-height: 1.4; }
+:root.dark .pm-h { color: #fde68a; }
+.pm-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+:root .pm-sub { margin: 4px 0 0; font-size: 13.5px; color: var(--m-ink-soft); }
+.pm-chip { flex-shrink: 0; font-size: 12.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; color: #92400e; background: #fef3c7; }
+:root.dark .pm-chip { color: #fcd34d; background: rgba(245,158,11,.14); }
+:root .pm-prose { margin: 0; max-width: 72ch; }
+
+/* පාලි | සිංහල — laptop/tablet තිරවල දෙපසින් */
+.pm-commentary { grid-template-columns: 1fr; gap: 0; border: 1px solid var(--m-rule); border-radius: 16px; background: var(--m-surface); overflow: hidden; }
+@media (min-width: 900px) { .pm-commentary { grid-template-columns: 1fr 1fr; } }
+.pm-col { padding: 18px 18px 20px; }
+.pm-col + .pm-col { border-top: 1px solid var(--m-rule); }
+@media (min-width: 900px) { .pm-col + .pm-col { border-top: 0; border-left: 1px solid var(--m-rule); } .pm-col { padding: 24px 26px; } }
+.pm-col--pali { background: linear-gradient(180deg, rgba(254,243,199,.55), rgba(254,243,199,.15)); }
+:root.dark .pm-col--pali { background: rgba(245,158,11,.06); }
+:root .pm-label { margin: 0 0 10px; font-family: "Noto Serif Sinhala", serif; font-size: 13px; font-weight: 700; color: #92400e; }
+:root.dark .pm-label { color: #fcd34d; }
+:root .pm-col p { margin: 0 0 10px; font-size: 15px; }
+:root .pm-col--pali p { font-size: 15.5px; line-height: 2; color: var(--m-ink); }
+.pm-list { margin: 6px 0 12px; padding-left: 1.2rem; list-style: disc; font-size: 15px; }
+.pm-list li { margin: 4px 0; }
+.pm-list strong { color: var(--m-lacquer); }
+:root.dark .pm-list strong { color: #fcd34d; }
+
+/* විස්තර ලැයිස්තුව (accordion) */
+.pm-acc { border: 1px solid var(--m-rule); border-radius: 16px; background: var(--m-surface); overflow: hidden; }
+.pm-acc__item + .pm-acc__item { border-top: 1px solid var(--m-rule); }
+.pm-acc__btn {
+  width: 100%; display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 14px;
+  padding: 14px 16px; text-align: left; background: transparent; border: 0; cursor: pointer; color: var(--m-ink);
+  transition: background-color .15s ease;
+}
+.pm-acc__btn:hover { background: var(--a-tint); }
+.pm-acc__n {
+  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  font-family: "Noto Serif Sinhala", Georgia, serif; font-weight: 700; font-size: 1.15rem;
+  color: var(--a); background: var(--a-tint); border: 1px solid color-mix(in srgb, var(--a) 35%, transparent);
+}
+.pm-acc__name { display: grid; gap: 2px; min-width: 0; }
+.pm-acc__meta { display: flex; gap: 6px; flex-wrap: wrap; }
+.pm-tag, .pm-count { font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; color: var(--a-ink); background: var(--a-tint); }
+.pm-tag { background: transparent; border: 1px solid color-mix(in srgb, var(--a) 40%, transparent); }
+:root .pm-acc__name h3 { margin: 0; font-size: 1.12rem; font-weight: 700; color: var(--m-ink); }
+.pm-acc__more { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--a); }
+.pm-acc__panel { padding: 2px 18px 18px 70px; border-left: 3px solid var(--a); margin-left: 16px; margin-bottom: 14px; }
+@media (max-width: 639px) { .pm-acc__panel { padding: 2px 14px 14px 16px; } }
+:root .pm-acc__panel p { margin: 0 0 10px; font-size: 15px; }
+
+/* විස්තරාත්මක පිටු කාඩ්පත් — බැනර් වෙනුවට */
+.pm-cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 640px)  { .pm-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px) { .pm-cards { grid-template-columns: repeat(4, 1fr); } }
+.pm-card {
+  position: relative; display: flex; flex-direction: column; gap: 10px;
+  padding: 18px 18px 16px; border-radius: 16px; text-decoration: none; color: var(--m-ink);
+  background: var(--m-surface); border: 1px solid var(--m-rule);
+  transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.pm-card::before { content: ""; position: absolute; left: 18px; right: 18px; top: -1px; height: 3px; border-radius: 0 0 3px 3px; background: var(--a); }
+.pm-card:hover { border-color: var(--a); transform: translateY(-2px); box-shadow: 0 14px 28px -20px color-mix(in srgb, var(--a) 70%, transparent); }
+.pm-card__top { display: flex; align-items: center; gap: 12px; }
+.pm-card__icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 18px; color: var(--a); background: var(--a-tint); }
+.pm-card__meta { display: grid; gap: 3px; }
+.pm-card__n { font-size: 12.5px; color: var(--m-ink-soft); }
+:root .pm-card__title { margin: 0; font-family: "Noto Serif Sinhala", serif; font-size: 1.2rem; font-weight: 700; color: var(--a-ink); }
+:root .pm-card__desc { margin: 0; font-size: 14.5px; line-height: 1.8; color: var(--m-ink-soft); flex: 1; }
+.pm-card__go { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px dashed var(--m-rule); font-size: 13.5px; font-weight: 600; color: var(--a); }
+.pm-card__go > i { font-size: 20px; transition: transform .15s ease; }
+.pm-card:hover .pm-card__go > i { transform: translateX(3px); }
+
+/* සාරාංශ වගුව */
+.pm-table-wrap { overflow-x: auto; border: 1px solid var(--m-rule); border-radius: 14px; background: var(--m-surface); }
+.pm-table { width: 100%; font-size: 14.5px; border-collapse: collapse; }
+.pm-table th { text-align: left; padding: 12px 14px; font-size: 13px; color: #92400e; background: rgba(254,243,199,.6); border-bottom: 1px solid var(--m-rule); }
+:root.dark .pm-table th { color: #fcd34d; background: rgba(245,158,11,.08); }
+.pm-table td { padding: 12px 14px; border-bottom: 1px solid var(--m-rule); color: var(--m-ink-soft); }
+.pm-table tr:last-child td { border-bottom: 0; }
+.pm-table__name { font-weight: 700; color: var(--a) !important; white-space: nowrap; box-shadow: inset 3px 0 0 var(--a); }
+.pm-table__name i { margin-right: 6px; }
+.pm-table__n { font-weight: 700; color: var(--a) !important; text-align: center; font-variant-numeric: tabular-nums; }
+.pm-foot { text-align: center; font-size: 13px; color: var(--m-ink-soft); margin: 0; }
+.pm-foot i { color: var(--m-gold); margin-right: 6px; }
+
+/* ============================================================
+   10. පරමාර්ථ උප පිටු — බැනර් ඉවත් කළ සරල හැඳින්වීම (m-hero)
+   ============================================================ */
+:root .m-hero {
+  position: relative; overflow: visible;
+  background: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  padding: 6px 0 24px !important; color: var(--m-ink) !important;
+  border-bottom: 1px solid var(--m-rule) !important;
+}
+:root .m-hero > .absolute { display: none !important; }
+:root .m-hero [class*="text-white"],
+:root .m-hero [class*="text-amber-1"],
+:root .m-hero [class*="text-amber-50"],
+:root .m-hero [class*="text-saffron-2"],
+:root .m-hero [class*="text-saffron-3"],
+:root .m-hero [class*="text-violet-2"],
+:root .m-hero [class*="text-emerald-2"] { color: inherit !important; }
+:root .m-hero [class*="drop-shadow"] { filter: none !important; }
+:root .m-hero :is(h1, h2) {
+  color: var(--a-ink) !important; font-size: clamp(1.8rem, 5vw, 2.6rem) !important; line-height: 1.25 !important;
+}
+:root .m-hero p { color: var(--m-ink-soft) !important; }
+:root .m-hero > .relative > span.inline-block,
+:root .m-hero > span.inline-block {
+  background: var(--a-tint) !important; border: 0 !important; color: var(--a-ink) !important; backdrop-filter: none !important;
+}
+:root .m-hero [class*="backdrop-blur"] { backdrop-filter: none !important; }
+/* ගාථා කොටුව → වම් රේඛාවක් පමණි */
+:root .m-hero [class*="bg-white/15"] {
+  background: transparent !important; border: 0 !important; border-left: 3px solid var(--a) !important;
+  border-radius: 0 !important; padding: 2px 0 2px 16px !important;
+}
+:root .m-hero [class*="bg-white/15"] p { color: var(--a-ink) !important; font-family: "Noto Serif Sinhala", serif; }
+:root .m-hero i[class*="fa-quote"] { color: var(--a) !important; }
+/* සංඛ්‍යා කොටු */
+:root .m-hero .grid > div {
+  background: var(--m-surface) !important; border: 1px solid var(--m-rule) !important; border-top: 3px solid var(--a) !important;
+  border-radius: 12px !important; text-align: left !important; padding: 12px 14px !important;
+}
+:root .m-hero .grid > div > div:first-child { color: var(--a) !important; font-family: "Noto Serif Sinhala", Georgia, serif; }
+:root .m-hero .grid > div > div:last-child { color: var(--m-ink-soft) !important; font-size: 13px !important; }
+:root.dark .m-hero--cetasika { --a-ink: #fde68a; }
+
+/* බැනර් බොත්තම් → සරල, රේඛා සහිත සබැඳි */
+:root .m-cta {
+  background: var(--m-surface) !important; color: var(--a-ink) !important;
+  border: 1px solid var(--m-rule) !important; border-left: 4px solid var(--a) !important;
+  box-shadow: none !important; transform: none !important;
+}
+:root .m-cta:hover { background: var(--a-tint) !important; }
+:root .m-cta [class*="text-"]:not(i) { color: inherit !important; }
+:root .m-cta i { color: var(--a) !important; }
+:root .m-cta p { color: var(--m-ink-soft) !important; }
+:root .m-cta [class*="bg-white/"] { background: var(--a-tint) !important; backdrop-filter: none !important; }
+
+:root .m-callout {
+  background: var(--a-tint) !important; border: 1px solid color-mix(in srgb, var(--a) 30%, transparent) !important;
+  border-left: 4px solid var(--a) !important; box-shadow: none !important; color: var(--m-ink) !important;
+}
+:root .m-callout [class*="text-white"] { color: var(--m-ink) !important; }
+:root .m-callout h4 { color: var(--a-ink) !important; }
+
+/* ============================================================
+   11. උපාංග අනුව පිරිසැලසුම — phone (<640) · tablet (640–1023) · laptop (≥1024)
+   ============================================================ */
+.m-wrap { max-width: 56rem; margin-left: auto; margin-right: auto; }
+
+/* ප්‍රධාන සංචාලන තීරුව — phone තිරයේ සඟවා ඇත */
+.m-topnav { display: none; }
+@media (min-width: 768px) {
+  .m-topnav {
+    display: block;
+    border-top: 1px solid rgba(252, 211, 77, .14);
+    background: rgba(0, 0, 0, .14);
+  }
+  .m-topnav__in {
+    max-width: 76rem; margin: 0 auto; padding: 0 16px;
+    display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none;
+  }
+  .m-topnav__in::-webkit-scrollbar { display: none; }
+  .m-topnav a {
+    flex-shrink: 0; display: inline-flex !important; align-items: center;
+    min-height: 40px !important; padding: 0 14px; font-size: 14px; font-weight: 500;
+    color: rgba(254, 243, 199, .78); text-decoration: none; white-space: nowrap;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .m-topnav a:hover { color: #fde68a; }
+  .m-topnav a.is-current { color: #fcd34d; border-bottom-color: #f59e0b; font-weight: 700; }
+}
+
+/* tablet: තරමක් පුළුල් අන්තර්ගතය */
+@media (min-width: 768px) {
+  :root body > header > div:first-child { max-width: 76rem; }
+  :root body > main.max-w-3xl,
+  :root body > nav.max-w-3xl { max-width: 52rem; }
+}
+/* laptop: පුළුල් තිර — කියවීමට සුදුසු පළල තබා, ඉතිරි ඉඩ පටුනට */
+@media (min-width: 1024px) {
+  :root body > main.max-w-3xl,
+  :root body > main.max-w-4xl,
+  :root body > nav.max-w-3xl,
+  :root body > nav.max-w-4xl { max-width: 58rem; }
+  :root body > main { padding-top: 1.75rem; }
+  .m-wrap { max-width: 68rem; }
+}
+@media (min-width: 1280px) {
+  :root body > header > div:first-child { max-width: 82rem; }
+  .m-topnav__in { max-width: 82rem; }
+}
+
+/* laptop පටුන් තීරුව */
+.m-rail {
+  position: fixed; z-index: 20;
+  top: calc(var(--m-header-h) + 24px);
+  max-height: calc(100vh - var(--m-header-h) - 48px);
+  overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
+  padding: 14px 8px 14px 0;
+  border-left: 1px solid var(--m-rule);
+}
+.m-rail[hidden] { display: none; }
+.m-rail__title {
+  display: flex; align-items: center; gap: 8px; padding: 0 12px 8px 16px;
+  font-family: "Noto Serif Sinhala", serif; font-weight: 700; font-size: 15px; color: var(--m-lacquer);
+}
+:root.dark .m-rail__title { color: #fcd34d; }
+.m-rail__title svg { width: 16px; height: 16px; color: var(--m-saffron); }
+.m-rail .m-toc { padding: 0; }
+.m-rail .m-toc a {
+  font-size: 13.5px; padding: 6px 10px 6px 16px; border-radius: 0 8px 8px 0;
+  grid-template-columns: 1.6rem 1fr; margin-left: -1px; border-left: 2px solid transparent;
+}
+.m-rail .m-toc a.is-current { border-left-color: var(--m-gold); background: rgba(245, 158, 11, .12); }
+.m-rail .m-toc li.lvl-3 a { padding-left: 2.2rem; font-size: 13px; }
+
+/* ---------- මුල් පිටුව: උපාංග අනුව ---------- */
+@media (min-width: 640px) {
+  .home-rows { grid-template-columns: repeat(3, 1fr); }
+  .home-rows .home-row { grid-template-columns: 1fr; align-content: start; gap: 12px; padding: 16px; }
+  .home-rows .home-row .home-row__go { display: none; }
+}
+@media (min-width: 1024px) {
+  body:has(#view-home) > main { max-width: 72rem !important; }
+  .home { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 36px; align-items: start; }
+  .home-leaf { grid-row: span 2; position: sticky; top: calc(var(--m-header-h) + 24px); padding: 34px 30px 32px; }
+  :root .home-leaf__title { font-size: 2.2rem; }
+}
+
+/* සතර පරමාර්ථ (මුල් පිටුව) — බැනර් රහිත සරල ශීර්ෂය */
+:root .home-param__head { background: transparent; }
+:root .home-param__head:hover { background: rgba(245, 158, 11, .07); }
+:root .home-param__head .home-row__go { color: var(--m-saffron); }
+
+/* ---------- ලැයිස්තු දසුන් — tablet/laptop තිරවල තීරු දෙකක් ---------- */
+@media (min-width: 768px) {
+  .m-grid-2 { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .m-grid-2 > * { margin-top: 0 !important; }
+}
+@media (min-width: 768px) {
+  #tika-list-container, #gochhaka-list, #duka-list-container, #suttanta-list-container,
+  #tika-bookmarks-container, #duka-bookmarks-container, #suttanta-bookmarks-container {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: stretch;
+  }
+  #tika-list-container > *, #gochhaka-list > *, #duka-list-container > *, #suttanta-list-container > *,
+  #tika-bookmarks-container > *, #duka-bookmarks-container > *, #suttanta-bookmarks-container > * { margin-top: 0 !important; }
+  #tika-pada-tabs-container, #suttanta-pada-tabs-container, #duka-pair-container {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px;
+  }
+  #duka-pair-container > * { margin-top: 0 !important; }
+}
+
+/* ============================================================
+   12. රූප — සවිස්තරාත්මක තොරතුරු : සම්පූර්ණ පාඨය (rupa-deta-full.js)
+   ============================================================ */
+.rd-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--m-rule); }
+.rd-tab {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 999px;
+  font-size: 13.5px; font-weight: 600; cursor: pointer;
+  color: #065f46; background: transparent; border: 1px solid rgba(5,150,105,.35);
+}
+.rd-tab.is-on { color: #fff; background: #047857; border-color: #047857; }
+:root.dark .rd-tab { color: #a7f3d0; border-color: rgba(52,211,153,.35); }
+:root.dark .rd-tab.is-on { color: #064e3b; background: #34d399; border-color: #34d399; }
+.rd-src { margin-left: auto; font-size: 12px; color: var(--m-ink-soft); }
+.rd-full { max-width: 72ch; }
+:root .rd-full .rd-p { margin: 0 0 14px; font-size: 15.5px; line-height: 1.95; color: var(--m-ink); }
+:root .rd-full .rd-namo { text-align: center !important; font-weight: 700; color: var(--m-lacquer); margin-bottom: 18px; }
+:root.dark .rd-full .rd-namo { color: #fcd34d; }
+:root .rd-full strong.pali-text { font-weight: 700; color: #7c2d12; }
+:root.dark .rd-full strong.pali-text { color: #fcd34d; }
+:root .rd-full .rd-h {
+  margin: 26px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--m-rule);
+  font-size: 1.08rem; font-weight: 700; color: #065f46;
+}
+:root.dark .rd-full .rd-h { color: #6ee7b7; }
+:root .rd-full .rd-h6 { margin: 18px 0 6px; font-size: 15px; font-weight: 700; color: var(--m-lacquer); font-family: "Noto Serif Sinhala", serif; }
+:root.dark .rd-full .rd-h6 { color: #fcd34d; }
+:root .rd-full .rd-qh { color: #b45309; }
+.rd-full .rd-gatha {
+  margin: 10px 0 16px; padding: 10px 16px; border-left: 3px solid #d97706;
+  background: rgba(254,243,199,.5); border-radius: 0 10px 10px 0;
+  font-weight: 700; line-height: 2; color: #78350f;
+}
+:root.dark .rd-full .rd-gatha { background: rgba(245,158,11,.08); color: #fde68a; }
+.rd-full .rd-ol, .rd-full .rd-q { margin: 6px 0 16px; padding-left: 1.6rem; list-style: decimal; }
+.rd-full .rd-ol li, .rd-full .rd-q li { margin: 5px 0; font-size: 15px; line-height: 1.85; padding-left: 4px; }
+.rd-full .rd-q { padding: 12px 14px 12px 2.2rem; border-radius: 12px; background: rgba(254,243,199,.45); border: 1px dashed rgba(217,119,6,.45); }
+:root.dark .rd-full .rd-q { background: rgba(245,158,11,.06); }
+.rd-table-wrap { overflow-x: auto; margin: 8px 0 18px; }
+.rd-table { border-collapse: collapse; font-size: 14.5px; min-width: 320px; }
+.rd-table td { border: 1px solid var(--m-rule); padding: 6px 12px; }
+.rd-table .rd-n { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; color: #92400e; }
+:root.dark .rd-table .rd-n { color: #fcd34d; }
+:root #rupa-deta-content .rd-gatha { text-align: left !important; }
+
+/* ============================================================
+   13. චෛතසික — පාඩම් 1-13, ලක්ඛණාදි චතුක්කය, විස්තර
+   ============================================================ */
+.les, .lr-cat { border: 1px solid var(--m-rule); border-radius: 14px; background: var(--m-paper, #fff); overflow: hidden; }
+.les > summary, .lr-cat > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 12px 16px; font-weight: 700; color: var(--m-lacquer); }
+.les > summary::-webkit-details-marker, .lr-cat > summary::-webkit-details-marker, .cet-more > summary::-webkit-details-marker { display: none; }
+.les > summary::after, .lr-cat > summary::after { content: "\203A"; margin-left: auto; font-size: 20px; transition: transform .2s; }
+.les[open] > summary::after, .lr-cat[open] > summary::after { transform: rotate(90deg); }
+.les-n, .lr-n { min-width: 30px; height: 30px; padding: 0 6px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: #f59e0b; color: #4c0519; font-size: 13px; }
+.les-body { padding: 4px 18px 18px; margin: 0 auto; }
+.lr-items { padding: 4px 14px 14px; display: grid; gap: 12px; }
+@media (min-width: 900px) { .lr-items { grid-template-columns: 1fr 1fr; } }
+.lr-item { border: 1px solid var(--m-rule); border-radius: 12px; padding: 12px 14px; }
+.lr-item h4 { font-weight: 700; color: var(--m-lacquer); margin-bottom: 6px; }
+.lr-id { font-size: 12px; opacity: .7; }
+.lr-def { font-size: 13px; margin-bottom: 8px; text-align: justify; }
+.lr-f { display: grid; grid-template-columns: 96px 1fr; gap: 8px; padding: 6px 0; border-top: 1px dashed var(--m-rule); font-size: 13.5px; line-height: 1.7; text-align: justify; }
+.lr-k { font-weight: 700; color: #92400e; }
+.lr-p { font-size: 12px; opacity: .8; margin-top: 2px; }
+.lr-notes { margin-top: 6px; padding-left: 18px; list-style: disc; font-size: 13px; line-height: 1.7; }
+.cet-more { margin-top: 8px; font-size: 12.5px; line-height: 1.8; text-align: justify; }
+.cet-more > summary { cursor: pointer; font-weight: 700; color: #92400e; list-style: none; }
+.cet-more > summary::before { content: "+ "; }
+.cet-more[open] > summary::before { content: "− "; }
+:root.dark .les, :root.dark .lr-cat { background: #1e293b; }
+:root.dark .les > summary, :root.dark .lr-cat > summary, :root.dark .lr-item h4 { color: #fcd34d; }
+:root.dark .lr-k, :root.dark .cet-more > summary { color: #fbbf24; }
+@media (max-width: 520px) { .lr-f { grid-template-columns: 1fr; gap: 2px; } .les-body { padding: 4px 12px 14px; } }

@@ -16,76 +16,94 @@
   ],
   "icons": [
     {
-      "src": "./icons/16.png",
+      "src": "./assets/icons/16.png",
       "sizes": "16x16",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/100.png",
+      "src": "./assets/icons/100.png",
       "sizes": "100x100",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/114.png",
+      "src": "./assets/icons/114.png",
       "sizes": "114x114",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/120.png",
+      "src": "./assets/icons/120.png",
       "sizes": "120x120",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/128.png",
+      "src": "./assets/icons/128.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/144.png",
+      "src": "./assets/icons/144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/152.png",
+      "src": "./assets/icons/152.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/167.png",
+      "src": "./assets/icons/167.png",
       "sizes": "167x167",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/180.png",
+      "src": "./assets/icons/180.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/192.png",
+      "src": "./assets/icons/192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/512.png",
+      "src": "./assets/icons/512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/1024.png",
+      "src": "./assets/icons/1024.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -93,10 +111,10 @@
       "name": "තික මාතිකා",
       "short_name": "තික",
       "description": "තික මාතිකා 22 අධ්‍යයනය කරන්න",
-      "url": "./tika-matika.html",
+      "url": "./matika/tika-matika.html",
       "icons": [
         {
-          "src": "./icons/192.png",
+          "src": "./assets/icons/192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -106,10 +124,10 @@
       "name": "දුක මාතිකා",
       "short_name": "දුක",
       "description": "දුක මාතිකා 100 අධ්‍යයනය කරන්න",
-      "url": "./duka-matika.html",
+      "url": "./matika/duka-matika.html",
       "icons": [
         {
-          "src": "./icons/192.png",
+          "src": "./assets/icons/192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -119,10 +137,10 @@
       "name": "සුත්තන්ත මාතිකා",
       "short_name": "සුත්තන්ත",
       "description": "සුත්තන්ත මාතිකා අධ්‍යයනය කරන්න",
-      "url": "./suttanta-matika.html",
+      "url": "./matika/suttanta-matika.html",
       "icons": [
         {
-          "src": "./icons/192.png",
+          "src": "./assets/icons/192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -132,10 +150,10 @@
       "name": "රූප විභාගය",
       "short_name": "රූප",
       "description": "රූප 28 වර්ගීකරණය සහ සමුට්ඨාන නය අධ්‍යයනය කරන්න",
-      "url": "./Rupa/rupa.html",
+      "url": "./paramattha/rupa.html",
       "icons": [
         {
-          "src": "./icons/192.png",
+          "src": "./assets/icons/192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -146,35 +164,35 @@
   "id": "abhidhamma-matika-app",
   "screenshots": [
     {
-      "src": "./screenshots/screenshot1.png",
+      "src": "./assets/screenshots/screenshot1.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "මුල් පිටුව - ජංගම දුරකථනය"
     },
     {
-      "src": "./screenshots/screenshot2.png",
+      "src": "./assets/screenshots/screenshot2.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "තික මාතිකා - ජංගම දුරකථනය"
     },
     {
-      "src": "./screenshots/screenshot3.png",
+      "src": "./assets/screenshots/screenshot3.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "දුක මාතිකා - ජංගම දුරකථනය"
     },
     {
-      "src": "./screenshots/screenshot4.png",
+      "src": "./assets/screenshots/screenshot4.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "සුත්තන්ත මාතිකා - ජංගම දුරකථනය"
     },
     {
-      "src": "./screenshots/screenshot5.png",
+      "src": "./assets/screenshots/screenshot5.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",

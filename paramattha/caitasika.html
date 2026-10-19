@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="si" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>චෛතසික හා සම්ප්‍රයෝග සංග්‍රහනය - අභිධර්ම මාතිකා</title>
+
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/180.png">
+<link rel="icon" href="../assets/icons/50.png">
+
+<meta name="theme-color" content="#3f0a0c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="චෛතසික">
+
+<script src="../assets/js/vendor/tailwind.min.js"></script>
+
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        saffron: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03' },
+        maroon: { 700:'#701a1d',800:'#581113',900:'#3f0a0c',950:'#260507' }
+      },
+      fontFamily: { sans: ['Inter','Noto Serif Sinhala','sans-serif'] }
+    }
+  }
+};
+</script>
+<script src="../assets/js/matika-theme.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+body { 
+  font-family: 'Noto Serif Sinhala', 'Inter', serif; 
+  -webkit-tap-highlight-color: transparent; 
+  font-size: 16px;
+}
+
+p {
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing: 0.05em;
+  line-height: 1.8;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+li {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 { text-align: left; }
+button, .btn, .badge { text-align: center; }
+th { text-align: left; }
+
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.cetasika-intro-card {
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%);
+  border: 1px solid #fda4af;
+  border-left: 5px solid #e11d48;
+}
+.dark .cetasika-intro-card {
+  background: linear-gradient(135deg, #4c0519 0%, #881337 50%, #9f1239 100%);
+  border-color: #f43f5e;
+  border-left-color: #fb7185;
+}
+
+.cetasika-intro-card .gatha-box {
+  background: rgba(255, 255, 255, 0.75);
+  border-left: 4px solid #e11d48;
+  border-radius: 0.5rem;
+}
+.dark .cetasika-intro-card .gatha-box {
+  background: rgba(0, 0, 0, 0.3);
+  border-left-color: #fb7185;
+}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.data-table thead th {
+  background: linear-gradient(135deg, #78350f, #451a03);
+  color: #fef3c7;
+  padding: 0.6rem 0.5rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-bottom: 2px solid #f59e0b;
+}
+
+.data-table tbody td {
+  padding: 0.55rem 0.5rem;
+  border-bottom: 1px solid #fef3c7;
+  color: #1e1b1b;
+  vertical-align: top;
+}
+
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:nth-child(even) { background: rgba(251, 191, 36, 0.05); }
+.data-table tbody tr:hover { background: rgba(251, 191, 36, 0.12); transition: background 0.15s; }
+
+.data-table .num-col {
+  font-weight: 700;
+  color: #92400e;
+  width: 1.8rem;
+  text-align: center;
+  background: rgba(251, 191, 36, 0.12);
+}
+
+.data-table .count-col {
+  font-weight: 800;
+  color: #b45309;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.data-table .count-col.highlight {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #3f0a0c;
+  border-radius: 0.4rem;
+}
+
+.dark .data-table thead th {
+  background: linear-gradient(135deg, #2b211c, #1d1613);
+  color: #fcd34d;
+  border-bottom-color: #f59e0b;
+}
+
+.dark .data-table tbody td {
+  border-bottom-color: #40332b;
+  color: #e2e8f0;
+}
+
+.dark .data-table tbody tr:nth-child(even) { background: rgba(252, 211, 77, 0.04); }
+.dark .data-table tbody tr:hover { background: rgba(252, 211, 77, 0.08); }
+.dark .data-table .num-col { color: #fcd34d; background: rgba(252, 211, 77, 0.12); }
+.dark .data-table .count-col { color: #fbbf24; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 5px solid #d97706;
+  border-radius: 0.75rem;
+  font-weight: 800;
+  color: #3f0a0c;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.dark .section-title {
+  background: linear-gradient(135deg, #451a03, #260507);
+  color: #fde68a;
+  border-left-color: #fbbf24;
+}
+
+.info-card {
+  background: #fdf2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: #1e1b1b;
+}
+.dark .info-card {
+  background: linear-gradient(135deg, #4a1a1c, #2a0a0c);
+  border-color: rgba(217, 119, 6, 0.4);
+  color: #fef3c7;
+}
+
+.highlight-card {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: #052e16;
+}
+.dark .highlight-card {
+  background: #14532d;
+  border-color: #166534;
+  color: #dcfce7;
+}
+
+.num-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: #3f0a0c;
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow: 0 3px 8px rgba(217, 119, 6, 0.3);
+}
+
+.cetasika-card {
+  background: white;
+  border: 1px solid #fde68a;
+  border-radius: 1rem;
+  padding: 1rem;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.dark .cetasika-card {
+  background: #2b211c;
+  border-color: #40332b;
+}
+.cetasika-card:hover {
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.15);
+  transform: translateY(-2px);
+}
+.cetasika-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #fbbf24, #d97706);
+}
+.cetasika-card.akusala::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+.cetasika-card.sobhana::before { background: linear-gradient(180deg, #10b981, #059669); }
+.cetasika-card.pakirnaka::before { background: linear-gradient(180deg, #6366f1, #4f46e5); }
+.cetasika-card.sabbacitta::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+
+.pada-box {
+  background: #fdf2f2;
+  border: 1px solid #fecaca;
+  color: #1e1b1b;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+.dark .pada-box {
+  background: linear-gradient(135deg, #4a1a1c, #2a0a0c);
+  border-color: rgba(217, 119, 6, 0.4);
+  color: #fef3c7;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.4rem;
+  font-weight: 700;
+  font-size: 0.7rem;
+}
+.badge-purple { background: #ede9fe; color: #6d28d9; }
+.dark .badge-purple { background: #4c1d95; color: #ddd6fe; }
+.badge-red { background: #fee2e2; color: #991b1b; }
+.dark .badge-red { background: #7f1d1d; color: #fecaca; }
+.badge-green { background: #dcfce7; color: #166534; }
+.dark .badge-green { background: #166534; color: #dcfce7; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.dark .badge-blue { background: #1e3a8a; color: #bfdbfe; }
+.badge-amber { background: #fef3c7; color: #92400e; }
+.dark .badge-amber { background: #78350f; color: #fde68a; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.3s ease-out; }
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.75rem;
+}
+.table-scroll::-webkit-scrollbar { height: 6px; }
+.table-scroll::-webkit-scrollbar-track { background: #fef3c7; border-radius: 3px; }
+.table-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 3px; }
+.dark .table-scroll::-webkit-scrollbar-track { background: #40332b; }
+.dark .table-scroll::-webkit-scrollbar-thumb { background: #f59e0b; }
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+.accordion-content.open {
+  max-height: 10000px;
+}
+
+.lesson-card {
+  border: 1px solid #fde68a;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: white;
+  transition: all 0.2s;
+}
+.dark .lesson-card {
+  border-color: #40332b;
+  background: #2b211c;
+}
+.lesson-card:hover {
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ✅ ටැබ් පැනලය සඳහා ස්ථාවර උසක් තබා ගැනීමට */
+#tab-navigation-section {
+  scroll-margin-top: 80px;
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/matika-ui.css">
+<link rel="stylesheet" href="../assets/css/paramattha.css">
+</head>
+
+<body class="h-full flex flex-col text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <a href="../index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="මුල් පිටුවට">
+        <i class="fa-solid fa-house text-lg"></i>
+      </a>
+      <button onclick="scrollToTop()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="ඉහළට">
+        <i class="fa-solid fa-arrow-up text-lg"></i>
+      </button>
+    </div>
+
+    <div class="flex items-center">
+      <div class="w-9 h-9 rounded-full bg-saffron-500/20 border border-saffron-400 flex items-center justify-center text-saffron-300 shrink-0">
+        <i class="fa-solid fa-heart text-xl"></i>
+      </div>
+      <h1 class="font-bold text-base sm:text-xl ml-2 text-saffron-100">චෛතසික හා සම්ප්‍රයෝග</h1>
+    </div>
+
+    <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="තේමාව">
+      <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
+    </button>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<nav class="ca-main w-full mx-auto px-4 sm:px-6 pt-3 text-xs text-amber-800 dark:text-saffron-300 flex items-center gap-2 flex-wrap">
+  <a href="../index.html" class="hover:underline flex items-center gap-1">
+    <i class="fa-solid fa-house text-[10px]"></i> මුල් පිටුව
+  </a>
+  <i class="fa-solid fa-chevron-right text-[10px] text-amber-400"></i>
+  <a href="index.html" class="hover:underline flex items-center gap-1">
+    <i class="fa-solid fa-gem text-[10px]"></i> සතර පරමාර්ථ
+  </a>
+  <i class="fa-solid fa-chevron-right text-[10px] text-amber-400"></i>
+  <span class="font-bold text-amber-900 dark:text-saffron-200">චෛතසික පරමාර්ථය</span>
+</nav>
+
+<!-- MAIN -->
+<main class="flex-1 ca-main w-full mx-auto p-4 sm:p-6 pb-16">
+
+  <!-- මුල් කොටස -->
+  <section class="ca-hero">
+    <p class="ca-hero__kicker">සතර පරමාර්ථ ධර්ම අතුරෙන් දෙවැන්න</p>
+    <h1>චෛතසික 52</h1>
+    <p class="ca-hero__gatha"><strong>“චෙතසි භවං තදායත්තවුත්තිතායාති චෙතසිකං.”</strong><cite>(අභි.සං)</cite></p>
+    <p class="ca-hero__lead">සිතක් හෙවත් අරමුණු දැනීමක් ඇති වන කල්හි ඒ දැනීම් ක්‍රියාව හා මිශ්‍ර ව ඇති වන්නා වූ අන්‍ය ක්‍රියාවෝ <strong>චෛතසිකයෝ ය</strong>. චෛතසික දෙපනසක් ඇත්තේ ය.</p>
+  </section>
+
+  <!-- සිතියම -->
+  <section class="ca-atlas" aria-labelledby="ca-atlas-h">
+    <h2 id="ca-atlas-h" class="sr-only">චෛතසික සිතියම</h2>
+    <div class="ca-tools">
+      <div class="ca-tools__row">
+        <label class="ca-search"><span class="sr-only">චෛතසිකයක් සොයන්න</span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="ca-q" type="search" placeholder="සොයන්න: සති, phassa…" autocomplete="off"></label>
+      </div>
+      <div class="ca-tools__row" style="margin-top:12px">
+        <span class="ca-tools__label">සිතක් තෝරන්න:</span>
+        <div id="ca-groups" class="ca-tools__row" role="group" aria-label="සිත් වර්ගය"></div>
+        <button id="ca-clear" class="ca-clear" type="button" hidden>සියල්ල පෙන්වන්න</button>
+      </div>
+      <div id="ca-options" class="ca-options" role="group" aria-label="සිත" hidden></div>
+      <div id="ca-result" class="ca-result" aria-live="polite" hidden></div>
+      <div id="ca-legend" class="ca-legend" hidden><span>නියතව යෙදෙන</span><span class="is-opt">විටෙක යෙදෙන</span></div>
+    </div>
+    <div id="ca-map" class="ca-map"></div>
+  </section>
+
+  <!-- කොටස් -->
+  <nav id="ca-secnav" class="ca-secnav" role="tablist" aria-label="කොටස්">
+    <button type="button" role="tab" data-sec="intro">හැඳින්වීම</button>
+    <button type="button" role="tab" data-sec="samprayoga">සම්ප්‍රයෝග නය 16</button>
+    <button type="button" role="tab" data-sec="sangaha">සංග්‍රහ නය 33</button>
+    <button type="button" role="tab" data-sec="citta">සිත් අනුව</button>
+    <button type="button" role="tab" data-sec="lessons">පාඩම් 1-13</button>
+  </nav>
+
+  <section id="sec-intro" class="ca-sec" role="tabpanel" aria-label="හැඳින්වීම">
+    <h2 class="sr-only">හැඳින්වීම</h2>
+    <section class="cetasika-intro-card ca-panel">
+    <div class="space-y-3">
+      
+
+      <p class="text-sm sm:text-base text-rose-900 dark:text-rose-50 leading-relaxed text-justify">
+        සිත සමඟ <strong>එකට ඉපදීම ය, එකට නැති වීම ය, සිතින් ගන්නා අරමුණ ගැනීම ය, සිතට නිඃශ්‍රය වූ වස්තුව ම නිඃශ්‍රය කර ගැනීම ය</strong> යන මේ කරුණු සතර චෛතසිකයන් ගේ සාමාන්‍ය ලක්ෂණයෝ ය.
+      </p>
+
+      <p class="text-sm sm:text-base text-rose-900 dark:text-rose-50 leading-relaxed text-justify">
+        සිතින් වෙන්ව කිසි කලෙක චෛතසිකයෝ නූපදිති. සිතක් නැති ව ඉපදිය හැකි ශක්තියක් ඒවාට ඇත්තේ ද නැත. සම්පූර්ණයෙන් ම චෛතසිකයන්ගෙන් තොරව ඉපදීමේ ශක්තියක් සිතට ද නැත. එහෙත් සිත සමහර චෛතසිකයන්ගෙන් තොරව ද උපදී. එක් සිතක් සියලු ම චෛතසිකයන් සමග උපදින්නේ ද නැත. 
+        <span class="text-xs text-rose-700 dark:text-rose-300 italic">(අභි,ච)</span>
+      </p>
+    </div>
+
+    <div class="bg-amber-50/95 border border-amber-300 rounded-xl p-4 sm:p-5 my-4 space-y-3 text-slate-900 shadow-sm">
+      <div class="border-b border-amber-300/80 pb-2">
+        <span class="text-xs uppercase tracking-wider font-bold text-amber-900">පරමත්ථ දීපනී ටීකා පාඨය</span>
+        <p class="text-xs sm:text-sm italic leading-relaxed text-justify mt-1 text-slate-900">
+          "චෙතසිකන්‌ති එත්‌ථ චෙතසි භවං තදායත්‌තවුත්‌තිතායාති චෙතසිකං. ඵස්‌සාදි ධම්‌මජාතං. එත්‌ථ ච තදායත්‌තවුත්‌තිතා නාම එකුප්‌පාදතාදීහි ලක්‌ඛණෙහි චිත්‌තෙන සහ එකීභූතස්‌ස විය පවත්‌ති. එතෙන යා චිත්‌තස්‌ස ජාති. සා එව ඵස්‌සාදීනං. යා චිත්‌තස්‌ස ජරා, යං චිත්‌තස්‌ස මරණං, යං චිත්‌තස්‌ස ආරම්‌මණං, යං චිත්‌තස්‌ස වත්‌ථු, තදෙව ඵස්‌සාදීනන්‌ති එවං එකපුප්‌ඵමඤ්‌ජරියං එකවණ්‌ටුපනිබ්‌බන්‌ධානි පුප්‌ඵානි විය චිත්‌තෙන සහ එකජාතියාදි උපනිබ්‌බන්‌ධා ඵස්‌සාදයො ධම්‌මා ඉධ චෙතසිකං නාමාති සිද්‌ධා හොන්‌ති. එවඤ්‌ච සති චිත්‌තංපි තෙහි ඵස්‌සාදීහි සහ තථෙවආයත්‌තං පවත්‌තතීති තංපි ඵස්‌සිකං වෙදනිකන්‌ති ආදිනා වත්‌තබ්‌බන්‌ති චෙ. න. චිත්‌තස්‌සෙව ජෙට්‌ඨකත්‌තා. මනොපුබ්‌බඞ්‌ගමා ධම්‌මා, මනොසෙට්‌ඨා මනොමයාති හි වුත්‌තං. එත්‌ථ ච මනොමයාති මනසා එව පකතා නිම්‌මිතා චිත්‌තක්‍රියාභූතාති අත්‌ථො. එතෙන තෙ ඵස්‌සාදයො ධම්‌මා චිත්‌තෙන විනා නුපලබ්‌භන්‌තීති දස්‌සෙති. චිත්‌තං පන තෙහි කෙහිචි විනාපි පවත්‌තති යෙව. පඤ්‌ච විඤ්‌ඤාණචිත්‌තඤ්‌හි තෙහි කෙහිචි විතක්‌කාදීහි විනා උප්‌පජ්‌ජතීති. තස්‌මා තෙසඤ්‌ඤෙව තදායත්‌තවුත්‌තිතා වත්‌තබ්‌බා න චිත්‌තස්‌සාති."
+        </p>
+      </div>
+
+      <div class="pt-1">
+        <span class="text-xs uppercase tracking-wider font-bold text-amber-900">සිංහල අර්ථ විවරණය</span>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-1 text-slate-900">
+          "මෙහි 'චෛතසික' යනු: සිතෙහි හටගන්නා බැවින් ද, ඒ සිතට අයත් ව (සිත ඇසුරු කොට) පැවැත්මක් ඇති බැවින් ද 'චෛතසික' නම් වේ. එනම් ඵස්සාදී ධර්ම සමූහයයි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          මෙහි 'තදායත්තවුත්තිතා' (ඒ සිතට අයත් ව පැවැත්ම) නම්: එකට ඉපදීම (එකුප්පාද) ආදී වූ සම්ප්‍රයෝග ලක්ෂණයන්ගෙන් සිත සමඟ එක්තැන් වූවාක් මෙන් පැවතීමයි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          එබැවින් යම් උපතක් (ජාතියක්) සිතට වේ ද, එයම ඵස්සාදීන්ට ද වේ. යම් දිරීමක් (ජරාවක්/ඨිතියක්) සිතට වේ ද, යම් බිඳීමක් (මරණයක්/භංගයක්) සිතට වේ ද, යම් අරමුණක් සිතට වේ ද, යම් වස්තු රූපයක් සිතට නිශ්‍රය වේ ද, එයම ඵස්සාදී චෛතසිකයන්ට ද වේ.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          මෙසේ එක් මල් පොකුරක එක් නටුවක බැඳී පවත්නා මල් මෙන්, සිත සමඟ එකම ඉපදීම ආදියෙන් බැඳී පවත්නා ඵස්සාදී ධර්මයෝ මෙහි 'චෛතසික' නම් වෙති යි සිද්ධ වේ.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          මෙසේ ඇති කල්හි, 'සිත ද ඒ ඵස්සාදී චෛතසිකයන් හා එලෙසින්ම බැඳී පවතින බැවින්, සිතට ද ඵාස්සික (ඵස්සයට අයත් වූව), වේදනික (වේදනාවට අයත් වූව) යනාදී වශයෙන් කිව යුතු නොවේ ද?' යත්;
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          නැත, එසේ නොකිය යුතුය. මක්නිසාද යත් සිත ම ප්‍රධාන (ජ්‍යෙෂ්ඨ) වන බැවිනි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 font-medium">
+          'මනෝපුබ්බංගමා ධම්මා, මනෝසෙට්ඨා මනෝමයා' (සියලු ධර්මයනට සිත පෙරටු වන්නේය, සිත ශ්‍රේෂ්ඨ වන්නේය, සිතින් ම උපදින්නේය) යැයි වදාරන ලද්දේ නොවේ ද? මෙහි 'මනෝමයා' යනු සිතින් ම මවන ලද්දාක් මෙන් සිතේ ම ක්‍රියාකාරීත්වයක් බවට පත්වන බැවිනි යන අර්ථයයි. මෙයින් ඒ ඵස්සාදී ධර්මයෝ සිතින් තොරව නොලැබෙන බව (නූපදින බව) දක්වයි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900">
+          නමුත් සිත වනාහි ඒ ඇතැම් චෛතසිකයන්ගෙන් තොරව ද පවතින්නේ ම ය. පංච විඤ්ඤාණ සිත් (ඇස, කන, නාසය, දිව, කය යන ද්විපංච විඤ්ඤාණ සිත්) විතර්කාදී වූ ඇතැම් චෛතසිකයන්ගෙන් තොරව ද උපදින බැවිනි.
+        </p>
+        <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 font-semibold">
+          එහෙයින් ඒ ඵස්සාදී චෛතසිකයන්ගේ ම සිතට අයත් පැවැත්ම (තදායත්තවුත්තිතාව) ප්‍රකාශ කළ යුතු ය, සිතෙහි චෛතසිකයන්ට අයත් පැවැත්මක් ප්‍රකාශ නොකළ යුතු ය."
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-4 pt-4 border-t border-rose-300/60 dark:border-rose-500/30 grid grid-cols-1 sm:grid-cols-4 gap-2">
+      <div class="bg-white/60 dark:bg-rose-950/40 rounded-lg p-3 text-center">
+        <i class="fa-solid fa-people-arrows text-rose-600 dark:text-rose-300 text-lg mb-1"></i>
+        <div class="text-xs font-bold text-rose-900 dark:text-rose-200">එකට ඉපදීම</div>
+        <div class="text-[10px] text-rose-700 dark:text-rose-300">සිත සමඟ එකවර</div>
+      </div>
+      <div class="bg-white/60 dark:bg-rose-950/40 rounded-lg p-3 text-center">
+        <i class="fa-solid fa-hourglass-end text-rose-600 dark:text-rose-300 text-lg mb-1"></i>
+        <div class="text-xs font-bold text-rose-900 dark:text-rose-200">එකට නැතිවීම</div>
+        <div class="text-[10px] text-rose-700 dark:text-rose-300">සිත සමඟ එකවර</div>
+      </div>
+      <div class="bg-white/60 dark:bg-rose-950/40 rounded-lg p-3 text-center">
+        <i class="fa-solid fa-bullseye text-rose-600 dark:text-rose-300 text-lg mb-1"></i>
+        <div class="text-xs font-bold text-rose-900 dark:text-rose-200">එකම අරමුණ</div>
+        <div class="text-[10px] text-rose-700 dark:text-rose-300">සිත ගන්නා අරමුණ</div>
+      </div>
+      <div class="bg-white/60 dark:bg-rose-950/40 rounded-lg p-3 text-center">
+        <i class="fa-solid fa-house text-rose-600 dark:text-rose-300 text-lg mb-1"></i>
+        <div class="text-xs font-bold text-rose-900 dark:text-rose-200">එකම වස්තුව</div>
+        <div class="text-[10px] text-rose-700 dark:text-rose-300">සිතට නිඃශ්‍රය</div>
+      </div>
+    </div>
+  </section>
+    <div class="ca-panel" id="panel-intro">
+      
+      <div class="pada-box">
+        <h3 class="font-bold text-base mb-3 flex items-center gap-2 text-maroon-900 dark:text-saffron-200">
+          <i class="fa-solid fa-circle-info"></i> චෛතසික යනු කුමක්ද?
+        </h3>
+        <p class="text-sm leading-relaxed mb-3 text-justify">
+          මදකුදු පෙර පසු නො වී සිත හා එකට ඉපදීම ය, එකට ම නිරුද්ධ වීම ය, සිතින් ගන්නා අරමුණ ම ගැනීම ය, සිත උපදනා තැන ම ඉපදීම ය යන කරුණු සතරින් සිත හා සම්ප්‍රයෝග වන ධර්මයෝ චෛතසිකයෝ ය.
+        </p>
+        <p class="text-xs leading-relaxed opacity-90 text-justify">
+          සම්ප්‍රයෝග වීමය යනු කවර ආකාරයකින් වත් වෙන් කළ නොහැන පරිදි මිශ්‍රවීම ය. එකට ඉපදීම ආදී කරුණු සතරට <strong>"සම්ප්‍රයෝග ලක්ෂණ සතර"</strong> යි කියනු ලැබේ.
+        </p>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-list-ol"></i>
+          <span>සම්ප්‍රයෝග ලක්ෂණ සතර</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="cetasika-card sabbacitta">
+            <div class="flex items-start gap-3">
+              <span class="num-pill shrink-0" style="width:2rem;height:2rem;font-size:0.85rem;background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">1</span>
+              <div>
+                <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">එකුප්පාද</h4>
+                <p class="text-xs mt-1 text-slate-600 dark:text-slate-300 text-justify">මදකුදු පෙර පසු නො වී සිත හා එකට ඉපදීම</p>
+              </div>
+            </div>
+          </div>
+          <div class="cetasika-card sabbacitta">
+            <div class="flex items-start gap-3">
+              <span class="num-pill shrink-0" style="width:2rem;height:2rem;font-size:0.85rem;background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">2</span>
+              <div>
+                <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">එකනිරෝධ</h4>
+                <p class="text-xs mt-1 text-slate-600 dark:text-slate-300 text-justify">සිත හා එකට ම නිරුද්ධ වීම</p>
+              </div>
+            </div>
+          </div>
+          <div class="cetasika-card sabbacitta">
+            <div class="flex items-start gap-3">
+              <span class="num-pill shrink-0" style="width:2rem;height:2rem;font-size:0.85rem;background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">3</span>
+              <div>
+                <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">එකාලම්බන</h4>
+                <p class="text-xs mt-1 text-slate-600 dark:text-slate-300 text-justify">සිතින් ගන්නා අරමුණ ම ගැනීම</p>
+              </div>
+            </div>
+          </div>
+          <div class="cetasika-card sabbacitta">
+            <div class="flex items-start gap-3">
+              <span class="num-pill shrink-0" style="width:2rem;height:2rem;font-size:0.85rem;background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">4</span>
+              <div>
+                <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">එකවත්ථුක</h4>
+                <p class="text-xs mt-1 text-slate-600 dark:text-slate-300 text-justify">සිත උපදනා තැන ම ඉපදීම</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>චෛතසික රාශි තුන</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="cetasika-card pakirnaka">
+            <div class="text-center">
+              <div class="badge badge-purple mb-2">අඤ්ඤසමාන රාශිය</div>
+              <div class="text-3xl font-bold text-purple-700 dark:text-purple-300">13</div>
+              <p class="text-xs mt-2 text-slate-600 dark:text-slate-300 text-justify">සර්වචිත්ත සාධාරණ 7 + ප්‍රකීර්ණක 6</p>
+            </div>
+          </div>
+          <div class="cetasika-card akusala">
+            <div class="text-center">
+              <div class="badge badge-red mb-2">අකුසල රාශිය</div>
+              <div class="text-3xl font-bold text-red-700 dark:text-red-300">14</div>
+              <p class="text-xs mt-2 text-slate-600 dark:text-slate-300 text-justify">අකුසල සාධාරණ 4 + අකුසල අසාධාරණ 10</p>
+            </div>
+          </div>
+          <div class="cetasika-card sobhana">
+            <div class="text-center">
+              <div class="badge badge-green mb-2">සොභන රාශිය</div>
+              <div class="text-3xl font-bold text-green-700 dark:text-green-300">25</div>
+              <p class="text-xs mt-2 text-slate-600 dark:text-slate-300 text-justify">සොභන සාධාරණ 19 + විරති 3 + අප්පමඤ්ඤා 2 + පඤ්ඤා 1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h4 class="font-bold text-sm mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-saffron-600"></i> විශේෂ කරුණු
+        </h4>
+        <ul class="text-xs space-y-2 leading-relaxed">
+          <li>• එක් සිතක් සමග එක වරකට උපදනා වැඩිම චෛතසික ගණන <strong>තිස් හයකි (36)</strong>.</li>
+          <li>• චෛතසිකයන්ගේ සහයෝගය නැතිව සිතකට නූපදිය හැක. සිතේ සහයෝගය නැතිව චෛතසිකයකට ද නූපදිය හැක.</li>
+          <li>• සිතත්, ඒ සිතින් සිදුකරන කෘත්‍යය සිදු කිරීමට වුවමනා චෛතසිකයෝත්, පෙර පසු නොවී එක වර ම ඉපදිය යුතු ය.</li>
+          <li>• ලීයක අරටුව ඉතිරි වී එළය පළමුවෙන් දිරා නොයන්නාක් මෙන්, එක් චිත්ත චෛතසික රාශියකට අයත් ධර්මයන්ගෙන් සමහරක් ඉතිරි වෙද්දී සමහරක් නැති වන්නේ නොවේ.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-bolt"></i>
+          <span>ඉක්මන් සම්ප්‍රයෝග සාරාංශය</span>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>චෛතසික රාශිය</th>
+                <th style="text-align:center;">ගණන</th>
+                <th>යෙදෙන සිත්වල ස්වභාවය</th>
+              </tr>
+            </thead>
+            <tbody id="quick-samprayoga-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="sec-samprayoga" class="ca-sec" role="tabpanel" aria-label="සම්ප්‍රයෝග නය 16" hidden>
+    <h2 class="sr-only">සම්ප්‍රයෝග නය 16</h2>
+    <p class="ca-sec__intro">එක් එක් චෛතසිකය කවර සිත් සමඟ යෙදේ ද යන්න.</p>
+    <div class="ca-panel" id="panel-samprayoga">
+      
+      <div id="niyata-aniyata-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-table-cells"></i>
+          <span>සම්ප්‍රයෝග නය 16 - සම්පූර්ණ විස්තරය</span>
+        </div>
+        
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:3rem;text-align:center;">අංක</th>
+                <th>චෛතසිකය</th>
+                <th>යෙදෙන සිත්</th>
+                <th style="width:4rem;text-align:center;">ගණන</th>
+                <th>විස්තරය</th>
+              </tr>
+            </thead>
+            <tbody id="samprayoga-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-sangaha" class="ca-sec" role="tabpanel" aria-label="සංග්‍රහ නය 33" hidden>
+    <h2 class="sr-only">සංග්‍රහ නය 33</h2>
+    <p class="ca-sec__intro">එක් එක් සිත සමඟ කවර චෛතසික යෙදේ ද යන්න.</p>
+    <div class="ca-panel" id="panel-sangrahana">
+      
+      <div class="info-card">
+        <div class="flex items-start gap-3">
+          <div class="num-pill shrink-0">33</div>
+          <div>
+            <h3 class="font-bold text-base mb-1">සංග්‍රහනය 33</h3>
+            <p class="text-xs leading-relaxed text-justify">
+              එක් එක් සිතක් සඳහා වෙන වෙනම යෙදෙන ධර්ම ගණනය කිරීම සංග්‍රහනය ලෙස හැඳින්වේ. මෙහි සම්පූර්ණ සංග්‍රහන 33ක් ඇත.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-sitemap"></i>
+          <span>සංග්‍රහනයේදී සිත් ප්‍රධාන කොටස් 5කට බෙදීම</span>
+        </div>
+
+        <div class="space-y-3">
+          
+          <div class="lesson-card">
+            <button onclick="toggleAccordion('lokkuttara')" class="w-full flex items-center justify-between p-4 hover:bg-amber-50 dark:hover:bg-slate-700 transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-saffron-500 text-maroon-950 font-bold flex items-center justify-center text-sm">1</span>
+                <div class="text-left">
+                  <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">ලෝකෝත්තර සිත් 40</h4>
+                  <p class="text-[10px] text-amber-700 dark:text-saffron-400">උපරිම යෙදෙන චෛතසික 36</p>
+                </div>
+              </div>
+              <i id="accordion-icon-lokkuttara" class="fa-solid fa-chevron-down text-saffron-600 transition-transform"></i>
+            </button>
+            <div id="accordion-lokkuttara" class="accordion-content">
+              <div class="p-4 bg-amber-50/50 dark:bg-slate-900">
+                <div class="table-scroll">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>සිත් වර්ගය</th>
+                        <th>යෙදෙන චෛතසික</th>
+                        <th style="text-align:center;">විතක්ක</th>
+                        <th style="text-align:center;">විචාර</th>
+                        <th style="text-align:center;">පීති</th>
+                        <th style="text-align:center;">එකතුව</th>
+                      </tr>
+                    </thead>
+                    <tbody id="lokkuttara-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <button onclick="toggleAccordion('mahaggata')" class="w-full flex items-center justify-between p-4 hover:bg-amber-50 dark:hover:bg-slate-700 transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-saffron-500 text-maroon-950 font-bold flex items-center justify-center text-sm">2</span>
+                <div class="text-left">
+                  <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">මහග්ගත සිත් 27</h4>
+                  <p class="text-[10px] text-amber-700 dark:text-saffron-400">උපරිම යෙදෙන චෛතසික 35</p>
+                </div>
+              </div>
+              <i id="accordion-icon-mahaggata" class="fa-solid fa-chevron-down text-saffron-600 transition-transform"></i>
+            </button>
+            <div id="accordion-mahaggata" class="accordion-content">
+              <div class="p-4 bg-amber-50/50 dark:bg-slate-900">
+                <div class="table-scroll">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>සිත් වර්ගය</th>
+                        <th>යෙදෙන චෛතසික</th>
+                        <th style="text-align:center;">විතක්ක</th>
+                        <th style="text-align:center;">විචාර</th>
+                        <th style="text-align:center;">පීති</th>
+                        <th style="text-align:center;">අප්පමඤ්ඤා</th>
+                        <th style="text-align:center;">එකතුව</th>
+                      </tr>
+                    </thead>
+                    <tbody id="mahaggata-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <button onclick="toggleAccordion('kamasohana')" class="w-full flex items-center justify-between p-4 hover:bg-amber-50 dark:hover:bg-slate-700 transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-saffron-500 text-maroon-950 font-bold flex items-center justify-center text-sm">3</span>
+                <div class="text-left">
+                  <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">කාමසෝහන 24</h4>
+                  <p class="text-[10px] text-amber-700 dark:text-saffron-400">උපරිම යෙදෙන චෛතසික 38</p>
+                </div>
+              </div>
+              <i id="accordion-icon-kamasohana" class="fa-solid fa-chevron-down text-saffron-600 transition-transform"></i>
+            </button>
+            <div id="accordion-kamasohana" class="accordion-content">
+              <div class="p-4 bg-amber-50/50 dark:bg-slate-900">
+                <div class="table-scroll">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th colspan="2" style="text-align:center;">කාමසෝහන සිත්වල සංග්‍රහනය</th>
+                        <th style="text-align:center;">යෙදෙන චෛතසික ගණන</th>
+                      </tr>
+                    </thead>
+                    <tbody id="kamasohana-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <button onclick="toggleAccordion('akusala')" class="w-full flex items-center justify-between p-4 hover:bg-amber-50 dark:hover:bg-slate-700 transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-saffron-500 text-maroon-950 font-bold flex items-center justify-center text-sm">4</span>
+                <div class="text-left">
+                  <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">අකුසල 12</h4>
+                  <p class="text-[10px] text-amber-700 dark:text-saffron-400">උපරිම යෙදෙන චෛතසික 27</p>
+                </div>
+              </div>
+              <i id="accordion-icon-akusala" class="fa-solid fa-chevron-down text-saffron-600 transition-transform"></i>
+            </button>
+            <div id="accordion-akusala" class="accordion-content">
+              <div class="p-4 bg-amber-50/50 dark:bg-slate-900">
+                <div class="table-scroll">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>සිත් වර්ගය</th>
+                        <th style="text-align:center;">යෙදෙන චෛතසික ගණන</th>
+                      </tr>
+                    </thead>
+                    <tbody id="akusala-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <button onclick="toggleAccordion('ahetuka')" class="w-full flex items-center justify-between p-4 hover:bg-amber-50 dark:hover:bg-slate-700 transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-saffron-500 text-maroon-950 font-bold flex items-center justify-center text-sm">5</span>
+                <div class="text-left">
+                  <h4 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">අහේතුක 18</h4>
+                  <p class="text-[10px] text-amber-700 dark:text-saffron-400">උපරිම යෙදෙන චෛතසික 12</p>
+                </div>
+              </div>
+              <i id="accordion-icon-ahetuka" class="fa-solid fa-chevron-down text-saffron-600 transition-transform"></i>
+            </button>
+            <div id="accordion-ahetuka" class="accordion-content">
+              <div class="p-4 bg-amber-50/50 dark:bg-slate-900">
+                <div class="table-scroll">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>සිත් වර්ගය</th>
+                        <th style="text-align:center;">යෙදෙන චෛතසික ගණන</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ahetuka-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ca-panel" id="panel-sangraha-5">
+      
+      <div class="info-card">
+        <h3 class="font-bold text-base mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-cubes text-saffron-600"></i>
+          සංග්‍රහනයේදී සිත් ප්‍රධාන කොටස් 5කට බෙදා දැක්වීම
+        </h3>
+        <p class="text-xs leading-relaxed text-justify">
+          සංග්‍රහනයේදී සිත් ප්‍රධාන කොටස් 5කට බෙදා දැක්වේ.
+        </p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="text-align:center;width:3rem;">අංක</th>
+              <th>සිත් කොටස</th>
+              <th style="text-align:center;">උපරිම චෛතසික</th>
+              <th style="text-align:center;">සංග්‍රහ ගණන</th>
+              <th>විස්තරය</th>
+            </tr>
+          </thead>
+          <tbody id="sangraha5-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-citta" class="ca-sec" role="tabpanel" aria-label="සිත් අනුව" hidden>
+    <h2 class="sr-only">සිත් අනුව</h2>
+    <div class="ca-panel" id="panel-citta-sangaha">
+      
+      <div class="info-card">
+        <h3 class="font-bold text-base mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-table-list text-saffron-600"></i>
+          අකුසල සිත් 12 - චෛතසික ගණන්
+        </h3>
+        <p class="text-xs leading-relaxed text-justify">
+          අකුසල සිත් 12 ට අදාළ චෛතසික ගණන් පහත පරිදි වේ.
+        </p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:3rem;text-align:center;">අංක</th>
+              <th>සිත් වර්ගය</th>
+              <th style="text-align:center;">චෛතසික ගණන</th>
+            </tr>
+          </thead>
+          <tbody id="akusala-citta-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="info-card">
+        <h3 class="font-bold text-base mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-table-list text-saffron-600"></i>
+          අහේතුක සිත් 18 - චෛතසික ගණන්
+        </h3>
+        <p class="text-xs leading-relaxed text-justify">
+          අහේතුක සිත් 18 ට අදාළ චෛතසික ගණන් පහත පරිදි වේ.
+        </p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:3rem;text-align:center;">අංක</th>
+              <th>සිත් වර්ගය</th>
+              <th style="text-align:center;">චෛතසික ගණන</th>
+            </tr>
+          </thead>
+          <tbody id="ahetuka-citta-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="info-card">
+        <h3 class="font-bold text-base mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-table-list text-saffron-600"></i>
+          කාමසෝහන සිත් 24 - චෛතසික ගණන්
+        </h3>
+        <p class="text-xs leading-relaxed text-justify">
+          කාමසෝහන සිත් 24 ට අදාළ චෛතසික ගණන් පහත පරිදි වේ.
+        </p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:3rem;text-align:center;">අංක</th>
+              <th>සිත් වර්ගය</th>
+              <th style="text-align:center;">චෛතසික ගණන</th>
+            </tr>
+          </thead>
+          <tbody id="kamasohana-citta-table-body"></tbody>
+        </table>
+      </div>
+
+    </div>
+    <div class="ca-panel" id="panel-mahaggata-lokuttara">
+      
+      <div class="info-card">
+        <h3 class="font-bold text-base mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-star text-saffron-600"></i>
+          රූපාවචර සහ අරූපාවචර සිත් - චෛතසික ගණන්
+        </h3>
+        <p class="text-xs leading-relaxed text-justify">
+          රූපාවචර සහ අරූපාවචර සිත්වලට අදාළ චෛතසික ගණන් පහත පරිදි වේ.
+        </p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>සිත් වර්ගය</th>
+              <th style="text-align:center;">විතක්ක</th>
+              <th style="text-align:center;">විචාර</th>
+              <th style="text-align:center;">පීති</th>
+              <th style="text-align:center;">අප්පමඤ්ඤා</th>
+              <th style="text-align:center;">විරති</th>
+              <th style="text-align:center;">එකතුව</th>
+            </tr>
+          </thead>
+          <tbody id="rupavacara-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="info-card">
+        <h3 class="font-bold text-base mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-star text-saffron-600"></i>
+          ලෝකෝත්තර සිත් - චෛතසික ගණන්
+        </h3>
+        <p class="text-xs leading-relaxed text-justify">
+          ලෝකෝත්තර සිත්වලට අදාළ චෛතසික ගණන් පහත පරිදි වේ.
+        </p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>සිත් වර්ගය</th>
+              <th style="text-align:center;">විතක්ක</th>
+              <th style="text-align:center;">විචාර</th>
+              <th style="text-align:center;">පීති</th>
+              <th style="text-align:center;">එකතුව</th>
+            </tr>
+          </thead>
+          <tbody id="lokuttara-detail-table-body"></tbody>
+        </table>
+      </div>
+
+    </div>
+    <div class="ca-panel" id="panel-athara">
+      
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-circle-nodes"></i>
+          <span>අහේතුක 18 - සම්පූර්ණ විස්තරය</span>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:3rem;text-align:center;">අංක</th>
+                <th>සිත් වර්ගය</th>
+                <th style="text-align:center;">සබ්බචිත්තසාධාරණ</th>
+                <th style="text-align:center;">විතක්ක + විචාර + අධිමොක්ඛ</th>
+                <th style="text-align:center;">විරිය</th>
+                <th style="text-align:center;">පීති</th>
+                <th style="text-align:center;">ඡන්ද</th>
+                <th style="text-align:center;">එකතුව</th>
+              </tr>
+            </thead>
+            <tbody id="ahetuka18-detail-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-list-ol"></i>
+          <span>අහේතුක සිත්වල සංග්‍රහනය 4</span>
+        </div>
+        <div id="ahetuka-naya-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-leaf text-green-600"></i>
+          <span>ලෝභ මූල සිත් 8 - චෛතසික සංග්‍රහය</span>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>අංකය</th>
+                <th>සිත / පොදුවේ යෙදෙන චෛතසික</th>
+                <th style="text-align:center;">පීති</th>
+                <th style="text-align:center;">දිට්ඨි</th>
+                <th style="text-align:center;">මාන</th>
+                <th style="text-align:center;">ථීන + මිද්ධ</th>
+                <th style="text-align:center;">එකතුව</th>
+              </tr>
+            </thead>
+            <tbody id="kusala8-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-fire text-red-600"></i>
+          <span>දෝස මූල සිත් 2 - චෛතසික සංග්‍රහය</span>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>අංකය</th>
+                <th>සිත / පොදුවේ යෙදෙන චෛතසික</th>
+                <th style="text-align:center;">ථීන + මිද්ධ</th>
+                <th style="text-align:center;">එකතුව</th>
+                <th>විස්තරය</th>
+              </tr>
+            </thead>
+            <tbody id="akusala2-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-circle-half-stroke text-blue-600"></i>
+          <span>මෝහ මූල සිත් 2 - චෛතසික සංග්‍රහය</span>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>අංකය</th>
+                <th>සිත / පොදුවේ යෙදෙන චෛතසික</th>
+                <th style="text-align:center;">අධිමොක්ඛ</th>
+                <th style="text-align:center;">විචිකිච්ඡා</th>
+                <th style="text-align:center;">එකතුව</th>
+              </tr>
+            </thead>
+            <tbody id="abyakata2-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-table-list text-saffron-600"></i>
+          <span>අකුසල සිත්වල සංග්‍රහනය 7</span>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:3rem;text-align:center;">අංක</th>
+                <th>සිත් වර්ගය</th>
+                <th style="text-align:center;">එකතුව</th>
+              </tr>
+            </thead>
+            <tbody id="akusala-sangraha7-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="sec-lessons" class="ca-sec" role="tabpanel" aria-label="පාඩම් 1-13" hidden>
+    <div class="ca-panel" id="panel-lessons">
+      <div class="section-title"><i class="fa-solid fa-book-open"></i><span>චෛතසික පාඩම් 1-13 - සවිස්තරාත්මක විවරණය</span></div>
+      <div id="caitasika-lessons" class="space-y-3"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- රාශි විස්තර (සිතියමේ "රාශිය ගැන") -->
+<template id="tpl-an"><div class="ca-rasi">
+  <p>සැම සිතක් ම ඇති වීමට මේ චෛතසික 7 වුවමනා ය. කුසලාකුසලාදී වශයෙන් විශේෂයක් නොමැති ව සියලු ම සිත්වල යෙදන බැවින් මේ චෛතසික 7ට <strong>"සර්වචිත්ත සාධාරණ"</strong> යි කියනු ලැබේ.</p>
+  <p>සර්වචිත්ත සාධාරණ චෛතසිකයන් මෙන් සැම සිතක යෙදෙන්නේ නැති ව, කුසලාකුසල ලෞකික ලෝකෝත්තරාදී සැල පක්ෂවලට ම අයත් සිත්වල සුදුසු පරිදි විසිරී යෙදන බැවින් මේ චෛතසික 6 <strong>ප්‍රකීර්ණක</strong> නම් වේ.</p>
+  <ul><li>අඤ්ඤසමාන රාශිය 13: සර්වචිත්ත සාධාරණ 7 + ප්‍රකීර්ණක 6</li></ul>
+</div></template>
+<template id="tpl-ak"><div class="ca-rasi">
+  <p>මෝහ, අහිරික, අනොත්තප්ප, උද්ධච්ච, ලෝභ, දිට්ඨි, මාන, දෝස, ඊර්ෂ්‍යා, මච්ඡරිය, කුක්කුච්ච, ථීන, මිද්ධ, විචිකිච්ඡා යන අකුසල චෛතසික 14කි.</p>
+  <ul>
+    <li><strong>අකුසල සාධාරණ 4:</strong> මෝහ, අහිරික, අනොත්තප්ප, උද්ධච්ච</li>
+    <li><strong>අකුසල අසාධාරණ 10:</strong> ලෝභ, දිට්ඨි, මාන (ලෝභ මූල); දෝස, ඊර්ෂ්‍යා, මච්ඡරිය, කුක්කුච්ච (දෝස මූල); ථීන, මිද්ධ; විචිකිච්ඡා (මෝහ මූල)</li>
+  </ul>
+</div></template>
+<template id="tpl-so"><div class="ca-rasi">
+  <p>සොභන සාධාරණ 19, විරති 3, අප්පමඤ්ඤා 2, පඤ්ඤා 1 - මුළු සොභන චෛතසික 25කි. සොභන සාධාරණ 19 සියලු සොභන සිත් 59 සමඟ යෙදේ.</p>
+  <ul>
+    <li><strong>විරති 3:</strong> සම්පත්ත විරති, සමාදාන විරති, සමුච්ඡේද විරති</li>
+    <li><strong>අප්පමඤ්ඤා:</strong> මෙත්තා - කරුණා - මුදිතා - උපෙක්ඛා යයි අප්පමඤ්ඤා සතරකි. නමුත් සොභන චෛතසිකවල දී අප්පමඤ්ඤා නාමයෙන් චෛතසික දෙකක් පමණක් දක්වා ඇත. මක්නිසාද යත්, අදෝස නාමයෙන් මෙත්තියත්, තත්‍රමජ්ඣත්තතා නාමයෙන් උපෙක්ඛාවත් සොභන සාධාරණ චෛතසිකවලට ඇතුළත් කර කියැවුණු බැවිනි.</li>
+    <li>සොභන සාධාරණ 19 සියලු සොභන සිත් 59 සමඟ යෙදේ. විරති 3, අප්පමඤ්ඤා 2, පඤ්ඤා 1 ඇතැම් සොභන සිත් සමඟ පමණක් යෙදේ.</li>
+  </ul>
+</div></template>
+
+<!-- විස්තර පත්‍රය -->
+<dialog id="ca-detail" class="ca-detail" aria-labelledby="ca-d-title">
+  <div class="ca-d__bar">
+    <div class="ca-d__nav">
+      <button id="ca-prev" type="button" aria-label="පෙර චෛතසිකය"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+      <span id="ca-pos"></span>
+      <button id="ca-next" type="button" aria-label="ඊළඟ චෛතසිකය"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+    </div>
+    <button class="ca-d__x" type="button" aria-label="වසන්න"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  </div>
+  <div class="ca-d__body"></div>
+</dialog>
+
+<footer class="bg-maroon-900 text-amber-100 py-4 border-t-2 border-saffron-500">
+  <div class="flex justify-center items-center">
+    <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා &copy; 2026</p>
+  </div>
+</footer>
+
+<!-- SCRIPT ගොනු -->
+<script src="../data/paramattha/caitasika-data.js"></script>
+<script src="../assets/js/pages/caitasika.js"></script>
+<script src="../assets/js/pages/samprayoga.js"></script>
+<script src="../assets/js/pages/caitasika-atlas.js"></script>
+<script src="../assets/js/matika-ui.js" defer></script>
+</body>
+</html>
