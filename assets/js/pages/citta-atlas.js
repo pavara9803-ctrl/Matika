@@ -1,7 +1,7 @@
 // ============================================================
 // citta-atlas.js — සිත් 89 / 121 සිතියම
 //   භූමිය අනුව පටි (කාම / රූප / අරූප / ලෝකෝත්තර), ජාතිය අනුව වර්ණ
-//   දත්ත: data/paramattha/citta-data.js (citta121Data, cittaDetailData, cittaData)
+//   දත්ත: data/paramattha/citta-data.js (citta121Data, cittaDetailData)
 // ============================================================
 (function () {
   'use strict';
@@ -222,25 +222,7 @@
     return '<details class="ca-acc"' + (open ? ' open' : '') + '><summary>' + (n != null ? '<span class="ca-acc__n">' + n + '</span>' : '') + '<span>' + title + '</span></summary><div class="ca-acc__body">' + html + '</div></details>';
   }
   function buildReading() {
-    var g = document.getElementById('citta-groups');
-    if (g) {
-      var order = [['citta121Summary'], ['akusala12Full', 'lobha8Full', 'dosa2Full', 'moha2Full'], ['ahetuka18Full', 'akusalaVipaka7Full', 'kusalaAhetuka8Full', 'ahetukaKriya3Full'],
-        ['kamaKusala24Full', 'kamaKusala8Full', 'kamaVipaka8Full', 'kamaKriya8Full'], ['rupa15Full', 'rupaKusala5Full', 'rupaVipaka5Full', 'rupaKriya5Full'],
-        ['arupa12Full', 'arupaKusala4Full', 'arupaVipaka4Full', 'arupaKriya4Full'], ['lokuttara40Full', 'lokuttaraMagga20Full', 'lokuttaraPhala20Full']];
-      g.innerHTML = order.map(function (grp, i) {
-        var head = citta121Data[grp[0]];
-        var inner = head.desc + grp.slice(1).map(function (k) { return '<h4 class="ca-d__h">' + citta121Data[k].title + '</h4>' + citta121Data[k].desc; }).join('');
-        return acc(null, head.title, inner, i === 0);
-      }).join('');
-    }
     var d = document.getElementById('citta-essays');
     if (d) d.innerHTML = cittaDetailData.map(function (x, i) { return acc(null, x.title, x.desc, i === 0); }).join('');
-    var c = document.getElementById('citta-cards');
-    if (c && typeof cittaData !== 'undefined') {
-      c.innerHTML = cittaData.map(function (s) {
-        return '<div class="ca-card"><h3>' + s.category + '</h3><p>' + s.description + '</p><ul>' +
-          s.items.map(function (it) { return '<li>' + it.name + ' — <strong>' + it.role + '</strong></li>'; }).join('') + '</ul></div>';
-      }).join('');
-    }
   }
 })();

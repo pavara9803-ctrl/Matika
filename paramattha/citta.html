@@ -224,9 +224,7 @@
   <nav id="ca-secnav" class="ca-secnav" role="tablist" aria-label="කොටස්">
     <button type="button" role="tab" data-sec="intro">හැඳින්වීම</button>
     <button type="button" role="tab" data-sec="table">සිත් 121 වගුව</button>
-    <button type="button" role="tab" data-sec="groups">සිත් කාණ්ඩ</button>
     <button type="button" role="tab" data-sec="essays">විස්තරාත්මක විග්‍රහය</button>
-    <button type="button" role="tab" data-sec="cards">වර්ගීකරණ සාරාංශය</button>
   </nav>
 
   <section id="sec-intro" class="ca-sec" role="tabpanel" aria-label="හැඳින්වීම">
@@ -327,19 +325,9 @@
     <div id="ct-root"></div>
   </section>
 
-  <section id="sec-groups" class="ca-sec" role="tabpanel" aria-label="සිත් කාණ්ඩ" hidden>
-    <h2 class="sr-only">සිත් කාණ්ඩ</h2>
-    <p class="ca-sec__intro">සිත් 121 කාණ්ඩ අනුව. මාතෘකාව එබූ විට විවෘත වේ.</p><div id="citta-groups"></div>
-  </section>
-
   <section id="sec-essays" class="ca-sec" role="tabpanel" aria-label="විස්තරාත්මක විග්‍රහය" hidden>
     <h2 class="sr-only">විස්තරාත්මක විග්‍රහය</h2>
     <div id="citta-essays"></div>
-  </section>
-
-  <section id="sec-cards" class="ca-sec" role="tabpanel" aria-label="වර්ගීකරණ සාරාංශය" hidden>
-    <h2 class="sr-only">වර්ගීකරණ සාරාංශය</h2>
-    <div id="citta-cards" class="ca-cards"></div>
   </section>
 
 </main>
@@ -403,89 +391,6 @@
         }
     })();
 
-    // සිත් 89/121 කන්ටේනරය Toggle කිරීම
-    function toggleCitta121Section() {
-        const subContainer = document.getElementById("citta121SubContainer");
-        const arrowIcon = document.getElementById("citta121-arrow");
-        if (subContainer) {
-            subContainer.classList.toggle("hidden");
-            if (arrowIcon) arrowIcon.classList.toggle("rotate-180");
-        }
-    }
-
-    // සිත් - විස්තරාත්මක විග්‍රහය ටොගල් කිරීම
-    function toggleCittaDetailSection() {
-        const subContainer = document.getElementById("cittaDetailSubContainer");
-        const arrowIcon = document.getElementById("cittaDetail-arrow");
-        if (subContainer) {
-            subContainer.classList.toggle("hidden");
-            if (arrowIcon) arrowIcon.classList.toggle("rotate-180");
-        }
-    }
-
-    // citta-data.js හි දත්ත ලැයිස්තුවක් (Accordion List) ලෙස පූරණය කිරීම
-    document.addEventListener("DOMContentLoaded", function() {
-        renderCittaAccordionList();
-    });
-
-    function renderCittaAccordionList() {
-        const detailContainer = document.getElementById("cittaDetailContent");
-        if (!detailContainer) return;
-
-        if (typeof cittaDetailData !== 'undefined' && Array.isArray(cittaDetailData) && cittaDetailData.length > 0) {
-            detailContainer.innerHTML = cittaDetailData.map((item, index) => {
-                const itemId = item.id || ('detail-item-' + index);
-                const badgeText = item.badge || 'විස්තරය';
-                return `
-                    <div class="border border-indigo-200 dark:border-slate-700 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-sm transition-all duration-200">
-                        <!-- Clickable Header / Item -->
-                        <button type="button" 
-                                onclick="toggleAccordionDetail('${itemId}')" 
-                                class="w-full p-4 flex items-center justify-between text-left hover:bg-indigo-50/70 dark:hover:bg-slate-700/50 transition-colors focus:outline-none">
-                            <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
-                                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-900/60 text-indigo-800 dark:text-indigo-200">
-                                    ${badgeText}
-                                </span>
-                                <span class="font-bold text-base sm:text-lg text-slate-800 dark:text-slate-100">
-                                    ${item.title || ''}
-                                </span>
-                            </div>
-                            <i id="accordion-icon-${itemId}" class="fa-solid fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-200 shrink-0 ml-2"></i>
-                        </button>
-
-                        <!-- Collapsible Body Containing Complete Details -->
-                        <div id="accordion-body-${itemId}" class="hidden border-t border-indigo-100 dark:border-slate-700 p-4 sm:p-5 bg-indigo-50/20 dark:bg-slate-900/40 text-justify">
-                            ${item.desc || ''}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        } else {
-            detailContainer.innerHTML = `
-                <div class="text-center py-8 text-slate-400 dark:text-slate-500">
-                    <i class="fa-solid fa-inbox text-3xl mb-2 text-indigo-300 dark:text-slate-600"></i>
-                    <p class="text-sm sm:text-base">විස්තරාත්මක දත්ත තවම එක් කර නැත.</p>
-                    <p class="text-xs sm:text-sm mt-1">citta-data.js ගොනුවේ cittaDetailData විචල්‍යයට දත්ත එක් කරන්න.</p>
-                </div>
-            `;
-        }
-    }
-
-    // Accordion අයිතමය Toggle කිරීම
-    function toggleAccordionDetail(id) {
-        const body = document.getElementById("accordion-body-" + id);
-        const icon = document.getElementById("accordion-icon-" + id);
-        if (!body) return;
-
-        const isHidden = body.classList.contains("hidden");
-        if (isHidden) {
-            body.classList.remove("hidden");
-            if (icon) icon.classList.add("rotate-180");
-        } else {
-            body.classList.add("hidden");
-            if (icon) icon.classList.remove("rotate-180");
-        }
-    }
 </script>
 
 <script src="../assets/js/matika-ui.js" defer></script>
