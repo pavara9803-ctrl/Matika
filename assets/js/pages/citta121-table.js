@@ -51,7 +51,7 @@
           (cols.length ? '<span class="ct-cols ct-c' + cols.length + '" aria-hidden="true">' + cols.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '</span>' : '') + '</div>';
         s.rows.forEach(function (row) {
           var multi = row.c.length > 1;
-          var cells = row.c.map(function (c) { return '<span class="ct-cell ' + (CLS[c] || 'ct-name') + '">' + c + '</span>'; }).join('');
+          var cells = row.c.map(function (c) { return '<span class="ct-cell ' + (CLS[c] || CLS[c.replace(/ සිත$/, '')] || 'ct-name') + '">' + c + '</span>'; }).join('');
           var inf = (window.CITTA_ATLAS && CITTA_ATLAS.info(row.n)) || {};
           var data = 'data-ved="' + (inf.ved || '') + '" data-jati="' + (inf.jati || '') + '" data-hetu="' + (inf.hetu != null ? inf.hetu : '') + '" ' +
             'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title) + '"' +
