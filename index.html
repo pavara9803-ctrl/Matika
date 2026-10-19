@@ -14,11 +14,12 @@
 <meta name="keywords" content="අභිධර්මය, අභිධර්ම මාතිකා, තික මාතිකා, දුක මාතිකා, සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, සතර පරමාර්ථ, චිත්ත, චෛතසික, රූප, නිබ්බාන, ධම්මසංගණී, ත්‍රිපිටකය, Abhidhamma, Abhidharma, Matika, Tika Matika, Duka Matika, Suttanta Matika, Paramattha, Dhamma, Buddhist Philosophy">
 
 <meta name="author" content="Buddhist Educational Apps">
-<meta name="robots" content="index, follow">
+
+<!-- Google Search හි Screenshots සහ Images විශාල පෙරදසුන් ලෙස පෙන්වීම -->
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://matika-snowy.vercel.app/">
 
-<!-- Google Search Console හිමිකාරිත්ව සත්‍යාපනය (Verification Meta Tag) -->
-<!-- සටහන: Search Console එකේ 'HTML tag' ක්‍රමයෙන් ලැබෙන කේතය මෙතැනට යොදන්න -->
+<!-- Google Search Console හිමිකාරිත්ව සත්‍යාපනය -->
 <meta name="google-site-verification" content="google8495547c2c561a1f">
 
 <!-- ============ OPEN GRAPH (Facebook, WhatsApp, Viber පෙරදසුන් සඳහා) ============ -->
@@ -26,7 +27,9 @@
 <meta property="og:url" content="https://matika-snowy.vercel.app/">
 <meta property="og:title" content="අභිධර්ම මාතිකා අධ්‍යයනය | Abhidharma Matika Study">
 <meta property="og:description" content="සබ්බත්තික, සුත්තන්ත, තික (22) සහ දුක (100) මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය විභාගය.">
-<meta property="og:image" content="https://matika-snowy.vercel.app/launchericon-192x192.png">
+<!-- පෙරදසුන සඳහා Screenshot එක හෝ App Banner එක -->
+<meta property="og:image" content="https://matika-snowy.vercel.app/assets/screenshots/screenshot1.png">
+<meta property="og:image:alt" content="අභිධර්ම මාතිකා අධ්‍යයනය යෙදුමේ පෙරදසුන">
 <meta property="og:locale" content="si_LK">
 
 <!-- ============ TWITTER CARD TAGS ============ -->
@@ -34,7 +37,7 @@
 <meta name="twitter:url" content="https://matika-snowy.vercel.app/">
 <meta name="twitter:title" content="අභිධර්ම මාතිකා අධ්‍යයනය">
 <meta name="twitter:description" content="අභිධර්ම මාතිකා, ස්වරූපාර්ථ සහ පරමාර්ථ ධර්ම විභාගය පහසුවෙන් අධ්‍යයනය කරන්න.">
-<meta name="twitter:image" content="https://matika-snowy.vercel.app/launchericon-192x192.png">
+<meta name="twitter:image" content="https://matika-snowy.vercel.app/assets/screenshots/screenshot1.png">
 
 <!-- ============ STRUCTURED DATA (Schema.org / JSON-LD for Google) ============ -->
 <script type="application/ld+json">
@@ -46,6 +49,13 @@
   "applicationCategory": "EducationalApplication",
   "genre": "Buddhism / Education",
   "inLanguage": "si",
+  "image": [
+    "https://matika-snowy.vercel.app/assets/screenshots/screenshot1.png",
+    "https://matika-snowy.vercel.app/assets/icons/192.png"
+  ],
+  "screenshot": [
+    "https://matika-snowy.vercel.app/assets/screenshots/screenshot1.png"
+  ],
   "description": "සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22 සහ දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ හා ධර්ම විශ්ලේෂණය.",
   "offers": {
     "@type": "Offer",
@@ -57,10 +67,11 @@
 
 <!-- ============ ICONS & PWA CONFIGURATION ============ -->
 <link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" sizes="48x48" href="./launchericon-48x48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="./launchericon-192x192.png">
-<link rel="shortcut icon" href="./launchericon-48x48.png">
-<link rel="apple-touch-icon" sizes="180x180" href="./launchericon-192x192.png">
+<link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/180.png">
+<link rel="icon" type="image/png" sizes="48x48" href="./assets/icons/50.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/192.png">
+<link rel="shortcut icon" href="./assets/icons/50.png">
 
 <meta name="theme-color" content="#3f0a0c">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -80,39 +91,38 @@
 </script>
 
 <!-- ============ DATA FILES ============ -->
-<!-- 1. Helper functions + data arrays + registerTika() -->
-<script src="sabbatika-data.js"></script>
-<script src="tika-data.js"></script>
-<script src="tika-app.js"></script>
+<script src="data/matika/sabbatika-data.js"></script>
+<script src="data/matika/tika/tika-data.js"></script>
+<script src="assets/js/pages/tika-app.js"></script>
 
-<!-- 2. තික ගොනු 22 (registerTika() call කරයි) -->
-<script src="tika/01-kusala-tika.js"></script>
-<script src="tika/02-vedana-tika.js"></script>
-<script src="tika/03-vipaka-tika.js"></script>
-<script src="tika/04-upadinnna-tika.js"></script>
-<script src="tika/05-sankilittha-tika.js"></script>
-<script src="tika/06-vitakka-tika.js"></script>
-<script src="tika/07-piti-tika.js"></script>
-<script src="tika/08-dassana-tika.js"></script>
-<script src="tika/09-dassanahetu-tika.js"></script>
-<script src="tika/10-avayagami-tika.js"></script>
-<script src="tika/11-sekha-tika.js"></script>
-<script src="tika/12-paritta-tika.js"></script>
-<script src="tika/13-parittarammana-tika.js"></script>
-<script src="tika/14-hina-tika.js"></script>
-<script src="tika/15-micchatta-tika.js"></script>
-<script src="tika/16-maggarammana-tika.js"></script>
-<script src="tika/17-uppanna-tika.js"></script>
-<script src="tika/18-atita-tika.js"></script>
-<script src="tika/19-atitarammana-tika.js"></script>
-<script src="tika/20-ajjhatta-tika.js"></script>
-<script src="tika/21-ajjhattarammana-tika.js"></script>
-<script src="tika/22-sanidassana-tika.js"></script>
+<!-- තික ගොනු 22 -->
+<script src="data/matika/tika/01-kusala-tika.js"></script>
+<script src="data/matika/tika/02-vedana-tika.js"></script>
+<script src="data/matika/tika/03-vipaka-tika.js"></script>
+<script src="data/matika/tika/04-upadinnna-tika.js"></script>
+<script src="data/matika/tika/05-sankilittha-tika.js"></script>
+<script src="data/matika/tika/06-vitakka-tika.js"></script>
+<script src="data/matika/tika/07-piti-tika.js"></script>
+<script src="data/matika/tika/08-dassana-tika.js"></script>
+<script src="data/matika/tika/09-dassanahetu-tika.js"></script>
+<script src="data/matika/tika/10-avayagami-tika.js"></script>
+<script src="data/matika/tika/11-sekha-tika.js"></script>
+<script src="data/matika/tika/12-paritta-tika.js"></script>
+<script src="data/matika/tika/13-parittarammana-tika.js"></script>
+<script src="data/matika/tika/14-hina-tika.js"></script>
+<script src="data/matika/tika/15-micchatta-tika.js"></script>
+<script src="data/matika/tika/16-maggarammana-tika.js"></script>
+<script src="data/matika/tika/17-uppanna-tika.js"></script>
+<script src="data/matika/tika/18-atita-tika.js"></script>
+<script src="data/matika/tika/19-atitarammana-tika.js"></script>
+<script src="data/matika/tika/20-ajjhatta-tika.js"></script>
+<script src="data/matika/tika/21-ajjhattarammana-tika.js"></script>
+<script src="data/matika/tika/22-sanidassana-tika.js"></script>
 
-<!-- 3. Feedback Logic -->
-<script src="feedback.js"></script>
+<!-- Feedback Logic -->
+<script src="assets/js/feedback.js"></script>
 
-<script src="./tailwind.min.js"></script>
+<script src="./assets/js/vendor/tailwind.min.js"></script>
 <script>
 tailwind.config = {
   darkMode: 'class',
@@ -135,6 +145,7 @@ tailwind.config = {
   }
 };
 </script>
+<script src="assets/js/matika-theme.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -146,7 +157,7 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 .breakdown-item .num { font-weight: 700; color: #92400e; min-width: 1.8rem; flex-shrink: 0; }
 .breakdown-item .name { color: #78350f; flex: 1; }
 .breakdown-item .value { color: #b45309; font-weight: 600; text-align: right; flex-shrink: 0; max-width: 55%; }
-.dark .breakdown-item { border-bottom-color: #334155; }
+.dark .breakdown-item { border-bottom-color: #40332b; }
 .dark .breakdown-item .num { color: #fcd34d; }
 .dark .breakdown-item .name { color: #fde68a; }
 .dark .breakdown-item .value { color: #fbbf24; }
@@ -168,6 +179,8 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 }
 #offline-indicator.show { transform: translateY(0); }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/matika-ui.css">
 </head>
 <script>
 window.addEventListener('load', function() {
@@ -233,7 +246,7 @@ window.addEventListener('load', function() {
             <i class="fa-solid fa-circle-info text-saffron-600 text-lg w-5"></i> මෙම යෙදුම ගැන
         </button>
         <button onclick="menuAction('help')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
-            <i class="fa-solid fa-circle-question text-purple-600 text-lg w-5"></i> උදව්
+            <i class="fa-solid fa-circle-question text-purple-600 text-lg w-5"></i> ඇප් එක භාවිත කරන ආකාරය
         </button>
         <button onclick="menuAction('feedback')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200">
             <i class="fa-solid fa-comment-dots text-saffron-600 text-lg w-5"></i> අදහස් එවන්න
@@ -245,76 +258,82 @@ window.addEventListener('load', function() {
 <div id="view-container">
 
 <!-- HOME VIEW -->
-<section id="view-home" class="space-y-6">
-<div class="bg-gradient-to-br from-amber-800 to-maroon-900 text-amber-50 rounded-2xl p-5 shadow-lg border border-amber-600/30 relative overflow-hidden">
-<div class="absolute -right-6 -bottom-6 opacity-10 text-amber-100 text-9xl pointer-events-none"><i class="fa-solid fa-dharmachakra"></i></div>
-<span class="inline-block px-3 py-1 bg-saffron-500/20 border border-saffron-400/40 rounded-full text-xs text-saffron-300 font-medium mb-2">අභිධර්ම පිටකය</span>
-<h2 class="text-xl sm:text-2xl font-bold text-saffron-200 mb-2">අභිධර්ම මාතිකා අධ්‍යයනය</h2>
-<p class="text-sm text-amber-100/90 leading-relaxed">සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22 සහ ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.</p>
+<section id="view-home" class="home">
+
+<!-- පුස්කොළ පත්‍රය: හැඳින්වීම -->
+<div class="home-leaf">
+  <span class="home-leaf__hole" aria-hidden="true"></span>
+  <div class="home-leaf__wheel" aria-hidden="true"><i class="fa-solid fa-dharmachakra"></i></div>
+  <span class="home-leaf__badge">අභිධර්ම පිටකය</span>
+  <h2 class="home-leaf__title">අභිධර්ම මාතිකා අධ්‍යයනය</h2>
+  <p class="home-leaf__desc">සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22 සහ ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.</p>
 </div>
 
-<!-- මාතිකා කාඩ්පත් -->
-<div class="grid grid-cols-1 gap-4">
+<!-- I. මාතිකා -->
+<div class="home-group">
+  <h3 class="home-group__title"><span class="home-group__mark" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span>මාතිකා</h3>
 
-<!-- සබ්බත්තික මාතිකා -->
-<a href="sabbattika.html" class="group bg-gradient-to-r from-amber-700 via-saffron-600 to-amber-700 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl w-full block">
-<div class="flex items-center justify-between mb-2">
-<div class="w-10 h-10 rounded-xl bg-white/25 flex items-center justify-center text-xl text-saffron-100"><i class="fa-solid fa-book-open"></i></div>
-<i class="fa-solid fa-arrow-right text-saffron-200 text-xl group-hover:translate-x-1 transition-transform"></i>
-</div>
-<h3 class="text-lg font-bold mb-1">සබ්බත්තික මාතිකා සහ ස්වරූපාර්ථ</h3>
-<p class="text-xs text-amber-100/90">සියලු තිකදුකයන්හි සමස්ත පද සහ පරමාර්ථ ධර්ම විශ්ලේෂණය</p>
-</a>
+  <!-- සබ්බත්තික මාතිකා — සියල්ල ආවරණය කරන නිසා ඉහළින්ම -->
+  <a href="matika/sabbattika.html" class="home-row home-row--lead">
+    <span class="home-row__tab" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span>
+    <span class="home-row__body">
+      <span class="home-row__title">සබ්බත්තික මාතිකා සහ ස්වරූපාර්ථ</span>
+      <span class="home-row__desc">සියලු තිකදුකයන්හි සමස්ත පද සහ පරමාර්ථ ධර්ම විශ්ලේෂණය</span>
+    </span>
+    <i class="fa-solid fa-chevron-right home-row__go" aria-hidden="true"></i>
+  </a>
 
-<!-- තික + දුක + සුත්තන්ත + සතර පරමාර්ථ -->
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div class="home-rows">
+    <a href="matika/tika-matika.html" class="home-row">
+      <span class="home-row__tab home-row__tab--num">22</span>
+      <span class="home-row__body">
+        <span class="home-row__title">තික මාතිකා</span>
+        <span class="home-row__desc">ත්‍රික කොටස් 22 කින් යුක්ත මාතිකා පද 66 සහ ස්වරූපාර්ථ</span>
+      </span>
+      <i class="fa-solid fa-chevron-right home-row__go" aria-hidden="true"></i>
+    </a>
 
-<!-- තික මාතිකා -->
-<a href="tika-matika.html" class="group bg-gradient-to-r from-saffron-500 to-amber-600 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl block">
-<div class="flex items-center justify-between mb-3">
-<div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-xl font-bold text-amber-100">22</div>
-<i class="fa-solid fa-arrow-right text-saffron-200 group-hover:translate-x-1 transition-transform"></i>
-</div>
-<h3 class="text-lg font-bold mb-1">තික මාතිකා</h3>
-<p class="text-xs text-amber-100/80">ත්‍රික කොටස් 22 කින් යුක්ත මාතිකා පද 66 සහ ස්වරූපාර්ථ</p>
-</a>
+    <a href="matika/duka-matika.html" class="home-row">
+      <span class="home-row__tab home-row__tab--num">100</span>
+      <span class="home-row__body">
+        <span class="home-row__title">දුක මාතිකා</span>
+        <span class="home-row__desc">ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි පද සහ ස්වරූපාර්ථ</span>
+      </span>
+      <i class="fa-solid fa-chevron-right home-row__go" aria-hidden="true"></i>
+    </a>
 
-<!-- දුක මාතිකා -->
-<a href="duka-matika.html" class="group bg-gradient-to-r from-amber-800 to-maroon-800 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl block">
-<div class="flex items-center justify-between mb-3">
-<div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-xl font-bold text-saffron-300">100</div>
-<i class="fa-solid fa-arrow-right text-amber-300 group-hover:translate-x-1 transition-transform"></i>
-</div>
-<h3 class="text-lg font-bold text-saffron-100 mb-1">දුක මාතිකා</h3>
-<p class="text-xs text-amber-200/80">ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි පද සහ ස්වරූපාර්ථ</p>
-</a>
-
-<!-- සුත්තන්ත මාතිකා -->
-<a href="suttanta-matika.html" class="group bg-gradient-to-r from-maroon-900 to-amber-900 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl block">
-<div class="flex items-center justify-between mb-2">
-<div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-xl text-saffron-300"><i class="fa-solid fa-scroll"></i></div>
-<i class="fa-solid fa-arrow-right text-saffron-200 group-hover:translate-x-1"></i>
-</div>
-<h3 class="text-lg font-bold text-saffron-100 mb-1">සුත්තන්ත මාතිකා</h3>
-<p class="text-xs text-amber-100/90">සුත්තන්තික මාතිකා පද සහ ස්වරූපාර්ථ</p>
-</a>
-
-<!-- සතර පරමාර්ථ -->
-<a href="paramatta.html" class="group bg-gradient-to-r from-purple-700 via-indigo-700 to-blue-700 text-white rounded-2xl p-5 text-left shadow-md hover:shadow-xl block relative overflow-hidden">
-<div class="absolute -right-4 -bottom-4 opacity-15 text-white text-8xl pointer-events-none"><i class="fa-solid fa-gem"></i></div>
-<div class="relative">
-<div class="flex items-center justify-between mb-3">
-<div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-xl text-purple-100"><i class="fa-solid fa-gem"></i></div>
-<i class="fa-solid fa-arrow-right text-purple-200 group-hover:translate-x-1 transition-transform"></i>
-</div>
-<h3 class="text-lg font-bold text-purple-100 mb-1">සතර පරමාර්ථ</h3>
-<p class="text-xs text-purple-100/90">අභිධර්ම මාතිකා අධ්‍යනය පිණිස උපාකාරී වන චිත්ත, චෛතසික, රූප සහ නිබ්බාන යන පරමාර්ථ ධර්ම විභාගය</p>
-</div>
-</a>
-
+    <a href="matika/suttanta-matika.html" class="home-row">
+      <span class="home-row__tab" aria-hidden="true"><i class="fa-solid fa-scroll"></i></span>
+      <span class="home-row__body">
+        <span class="home-row__title">සුත්තන්ත මාතිකා</span>
+        <span class="home-row__desc">සුත්තන්තික මාතිකා පද සහ ස්වරූපාර්ථ</span>
+      </span>
+      <i class="fa-solid fa-chevron-right home-row__go" aria-hidden="true"></i>
+    </a>
+  </div>
 </div>
 
+<!-- II. සතර පරමාර්ථ -->
+<div class="home-group">
+  <h3 class="home-group__title"><span class="home-group__mark home-group__mark--gem" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>සතර පරමාර්ථ</h3>
+
+  <div class="home-param">
+    <a href="paramattha/index.html" class="home-param__head">
+      <span class="home-param__text">
+        <span class="home-row__title">සතර පරමාර්ථ</span>
+        <span class="home-row__desc">අභිධර්ම මාතිකා අධ්‍යනය පිණිස උපාකාරී වන චිත්ත, චෛතසික, රූප සහ නිබ්බාන යන පරමාර්ථ ධර්ම විභාගය</span>
+      </span>
+      <i class="fa-solid fa-chevron-right home-row__go" aria-hidden="true"></i>
+    </a>
+    <div class="home-param__grid">
+      <a href="./paramattha/citta.html" class="home-p home-p--citta"><span class="home-p__n">89 / 121</span><span class="home-p__name">චිත්තය</span></a>
+      <a href="./paramattha/caitasika.html" class="home-p home-p--cet"><span class="home-p__n">52</span><span class="home-p__name">චෛතසිකය</span></a>
+      <a href="./paramattha/rupa.html" class="home-p home-p--rupa"><span class="home-p__n">28</span><span class="home-p__name">රූපය</span></a>
+      <a href="./paramattha/nibbana.html" class="home-p home-p--nib"><span class="home-p__n">1</span><span class="home-p__name">නිර්වාණය</span></a>
+    </div>
+  </div>
 </div>
+
 </section>
 
 </div>
@@ -392,7 +411,8 @@ window.addEventListener('load', function() {
   </div>
 </div>
 
-<script src="app.js"></script>
+<script src="assets/js/app.js"></script>
 
+<script src="assets/js/matika-ui.js" defer></script>
 </body>
 </html>

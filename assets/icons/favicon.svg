@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><defs>
+  <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+    <stop offset="0" stop-color="#6e1a1c"/><stop offset=".55" stop-color="#4a0e10"/><stop offset="1" stop-color="#260507"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fde9a8"/><stop offset=".45" stop-color="#f5c04a"/><stop offset="1" stop-color="#c98a14"/>
+  </linearGradient>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0" stop-color="#f59e0b" stop-opacity=".42"/><stop offset=".6" stop-color="#f59e0b" stop-opacity=".12"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fbeec9"/><stop offset="1" stop-color="#e7cc8c"/>
+  </linearGradient>
+  <linearGradient id="cover" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#a3282b"/><stop offset="1" stop-color="#6b1416"/>
+  </linearGradient>
+</defs><rect width="1024" height="1024" rx="224" fill="url(#bg)"/><circle cx="512" cy="512" r="360.0" fill="none" stroke="url(#gold)" stroke-width="80"/>
+<circle cx="512" cy="512" r="296.0" fill="none" stroke="#f5c04a" stroke-opacity=".45" stroke-width="6.4"/>
+<polygon fill="url(#gold)" points="548.3,407.0 533.1,190.0 490.9,190.0 475.7,407.0"/>
+<ellipse cx="512.0" cy="282.5" rx="29.4" ry="46.3" transform="rotate(0 512.0 282.5)" fill="url(#gold)"/>
+<polygon fill="url(#gold)" points="611.9,463.4 754.6,299.2 724.8,269.4 560.6,412.1"/>
+<ellipse cx="674.3" cy="349.7" rx="29.4" ry="46.3" transform="rotate(45 674.3 349.7)" fill="url(#gold)"/>
+<polygon fill="url(#gold)" points="617.0,548.3 834.0,533.1 834.0,490.9 617.0,475.7"/>
+<ellipse cx="741.5" cy="512.0" rx="29.4" ry="46.3" transform="rotate(90 741.5 512.0)" fill="url(#gold)"/>
+<polygon fill="url(#gold)" points="560.6,611.9 724.8,754.6 754.6,724.8 611.9,560.6"/>
+<ellipse cx="674.3" cy="674.3" rx="29.4" ry="46.3" transform="rotate(135 674.3 674.3)" fill="url(#gold)"/>
+<polygon fill="url(#gold)" points="475.7,617.0 490.9,834.0 533.1,834.0 548.3,617.0"/>
+<ellipse cx="512.0" cy="741.5" rx="29.4" ry="46.3" transform="rotate(180 512.0 741.5)" fill="url(#gold)"/>
+<polygon fill="url(#gold)" points="412.1,560.6 269.4,724.8 299.2,754.6 463.4,611.9"/>
+<ellipse cx="349.7" cy="674.3" rx="29.4" ry="46.3" transform="rotate(225 349.7 674.3)" fill="url(#gold)"/>
+<polygon fill="url(#gold)" points="407.0,475.7 190.0,490.9 190.0,533.1 407.0,548.3"/>
+<ellipse cx="282.5" cy="512.0" rx="29.4" ry="46.3" transform="rotate(270 282.5 512.0)" fill="url(#gold)"/>
+<polygon fill="url(#gold)" points="463.4,412.1 299.2,269.4 269.4,299.2 412.1,463.4"/>
+<ellipse cx="349.7" cy="349.7" rx="29.4" ry="46.3" transform="rotate(315 349.7 349.7)" fill="url(#gold)"/>
+<circle cx="512" cy="512" r="153.0" fill="#4a0e10"/>
+<path transform="translate(512,512) rotate(22.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(67.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(112.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(157.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(202.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(247.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(292.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(337.5)" d="M0,-129.0 Q51.6,-58.1 0,-23.2 Q-51.6,-58.1 0,-129.0 Z" fill="#c98a14"/>
+<path transform="translate(512,512) rotate(0)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<path transform="translate(512,512) rotate(45)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<path transform="translate(512,512) rotate(90)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<path transform="translate(512,512) rotate(135)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<path transform="translate(512,512) rotate(180)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<path transform="translate(512,512) rotate(225)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<path transform="translate(512,512) rotate(270)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<path transform="translate(512,512) rotate(315)" d="M0,-150.0 Q60.0,-67.5 0,-27.0 Q-60.0,-67.5 0,-150.0 Z" fill="url(#gold)"/>
+<circle cx="512" cy="512" r="45.0" fill="#5a1416"/>
+<circle cx="512" cy="512" r="30.0" fill="url(#gold)"/></svg>

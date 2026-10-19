@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="si" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>අභිධර්ම රූප විභාගය (Rupa Vibhagaya App)</title>
+    
+    <link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/180.png">
+    <link rel="icon" href="../assets/icons/50.png">
+    <meta name="theme-color" content="#3f0a0c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="../assets/js/vendor/tailwind.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        saffron: {
+                            50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d',
+                            400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309',
+                            800: '#92400e', 900: '#78350f', 950: '#451a03',
+                        },
+                        maroon: {
+                            700: '#701a1d', 800: '#581113', 900: '#3f0a0c', 950: '#260507',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Serif Sinhala', 'Inter', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+<script src="../assets/js/matika-theme.js"></script>
+    <!-- Google Fonts: Noto Serif Sinhala & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Noto Serif Sinhala', 'Inter', serif;
+            -webkit-tap-highlight-color: transparent;
+            font-size: 15px;
+        }
+        
+        /* ============================================================ */
+        /* ✅ සිංහල පෙළ සඳහා Justify සැකසුම */
+        /* ============================================================ */
+        p, .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+            word-spacing: 0.05em;
+            line-height: 1.8;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+        
+        li {
+            text-align: justify;
+            text-justify: inter-word;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            text-align: left;
+        }
+        
+        button, .btn, .badge {
+            text-align: center;
+        }
+        
+        th {
+            text-align: left;
+        }
+        
+        /* Dynamic content justify */
+        #rupa-deta-content p,
+        #rupa-deta-content td,
+        #rupa-deta-content li,
+        [id^="infoDetailsGroup"] {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* ============================================================ */
+        /* ✅ රූපය විස්තර කාඩ්පත - විශේෂ ස්ටයිල් (රන්වන්-දුඹුරු) */
+        /* ============================================================ */
+        .rupa-intro-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+            border: 1px solid #fcd34d;
+            border-left: 6px solid #d97706;
+        }
+        .dark .rupa-intro-card {
+            background: linear-gradient(135deg, #451a03 0%, #78350f 50%, #92400e 100%);
+            border-color: #b45309;
+            border-left-color: #fbbf24;
+        }
+        
+        .rupa-intro-card .gatha-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-left: 4px solid #d97706;
+            border-radius: 0.75rem;
+        }
+        .dark .rupa-intro-card .gatha-box {
+            background: rgba(0, 0, 0, 0.35);
+            border-left-color: #fbbf24;
+        }
+        
+        /* ============================================================ */
+        /* SCROLL TABLE */
+        /* ============================================================ */
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 0.75rem;
+        }
+        .table-scroll::-webkit-scrollbar { height: 6px; }
+        .table-scroll::-webkit-scrollbar-track { background: #fef3c7; border-radius: 3px; }
+        .table-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 3px; }
+        .dark .table-scroll::-webkit-scrollbar-track { background: #40332b; }
+        .dark .table-scroll::-webkit-scrollbar-thumb { background: #f59e0b; }
+        
+        /* ============================================================ */
+        /* ANIMATIONS */
+        /* ============================================================ */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/matika-ui.css">
+<link rel="stylesheet" href="../assets/css/paramattha.css">
+</head>
+<body class="h-full flex flex-col justify-between text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased selection:bg-saffron-200 selection:text-maroon-900 transition-colors duration-200">
+
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
+<header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between relative">
+        <div class="flex items-center space-x-2">
+            <a href="../index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="මුල් පිටුවට">
+                <i class="fa-solid fa-house text-lg"></i>
+            </a>
+            <a href="index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="සතර පරමාර්ථ">
+                <i class="fa-solid fa-gem text-lg"></i>
+            </a>
+        </div>
+
+        <div class="flex items-center space-x-2 mx-auto text-center cursor-pointer" onclick="window.location.href='../index.html'">
+            <div class="w-9 h-9 rounded-full bg-saffron-500/20 border border-saffron-400 flex items-center justify-center text-saffron-300 shadow-inner shrink-0">
+                <i class="fa-solid fa-cube text-xl"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-xl sm:text-2xl leading-tight text-saffron-100 tracking-wide">අභිධර්ම රූප විභාගය</h1>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+            <button id="theme-toggle-btn" onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 transition-colors" title="තේමාව වෙනස් කරන්න">
+                <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- BREADCRUMB -->
+<!-- ============================================================ -->
+<nav class="ca-main w-full mx-auto px-4 sm:px-6 pt-3 text-xs text-amber-800 dark:text-saffron-300 flex items-center gap-2 flex-wrap">
+    <a href="../index.html" class="hover:underline flex items-center gap-1">
+        <i class="fa-solid fa-house text-[10px]"></i> මුල් පිටුව
+    </a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-amber-400"></i>
+    <a href="index.html" class="hover:underline flex items-center gap-1">
+        <i class="fa-solid fa-gem text-[10px]"></i> සතර පරමාර්ථ
+    </a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-amber-400"></i>
+    <span class="font-bold text-amber-900 dark:text-saffron-200">රූප පරමාර්ථය</span>
+</nav>
+
+<!-- ============================================================ -->
+<!-- MAIN CONTAINER -->
+<!-- ============================================================ -->
+<main class="flex-1 ca-main w-full mx-auto p-4 sm:p-6 pb-16">
+  <section class="ca-hero">
+    <p class="ca-hero__kicker">සතර පරමාර්ථ ධර්ම අතුරෙන් තුන්වැන්න</p>
+    <h1>රූප 28</h1>
+    <p class="ca-hero__gatha"><strong>"රුප්පතීති රූපං, සීතුණ්හාදිවිරොධිපච්චයෙහි විකාරමාපජ්ජති, ආපාදීයතීති වා අත්ථො."</strong><cite>(අභි.සං)</cite></p>
+    <p class="ca-hero__lead">අරමුණ නොදන්නා, රූපී ස්වභාවය ඇති ධර්ම. රූපයක් එබූ විට එහි ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන පෙන්වයි. විභාග සහ සමුට්ඨාන අනුව රූප තෝරා බැලිය හැක.</p>
+  </section>
+
+  <section class="ca-atlas" aria-labelledby="ca-atlas-h">
+    <h2 id="ca-atlas-h" class="sr-only">රූප සිතියම</h2>
+    <div class="ca-tools">
+      <div class="ca-tools__row">
+        <label class="ca-search"><span class="sr-only">සොයන්න</span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="ca-q" type="search" placeholder="සොයන්න: පඨවි, චක්ඛු, pathavi…" autocomplete="off"></label>
+        
+      </div>
+      <div class="ca-tools__row" style="margin-top:12px">
+        <span class="ca-tools__label">අනුව බලන්න:</span>
+        <div id="ca-groups" class="ca-tools__row" role="group" aria-label="වර්ගීකරණය"></div>
+        <button id="ca-clear" class="ca-clear" type="button" hidden>සියල්ල පෙන්වන්න</button>
+      </div>
+      <div id="ca-options" class="ca-options" role="group" aria-label="කොටස" hidden></div>
+      <div id="ca-result" class="ca-result" aria-live="polite" hidden></div>
+      <div id="ca-legend" class="ca-legend" hidden><span>නියතව</span><span class="is-opt">විටෙක</span></div>
+    </div>
+    <div id="ca-map" class="ca-map"></div>
+  </section>
+
+  <nav id="ca-secnav" class="ca-secnav" role="tablist" aria-label="කොටස්">
+    <button type="button" role="tab" data-sec="intro">හැඳින්වීම</button>
+    <button type="button" role="tab" data-sec="lr">ලක්ඛණාදි චතුක්කය</button>
+    <button type="button" role="tab" data-sec="vibhaga">විභාග සහ සමුට්ඨාන</button>
+    <button type="button" role="tab" data-sec="deta">සවිස්තරාත්මක පාඩම්</button>
+  </nav>
+
+  <section id="sec-intro" class="ca-sec" role="tabpanel" aria-label="හැඳින්වීම">
+    <h2 class="sr-only">හැඳින්වීම</h2>
+    <section class="rupa-intro-card ca-panel">
+        <!-- මුල් විස්තරය -->
+        <div class="space-y-3">
+            <p class="text-sm sm:text-base text-amber-900 dark:text-amber-50 leading-relaxed text-justify">
+                සත්ත්ව ශරීර හා බාහිර වස්තූන් සෑදී ඇති මූලික ධර්ම රාශිය <strong>රූපයෝ</strong> ය. රූප විසි අටක් (28) ඇත්තේ ය. එයින් ඇසට පෙනෙන්නේ වර්ණ ධාතුව නැමති එක් රූපයක් පමණෙකි. ඉතිරි සත්විස්ස ඇසට පෙනෙන රූප නො වේ.
+            </p>
+
+            <p class="text-sm sm:text-base text-amber-900 dark:text-amber-50 leading-relaxed text-justify">
+                රූප යන වචනයේ තේරුම <strong>ශීතෝෂ්ණාදි විරුද්ධ දෙය හා එක් වීමෙන් විකාරයට පැමිණෙන දෙය</strong> ය යනුයි. චිත්ත චෛතසිකයන් ඉතා සියුම් බැවින් ශීතෝෂ්ණාදිය හා ඒවායේ ගැටීමක් සිදු නොවේ. 
+                <span class="text-xs text-amber-700 dark:text-amber-300 italic">(අභි,ච)</span>
+            </p>
+        </div>
+
+        <!-- අලුතින් එක් කරන ලද රූප නිර්වචන පාලි සහ සිංහල විවරණය -->
+        <div class="bg-amber-50/95 dark:bg-slate-900/90 border border-amber-300 dark:border-amber-700 rounded-xl p-4 sm:p-5 my-4 space-y-3 text-slate-900 dark:text-slate-100 shadow-sm">
+            <div class="border-b border-amber-300/80 dark:border-slate-700 pb-2">
+                <span class="text-xs uppercase tracking-wider font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-scroll text-amber-700 dark:text-amber-400"></i> රූප නිර්වචන පාලි පාඨය
+                </span>
+                <p class="text-xs sm:text-sm italic leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    "රුප්‌පතීති රූපං, සීතුණ්‌හාදිවිරොධිපච්‌චයෙහි විකාරමාපජ්‌ජති, ආපාදීයතීති වා අත්‌ථො. තෙනාහ භගවා ‘‘සීතෙනපි රුප්‌පති, උණ්‌හෙනපි රුප්‌පතී’’ත්‍යාදි (සං. නි. 3.79), රුප්‌පනඤ්‌චෙත්‌ථ සීතාදිවිරොධිපච්‌චයසමවායෙ විසදිසුප්‌පත්‌තියෙව. යදි එවං අරූපධම්‌මානම්‌පි රූපවොහාරො ආපජ්‌ජතීති? නාපජ්‌ජති සීතාදිග්‌ගහණසාමත්‌ථියතො විභූතතරස්‌සෙව රුප්‌පනස්‌සාධිප්‌පෙතත්‌තා. ඉතරථා හි ‘‘රුප්‌පතී’’ති අවිසෙසවචනෙනෙව පරියත්‌තන්‌ති කිං සීතාදිග්‌ගහණෙන, තං පන සීතාදිනා ඵුට්‌ඨස්‌ස රුප්‌පනං විභූතතරං, තස්‌මා තදෙවෙත්‌ථාධිප්‌පෙතන්‌ති ඤාපනත්‌ථං සීතාදිග්‌ගහණං කතං. යදි එවං කථං බ්‍රහ්‌මලොකෙ රූපවොහාරො, න හි තත්‌ථ උපඝාතකා සීතාදයො අත්‌ථීති? කිඤ්‌චාපි උපඝාතකා නත්‌ථි, අනුග්‌ගාහකා පන අත්‌ථි, තස්‌මා තංවසෙනෙත්‌ථ රුප්‌පනං සම්‌භවතීති, අථ වා තංසභාවානතිවත්‌තනතො තත්‌ථ රූපවොහාරොති අලමතිප්‌පපඤ්‌චෙන."
+                </p>
+            </div>
+
+            <div class="pt-1">
+                <span class="text-xs uppercase tracking-wider font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-open text-amber-700 dark:text-amber-400"></i> සිංහල අර්ථ විවරණය
+                </span>
+                <p class="text-xs sm:text-sm leading-relaxed text-justify mt-2 text-slate-900 dark:text-slate-200">
+                    "විකාරයට පත්වේනුයි (වෙනස් වීමට භාජනය වේනුයි) <strong>'රූප'</strong> නම් වේ. එනම් ශීත, උෂ්ණ ආදී වූ පටහැනි (විරුද්ධ) ප්‍රත්‍යයන් හේතුවෙන් විකාරයට පැමිණේ, පමුණුවනු ලැබේ යන අර්ථයයි. එහෙයින් භාග්‍යවතුන් වහන්සේ <em>'සීතේනපි රුප්පති, උණ්හේනපි රුප්පති'</em> (ශීතලෙන් ද විකාරයට පත්වේ, උෂ්ණයෙන් ද විකාරයට පත්වේ) යනාදී වශයෙන් වදාළ සේක (සංයුක්ත නිකාය 3.79 - ඛජ්ජනීය සූත්‍රය). මෙහිලා 'රුප්පනය' (විකාරයට පත්වීම) යනු ශීතාදී විරුද්ධ ප්‍රත්‍යයන් එක්රැස් වූ කල්හි (පෙර පැවති රූප සන්තතියට) අසමාන වූ (විසදෘශ) රූපයන්ගේ පහළවීම ම ය.
+                </p>
+                <div class="bg-white/80 dark:bg-slate-800/80 p-3 rounded-lg border border-amber-200 dark:border-slate-700 my-2 space-y-2">
+                    <div>
+                        <strong class="text-amber-950 dark:text-amber-300">ප්‍රශ්නය:</strong> ඉදින් එසේ නම් (පෙර සිතට අසමාන පසු සිත් පහළවීම් ආදිය හේතුවෙන්) අරූප ධර්මයන්ට ද (නාම ධර්මයන්ට ද) 'රූප' යන ව්‍යවහාරය පැමිණිය යුතු නොවේ ද?
+                    </div>
+                    <div>
+                        <strong class="text-emerald-800 dark:text-emerald-400">පිළිතුර:</strong> නැත, එසේ නොපැමිණේ. ශීත-උෂ්ණාදිය ගැනීමෙහි සමර්ථතාව අනුව (ඇසට, කයට) අතිශයින්ම ප්‍රකට වූවක් ම 'රුප්පනය' වශයෙන් මෙහි අදහස් කර ඇති බැවිනි. එසේ නොවන්නේ නම්, 'රුප්පති' (විකාරයට පත්වේ) යන විශේෂණයක් නැති සාමාන්‍ය වචනයෙන්ම ප්‍රමාණවත් වන බැවින් 'ශීතාදී' වශයෙන් ගැනීමෙන් කුමන ඵලයක් ද? ශීත-උෂ්ණාදිය හා ගැටීමෙන් වන විකාරය අතිශයින්ම ප්‍රකට ය. එබැවින් මෙහි අදහස් කරන ලද්දේ එයම බව දැනවීම සඳහා ශීතාදී වශයෙන් ගැනීම කරන ලදී.
+                    </div>
+                    <div class="pt-1">
+                        <strong class="text-amber-950 dark:text-amber-300">ප්‍රශ්නය:</strong> ඉදින් එසේ නම් බ්‍රහ්ම ලෝකයෙහි 'රූප' යන ව්‍යවහාරය කෙසේ වේ ද? එහි රූපයන්ට හානි පමුණුවන (උපඝාතක වූ) ශීත-උෂ්ණාදිය නැත්තේ නොවේ ද?
+                    </div>
+                    <div>
+                        <strong class="text-emerald-800 dark:text-emerald-400">පිළිතුර:</strong> හානි පමුණුවන උපඝාතක ධර්මයන් එහි නැතත්, අනුග්‍රහ කරන (අනුකූල වූ) ශීත-උෂ්ණාදී ප්‍රත්‍යයෝ ඇත්තාහ. එබැවින් ඒ අනුග්‍රාහක ප්‍රත්‍යයන්ගේ බලයෙන් එහි ද 'රුප්පනය' (වෙනස් වී පහළවීම) සම්භවය වේ (සිදුවේ). නැතහොත්, (කාම ලෝකයේදී පවතින) එම රූප ස්වභාවය ඉක්මවා නොපවතින බැවින් ද එහි 'රූප' යන ව්‍යවහාරය වේ. එබැවින් මේ සම්බන්ධයෙන් අනවශ්‍ය ලෙස දීර්ඝ විස්තර කිරීම් ප්‍රමාණවත් වේ."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- විශේෂාංග ලැයිස්තුව -->
+        <div class="mt-4 pt-4 border-t border-amber-300/60 dark:border-amber-500/30 grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div class="bg-white/60 dark:bg-amber-950/40 rounded-lg p-3 text-center">
+                <i class="fa-solid fa-cube text-amber-600 dark:text-amber-300 text-lg mb-1"></i>
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-200">28 ක් ඇත</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-300">රූප වර්ග</div>
+            </div>
+            <div class="bg-white/60 dark:bg-amber-950/40 rounded-lg p-3 text-center">
+                <i class="fa-solid fa-eye-slash text-amber-600 dark:text-amber-300 text-lg mb-1"></i>
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-200">අරමුණ නොදනී</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-300">රූපයේ ස්වභාවය</div>
+            </div>
+            <div class="bg-white/60 dark:bg-amber-950/40 rounded-lg p-3 text-center">
+                <i class="fa-solid fa-temperature-half text-amber-600 dark:text-amber-300 text-lg mb-1"></i>
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-200">විකාරයට පැමිණේ</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-300">ශීතෝෂ්ණාදියෙන්</div>
+            </div>
+        </div>
+    </section>
+  </section>
+
+  <section id="sec-lr" class="ca-sec" role="tabpanel" aria-label="ලක්ඛණාදි චතුක්කය" hidden>
+    <h2 class="sr-only">ලක්ඛණාදි චතුක්කය</h2>
+    <div id="rupa-lr-intro" style="display:grid;gap:18px"></div>
+  </section>
+
+  <section id="sec-vibhaga" class="ca-sec" role="tabpanel" aria-label="විභාග සහ සමුට්ඨාන" hidden>
+    <h2 class="sr-only">විභාග සහ සමුට්ඨාන</h2>
+    <div id="rupa-vibhaga"></div>
+  </section>
+
+  <section id="sec-deta" class="ca-sec" role="tabpanel" aria-label="සවිස්තරාත්මක පාඩම්" hidden>
+    <h2 class="sr-only">සවිස්තරාත්මක පාඩම්</h2>
+    <div id="rupa-deta-content" class="space-y-4"></div>
+  </section>
+
+</main>
+
+<dialog id="ca-detail" class="ca-detail" aria-labelledby="ca-d-title">
+  <div class="ca-d__bar">
+    <div class="ca-d__nav">
+      <button id="ca-prev" type="button" aria-label="පෙර"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+      <span id="ca-pos"></span>
+      <button id="ca-next" type="button" aria-label="ඊළඟ"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+    </div>
+    <button class="ca-d__x" type="button" aria-label="වසන්න"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  </div>
+  <div class="ca-d__body"></div>
+</dialog>
+
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+
+<footer class="bg-maroon-900 text-amber-100 py-4 border-t-2 border-saffron-500">
+  <div class="flex justify-center items-center">
+    <p class="text-xs text-amber-200/70">අභිධර්ම මාතිකා අධ්‍යයනය &copy; 2026 | රූප පරමාර්ථය</p>
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- THEME TOGGLE SUPPORT SCRIPT -->
+<!-- ============================================================ -->
+<script>
+    function initTheme() {
+        const isDark = localStorage.getItem('abhidhamma_theme') === 'dark' ||
+                       localStorage.getItem('theme') === 'dark' ||
+                       (!localStorage.getItem('abhidhamma_theme') && !localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-moon text-lg';
+        }
+    }
+
+    function toggleDarkMode() {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('abhidhamma_theme', 'light');
+            localStorage.setItem('theme', 'light');
+            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-moon text-lg';
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('abhidhamma_theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            document.getElementById('theme-toggle-icon').className = 'fa-solid fa-sun text-lg';
+        }
+    }
+
+    function toggleRupaDetaSection() {
+        const container = document.getElementById("rupaDetaContainer");
+        const arrowIcon = document.getElementById("rupa-deta-arrow");
+        
+        if (container) {
+            container.classList.toggle("hidden");
+            if (arrowIcon) {
+                arrowIcon.classList.toggle("rotate-180");
+            }
+            
+            if (!container.classList.contains('hidden')) {
+                if (typeof initRupaDeta === 'function') {
+                    initRupaDeta();
+                } else {
+                    console.warn('[rupa.html] initRupaDeta function not found - rupa-deta.js load වී නැත');
+                }
+            }
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', initTheme);
+</script>
+
+<!-- ============================================================ -->
+<!-- EXTERNAL DATA & LOGIC -->
+<!-- ============================================================ -->
+<script src="../assets/js/pm-atlas.js"></script>
+<script src="../data/paramattha/rupa-data.js"></script>
+<script src="../data/paramattha/rupa-deta-full.js"></script>
+<script src="../data/paramattha/rupa-deta.js"></script>
+<script src="../assets/js/pages/rupa-atlas.js"></script>
+
+<script src="../assets/js/matika-ui.js" defer></script>
+</body>
+</html>

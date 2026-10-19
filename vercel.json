@@ -1,0 +1,81 @@
+{
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/sabbattika.html",
+      "destination": "/matika/sabbattika.html",
+      "permanent": true
+    },
+    {
+      "source": "/tika-matika.html",
+      "destination": "/matika/tika-matika.html",
+      "permanent": true
+    },
+    {
+      "source": "/duka-matika.html",
+      "destination": "/matika/duka-matika.html",
+      "permanent": true
+    },
+    {
+      "source": "/suttanta-matika.html",
+      "destination": "/matika/suttanta-matika.html",
+      "permanent": true
+    },
+    {
+      "source": "/paramatta.html",
+      "destination": "/paramattha/",
+      "permanent": true
+    },
+    {
+      "source": "/Citta/citta.html",
+      "destination": "/paramattha/citta.html",
+      "permanent": true
+    },
+    {
+      "source": "/caitasika/caitasika.html",
+      "destination": "/paramattha/caitasika.html",
+      "permanent": true
+    },
+    {
+      "source": "/caitasika/caitasika.lr.html",
+      "destination": "/paramattha/caitasika.html",
+      "permanent": true
+    },
+    {
+      "source": "/Rupa/rupa.html",
+      "destination": "/paramattha/rupa.html",
+      "permanent": true
+    },
+    {
+      "source": "/Rupa/rupa-lr.html",
+      "destination": "/paramattha/rupa.html",
+      "permanent": true
+    },
+    {
+      "source": "/nibbana/nibbana.html",
+      "destination": "/paramattha/nibbana.html",
+      "permanent": true
+    },
+    {
+      "source": "/icons/:file",
+      "destination": "/assets/icons/:file",
+      "permanent": true
+    },
+    {
+      "source": "/screenshots/:file",
+      "destination": "/assets/screenshots/:file",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ]
+}
