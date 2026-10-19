@@ -209,6 +209,14 @@
     }
   });
 
+  // සිත් 121 වගුවෙන් (citta121-table.js) සිතක විස්තරය විවෘත කිරීම
+  window.CITTA_ATLAS = {
+    openCitta: function (id, needs121) {
+      if (needs121 && mode !== 121) setMode(121);
+      if (I[id]) atlas.open(id);
+    }
+  };
+
   // ---------- කියවීමේ කොටස් ----------
   function acc(n, title, html, open) {
     return '<details class="ca-acc"' + (open ? ' open' : '') + '><summary>' + (n != null ? '<span class="ca-acc__n">' + n + '</span>' : '') + '<span>' + title + '</span></summary><div class="ca-acc__body">' + html + '</div></details>';
