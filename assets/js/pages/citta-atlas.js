@@ -1,11 +1,11 @@
 // ============================================================
-// citta-atlas.js — සිත් 89 / 121 සිතියම
-//   භූමිය අනුව පටි (කාම / රූප / අරූප / ලෝකෝත්තර), ජාතිය අනුව වර්ණ
+// citta-atlas.js — සිත් පිටුව: සිත් 121 හි ලක්ෂණ, විස්තර පත්‍රය සහ කියවීමේ කොටස්
+//   (සිත් 121 වගුවේ පේළියක් එබූ විට විස්තර පත්‍රය විවෘත වේ)
 //   දත්ත: data/paramattha/citta-data.js (citta121Data, cittaDetailData, cittaData)
 // ============================================================
 (function () {
   'use strict';
-  if (typeof PMAtlas === 'undefined' || typeof citta121Data === 'undefined') return;
+  if (typeof citta121Data === 'undefined') return;
 
   var JATI = { ak: 'අකුසල', ku: 'කුසල', vi: 'විපාක', ki: 'ක්‍රියා' };
   var BHUMI = { kama: 'කාමාවචර', rupa: 'රූපාවචර', arupa: 'අරූපාවචර', lok: 'ලෝකෝත්තර' };
@@ -110,71 +110,9 @@
     });
   });
 
-  function more(key) { var d = citta121Data[key]; return d ? { title: d.title, html: d.desc } : null; }
-
-  function bands(mode) {
-    var kama = { key: 'kama', name: 'කාමාවචර', count: 54, cls: 'plain', more: more('citta121Summary') && { title: 'කාමාවචර සිත් 54', html: citta121Data.akusala12Full.desc + citta121Data.ahetuka18Full.desc + citta121Data.kamaKusala24Full.desc }, subs: [
-      { name: 'ලෝභ මූල', cls: 'ak', ids: LOBHA }, { name: 'දෝස මූල', cls: 'ak', ids: DOSA }, { name: 'මෝහ මූල', cls: 'ak', ids: MOHA },
-      { name: 'අකුසල විපාක (අහේතුක)', cls: 'vi', ids: AV }, { name: 'කුසල විපාක (අහේතුක)', cls: 'vi', ids: KV }, { name: 'අහේතුක ක්‍රියා', cls: 'ki', ids: AKR },
-      { name: 'මහාකුසල්', cls: 'ku', ids: KK, wide: true }, { name: 'මහාවිපාක', cls: 'vi', ids: KVP, wide: true }, { name: 'මහාක්‍රියා', cls: 'ki', ids: KKR, wide: true } ] };
-    var rup = { key: 'rupa', name: 'රූපාවචර', count: 15, cls: 'plain', more: more('rupa15Full'), subs: [
-      { name: 'කුසල්', cls: 'ku', ids: RK, wide: true }, { name: 'විපාක', cls: 'vi', ids: RV, wide: true }, { name: 'ක්‍රියා', cls: 'ki', ids: RKR, wide: true } ] };
-    var aru = { key: 'arupa', name: 'අරූපාවචර', count: 12, cls: 'plain', more: more('arupa12Full'), subs: [
-      { name: 'කුසල්', cls: 'ku', ids: AK4, wide: true }, { name: 'විපාක', cls: 'vi', ids: AV4, wide: true }, { name: 'ක්‍රියා', cls: 'ki', ids: AKR4, wide: true } ] };
-    var lok = mode === 121
-      ? { key: 'lok', name: 'ලෝකෝත්තර', count: 40, cls: 'plain', more: more('lokuttara40Full'),
-          subs: L40.m.map(function (s) { return { name: s.name, cls: 'ku', ids: s.ids }; }).concat(L40.p.map(function (s) { return { name: s.name, cls: 'vi', ids: s.ids }; })) }
-      : { key: 'lok', name: 'ලෝකෝත්තර', count: 8, cls: 'plain', more: more('lokuttara40Full'), subs: [
-          { name: 'මග්ග', cls: 'ku', ids: L8M }, { name: 'ඵල', cls: 'vi', ids: L8P } ] };
-    rup.moreLabel = aru.moreLabel = lok.moreLabel = kama.moreLabel = 'විස්තරය';
-    return [kama, rup, aru, lok];
-  }
-
-  function idsOf(mode) {
-    var out = [];
-    bands(mode).forEach(function (b) { b.subs.forEach(function (s) { out = out.concat(s.ids); }); });
-    return out;
-  }
-  function breakdown(ids) {
-    var c = {}; ids.forEach(function (id) { var b = I[id].bhumi; c[b] = (c[b] || 0) + 1; });
-    var parts = []; ['kama', 'rupa', 'arupa', 'lok'].forEach(function (b) { if (c[b]) parts.push(BHUMI[b] + ' ' + c[b]); });
-    return parts.length > 1 ? parts.join(' + ') + ' = ' + ids.length : '';
-  }
-  function opt(label, ids, title, extra) {
-    var o = { label: label + ' ' + ids.length, title: title || label, ids: ids, note: breakdown(ids) };
-    if (extra) for (var k in extra) o[k] = extra[k];
-    return o;
-  }
-
-  var mode = 89, atlas;
-  function pickers(m) {
-    var all = idsOf(m), f = function (fn) { return all.filter(function (id) { return fn(I[id]); }); };
-    var v121 = idsOf(121), f121 = function (fn) { return v121.filter(function (id) { return fn(I[id]); }); };
-    var to121 = function () { if (mode !== 121) setMode(121, true); };
-    return [
-      { key: 'bh', name: 'භූමිය', options: ['kama', 'rupa', 'arupa', 'lok'].map(function (b) { return opt(BHUMI[b], f(function (c) { return c.bhumi === b; }), BHUMI[b] + ' සිත්'); }) },
-      { key: 'ja', name: 'ජාතිය', options: ['ak', 'ku', 'vi', 'ki'].map(function (j) { return opt(JATI[j], f(function (c) { return c.jati === j; }), JATI[j] + ' සිත්'); }) },
-      { key: 'he', name: 'හේතු', options: [0, 1, 2, 3].map(function (h) { return opt(HETU[h], f(function (c) { return c.hetu === h; }), HETU[h] + ' සිත්'); }) },
-      { key: 've', name: 'වේදනාව', onPick: to121, options: ['su', 'du', 'so', 'dom', 'up'].map(function (v) {
-        return opt(VED[v], f121(function (c) { return c.ved === v; }), VED[v] + ' සහගත සිත්', { sub: 'සිත් (වේදනා අනුව ගණන් කරන්නේ සිත් 121 ක්‍රමයෙනි)' }); }) },
-      { key: 'so', name: 'සෝභන', options: [
-        opt('සෝභන', f(function (c) { return c.jati !== 'ak' && c.hetu > 0; }), 'සෝභන සිත්'),
-        opt('අසෝභන', f(function (c) { return c.jati === 'ak' || c.hetu === 0; }), 'අසෝභන සිත් (අකුසල 12 + අහේතුක 18)') ] }
-    ];
-  }
-
-  function setMode(m, keep) {
-    mode = m;
-    document.querySelectorAll('#ca-mode button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.m === m)); });
-    var sel = atlas.state.opt;
-    atlas.setBands(bands(m));
-    var p = pickers(m);
-    if (keep && sel) {
-      // වේදනා තේරීම රඳවා ගැනීම
-      atlas.setPickers(p); atlas.select(sel);
-    } else atlas.setPickers(p);
-    var t = document.getElementById('ca-total'); if (t) t.textContent = m;
-  }
+  // PDF වගුවේ අංකය (1-121) → සිතේ හැඳුනුම
+  //   (වගුවේ 26 = උපෙක්ඛා සන්තීරණ, 27 = සෝමනස්ස සන්තීරණ)
+  function idOf(n) { return n === 26 ? '27' : n === 27 ? '26' : n >= 82 ? 'x' + n : String(n); }
 
   function fact(label, v) { return v ? '<div><span>' + label + '</span><strong>' + v + '</strong></div>' : ''; }
 
@@ -186,7 +124,6 @@
       fact('වේදනාව', c.ved && VED[c.ved]) + fact('හේතු', HETU[c.hetu]) + fact('මූලය', c.root) + fact('සංඛාරය', c.sankhara) +
       fact('ධ්‍යාන අංග', c.jh != null ? JH_ANGA[c.jh] : '') + '</div>';
     if (c.cet) h += '<a class="ca-d__link" href="caitasika.html#sit=' + c.cet + '">මේ සිත සමඟ යෙදෙන චෛතසික බලන්න</a>';
-    else if (c.bhumi === 'lok') h += '<p class="ca-d__path" style="margin-top:12px">ධ්‍යාන අනුව චෛතසික බැලීමට ඉහළින් "සිත් 121" තෝරන්න.</p>';
     h += '<h3 class="ca-d__h">' + (g.title || '') + '</h3><div class="ca-d__group">' + (g.desc || '') + '</div>';
     var e = ESSAY[c.grp];
     if (e != null && cittaDetailData[e]) {
@@ -195,27 +132,46 @@
     return h;
   }
 
-  var items = {};
-  Object.keys(I).forEach(function (k) { var c = I[k]; c.search = c.name + ' ' + c.short + ' ' + (c.root || '') + ' ' + (c.vk || '') + ' ' + (c.kl || '') + ' ' + JATI[c.jati] + ' ' + BHUMI[c.bhumi]; items[k] = c; });
+  // ---------- විස්තර පත්‍රය (සිත් 121 වගුවේ පේළියක් එබූ විට) ----------
+  var dlg = document.getElementById('ca-detail'), body = dlg && dlg.querySelector('.ca-d__body'), curN = 0;
+  function openN(n) {
+    if (!dlg || n < 1 || n > 121) return;
+    curN = n;
+    var c = I[idOf(n)];
+    body.innerHTML = detail(idOf(n)).replace('<span class="ca-d__no">' + c.no + '</span>', '<span class="ca-d__no">' + n + '</span>');
+    document.getElementById('ca-prev').disabled = n <= 1;
+    document.getElementById('ca-next').disabled = n >= 121;
+    document.getElementById('ca-pos').textContent = n + ' / 121';
+    body.scrollTop = 0;
+    if (!dlg.open) { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); }
+    try { history.replaceState(null, '', '#c' + n); } catch (e) {}
+  }
+  if (dlg) {
+    var close = function () { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); };
+    dlg.querySelector('.ca-d__x').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    dlg.addEventListener('close', function () {
+      try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+      var r = document.querySelector('.ct-row[data-n="' + curN + '"]'); if (r) r.focus();
+    });
+    document.getElementById('ca-prev').addEventListener('click', function () { openN(curN - 1); });
+    document.getElementById('ca-next').addEventListener('click', function () { openN(curN + 1); });
+    dlg.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') openN(curN + 1); if (e.key === 'ArrowLeft') openN(curN - 1); });
+  }
 
-  atlas = PMAtlas.create({
-    items: items, bands: bands(89), pickers: pickers(89), unit: 'සිත්', hash: 'c', detail: detail,
-    onReady: function (api) {
-      document.querySelectorAll('#ca-mode button').forEach(function (b) {
-        b.addEventListener('click', function () { setMode(+b.dataset.m); });
-      });
-      if (/^#cx/.test(location.hash)) { setMode(121); api.open(location.hash.slice(2)); }
-      buildReading();
-    }
-  });
-
-  // සිත් 121 වගුවෙන් (citta121-table.js) සිතක විස්තරය විවෘත කිරීම
+  // සිත් 121 වගුව (citta121-table.js) සඳහා
   window.CITTA_ATLAS = {
-    openCitta: function (id, needs121) {
-      if (needs121 && mode !== 121) setMode(121);
-      if (I[id]) atlas.open(id);
-    }
+    open: openN,
+    info: function (n) { var c = I[idOf(n)]; return c ? { jati: c.jati, hetu: c.hetu, ved: c.ved, bhumi: c.bhumi } : null; }
   };
+
+  function start() {
+    buildReading();
+    if (window.PMAtlas) PMAtlas.sections();
+    var m = /^#c(\d{1,3})$/.exec(location.hash); if (m) openN(+m[1]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+
 
   // ---------- කියවීමේ කොටස් ----------
   function acc(n, title, html, open) {
