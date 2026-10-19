@@ -226,33 +226,6 @@ th {
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.3s ease-out; }
-/* ඉහළට බටනය විශේෂයෙන් ඉස්මතු කිරීම */
-#suttanta-scroll-top-btn {
-  background: linear-gradient(135deg, #9f1239, #701a35);
-  color: #fff;
-  border: 3px solid #fbbf24;
-  box-shadow: 0 0 0 5px rgba(251, 191, 36, .24), 0 8px 24px rgba(112, 26, 53, .4);
-  font-weight: 800;
-  padding: 14px 20px;
-}
-#suttanta-scroll-top-btn i {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #fbbf24;
-  color: #701a35;
-}
-#suttanta-scroll-top-btn:hover {
-  background: #881337;
-  box-shadow: 0 0 0 7px rgba(251, 191, 36, .3), 0 10px 28px rgba(112, 26, 53, .45);
-}
-#suttanta-scroll-top-btn:focus-visible {
-  outline: 3px solid #2563eb;
-  outline-offset: 7px;
-}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/matika-ui.css">
@@ -523,40 +496,21 @@ th {
         <p id="suttanta-mukta-content" class="text-xs text-purple-900 dark:text-purple-100 leading-relaxed whitespace-pre-line text-justify"></p>
       </div>
 
-      <!-- ============================================================ -->
-      <!-- ✅ පෙර දුකය / ඊළඟ දුකය NAVIGATION BUTTONS (පිටුවේ යටම කෙළවර) -->
-      <!-- ============================================================ -->
-      <div class="flex items-center justify-between gap-3 pt-4 border-t border-amber-200 dark:border-slate-700">
-        <button id="suttanta-prev-btn" onclick="goToPrevSuttanta()" 
-                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 text-maroon-900 dark:text-saffron-200 font-bold text-xs sm:text-sm hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
-          <i class="fa-solid fa-arrow-left"></i>
-          <span class="truncate">පෙර දුකය</span>
+      <!-- ✅ පෙර / ඊළඟ (නවීන පිටු-සංචාලනය) -->
+      <nav class="mx-pager" aria-label="දුකය අතර යාම">
+        <button type="button" id="suttanta-prev-btn" onclick="goToPrevSuttanta()" class="mx-pager__btn mx-pager__btn--prev">
+          <span class="mx-pager__dir"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> පෙර දුකය</span>
+          <span class="mx-pager__name"></span>
         </button>
+        <button type="button" id="suttanta-next-btn" onclick="goToNextSuttanta()" class="mx-pager__btn mx-pager__btn--next">
+          <span class="mx-pager__dir">ඊළඟ දුකය <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          <span class="mx-pager__name"></span>
+        </button>
+      </nav>
+      <div class="mx-pager__links">
+        <button type="button" id="suttanta-list-btn" onclick="backToSuttantaList()" class="mx-pager__link"><i class="fa-solid fa-list" aria-hidden="true"></i><span>සූත්‍රාන්ත දුක ලැයිස්තුව</span></button>
+      </div>
 
-        <button id="suttanta-next-btn" onclick="goToNextSuttanta()" 
-                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-xs sm:text-sm hover:from-saffron-400 hover:to-amber-500 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed">
-          <span class="truncate">ඊළඟ දුකය</span>
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-      <div class="pt-3">
-        <button type="button" id="suttanta-list-btn" onclick="backToSuttantaList()"
-                class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-slate-700 text-maroon-900 dark:text-saffron-200 font-bold text-xs sm:text-sm hover:bg-amber-100 dark:hover:bg-slate-700 shadow-sm transition-all cursor-pointer">
-          <i class="fa-solid fa-list" aria-hidden="true"></i>
-          <span>සූත්‍රාන්ත දුක ලැයිස්තුවට</span>
-        </button>
-      </div>
-      <div class="pt-3">
-<!-- දැනට සිටින පිටුවේ ඉහළට යාම -->
-<button type="button" id="suttanta-scroll-top-btn"
-        onclick="window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })"
-        aria-label="පිටුවේ ඉහළට යන්න" title="පිටුවේ ඉහළට යන්න"
-        style="width: 100%; min-height: 48px; cursor: pointer;"
-        class="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold text-sm shadow-lg border border-amber-300 hover:from-saffron-400 hover:to-amber-500 transition-all">
-  <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-  <span>ඉහළට</span>
-</button>
-      </div>
 
 
     </div>
@@ -742,6 +696,10 @@ function updateSuttantaNavButtons() {
 
   prevBtn.disabled = (suttantaCurrentMatikaIndex <= 0);
   nextBtn.disabled = (suttantaCurrentMatikaIndex >= suttantaFullData.length - 1);
+  if (window.mxPagerNames) {
+    var pv = suttantaFullData[suttantaCurrentMatikaIndex - 1], nx = suttantaFullData[suttantaCurrentMatikaIndex + 1];
+    mxPagerNames(prevBtn, nextBtn, pv && pv.title, nx && nx.title);
+  }
 }
 
 // ============================================================

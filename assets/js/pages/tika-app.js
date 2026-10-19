@@ -186,6 +186,11 @@ function updateTikaNavButtons() {
 
   // අවසාන ත්‍රිකයේදී ඊළඟ ත්‍රිකය අක්‍රියයි
   nextBtn.disabled = (current >= maxLimit);
+
+  if (window.mxPagerNames && typeof tikaFullData !== 'undefined') {
+    var pv = tikaFullData[current - 1], nx = tikaFullData[current + 1];
+    mxPagerNames(prevBtn, nextBtn, pv && (pv.title || pv.name), nx && (nx.title || nx.name));
+  }
 }
 
 // ============================================================

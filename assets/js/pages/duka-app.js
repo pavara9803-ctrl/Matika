@@ -501,6 +501,11 @@ function updateDukaNavButtons() {
 
   prevBtn.disabled = (pos <= 0);
   nextBtn.disabled = (pos >= list.length - 1);
+
+  if (window.mxPagerNames) {
+    var nm = function (e) { if (!e) return ''; var pd = getGochhakaPadas(e.gochhaka)[e.padaIndex]; return pd ? pd.name : ''; };
+    mxPagerNames(prevBtn, nextBtn, nm(list[pos - 1]), nm(list[pos + 1]));
+  }
 }
 
 // ═══ padaArtha format කිරීම ═══
