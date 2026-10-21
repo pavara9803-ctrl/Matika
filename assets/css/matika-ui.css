@@ -333,12 +333,12 @@
   color: #fcd34d; background: rgba(245,158,11,.14); border: 1px solid rgba(252,211,77,.35);
 }
 :root .home-leaf__title {
-  margin: 12px 0 10px; padding-right: 28px;
+  margin: 12px 0 10px; padding: 0 28px; text-align: center !important;
   font-family: "Noto Serif Sinhala", serif; font-weight: 700;
   font-size: clamp(1.55rem, 5.2vw, 2.1rem); line-height: 1.35; color: #fde68a;
 }
 :root .home-leaf__desc {
-  position: relative; max-width: 62ch; margin: 0;
+  position: relative; max-width: 62ch; margin: 0 auto; text-align: justify !important; text-justify: inter-word; hyphens: auto;
   font-size: 15.5px; line-height: 1.9; color: rgba(254,243,199,.92);
 }
 
