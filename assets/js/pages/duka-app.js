@@ -127,7 +127,7 @@ function renderGochhakaList() {
     var totalDukas = dukas.length + mishraka.length;
 
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
     card.onclick = function() { openGochhaka(gochhaka.id); };
 
     var dukasHtml = '';
@@ -258,7 +258,7 @@ function renderDukaList(gochhaka) {
     var pada2 = padas[1] || null;
 
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
 
     card.onclick = function() {
       var allPadas = getGochhakaPadas(gochhaka);
@@ -341,7 +341,7 @@ function renderDukaPair(pada1, pada2) {
 
 function createPadaPairCard(pada, number, padaIndex) {
   var card = document.createElement('div');
-  card.className = 'bg-gradient-to-br from-saffron-500/10 to-amber-100/30 dark:from-slate-800 dark:to-slate-800/50 border-2 border-saffron-500/40 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
+  card.className = 'mx-card mx-card--accent bg-gradient-to-br from-saffron-500/10 to-amber-100/30 dark:from-slate-800 dark:to-slate-800/50 border-2 border-saffron-500/40 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
   card.onclick = function() { openPadaDetail(padaIndex); };
 
   card.innerHTML =
@@ -892,7 +892,7 @@ function renderDukaSearchResults(results) {
 
   results.forEach(function(result) {
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
 
     if (result.type === 'pada') {
       card.onclick = function() {
@@ -990,7 +990,7 @@ function renderDukaBookmarks() {
     if (!gochhaka) return;
 
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all flex items-center justify-between gap-2';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all flex items-center justify-between gap-2';
 
     card.onclick = function(e) {
       if (e.target.closest('button')) return;
