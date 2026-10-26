@@ -72,7 +72,7 @@ function renderTikaList() {
 
   tikaFullData.forEach(function(tika, index) {
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all';
     card.onclick = function() { openTikaDetail(index); };
 
     var padasHtml = (tika.padas || []).map(function(p) {
@@ -721,7 +721,7 @@ function renderTikaBookmarks() {
 
   tikaBookmarks.forEach(function(b) {
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all flex items-center justify-between gap-2';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all flex items-center justify-between gap-2';
     card.onclick = function(e) {
       if (e.target.closest('button')) return;
       openTikaDetail(b.tikaIndex);
@@ -798,7 +798,7 @@ function handleTikaSearch(query) {
 
   results.forEach(function(r) {
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all';
     card.onclick = function() {
       openTikaDetail(r.tikaIndex);
       setTimeout(function() { selectTikaPada(r.padaIndex); }, 100);

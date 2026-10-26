@@ -848,3 +848,19 @@
 :root.dark .mx-pager__link:hover { color: #fcd34d; }
 .mx-pager__link:focus-visible { outline: 2.5px solid #f59e0b; outline-offset: 2px; border-radius: 6px; }
 @media (max-width: 420px) { .mx-pager { gap: 8px; } .mx-pager__btn { padding: 10px 12px; } .mx-pager__name { font-size: 14px; } }
+
+/* ===== නවීන මාතිකා ලයිස්තු කාඩ්පත් (Modern matika list cards) ===== */
+.mx-card { position: relative; overflow: hidden; border-radius: 18px !important; border: 1px solid rgba(180,83,9,.18) !important; padding: 16px 18px 16px 22px !important; background: linear-gradient(135deg,#fffdf7 0%,#fff7e6 100%) !important; box-shadow: 0 1px 2px rgba(120,53,15,.06), 0 6px 18px -8px rgba(120,53,15,.18) !important; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease !important; }
+.mx-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(180deg,#f59e0b,#b45309 60%,#7f1d1d); }
+.mx-card:hover { transform: translateY(-2px); border-color: rgba(245,158,11,.6) !important; box-shadow: 0 2px 4px rgba(120,53,15,.08), 0 14px 28px -10px rgba(120,53,15,.32) !important; }
+.mx-card:active { transform: translateY(0) scale(.995); }
+.mx-card:focus-visible { outline: 2.5px solid #f59e0b; outline-offset: 2px; }
+.mx-card .rounded-full.font-bold { background: linear-gradient(145deg,#f59e0b,#b45309) !important; color: #fff !important; box-shadow: 0 3px 8px -2px rgba(180,83,9,.55); }
+.mx-card h3 { letter-spacing: .1px; line-height: 1.45; }
+.mx-card span.inline-block { border-radius: 999px !important; background: rgba(245,158,11,.12) !important; border-color: rgba(180,83,9,.22) !important; }
+.mx-card--accent { background: linear-gradient(135deg,#fff3d6 0%,#ffe9b8 100%) !important; }
+:root.dark .mx-card { background: linear-gradient(135deg,#1e293b 0%,#172033 100%) !important; border-color: rgba(251,191,36,.18) !important; box-shadow: 0 6px 18px -8px rgba(0,0,0,.6) !important; }
+:root.dark .mx-card:hover { border-color: rgba(251,191,36,.5) !important; }
+:root.dark .mx-card span.inline-block { background: rgba(251,191,36,.1) !important; border-color: rgba(251,191,36,.25) !important; }
+:root.dark .mx-card--accent { background: linear-gradient(135deg,#2a2412 0%,#1e293b 100%) !important; }
+@media (prefers-reduced-motion: reduce) { .mx-card, .mx-card:hover { transition: none; transform: none; } }

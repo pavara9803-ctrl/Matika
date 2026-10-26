@@ -645,7 +645,7 @@ function renderSuttantaList() {
   
   suttantaFullData.forEach(function(item, index) {
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between cursor-pointer';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between cursor-pointer';
     card.onclick = function() { openSuttantaMatikaDetails(index); };
     
     var padasHtml = item.padas.map(function(p) { 
@@ -1125,7 +1125,7 @@ function showSuttantaBookmarksView() {
   
   suttantaBookmarks.forEach(function(b) {
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm flex items-center justify-between cursor-pointer hover:shadow-md';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm flex items-center justify-between cursor-pointer hover:shadow-md';
     card.onclick = function() {
       openSuttantaMatikaDetails(b.matikaIndex, b.padaIndex);
     };
@@ -1181,7 +1181,7 @@ function handleSuttantaSearch(query) {
   
   results.forEach(function(r) {
     var card = document.createElement('div');
-    card.className = 'bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between cursor-pointer';
+    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between cursor-pointer';
     card.onclick = function() { openSuttantaMatikaDetails(r.matikaIndex, r.padaIndex); };
     
     card.innerHTML = '<div class="flex-1 min-w-0 pr-3"><div class="text-xs text-saffron-600 font-bold mb-1">' + r.matika.title + '</div><h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200 truncate">' + r.pada.name + '</h3><p class="text-xs text-slate-500 mt-1 truncate">' + (r.pada.desc || '') + '</p></div><i class="fa-solid fa-chevron-right text-slate-400"></i>';
