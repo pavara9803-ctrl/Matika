@@ -30,7 +30,8 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   // ---------- සැකිල්ල ----------
-  var h = '<div class="ct-tools">';
+  var h = '<div class="ct-hint" role="note"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i><span><strong>ඕනෑම සිතක් එබූ විට</strong> එම සිතේ විස්තරය (භූමිය, ජාතිය, වේදනාව, හේතු, චෛතසික ආදිය) පැත්තෙන් විවෘත වේ.</span></div>';
+  h += '<div class="ct-tools">';
   h += '<div class="ct-jump" role="group" aria-label="කොටසට යන්න">' + T.map(function (g, i) {
     return '<a class="ca-opt" href="#ct-g' + i + '">' + g.title + ' ' + g.count + '</a>'; }).join('') + '</div>';
   h += '<label class="ca-search ct-search"><span class="sr-only">සිතක් හෝ අංකයක් සොයන්න</span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="ct-q" type="search" placeholder="සොයන්න: අංකය (උදා: 57) හෝ නම" autocomplete="off"></label>';
@@ -56,8 +57,9 @@
           var data = 'data-ved="' + (inf.ved || '') + '" data-jati="' + (inf.jati || '') + '" data-hetu="' + (inf.hetu != null ? inf.hetu : '') + '" ' +
             'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title) + '"' +
             (row.jh != null ? ' data-j="' + JH[row.jh] + 'ජ්ඣාන"' : '');
-          h += '<button type="button" class="ct-row' + (row.jh != null ? ' ct-jh' + row.jh : '') + '" ' + data + ' title="විස්තරය බලන්න">' +
-            '<span class="ct-n">' + row.n + '</span><span class="ct-cells' + (multi ? ' ct-c' + row.c.length : '') + '">' + cells + '</span></button>';
+          h += '<button type="button" class="ct-row' + (row.jh != null ? ' ct-jh' + row.jh : '') + '" ' + data + ' title="සිත ' + row.n + ' හි විස්තරය බලන්න" aria-haspopup="dialog">' +
+            '<span class="ct-n">' + row.n + '</span><span class="ct-cells' + (multi ? ' ct-c' + row.c.length : '') + '">' + cells + '</span>' +
+            '<span class="ct-go" aria-hidden="true"><em>විස්තරය</em><b>›</b></span></button>';
         });
         h += '</div>';
       });

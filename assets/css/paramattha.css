@@ -377,6 +377,17 @@ body > header > div > div:nth-child(2) { flex-shrink: 1; }
 .ct-c3 { grid-template-columns: repeat(3, 1fr); }
 .ct-row { width: 100%; font: inherit; display: flex; align-items: center; gap: 10px; padding: 6px 12px; background: none; border: 0; border-top: 1px solid var(--m-rule); cursor: pointer; color: var(--m-ink); text-align: left; }
 .ct-shead + .ct-row { border-top: 0; }
+.ct-hint { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; padding: 10px 14px; border: 1px dashed var(--ca-ring); border-radius: 12px; background: var(--m-leaf); font-size: 14px; line-height: 1.7; color: var(--m-ink); }
+.ct-hint i { flex: none; color: var(--m-lacquer); font-size: 18px; }
+:root.dark .ct-hint i { color: #fcd34d; }
+.ct-go { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--m-lacquer); border: 1px solid var(--m-rule); background: var(--m-leaf); transition: background .15s, color .15s, transform .15s; }
+.ct-go em { font-style: normal; }
+.ct-go b { font-size: 18px; line-height: 1; font-weight: 700; }
+:root.dark .ct-go { color: #fcd34d; }
+.ct-row:hover .ct-go, .ct-row:focus-visible .ct-go { background: var(--m-lacquer); color: #fde68a; border-color: var(--m-lacquer); transform: translateX(2px); }
+:root.dark .ct-row:hover .ct-go, :root.dark .ct-row:focus-visible .ct-go { background: #fbbf24; color: #3f0a0c; border-color: #fbbf24; }
+.ct-row:hover { box-shadow: inset 3px 0 0 var(--ca-ring); }
+.ct-row:active { background: var(--m-rule); }
 .ct-row:hover { background: var(--m-leaf); }
 .ct-row:focus-visible { outline: 2.5px solid var(--ca-ring); outline-offset: -2px; }
 .ct-row[hidden], .ct-sub[hidden], .ct-part[hidden], .ct-group[hidden] { display: none; }
@@ -402,6 +413,9 @@ body > header > div > div:nth-child(2) { flex-shrink: 1; }
   .ct-cells.ct-c3 .ct-cell:last-child { grid-column: 1 / -1; }
   .ct-cell { font-size: 13px; padding: 4px 6px; }
   .ct-row { padding: 6px 8px; gap: 8px; }
+  .ct-go { padding: 2px 9px; }
+  .ct-go em { display: none; }
+  .ct-hint { font-size: 13px; padding: 8px 10px; }
 }
 
 /* ============================================================
