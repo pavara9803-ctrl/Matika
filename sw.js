@@ -1,6 +1,6 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
-// Version: 22.1.0 (js/css/json network-first; install bypasses HTTP cache)
+// Version: 23.0.0 (js/css/json network-first; නව අනුවාදය සක්‍රිය වන්නේ පරිශීලකයා යාවත්කාලීන කිරීමට එබූ විට පමණි)
 // ============================================================
 
 // precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
@@ -63,8 +63,9 @@ self.addEventListener('install', (event) => {
         )
       );
       
-      await self.skipWaiting();
-      console.log('[SW] Installation complete.');
+      // skipWaiting() මෙතැන කැඳවන්නේ නැත — පරිශීලකයා "යාවත්කාලීන කරන්න" එබූ විට
+      // sw-update.js මගින් එවන SKIP_WAITING පණිවිඩයෙන් පමණක් සක්‍රිය වේ.
+      console.log('[SW] Installation complete (waiting for user to apply update).');
     })()
   );
 });
