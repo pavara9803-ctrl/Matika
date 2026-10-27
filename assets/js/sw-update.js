@@ -51,10 +51,10 @@
     b.setAttribute('role', 'status');
     b.setAttribute('aria-live', 'polite');
     b.innerHTML =
-      '<button type="button" class="swu-go" aria-label="නව අනුවාදය ස්ථාපනය කිරීමට එබීන්න">' +
+      '<button type="button" class="swu-go" aria-label="නව අනුවාදය ස්ථාපනය කිරීමට ටච් කරන්න">' +
         '<svg class="swu-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
         '<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>' +
-        '<span class="swu-tx"><strong>නව අනුවාදයක් ඇත</strong><span>යාවත්කාලීන කිරීමට මෙය එබීන්න</span></span>' +
+        '<span class="swu-tx"><strong>නව අනුවාදයක් ඇත</strong><span>යාවත්කාලීන කිරීමට මෙය ටච් කරන්න</span></span>' +
       '</button>' +
       '<button type="button" class="swu-x" aria-label="පසුව">×</button>';
     document.body.appendChild(b);
