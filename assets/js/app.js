@@ -20,62 +20,7 @@
   window.addEventListener('online', updateOnlineStatus);
   window.addEventListener('offline', updateOnlineStatus);
 
-  // ============================================================
-  // SERVICE WORKER REGISTRATION
-  // ============================================================
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('./sw.js')
-        .then(function (registration) {
-          console.log('[App] Service Worker registered:', registration.scope);
-          registration.addEventListener('updatefound', function () {
-            var newWorker = registration.installing;
-            newWorker.addEventListener('statechange', function () {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                showUpdateNotification();
-              }
-            });
-          });
-          setInterval(function () { registration.update(); }, 60 * 60 * 1000);
-        })
-        .catch(function (error) {
-          console.warn('[App] Service Worker registration failed:', error);
-        });
-    });
-
-    var refreshing = false;
-    var hadController = !!navigator.serviceWorker.controller;
-    navigator.serviceWorker.addEventListener('controllerchange', function () {
-      if (!hadController) { hadController = true; return; }
-      if (refreshing) return;
-      refreshing = true;
-      window.location.reload();
-    });
-  }
-
-  function showUpdateNotification() {
-    var banner = document.createElement('div');
-    banner.id = 'update-banner';
-    banner.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-saffron-500 to-amber-600 text-maroon-950 font-bold px-5 py-3 rounded-xl shadow-2xl border-2 border-maroon-900 flex items-center gap-3';
-    banner.innerHTML =
-      '<i class="fa-solid fa-circle-down text-xl"></i>' +
-      '<span class="text-sm">නව අනුවාදයක් ලබාගත හැක!</span>' +
-      '<button onclick="applyUpdate()" class="bg-maroon-900 text-saffron-200 px-3 py-1.5 rounded-lg text-xs font-bold shadow">යාවත්කාලීන කරන්න</button>' +
-      '<button onclick="dismissUpdate()" class="text-maroon-900/60 hover:text-maroon-900 p-1"><i class="fa-solid fa-xmark"></i></button>';
-    document.body.appendChild(banner);
-  }
-
-  window.applyUpdate = function () {
-    if (navigator.serviceWorker.controller) {
-      navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
-    }
-    window.location.reload();
-  };
-
-  window.dismissUpdate = function () {
-    var banner = document.getElementById('update-banner');
-    if (banner) banner.remove();
-  };
+  // SERVICE WORKER ලියාපදිංචිය සහ යාවත්කාලීන දැනුම්දීම: assets/js/sw-update.js බලන්න
 
   // ============================================================
   // NAVIGATION
