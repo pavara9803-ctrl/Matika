@@ -1,6 +1,7 @@
-self.PRECACHE_VERSION = "v965db48ef0";
+self.PRECACHE_VERSION = "v16e4ba0d8c";
 self.PRECACHE_URLS = [
   "./about.html",
+  "./assets/css/apple-ui.css",
   "./assets/css/matika-ui.css",
   "./assets/css/paramattha.css",
   "./assets/icons/100.png",
