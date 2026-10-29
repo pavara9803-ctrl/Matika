@@ -475,11 +475,11 @@
 :root main [class*="border-l-4"] { border-left-width: 3px; }
 
 
-:root main [class*="from-amber-50"], :root main [class*="from-white"], :root main [class*="from-saffron-50"], :root main [class*="to-amber-50"] {
+:root main [class*="from-amber-50"]:not([class*="from-amber-500 "]), :root main [class*="from-white"], :root main [class*="from-saffron-50"]:not([class*="from-saffron-500 "]), :root main [class*="to-amber-50"]:not([class*="to-amber-500 "]) {
   background-image: none !important; background-color: var(--ios-card) !important;
 }
 :root main [class*="border-amber-"][class*="rounded-"] { border-width: 0; box-shadow: var(--ios-shadow); }
-:root.dark main [class*="from-amber-50"], :root.dark main [class*="from-white"] { background-color: var(--ios-card) !important; }
+:root.dark main [class*="from-amber-50"]:not([class*="from-amber-500 "]), :root.dark main [class*="from-white"] { background-color: var(--ios-card) !important; }
 :root main .rounded-full[class*="border-amber"], :root main .rounded-full[class*="border-saffron"] { border-width: 0; background-color: var(--ios-fill); }
 
 /* ---------- 11. සතර පරමාර්ථ පිටු (pm-*, m-*) ---------- */
