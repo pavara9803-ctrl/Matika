@@ -30,8 +30,8 @@
   --ios-tint: #c2620a;                     /* සිවුරු කහ — පෙළ සඳහා (AA) */
   --ios-tint-fill: #ff9500;                /* iOS orange — පිරවුම් සඳහා */
   --ios-bar: rgba(249, 249, 251, .78);     /* විනිවිද පෙනෙන තීරුව */
-  --ios-header: rgba(214, 234, 255, .82);  /* ශීර්ෂ තීරුව — ලා නිල් */
-  --ios-header-sep: rgba(90, 160, 230, .35);
+  --ios-header: rgba(12, 42, 94, .94);     /* ශීර්ෂ තීරුව — තද නිල් */
+  --ios-header-sep: rgba(255, 255, 255, .12);
   --ios-r-card: 16px;
   --ios-r-lg: 22px;
   --ios-spring: cubic-bezier(.32, .72, 0, 1);
@@ -65,8 +65,8 @@
   --ios-tint: #ffb340;
   --ios-tint-fill: #ff9f0a;
   --ios-bar: rgba(28, 28, 30, .72);
-  --ios-header: rgba(22, 48, 82, .78);
-  --ios-header-sep: rgba(100, 170, 240, .3);
+  --ios-header: rgba(8, 26, 60, .94);
+  --ios-header-sep: rgba(255, 255, 255, .1);
   --ios-shadow: 0 0 0 .5px rgba(255, 255, 255, .04);
   --m-leaf-line: transparent;
 }
@@ -108,7 +108,7 @@
   background: var(--ios-header) !important;
   -webkit-backdrop-filter: saturate(180%) blur(22px);
   backdrop-filter: saturate(180%) blur(22px);
-  color: var(--ios-label) !important;
+  color: #fff !important;
   border: 0 !important;
   border-bottom: .5px solid var(--ios-header-sep) !important;
   box-shadow: none !important;
@@ -119,13 +119,13 @@
   font-size: 1.0625rem !important;       /* 17px — iOS nav title */
   font-weight: 600 !important;
   letter-spacing: -.01em;
-  color: var(--ios-label) !important;
+  color: #fff !important;
 }
 @media (min-width: 640px) { :root body > header h1 { font-size: 1.125rem !important; } }
 /* අයිකන බොත්තම් — වටකුරු, tinted */
 :root body > header button,
 :root body > header a:not(.m-topnav a) {
-  color: var(--ios-tint) !important;
+  color: #ffc266 !important;
   background: transparent !important;
   border: 0 !important;
   border-radius: 999px !important;
@@ -134,8 +134,8 @@
   transition: background-color .2s var(--ios-spring), transform .2s var(--ios-spring), opacity .2s ease;
 }
 :root body > header button:hover,
-:root body > header a:not(.m-topnav a):hover { background: var(--ios-fill) !important; }
-:root body > header button:active { transform: scale(.92); background: var(--ios-fill-2) !important; }
+:root body > header a:not(.m-topnav a):hover { background: rgba(255, 255, 255, .14) !important; }
+:root body > header button:active { transform: scale(.92); background: rgba(255, 255, 255, .22) !important; }
 :root body > header .fa-solid, :root body > header .fa-regular { color: inherit; }
 /* ධර්ම චක්‍ර ලාංඡනය */
 :root body > header .rounded-full {
@@ -158,10 +158,10 @@
 
 /* desktop ඉහළ සංචාලන තීරුව */
 @media (min-width: 768px) {
-  .m-topnav { border-top: .5px solid var(--ios-sep) !important; background: transparent !important; }
-  .m-topnav a { color: var(--ios-label-2) !important; border-bottom-width: 0 !important; border-radius: 8px; margin: 4px 0; min-height: 32px !important; }
-  .m-topnav a:hover { color: var(--ios-label) !important; background: var(--ios-fill); }
-  .m-topnav a.is-current { color: var(--ios-tint) !important; background: var(--ios-fill); font-weight: 600; }
+  .m-topnav { border-top: .5px solid rgba(255, 255, 255, .12) !important; background: transparent !important; }
+  .m-topnav a { color: rgba(255, 255, 255, .72) !important; border-bottom-width: 0 !important; border-radius: 8px; margin: 4px 0; min-height: 32px !important; }
+  .m-topnav a:hover { color: #fff !important; background: rgba(255, 255, 255, .12); }
+  .m-topnav a.is-current { color: #ffc266 !important; background: rgba(255, 255, 255, .14); font-weight: 600; }
 }
 
 /* ---------- 3. Breadcrumb — iOS "Back" ශෛලිය ---------- */
