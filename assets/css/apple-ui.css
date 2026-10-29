@@ -436,10 +436,20 @@
   .home-p:nth-child(even)::after { display: none; }
   .home-p:nth-child(-n+2) { border-bottom: .5px solid var(--ios-sep); }
 }
-.home-p:hover { background: color-mix(in srgb, var(--c) 8%, transparent); }
-.home-p:active { background: color-mix(in srgb, var(--c) 16%, transparent); }
-.home-p__n { font-size: 1.35rem; letter-spacing: -.02em; }
+/* සතර පරමාර්ථ — එක් එක් පරමාර්ථයට ම වර්ණයක් (චිත්ත: කොළ · චෛතසික: රෝස · රූප: ඇම්බර් · නිර්වාණ: දම්) */
+.home-p {
+  background: color-mix(in srgb, var(--c) 11%, var(--ios-card));
+  box-shadow: inset 0 3px 0 var(--c);
+}
+.home-p__n { font-size: 1.35rem; letter-spacing: -.02em; color: color-mix(in srgb, var(--c) 82%, #000); }
 .home-p__name { font-weight: 600; font-size: .95rem; color: var(--ios-label); }
+.home-p:hover  { background: color-mix(in srgb, var(--c) 20%, var(--ios-card)); }
+.home-p:active { background: color-mix(in srgb, var(--c) 28%, var(--ios-card)); }
+:root.dark .home-p { background: color-mix(in srgb, var(--c) 16%, var(--ios-card)); }
+:root.dark .home-p__n { color: var(--c); }
+:root.dark .home-p:hover  { background: color-mix(in srgb, var(--c) 26%, var(--ios-card)); }
+:root.dark .home-p:active { background: color-mix(in srgb, var(--c) 34%, var(--ios-card)); }
+.home-param { overflow: hidden; }
 
 
 /* ---------- 10b. මාතිකා ලැයිස්තු පිටු — banner සහ සෙවුම ---------- */
