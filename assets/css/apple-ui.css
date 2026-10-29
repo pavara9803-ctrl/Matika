@@ -605,3 +605,50 @@
   :root body { background: #fff !important; color: #000; }
   :root body > header { background: #fff !important; -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+
+/* ---------- 14. මාතිකා කොටස් — එක් එක් කොටසට ම වර්ණයක් (මුල් පිටුවේ ලකුණු වර්ණයම) ----------
+   තික මාතිකා: නිල් · දුක මාතිකා: රතු · සුත්තන්ත මාතිකා: කොළ  (ශීර්ෂය මෙරූන් ලෙසම පවතී) */
+body.acc-tika     { --acc: #1f8fe0; --acc-hi: #5ac8fa; --acc-ink: #0b5fa8; --acc-ink-dk: #8fd3fb; --hero-a: #1f8fe0; --hero-b: #1670bd; --hero-c: #0e4f8c; --hero-glow: rgba(90, 200, 250, .55); --hero-shadow: rgba(14, 79, 140, .85); }
+body.acc-duka     { --acc: #e5322b; --acc-hi: #ff6b6b; --acc-ink: #a3201b; --acc-ink-dk: #ff9e9a; --hero-a: #e5322b; --hero-b: #b3241f; --hero-c: #861a16; --hero-glow: rgba(255, 130, 120, .55); --hero-shadow: rgba(134, 26, 22, .85); }
+body.acc-suttanta { --acc: #2fb24f; --acc-hi: #6fdc8c; --acc-ink: #1d7a35; --acc-ink-dk: #8be6a3; --hero-a: #2fb24f; --hero-b: #1f8a3b; --hero-c: #14602a; --hero-glow: rgba(150, 240, 175, .5); --hero-shadow: rgba(20, 96, 42, .85); }
+
+/* ශීර්ෂයේ යටි ඉර */
+:root body[class*="acc-"] > header { border-bottom-color: var(--acc-hi) !important; }
+:root body[class*="acc-"] .m-progress { background: linear-gradient(90deg, var(--acc-hi), var(--acc)); }
+/* ප්‍රධාන බැනරය */
+:root body[class*="acc-"] main .bg-gradient-to-br.from-amber-800 {
+  background:
+    radial-gradient(120% 100% at 100% 0%, var(--hero-glow), transparent 55%),
+    linear-gradient(155deg, var(--hero-a) 0%, var(--hero-b) 55%, var(--hero-c) 100%) !important;
+  box-shadow: 0 18px 40px -22px var(--hero-shadow) !important;
+}
+/* ඉලක්කම් ලකුණු සහ තද කහ ඉඳුරන් */
+:root body[class*="acc-"] main [class*="bg-saffron-500"]:not([class*="bg-saffron-500/"]) { background-color: var(--acc) !important; color: #fff !important; }
+:root body[class*="acc-"] main [class*="bg-saffron-500/"] { background-color: color-mix(in srgb, var(--acc) 16%, transparent) !important; }
+:root body[class*="acc-"] main [class*="border-saffron-"] { border-color: var(--acc) !important; }
+:root body[class*="acc-"] main [class*="text-saffron-6"], :root body[class*="acc-"] main [class*="text-saffron-7"], :root body[class*="acc-"] main [class*="text-saffron-8"] { color: var(--acc-ink) !important; }
+:root.dark body[class*="acc-"] main [class*="text-saffron-"] { color: var(--acc-ink-dk) !important; }
+/* පද කුඩා ටැග් (චිප්) */
+:root body[class*="acc-"] main [class*="bg-amber-100"], :root body[class*="acc-"] main [class*="bg-amber-50"] { background-color: color-mix(in srgb, var(--acc) 12%, #fff) !important; }
+:root body[class*="acc-"] main [class*="text-amber-8"], :root body[class*="acc-"] main [class*="text-amber-9"] { color: var(--acc-ink) !important; }
+:root.dark body[class*="acc-"] main [class*="bg-amber-100"], :root.dark body[class*="acc-"] main [class*="bg-amber-50"] { background-color: color-mix(in srgb, var(--acc) 22%, var(--ios-card)) !important; }
+:root.dark body[class*="acc-"] main [class*="text-amber-"] { color: var(--acc-ink-dk) !important; }
+/* breadcrumb සහ සබැඳි */
+:root body[class*="acc-"] > nav a, :root body[class*="acc-"] > nav button, :root body[class*="acc-"] > nav span { color: var(--acc-ink) !important; }
+:root.dark body[class*="acc-"] > nav a, :root.dark body[class*="acc-"] > nav button, :root.dark body[class*="acc-"] > nav span { color: var(--acc-ink-dk) !important; }
+/* ඉලක්කම් වටකුරු ලකුණු — තැඹිලි වෙනුවට කොටසේ වර්ණය */
+:root body[class*="acc-"] main .rounded-full[class*="bg-saffron"]:not([class*="bg-saffron-500/"]),
+:root body[class*="acc-"] main .mx-card .rounded-full[class*="bg-saffron"] {
+  background: linear-gradient(160deg, var(--acc-hi), var(--acc)) !important; color: #fff !important;
+}
+/* සුත්තන්ත ආදී පිටුවල ඇති මෙරූන්-දුඹුරු බැනරය */
+:root body[class*="acc-"] main .bg-gradient-to-br.from-maroon-900 {
+  background:
+    radial-gradient(120% 100% at 100% 0%, var(--hero-glow), transparent 55%),
+    linear-gradient(155deg, var(--hero-a) 0%, var(--hero-b) 55%, var(--hero-c) 100%) !important;
+  border: 0 !important; border-radius: 26px !important;
+  box-shadow: 0 18px 40px -22px var(--hero-shadow) !important;
+}
+:root body[class*="acc-"] main .bg-gradient-to-br.from-maroon-900 :is(h2, h3, p, span, i, div) { color: #fff !important; }
+:root body[class*="acc-"] main .bg-gradient-to-br.from-maroon-900 span.inline-block { background: rgba(255,255,255,.2) !important; border: 0 !important; }
+:root body[class*="acc-"] main .bg-gradient-to-br.from-maroon-900 .border-t, :root body[class*="acc-"] main .bg-gradient-to-br.from-amber-800 .border-t { border-color: rgba(255,255,255,.28) !important; }

@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v3aebf38373";
+self.PRECACHE_VERSION = "v9401dca1ad";
 self.PRECACHE_URLS = [
   "./about.html",
   "./assets/css/apple-ui.css",
