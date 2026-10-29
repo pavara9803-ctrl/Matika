@@ -156,6 +156,46 @@
 :root body > header [id$="fav-badge"] { background: #ff3b30 !important; color: #fff !important; }
 .m-progress { height: 2px; bottom: -.5px; background: var(--ios-tint-fill); }
 
+
+/* ---------- 2b. මුල් පිටුව හැර අනෙක් පිටු — මුල් මැරූන් ශීර්ෂය ---------- */
+:root body:not(.is-home) > header,
+:root body:not(.is-home) > header.sticky {
+  background: #3f0a0c !important;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  color: #fef3c7 !important;
+  border-bottom: 2px solid #f59e0b !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,.25), 0 6px 18px -8px rgba(63, 10, 12, .55) !important;
+}
+:root body:not(.is-home) > header h1 { color: #fef3c7 !important; }
+:root body:not(.is-home) > header button,
+:root body:not(.is-home) > header a:not(.m-topnav a) {
+  color: #fde68a !important;
+  background: #581113 !important;
+  border-radius: 8px !important;
+}
+:root body:not(.is-home) > header button:hover,
+:root body:not(.is-home) > header a:not(.m-topnav a):hover { background: #701a1d !important; }
+:root body:not(.is-home) > header button:active { background: #701a1d !important; }
+:root body:not(.is-home) > header .rounded-full {
+  background: rgba(245, 158, 11, .2) !important;
+  border: 1px solid #fbbf24 !important;
+  color: #fcd34d !important;
+  box-shadow: none;
+}
+:root body:not(.is-home) > header .rounded-full i { color: #fcd34d !important; }
+:root body:not(.is-home) > header .feedback-pulse {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #260507 !important;
+}
+:root body:not(.is-home) > header .feedback-pulse i { color: #260507 !important; }
+:root body:not(.is-home) .m-progress { background: linear-gradient(90deg, #fcd34d, #f59e0b 60%, #d97706); }
+@media (min-width: 768px) {
+  :root body:not(.is-home) .m-topnav { border-top: 1px solid rgba(252, 211, 77, .14) !important; background: rgba(0, 0, 0, .14) !important; }
+  :root body:not(.is-home) .m-topnav a { color: rgba(254, 243, 199, .78) !important; background: transparent !important; border-radius: 0; margin: 0 0 -1px; min-height: 40px !important; border-bottom: 2px solid transparent !important; }
+  :root body:not(.is-home) .m-topnav a:hover { color: #fde68a !important; background: transparent !important; }
+  :root body:not(.is-home) .m-topnav a.is-current { color: #fcd34d !important; background: transparent !important; border-bottom-color: #f59e0b !important; font-weight: 700; }
+}
+
 /* desktop ඉහළ සංචාලන තීරුව */
 @media (min-width: 768px) {
   .m-topnav { border-top: .5px solid rgba(255, 255, 255, .12) !important; background: transparent !important; }
