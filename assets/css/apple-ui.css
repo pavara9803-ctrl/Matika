@@ -157,43 +157,45 @@
 .m-progress { height: 2px; bottom: -.5px; background: var(--ios-tint-fill); }
 
 
-/* ---------- 2b. මුල් පිටුව හැර අනෙක් පිටු — මුල් මැරූන් ශීර්ෂය ---------- */
+/* ---------- 2b. මුල් පිටුව හැර අනෙක් පිටු — නිල් ශීර්ෂය (තික මාතිකා "22" ලකුණේ නිල් පාටම) ---------- */
 :root body:not(.is-home) > header,
 :root body:not(.is-home) > header.sticky {
-  background: #3f0a0c !important;
+  background: linear-gradient(160deg, #5ac8fa, #1f8fe0) !important;
   -webkit-backdrop-filter: none; backdrop-filter: none;
-  color: #fef3c7 !important;
-  border-bottom: 2px solid #f59e0b !important;
-  box-shadow: 0 1px 0 rgba(0,0,0,.25), 0 6px 18px -8px rgba(63, 10, 12, .55) !important;
+  color: #fff !important;
+  border-bottom: 2px solid #1676c4 !important;
+  box-shadow: 0 1px 0 rgba(0, 40, 90, .18), 0 6px 18px -8px rgba(31, 143, 224, .6) !important;
 }
-:root body:not(.is-home) > header h1 { color: #fef3c7 !important; }
+:root body:not(.is-home) > header h1 { color: #fff !important; text-shadow: 0 1px 2px rgba(0, 50, 110, .45); }
 :root body:not(.is-home) > header button,
 :root body:not(.is-home) > header a:not(.m-topnav a) {
-  color: #fde68a !important;
-  background: #581113 !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, .24) !important;
   border-radius: 8px !important;
 }
 :root body:not(.is-home) > header button:hover,
-:root body:not(.is-home) > header a:not(.m-topnav a):hover { background: #701a1d !important; }
-:root body:not(.is-home) > header button:active { background: #701a1d !important; }
+:root body:not(.is-home) > header a:not(.m-topnav a):hover { background: rgba(255, 255, 255, .38) !important; }
+:root body:not(.is-home) > header button:active { background: rgba(255, 255, 255, .46) !important; }
+:root body:not(.is-home) > header .fa-solid,
+:root body:not(.is-home) > header .fa-regular { filter: drop-shadow(0 1px 1px rgba(0, 50, 110, .35)); }
 :root body:not(.is-home) > header .rounded-full {
-  background: rgba(245, 158, 11, .2) !important;
-  border: 1px solid #fbbf24 !important;
-  color: #fcd34d !important;
+  background: rgba(255, 255, 255, .24) !important;
+  border: 1px solid rgba(255, 255, 255, .75) !important;
+  color: #fff !important;
   box-shadow: none;
 }
-:root body:not(.is-home) > header .rounded-full i { color: #fcd34d !important; }
+:root body:not(.is-home) > header .rounded-full i { color: #fff !important; }
 :root body:not(.is-home) > header .feedback-pulse {
-  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
   color: #260507 !important;
 }
-:root body:not(.is-home) > header .feedback-pulse i { color: #260507 !important; }
-:root body:not(.is-home) .m-progress { background: linear-gradient(90deg, #fcd34d, #f59e0b 60%, #d97706); }
+:root body:not(.is-home) > header .feedback-pulse i { color: #260507 !important; filter: none; }
+:root body:not(.is-home) .m-progress { background: linear-gradient(90deg, #fff, #cfeeff 60%, #8fd8ff); }
 @media (min-width: 768px) {
-  :root body:not(.is-home) .m-topnav { border-top: 1px solid rgba(252, 211, 77, .14) !important; background: rgba(0, 0, 0, .14) !important; }
-  :root body:not(.is-home) .m-topnav a { color: rgba(254, 243, 199, .78) !important; background: transparent !important; border-radius: 0; margin: 0 0 -1px; min-height: 40px !important; border-bottom: 2px solid transparent !important; }
-  :root body:not(.is-home) .m-topnav a:hover { color: #fde68a !important; background: transparent !important; }
-  :root body:not(.is-home) .m-topnav a.is-current { color: #fcd34d !important; background: transparent !important; border-bottom-color: #f59e0b !important; font-weight: 700; }
+  :root body:not(.is-home) .m-topnav { border-top: 1px solid rgba(255, 255, 255, .22) !important; background: rgba(0, 60, 130, .16) !important; }
+  :root body:not(.is-home) .m-topnav a { color: rgba(255, 255, 255, .88) !important; background: transparent !important; border-radius: 0; margin: 0 0 -1px; min-height: 40px !important; border-bottom: 2px solid transparent !important; }
+  :root body:not(.is-home) .m-topnav a:hover { color: #fff !important; background: transparent !important; }
+  :root body:not(.is-home) .m-topnav a.is-current { color: #fff !important; background: transparent !important; border-bottom-color: #fff !important; font-weight: 700; }
 }
 
 /* desktop ඉහළ සංචාලන තීරුව */
