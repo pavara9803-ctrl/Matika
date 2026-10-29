@@ -33,7 +33,6 @@ const ALL_ASSETS = Array.from(new Set(ASSETS_TO_CACHE.concat(self.PRECACHE_URLS 
 const CDN_ASSETS = [
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap',
-  'https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap',
 ];
 
 // ============================================================
