@@ -40,6 +40,47 @@ var dukaArthaVistaraOpenState = {
 };
 
 // ============================================================
+// ENGLISH SUPPORT — දත්ත ගොනු වල පාඨ MX_I18N හරහා පරිවර්තනය (ස්ථානීයව; යොමු නොවෙනස්ව පවතී)
+// ============================================================
+var __dukaOrig = null;
+var __dukaSyncKey = '';
+function mxDukaClone(o) {
+  if (Array.isArray(o)) return o.map(mxDukaClone);
+  if (o && typeof o === 'object') { var r = {}; Object.keys(o).forEach(function(k) { r[k] = mxDukaClone(o[k]); }); return r; }
+  return o;
+}
+function mxDukaApply(target, src, en) {
+  Object.keys(src).forEach(function(k) {
+    var v = src[k];
+    if (typeof v === 'string') target[k] = en ? MX_I18N.t(v) : v;
+    else if (Array.isArray(v) || (v && typeof v === 'object')) { if (target[k] && typeof target[k] === 'object') mxDukaApply(target[k], v, en); }
+  });
+}
+function mxDukaSync() {
+  if (!window.MX_I18N || !dukaGochhakaData.length) return;
+  if (!__dukaOrig) __dukaOrig = dukaGochhakaData.map(mxDukaClone);
+  var en = MX_I18N.lang() === 'en';
+  var key = (en ? 'en' : 'si') + ':' + MX_I18N.version();
+  if (key === __dukaSyncKey) return;
+  __dukaSyncKey = key;
+  dukaGochhakaData.forEach(function(g, i) { mxDukaApply(g, __dukaOrig[i], en); });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.MX_I18N) return;
+  MX_I18N.onChange(function() {
+    mxDukaSync();
+    var vis = function(id) { var e = document.getElementById(id); return e && !e.classList.contains('hidden'); };
+    try {
+      if (vis('duka-view-pada-detail')) openPadaDetail(dukaState.currentPadaIndex);
+      else if (vis('duka-view-pada-pair') && dukaState.currentDukaPair) { var dp = dukaState.currentDukaPair; var dk = getGochhakaDukas(dukaState.currentGochhaka).find(function(d) { return d.number === dp.number; }) || {}; openDukaPair(dp.number, dp.padaIndex1, dp.padaIndex2, dk.name || dp.name, dk.pali || dp.pali); }
+      else if (vis('duka-view-duka-list') && dukaState.currentGochhaka) openGochhaka(dukaState.currentGochhaka.id);
+      else if (vis('duka-view-bookmarks')) renderDukaBookmarks();
+      else renderGochhakaList();
+    } catch (e) {}
+  });
+});
+
+// ============================================================
 // දත්ත ව්‍යුහය ලබා ගැනීමේ helper
 // ============================================================
 function getGochhakaPadas(gochhaka) {
@@ -114,6 +155,7 @@ function showDukaView(viewId) {
 // 1. ගොච්ඡක ලැයිස්තුව render කිරීම
 // ============================================================
 function renderGochhakaList() {
+  mxDukaSync();
   var container = document.getElementById('gochhaka-list');
   if (!container) return;
 
@@ -159,6 +201,7 @@ function renderGochhakaList() {
 // 2. ගොච්ඡකයක් click → දුක ලැයිස්තුව
 // ============================================================
 function openGochhaka(gochhakaId) {
+  mxDukaSync();
   var gochhaka = dukaGochhakaData.find(function(g) { return g.id === gochhakaId; });
   if (!gochhaka) return;
 
@@ -239,6 +282,7 @@ function renderMishrakaDukas(gochhaka) {
 // දුක ලැයිස්තුව render කිරීම
 // ============================================================
 function renderDukaList(gochhaka) {
+  mxDukaSync();
   var container = document.getElementById('duka-list-container');
   if (!container) return;
 
@@ -302,6 +346,7 @@ function renderDukaList(gochhaka) {
 // 3. දුකයක් click → පද දෙක
 // ============================================================
 function openDukaPair(dukaNumber, padaIndex1, padaIndex2, dukaName, dukaPali) {
+  mxDukaSync();
   var gochhaka = dukaState.currentGochhaka;
   if (!gochhaka) return;
 
@@ -362,6 +407,7 @@ function createPadaPairCard(pada, number, padaIndex) {
 // 4. පදයක් click → ස්වරූපාර්ථ + බෙදීම්
 // ============================================================
 function openPadaDetail(padaIndex) {
+  mxDukaSync();
   var gochhaka = dukaState.currentGochhaka;
   if (!gochhaka) return;
 
@@ -835,6 +881,7 @@ function openDukaMatika() {
 // SEARCH
 // ============================================================
 function searchDukaMatika(query) {
+  mxDukaSync();
   if (!query || query.trim() === '') return [];
   var q = query.toLowerCase().trim();
   var results = [];
@@ -976,6 +1023,7 @@ function showDukaBookmarksView() {
 }
 
 function renderDukaBookmarks() {
+  mxDukaSync();
   var container = document.getElementById('duka-bookmarks-container');
   if (!container) return;
   container.innerHTML = '';
