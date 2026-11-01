@@ -216,6 +216,7 @@
     var p = location.pathname;
     var files = ['en-common.js', 'en-app.js'];
     if (/\/paramattha\//.test(p)) files.push('en-paramattha.js');
+    if (/\/matika\//.test(p)) files.push('en-matika.js');
     return files;
   }
 
