@@ -1,8 +1,11 @@
-self.PRECACHE_VERSION = "v91769d7b4f";
+self.PRECACHE_VERSION = "v9054ff3398";
 self.PRECACHE_URLS = [
   "./about.html",
   "./assets/css/matika-ui.css",
   "./assets/css/paramattha.css",
+  "./assets/i18n/en-app.js",
+  "./assets/i18n/en-common.js",
+  "./assets/i18n/en-paramattha.js",
   "./assets/icons/100.png",
   "./assets/icons/1024.png",
   "./assets/icons/114.png",
@@ -124,6 +127,7 @@ self.PRECACHE_URLS = [
   "./assets/icons/maskable-512.png",
   "./assets/js/app.js",
   "./assets/js/feedback.js",
+  "./assets/js/i18n.js",
   "./assets/js/matika-theme.js",
   "./assets/js/matika-ui.js",
   "./assets/js/pages/caitasika-atlas.js",
