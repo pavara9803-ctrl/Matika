@@ -218,6 +218,7 @@
     if (/\/paramattha\//.test(p)) files.push('en-paramattha.js');
     if (/\/matika\//.test(p)) files.push('en-matika.js');
     if (/\/sabbattika\.html/.test(p)) files.push('en-sabbattika.js');
+    if (/\/tika-matika\.html/.test(p)) files.push('en-tika.js');
     return files;
   }
 
@@ -249,11 +250,14 @@
     try { document.dispatchEvent(new CustomEvent('mx-lang-change', { detail: { lang: lang } })); } catch (e) {}
   }
 
+  var dictVersion = 0;
   window.MX_I18N = {
     lang: function () { return lang; },
+    version: function () { return dictVersion; },
     setLang: setLang,
     t: t,
     add: function (obj) {
+      dictVersion++;
       for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k)) dict[norm(k)] = obj[k];
       if (lang === 'en' && document.body) applyAll();
     },

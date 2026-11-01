@@ -20,6 +20,46 @@ var arthaVistaraOpenState = {
   vishesha: false
 };
 
+
+// ============================================================
+// ENGLISH SUPPORT — දත්ත ගොනු වල පාඨ (සම්පූර්ණ වාක්‍ය/ඡේද) MX_I18N හරහා පරිවර්තනය
+// මුල් දත්ත __tikaOrig හි ආරක්ෂා කර, English විට පරිවර්තිත පිටපතක් tikaFullData වෙත දමයි.
+// ============================================================
+var __tikaOrig = null;
+var __tikaSyncKey = '';
+function mxDeepTr(o) {
+  if (typeof o === 'string') return MX_I18N.t(o);
+  if (Array.isArray(o)) return o.map(mxDeepTr);
+  if (o && typeof o === 'object') {
+    var r = {};
+    Object.keys(o).forEach(function(k) { r[k] = mxDeepTr(o[k]); });
+    return r;
+  }
+  return o;
+}
+function mxTikaSync() {
+  if (!window.MX_I18N || typeof tikaFullData === 'undefined' || !tikaFullData.length) return;
+  if (!__tikaOrig || __tikaOrig.length !== tikaFullData.length) __tikaOrig = tikaFullData.slice();
+  var en = MX_I18N.lang() === 'en';
+  var key = (en ? 'en' : 'si') + ':' + MX_I18N.version() + ':' + __tikaOrig.length;
+  if (key === __tikaSyncKey) return;
+  __tikaSyncKey = key;
+  for (var i = 0; i < __tikaOrig.length; i++) tikaFullData[i] = en ? mxDeepTr(__tikaOrig[i]) : __tikaOrig[i];
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.MX_I18N) return;
+  MX_I18N.onChange(function() {
+    mxTikaSync();
+    var det = document.getElementById('tika-view-pada-detail');
+    if (det && !det.classList.contains('hidden')) {
+      var pi = currentPadaIndex;
+      try { var tk = tikaFullData[currentTikaIndex]; renderTikaPadaTabs(tk.padas); selectTikaPada(pi); } catch (e) {}
+      var t0 = tikaFullData[currentTikaIndex], te = document.getElementById('tika-detail-title');
+      if (te && t0) te.innerText = t0.title || te.innerText;
+    } else if (typeof renderTikaList === 'function') { try { renderTikaList(); } catch (e) {} }
+  });
+});
+
 // ============================================================
 // VIEW MANAGEMENT
 // ============================================================
@@ -56,6 +96,7 @@ function scrollToTikaList() {
 // TIKA LIST RENDERING
 // ============================================================
 function renderTikaList() {
+  mxTikaSync();
   var container = document.getElementById('tika-list-container');
   if (!container) return;
   container.innerHTML = '';
@@ -93,6 +134,7 @@ function renderTikaList() {
 // OPEN TIKA DETAIL & NAVIGATION (සම්පූර්ණ විසඳුම)
 // ============================================================
 function openTikaDetail(tikaIndex) {
+  mxTikaSync();
   if (typeof tikaFullData === 'undefined' || !tikaFullData || tikaFullData.length === 0) {
     console.error('[tika-app] tikaFullData හිස්ව පවතී.');
     return;
@@ -234,6 +276,7 @@ function renderTikaPadaTabs(padas) {
 // SELECT PADA - පදයේ අර්ථය (padaArtha) ද පෙන්වයි
 // ============================================================
 function selectTikaPada(padaIndex) {
+  mxTikaSync();
   currentPadaIndex = parseInt(padaIndex, 10);
   if (isNaN(currentPadaIndex)) currentPadaIndex = 0;
 
@@ -536,6 +579,7 @@ function toggleArthaVistaraSection() {
 // BREAKDOWN LISTS
 // ============================================================
 function renderTikaBreakdownLists(pada) {
+  mxTikaSync();
   // ස්කන්ධ (නියත 5)
   var sList = document.getElementById('tika-skandha-list');
   if (sList) {
@@ -706,6 +750,7 @@ function showTikaBookmarksView() {
 }
 
 function renderTikaBookmarks() {
+  mxTikaSync();
   var container = document.getElementById('tika-bookmarks-container');
   if (!container) return;
   container.innerHTML = '';
