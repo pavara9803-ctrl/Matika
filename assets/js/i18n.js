@@ -92,6 +92,9 @@
     el.__mxa = null;
   }
 
+  function doAttrsH(el) { doAttrs(el); doHtml(el); }
+  function undoAttrsH(el) { undoHtml(el); undoAttrs(el); }
+
   function walk(root, fn, attrFn) {
     if (!root) return;
     if (root.nodeType === 3) { if (!skipNode(root)) fn(root); return; }
@@ -112,6 +115,70 @@
     while ((n = w.nextNode())) {
       if (n.nodeType === 3) fn(n); else attrFn(n);
     }
+  }
+
+
+  /* ---------- Inline markup සහිත block පරිවර්තනය ----------
+     <p>සිංහල <strong>සිංහල</strong> ...</p> වැනි අංගයක් (block-level අංග නැති, උප-අංග ඇති) එක් පරිවර්තන
+     ඒකකයක් ලෙස සලකයි. යතුර: innerHTML, ඉන් සිංහල නැති අංග ⟦n⟧ ලෙසත්, සිංහල ඇති අංග <n>…</n> ලෙසත් ආදේශ කර ඇත. */
+  var BLOCKSEL = 'div,p,ul,ol,li,table,thead,tbody,tr,td,th,h1,h2,h3,h4,h5,h6,section,article,blockquote,details,summary,pre,dl,dt,dd,header,footer,nav,main,figure,form,select,textarea';
+  function isCand(el) {
+    return el.nodeType === 1 && el.children.length > 0 && !SKIP[el.nodeName] && SIN.test(el.textContent) && !el.querySelector(BLOCKSEL);
+  }
+  function esc(x) { return x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function sig(el) {
+    var holes = [], tags = [];
+    function rec(node) {
+      var s = '';
+      for (var c = node.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 3) s += esc(c.nodeValue);
+        else if (c.nodeType === 1) {
+          if (!SIN.test(c.textContent)) { holes.push(c.outerHTML); s += '⟦' + holes.length + '⟧'; }
+          else { tags.push(c); var i = tags.length; s += '<' + i + '>' + rec(c) + '</' + i + '>'; }
+        }
+      }
+      return s;
+    }
+    return { key: norm(rec(el)), holes: holes, tags: tags };
+  }
+  function buildHtml(en, sg) {
+    var ok = true;
+    var out = en.replace(/<(\/?)(\d+)>/g, function (m, sl, n) {
+      var c = sg.tags[+n - 1]; if (!c) { ok = false; return ''; }
+      if (sl) return '</' + c.nodeName.toLowerCase() + '>';
+      var o = c.cloneNode(false).outerHTML; return o.slice(0, o.lastIndexOf('</'));
+    }).replace(/⟦(\d+)⟧/g, function (m, n) {
+      var h = sg.holes[+n - 1]; if (h == null) { ok = false; return ''; } return h;
+    });
+    return ok ? out : null;
+  }
+  function doHtml(el) {
+    if (el.__mxh && el.innerHTML === el.__mxh.t) return;
+    if (!isCand(el)) { el.__mxh = undefined; return; }
+    var sg = sig(el), en = Object.prototype.hasOwnProperty.call(dict, sg.key) ? dict[sg.key] : null;
+    if (en == null) { el.__mxh = undefined; return; }
+    var out = buildHtml(en, sg);
+    if (out == null) return;
+    var o = el.innerHTML;
+    el.innerHTML = out;
+    el.__mxh = { o: o, t: el.innerHTML };
+  }
+  function undoHtml(el) {
+    if (el.__mxh && el.innerHTML === el.__mxh.t) el.innerHTML = el.__mxh.o;
+    el.__mxh = undefined;
+  }
+  /* පරිවර්තන යතුරු එකතු කිරීම (මෙවලම් සඳහා): root තුළ ඇති ඒකක (සිංහල) */
+  function collect(root) {
+    var out = [];
+    (function rec(el) {
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 3) { var k = norm(c.nodeValue); if (SIN.test(k)) out.push(k); }
+        else if (c.nodeType === 1 && !SKIP[c.nodeName]) {
+          if (isCand(c)) out.push(sig(c).key); else rec(c);
+        }
+      }
+    })(root);
+    return out;
   }
 
   var origTitle = null;
@@ -135,8 +202,8 @@
     var html = document.documentElement;
     html.setAttribute('lang', lang === 'en' ? 'en' : 'si');
     html.classList.toggle('lang-en', lang === 'en');
-    if (lang === 'en') walk(document, doText, doAttrs);
-    else walk(document, undoText, undoAttrs);
+    if (lang === 'en') walk(document, doText, doAttrsH);
+    else walk(document, undoText, undoAttrsH);
     doHead();
     updateButtons();
     observe();
@@ -152,11 +219,11 @@
 
   function initObserver() {
     observer = new MutationObserver(function (muts) {
-      if (lang !== 'en') return;
+      if (lang !== 'en' || pending > 0) return; /* ශබ්දකෝෂ පූරණය වන අතර නවතා ඇත; ඉන් පසු applyAll සියල්ල ආවරණය කරයි */
       observer.disconnect();
       muts.forEach(function (m) {
         if (m.type === 'childList') {
-          for (var i = 0; i < m.addedNodes.length; i++) walk(m.addedNodes[i], doText, doAttrs);
+          for (var i = 0; i < m.addedNodes.length; i++) walk(m.addedNodes[i], doText, doAttrsH);
         } else if (m.type === 'characterData') {
           if (m.target.nodeType === 3 && !skipNode(m.target)) doText(m.target);
         } else if (m.type === 'attributes') {
@@ -215,7 +282,7 @@
   function dictFiles() {
     var p = location.pathname;
     var files = ['en-common.js', 'en-app.js'];
-    if (/\/paramattha\//.test(p)) files.push('en-paramattha.js');
+    if (/\/paramattha\//.test(p)) files.push('en-paramattha.js', 'en-paramattha2.js', 'en-paramattha3.js');
     if (/\/matika\//.test(p)) files.push('en-matika.js');
     if (/\/sabbattika\.html/.test(p)) files.push('en-sabbattika.js');
     if (/\/tika-matika\.html/.test(p)) files.push('en-tika.js');
@@ -261,10 +328,12 @@
     add: function (obj) {
       dictVersion++;
       for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k)) dict[norm(k)] = obj[k];
-      if (lang === 'en' && document.body) applyAll();
+      if (lang === 'en' && document.body && pending === 0) applyAll(); /* පූරණය වන අතර නොකරයි — අවසානයේ එක් වරක් */
     },
     addPatterns: function (arr) { patterns = patterns.concat(arr); },
-    onChange: function (fn) { listeners.push(fn); }
+    onChange: function (fn) { listeners.push(fn); },
+    collect: collect,
+    sig: sig
   };
 
   /* alert / confirm පණිවිඩද පරිවර්තනය කරයි */
