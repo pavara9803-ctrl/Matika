@@ -196,7 +196,7 @@
     var header = document.querySelector('body > header') || document.querySelector('header');
     var cls = 'mx-lang-btn p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 ml-1 font-bold text-sm';
     if (header) {
-      var theme = header.querySelector('[onclick*="toggleDarkMode"]');
+      var theme = header.querySelector('[onclick*="toggleDarkMode"]') || header.querySelector('[onclick*="toggleMenu"]');
       var bar = header.querySelector('.flex.items-center.justify-between') || header.firstElementChild || header;
       var b = makeButton(cls);
       b.style.minWidth = '2.4rem';

@@ -275,11 +275,11 @@
     if (html.classList.contains('dark')) {
       html.classList.remove('dark');
       localStorage.setItem('abhidhamma_theme', 'light');
-      if (icon) icon.className = 'fa-solid fa-moon text-lg';
+      if (icon) icon.className = 'fa-solid fa-moon text-indigo-500 text-lg w-5';
     } else {
       html.classList.add('dark');
       localStorage.setItem('abhidhamma_theme', 'dark');
-      if (icon) icon.className = 'fa-solid fa-sun text-lg';
+      if (icon) icon.className = 'fa-solid fa-sun text-amber-500 text-lg w-5';
     }
   };
 
@@ -287,7 +287,7 @@
       (!localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');
     var themeIcon = document.getElementById('theme-toggle-icon');
-    if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-lg';
+    if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-500 text-lg w-5';
   }
 
   // ============================================================

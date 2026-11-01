@@ -282,3 +282,4 @@ MX_I18N.add({
   'ටීකා': 'Sub-commentary',
   'සටහන්': 'Notes'
 });
+MX_I18N.add({ 'ආලෝක / අඳුරු තේමාව': 'Light / Dark theme' });
