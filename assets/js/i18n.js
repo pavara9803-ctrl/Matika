@@ -220,6 +220,7 @@
     if (/\/sabbattika\.html/.test(p)) files.push('en-sabbattika.js');
     if (/\/tika-matika\.html/.test(p)) files.push('en-tika.js');
     if (/\/duka-matika\.html/.test(p)) files.push('en-duka.js');
+    if (/\/suttanta-matika\.html/.test(p)) files.push('en-suttanta.js');
     return files;
   }
 
