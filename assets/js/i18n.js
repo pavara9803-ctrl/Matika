@@ -219,6 +219,7 @@
     if (/\/matika\//.test(p)) files.push('en-matika.js');
     if (/\/sabbattika\.html/.test(p)) files.push('en-sabbattika.js');
     if (/\/tika-matika\.html/.test(p)) files.push('en-tika.js');
+    if (/\/duka-matika\.html/.test(p)) files.push('en-duka.js');
     return files;
   }
 
