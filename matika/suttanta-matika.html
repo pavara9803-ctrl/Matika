@@ -586,6 +586,44 @@ if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
 }
 
 // ============================================================
+// ENGLISH SUPPORT — දත්ත ගොනු වල පාඨ MX_I18N හරහා පරිවර්තනය (ස්ථානීයව; යොමු නොවෙනස්ව පවතී)
+// ============================================================
+var __suttantaOrig = null;
+var __suttantaSyncKey = '';
+function mxSuttantaClone(o) {
+  if (Array.isArray(o)) return o.map(mxSuttantaClone);
+  if (o && typeof o === 'object') { var r = {}; Object.keys(o).forEach(function(k) { r[k] = mxSuttantaClone(o[k]); }); return r; }
+  return o;
+}
+function mxSuttantaApply(target, src, en) {
+  Object.keys(src).forEach(function(k) {
+    var v = src[k];
+    if (typeof v === 'string') target[k] = en ? MX_I18N.t(v) : v;
+    else if (Array.isArray(v) || (v && typeof v === 'object')) { if (target[k] && typeof target[k] === 'object') mxSuttantaApply(target[k], v, en); }
+  });
+}
+function mxSuttantaSync() {
+  if (!window.MX_I18N || !suttantaFullData || !suttantaFullData.length) return;
+  if (!__suttantaOrig) __suttantaOrig = suttantaFullData.map(mxSuttantaClone);
+  var en = MX_I18N.lang() === 'en';
+  var key = (en ? 'en' : 'si') + ':' + MX_I18N.version();
+  if (key === __suttantaSyncKey) return;
+  __suttantaSyncKey = key;
+  suttantaFullData.forEach(function(g, i) { mxSuttantaApply(g, __suttantaOrig[i], en); });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.MX_I18N) return;
+  MX_I18N.onChange(function() {
+    mxSuttantaSync();
+    try {
+      if (suttantaCurrentView === 'pada-detail') openSuttantaMatikaDetails(suttantaCurrentMatikaIndex, suttantaCurrentPadaIndex);
+      else if (suttantaCurrentView === 'bookmarks') showSuttantaBookmarksView();
+      else renderSuttantaList();
+    } catch (e) {}
+  });
+});
+
+// ============================================================
 // VIEW NAVIGATION
 // ============================================================
 function showSuttantaView(viewName) {
@@ -631,6 +669,7 @@ function scrollToSuttantaList() {
 // LIST RENDERING
 // ============================================================
 function renderSuttantaList() {
+  mxSuttantaSync();
   var container = document.getElementById('suttanta-list-container');
   container.innerHTML = '';
   
@@ -658,6 +697,7 @@ function renderSuttantaList() {
 }
 
 function openSuttantaMatikaDetails(matikaIndex, padaIndex) {
+  mxSuttantaSync();
   suttantaCurrentMatikaIndex = matikaIndex;
   suttantaCurrentPadaIndex = (typeof padaIndex === 'number') ? padaIndex : 0;
   
@@ -675,6 +715,7 @@ function openSuttantaMatikaDetails(matikaIndex, padaIndex) {
 
 // පෙර සහ ඊළඟ සුත්තන්ත දුකයට යාම
 function goToPrevSuttanta() {
+  mxSuttantaSync();
   if (suttantaCurrentMatikaIndex > 0) {
     openSuttantaMatikaDetails(suttantaCurrentMatikaIndex - 1, 0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -682,6 +723,7 @@ function goToPrevSuttanta() {
 }
 
 function goToNextSuttanta() {
+  mxSuttantaSync();
   if (suttantaCurrentMatikaIndex < suttantaFullData.length - 1) {
     openSuttantaMatikaDetails(suttantaCurrentMatikaIndex + 1, 0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -729,6 +771,7 @@ function renderSuttantaPadaTabs(padas) {
 }
 
 function selectSuttantaPada(padaIndex) {
+  mxSuttantaSync();
   suttantaCurrentPadaIndex = padaIndex;
   var item = suttantaFullData[suttantaCurrentMatikaIndex];
   var pada = item.padas[padaIndex];
@@ -1114,6 +1157,7 @@ function updateSuttantaBookmarksBadge() {
 }
 
 function showSuttantaBookmarksView() {
+  mxSuttantaSync();
   showSuttantaView('bookmarks');
   var container = document.getElementById('suttanta-bookmarks-container');
   container.innerHTML = '';
@@ -1146,6 +1190,7 @@ function removeSuttantaBookmark(id) {
 // SEARCH
 // ============================================================
 function handleSuttantaSearch(query) {
+  mxSuttantaSync();
   var container = document.getElementById('suttanta-list-container');
   var clearBtn = document.getElementById('suttanta-search-clear');
   
