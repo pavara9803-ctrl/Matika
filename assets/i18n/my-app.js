@@ -85,3 +85,6 @@ MX_I18N.add({
  "📱 Android උපාංගයේ install කිරීමට:\n\n1. Chrome browser එකේ ඉහළ දකුණේ ඇති ⋮ මෙනුව ඔබන්න\n2. \"Install app\" හෝ \"Add to Home screen\" තෝරන්න\n3. \"Install\" ඔබන්න": "📱 Android ကိရိယာတွင် install လုပ်ရန် -\n\n၁။ Chrome browser ၏ ညာဘက်အပေါ်ရှိ ⋮ မီနူးကို နှိပ်ပါ\n၂။ \"Install app\" သို့မဟုတ် \"Add to Home screen\" ကို ရွေးပါ\n၃။ \"Install\" ကို နှိပ်ပါ",
  "💻 Desktop එකේ install කිරීමට:\n\n1. Browser එකේ address bar එකේ ඇති install icon එක ඔබන්න\n2. හෝ browser මෙනුවෙන් \"Install\" තෝරන්න": "💻 Desktop တွင် install လုပ်ရန် -\n\n၁။ Browser ၏ address bar ရှိ install icon ကို နှိပ်ပါ\n၂။ သို့မဟုတ် browser မီနူးမှ \"Install\" ကို ရွေးပါ"
 }, 'my');
+MX_I18N.add({
+  'අන්තර්ගත රුක': 'မာတိကာ သစ်ပင်'
+}, 'my');

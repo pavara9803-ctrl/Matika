@@ -77,3 +77,6 @@ MX_I18N.add({
   'නව අනුවාදය ස්ථාපනය කිරීමට ටච් කරන්න': 'Tap to install the new version',
   'යාවත්කාලීන වෙමින්…': 'Updating…'
 });
+MX_I18N.add({
+  'අන්තර්ගත රුක': 'Contents tree'
+});
