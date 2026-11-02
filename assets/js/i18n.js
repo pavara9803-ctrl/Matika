@@ -23,13 +23,13 @@
     { code: 'si', short: 'සිං', name: 'සිංහල', ready: true },
     { code: 'en', short: 'EN', name: 'English', ready: true },
     { code: 'my', short: 'မြန်', name: 'မြန်မာဘာသာ', ready: true },
-    { code: 'zh', short: '中文', name: '中文', ready: false }
+    { code: 'zh', short: '中文', name: '中文', ready: true }
   ];
   /* බිඳෙන ගොනු (404) පූරණය නොකිරීමට: සූදානම් වූ පරිවර්තන ගොනු මෙහි ලියන්න. */
   var AVAILABLE = {
     my: ['my-app.js', 'my-common.js', 'my-duka.js', 'my-paramattha.js', 'my-paramattha2.js', 'my-paramattha3.js',
          'my-matika.js', 'my-sabbattika.js', 'my-suttanta.js', 'my-tika.js'],
-    zh: []
+    zh: ['zh-app.js', 'zh-common.js', 'zh-sabbattika.js']
   };
   var dicts = { en: {}, my: {}, zh: {} };       // සිංහල (සාමාන්‍යකරණය කළ) → පරිවර්තනය
   var patterns = { en: [], my: [], zh: [] };    // [RegExp, replacement|function] — ඉලක්කම් අඩංගු පාඨ සඳහා
