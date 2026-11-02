@@ -1,6 +1,9 @@
 /* en-paramattha.js — සතර පරමාර්ථ පිටු (චිත්ත, චෛතසික, රූප, නිබ්බාන) : සිංහල → English
    පාලි පාඨ (සිංහල අකුරින්) රෝම අකුරට (IAST) ලිප්‍යන්තරණය කර ඇත. */
 MX_I18N.add({
+ "රූපයක් එබූ විට එහි ලක්ඛණ, රස, පච්චුපට්ඨාන, පදට්ඨාන පෙන්වයි. විභාග සහ සමුට්ඨාන අනුව රූප තෝරා බැලිය හැක.": "When you tap a rūpa, its characteristic, function, manifestation and proximate cause are shown. You can also choose rūpas by classification and by origin (samuṭṭhāna).",
+ "අරමුණ සිතන්නේ ය, එනම් අරමුණ දැන ගන්නේ ය යන අර්ථයෙන් චිත්ත නම් වේ.": "It is called citta because it thinks (cinteti) of an object — that is, it knows (vijānāti) the object.",
+ "සීත, උෂ්ණ ආදී විරුද්ධ ප්‍රත්‍යයන් නිසා විකාරයට (වෙනස් බවට) පැමිණෙන්නේ ය යන අර්ථයෙන් රූප නම් වේ. එසේ නැතහොත් ඒ විරුද්ධ ප්‍රත්‍යයන් විසින් පීඩාවට පමුණුවනු ලබන්නේ ය යන අර්ථයෙන් ද රූප නම් වේ.": "It is called rūpa because it undergoes alteration (vikāra) when confronted by opposing conditions such as cold and heat; or, alternatively, because it is afflicted by those opposing conditions.",
  "චෛතසික හා සම්ප්‍රයෝග": "Cetasikas: Association and Combination",
  "චෛතසික පරමාර්ථය": "Cetasika as an Ultimate Reality",
  "සිත්": "Cittas",
