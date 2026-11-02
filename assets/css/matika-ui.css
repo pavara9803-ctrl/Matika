@@ -970,3 +970,10 @@
 .ht__dot--caitasika { --c: #e11d48; }
 .ht__dot--rupa { --c: #d97706; }
 .ht__dot--nibbana { --c: #7c3aed; }
+
+/* ශීර්ෂ තීරුවේ මෙනු (≡) සහ සැකසුම් (⚙) අයිකන */
+.bo--menu { width: 25px; height: 25px; }
+.bo--gear { width: 25px; height: 25px; }
+.ht-btn--gear:hover .bo--gear { transform: rotate(60deg); }
+.ht-btn:hover .bo--menu { transform: none; }
+@media (prefers-reduced-motion: reduce) { .ht-btn--gear:hover .bo--gear { transform: none; } }
