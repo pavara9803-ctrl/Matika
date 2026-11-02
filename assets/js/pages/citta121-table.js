@@ -29,19 +29,25 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-  // English දසුනේදී වගුවේ පාඨය පාලියෙන් (රෝමන්) පෙන්වයි; සිංහල දසුනේදී සිංහලෙන්.
-  // .ct-t අංග data-no-i18n වන නිසා සාමාන්‍ය English පරිවර්තනය (i18n.js) ඒවාට බලපාන්නේ නැත.
+  // වගුවේ පාඨය භාෂාව අනුව පාලියෙන්:  සිංහල → සිංහල අකුරු; English → රෝමන් (IAST); မြန်မာ → မြန်မာ අකුරු (pali-script.js).
+  // .ct-t අංග data-no-i18n වන නිසා සාමාන්‍ය පරිවර්තනය (i18n.js) ඒවාට බලපාන්නේ නැත.
   function curLang() {
     if (window.MX_I18N) return MX_I18N.lang();
-    var q = /[?&]lang=(en|si)\b/.exec(location.search); if (q) return q[1];
-    try { return localStorage.getItem('matika-lang') === 'en' ? 'en' : 'si'; } catch (e) { return 'si'; }
+    var q = /[?&]lang=(en|si|my|zh)\b/.exec(location.search); if (q) return q[1];
+    try { var v = localStorage.getItem('matika-lang'); return (v === 'en' || v === 'my' || v === 'zh') ? v : 'si'; } catch (e) { return 'si'; }
   }
-  var PALI = curLang() === 'en';
+  function rend(si, pa) {     // වත්මන් භාෂාවේ පාඨය
+    var l = curLang();
+    if (l === 'si' || pa == null) return si;
+    if (l === 'my' && window.PaliScript) return PaliScript.toMyanmar(pa);
+    return pa;
+  }
+  function num(n) { return (curLang() === 'my' && window.PaliScript) ? PaliScript.digits(n) : String(n); }
   function tt(si, pa) {   // attribute string for a bilingual element
     if (pa == null) pa = si;
     return ' class="ct-t" data-no-i18n data-si="' + esc(si) + '" data-pa="' + esc(pa) + '"';
   }
-  function tv(si, pa) { return PALI ? (pa == null ? si : pa) : si; }
+  function tv(si, pa) { return rend(si, pa); }
 
   // ---------- සැකිල්ල ----------
   var h = '<div class="ct-hint" role="note"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i><span><strong>ඕනෑම සිතක් එබූ විට</strong> එම සිතේ විස්තරය (භූමිය, ජාතිය, වේදනාව, හේතු, චෛතසික ආදිය) පැත්තෙන් විවෘත වේ.</span></div>';
@@ -57,10 +63,10 @@
   h += '</div>';
 
   T.forEach(function (g, gi) {
-    h += '<section class="ct-group" id="ct-g' + gi + '"><h3 class="ct-gtitle" data-no-i18n><span' + tt(g.title, g.p) + '>' + tv(g.title, g.p) + '</span> <span>' + g.count + '</span>' +
+    h += '<section class="ct-group" id="ct-g' + gi + '"><h3 class="ct-gtitle" data-no-i18n><span' + tt(g.title, g.p) + '>' + tv(g.title, g.p) + '</span> <span class="ct-d" data-d="' + g.count + '">' + num(g.count) + '</span>' +
       (g.note ? ' <small' + tt('(' + g.note + ')', '(' + g.pnote + ')') + '>' + tv('(' + g.note + ')', '(' + g.pnote + ')') + '</small>' : '') + '</h3>';
     g.parts.forEach(function (p) {
-      h += '<div class="ct-part"><h4 class="ct-ptitle" data-no-i18n><span' + tt(p.title, p.p) + '>' + tv(p.title, p.p) + '</span> <span>' + p.count + '</span></h4>';
+      h += '<div class="ct-part"><h4 class="ct-ptitle" data-no-i18n><span' + tt(p.title, p.p) + '>' + tv(p.title, p.p) + '</span> <span class="ct-d" data-d="' + p.count + '">' + num(p.count) + '</span></h4>';
       p.subs.forEach(function (s) {
         var cols = s.cols || [];
         h += '<div class="ct-sub"><div class="ct-shead"><span class="ct-sname ct-t" data-no-i18n data-si="' + esc(s.name) + '" data-pa="' + esc(s.p) + '">' + tv(s.name, s.p) + '</span>' +
@@ -70,10 +76,10 @@
           var cells = row.c.map(function (c, ci) { return '<span class="ct-cell ct-t ' + (CLS[c] || CLS[c.replace(/ සිත$/, '')] || 'ct-name') + '" data-no-i18n data-si="' + esc(c) + '" data-pa="' + esc(row.p[ci]) + '">' + tv(c, row.p[ci]) + '</span>'; }).join('');
           var inf = (window.CITTA_ATLAS && CITTA_ATLAS.info(row.n)) || {};
           var data = 'data-ved="' + (inf.ved || '') + '" data-jati="' + (inf.jati || '') + '" data-hetu="' + (inf.hetu != null ? inf.hetu : '') + '" ' +
-            'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title + ' ' + row.p.join(' ') + ' ' + s.p + ' ' + p.p + ' ' + g.p) + '"' +
+            'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title + ' ' + row.p.join(' ') + ' ' + s.p + ' ' + p.p + ' ' + g.p + (window.PaliScript ? ' ' + PaliScript.toMyanmar(row.p.join(' ')) : '')) + '"' +
             (row.jh != null ? ' data-j="' + JH[row.jh] + 'ජ්ඣාන"' : '');
           h += '<button type="button" class="ct-row' + (row.jh != null ? ' ct-jh' + row.jh : '') + '" ' + data + ' title="සිත ' + row.n + ' හි විස්තරය බලන්න" aria-haspopup="dialog">' +
-            '<span class="ct-n">' + row.n + '</span><span class="ct-cells' + (multi ? ' ct-c' + row.c.length : '') + '">' + cells + '</span>' +
+            '<span class="ct-n ct-d" data-d="' + row.n + '">' + num(row.n) + '</span><span class="ct-cells' + (multi ? ' ct-c' + row.c.length : '') + '">' + cells + '</span>' +
             '<span class="ct-go" aria-hidden="true"><em>විස්තරය</em><b>›</b></span></button>';
         });
         h += '</div>';
@@ -92,8 +98,9 @@
   // ---------- පෙරහන් ----------
   var rows = Array.prototype.slice.call(box.querySelectorAll('.ct-row'));
   function norm(s) { return String(s || '').replace(/‍/g, '').toLowerCase(); }
+  function qnorm(s) { return window.PaliScript ? PaliScript.undigits(s) : s; }
   function apply() {
-    var q = norm(state.q.trim()), shown = 0, active = !!q;
+    var q = norm(qnorm(state.q).trim()), shown = 0, active = !!q;
     FILTERS.forEach(function (f) { if (state[f.key]) active = true; });
     rows.forEach(function (r) {
       var t = r.getAttribute('data-txt'), ok = true;
@@ -144,8 +151,8 @@
   });
   // ---------- භාෂා මාරුව: සිංහල ⇄ පාලි (රෝමන්) ----------
   function syncLang() {
-    var en = curLang() === 'en';
-    box.querySelectorAll('.ct-t').forEach(function (el) { el.textContent = el.getAttribute(en ? 'data-pa' : 'data-si'); });
+    box.querySelectorAll('.ct-t').forEach(function (el) { el.textContent = rend(el.getAttribute('data-si'), el.getAttribute('data-pa')); });
+    box.querySelectorAll('.ct-d').forEach(function (el) { el.textContent = num(el.getAttribute('data-d')); });
   }
   document.addEventListener('mx-lang-change', syncLang);
   syncLang();

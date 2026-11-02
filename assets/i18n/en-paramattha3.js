@@ -549,4 +549,7 @@ MX_I18N.add({
  "නිප්ඵන්න › හදය රූප": "Nipphanna › hadaya rūpa",
  "නිප්ඵන්න › ආහාර රූප": "Nipphanna › āhāra rūpa",
  "අනිප්ඵන්න › පරිච්ඡේද රූප": "Anipphanna › pariccheda rūpa",
+ "සොයන්න: අංකය (උදා: 57) හෝ නම": "Search: number (e.g. 57) or name",
+ "කොටසට යන්න": "Go to section",
 });
+MX_I18N.addPatterns([[/^සිත (\d+) හි විස්තරය බලන්න$/, 'View the details of citta $1']]);

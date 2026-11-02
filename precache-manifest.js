@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v99ea392b8b";
+self.PRECACHE_VERSION = "v6a4d31f1a3";
 self.PRECACHE_URLS = [
   "./about.html",
   "./assets/css/matika-ui.css",
@@ -13,6 +13,14 @@ self.PRECACHE_URLS = [
   "./assets/i18n/en-sabbattika.js",
   "./assets/i18n/en-suttanta.js",
   "./assets/i18n/en-tika.js",
+  "./assets/i18n/my-app.js",
+  "./assets/i18n/my-common.js",
+  "./assets/i18n/my-duka.js",
+  "./assets/i18n/my-paramattha.js",
+  "./assets/i18n/my-paramattha2.js",
+  "./assets/i18n/my-paramattha3.js",
+  "./assets/i18n/my-suttanta.js",
+  "./assets/i18n/my-tika.js",
   "./assets/icons/100.png",
   "./assets/icons/1024.png",
   "./assets/icons/114.png",
@@ -146,6 +154,7 @@ self.PRECACHE_URLS = [
   "./assets/js/pages/rupa-atlas.js",
   "./assets/js/pages/samprayoga.js",
   "./assets/js/pages/tika-app.js",
+  "./assets/js/pali-script.js",
   "./assets/js/pm-atlas.js",
   "./assets/js/sw-update.js",
   "./assets/js/vendor/tailwind.min.js",
