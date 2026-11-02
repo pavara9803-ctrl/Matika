@@ -59,8 +59,8 @@ function mxDukaApply(target, src, en) {
 function mxDukaSync() {
   if (!window.MX_I18N || !dukaGochhakaData.length) return;
   if (!__dukaOrig) __dukaOrig = dukaGochhakaData.map(mxDukaClone);
-  var en = MX_I18N.lang() === 'en';
-  var key = (en ? 'en' : 'si') + ':' + MX_I18N.version();
+  var en = MX_I18N.lang() !== 'si';
+  var key = MX_I18N.lang() + ':' + MX_I18N.version();
   if (key === __dukaSyncKey) return;
   __dukaSyncKey = key;
   dukaGochhakaData.forEach(function(g, i) { mxDukaApply(g, __dukaOrig[i], en); });
