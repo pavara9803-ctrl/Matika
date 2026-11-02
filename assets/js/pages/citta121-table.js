@@ -29,11 +29,25 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
+  // English දසුනේදී වගුවේ පාඨය පාලියෙන් (රෝමන්) පෙන්වයි; සිංහල දසුනේදී සිංහලෙන්.
+  // .ct-t අංග data-no-i18n වන නිසා සාමාන්‍ය English පරිවර්තනය (i18n.js) ඒවාට බලපාන්නේ නැත.
+  function curLang() {
+    if (window.MX_I18N) return MX_I18N.lang();
+    var q = /[?&]lang=(en|si)\b/.exec(location.search); if (q) return q[1];
+    try { return localStorage.getItem('matika-lang') === 'en' ? 'en' : 'si'; } catch (e) { return 'si'; }
+  }
+  var PALI = curLang() === 'en';
+  function tt(si, pa) {   // attribute string for a bilingual element
+    if (pa == null) pa = si;
+    return ' class="ct-t" data-no-i18n data-si="' + esc(si) + '" data-pa="' + esc(pa) + '"';
+  }
+  function tv(si, pa) { return PALI ? (pa == null ? si : pa) : si; }
+
   // ---------- සැකිල්ල ----------
   var h = '<div class="ct-hint" role="note"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i><span><strong>ඕනෑම සිතක් එබූ විට</strong> එම සිතේ විස්තරය (භූමිය, ජාතිය, වේදනාව, හේතු, චෛතසික ආදිය) පැත්තෙන් විවෘත වේ.</span></div>';
   h += '<div class="ct-tools">';
   h += '<div class="ct-jump" role="group" aria-label="කොටසට යන්න">' + T.map(function (g, i) {
-    return '<a class="ca-opt" href="#ct-g' + i + '">' + g.title + ' ' + g.count + '</a>'; }).join('') + '</div>';
+    return '<a href="#ct-g' + i + '" class="ca-opt ct-t" data-no-i18n data-si="' + esc(g.title + ' ' + g.count) + '" data-pa="' + esc(g.p + ' ' + g.count) + '">' + tv(g.title + ' ' + g.count, g.p + ' ' + g.count) + '</a>'; }).join('') + '</div>';
   h += '<label class="ca-search ct-search"><span class="sr-only">සිතක් හෝ අංකයක් සොයන්න</span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="ct-q" type="search" placeholder="සොයන්න: අංකය (උදා: 57) හෝ නම" autocomplete="off"></label>';
   h += FILTERS.map(function (f) {
     return '<div class="ct-frow"><span class="ct-flabel">' + f.name + '</span>' + f.opts.map(function (o) {
@@ -43,19 +57,20 @@
   h += '</div>';
 
   T.forEach(function (g, gi) {
-    h += '<section class="ct-group" id="ct-g' + gi + '"><h3 class="ct-gtitle">' + g.title + ' <span>' + g.count + '</span>' + (g.note ? ' <small>(' + g.note + ')</small>' : '') + '</h3>';
+    h += '<section class="ct-group" id="ct-g' + gi + '"><h3 class="ct-gtitle" data-no-i18n><span' + tt(g.title, g.p) + '>' + tv(g.title, g.p) + '</span> <span>' + g.count + '</span>' +
+      (g.note ? ' <small' + tt('(' + g.note + ')', '(' + g.pnote + ')') + '>' + tv('(' + g.note + ')', '(' + g.pnote + ')') + '</small>' : '') + '</h3>';
     g.parts.forEach(function (p) {
-      h += '<div class="ct-part"><h4 class="ct-ptitle">' + p.title + ' <span>' + p.count + '</span></h4>';
+      h += '<div class="ct-part"><h4 class="ct-ptitle" data-no-i18n><span' + tt(p.title, p.p) + '>' + tv(p.title, p.p) + '</span> <span>' + p.count + '</span></h4>';
       p.subs.forEach(function (s) {
         var cols = s.cols || [];
-        h += '<div class="ct-sub"><div class="ct-shead"><span class="ct-sname">' + s.name + '</span>' +
-          (cols.length ? '<span class="ct-cols ct-c' + cols.length + '" aria-hidden="true">' + cols.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '</span>' : '') + '</div>';
+        h += '<div class="ct-sub"><div class="ct-shead"><span class="ct-sname ct-t" data-no-i18n data-si="' + esc(s.name) + '" data-pa="' + esc(s.p) + '">' + tv(s.name, s.p) + '</span>' +
+          (cols.length ? '<span class="ct-cols ct-c' + cols.length + '" aria-hidden="true">' + cols.map(function (c, ci) { return '<span' + tt(c, s.pcols[ci]) + '>' + tv(c, s.pcols[ci]) + '</span>'; }).join('') + '</span>' : '') + '</div>';
         s.rows.forEach(function (row) {
           var multi = row.c.length > 1;
-          var cells = row.c.map(function (c) { return '<span class="ct-cell ' + (CLS[c] || CLS[c.replace(/ සිත$/, '')] || 'ct-name') + '">' + c + '</span>'; }).join('');
+          var cells = row.c.map(function (c, ci) { return '<span class="ct-cell ct-t ' + (CLS[c] || CLS[c.replace(/ සිත$/, '')] || 'ct-name') + '" data-no-i18n data-si="' + esc(c) + '" data-pa="' + esc(row.p[ci]) + '">' + tv(c, row.p[ci]) + '</span>'; }).join('');
           var inf = (window.CITTA_ATLAS && CITTA_ATLAS.info(row.n)) || {};
           var data = 'data-ved="' + (inf.ved || '') + '" data-jati="' + (inf.jati || '') + '" data-hetu="' + (inf.hetu != null ? inf.hetu : '') + '" ' +
-            'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title) + '"' +
+            'data-n="' + row.n + '" data-txt="' + esc(row.c.join(' ') + ' ' + s.name + ' ' + p.title + ' ' + g.title + ' ' + row.p.join(' ') + ' ' + s.p + ' ' + p.p + ' ' + g.p) + '"' +
             (row.jh != null ? ' data-j="' + JH[row.jh] + 'ජ්ඣාන"' : '');
           h += '<button type="button" class="ct-row' + (row.jh != null ? ' ct-jh' + row.jh : '') + '" ' + data + ' title="සිත ' + row.n + ' හි විස්තරය බලන්න" aria-haspopup="dialog">' +
             '<span class="ct-n">' + row.n + '</span><span class="ct-cells' + (multi ? ' ct-c' + row.c.length : '') + '">' + cells + '</span>' +
@@ -127,5 +142,12 @@
     var r = e.target.closest('.ct-row'); if (!r || !window.CITTA_ATLAS) return;
     window.CITTA_ATLAS.open(+r.getAttribute('data-n'));
   });
+  // ---------- භාෂා මාරුව: සිංහල ⇄ පාලි (රෝමන්) ----------
+  function syncLang() {
+    var en = curLang() === 'en';
+    box.querySelectorAll('.ct-t').forEach(function (el) { el.textContent = el.getAttribute(en ? 'data-pa' : 'data-si'); });
+  }
+  document.addEventListener('mx-lang-change', syncLang);
+  syncLang();
   apply();
 })();
