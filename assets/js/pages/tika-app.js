@@ -40,8 +40,8 @@ function mxDeepTr(o) {
 function mxTikaSync() {
   if (!window.MX_I18N || typeof tikaFullData === 'undefined' || !tikaFullData.length) return;
   if (!__tikaOrig || __tikaOrig.length !== tikaFullData.length) __tikaOrig = tikaFullData.slice();
-  var en = MX_I18N.lang() === 'en';
-  var key = (en ? 'en' : 'si') + ':' + MX_I18N.version() + ':' + __tikaOrig.length;
+  var en = MX_I18N.lang() !== 'si';
+  var key = MX_I18N.lang() + ':' + MX_I18N.version() + ':' + __tikaOrig.length;
   if (key === __tikaSyncKey) return;
   __tikaSyncKey = key;
   for (var i = 0; i < __tikaOrig.length; i++) tikaFullData[i] = en ? mxDeepTr(__tikaOrig[i]) : __tikaOrig[i];

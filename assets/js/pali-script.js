@@ -25,6 +25,8 @@
   var VIRAMA = '္', ASAT = '်', ANUSVARA = 'ံ', MEDIAL_HA = 'ှ';
   var HA_OK = 'ဝနမလယရဏဉင';              // ှ (ha-htoe) ලබාගන්නා අකුරු (v n m l y r ṇ ñ ṅ)
   var VOWELS = 'aāiīuūeo';
+  var MEDIALS = { y: 'ျ', r: 'ြ', v: 'ွ' };
+  var ISMED = 'ျြွှ';
 
   var DIG = '၀၁၂၃၄၅၆၇၈၉';
   function digits(s) { return String(s).replace(/[0-9]/g, function (d) { return DIG.charAt(+d); }); }
@@ -72,14 +74,14 @@
       base = g[i0];
       s += base;
       for (var i = i0 + 1; i < g.length; i++) {
-        if (g[i] === MEDIAL_HA) s += MEDIAL_HA; else s += VIRAMA + g[i];
+        if (ISMED.indexOf(g[i]) >= 0) s += g[i]; else s += VIRAMA + g[i];
       }
       if (vowel === null) {               // ස්වරයක් නැත → asat (වචනය අවසානයේ)
         s += ASAT;
       } else if (vowel === 'a') {
         /* inherent */
       } else {
-        var vs = vowelSigns(vowel, base);
+        var vs = vowelSigns(vowel, /[ျြ]/.test(s) ? 'က' : base);
         // Unicode අනුපිළිවෙළ: ေ  → ိ ී → ු ූ → ါ ာ
         s += vs;
       }
@@ -98,6 +100,8 @@
       if (prevKey === 's' && key === 's') { stack.cons[stack.cons.length - 1] = 'ဿ'; stack.keys[stack.keys.length - 1] = 'ss'; return; }
       // v/n/m/l/y/r/ṇ/ñ/ṅ + h → ှ
       if (key === 'h' && HA_OK.indexOf(prevG) >= 0 && stack.cons.length === 1) { stack.cons.push(MEDIAL_HA); stack.keys.push('h'); return; }
+      // y / r / v (ယ ရ ဝ) පාදක අකුරකට පසු → ya-pin ျ, ya-yit ြ, wa-hswe ွ (geminate yy rr vv නොවෙනස්)
+      if (MEDIALS[key] && prevKey !== key && prevG !== MEDIAL_HA && !/~$/.test(prevKey)) { stack.cons.push(MEDIALS[key]); stack.keys.push(key + '~'); return; }
       stack.cons.push(g); stack.keys.push(key);
     }
 
