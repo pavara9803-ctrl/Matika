@@ -28,7 +28,7 @@
   /* බිඳෙන ගොනු (404) පූරණය නොකිරීමට: සූදානම් වූ පරිවර්තන ගොනු මෙහි ලියන්න. */
   var AVAILABLE = {
     my: ['my-app.js', 'my-common.js', 'my-duka.js', 'my-paramattha.js', 'my-paramattha2.js', 'my-paramattha3.js',
-         'my-suttanta.js', 'my-tika.js'],
+         'my-sabbattika.js', 'my-suttanta.js', 'my-tika.js'],
     zh: []
   };
   var dicts = { en: {}, my: {}, zh: {} };       // සිංහල (සාමාන්‍යකරණය කළ) → පරිවර්තනය
