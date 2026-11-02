@@ -283,3 +283,42 @@ MX_I18N.add({
   'සටහන්': 'Notes'
 });
 MX_I18N.add({ 'ආලෝක / අඳුරු තේමාව': 'Light / Dark theme' });
+
+/* මුල් පිටුවේ අන්තර්ගත රුකේ ත්‍රික / දුක ලැයිස්තු */
+MX_I18N.add({
+ "01. කුසල ත්‍රිකය": "01. Kusala Tika",
+ "02. වේදනා ත්‍රිකය": "02. Vedanā Tika",
+ "03. විපාක ත්‍රිකය": "03. Vipāka Tika",
+ "04. උපාදින්න ත්‍රිකය": "04. Upādinna Tika",
+ "05. සංකිලිට්ඨ ත්‍රිකය": "05. Saṃkiliṭṭha Tika",
+ "06. විතර්ක ත්‍රිකය": "06. Vitakka Tika",
+ "07. ප්‍රීති ත්‍රිකය": "07. Prīti Tika",
+ "08. දස්සන ත්‍රිකය": "08. Dassana Tika",
+ "09. දස්සනහේතු ත්‍රිකය": "09. Dassanahetu Tika",
+ "10. ආචයගාමී ත්‍රිකය": "10. Ācayagāmī Tika",
+ "11. සෙක්ඛ ත්‍රිකය": "11. Sekkha Tika",
+ "12. පරිත්ත ත්‍රිකය": "12. Paritta Tika",
+ "13. පරිත්තාරම්මණ ත්‍රිකය": "13. Parittārammaṇa Tika",
+ "14. හීන ත්‍රිකය": "14. Hīna Tika",
+ "15. මිච්ඡත්ත ත්‍රිකය": "15. Micchatta Tika",
+ "16. මග්ගාරම්මණ ත්‍රිකය": "16. Maggārammaṇa Tika",
+ "17. උප්පන්න ත්‍රිකය": "17. Uppanna Tika",
+ "18. අතීත ත්‍රිකය": "18. Atīta Tika",
+ "19. අතීතාරම්මණ ත්‍රිකය": "19. Atītārammaṇa Tika",
+ "20. අජ්ඣත්ත ත්‍රිකය": "20. Ajjhatta Tika",
+ "21. අජ්ඣත්තාරම්මණ ත්‍රිකය": "21. Ajjhattārammaṇa Tika",
+ "22. සනිදස්සන ත්‍රිකය": "22. Sanidassana Tika",
+ "01. හේතු ගොච්ඡකය": "01. Hetu Gocchaka",
+ "02. චුල්ලන්තර දුකය": "02. Cūḷantara Duka",
+ "03. ආසව ගොච්ඡකය": "03. Āsava Gocchaka",
+ "04. සංයෝජන ගොච්ඡකය": "04. Saṃyojana Gocchaka",
+ "05. ගන්ථ ගොච්ඡකය": "05. Gantha Gocchaka",
+ "06. ඕඝ ගොච්ඡකය": "06. Ogha Gocchaka",
+ "07. යෝග ගොච්ඡකය": "07. Yoga Gocchaka",
+ "08. නීවරණ ගොච්ඡකය": "08. Nīvaraṇa Gocchaka",
+ "09. පරාමාස ගොච්ඡකය": "09. Parāmāsa Gocchaka",
+ "10. මහන්තර දුකය": "10. Mahantara Duka",
+ "11. උපාදාන ගොච්ඡකය": "11. Upādāna Gocchaka",
+ "12. කිලෙස ගොච්ඡකය": "12. Kilesa Gocchaka",
+ "13. පිට්ඨි දුකය": "13. Piṭṭhi Duka"
+}, 'en');
