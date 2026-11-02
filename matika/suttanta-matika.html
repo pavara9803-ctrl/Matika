@@ -605,8 +605,8 @@ function mxSuttantaApply(target, src, en) {
 function mxSuttantaSync() {
   if (!window.MX_I18N || !suttantaFullData || !suttantaFullData.length) return;
   if (!__suttantaOrig) __suttantaOrig = suttantaFullData.map(mxSuttantaClone);
-  var en = MX_I18N.lang() === 'en';
-  var key = (en ? 'en' : 'si') + ':' + MX_I18N.version();
+  var en = MX_I18N.lang() !== 'si';
+  var key = MX_I18N.lang() + ':' + MX_I18N.version();
   if (key === __suttantaSyncKey) return;
   __suttantaSyncKey = key;
   suttantaFullData.forEach(function(g, i) { mxSuttantaApply(g, __suttantaOrig[i], en); });
