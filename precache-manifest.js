@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v386f035c65";
+self.PRECACHE_VERSION = "v5c94a95bfe";
 self.PRECACHE_URLS = [
   "./about.html",
   "./assets/css/matika-ui.css",
@@ -26,6 +26,7 @@ self.PRECACHE_URLS = [
   "./assets/i18n/zh-app.js",
   "./assets/i18n/zh-common.js",
   "./assets/i18n/zh-duka.js",
+  "./assets/i18n/zh-matika.js",
   "./assets/i18n/zh-sabbattika.js",
   "./assets/i18n/zh-suttanta.js",
   "./assets/i18n/zh-tika.js",
