@@ -23,16 +23,18 @@
     { code: 'si', short: 'සිං', name: 'සිංහල', ready: true },
     { code: 'en', short: 'EN', name: 'English', ready: true },
     { code: 'my', short: 'မြန်', name: 'မြန်မာဘာသာ', ready: true },
-    { code: 'zh', short: '中文', name: '中文', ready: true }
+    { code: 'zh', short: '简体', name: '简体中文', ready: true },
+    { code: 'zh-Hant', short: '繁體', name: '繁體中文', ready: true }
   ];
   /* බිඳෙන ගොනු (404) පූරණය නොකිරීමට: සූදානම් වූ පරිවර්තන ගොනු මෙහි ලියන්න. */
   var AVAILABLE = {
     my: ['my-app.js', 'my-common.js', 'my-duka.js', 'my-paramattha.js', 'my-paramattha2.js', 'my-paramattha3.js',
          'my-matika.js', 'my-sabbattika.js', 'my-suttanta.js', 'my-tika.js'],
-    zh: ['zh-app.js', 'zh-common.js', 'zh-sabbattika.js', 'zh-tika.js', 'zh-duka.js', 'zh-suttanta.js', 'zh-matika.js', 'zh-paramattha.js', 'zh-paramattha3.js', 'zh-paramattha2.js']
+    zh: ['zh-app.js', 'zh-common.js', 'zh-sabbattika.js', 'zh-tika.js', 'zh-duka.js', 'zh-suttanta.js', 'zh-matika.js', 'zh-paramattha.js', 'zh-paramattha3.js', 'zh-paramattha2.js'],
+    'zh-Hant': ['zh-Hant-app.js', 'zh-Hant-common.js', 'zh-Hant-sabbattika.js', 'zh-Hant-tika.js', 'zh-Hant-duka.js', 'zh-Hant-suttanta.js', 'zh-Hant-matika.js', 'zh-Hant-paramattha.js', 'zh-Hant-paramattha3.js', 'zh-Hant-paramattha2.js']
   };
-  var dicts = { en: {}, my: {}, zh: {} };       // සිංහල (සාමාන්‍යකරණය කළ) → පරිවර්තනය
-  var patterns = { en: [], my: [], zh: [] };    // [RegExp, replacement|function] — ඉලක්කම් අඩංගු පාඨ සඳහා
+  var dicts = { en: {}, my: {}, zh: {}, 'zh-Hant': {} };       // සිංහල (සාමාන්‍යකරණය කළ) → පරිවර්තනය
+  var patterns = { en: [], my: [], zh: [], 'zh-Hant': [] };    // [RegExp, replacement|function] — ඉලක්කම් අඩංගු පාඨ සඳහා
   var lang = 'si';
   var listeners = [];
   var observer = null;
@@ -420,7 +422,7 @@
     version: function () { return dictVersion; },
     setLang: setLang,
     t: t,
-    /* add(obj [, code]) — code: 'en' (පෙරනිමි) | 'my' | 'zh' */
+    /* add(obj [, code]) — code: 'en' (පෙරනිමි) | 'my' | 'zh' | 'zh-Hant' */
     add: function (obj, code) {
       code = dicts[code] ? code : 'en';
       dictVersion++;
@@ -442,7 +444,7 @@
   });
 
   /* ---------- ආරම්භය ---------- */
-  var q = /[?&]lang=(en|si|my|zh)\b/.exec(location.search);
+  var q = /[?&]lang=(en|si|my|zh-Hant|zh)\b/.exec(location.search);
   var saved = null;
   try { saved = localStorage.getItem(KEY); } catch (e) {}
   lang = validLang((q && q[1]) || saved || 'si');
@@ -469,7 +471,8 @@
     'html.lang-my p,html.lang-my li,html.lang-my td,html.lang-my summary{line-height:1.95}' +
     'html.lang-my h1,html.lang-my h2,html.lang-my h3,html.lang-my h4{line-height:1.6}' +
     'html.lang-zh body{font-family:"Noto Serif SC","Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif}' +
-    'html.lang-my [lang="si"],html.lang-zh [lang="si"]{font-family:"Noto Serif Sinhala",serif}' +
+    'html.lang-zh-Hant body{font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}' +
+    'html.lang-my [lang="si"],html.lang-zh [lang="si"],html.lang-zh-Hant [lang="si"]{font-family:"Noto Serif Sinhala",serif}' +
     /* භාෂා මෙනුව */
     '.mx-lang-wrap{position:relative;display:inline-block}' +
     '.mx-lang-menu{position:absolute;right:0;top:calc(100% + 6px);min-width:10rem;background:#fffaf0;color:#3b1010;border:1px solid #f59e0b;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.28);padding:4px;z-index:70;text-align:left}' +
