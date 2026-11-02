@@ -11,6 +11,44 @@
   var NS = 'ඥාණ සම්පයුත්ත', NV = 'ඥාණ විප්පයුත්ත';
   var A = 'අසඞ්ඛාරික සිත', S = 'සසඞ්ඛාරික සිත';
 
+  // ---------- පාලි (රෝමන්) ලේබල — English දසුනේදී වගුවේ පෙන්වීමට ----------
+  //   සිංහල පාඨය කිසිවිටෙක වෙනස් නොවේ; මෙය සිංහල → පාලි සිතියමක් පමණි.
+  var PA = {};
+  function pa(map) { for (var k in map) PA[k] = map[k]; }
+  pa({
+    // වේදනා / ඥාණ / සඞ්ඛාර
+    'සෝමනස්ස සහගත': 'Somanassasahagataṃ', 'උපෙක්ඛා සහගත': 'Upekkhāsahagataṃ', 'දෝමනස්ස සහගත': 'Domanassasahagataṃ',
+    'දුක්ඛ සහගත': 'Dukkhasahagataṃ', 'සුඛ සහගත': 'Sukhasahagataṃ',
+    'දිට්ඨිගත සම්පයුත්ත': 'Diṭṭhigatasampayuttaṃ', 'දිට්ඨිගත විප්පයුත්ත': 'Diṭṭhigatavippayuttaṃ',
+    'ඥාණ සම්පයුත්ත': 'Ñāṇasampayuttaṃ', 'ඥාණ විප්පයුත්ත': 'Ñāṇavippayuttaṃ',
+    'අසඞ්ඛාරික සිත': 'Asaṅkhārikaṃ', 'සසඞ්ඛාරික සිත': 'Sasaṅkhārikaṃ',
+    'පටිඝ සම්පයුත්ත': 'Paṭighasampayuttaṃ', 'විචිකිච්ඡා සම්පයුත්ත සිත': 'Vicikicchāsampayuttaṃ', 'උද්ධච්ච සම්පයුත්ත සිත': 'Uddhaccasampayuttaṃ',
+    // අහේතුක සිත්
+    'චක්ඛුවිඤ්ඤාණ සිත': 'Cakkhuviññāṇaṃ', 'සෝතවිඤ්ඤාණ සිත': 'Sotaviññāṇaṃ', 'ඝානවිඤ්ඤාණ සිත': 'Ghānaviññāṇaṃ',
+    'ජිව්හාවිඤ්ඤාණ සිත': 'Jivhāviññāṇaṃ', 'කායවිඤ්ඤාණ සිත': 'Kāyaviññāṇaṃ',
+    'සම්පටිච්ඡන සිත': 'Sampaṭicchanaṃ', 'සන්තීරණ සිත': 'Santīraṇaṃ',
+    'පඤ්චද්වාරාවජ්ජන සිත': 'Pañcadvārāvajjanaṃ', 'මනෝද්වාරාවජ්ජන සිත': 'Manodvārāvajjanaṃ', 'හසිතුප්පාද සිත': 'Hasituppādacittaṃ',
+    // අරූපාවචර සිත්
+    'ආකාසානඤ්චායතන සිත': 'Ākāsānañcāyatanaṃ', 'විඤ්ඤාණඤ්චායතන සිත': 'Viññāṇañcāyatanaṃ',
+    'ආකිඤ්චඤ්ඤායතන සිත': 'Ākiñcaññāyatanaṃ', 'නෙවසඤ්ඤානාසඤ්ඤායතන සිත': 'Nevasaññānāsaññāyatanaṃ',
+    // ශීර්ෂ: කොටස් / උප කොටස් / තීරු
+    'කාමාවචර සිත්': 'Kāmāvacaracittāni', 'මහග්ගත සිත්': 'Mahaggatacittāni', 'ලෝකෝත්තර සිත්': 'Lokuttaracittāni',
+    'අකුසල් සිත්': 'Akusalacittāni', 'අහේතුක සිත්': 'Ahetukacittāni', 'සෝභන සිත්': 'Sobhanacittāni',
+    'රූපාවචර සිත්': 'Rūpāvacaracittāni', 'අරූපාවචර සිත්': 'Arūpāvacaracittāni',
+    'මාර්ග සිත්': 'Maggacittāni', 'ඵල සිත්': 'Phalacittāni', 'විස්ථාර ක්‍රමයට': 'Vitthāranayena',
+    'ලෝභ': 'Lobha', 'දෝස': 'Dosa', 'මෝහ': 'Moha', 'අකුසල විපාක': 'Akusalavipāka', 'කුසල විපාක': 'Kusalavipāka',
+    'කුසල් සිත්': 'Kusala', 'විපාක සිත්': 'Vipāka', 'ක්‍රියා සිත්': 'Kiriya',
+    'වේදනා': 'Vedanā', 'දිට්ඨි': 'Diṭṭhi', 'සඞ්ඛාර': 'Saṅkhāra', 'සිත': 'Citta', 'ඥාණ': 'Ñāṇa',
+    'විචිකිච්ඡා & උද්ධච්ච': 'Vicikicchā & Uddhacca',
+    'සෝතාපත්ති මාර්ග': 'Sotāpattimaggo', 'සකදාගාමි මාර්ග': 'Sakadāgāmimaggo', 'අනාගාමි මාර්ග': 'Anāgāmimaggo', 'අරිහත් මාර්ග': 'Arahattamaggo',
+    'සෝතාපත්ති ඵල': 'Sotāpattiphalaṃ', 'සකදාගාමි ඵල': 'Sakadāgāmiphalaṃ', 'අනාගාමි ඵල': 'Anāgāmiphalaṃ', 'අරිහත් ඵල': 'Arahattaphalaṃ'
+  });
+  var JP = [
+    ['Vitakkavicārapītisukhekaggatāsahitaṃ', 'paṭhamajjhānaṃ'], ['Vicārapītisukhekaggatāsahitaṃ', 'dutiyajjhānaṃ'],
+    ['Pītisukhekaggatāsahitaṃ', 'tatiyajjhānaṃ'], ['Sukhekaggatāsahitaṃ', 'catutthajjhānaṃ'], ['Upekkhekaggatāsahitaṃ', 'pañcamajjhānaṃ']
+  ];
+  var PP = { 'සෝතාපත්ති': 'sotāpatti', 'සකදාගාමි': 'sakadāgāmi', 'අනාගාමි': 'anāgāmi', 'අරිහත්': 'arahatta' };
+
   var n = 0;
   function r() { n++; return { n: n, c: Array.prototype.slice.call(arguments) }; }
   function eight(first, second) {
@@ -25,7 +63,7 @@
     ['සුඛෙකග්ගතා සහිත', 'චතුත්ථජ්ඣාන'],
     ['උපෙක්ඛෙකග්ගතා සහිත', 'පඤ්චමජ්ඣාන']
   ];
-  function rupa() { return JH.map(function (j, i) { var x = r(j[0] + ' ' + j[1] + ' සිත'); x.jh = i; return x; }); }
+  function rupa() { return JH.map(function (j, i) { var key = j[0] + ' ' + j[1] + ' සිත'; PA[key] = JP[i][0] + ' ' + JP[i][1]; var x = r(key); x.jh = i; return x; }); }
   var ARU = ['ආකාසානඤ්චායතන සිත', 'විඤ්ඤාණඤ්චායතන සිත', 'ආකිඤ්චඤ්ඤායතන සිත', 'නෙවසඤ්ඤානාසඤ්ඤායතන සිත'];
   function arupa() { return ARU.map(function (a) { return r(a); }); }
   var PATH = ['සෝතාපත්ති', 'සකදාගාමි', 'අනාගාමි', 'අරිහත්'];
@@ -33,7 +71,9 @@
     var subs = [];
     PATH.forEach(function (p) {
       subs.push({ name: p + ' ' + kind, rows: JH.map(function (j, i) {
-        var x = r(j[0].replace(' සහිත', 'සහිත') + ' ' + j[1] + ' ' + p + ' ' + kind + ' සිත'); x.jh = i; return x; }) });
+        var key = j[0].replace(' සහිත', 'සහිත') + ' ' + j[1] + ' ' + p + ' ' + kind + ' සිත';
+        PA[key] = JP[i][0] + ' ' + JP[i][1] + ' ' + PP[p] + (kind === 'මාර්ග' ? 'maggacittaṃ' : 'phalacittaṃ');
+        var x = r(key); x.jh = i; return x; }) });
     });
     return subs;
   }
@@ -64,6 +104,20 @@
     { title: 'මාර්ග සිත්', count: 20, subs: lok('මාර්ග') },
     { title: 'ඵල සිත්', count: 20, subs: lok('ඵල') }
   ] };
+
+  // සෑම ශීර්ෂයකටම/පේළියකටම පාලි සමානය (.p) එකතු කරයි — සිංහල පාඨයට කිසිදු වෙනසක් නැත
+  function P(x) { return Object.prototype.hasOwnProperty.call(PA, x) ? PA[x] : x; }
+  [kama, mahaggata, lokuttara].forEach(function (g) {
+    g.p = P(g.title); if (g.note) g.pnote = P(g.note);
+    g.parts.forEach(function (pt) {
+      pt.p = P(pt.title);
+      pt.subs.forEach(function (sb) {
+        sb.p = P(sb.name);
+        if (sb.cols) sb.pcols = sb.cols.map(P);
+        sb.rows.forEach(function (rw) { rw.p = rw.c.map(P); });
+      });
+    });
+  });
 
   window.CITTA121_TABLE = [kama, mahaggata, lokuttara];
   window.CITTA121_TABLE_FIXES = [
