@@ -80,3 +80,6 @@ MX_I18N.add({
 MX_I18N.add({
   'අන්තර්ගත රුක': 'Contents tree'
 });
+MX_I18N.add({
+  'සැකසුම්': 'Settings'
+});
