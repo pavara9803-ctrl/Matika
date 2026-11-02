@@ -33,8 +33,8 @@
   // .ct-t අංග data-no-i18n වන නිසා සාමාන්‍ය පරිවර්තනය (i18n.js) ඒවාට බලපාන්නේ නැත.
   function curLang() {
     if (window.MX_I18N) return MX_I18N.lang();
-    var q = /[?&]lang=(en|si|my|zh)\b/.exec(location.search); if (q) return q[1];
-    try { var v = localStorage.getItem('matika-lang'); return (v === 'en' || v === 'my' || v === 'zh') ? v : 'si'; } catch (e) { return 'si'; }
+    var q = /[?&]lang=(en|si|my|zh-Hant|zh)\b/.exec(location.search); if (q) return q[1];
+    try { var v = localStorage.getItem('matika-lang'); return (v === 'en' || v === 'my' || v === 'zh' || v === 'zh-Hant') ? v : 'si'; } catch (e) { return 'si'; }
   }
   function rend(si, pa) {     // වත්මන් භාෂාවේ පාඨය
     var l = curLang();
