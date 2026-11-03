@@ -1031,3 +1031,8 @@ MX_I18N.add({
  "හේතු නොවූද සහේතුක වූද ධර්ම - සහේතුක සිත් 71, චෛතසික 46.": "Dhammas that are not roots but are with roots — 71 cittas with roots, 46 cetasikas.",
  "හේතු සම්ප්‍රයුක්ත වූද හේතු නොවූද ධර්ම - සහේතුක සිත් 71, චෛතසික 46.": "Dhammas that are associated with roots but are not roots — 71 cittas with roots, 46 cetasikas."
 });
+
+/* Restore translations overridden after the spelling correction. */
+MX_I18N.add({
+ "අහේතුක සිත් 18, ඡන්දය හැර චෛතසික 12, මෝහ මූල දෙසිත්හි මෝහය, රූප 28, නිර්වාණය.": "18 rootless cittas, 12 cetasikas excluding chanda, moha in the two moha-rooted cittas, 28 rūpas, Nibbāna."
+});
