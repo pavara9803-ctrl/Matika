@@ -1829,3 +1829,13 @@ MX_I18N.add({
  "චක්ඛු ධාතුව, සෝත ධාතුව, ඝාන ධාතුව, ජිව්හා ධාතුව, කාය ධාතුව, සද්ද ධාතුව, ගන්ධ ධාතුව, රස ධාතුව, ඵොට්ඨබ්බ ධාතුව — මුළු 9 කි.": "Eye element, ear element, nose element, tongue element, body element, sound element, smell element, taste element, tangible element — total 9.",
  "විඤ්ඤාණ ධාතු 7 (චක්ඛු, සෝත, ඝාන, ජිව්හා, කාය විඤ්ඤාණ ධාතු 5 + මනෝධාතුව + මනෝවිඤ්ඤාණ ධාතුව = සිත් 89) + ධම්ම ධාතුව (චෛතසික 52 + සුඛුම රූප 16 + නිර්වාණය) = 8 කි.": "7 consciousness elements (the 5 consciousness elements eye, ear, nose, tongue, body + the mind element + the mind-consciousness element = the 89 cittas) + the dhamma element (52 cetasikas + 16 subtle rūpas + Nibbāna) = 8."
 });
+
+MX_I18N.add({
+ "සම්පටිච්ඡන සිත් 2": "2 receiving cittas",
+ "ඉතිරි විපාක සිත් 20": "The remaining 20 resultant cittas",
+ "අකුසල් සිත් 12, ලෞකික කුසල් සිත් 17, ක්‍රියා සිත් 20, චෛතසික 52, චිත්තජ, උතුජ හා ආහාරජ රූප.": "12 unwholesome cittas, 17 mundane wholesome cittas, 20 functional cittas, 52 cetasikas, and the mind-born, temperature-born and nutriment-born rūpas.",
+ "සබ්බචිත්තසාධාරණ 7, පකිණ්ණක 6, අකුසල සාධාරණ 4, ලෝභ ත්‍රය 3 (ලෝභ, දිට්ඨි, මාන), දෝස චතුක්කය 4 (දෝස, ඊර්ෂ්‍යා, මාත්සර්‍ය, කුක්කුච්ච), ථීන-මිද්ධ 2, විචිකිච්ඡා 1 — එකතුව 27 කි.": "Universals 7, particulars 6, unwholesome universals 4, the greed triad 3 (lobha, diṭṭhi, māna), the hatred tetrad 4 (dosa, issā, macchariya, kukkucca), sloth-and-torpor 2, vicikicchā 1 — total 27.",
+ "සංඛාර චෛතසික 34 + විතර්ක 55": "34 formations (saṅkhāra) cetasikas + 55 vitakkas",
+ "සංඛාර චෛතසික 34 + විචාර 11": "34 formations (saṅkhāra) cetasikas + 11 vicāras",
+ "කාමාවචර ක්‍රියා 11, රූපාවචර ක්‍රියා 5, අරූපාවචර ක්‍රියා 4 — එකතුව 20 කි.": "11 sense-sphere functional, 5 fine-material-sphere functional, 4 immaterial-sphere functional — total 20."
+});
