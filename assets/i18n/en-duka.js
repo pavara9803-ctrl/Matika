@@ -2687,3 +2687,9 @@ MX_I18N.addPatterns([[/^ස්වරූපාර්ථ වශයෙන්: (.+?)
   var tail = / \(විස්තරාත්මක/.test(m) ? ' (For the detailed comprehensive (saṅgaha) analysis, see the "Detailed Explanation" section above.)' : '';
   return 'In terms of essential meaning: ' + MX_I18N.t(x) + ' Aggregates: ' + a + ' | Sense bases: ' + b + ' | Elements: ' + c + ' | Truths: ' + d + tail;
 }]]);
+
+/* Restore translations whose keys merged after the spelling correction. */
+MX_I18N.add({
+ "අහේතුක සිත් 18, ඡන්දය හැර චෛතසික 12, මෝහ මූල දෙසිත්හි මෝහය, රූප 28, නිර්වාණය.": "18 rootless cittas, 12 cetasikas excluding chanda, moha in the two moha-rooted cittas, 28 rūpas, Nibbāna.",
+ "ලෞකික සිත්": "Mundane cittas"
+});

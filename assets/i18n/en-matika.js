@@ -1000,3 +1000,34 @@ MX_I18N.add({
 });
 MX_I18N.addPatterns([[/^මෙම ගොච්ඡකයේ දුක මාතිකා (\d+) ක් ඇත(?: \(මිශ්‍රක දුක (\d+) සමඟ\))?$/, function (m, n, k) { return 'This Gocchaka has ' + n + ' duka matikas' + (k ? ' (with ' + k + ' mixed dukas)' : ''); }], [/^මිශ්‍රක දුක \((\d+)\)$/, 'Mixed dukas ($1)']]);
 MX_I18N.addPatterns([[/^දුක (\d+)$/, function (m, n) { return n + ' dukas'; }]]);
+
+/* Keys with corrected Sinhala spellings (ලෞකික, සුඛුම, ...). */
+MX_I18N.add({
+ "අකුසල් සිත් 12, ලෞකික කුසල් සිත් 17, ක්‍රියා සිත් 20, චෛතසික 52, චිත්තජ, උතුජ හා ආහාරජ රූප.": "12 unwholesome cittas, 17 mundane wholesome cittas, 20 functional cittas, 52 cetasikas, and the mind-born, temperature-born and nutriment-born rūpas.",
+ "අහේතුක සිත් 18, ඡන්දය හැර චෛතසික 12, මෝහ මූල දෙසිත්හි මෝහය, රූප 28, නිර්වාණය.": "18 rootless cittas; 12 cetasikas (excluding chanda); the moha in the two delusion-rooted cittas; 28 rūpas; Nibbāna.",
+ "ද්වේෂ මූල සිත් 2, මෝහ මූල සිත් 2, ලෞකික කුසල් විපාක ක්‍රියා සිත් 69, ලෝභ දිට්ඨි මාන වර්ජිත චෛතසික 49, දිට්ඨි විප්පයුත්ත සිත්වල ලෝභය, රූප 28.": "2 hatred-rooted cittas, 2 delusion-rooted cittas, 69 mundane wholesome, resultant and functional cittas, 49 cetasikas (excluding lobha, diṭṭhi and māna), the lobha in the cittas dissociated from wrong view, 28 rūpas.",
+ "දොළොස් අකුසල් සිත් වර්ජිත ඉතිරි ලෞකික සිත් එක් සැත්තැව, තත්සම්ප්‍රයුක්ත අටතිස් චෛතසිකය, දෝස විචිකිච්ඡා, රූප 28.": "71 mundane cittas remaining after excluding the 12 unwholesome cittas; the 38 associated cetasikas; dosa and vicikicchā; 28 rūpas.",
+ "දොළොස් අකුසල් සිත් වර්ජිත ඉතිරි සත්සැත්තෑ චිත්තය, තත්සම්ප්‍රයුක්ත අටතිස් චෛතසිකය, දෝස මූල මෝහ මූල සිත් සතරෙහි මෝහය, රූප 28, නිර්වාණය.": "77 cittas remaining after excluding the 12 unwholesome cittas; the 38 associated cetasikas; the moha in the four hatred-rooted and delusion-rooted cittas; 28 rūpas; Nibbāna.",
+ "දොළොස් අකුසල් සිත් වර්ජිත ඉතිරි සත්සැත්තෑ චිත්තය, තත්සම්ප්‍රයුක්ත අටතිස් චෛතසිකය, රූප 28, නිර්වාණය.": "77 cittas remaining after excluding the 12 unwholesome cittas; the 38 associated cetasikas; 28 rūpas; Nibbāna.",
+ "දොළොස් අකුසල් සිත් වර්ජිත ලෞකික සිත් 69, තත්සම්ප්‍රයුක්ත අටතිස් චෛතසිකය, රූප 28.": "69 mundane cittas, excluding the 12 unwholesome cittas; the 38 associated cetasikas; 28 rūpas.",
+ "දොළොස් අකුසල් සිත් වර්ජිත සත්සැත්තෑ චිත්තය, තත්සම්ප්‍රයුක්ත අටතිස් චෛතසිකය, රූප 28, නිර්වාණය.": "77 cittas, excluding the 12 unwholesome cittas; the 38 associated cetasikas; 28 rūpas; Nibbāna.",
+ "ලෞකික සිත් 81, ආශ්‍රව වර්ජිත චෛතසික 49, රූප 28.": "81 mundane cittas, 49 cetasikas (excluding the taints), 28 rūpas.",
+ "ලෞකික සිත් 81, ඕඝ ධර්ම වර්ජිත එකුන්පණස් චෛතසිකය, රූප 28.": "81 mundane cittas, 49 cetasikas (excluding the dhammas of the floods), 28 rūpas.",
+ "ලෞකික සිත් 81, ග්‍රන්ථ ධර්ම තුන වර්ජිත චෛතසික 49, රූප 28.": "81 mundane cittas, 49 cetasikas (excluding the three dhammas of the knots, gantha), 28 rūpas.",
+ "ලෞකික සිත් 81, චෛතසික 52, රූප 28.": "81 mundane cittas, 52 cetasikas, 28 rūpas.",
+ "ලෞකික සිත් 81, දශ කිලෙස් වර්ජිත දෙසාළිස් චෛතසිකය, රූප 28.": "81 mundane cittas, 42 cetasikas (excluding the ten defilements), 28 rūpas.",
+ "ලෞකික සිත් 81, දිට්ඨි වර්ජිත එක් පණස් චෛතසිකය, රූප 28.": "81 mundane cittas, 51 cetasikas (excluding diṭṭhi), 28 rūpas.",
+ "ලෞකික සිත් 81, නීවරණ ධර්ම වර්ජිත සසාළිස් චෛතසිකය, රූප 28.": "81 mundane cittas, 46 cetasikas (excluding the hindrance dhammas), 28 rūpas.",
+ "ලෞකික සිත් 81, යෝග ධර්ම වර්ජිත එකුන්පණස් චෛතසිකය, රූප 28.": "81 mundane cittas, 49 cetasikas (excluding the dhammas of the bonds), 28 rūpas.",
+ "ලෞකික සිත් 81, ලෝභ දිට්ඨි වර්ජිත චෛතසික සමපණස, රූප 28.": "81 mundane cittas, 50 cetasikas (excluding lobha and diṭṭhi), 28 rūpas.",
+ "ලෞකික සිත් 81, සංයෝජන ධර්ම වර්ජිත චෛතසික 44, රූප 28.": "81 mundane cittas, 44 cetasikas (excluding the dhammas of the fetters), 28 rūpas.",
+ "ලෝභ මූල දෝස මූල අකුසල් සිත් දශය වර්ජිත ඉතිරි ලෞකික සිත් 69, තත්සම්ප්‍රයුක්ත චෛතසික 38, උද්ධච්ච සිතේ මෝහය, රූප 28.": "69 mundane cittas remaining after excluding the ten greed-rooted and hatred-rooted unwholesome cittas, the 38 associated cetasikas, the moha in the restlessness citta, 28 rūpas.",
+ "ලෝභ මූල දෝස මූල අකුසල් සිත් දශය වර්ජිත ඉතිරි ලෞකික සිත් 69, තත්සම්ප්‍රයුක්ත චෛතසික 43, දිට්ඨි විප්පයුත්ත සිත්වල ලෝභය, ද්වේෂ සිත්වල ඇති ද්වේෂය, රූප 28.": "69 mundane cittas remaining after excluding the ten greed-rooted and hatred-rooted unwholesome cittas, 43 associated cetasikas, the lobha in the cittas dissociated from wrong view, the dosa in the hatred-rooted cittas, 28 rūpas.",
+ "ලෝභ මූල සිත් වර්ජිත එක් අසූ චිත්තය, ලෝභ දිට්ඨි මාන වර්ජිත එකුන්පණස් චෛතසිකය, අටවිසි රූපය, නිර්වාණය.": "The 81 cittas excluding the greed-rooted cittas, 49 cetasikas (excluding lobha, diṭṭhi and māna), 28 rūpas, Nibbāna.",
+ "ලෝභ මූල සිත් වර්ජිත ලෞකික සිත් එකුන් සැත්තැව, ආශ්‍රව ධර්ම වර්ජිත චෛතසික 38, රූප 28.": "69 mundane cittas excluding the greed-rooted cittas, 38 cetasikas (excluding the dhammas of the taints), 28 rūpas.",
+ "සහේතුක වූද හේතු නොවූද ධර්ම - සහේතුක සිත් 71, චෛතසික 46.": "Dhammas that are with roots but are not roots — 71 cittas with roots, 46 cetasikas.",
+ "සහේතුක සිත් 71, මෝහ මූල දෙසිත්හි මෝහය හැර චෛතසික 52.": "71 cittas with roots, 52 cetasikas excluding the moha in the two delusion-rooted cittas.",
+ "සෝවාන් මාර්ගයෙන් ප්‍රහාණය නොවන්නා වූ අපාගාමී ශක්තියෙන් තොර දිට්ඨිගත විප්පයුක්ත සිත් 4, දෝස මූල සිත් 2, උද්ධච්ච සිත, දොළොස් අකුසල් වර්ජිත සත්සැත්තෑ චිත්තය, දිට්ඨි විචිකිච්ඡා වර්ජිත චෛතසික සමපණස, රූප 28, නිර්වාණය.": "The 4 cittas dissociated from wrong view and without the power to lead to the lower realms, which are not abandoned by the stream-entry path; the 2 hatred-rooted cittas; the restlessness citta; the 77 cittas excluding the 12 unwholesome cittas; 50 cetasikas excluding diṭṭhi and vicikicchā; 28 rūpas; Nibbāna.",
+ "හේතු නොවූද සහේතුක වූද ධර්ම - සහේතුක සිත් 71, චෛතසික 46.": "Dhammas that are not roots but are with roots — 71 cittas with roots, 46 cetasikas.",
+ "හේතු සම්ප්‍රයුක්ත වූද හේතු නොවූද ධර්ම - සහේතුක සිත් 71, චෛතසික 46.": "Dhammas that are associated with roots but are not roots — 71 cittas with roots, 46 cetasikas."
+});
