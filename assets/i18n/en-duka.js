@@ -2698,3 +2698,7 @@ MX_I18N.add({
 MX_I18N.add({
  "සුඛුම රූප": "Subtle rūpas"
 });
+
+MX_I18N.add({
+ "සහේතුක සිත්": "Rooted cittas"
+});
