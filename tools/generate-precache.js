@@ -17,11 +17,21 @@ const files = [];
 })(ROOT);
 files.sort();
 const hash = crypto.createHash('md5');
-const urls = files.map(f => {
-  hash.update(fs.readFileSync(f));
-  return './' + path.relative(ROOT, f).split(path.sep).map(encodeURIComponent).join('/');
-});
+const toUrl = f => './' + path.relative(ROOT, f).split(path.sep).map(encodeURIComponent).join('/');
+// CORE  = ඇප් එක offline ක්‍රියා කිරීමට අත්‍යවශ්‍ය (html/js/css/data + මූලික අයිකන). install විට සියල්ල බාගත විය යුතුයි.
+// LATER = භාෂා (i18n) ගොනු සහ අමතර අයිකන ප්‍රමාණ — පසුබිමේ බාගැනේ (අසාර්ථක වුවද ඇප් එකට හානියක් නැත).
+const CORE_ICONS = new Set(['favicon.svg', 'icon.svg', '50.png', '180.png', '192.png', '512.png', 'maskable-192.png', 'maskable-512.png']);
+const isLater = f => {
+  const rel = path.relative(ROOT, f).split(path.sep);
+  if (rel[0] === 'assets' && rel[1] === 'i18n') return true;
+  if (rel[0] === 'assets' && rel[1] === 'icons') return !CORE_ICONS.has(rel[rel.length - 1]);
+  return false;
+};
+const core = [], later = [];
+files.forEach(f => { hash.update(fs.readFileSync(f)); (isLater(f) ? later : core).push(toUrl(f)); });
 const version = 'v' + hash.digest('hex').slice(0, 10);
 fs.writeFileSync(path.join(ROOT, 'precache-manifest.js'),
-  'self.PRECACHE_VERSION = ' + JSON.stringify(version) + ';\nself.PRECACHE_URLS = ' + JSON.stringify(urls, null, 2) + ';\n');
-console.log('✅ ' + urls.length + ' ගොනු ලැයිස්තුගත කළා. version = ' + version);
+  'self.PRECACHE_VERSION = ' + JSON.stringify(version) + ';\n' +
+  'self.PRECACHE_CORE = ' + JSON.stringify(core, null, 2) + ';\n' +
+  'self.PRECACHE_LATER = ' + JSON.stringify(later, null, 2) + ';\n');
+console.log('✅ core ' + core.length + ' + later ' + later.length + ' ගොනු ලැයිස්තුගත කළා. version = ' + version);
