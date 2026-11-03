@@ -223,7 +223,7 @@ MX_I18N.add({
  "සිතට අවශ්‍ය වේ": "Required by citta",
  "ක්ෂණික": "Momentary",
  "එකෙණෙහි නැති වේ": "Ceases at that very instant",
- "සිත් 121 එක් වගුවක. වේදනාව, ජාතිය, හේතු, දිට්ඨි / ඥාණ, සඞ්ඛාර, ධ්‍යානය අනුව පෙරහනක් තෝරා අදාළ සිත් පමණක් බලන්න. පේළියක් එබූ විට එම සිතේ සම්පූර්ණ විස්තරය විවෘත වේ.": "All 121 cittas in a single table. Choose a filter — feeling, class, roots, view / knowledge, prompting or jhāna — to see only the relevant cittas. Tapping a row opens the full details of that citta.",
+ "සිත් 121 ම එක් වගුවකි. වේදනාව, ජාතිය, හේතු, දිට්ඨි / ඥාන, සංඛාර, ධ්‍යාන අනුව පෙරහනක් තෝරා අදාළ සිත් පමණක් බලන්න. පේළියක් එබූ විට එම සිතේ සම්පූර්ණ විස්තරය විවෘත වේ.": "All 121 cittas in a single table. Choose a filter — feeling, class, roots, view / knowledge, prompting or jhāna — to see only the relevant cittas. Tapping a row opens the full details of that citta.",
  "සිත් 121 කාණ්ඩ අනුව. මාතෘකාව එබූ විට විවෘත වේ.": "The 121 cittas by group. Opens when you tap a heading.",
  "සතර පරමාර්ථ - අභිධර්ම මාතිකා": "The Four Ultimate Realities - Abhidhamma Matika",
  "“තත්ථ වුත්තාභිධම්මත්ථා - චතූධා පරමත්ථතො,": "“tattha vuttābhidhammatthā - catūdhā paramatthato,",
