@@ -1,6 +1,7 @@
 // ============================================================
 // sw.js - Service Worker for Offline Support
-// Version: 23.0.0 (js/css/json network-first; නව අනුවාදය සක්‍රිය වන්නේ පරිශීලකයා යාවත්කාලීන කිරීමට එබූ විට පමණි)
+// Version: 24.0.0 (html/js/css/json: network-first නමුත් තත්පර 1.5-2ක් තුළ පිළිතුරු නොලැබුණහොත් cache එක වහාම පෙන්වයි —
+//   දත්ත අවසන් / සංඥාව දුර්වල විට ඇප් එක පමාවීම නැති කිරීමට; නව අනුවාදය සක්‍රිය වන්නේ පරිශීලකයා යාවත්කාලීන කිරීමට එබූ විට පමණි)
 // ============================================================
 
 // precache-manifest.js (generate-precache.js මගින් සාදයි) - සියලු ගොනු ස්වයංක්‍රීයව ඇතුළත් කරයි
@@ -112,31 +113,64 @@ self.addEventListener('fetch', (event) => {
     (request.headers.get('accept') || '').includes('text/html');
 
   if (isHTMLNavigation) {
-    event.respondWith(handleHTMLRequest(request));
+    event.respondWith(handleHTMLRequest(event, request));
     return;
   }
 
   // Assets - Cache-first
-  event.respondWith(handleAssetRequest(request));
+  event.respondWith(handleAssetRequest(event, request));
 });
 
-async function handleHTMLRequest(request) {
-  try {
-    // අන්තර්ජාලය අඩු/නැති විට තත්පර 4කින් පසු cache එකට මාරු වේ
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 4000);
-    const networkResponse = await fetch(request, { signal: controller.signal });
-    clearTimeout(timer);
-    if (networkResponse && networkResponse.status === 200) {
+// ============================================================
+// "Network-first, but fast": cache එකේ පිටපතක් තිබේ නම්, network එක
+// timeoutMs ඇතුළත පිළිතුරු නොදුන්නොත් (දත්ත අවසන් / සංඥාව දුර්වල / lie-fi)
+// වහාම cache එක පෙන්වයි. network ඉල්ලීම පසුබිමේ දිගටම ක්‍රියාත්මක වී
+// cache එක අලුත් කරයි (ඊළඟ වතාවේ නව අනුවාදය පෙනේ).
+// cache එකේ පිටපතක් නැති නම් පමණක් network එක සම්පූර්ණයෙන්ම බලා සිටී.
+// ============================================================
+const HTML_TIMEOUT_MS = 2000;
+const CODE_TIMEOUT_MS = 1500;
+const ASSET_FETCH_TIMEOUT_MS = 8000; // cache නැති රූප/fonts/CDN සඳහා උපරිම බලා සිටීම
+
+async function networkFirstFast(event, request, timeoutMs, fetchOptions) {
+  const cached = await caches.match(request, { ignoreSearch: true });
+
+  const networkPromise = fetch(request, fetchOptions || {}).then(async (res) => {
+    if (res && res.status === 200) {
       const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse.clone());
+      await cache.put(request, res.clone());
     }
-    return networkResponse;
+    return res;
+  });
+
+  // cache නැත → network එකම බලා සිටින්න (අසාර්ථක වුවහොත් caller හසුරුවයි)
+  if (!cached) return networkPromise;
+
+  // පසුබිමේ බාගැනීම නොකැඩී cache යාවත්කාලීන වීමට ඉඩ දෙන්න
+  networkPromise.catch(() => {});
+  try { event.waitUntil(networkPromise.catch(() => {})); } catch (e) {}
+
+  let timer;
+  const timeout = new Promise((resolve) => { timer = setTimeout(() => resolve(null), timeoutMs); });
+  try {
+    const res = await Promise.race([networkPromise, timeout]);
+    clearTimeout(timer);
+    if (res && res.status < 500) return res;
+    return cached; // timeout හෝ server දෝෂයක්
+  } catch (error) {
+    clearTimeout(timer);
+    return cached; // network දෝෂයක් (offline)
+  }
+}
+
+async function handleHTMLRequest(event, request) {
+  try {
+    return await networkFirstFast(event, request, HTML_TIMEOUT_MS);
   } catch (error) {
     console.log('[SW] Network failed for HTML, using cache:', request.url);
     const cachedResponse = await caches.match(request, { ignoreSearch: true });
     if (cachedResponse) return cachedResponse;
-    
+
     const offlinePage = await caches.match(OFFLINE_URL);
     if (offlinePage) return offlinePage;
     
@@ -155,20 +189,13 @@ function isCodeAsset(url) {
   return url.origin === self.location.origin && /\.(js|css|json)$/i.test(url.pathname);
 }
 
-async function handleAssetRequest(request) {
+async function handleAssetRequest(event, request) {
   const url = new URL(request.url);
 
   if (isCodeAsset(url)) {
     try {
-      const networkResponse = await fetch(request, { cache: 'no-cache' });
-      if (networkResponse && networkResponse.status === 200) {
-        const cache = await caches.open(CACHE_NAME);
-        cache.put(request, networkResponse.clone());
-      }
-      return networkResponse;
+      return await networkFirstFast(event, request, CODE_TIMEOUT_MS, { cache: 'no-cache' });
     } catch (error) {
-      const cached = await caches.match(request, { ignoreSearch: true });
-      if (cached) return cached;
       console.warn('[SW] Fetch failed:', request.url, error.message);
       return new Response('', { status: 408, statusText: 'Offline - Resource not available' });
     }
@@ -178,8 +205,16 @@ async function handleAssetRequest(request) {
   try {
     const cachedResponse = await caches.match(request, { ignoreSearch: true });
     if (cachedResponse) return cachedResponse;
-    
-    const networkResponse = await fetch(request);
+
+    // cache එකේ නැති ගොනුවක් සඳහා අනන්තයට බලා නොසිට තත්පර 8කින් අත්හරින්න
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ASSET_FETCH_TIMEOUT_MS);
+    let networkResponse;
+    try {
+      networkResponse = await fetch(request, { signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
     if (networkResponse && networkResponse.status === 200 && networkResponse.type !== 'opaque') {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, networkResponse.clone());
