@@ -2770,3 +2770,8 @@ MX_I18N.add({
 MX_I18N.add({
  "අහේතුක සිත් 18, ඡන්දය හැර චෛතසික 12, මෝහ මූල දෙසිත්හි මෝහය, රූප 28, නිර්වාණය.": "18 个无因心、除欲之外的 12 个心所、两个痴根心中的痴、28 种色、涅槃。"
 });
+
+/* Restore translations overridden after the spelling correction. */
+MX_I18N.add({
+ "සුඛුම රූප": "微细色"
+});
