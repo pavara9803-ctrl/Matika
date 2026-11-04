@@ -267,6 +267,15 @@
     }
   };
 
+  // ?feedback=1 — වෙනත් පිටුවකින් (උදා: updates.html) කෙලින්ම අදහස් පෝරමය විවෘත කිරීමට
+  window.addEventListener('load', function () {
+    try {
+      if (new URLSearchParams(location.search).get('feedback') === '1') {
+        setTimeout(function () { if (typeof window.openFeedbackModal === 'function') window.openFeedbackModal(); }, 400);
+      }
+    } catch (e) {}
+  });
+
   // ============================================================
   // THEME TOGGLE
   // ============================================================
