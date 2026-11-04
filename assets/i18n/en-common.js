@@ -326,5 +326,20 @@ MX_I18N.add({
  "නිවැරදි කළ කරුණු බැලීමට මෙය ටච් කරන්න": "Tap here to see the corrected points",
  "නිවැරදි කළ කරුණු බැලීමට": "See the corrected points",
  "නිවැරදි කළ කරුණු - මාතිකා මෘදුකාංගය": "Corrected points - Matika Software",
- "පසුව": "Later"
+ "පසුව": "Later",
+ "අන්තර්ගත රුක": "Contents tree",
+ "සියලු මාතිකා සහ පරමාර්ථ පිටු එක් ලැයිස්තුවකින් බලා කෙලින්ම යාම.": "See all matikas and paramattha pages in one list and go straight to any of them.",
+ "භාෂාව": "Language",
+ "සිංහල, English, မြန်မာ, 简体, 繁體 අතර මාරු වීම.": "Switch between Sinhala, English, Burmese, Simplified and Traditional Chinese.",
+ "නිවැරදි කළ ධර්ම කරුණු සහ පරිවර්තන බැලීම.": "See the corrected points of Dhamma and translations.",
+ "මුල් පිටුවේ ශීර්ෂයේ ඇති අන්තර්ගත රුක බොත්තම ඔබා, සියලු මාතිකා සහ පරමාර්ථ පිටු එක් ලැයිස්තුවකින් බලා කෙලින්ම ඒවාට යන්න.": "Tap the Contents tree button in the Home page header to see all matikas and paramattha pages in one list and go straight to them.",
+ "භාෂාව මාරු කිරීම": "Changing the language",
+ "ශීර්ෂයේ ඇති භාෂා බොත්තම ඔබා සිංහල, English, မြန်မာ, 简体 හෝ 繁體 අතරින් භාෂාවක් තෝරන්න. පිටුවේ මාතිකා, අර්ථ විස්තර සහ බොත්තම් ඔබ තෝරාගත් භාෂාවෙන් පෙනේ.": "Tap the language button in the header and choose Sinhala, English, Burmese, Simplified or Traditional Chinese. Matikas, explanations and buttons then appear in the language you chose.",
+ "ඔබ තෝරාගත් භාෂාව සියලු පිටුවලට යෙදේ. පරිවර්තනයක් නොමැති කොටස් English වලින් හෝ සිංහලෙන් පෙන්වයි.": "Your chosen language applies to all pages. Parts without a translation are shown in English or Sinhala.",
+ "නිවැරදි කළ කරුණු බැලීම": "Viewing the corrected points",
+ "ඇප් එකේ ධර්ම කරුණක් හෝ පරිවර්තනයක් නිවැරදි කළ විට, ඇප් එක යාවත්කාලීන වූ පසු “නිවැරදි කළ කරුණු බැලීමට මෙය ටච් කරන්න” යන දැනුම්දීම පෙනේ.": "When a point of Dhamma or a translation in the app is corrected, a notice “Tap here to see the corrected points” appears after the app updates.",
+ "එය ඔබන්න, නැතහොත් මුල් පිටුවේ මෙනුවෙන් “නිවැරදි කළ කරුණු” තෝරන්න.": "Tap it, or choose “Corrected points” from the menu on the Home page.",
+ "සෑම කරුණක්ම “පෙර” සහ “දැන්” පාඨ සමඟ පෙන්වයි. “පිටුවේ බලන්න” ඔබා අදාළ පදයට කෙලින්ම යන්න.": "Each point is shown with its “Before” and “Now” text. Tap “View in page” to go straight to the term.",
+ "ඔබ දෝෂයක් දුටුවොත් එම පිටුවේ ඇති “දෝෂයක් දන්වන්න” බොත්තමෙන් අපට දන්වන්න. පරීක්ෂා කර බලා, නිවැරදි කළ යුතු නම් සකස් කර එහි සටහන් කරමු.": "If you notice an error, tell us with the “Report an error” button on that page. We will check it and, if it needs correcting, fix it and record it there.",
+ "නිවැරදි කළ කරුණු බලන්න": "View the corrected points"
 }, 'en');
