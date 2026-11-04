@@ -22,6 +22,15 @@
     go: { si: 'පිටුවේ බලන්න', en: 'View in page', my: 'စာမျက်နှာတွင်ကြည့်ရန်', zh: '在页面中查看', 'zh-Hant': '在頁面中查看' },
     isNew: { si: 'අලුත්', en: 'New', my: 'အသစ်', zh: '新', 'zh-Hant': '新' },
     items: { si: 'නිවැරදි කිරීම්', en: 'corrections', my: 'ပြင်ဆင်ချက်', zh: '项更正', 'zh-Hant': '項更正' },
+    reportH: { si: 'දෝෂයක් දුටුවාද?', en: 'Found an error?', my: 'အမှားတစ်ခု တွေ့ပါသလား။', zh: '发现错误了吗？', 'zh-Hant': '發現錯誤了嗎？' },
+    reportT: {
+      si: 'ධර්ම කරුණක හෝ පරිවර්තනයක වැරදීමක් ඔබට පෙනේ නම් අපට දන්වන්න. එය පරීක්ෂා කර බලා, නිවැරදි කළ යුතු නම් සකස් කර මෙම පිටුවේ සටහන් කරන්නෙමු.',
+      en: 'If you notice a mistake in a point of Dhamma or in a translation, please let us know. We will check it and, if it needs correcting, fix it and record it on this page.',
+      my: 'ဓမ္မအချက်တစ်ခု သို့မဟုတ် ဘာသာပြန်ချက်တစ်ခုတွင် အမှားတွေ့ပါက ကျွန်ုပ်တို့ကို အကြောင်းကြားပါ။ စစ်ဆေးပြီး ပြင်ရန်လိုပါက ပြင်ဆင်၍ ဤစာမျက်နှာတွင် မှတ်တမ်းတင်ပါမည်။',
+      zh: '如果您发现法义内容或译文有误，请告知我们。我们会核实，如需更正，将予以修改并记录在此页面。',
+      'zh-Hant': '如果您發現法義內容或譯文有誤，請告知我們。我們會核實，如需更正，將予以修改並記錄在此頁面。'
+    },
+    reportB: { si: 'දෝෂයක් දන්වන්න', en: 'Report an error', my: 'အမှားကို အကြောင်းကြားရန်', zh: '报告错误', 'zh-Hant': '回報錯誤' },
     empty: { si: 'තවම නිවැරදි කළ කරුණු සටහන් කර නැත.', en: 'No corrections recorded yet.', my: 'ပြင်ဆင်ချက် မှတ်တမ်း မရှိသေးပါ။', zh: '尚无更正记录。', 'zh-Hant': '尚無更正記錄。' }
   };
   var filter = 'all';
@@ -55,7 +64,8 @@
     fe.innerHTML = fh;
     if (filter !== 'all' && areas.indexOf(filter) < 0) filter = 'all';
 
-    var out = '';
+    var out = '<aside class="up-report" data-no-i18n><h2>' + esc(L(UI.reportH)) + '</h2><p>' + esc(L(UI.reportT)) +
+      '</p><a class="up-report__b" href="' + esc(window.MX_UPDATES.root()) + 'index.html?feedback=1"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i> ' + esc(L(UI.reportB)) + '</a></aside>';
     data.forEach(function (r) {
       var its = (r.items || []).filter(function (it) { return filter === 'all' || (it.areas || []).indexOf(filter) >= 0; });
       if (!its.length) return;
