@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "va8bcd166c6";
+self.PRECACHE_VERSION = "v49b06477d6";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/matika-ui.css",
@@ -26,9 +26,11 @@ self.PRECACHE_CORE = [
   "./assets/js/pages/rupa-atlas.js",
   "./assets/js/pages/samprayoga.js",
   "./assets/js/pages/tika-app.js",
+  "./assets/js/pages/updates-page.js",
   "./assets/js/pali-script.js",
   "./assets/js/pm-atlas.js",
   "./assets/js/sw-update.js",
+  "./assets/js/updates-notice.js",
   "./assets/js/vendor/tailwind.min.js",
   "./data/matika/duka/gochhaka-01-hetu.js",
   "./data/matika/duka/gochhaka-02-cullantara.js",
@@ -77,6 +79,7 @@ self.PRECACHE_CORE = [
   "./data/paramattha/rupa-data.js",
   "./data/paramattha/rupa-deta-full.js",
   "./data/paramattha/rupa-deta.js",
+  "./data/updates/corrections.js",
   "./help.html",
   "./index.html",
   "./manifest.json",
@@ -91,7 +94,8 @@ self.PRECACHE_CORE = [
   "./paramattha/nibbana.html",
   "./paramattha/rupa-lr.html",
   "./paramattha/rupa.html",
-  "./privacy.html"
+  "./privacy.html",
+  "./updates.html"
 ];
 self.PRECACHE_LATER = [
   "./assets/i18n/en-app.js",

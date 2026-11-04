@@ -258,6 +258,10 @@ window.addEventListener('load', function() {
         <button onclick="menuAction('help')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i class="fa-solid fa-circle-question text-purple-600 text-lg w-5"></i> ඇප් එක භාවිත කරන ආකාරය
         </button>
+        <button onclick="menuAction('updates')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
+            <i class="fa-solid fa-clipboard-check text-green-600 text-lg w-5"></i> නිවැරදි කළ කරුණු
+            <span data-mxu-badge data-no-i18n class="hidden ml-auto min-w-[22px] h-[22px] px-1.5 rounded-full bg-green-600 text-white text-xs font-bold leading-[22px] text-center"></span>
+        </button>
         <button onclick="toggleDarkMode()" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i id="theme-toggle-icon" class="fa-solid fa-moon text-indigo-500 text-lg w-5"></i> ආලෝක / අඳුරු තේමාව
         </button>
@@ -515,5 +519,6 @@ window.addEventListener('load', function() {
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/matika-ui.js" defer></script>
 <script src="assets/js/sw-update.js" defer></script>
+<script src="assets/js/updates-notice.js" defer></script>
 </body>
 </html>

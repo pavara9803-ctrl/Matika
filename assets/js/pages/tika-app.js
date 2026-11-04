@@ -1209,6 +1209,36 @@ function initTikaApp() {
   var nb = document.getElementById('tika-next-btn');
   if (pb) pb.addEventListener('click', function(e) { e.preventDefault(); goToPrevTika(); });
   if (nb) nb.addEventListener('click', function(e) { e.preventDefault(); goToNextTika(); });
+
+  openTikaFromUrl();
+}
+
+// ═══ සබැඳි (deep link): ?t=<ත්‍රිකය 0 සිට>&p=<පදය 0 සිට>&open=<nirukthi|abhidheya|sangraha|vishesha> ═══
+// "නිවැරදි කළ කරුණු" පිටුවෙන් අදාළ පදයට කෙලින්ම පැමිණීමට භාවිත වේ.
+function openTikaFromUrl() {
+  var q;
+  try { q = new URLSearchParams(location.search); } catch (e) { return; }
+  if (!q.has('t')) return;
+  var t = parseInt(q.get('t'), 10), p = parseInt(q.get('p') || '0', 10), key = q.get('open');
+  if (isNaN(t) || t < 0 || typeof tikaFullData === 'undefined' || !tikaFullData[t]) return;
+  if (isNaN(p) || p < 0 || p >= (tikaFullData[t].padas || []).length) p = 0;
+  if (key && !Object.prototype.hasOwnProperty.call(arthaVistaraOpenState, key)) key = null;
+  try {
+    openTikaDetail(t);
+    if (key) {
+      Object.keys(arthaVistaraOpenState).forEach(function (k) { arthaVistaraOpenState[k] = (k === key); });
+    }
+    selectTikaPada(p);
+    if (key) {
+      var sec = document.getElementById('artha-vistara-content');
+      if (sec && sec.classList.contains('hidden')) toggleArthaVistaraSection();
+      setTimeout(function () {
+        var b = document.getElementById('av-body-' + key);
+        var target = b && b.parentNode;
+        if (target && target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    }
+  } catch (err) { console.error('[tika-app] deep link', err); }
 }
 
 // DOMContentLoaded event එකේදී යෙදුම initialize කරන්න

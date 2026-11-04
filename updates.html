@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="si" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>නිවැරදි කළ කරුණු - මාතිකා මෘදුකාංගය</title>
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/180.png">
+<link rel="icon" href="./assets/icons/50.png">
+<meta name="theme-color" content="#3f0a0c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="මාතිකා">
+
+<script src="./assets/js/vendor/tailwind.min.js"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        saffron: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03' },
+        maroon: { 700:'#701a1d',800:'#581113',900:'#3f0a0c',950:'#260507' }
+      },
+      fontFamily: { sans: ['Inter','Noto Serif Sinhala','Segoe UI','sans-serif'] }
+    }
+  }
+};
+</script>
+<script src="assets/js/matika-theme.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-color: transparent; }
+.up-rel { margin-top: 26px; }
+.up-rel__h { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 12px; margin:0 0 4px; }
+.up-rel__h h2 { font-size:18px; font-weight:700; margin:0; color:var(--m-lacquer); }
+:root.dark .up-rel__h h2 { color:#fcd34d; }
+.up-rel__d { font-size:13px; color:var(--m-ink-soft); }
+.up-new { font-size:12px; font-weight:700; padding:2px 9px; border-radius:999px; background:#166534; color:#dcfce7; }
+.up-item { margin-top:12px; padding:14px 16px; border:1px solid var(--m-rule); border-radius:14px; background:var(--ca-panel); }
+.up-where { display:flex; flex-wrap:wrap; align-items:center; gap:2px 6px; font-size:13px; color:var(--m-ink-soft); margin:0 0 8px; }
+.up-where i { font-size:10px; opacity:.6; }
+.up-what { margin:0; font-size:15px; line-height:1.85; }
+.up-cmp { margin:10px 0 0; display:grid; gap:8px; }
+.up-q { margin:0; padding:9px 12px; border-radius:0 10px 10px 0; font-size:14px; line-height:1.85; border-left:3px solid; }
+.up-q b { display:block; font-size:12px; margin-bottom:2px; letter-spacing:.02em; }
+.up-q--b { border-color:#dc2626; background:rgba(220,38,38,.07); }
+.up-q--a { border-color:#16a34a; background:rgba(22,163,74,.09); }
+.up-go { display:inline-flex; align-items:center; gap:7px; margin-top:12px; font-weight:700; font-size:14px; color:var(--m-lacquer); text-decoration:underline; text-underline-offset:3px; }
+:root.dark .up-go { color:#fcd34d; }
+.up-filters { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.up-empty { margin-top:24px; padding:18px; text-align:center; border:1px dashed var(--m-rule); border-radius:14px; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/matika-ui.css">
+<link rel="stylesheet" href="assets/css/paramattha.css">
+</head>
+<body class="h-full flex flex-col text-slate-800 dark:text-slate-100 bg-amber-50/30 dark:bg-slate-900 antialiased">
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
+  <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="ආපසු">
+      <i class="fa-solid fa-arrow-left text-lg"></i>
+    </a>
+    <div class="flex items-center mx-auto">
+      <div class="w-9 h-9 rounded-full bg-saffron-500/20 border border-saffron-400 flex items-center justify-center text-saffron-300 shrink-0">
+        <i class="fa-solid fa-clipboard-check text-xl"></i>
+      </div>
+      <h1 class="font-bold text-xl sm:text-2xl ml-2 text-saffron-100">නිවැරදි කළ කරුණු</h1>
+    </div>
+    <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="තේමාව">
+      <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
+    </button>
+  </div>
+</header>
+
+<main class="flex-1 ca-main w-full mx-auto p-4 sm:p-6 pb-16" style="max-width:52rem">
+  <section class="ca-hero">
+    <p class="ca-hero__kicker" id="up-kicker" data-no-i18n></p>
+    <h1 id="up-title" data-no-i18n></h1>
+    <p class="ca-hero__lead" id="up-lead" data-no-i18n></p>
+  </section>
+  <div class="up-filters" id="up-filters" role="group" data-no-i18n></div>
+  <div id="up-list" aria-live="polite"></div>
+</main>
+
+<script>
+function toggleDarkMode() {
+  var html = document.documentElement;
+  var icon = document.getElementById('theme-toggle-icon');
+  if (html.classList.contains('dark')) {
+    html.classList.remove('dark');
+    localStorage.setItem('abhidhamma_theme', 'light');
+    if (icon) icon.className = 'fa-solid fa-moon text-lg';
+  } else {
+    html.classList.add('dark');
+    localStorage.setItem('abhidhamma_theme', 'dark');
+    if (icon) icon.className = 'fa-solid fa-sun text-lg';
+  }
+}
+try {
+  if (localStorage.getItem('abhidhamma_theme') === 'dark' ||
+      (!localStorage.getItem('abhidhamma_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    var ti = document.getElementById('theme-toggle-icon'); if (ti) ti.className = 'fa-solid fa-sun text-lg';
+  }
+} catch (e) {}
+</script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/matika-ui.js" defer></script>
+<script src="assets/js/sw-update.js" defer></script>
+<script src="assets/js/updates-notice.js" defer></script>
+<script src="assets/js/pages/updates-page.js" defer></script>
+</body>
+</html>
