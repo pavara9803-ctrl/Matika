@@ -320,5 +320,11 @@ MX_I18N.add({
  "10. මහන්තර දුකය": "10. Mahantara Duka",
  "11. උපාදාන ගොච්ඡකය": "11. Upādāna Gocchaka",
  "12. කිලෙස ගොච්ඡකය": "12. Kilesa Gocchaka",
- "13. පිට්ඨි දුකය": "13. Piṭṭhi Duka"
+ "13. පිට්ඨි දුකය": "13. Piṭṭhi Duka",
+ "නිවැරදි කළ කරුණු": "Corrected points",
+ "ඇප් එක යාවත්කාලීන විය": "The app has been updated",
+ "නිවැරදි කළ කරුණු බැලීමට මෙය ටච් කරන්න": "Tap here to see the corrected points",
+ "නිවැරදි කළ කරුණු බැලීමට": "See the corrected points",
+ "නිවැරදි කළ කරුණු - මාතිකා මෘදුකාංගය": "Corrected points - Matika Software",
+ "පසුව": "Later"
 }, 'en');
