@@ -168,31 +168,40 @@ function renderGochhakaList() {
     var mishraka = getGochhakaMishrakaDukas(gochhaka);
     var totalDukas = dukas.length + mishraka.length;
 
-    var card = document.createElement('div');
-    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
-    card.onclick = function() { openGochhaka(gochhaka.id); };
+    var card = document.createElement('section');
+    card.className = 'tl-card';
 
-    var dukasHtml = '';
-    if (dukas.length > 0) {
-      dukasHtml = dukas.slice(0, 3).map(function(d) {
-        return '<span class="inline-block bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 text-amber-900 dark:text-saffron-300 text-[10px] px-2 py-0.5 rounded mr-1 mb-1">' + (d.name || '') + '</span>';
-      }).join('');
-      if (totalDukas > 3) {
-        dukasHtml += '<span class="inline-block text-amber-600 text-[10px] px-2 py-0.5">+' + (totalDukas - 3) + ' more</span>';
-      }
+    var head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'tl-head';
+    head.onclick = function() { openGochhaka(gochhaka.id); };
+    var num = document.createElement('span'); num.className = 'tl-num'; num.textContent = String(gochhaka.id);
+    var ttl = document.createElement('span'); ttl.className = 'tl-title'; ttl.textContent = gochhaka.title || '';
+    var cnt = document.createElement('span'); cnt.className = 'tl-count'; cnt.textContent = 'දුක ' + totalDukas;
+    head.appendChild(num); head.appendChild(ttl); head.appendChild(cnt);
+    card.appendChild(head);
+
+    var ul = document.createElement('ul');
+    ul.className = 'tl-padas';
+    function addRow(label, text, handler) {
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tl-pada'; b.onclick = handler;
+      var n = document.createElement('span'); n.className = 'tl-pn'; n.textContent = label;
+      var t = document.createElement('span'); t.className = 'tl-pt'; t.textContent = text;
+      var c = document.createElement('i'); c.className = 'fa-solid fa-chevron-right tl-chev'; c.setAttribute('aria-hidden', 'true');
+      b.appendChild(n); b.appendChild(t); b.appendChild(c);
+      li.appendChild(b); ul.appendChild(li);
     }
-
-    card.innerHTML =
-      '<div class="flex items-center justify-between mb-2">' +
-        '<div class="flex items-center gap-2">' +
-          '<span class="w-8 h-8 rounded-full bg-saffron-500 text-maroon-950 font-bold text-sm flex items-center justify-center">' + gochhaka.id + '</span>' +
-          '<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200">' + gochhaka.title + '</h3>' +
-        '</div>' +
-        '<span class="text-xs bg-saffron-500/20 text-saffron-600 font-bold px-2 py-1 rounded-full">දුක ' + totalDukas + '</span>' +
-      '</div>' +
-      '<div class="flex flex-wrap mt-2">' + dukasHtml + '</div>' +
-      '<div class="text-right mt-2"><i class="fa-solid fa-chevron-right text-slate-400"></i></div>';
-
+    dukas.forEach(function(d, i) {
+      if (!d) return;
+      addRow(String(d.number || (i + 1)), d.name || '', function() { openGochhaka(gochhaka.id); });
+    });
+    mishraka.forEach(function(m) {
+      if (!m) return;
+      addRow('•', m.name || '', function() { openGochhaka(gochhaka.id); });
+    });
+    card.appendChild(ul);
     container.appendChild(card);
   });
 }
@@ -301,43 +310,39 @@ function renderDukaList(gochhaka) {
     var pada1 = padas[0] || null;
     var pada2 = padas[1] || null;
 
-    var card = document.createElement('div');
-    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all fade-in';
+    var card = document.createElement('section');
+    card.className = 'tl-card';
 
-    card.onclick = function() {
+    var open = function() {
       var allPadas = getGochhakaPadas(gochhaka);
       var idx1 = allPadas.indexOf(pada1);
       var idx2 = pada2 ? allPadas.indexOf(pada2) : -1;
       openDukaPair(dukaNumber, idx1, idx2, dukaName, dukaPali);
     };
 
-    card.innerHTML =
-      '<div class="flex items-center justify-between mb-3">' +
-        '<div class="flex items-center gap-2 flex-1 min-w-0">' +
-          '<span class="w-9 h-9 rounded-full bg-saffron-500 text-maroon-950 font-bold text-sm flex items-center justify-center shrink-0">' + dukaNumber + '</span>' +
-          '<div class="flex-1 min-w-0">' +
-            '<h3 class="font-bold text-sm text-maroon-900 dark:text-saffron-200">' + dukaName + '</h3>' +
-            (dukaPali ? '<p class="text-[10px] text-amber-700 dark:text-saffron-400 truncate">' + dukaPali + '</p>' : '') +
-          '</div>' +
-        '</div>' +
-        '<i class="fa-solid fa-chevron-right text-slate-400 shrink-0"></i>' +
-      '</div>' +
-      '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">' +
-        (pada1 ?
-          '<div class="bg-gradient-to-br from-saffron-500/10 to-saffron-500/5 border border-saffron-500/30 rounded-lg p-3">' +
-            '<div class="text-[10px] font-bold text-saffron-600 dark:text-saffron-400 uppercase mb-1">පදය 1</div>' +
-            '<div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mb-1">' + pada1.name + '</div>' +
-            '<div class="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-2">' + (pada1.desc || '') + '</div>' +
-          '</div>' : '') +
-        (pada2 ?
-          '<div class="bg-gradient-to-br from-saffron-500/10 to-saffron-500/5 border border-saffron-500/30 rounded-lg p-3">' +
-            '<div class="text-[10px] font-bold text-saffron-600 dark:text-saffron-400 uppercase mb-1">පදය 2</div>' +
-            '<div class="text-sm font-bold text-maroon-900 dark:text-saffron-200 mb-1">' + pada2.name + '</div>' +
-            '<div class="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-2">' + (pada2.desc || '') + '</div>' +
-          '</div>' : '') +
-      '</div>' +
-      '<div class="text-center mt-3 text-[10px] text-slate-400"><i class="fa-solid fa-hand-pointer"></i> පද දෙක බැලීමට click කරන්න</div>';
+    var head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'tl-head';
+    head.onclick = open;
+    var num = document.createElement('span'); num.className = 'tl-num'; num.textContent = String(dukaNumber);
+    var ttl = document.createElement('span'); ttl.className = 'tl-title'; ttl.textContent = dukaName;
+    head.appendChild(num); head.appendChild(ttl);
+    card.appendChild(head);
 
+    var ul = document.createElement('ul');
+    ul.className = 'tl-padas';
+    [pada1, pada2].forEach(function(pd, k) {
+      if (!pd) return;
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tl-pada'; b.onclick = open;
+      var n = document.createElement('span'); n.className = 'tl-pn'; n.textContent = String(k + 1);
+      var t = document.createElement('span'); t.className = 'tl-pt'; t.textContent = pd.name;
+      var c = document.createElement('i'); c.className = 'fa-solid fa-chevron-right tl-chev'; c.setAttribute('aria-hidden', 'true');
+      b.appendChild(n); b.appendChild(t); b.appendChild(c);
+      li.appendChild(b); ul.appendChild(li);
+    });
+    card.appendChild(ul);
     container.appendChild(card);
   });
 }

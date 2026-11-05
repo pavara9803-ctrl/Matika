@@ -980,7 +980,7 @@
 
 /* ---------- තික ලැයිස්තුව: පැහැදිලි ලැයිස්තු ආකාරය (ත්‍රිකය → පද පේළි) ---------- */
 @media (min-width: 768px) {
-  #tika-list-container { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  #tika-list-container, #gochhaka-list, #duka-list-container, #suttanta-list-container { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }
 .tl-card { background: #fff; border: 1px solid var(--m-rule, #e8d9b8); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(63,10,12,.06); }
 :root.dark .tl-card { background: #1e293b; border-color: #334155; }
