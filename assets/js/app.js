@@ -248,6 +248,7 @@
       case 'about': window.location.href = 'about.html'; break;
       case 'help': window.location.href = 'help.html'; break;
       case 'updates': window.location.href = 'updates.html'; break;
+      case 'search': window.location.href = 'search.html'; break;
       case 'feedback':
         if (typeof window.openFeedbackModal === 'function') {
           window.openFeedbackModal();

@@ -1003,3 +1003,8 @@
 .tl-pt { flex: 1; min-width: 0; }
 .tl-chev { flex: none; font-size: 11px; opacity: .45; }
 @media (max-width: 420px) { .tl-title { font-size: 16px; } .tl-pada { padding-left: 14px; font-size: 15px; } }
+
+/* ── මුල් පිටුවේ සෙවුම් තීරුව (search.html වෙත) ── */
+.home-search { display:flex; align-items:center; gap:12px; margin:0 0 18px; padding:13px 18px; border:2px solid var(--ca-ring, #d9c9a8); border-radius:14px; background:var(--ca-panel, #fffdf8); color:var(--m-ink-soft, #6b5b4a); text-decoration:none; font-size:16px; }
+.home-search i { color:#d97706; font-size:17px; }
+.home-search:hover, .home-search:focus-visible { border-color:#d97706; outline:none; box-shadow:0 0 0 3px rgba(217,119,6,.18); }

@@ -83,3 +83,7 @@ MX_I18N.add({
 MX_I18N.add({
   'සැකසුම්': 'Settings'
 });
+MX_I18N.add({
+  "ඕනෑම පදයක් සොයන්න": "Search any term",
+  "සෙවුම": "Search"
+});
