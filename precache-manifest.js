@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v052c934198";
+self.PRECACHE_VERSION = "vab86a9b9d2";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/fonts.css",
@@ -18,6 +18,7 @@ self.PRECACHE_CORE = [
   "./assets/icons/maskable-512.png",
   "./assets/js/app.js",
   "./assets/js/feedback.js",
+  "./assets/js/home-search.js",
   "./assets/js/home-tree.js",
   "./assets/js/i18n.js",
   "./assets/js/matika-theme.js",
@@ -30,7 +31,6 @@ self.PRECACHE_CORE = [
   "./assets/js/pages/nibbana.js",
   "./assets/js/pages/rupa-atlas.js",
   "./assets/js/pages/samprayoga.js",
-  "./assets/js/pages/search-page.js",
   "./assets/js/pages/tika-app.js",
   "./assets/js/pages/updates-page.js",
   "./assets/js/pali-script.js",
@@ -102,7 +102,6 @@ self.PRECACHE_CORE = [
   "./paramattha/rupa-lr.html",
   "./paramattha/rupa.html",
   "./privacy.html",
-  "./search.html",
   "./updates.html"
 ];
 self.PRECACHE_LATER = [

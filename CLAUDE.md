@@ -14,5 +14,5 @@
 ## i18n
 සිංහල පාඨ `assets/i18n/<lang>-<page>.js` හි නිවැරදි සිංහල පාඨයෙන්ම යතුරු කර ඇත; පාඨය වෙනස් කළ විට පරිවර්තන යතුරද යාවත්කාලීන කරන්න.
 
-## සෙවුම (search.html)
+## සෙවුම (මුල් පිටුවේ ශීර්ෂ සෙවුම් තීරුව — assets/js/home-search.js)
 `data/matika/**` (තික / දුක / සුත්තන්ත / සබ්බත්තික), `data/paramattha/**` (සිත් / චෛතසික / රූප) සහ `paramattha/nibbana.html` වෙනස් කළ සෑම විටම `node tools/generate-search-index.js` ධාවනය කර `data/search/search-index.js` යාවත්කාලීන කරන්න (ඉන්පසු `node tools/generate-precache.js`).

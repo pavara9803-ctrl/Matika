@@ -212,11 +212,12 @@ window.addEventListener('load', function() {
 <div class="flex items-center space-x-2 space-x-reverse">
 <button id="home-tree-btn" type="button" onclick="toggleHomeTree()" aria-haspopup="true" aria-expanded="false" aria-controls="home-tree" class="ht-btn p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200" title="අන්තර්ගත රුක" aria-label="අන්තර්ගත රුක"><svg class="bo bo--menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ic-menu"/></svg><i class="fa-solid fa-caret-down ht-btn__caret" aria-hidden="true"></i></button>
 </div>
-<div class="flex items-center mx-auto cursor-pointer" onclick="navigateTo('home')">
-<div class="w-9 h-9 rounded-full bg-saffron-500/20 border border-saffron-400 flex items-center justify-center text-saffron-300 shrink-0"><i class="fa-solid fa-dharmachakra text-xl"></i></div>
-<h1 class="font-bold text-xl sm:text-2xl ml-2 text-saffron-100">අභිධර්ම මාතිකා</h1>
-</div>
-
+<h1 class="sr-only">අභිධර්ම මාතිකා</h1>
+<form class="hs-wrap" role="search" onsubmit="return false" data-no-i18n>
+  <i class="fa-solid fa-magnifying-glass hs-ico" aria-hidden="true"></i>
+  <input id="hs-q" class="hs-input" type="search" inputmode="search" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false">
+  <button type="button" id="hs-x" class="hs-x hidden" aria-label="✕">✕</button>
+</form>
 
 <button onclick="toggleMenu()" class="ht-btn ht-btn--gear p-2 rounded-lg bg-maroon-800 hover:bg-maroon-700 text-saffron-200 ml-1" title="සැකසුම්" aria-label="සැකසුම්">
     <svg class="bo bo--gear" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ic-gear"/></svg>
@@ -248,9 +249,6 @@ window.addEventListener('load', function() {
         </a>
         <button onclick="menuAction('help')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i class="fa-solid fa-circle-question text-purple-600 text-lg w-5"></i> ඇප් එක භාවිත කරන ආකාරය
-        </button>
-        <button onclick="menuAction('search')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
-            <i class="fa-solid fa-magnifying-glass text-saffron-600 text-lg w-5"></i> සෙවුම
         </button>
         <button onclick="menuAction('updates')" class="w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700">
             <i class="fa-solid fa-clipboard-check text-green-600 text-lg w-5"></i> නිවැරදි කළ කරුණු
@@ -351,6 +349,11 @@ window.addEventListener('load', function() {
 </div>
 
 <main class="flex-1 max-w-3xl w-full mx-auto p-4 sm:p-6 pb-12">
+<section id="hs-panel" class="hs-panel" hidden aria-live="polite" data-no-i18n>
+  <div class="sr-chips" id="hs-chips" role="group"></div>
+  <p class="sr-count" id="hs-count"></p>
+  <div id="hs-list"></div>
+</section>
 <div id="view-container">
 
 <!-- HOME VIEW -->
@@ -364,11 +367,6 @@ window.addEventListener('load', function() {
   <h2 class="home-leaf__title">අභිධර්ම මාතිකා අධ්‍යයනය</h2>
   <p class="home-leaf__desc">සර්වසංග්‍රාහී සබ්බත්තික මාතිකා, සුත්තන්ත මාතිකා, තික මාතිකා 22 සහ ගොච්ඡක 13 ට අයත් දුක මාතිකා 100 හි මාතිකා පදවල ස්වරූපාර්ථ, ස්කන්ධ, ආයතන, ධාතු සහ සත්‍ය බෙදීම් විස්තරාත්මකව අධ්‍යයනය කරන්න.</p>
 </div>
-
-<!-- සෙවුම් තීරුව: ඕනෑම පදයක් සොයන්න -->
-<a href="search.html" class="home-search" aria-label="ඕනෑම පදයක් සොයන්න">
-  <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span>ඕනෑම පදයක් සොයන්න</span>
-</a>
 
 <!-- I. මාතිකා -->
 <div class="home-group">
@@ -514,6 +512,7 @@ window.addEventListener('load', function() {
 
 <script src="assets/js/app.js"></script>
 <script src="assets/js/home-tree.js"></script>
+<script src="assets/js/home-search.js" defer></script>
 
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/matika-ui.js" defer></script>

@@ -1,20 +1,11 @@
-// search.html — මාතිකා ඇප් එකේ සියලු කරුණු ඕනෑම පදයකින් සෙවීම
+// home-search.js — මුල් පිටුවේ (index.html) ශීර්ෂයේ ඇති සෙවුම් තීරුව: මාතිකා ඇප් එකේ සියලු කරුණු ඕනෑම පදයකින් සෙවීම
 //   • data/search/search-index.js (tools/generate-search-index.js මගින් සාදන) දර්ශකය පූරණය කරයි.
 //   • සිංහල / පාලි (රෝම අකුරු) / English / မြန်မာ / 中文 — ඕනෑම අකුරකින් සෙවිය හැක.
 //   • වචන කිහිපයක් ලිව්වොත් සියල්ලම අඩංගු සටහන් පමණක් පෙන්වයි.
 (function () {
   'use strict';
   var UI = {
-    kicker: { si: 'සෙවුම', en: 'Search', my: 'ရှာဖွေရန်', zh: '搜索', 'zh-Hant': '搜尋' },
-    title: { si: 'ඕනෑම පදයක් සොයන්න', en: 'Search any term', my: 'ပုဒ်မည်သည့်ကိုမဆို ရှာပါ', zh: '搜索任意词条', 'zh-Hant': '搜尋任意詞條' },
-    lead: {
-      si: 'තික, දුක, සුත්තන්ත, සබ්බත්තික මාතිකා සහ සතර පරමාර්ථ (සිත්, චෛතසික, රූප, නිබ්බාන) වල පද, අර්ථ, නිරුක්ති ඇතුළු සියලු විස්තර එකවර සොයයි.',
-      en: 'Searches terms, meanings, etymologies and explanations across the Tika, Duka, Suttanta and Sabbattika Matikas and the four ultimate realities (citta, cetasika, rūpa, nibbāna) at once.',
-      my: 'တိက၊ ဒုက၊ သုတ္တန်၊ သဗ္ဗတ္တိက မာတိကာများနှင့် ပရမတ္ထလေးပါး (စိတ်၊ စေတသိက်၊ ရူပ၊ နိဗ္ဗာန်) ရှိ ပုဒ်၊ အနက်၊ နိရုတ္တိနှင့် ရှင်းလင်းချက်အားလုံးကို တစ်ပြိုင်နက် ရှာပေးသည်။',
-      zh: '一次搜索三法、二法、经藏、总摄母论及四种究竟法（心、心所、色、涅槃）中的词条、释义、词源及全部说明。',
-      'zh-Hant': '一次搜尋三法、二法、經藏、總攝母論及四種究竟法（心、心所、色、涅槃）中的詞條、釋義、詞源及全部說明。'
-    },
-    ph: { si: 'පදයක් ලියන්න (උදා: කුසල, හේතු, kusala)', en: 'Type a term (e.g. kusala, hetu, root)', my: 'ပုဒ်တစ်ခု ရိုက်ပါ (ဥပမာ ကုသလ၊ ဟေတု)', zh: '输入词条（如 kusala、hetu、善）', 'zh-Hant': '輸入詞條（如 kusala、hetu、善）' },
+    ph: { si: 'පදයක් සොයන්න', en: 'Search any term', my: 'ပုဒ်ရှာရန်', zh: '搜索词条', 'zh-Hant': '搜尋詞條' },
     all: { si: 'සියල්ල', en: 'All', my: 'အားလုံး', zh: '全部', 'zh-Hant': '全部' },
     tika: { si: 'තික', en: 'Tika', my: 'တိက', zh: '三法', 'zh-Hant': '三法' },
     duka: { si: 'දුක', en: 'Duka', my: 'ဒုက', zh: '二法', 'zh-Hant': '二法' },
@@ -32,7 +23,6 @@
     loading: { si: 'දර්ශකය පූරණය වෙමින්…', en: 'Loading index…', my: 'အညွှန်း ဖွင့်နေသည်…', zh: '正在加载索引…', 'zh-Hant': '正在載入索引…' },
     err: { si: 'සෙවුම් දර්ශකය පූරණය කළ නොහැකි විය. පිටුව නැවත පූරණය කරන්න.', en: 'Could not load the search index. Please reload the page.', my: 'ရှာဖွေရေး အညွှန်း မဖွင့်နိုင်ပါ။ စာမျက်နှာကို ပြန်ဖွင့်ပါ။', zh: '无法加载搜索索引，请刷新页面。', 'zh-Hant': '無法載入搜尋索引，請重新整理頁面。' }
   };
-  var EX = ['කුසල', 'හේතු', 'විඤ්ඤාණ', 'kusala', 'ආසව', 'නිවරණ'];
   var CODE = { en: 'e', my: 'm', zh: 'z', 'zh-Hant': 'h' };
   var PAGE = 40;
 
@@ -41,7 +31,7 @@
   function lang() { return (window.MX_I18N && window.MX_I18N.lang && window.MX_I18N.lang()) || 'si'; }
   function L(o) { var l = lang(); return o[l] || o.en || o.si; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function root() { return (window.MX_UPDATES && window.MX_UPDATES.root && window.MX_UPDATES.root()) || './'; }
+  function root() { return './'; }
 
   // ── ප්‍රමිතිකරණය: ZWJ/ZWNJ ඉවත්, කුඩා අකුරු, රෝම diacritic ඉවත් (ā→a), විරාම ලකුණු → හිස්තැන ──
   function normChar(ch) {
@@ -198,30 +188,32 @@
       if (k !== 'all' && !by[k]) return;
       html += '<button type="button" class="ca-chip" data-f="' + k + '" aria-pressed="' + (filter === k) + '">' + esc(L(UI[k])) + (lastQ ? ' · ' + (by[k] || 0) : '') + '</button>';
     });
-    $('sr-chips').innerHTML = lastQ ? html : '';
+    $('hs-chips').innerHTML = lastQ ? html : '';
   }
 
   var results = [];
+  function showPanel(on) {
+    var panel = $('hs-panel'), main = $('view-container');
+    if (panel) panel.hidden = !on;
+    if (main) main.hidden = on;
+  }
   function render() {
-    var q = $('sr-q').value;
+    var q = $('hs-q').value;
     lastQ = q.trim();
-    $('sr-x').classList.toggle('hidden', !q);
-    $('sr-q').placeholder = L(UI.ph);
-    if (!rows) { $('sr-count').textContent = L(UI.loading); return; }
-    if (!lastQ) {
-      results = []; $('sr-chips').innerHTML = ''; $('sr-count').textContent = '';
-      $('sr-list').innerHTML = '<div class="sr-empty"><p>' + esc(L(UI.hint)) + '</p><div class="sr-chips" style="justify-content:center">' +
-        EX.map(function (x) { return '<button type="button" class="ca-chip" data-ex="' + esc(x) + '" aria-pressed="false">' + esc(x) + '</button>'; }).join('') + '</div></div>';
-      return;
-    }
+    $('hs-x').classList.toggle('hidden', !q);
+    $('hs-q').placeholder = L(UI.ph);
+    $('hs-q').setAttribute('aria-label', L(UI.ph));
+    if (!lastQ) { results = []; showPanel(false); return; }
+    showPanel(true);
+    if (!rows) { $('hs-chips').innerHTML = ''; $('hs-list').innerHTML = ''; $('hs-count').textContent = L(UI.loading); return; }
     results = run(lastQ);
     chips(results);
     var list = filter === 'all' ? results : results.filter(function (h) { return h.R.e.y === filter; });
     var toks = norm(lastQ).split(' ').filter(Boolean);
     var vis = list.slice(0, shown);
-    $('sr-count').textContent = list.length + ' ' + L(UI.found) + (list.length > vis.length ? ' · ' + L(UI.shown) + ' ' + vis.length : '');
-    $('sr-list').innerHTML = list.length
-      ? vis.map(function (h) { return card(h, toks); }).join('') + (list.length > vis.length ? '<button type="button" class="sr-more" id="sr-more">' + esc(L(UI.more)) + '</button>' : '')
+    $('hs-count').textContent = list.length + ' ' + L(UI.found) + (list.length > vis.length ? ' · ' + L(UI.shown) + ' ' + vis.length : '');
+    $('hs-list').innerHTML = list.length
+      ? vis.map(function (h) { return card(h, toks); }).join('') + (list.length > vis.length ? '<button type="button" class="sr-more" id="hs-more">' + esc(L(UI.more)) + '</button>' : '')
       : '<div class="sr-empty">' + esc(L(UI.none)) + '</div>';
   }
 
@@ -234,32 +226,34 @@
   }
   function onInput() { clearTimeout(timer); timer = setTimeout(function () { shown = PAGE; filter = 'all'; render(); syncUrl(); }, 140); }
 
-  function staticText() {
-    $('sr-kicker').textContent = L(UI.kicker); $('sr-title').textContent = L(UI.title); $('sr-lead').textContent = L(UI.lead);
-    document.title = L(UI.kicker) + ' - මාතිකා';
+  function loadIndex() {
+    if (rows || loading) return; loading = true;
+    var sc = document.createElement('script');
+    sc.src = root() + 'data/search/search-index.js';
+    sc.onload = function () { rows = prepare(window.MATIKA_SEARCH || []); render(); };
+    sc.onerror = function () { loading = false; $('hs-count').textContent = L(UI.err); };
+    document.head.appendChild(sc);
   }
+  var loading = false;
+  function reset() { $('hs-q').value = ''; shown = PAGE; filter = 'all'; render(); syncUrl(); }
   function init() {
-    staticText();
+    if (!$('hs-q')) return;
     var q0 = ''; try { q0 = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
-    $('sr-q').value = q0;
-    $('sr-q').addEventListener('input', onInput);
-    $('sr-q').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); clearTimeout(timer); shown = PAGE; render(); syncUrl(); $('sr-q').blur(); } });
-    $('sr-x').addEventListener('click', function () { $('sr-q').value = ''; shown = PAGE; filter = 'all'; render(); syncUrl(); $('sr-q').focus(); });
-    $('sr-chips').addEventListener('click', function (e) { var b = e.target.closest('button[data-f]'); if (!b) return; filter = b.getAttribute('data-f'); shown = PAGE; render(); });
-    $('sr-list').addEventListener('click', function (e) {
-      if (e.target.closest('#sr-more')) { shown += PAGE; render(); return; }
-      var x = e.target.closest('button[data-ex]'); if (x) { $('sr-q').value = x.getAttribute('data-ex'); shown = PAGE; filter = 'all'; render(); syncUrl(); }
+    $('hs-q').value = q0;
+    $('hs-q').addEventListener('focus', loadIndex);
+    $('hs-q').addEventListener('input', function () { loadIndex(); onInput(); });
+    $('hs-q').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); clearTimeout(timer); shown = PAGE; render(); syncUrl(); $('hs-q').blur(); }
+      else if (e.key === 'Escape') { reset(); $('hs-q').blur(); }
     });
-    var refresh = function () { staticText(); render(); };
+    $('hs-x').addEventListener('click', function () { reset(); $('hs-q').focus(); });
+    $('hs-chips').addEventListener('click', function (e) { var b = e.target.closest('button[data-f]'); if (!b) return; filter = b.getAttribute('data-f'); shown = PAGE; render(); });
+    $('hs-list').addEventListener('click', function (e) { if (e.target.closest('#hs-more')) { shown += PAGE; render(); } });
+    var refresh = function () { render(); };
     if (window.MX_I18N && window.MX_I18N.onChange) window.MX_I18N.onChange(refresh);
     document.addEventListener('mx-lang-change', refresh);
     render();
-    var s = document.createElement('script');
-    s.src = root() + 'data/search/search-index.js';
-    s.onload = function () { rows = prepare(window.MATIKA_SEARCH || []); render(); if (!q0) $('sr-q').focus(); };
-    s.onerror = function () { $('sr-count').textContent = L(UI.err); };
-    document.head.appendChild(s);
+    if (q0) loadIndex();
   }
-  function boot() { if (window.MX_UPDATES) init(); else setTimeout(boot, 30); }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
