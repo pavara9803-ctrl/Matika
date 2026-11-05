@@ -1032,4 +1032,4 @@
 .hs-panel .ca-chip { font:inherit; font-size:13.5px; font-weight:700; padding:7px 14px; border:1.5px solid var(--m-rule); border-radius:999px; background:transparent; color:var(--m-ink); cursor:pointer; }
 .hs-panel .ca-chip[aria-pressed="true"] { background:var(--m-lacquer); border-color:var(--m-lacquer); color:#fde68a; }
 :root.dark .hs-panel .ca-chip[aria-pressed="true"] { background:#fbbf24; border-color:#fbbf24; color:#3f0a0c; }
-@media (min-width: 640px) { .hs-wrap { flex: 0 1 300px; margin: 0 auto; } }   /* tablet / පරිගණක: තීරුව කෙටි කිරීම */
+@media (min-width: 640px) { .hs-wrap { flex: 0 1 400px; margin: 0 auto; } }   /* tablet / පරිගණක: තීරුව කෙටි කිරීම */
