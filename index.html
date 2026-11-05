@@ -172,13 +172,6 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
   animation: pulse-soft 2.5s infinite;
 }
 
-#offline-indicator {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
-  background: #dc2626; color: white; text-align: center;
-  padding: 6px; font-size: 12px; font-weight: bold;
-  transform: translateY(-100%); transition: transform 0.3s;
-}
-#offline-indicator.show { transform: translateY(0); }
 </style>
 <link rel="stylesheet" href="assets/css/matika-ui.css">
 </head>
@@ -212,8 +205,6 @@ window.addEventListener('load', function() {
 </g>
 </symbol>
 </svg>
-
-<div id="offline-indicator"><i class="fa-solid fa-wifi"></i> ඔබ දැන් නොබැඳි තත්ත්වයේ සිටී</div>
 
 <!-- ============ HEADER ============ -->
 <header class="sticky top-0 z-30 bg-maroon-900 text-amber-100 shadow-md border-b-2 border-saffron-500">
