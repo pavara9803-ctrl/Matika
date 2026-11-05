@@ -195,7 +195,7 @@ function renderGochhakaList() {
     }
     dukas.forEach(function(d, i) {
       if (!d) return;
-      addRow(String(d.number || (i + 1)), d.name || '', function() { openGochhaka(gochhaka.id); });
+      addRow(String(d.number || (i + 1)), d.name || '', function() { openDukaDirect(gochhaka, d, 0); });
     });
     mishraka.forEach(function(m) {
       if (!m) return;
@@ -204,6 +204,17 @@ function renderGochhakaList() {
     card.appendChild(ul);
     container.appendChild(card);
   });
+}
+
+// ලැයිස්තුවෙන් කෙලින්ම දුකයක පදයක විස්තරයට යාම (ගොච්ඡකය විවෘත කර, පදයේ විස්තරය පෙන්වයි)
+function openDukaDirect(gochhaka, duka, k) {
+  openGochhaka(gochhaka.id);
+  var allPadas = getGochhakaPadas(gochhaka);
+  var pd = (duka.padas || [])[k] || (duka.padas || [])[0];
+  var idx = allPadas.indexOf(pd);
+  if (idx < 0) return;
+  openDukaPair(duka.number, allPadas.indexOf((duka.padas || [])[0]), (duka.padas || [])[1] ? allPadas.indexOf(duka.padas[1]) : -1, duka.name, duka.pali || '');
+  openPadaDetail(idx);
 }
 
 // ============================================================
@@ -335,7 +346,8 @@ function renderDukaList(gochhaka) {
       if (!pd) return;
       var li = document.createElement('li');
       var b = document.createElement('button');
-      b.type = 'button'; b.className = 'tl-pada'; b.onclick = open;
+      b.type = 'button'; b.className = 'tl-pada';
+      b.onclick = function() { var all = getGochhakaPadas(gochhaka); var ix = all.indexOf(pd); if (ix < 0) { open(); return; } open(); openPadaDetail(ix); };
       var n = document.createElement('span'); n.className = 'tl-pn'; n.textContent = String(k + 1);
       var t = document.createElement('span'); t.className = 'tl-pt'; t.textContent = pd.name;
       var c = document.createElement('i'); c.className = 'fa-solid fa-chevron-right tl-chev'; c.setAttribute('aria-hidden', 'true');
