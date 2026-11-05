@@ -461,6 +461,7 @@ function openPadaDetail(padaIndex) {
   // දුක මුක්ත ධර්ම
   renderDukaMukta(pada);
 
+  renderDukaPadaTabs(pada);
   updateDukaBookmarkButton();
   renderDukaBreakdowns(pada);
   switchDukaTab('skandha');
@@ -468,6 +469,37 @@ function openPadaDetail(padaIndex) {
 
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('pada-detail');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// පද විස්තර පිටුවේ: වත්මන් පදය අයත් දුකයේ පද දෙකම පෙන්වා (තික පිටුවේ මෙන්) ඒවා අතර මාරු විය හැක
+function renderDukaPadaTabs(current) {
+  var box = document.getElementById('duka-pada-tabs');
+  if (!box) return;
+  box.innerHTML = '';
+  var g = dukaState.currentGochhaka, owner = null;
+  if (g) getGochhakaDukas(g).forEach(function(d) { if (d && (d.padas || []).indexOf(current) > -1) owner = d; });
+  if (!owner || (owner.padas || []).length < 2) { box.classList.add('hidden'); return; }
+  var all = getGochhakaPadas(g);
+  owner.padas.forEach(function(pd, k) {
+    var ix = all.indexOf(pd);
+    var active = pd === current;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left p-3 rounded-xl border transition-all flex items-center gap-2 ' +
+      (active ? 'bg-saffron-500/20 border-saffron-500 text-maroon-900 dark:text-saffron-200 font-bold'
+              : 'bg-white dark:bg-slate-800 border-amber-200 dark:border-slate-700 text-slate-700 dark:text-slate-300');
+    if (active) btn.setAttribute('aria-current', 'true');
+    btn.onclick = function() { if (!active && ix > -1) openPadaDetail(ix); };
+    var n = document.createElement('span');
+    n.className = 'w-6 h-6 rounded-full bg-saffron-500 text-maroon-950 font-bold text-xs flex items-center justify-center shrink-0';
+    n.textContent = String(k + 1);
+    var t = document.createElement('span');
+    t.className = 'text-sm font-bold';
+    t.textContent = pd.name;
+    btn.appendChild(n); btn.appendChild(t);
+    box.appendChild(btn);
+  });
+  box.classList.remove('hidden');
 }
 
 // ============================================================
