@@ -8,11 +8,11 @@
     kicker: { si: 'සෙවුම', en: 'Search', my: 'ရှာဖွေရန်', zh: '搜索', 'zh-Hant': '搜尋' },
     title: { si: 'ඕනෑම පදයක් සොයන්න', en: 'Search any term', my: 'ပုဒ်မည်သည့်ကိုမဆို ရှာပါ', zh: '搜索任意词条', 'zh-Hant': '搜尋任意詞條' },
     lead: {
-      si: 'තික, දුක, සුත්තන්ත සහ සබ්බත්තික මාතිකා වල පද, අර්ථ, නිරුක්ති, අභිධෙය්‍යාර්ථ ඇතුළු සියලු විස්තර එකවර සොයයි.',
-      en: 'Searches terms, meanings, etymologies and explanations across the Tika, Duka, Suttanta and Sabbattika Matikas at once.',
-      my: 'တိက၊ ဒုက၊ သုတ္တန်နှင့် သဗ္ဗတ္တိက မာတိကာများရှိ ပုဒ်၊ အနက်၊ နိရုတ္တိနှင့် ရှင်းလင်းချက်အားလုံးကို တစ်ပြိုင်နက် ရှာပေးသည်။',
-      zh: '一次搜索三法、二法、经藏与总摄母论中的词条、释义、词源及全部说明。',
-      'zh-Hant': '一次搜尋三法、二法、經藏與總攝母論中的詞條、釋義、詞源及全部說明。'
+      si: 'තික, දුක, සුත්තන්ත, සබ්බත්තික මාතිකා සහ සතර පරමාර්ථ (සිත්, චෛතසික, රූප, නිබ්බාන) වල පද, අර්ථ, නිරුක්ති ඇතුළු සියලු විස්තර එකවර සොයයි.',
+      en: 'Searches terms, meanings, etymologies and explanations across the Tika, Duka, Suttanta and Sabbattika Matikas and the four ultimate realities (citta, cetasika, rūpa, nibbāna) at once.',
+      my: 'တိက၊ ဒုက၊ သုတ္တန်၊ သဗ္ဗတ္တိက မာတိကာများနှင့် ပရမတ္ထလေးပါး (စိတ်၊ စေတသိက်၊ ရူပ၊ နိဗ္ဗာန်) ရှိ ပုဒ်၊ အနက်၊ နိရုတ္တိနှင့် ရှင်းလင်းချက်အားလုံးကို တစ်ပြိုင်နက် ရှာပေးသည်။',
+      zh: '一次搜索三法、二法、经藏、总摄母论及四种究竟法（心、心所、色、涅槃）中的词条、释义、词源及全部说明。',
+      'zh-Hant': '一次搜尋三法、二法、經藏、總攝母論及四種究竟法（心、心所、色、涅槃）中的詞條、釋義、詞源及全部說明。'
     },
     ph: { si: 'පදයක් ලියන්න (උදා: කුසල, හේතු, kusala)', en: 'Type a term (e.g. kusala, hetu, root)', my: 'ပုဒ်တစ်ခု ရိုက်ပါ (ဥပမာ ကုသလ၊ ဟေတု)', zh: '输入词条（如 kusala、hetu、善）', 'zh-Hant': '輸入詞條（如 kusala、hetu、善）' },
     all: { si: 'සියල්ල', en: 'All', my: 'အားလုံး', zh: '全部', 'zh-Hant': '全部' },
@@ -20,6 +20,10 @@
     duka: { si: 'දුක', en: 'Duka', my: 'ဒုက', zh: '二法', 'zh-Hant': '二法' },
     suttanta: { si: 'සුත්තන්ත', en: 'Suttanta', my: 'သုတ္တန်', zh: '经藏', 'zh-Hant': '經藏' },
     sabbattika: { si: 'සබ්බත්තික', en: 'Sabbattika', my: 'သဗ္ဗတ္တိက', zh: '总摄', 'zh-Hant': '總攝' },
+    citta: { si: 'සිත්', en: 'Citta', my: 'စိတ်', zh: '心', 'zh-Hant': '心' },
+    cetasika: { si: 'චෛතසික', en: 'Cetasika', my: 'စေတသိက်', zh: '心所', 'zh-Hant': '心所' },
+    rupa: { si: 'රූප', en: 'Rūpa', my: 'ရူပ', zh: '色', 'zh-Hant': '色' },
+    nibbana: { si: 'නිබ්බාන', en: 'Nibbāna', my: 'နိဗ္ဗာန်', zh: '涅槃', 'zh-Hant': '涅槃' },
     found: { si: 'ප්‍රතිඵල', en: 'results', my: 'ရလဒ်', zh: '条结果', 'zh-Hant': '條結果' },
     shown: { si: 'පෙන්වන්නේ', en: 'showing', my: 'ပြသနေသည်', zh: '显示', 'zh-Hant': '顯示' },
     more: { si: 'තවත් පෙන්වන්න', en: 'Show more', my: 'ထပ်ပြရန်', zh: '显示更多', 'zh-Hant': '顯示更多' },
@@ -190,7 +194,7 @@
     var by = { all: results.length };
     results.forEach(function (h) { by[h.R.e.y] = (by[h.R.e.y] || 0) + 1; });
     var html = '';
-    ['all', 'tika', 'duka', 'suttanta', 'sabbattika'].forEach(function (k) {
+    ['all', 'tika', 'duka', 'suttanta', 'sabbattika', 'citta', 'cetasika', 'rupa', 'nibbana'].forEach(function (k) {
       if (k !== 'all' && !by[k]) return;
       html += '<button type="button" class="ca-chip" data-f="' + k + '" aria-pressed="' + (filter === k) + '">' + esc(L(UI[k])) + (lastQ ? ' · ' + (by[k] || 0) : '') + '</button>';
     });
