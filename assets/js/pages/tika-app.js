@@ -290,9 +290,8 @@ function renderTikaPadaTabs(padas) {
     btn.innerHTML = 
       '<div class="flex items-center gap-2 min-w-0">' +
         '<span class="w-6 h-6 rounded-full bg-saffron-500 text-maroon-950 font-bold text-xs flex items-center justify-center shrink-0">' + (index + 1) + '</span>' +
-        '<span class="text-sm font-bold truncate">' + pada.name + '</span>' +
-      '</div>' +
-      '<span class="text-xs text-slate-500 truncate max-w-[45%] hidden sm:inline">' + (pada.desc || '') + '</span>';
+        '<span class="text-sm font-bold">' + pada.name + '</span>' +
+      '</div>';
     container.appendChild(btn);
   });
 }
