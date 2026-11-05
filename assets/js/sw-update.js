@@ -78,21 +78,10 @@
     });
   }
 
-  // Offline සූදානම: cache එක සම්පූර්ණදැයි SW ලවා පරීක්ෂා කරවා (අඩුපාඩු පුරවා), පළමු වතාවට සූදානම් වූ විට කෙටි දැනුම්දීමක් පෙන්වයි
-  function toast(msg) {
-    css();
-    var t = document.createElement('div');
-    t.id = 'sw-ready'; t.setAttribute('role', 'status');
-    t.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:2147483000;max-width:92vw;padding:10px 16px;border-radius:12px;background:#14532d;color:#dcfce7;border:2px solid #86efac;font:600 13.5px/1.45 inherit;box-shadow:0 10px 30px -6px rgba(0,0,0,.5)';
-    t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(function () { t.remove(); }, 4500);
-  }
+  // Offline සූදානම: cache එක සම්පූර්ණදැයි SW ලවා පරීක්ෂා කරවා (අඩුපාඩු පුරවා) නිශ්ශබ්දව සටහන් කරයි (දැනුම්දීමක් පෙන්වන්නේ නැත)
   navigator.serviceWorker.addEventListener('message', function (e) {
     if (!e.data || e.data.type !== 'OFFLINE_READY') return;
-    var key = 'matika-offline-ready-' + e.data.version;
-    try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (err) {}
-    toast('✔ ඇප් එක දැන් අන්තර්ජාලය නැතිවත් භාවිත කළ හැක');
+    try { localStorage.setItem('matika-offline-ready-' + e.data.version, '1'); } catch (err) {}
   });
   function warm() {
     if (!navigator.onLine) return;
