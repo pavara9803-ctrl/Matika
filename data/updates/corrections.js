@@ -26,6 +26,58 @@
 // ============================================================
 window.MATIKA_UPDATES = [
   {
+    id: '2026-11-05',
+    date: '2026-11-05',
+    title: {
+      si: 'සුත්තන්ත මාතිකා පද නම් නිවැරදි කිරීම',
+      en: 'Corrections to the Suttanta Matika term names',
+      my: 'သုတ္တန်မာတိကာ ပုဒ်အမည်များ ပြင်ဆင်ခြင်း',
+      zh: '经藏母论词条名称的更正',
+      'zh-Hant': '經藏母論詞條名稱的更正'
+    },
+    items: [
+      {
+        areas: ['suttanta'],
+        where: ['සුත්තන්ත මාතිකා', '15. අහිරික දුකය'],
+        what: {
+          si: '15 වන සහ 38 වන දුකවල දෙවන පදයේ නම වෙනුවට පද විස්තරයක් සටහන්ව තිබුණි. පොතේ ඇති පරිදි පාළි පද නම් (අනොත්තප්පඤ්ච / යථාදිට්ඨිස්ස ච පධානං) යොදා නිවැරදි කළා.',
+          en: 'In dukas 15 and 38 the second term was shown as an explanatory sentence instead of its name. It now carries the Pali term as in the book (anottappañca / yathādiṭṭhissa ca padhānaṃ).',
+          my: '၁၅ နှင့် ၃၈ ဒုကတို့တွင် ဒုတိယပုဒ်၏ အမည်အစား ရှင်းလင်းချက်စာကြောင်း ရေးထားခဲ့သည်။ စာအုပ်အတိုင်း ပါဠိပုဒ် (အနောတ္တပ္ပဉ္စ / ယထာဒိဋ္ဌိဿ စ ပဓာနံ) ဖြင့် ပြင်ဆင်ပြီးဖြစ်သည်။',
+          zh: '第15、38对中，第二个词条原写为说明句而非其名称，现按原书改为巴利词条（anottappañca / yathādiṭṭhissa ca padhānaṃ）。',
+          'zh-Hant': '第15、38對中，第二個詞條原寫為說明句而非其名稱，現按原書改為巴利詞條（anottappañca / yathādiṭṭhissa ca padhānaṃ）。'
+        },
+        before: 'කාය වාග් මනෝ දුශ්චරිතා දී පාපයෙහි ලජ්ජා නොවීම ලක්ෂණ කොට ඇත්තා වූ අහිරික නම් වූ ධර්මයක් ඇත්තේය',
+        after: 'අනොත්තප්පඤ්ච'
+      },
+      {
+        areas: ['suttanta'],
+        where: ['සුත්තන්ත මාතිකා'],
+        what: {
+          si: 'දුක් බොහොමයක දෙවන පදයේ අගට වැරදිව “චා” යනුවෙන් තිබුණි; පොතේ ඇති පරිදි “ච” ලෙස නිවැරදි කළා (උදා: රූපඤ්චා → රූපඤ්ච).',
+          en: 'In many dukas the second term wrongly ended in “chā”; it is now “ca” as in the book (e.g. rūpañcā → rūpañca).',
+          my: 'ဒုကများစွာတွင် ဒုတိယပုဒ်၏ အဆုံး “စာ” ဟု မှားယွင်းစွာ ရေးထားခဲ့ပြီး စာအုပ်အတိုင်း “စ” ဟု ပြင်ဆင်ပြီးဖြစ်သည် (ဥပမာ ရူပဉ္စာ → ရူပဉ္စ)။',
+          zh: '许多对中第二个词条结尾误作“chā”，现按原书改为“ca”（如 rūpañcā → rūpañca）。',
+          'zh-Hant': '許多對中第二個詞條結尾誤作「chā」，現按原書改為「ca」（如 rūpañcā → rūpañca）。'
+        },
+        before: 'රූපඤ්චා',
+        after: 'රූපඤ්ච'
+      },
+      {
+        areas: ['suttanta'],
+        where: ['සුත්තන්ත මාතිකා'],
+        what: {
+          si: 'පාළි පද අකුරු පොතේ පාඨයට අනුව නිවැරදි කළා (උදා: පඤ්ඤත්ති පථා → පඤ්ඤත්තිපථා, විමුක්ති → විමුත්ති, පධානන් → පධානං, ඤාණන් → ඤාණන්ති).',
+          en: 'The spelling of several Pali terms was corrected to match the text of the book (e.g. paññatti pathā → paññattipathā, vimutti, padhānaṃ, ñāṇanti).',
+          my: 'ပါဠိပုဒ်အချို့၏ စာလုံးပေါင်းကို စာအုပ်စာသားနှင့်ညီအောင် ပြင်ဆင်ပြီးဖြစ်သည်။',
+          zh: '若干巴利词条的拼写已按原书文本更正（如 paññatti pathā → paññattipathā、vimutti、padhānaṃ、ñāṇanti）。',
+          'zh-Hant': '若干巴利詞條的拼寫已按原書文本更正（如 paññatti pathā → paññattipathā、vimutti、padhānaṃ、ñāṇanti）。'
+        },
+        before: 'විමුක්ති චා  ·  අනුප්පාදෙ ඤාණන්',
+        after: 'විමුත්ති ච  ·  අනුප්පාදෙ ඤාණන්ති'
+      }
+    ]
+  },
+  {
     id: '2026-11-04',
     date: '2026-11-04',
     title: {
