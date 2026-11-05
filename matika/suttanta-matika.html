@@ -1261,6 +1261,14 @@ function clearSuttantaSearch() {
 window.addEventListener('DOMContentLoaded', function() {
   renderSuttantaList();
   updateSuttantaBookmarksBadge();
+  // සබැඳි (deep link): ?d=<දුකය 0 සිට>&p=<පදය 0|1> — සෙවුම් පිටුවෙන් කෙලින්ම පදයට පැමිණීමට
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.has('d')) {
+      var d = parseInt(q.get('d'), 10), p = parseInt(q.get('p') || '0', 10);
+      if (!isNaN(d) && suttantaFullData[d]) openSuttantaMatikaDetails(d, (isNaN(p) || p < 0 || p >= suttantaFullData[d].padas.length) ? 0 : p);
+    }
+  } catch (e) { console.error('[suttanta] deep link', e); }
 });
 </script>
 

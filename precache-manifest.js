@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v007ca8c335";
+self.PRECACHE_VERSION = "vab86a9b9d2";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/fonts.css",
@@ -18,6 +18,7 @@ self.PRECACHE_CORE = [
   "./assets/icons/maskable-512.png",
   "./assets/js/app.js",
   "./assets/js/feedback.js",
+  "./assets/js/home-search.js",
   "./assets/js/home-tree.js",
   "./assets/js/i18n.js",
   "./assets/js/matika-theme.js",
@@ -84,6 +85,7 @@ self.PRECACHE_CORE = [
   "./data/paramattha/rupa-data.js",
   "./data/paramattha/rupa-deta-full.js",
   "./data/paramattha/rupa-deta.js",
+  "./data/search/search-index.js",
   "./data/updates/corrections.js",
   "./help.html",
   "./index.html",

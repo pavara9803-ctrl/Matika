@@ -136,6 +136,21 @@ function initDukaApp() {
 
   renderGochhakaList();
   updateDukaBookmarkBadge();
+  openDukaFromUrl();
+}
+
+// ═══ සබැඳි (deep link): ?g=<ගොච්ඡක අංකය>&d=<දුක අංකය>&k=<පදය 0|1> — සෙවුම් පිටුවෙන් කෙලින්ම පදයට පැමිණීමට ═══
+function openDukaFromUrl() {
+  var q;
+  try { q = new URLSearchParams(location.search); } catch (e) { return; }
+  if (!q.has('g')) return;
+  var gid = parseInt(q.get('g'), 10), dn = parseInt(q.get('d') || '', 10), k = parseInt(q.get('k') || '0', 10);
+  var g = dukaGochhakaData.find(function(x) { return x && x.id === gid; });
+  if (!g) return;
+  try {
+    var duka = isNaN(dn) ? null : getGochhakaDukas(g).find(function(d) { return d && d.number === dn; });
+    if (duka) openDukaDirect(g, duka, (k === 1 ? 1 : 0)); else openGochhaka(gid);
+  } catch (err) { console.error('[duka-app] deep link', err); }
 }
 
 // ============================================================
