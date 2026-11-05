@@ -5,21 +5,6 @@
 (function () {
   'use strict';
 
-  // ============================================================
-  // ONLINE/OFFLINE INDICATOR
-  // ============================================================
-  function updateOnlineStatus() {
-    var indicator = document.getElementById('offline-indicator');
-    if (!indicator) return;
-    if (navigator.onLine) {
-      indicator.classList.remove('show');
-    } else {
-      indicator.classList.add('show');
-    }
-  }
-  window.addEventListener('online', updateOnlineStatus);
-  window.addEventListener('offline', updateOnlineStatus);
-
   // SERVICE WORKER ලියාපදිංචිය සහ යාවත්කාලීන දැනුම්දීම: assets/js/sw-update.js බලන්න
 
   // ============================================================
@@ -28,7 +13,6 @@
   var currentView = 'home';
 
   function initApp() {
-    updateOnlineStatus();
     checkIfInstalled();
     console.log('[App] Initialized');
   }
