@@ -62,19 +62,26 @@
   // ============================================================
   // RATE APP
   // ============================================================
-  var APP_PACKAGE_NAME = 'com.abhidhamma.matika';
+  // Play Store හි යෙදුමේ package id (.well-known/assetlinks.json හි package_name සමඟ සමාන විය යුතුයි)
+  var APP_PACKAGE_NAME = 'app.vercel.matika_snowy.twa';
 
   function rateThisApp() {
     var playStoreUrl = 'https://play.google.com/store/apps/details?id=' + APP_PACKAGE_NAME;
     try {
       if (/android/i.test(navigator.userAgent)) {
+        // Play Store ඇප් එක කෙලින්ම විවෘත කරන්න (ඇප් එක විවෘත වූ විට fallback එක අවලංගු වේ)
+        var left = false, onHide = function () { if (document.hidden) left = true; };
+        document.addEventListener('visibilitychange', onHide);
         window.location.href = 'market://details?id=' + APP_PACKAGE_NAME;
-        setTimeout(function () { window.location.href = playStoreUrl; }, 1500);
+        setTimeout(function () {
+          document.removeEventListener('visibilitychange', onHide);
+          if (!left) window.location.href = playStoreUrl;
+        }, 1500);
       } else {
-        window.open(playStoreUrl, '_blank');
+        window.open(playStoreUrl, '_blank', 'noopener');
       }
     } catch (e) {
-      window.open(playStoreUrl, '_blank');
+      window.open(playStoreUrl, '_blank', 'noopener');
     }
   }
 
