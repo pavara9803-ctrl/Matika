@@ -1,8 +1,13 @@
-self.PRECACHE_VERSION = "v4c69204c7d";
+self.PRECACHE_VERSION = "vf6086e8fcf";
 self.PRECACHE_CORE = [
   "./about.html",
+  "./assets/css/fonts.css",
   "./assets/css/matika-ui.css",
   "./assets/css/paramattha.css",
+  "./assets/fonts/inter-latin.woff2",
+  "./assets/fonts/noto-sans-myanmar.woff2",
+  "./assets/fonts/noto-serif-sinhala-latin.woff2",
+  "./assets/fonts/noto-serif-sinhala-sinhala.woff2",
   "./assets/icons/180.png",
   "./assets/icons/192.png",
   "./assets/icons/50.png",
