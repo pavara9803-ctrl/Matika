@@ -111,21 +111,46 @@ function renderTikaList() {
     return;
   }
 
+  // ලැයිස්තුව: ත්‍රිකය අනුව කාඩ්පතක්; ඒ තුළ පද එකින් එක පේළියක් ලෙස (ඕනෑම පදයක් ඔබා කෙලින්ම විවෘත කළ හැක)
   tikaFullData.forEach(function(tika, index) {
-    var card = document.createElement('div');
-    card.className = 'mx-card bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer transition-all';
-    card.onclick = function() { openTikaDetail(index); };
+    var card = document.createElement('section');
+    card.className = 'tl-card';
 
-    var padasHtml = (tika.padas || []).map(function(p) {
-      return '<span class="inline-block bg-amber-50 dark:bg-slate-900 border border-amber-200 dark:border-slate-700 text-amber-900 dark:text-saffron-300 text-xs px-2 py-1 rounded-lg mr-1 mb-1">' + p.name + '</span>';
-    }).join('');
+    var head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'tl-head';
+    head.onclick = function() { openTikaDetail(index); };
+    var num = document.createElement('span');
+    num.className = 'tl-num';
+    num.textContent = String(index + 1);
+    var ttl = document.createElement('span');
+    ttl.className = 'tl-title';
+    ttl.textContent = tika.title || '';
+    head.appendChild(num); head.appendChild(ttl);
+    card.appendChild(head);
 
-    card.innerHTML = 
-      '<div class="flex items-center gap-2 mb-2">' +
-        '<span class="w-8 h-8 rounded-full bg-saffron-500/20 text-saffron-600 font-bold text-sm flex items-center justify-center shrink-0">' + (index + 1) + '</span>' +
-        '<h3 class="font-bold text-base text-maroon-900 dark:text-saffron-200">' + (tika.title || '') + '</h3>' +
-      '</div>' +
-      '<div class="flex flex-wrap">' + padasHtml + '</div>';
+    var ul = document.createElement('ul');
+    ul.className = 'tl-padas';
+    (tika.padas || []).forEach(function(p, pIdx) {
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tl-pada';
+      b.onclick = function() { openTikaDetail(index); selectTikaPada(pIdx); };
+      var n = document.createElement('span');
+      n.className = 'tl-pn';
+      n.textContent = String(pIdx + 1);
+      var t = document.createElement('span');
+      t.className = 'tl-pt';
+      t.textContent = p.name;
+      var c = document.createElement('i');
+      c.className = 'fa-solid fa-chevron-right tl-chev';
+      c.setAttribute('aria-hidden', 'true');
+      b.appendChild(n); b.appendChild(t); b.appendChild(c);
+      li.appendChild(b);
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
     container.appendChild(card);
   });
 }

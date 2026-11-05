@@ -977,3 +977,29 @@
 .ht-btn--gear:hover .bo--gear { transform: rotate(60deg); }
 .ht-btn:hover .bo--menu { transform: none; }
 @media (prefers-reduced-motion: reduce) { .ht-btn--gear:hover .bo--gear { transform: none; } }
+
+/* ---------- තික ලැයිස්තුව: පැහැදිලි ලැයිස්තු ආකාරය (ත්‍රිකය → පද පේළි) ---------- */
+@media (min-width: 768px) {
+  #tika-list-container { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+.tl-card { background: #fff; border: 1px solid var(--m-rule, #e8d9b8); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(63,10,12,.06); }
+:root.dark .tl-card { background: #1e293b; border-color: #334155; }
+.tl-head { all: unset; box-sizing: border-box; width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 16px; cursor: pointer; background: linear-gradient(90deg, rgba(245,158,11,.16), rgba(245,158,11,.04)); border-bottom: 1px solid var(--m-rule, #e8d9b8); }
+:root.dark .tl-head { background: linear-gradient(90deg, rgba(251,191,36,.14), rgba(251,191,36,.03)); border-color: #334155; }
+.tl-head:hover { background: rgba(245,158,11,.22); }
+.tl-head:focus-visible, .tl-pada:focus-visible { outline: 2.5px solid #d97706; outline-offset: -3px; }
+.tl-num { flex: none; width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font: 700 15px/1 inherit; background: var(--m-lacquer, #701a1d); color: #fde68a; }
+:root.dark .tl-num { background: #fbbf24; color: #3f0a0c; }
+.tl-title { flex: 1; min-width: 0; font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--m-lacquer, #581113); }
+:root.dark .tl-title { color: #fcd34d; }
+.tl-count { flex: none; font-size: 12.5px; opacity: .7; }
+.tl-padas { list-style: none; margin: 0; padding: 0; }
+.tl-padas li + li { border-top: 1px solid var(--m-rule, #f1e6cc); }
+:root.dark .tl-padas li + li { border-color: #334155; }
+.tl-pada { all: unset; box-sizing: border-box; width: 100%; display: flex; align-items: center; gap: 12px; padding: 11px 16px 11px 20px; cursor: pointer; font-size: 15.5px; line-height: 1.7; }
+.tl-pada:hover { background: rgba(245,158,11,.10); }
+.tl-pn { flex: none; width: 24px; text-align: center; font-size: 13px; font-weight: 700; color: #b45309; }
+:root.dark .tl-pn { color: #fbbf24; }
+.tl-pt { flex: 1; min-width: 0; }
+.tl-chev { flex: none; font-size: 11px; opacity: .45; }
+@media (max-width: 420px) { .tl-title { font-size: 16px; } .tl-pada { padding-left: 14px; font-size: 15px; } }
