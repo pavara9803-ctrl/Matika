@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v25466b6b72";
+self.PRECACHE_VERSION = "v40b453dba3";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/fonts.css",
@@ -17,6 +17,7 @@ self.PRECACHE_CORE = [
   "./assets/icons/maskable-192.png",
   "./assets/icons/maskable-512.png",
   "./assets/js/app.js",
+  "./assets/js/back-nav.js",
   "./assets/js/feedback.js",
   "./assets/js/home-search.js",
   "./assets/js/home-tree.js",

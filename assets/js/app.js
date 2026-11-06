@@ -109,12 +109,14 @@
       '</div>';
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
+    if (window.MxBack) window.MxBack.add(window.closeShareModal);   // Back බොත්තමෙන් වැසීමට
   }
 
   window.closeShareModal = function () {
     var modal = document.getElementById('share-modal');
     if (modal) modal.remove();
     document.body.style.overflow = '';
+    if (window.MxBack) window.MxBack.remove(window.closeShareModal);
   };
 
   function showShareToast(message, type) {

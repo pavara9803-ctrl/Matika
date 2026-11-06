@@ -232,6 +232,7 @@
       lastFocus = document.activeElement;
       scrim.classList.add('is-open');
       sheet.classList.add('is-open');
+      if (window.MxBack) window.MxBack.add(close);   // Back බොත්තමෙන් වැසීමට
       var cur = $('.is-current', sheetList) || $('a', sheetList);
       setTimeout(function () {
         if (cur) { cur.focus({ preventScroll: true }); cur.scrollIntoView({ block: 'center' }); }
@@ -240,6 +241,7 @@
     function close() {
       scrim.classList.remove('is-open');
       sheet.classList.remove('is-open');
+      if (window.MxBack) window.MxBack.remove(close);
       if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
     }
     tocBtn.addEventListener('click', open);
