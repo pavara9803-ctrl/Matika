@@ -41,8 +41,9 @@
 │   │   ├── matika-ui.js      පටුන, සංචාලන තීරුව, ඉහළට බොත්තම
 │   │   ├── matika-theme.js   වර්ණ / අකුරු සැකසුම
 │   │   ├── app.js, feedback.js
-│   │   ├── pages/            එක් එක් පිටුවේ ක්‍රියාකාරී කේත
-│   │   └── vendor/tailwind.min.js
+│   │   ├── back-nav.js       Android Back බොත්තම (view / overlay)
+│   │   └── pages/            එක් එක් පිටුවේ ක්‍රියාකාරී කේත
+│   ├── css/tailwind-built.css   Tailwind utilities (පෙර් browser එකේ runtime එකෙන් ජනනය වූ ඒවා, static ලෙස)
 │   ├── icons/                යෙදුම් අයිකන
 │   └── screenshots/          Store / manifest තිර රූප
 │

@@ -58,7 +58,7 @@ function switchTab(tabName) {
     }
   });
   
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 // ============================================================
@@ -84,7 +84,7 @@ function switchCaitasikaTab(tabName) {
     }
   });
   
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 // ============================================================
@@ -109,7 +109,7 @@ function toggleAccordion(id) {
 // 5. SCROLL TO TOP
 // ============================================================
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 // ============================================================

@@ -255,7 +255,7 @@ function openGochhaka(gochhakaId) {
   renderMishrakaDukas(gochhaka);
 
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('duka-list');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 function renderGochhakaNotes(gochhaka) {
@@ -404,7 +404,7 @@ function openDukaPair(dukaNumber, padaIndex1, padaIndex2, dukaName, dukaPali) {
   renderDukaPair(pada1, pada2);
 
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('pada-pair');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 function renderDukaPair(pada1, pada2) {
@@ -483,7 +483,7 @@ function openPadaDetail(padaIndex) {
   updateDukaNavButtons();
 
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('pada-detail');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 // පද විස්තර පිටුවේ: වත්මන් පදය අයත් දුකයේ පද දෙකම පෙන්වා (තික පිටුවේ මෙන්) ඒවා අතර මාරු විය හැක
@@ -863,7 +863,7 @@ function backToGochhakaList() {
   dukaState.currentPada = null;
   showDukaView('duka-view-list');
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('list');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 function backToDukaList() {
@@ -872,7 +872,7 @@ function backToDukaList() {
   dukaState.currentPada = null;
   showDukaView('duka-view-duka-list');
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('duka-list');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 function backToPadaPair() {
@@ -880,7 +880,7 @@ function backToPadaPair() {
   dukaState.currentPada = null;
   showDukaView('duka-view-pada-pair');
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('pada-pair');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 // ============================================================
@@ -1083,7 +1083,7 @@ function showDukaBookmarksView() {
   showDukaView('duka-view-bookmarks');
   if (typeof updateBreadcrumbDuka === 'function') updateBreadcrumbDuka('bookmarks');
   renderDukaBookmarks();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 function renderDukaBookmarks() {

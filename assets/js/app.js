@@ -23,7 +23,7 @@
     sections.forEach(function (sec) { sec.classList.add('hidden'); });
     var targetSec = document.getElementById('view-' + viewName);
     if (targetSec) targetSec.classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   // ============================================================

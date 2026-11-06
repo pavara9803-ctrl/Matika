@@ -24,7 +24,7 @@ const ASSETS_TO_CACHE = [
   './assets/js/matika-ui.js',
   './assets/js/matika-theme.js',
   './assets/js/app.js',
-  './assets/js/vendor/tailwind.min.js',
+  './assets/css/tailwind-built.css',
 ];
 
 // CORE: offline ක්‍රියාවට අත්‍යවශ්‍ය ගොනු — install විට සියල්ලම cache විය යුතුයි (එසේ නොවුණහොත් install අසාර්ථක වී පසුව නැවත උත්සාහ කරයි;

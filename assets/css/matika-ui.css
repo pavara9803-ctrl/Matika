@@ -1044,3 +1044,19 @@
 .hs-ico { flex:none; width:30px; height:30px; display:grid; place-items:center; border-radius:50%; background:linear-gradient(180deg,#fcd34d,#f59e0b); color:#3f0a0c; font-size:13px; }
 .hs-input { flex:1; min-width:0; border:0; outline:0; background:transparent; color:#fef3c7; font:inherit; font-size:16px; padding:11px 0; }
 @media (min-width: 640px) { .hs-wrap { flex: 0 1 560px; margin: 0 auto; } }   /* tablet / පරිගණක */
+
+/* ============================================================
+   ස්පර්ශ ප්‍රතිචාරය (touch) — ක්ෂණික හා ස්මූත් බව
+   • touch-action: manipulation — double-tap zoom බලා සිටීම / ප්‍රමාදය ඉවත් කරයි
+   • :active — ඇඟිල්ල තැබූ සැනින් දෘශ්‍ය ප්‍රතිචාරය (ඉතා කෙටි transition)
+   ============================================================ */
+a, button, summary, label, select, [role="button"], [onclick],
+.mx-card, .tl-head, .tl-pada, .mx-pager__link {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.tl-head:active, .tl-pada:active, .mx-pager__link:active {
+  background-color: rgba(245, 158, 11, .30);
+  transition-duration: 40ms;
+}
+.mx-card:active { transition-duration: 60ms; }

@@ -76,7 +76,7 @@ function backToTikaList() {
   showTikaView('tika-view-list');
   updateBreadcrumbTika('list');
   renderTikaList();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 // ============================================================
@@ -770,7 +770,7 @@ function showTikaBookmarksView() {
   showTikaView('tika-view-bookmarks');
   updateBreadcrumbTika('bookmarks');
   renderTikaBookmarks();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 function renderTikaBookmarks() {

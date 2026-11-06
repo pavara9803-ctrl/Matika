@@ -1,9 +1,10 @@
-self.PRECACHE_VERSION = "v40b453dba3";
+self.PRECACHE_VERSION = "v9ad6bc6a63";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/fonts.css",
   "./assets/css/matika-ui.css",
   "./assets/css/paramattha.css",
+  "./assets/css/tailwind-built.css",
   "./assets/fonts/inter-latin.woff2",
   "./assets/fonts/noto-sans-myanmar.woff2",
   "./assets/fonts/noto-serif-sinhala-latin.woff2",
@@ -38,7 +39,6 @@ self.PRECACHE_CORE = [
   "./assets/js/pm-atlas.js",
   "./assets/js/sw-update.js",
   "./assets/js/updates-notice.js",
-  "./assets/js/vendor/tailwind.min.js",
   "./data/matika/duka/gochhaka-01-hetu.js",
   "./data/matika/duka/gochhaka-02-cullantara.js",
   "./data/matika/duka/gochhaka-03-asava.js",
