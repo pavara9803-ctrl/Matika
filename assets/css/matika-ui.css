@@ -1036,6 +1036,8 @@
 .home-header::before { content:""; position:absolute; inset:0 0 3px 0; pointer-events:none; opacity:.5;
   background: radial-gradient(circle at 18% 120%, rgba(251,191,36,.18) 0 38px, transparent 39px), radial-gradient(circle at 82% -20%, rgba(251,191,36,.14) 0 46px, transparent 47px); }
 .home-header > * { position: relative; z-index: 1; }
+/* භාෂා මෙනුව පහළ සංචාලන තීරුව (m-topnav) පිටුපසට නොයෑමට: ඉහළ තීරුව ඉහළින් */
+.home-header > :first-child { z-index: 2; }
 .hs-wrap { flex:1; min-width:0; display:flex; align-items:center; gap:10px; margin:0 8px; padding:0 8px 0 6px; border:2px solid #d99a2b; border-radius:999px;
   background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06)); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 3px 12px -4px rgba(0,0,0,.5); transition: box-shadow .15s, border-color .15s; }
 .hs-wrap:focus-within { border-color:#fcd34d; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 0 0 4px rgba(252,211,77,.25), 0 3px 14px -4px rgba(0,0,0,.5); }
