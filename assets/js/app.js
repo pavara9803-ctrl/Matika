@@ -53,14 +53,14 @@
     var playStoreUrl = 'https://play.google.com/store/apps/details?id=' + APP_PACKAGE_NAME;
     try {
       if (/android/i.test(navigator.userAgent)) {
-        // Play Store ඇප් එක කෙලින්ම විවෘත කරන්න (ඇප් එක විවෘත වූ විට fallback එක අවලංගු වේ)
-        var left = false, onHide = function () { if (document.hidden) left = true; };
-        document.addEventListener('visibilitychange', onHide);
-        window.location.href = 'market://details?id=' + APP_PACKAGE_NAME;
-        setTimeout(function () {
-          document.removeEventListener('visibilitychange', onHide);
-          if (!left) window.location.href = playStoreUrl;
-        }, 1500);
+        // Android: intent:// ලින්ක් එක Play Store ඇප් එක (com.android.vending) කෙලින්ම විවෘත කරයි.
+        // එය විවෘත කළ නොහැකි නම්, Android විසින්ම S.browser_fallback_url (Play Store වෙබ් පිටුව) විවෘත කරයි.
+        // (පෙර වෙනස: market:// + setTimeout fallback නිසා, TWA තුළදී Play Store ඇප් එක ඇරෙන්නේ නැතිව
+        //  Chrome වෙබ් පිටුව පමණක් ඇරී තරු යොදන තැන නොපෙනී තිබුණි.)
+        window.location.href =
+          'intent://details?id=' + APP_PACKAGE_NAME +
+          '#Intent;scheme=market;package=com.android.vending;' +
+          'S.browser_fallback_url=' + encodeURIComponent(playStoreUrl) + ';end';
       } else {
         window.open(playStoreUrl, '_blank', 'noopener');
       }
