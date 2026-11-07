@@ -443,5 +443,3 @@ a.mx-pager__link { color: var(--m-ink-soft); }
 @media (max-width: 520px) { .ca-secnav button { padding: 8px 12px; font-size: 13.5px; } .ca-secbar { padding: 6px 0; } }
 html, body { overflow-x: clip; }
 body { height: auto !important; min-height: 100vh; }
-.pf__gatha { margin: 6px 0 0; font-size: 14px; line-height: 1.8; text-align: left !important; color: var(--m-ink); }
-.pf__gatha cite { display: block; font-style: normal; font-size: 12px; color: var(--m-ink-soft); }
