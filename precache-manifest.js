@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "va406fdbcaa";
+self.PRECACHE_VERSION = "vf30638a155";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/fonts.css",
