@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v0574aa82ce";
+self.PRECACHE_VERSION = "v147a9bf16c";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/fonts.css",
@@ -132,6 +132,7 @@ self.PRECACHE_LATER = [
   "./assets/i18n/zh-Hant-common.js",
   "./assets/i18n/zh-Hant-duka.js",
   "./assets/i18n/zh-Hant-matika.js",
+  "./assets/i18n/zh-Hant-nibbana.js",
   "./assets/i18n/zh-Hant-paramattha.js",
   "./assets/i18n/zh-Hant-paramattha2.js",
   "./assets/i18n/zh-Hant-paramattha3.js",
@@ -142,6 +143,7 @@ self.PRECACHE_LATER = [
   "./assets/i18n/zh-common.js",
   "./assets/i18n/zh-duka.js",
   "./assets/i18n/zh-matika.js",
+  "./assets/i18n/zh-nibbana.js",
   "./assets/i18n/zh-paramattha.js",
   "./assets/i18n/zh-paramattha2.js",
   "./assets/i18n/zh-paramattha3.js",

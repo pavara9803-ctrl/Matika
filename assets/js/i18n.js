@@ -30,8 +30,8 @@
   var AVAILABLE = {
     my: ['my-app.js', 'my-common.js', 'my-duka.js', 'my-paramattha.js', 'my-paramattha2.js', 'my-paramattha3.js',
          'my-matika.js', 'my-sabbattika.js', 'my-suttanta.js', 'my-tika.js', 'my-nibbana.js'],
-    zh: ['zh-app.js', 'zh-common.js', 'zh-sabbattika.js', 'zh-tika.js', 'zh-duka.js', 'zh-suttanta.js', 'zh-matika.js', 'zh-paramattha.js', 'zh-paramattha3.js', 'zh-paramattha2.js'],
-    'zh-Hant': ['zh-Hant-app.js', 'zh-Hant-common.js', 'zh-Hant-sabbattika.js', 'zh-Hant-tika.js', 'zh-Hant-duka.js', 'zh-Hant-suttanta.js', 'zh-Hant-matika.js', 'zh-Hant-paramattha.js', 'zh-Hant-paramattha3.js', 'zh-Hant-paramattha2.js']
+    zh: ['zh-app.js', 'zh-common.js', 'zh-sabbattika.js', 'zh-tika.js', 'zh-duka.js', 'zh-suttanta.js', 'zh-matika.js', 'zh-paramattha.js', 'zh-paramattha3.js', 'zh-paramattha2.js', 'zh-nibbana.js'],
+    'zh-Hant': ['zh-Hant-app.js', 'zh-Hant-common.js', 'zh-Hant-sabbattika.js', 'zh-Hant-tika.js', 'zh-Hant-duka.js', 'zh-Hant-suttanta.js', 'zh-Hant-matika.js', 'zh-Hant-paramattha.js', 'zh-Hant-paramattha3.js', 'zh-Hant-paramattha2.js', 'zh-Hant-nibbana.js']
   };
   var dicts = { en: {}, my: {}, zh: {}, 'zh-Hant': {} };       // සිංහල (සාමාන්‍යකරණය කළ) → පරිවර්තනය
   var patterns = { en: [], my: [], zh: [], 'zh-Hant': [] };    // [RegExp, replacement|function] — ඉලක්කම් අඩංගු පාඨ සඳහා
