@@ -368,6 +368,7 @@
     var p = location.pathname;
     var files = ['en-common.js', 'en-app.js'];
     if (/\/paramattha\//.test(p)) files.push('en-paramattha.js', 'en-paramattha2.js', 'en-paramattha3.js');
+    if (/\/paramattha\/nibbana\.html/.test(p)) files.push('en-nibbana.js');
     if (/\/matika\//.test(p)) files.push('en-matika.js');
     if (/\/sabbattika\.html/.test(p)) files.push('en-sabbattika.js');
     if (/\/tika-matika\.html/.test(p)) files.push('en-tika.js');

@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v4e9547a0b0";
+self.PRECACHE_VERSION = "v17f601d1d1";
 self.PRECACHE_CORE = [
   "./about.html",
   "./assets/css/fonts.css",
@@ -110,6 +110,7 @@ self.PRECACHE_LATER = [
   "./assets/i18n/en-common.js",
   "./assets/i18n/en-duka.js",
   "./assets/i18n/en-matika.js",
+  "./assets/i18n/en-nibbana.js",
   "./assets/i18n/en-paramattha.js",
   "./assets/i18n/en-paramattha2.js",
   "./assets/i18n/en-paramattha3.js",
