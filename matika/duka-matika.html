@@ -87,6 +87,12 @@ th { text-align: left; }
   color: #b45309; font-weight: 600; text-align: right;
   flex-shrink: 0; max-width: 60%; font-size: 0.85rem;
 }
+/* දුරකථන තිර: value කොටස දකුණට කැපී නොයන සේ පහළට ගෙන සම්පූර්ණ පළලින් පෙන්වයි */
+.breakdown-item .name { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .breakdown-item { flex-wrap: wrap; }
+  .breakdown-item .value { flex: 1 1 100%; max-width: 100%; min-width: 0; text-align: left; overflow-wrap: anywhere; padding-left: 2.55rem; }
+}
 .dark .breakdown-item { border-bottom-color: #40332b; }
 .dark .breakdown-item .num { color: #fcd34d; background: rgba(252, 211, 77, 0.15); }
 .dark .breakdown-item .name { color: #fde68a; }
