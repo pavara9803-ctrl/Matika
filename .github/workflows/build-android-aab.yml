@@ -76,14 +76,22 @@ jobs:
           JSON
           npm install -g @bubblewrap/cli@1.22.4
 
-      - name: Generate Android project and build AAB
+      - name: Generate Android project
         working-directory: android
-        env:
-          BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ env.KEYSTORE_PASSWORD }}
-          BUBBLEWRAP_KEY_PASSWORD: ${{ env.KEY_PASSWORD }}
+        run: bubblewrap update --skipVersionUpgrade --manifest=./twa-manifest.json
+
+      - name: Build and sign AAB (Gradle + jarsigner)
+        working-directory: android
         run: |
-          bubblewrap update --skipVersionUpgrade --manifest=./twa-manifest.json
-          bubblewrap build --skipPwaValidation --manifest=./twa-manifest.json
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          chmod +x ./gradlew
+          ./gradlew --no-daemon bundleRelease
+          cp app/build/outputs/bundle/release/app-release.aab app-release-bundle.aab
+          jarsigner -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore android.keystore \
+            -storepass "$KEYSTORE_PASSWORD" -keypass "$KEY_PASSWORD" \
+            app-release-bundle.aab "$KEY_ALIAS"
+          jarsigner -verify app-release-bundle.aab | head -3
           ls -la *.aab
 
       - name: Show signing certificate fingerprint
