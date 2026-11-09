@@ -45,6 +45,11 @@ jobs:
             echo "mode=test" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Inspect keystore (aliases and entry types only)
+        working-directory: android
+        run: |
+          keytool -list -keystore android.keystore -storepass "$KEYSTORE_PASSWORD" 2>&1 | grep -vi "password" | sed 's/^/  /' || true
+
       - name: Fill in version and key alias
         working-directory: android
         env:
