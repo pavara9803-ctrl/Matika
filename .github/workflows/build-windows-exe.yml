@@ -24,6 +24,9 @@ jobs:
           mkdir -p desktop/app desktop/build
           for f in *.html manifest.json; do cp "$f" desktop/app/; done
           cp -r assets data matika paramattha desktop/app/
+          # ඇප් එකට අවශ්‍ය නොවන විශාල ගොනු ඉවත් කරන්න (exe ප්‍රමාණය අඩු කිරීමට)
+          rm -rf desktop/app/assets/screenshots
+          find desktop/app/assets/icons -type f ! -name 'launchericon-512x512.png' ! -name '192.png' ! -name '512.png' ! -name '16.png' ! -name '128.png' -size +100k -delete
           cp assets/icons/launchericon-512x512.png desktop/build/icon.png
 
       - name: Install dependencies
