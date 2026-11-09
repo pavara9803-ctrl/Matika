@@ -1,0 +1,35 @@
+{
+  "name": "tika-matika-app",
+  "productName": "Tika Matika App",
+  "version": "1.0.0",
+  "description": "අභිධර්ම මාතිකා අධ්‍යයනය — Abhidhamma Matika Study (Windows)",
+  "author": "Dhamma Study Apps",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "app.matika.desktop",
+    "productName": "Tika Matika App",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "app/**/*"],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "Tika-Matika-Setup-${version}.${ext}"
+    },
+    "portable": { "artifactName": "Tika-Matika-Portable-${version}.${ext}" }
+  }
+}
