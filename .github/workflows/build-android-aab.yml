@@ -94,7 +94,7 @@ jobs:
           cp app/build/outputs/bundle/release/app-release.aab app-release-bundle.aab
           jarsigner -sigalg SHA256withRSA -digestalg SHA-256 \
             -keystore android.keystore \
-            -storepass "$KEYSTORE_PASSWORD" -keypass "$KEY_PASSWORD" \
+            -storepass "$KEYSTORE_PASSWORD" \
             app-release-bundle.aab "$KEY_ALIAS"
           jarsigner -verify app-release-bundle.aab | head -3
           ls -la *.aab
