@@ -64,10 +64,15 @@ jobs:
 
       - name: Install Android SDK components and Bubblewrap
         run: |
-          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          echo "Android SDK at: $SDK"
+          ls "$SDK" || true
+          yes | "$SDK/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$SDK/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;android-35" "build-tools;35.0.0" "build-tools;34.0.0"
+          ls "$SDK/build-tools" "$SDK/platforms"
           mkdir -p ~/.bubblewrap
           cat > ~/.bubblewrap/config.json <<JSON
-          {"jdkPath":"$JAVA_HOME","androidSdkPath":"$ANDROID_HOME"}
+          {"jdkPath":"$JAVA_HOME","androidSdkPath":"$SDK"}
           JSON
           npm install -g @bubblewrap/cli@1.22.4
 
