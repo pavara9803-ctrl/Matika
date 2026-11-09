@@ -16,12 +16,22 @@
   "build": {
     "appId": "app.matika.desktop",
     "productName": "Tika Matika App",
-    "directories": { "output": "dist", "buildResources": "build" },
-    "files": ["main.js", "app/**/*"],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "app/**/*"
+    ],
     "win": {
       "target": [
-        { "target": "nsis", "arch": ["x64"] },
-        { "target": "portable", "arch": ["x64"] }
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
       ],
       "icon": "build/icon.png"
     },
@@ -30,6 +40,9 @@
       "allowToChangeInstallationDirectory": true,
       "artifactName": "Tika-Matika-Setup-${version}.${ext}"
     },
-    "portable": { "artifactName": "Tika-Matika-Portable-${version}.${ext}" }
+    "compression": "maximum",
+    "electronLanguages": [
+      "en-US"
+    ]
   }
 }
