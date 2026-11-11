@@ -174,7 +174,7 @@
         num.className = 'm-toc__n';
         num.textContent = it.lvl === 2 ? String(n) : '';
         var txt = document.createElement('span');
-        txt.textContent = h.textContent.replace(/\s+/g, ' ').trim();
+        txt.textContent = h.getAttribute('data-toc') || h.textContent.replace(/\s+/g, ' ').trim();
         a.appendChild(num); a.appendChild(txt);
         a.addEventListener('click', function (e) {
           e.preventDefault();

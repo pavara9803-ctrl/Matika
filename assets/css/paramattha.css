@@ -539,3 +539,28 @@ body { height: auto !important; min-height: 100vh; }
 :root.dark .vg-k { background: #b45309; }
 :root.dark .vg-u { background: #57534e; }
 @media (max-width: 520px) { .vg-t td, .vg-t th { min-width: 27px; height: 26px; font-size: 13px; } }
+/* කෘත්‍ය 14 — ක්ලික් කළ විට සිත් */
+.vk-list { margin-top: 12px; display: grid; gap: 8px; }
+.vk { border: 1px solid var(--m-rule); border-radius: 12px; background: var(--m-leaf); overflow: hidden; }
+.vk > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+.vk > summary::-webkit-details-marker { display: none; }
+.vk > summary:hover { background: rgba(180, 83, 9, .06); }
+.vk-i { flex: none; width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: var(--m-lacquer, #7f1d1d); color: #fff; font-size: 13px; font-weight: 700; }
+.vk-n { flex: 1; font-weight: 700; font-size: 16px; color: var(--m-lacquer); display: flex; flex-direction: column; line-height: 1.5; }
+.vk-n small { font-weight: 500; font-size: 13px; color: var(--m-ink-soft); }
+.vk-c { flex: none; font-size: 13.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: #fef3c7; color: #92400e; }
+.vk-car { flex: none; font-size: 13px; color: var(--m-ink-soft); transition: transform .2s; }
+.vk[open] .vk-car { transform: rotate(180deg); }
+.vk[open] > summary { border-bottom: 1px solid var(--m-rule); }
+.vk-b { padding: 6px 14px 12px; background: var(--ca-panel); }
+.vk-g h4 { margin: 10px 0 4px; font-size: 14.5px; font-weight: 700; color: var(--m-saffron, #b45309); }
+.vk-g h4 span { font-weight: 500; color: var(--m-ink-soft); }
+.vk-g ol { margin: 0; padding-left: 24px; display: grid; gap: 3px; }
+.vk-g li { font-size: 15px; line-height: 1.75; color: var(--m-ink); }
+:root.dark .vk-n { color: #fcd34d; }
+:root.dark .vk-c { background: #78350f; color: #fde68a; }
+:root.dark .vk-g h4 { color: #fbbf24; }
+.vk-g li, .vk-n { text-align: left; }
+/* කොටස් තීරුව ඇති පිටුවල පටුන (rail) එයට යටින් — තීරුවේ පසුබිම පටුන වසා නොගනී */
+:root:has(.ca-secbar) .m-rail { z-index: 21; top: calc(var(--m-header-h, 64px) + 92px); max-height: calc(100vh - var(--m-header-h, 64px) - 112px); background: var(--m-paper, transparent); }
+.m-rail .m-toc a { text-align: left; }
