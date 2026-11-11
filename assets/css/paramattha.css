@@ -473,3 +473,28 @@ body { height: auto !important; min-height: 100vh; }
 :root.dark .vt-tbl tbody th { color: #fcd34d; }
 .vt-src { margin: 4px 2px 0; font-size: 13px; color: var(--m-ink-soft); line-height: 1.8; }
 @media (max-width: 520px) { .vt-card { padding: 14px 12px; } .vt-p, .vt-dl dd { font-size: 15px; } }
+/* චිත්තවීථි — පොත ඇසුරින් පුළුල් කළ කොටස */
+.vt-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.vt-jump a { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--m-rule); background: var(--ca-panel); color: var(--m-lacquer); font-size: 14px; font-weight: 600; text-decoration: none; }
+.vt-jump a:hover { border-color: var(--ca-ring); }
+:root.dark .vt-jump a { color: #fcd34d; }
+.vt-grp { scroll-margin-top: calc(var(--m-header-h, 64px) + 80px); margin: 14px 0 0; padding: 10px 2px 6px; font-size: 20px; font-weight: 800; color: var(--m-lacquer); border-bottom: 2px solid var(--m-saffron); display: flex; flex-direction: column; gap: 2px; }
+.vt-grp span { font-size: 13px; font-weight: 500; color: var(--m-ink-soft); }
+:root.dark .vt-grp { color: #fcd34d; }
+.vt-sh { margin: 14px 0 0; font-size: 16px; font-weight: 700; color: var(--m-lacquer); }
+:root.dark .vt-sh { color: #fcd34d; }
+.vt-ul { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+.vt-ul li { font-size: 15.5px; line-height: 1.9; text-align: justify; color: var(--m-ink); }
+.vt-note { margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--m-leaf); border: 1px dashed var(--m-rule); font-size: 14.5px; line-height: 1.85; color: var(--m-ink-soft); }
+.vt-cap { margin: 14px 0 0; font-size: 13.5px; font-weight: 700; color: var(--m-ink-soft); }
+.vt-cap + .vt-chips { margin-top: 6px; }
+.vt-c-k .vt-chip__n { background: #0891b2; color: #fff; }
+.vt-c-m .vt-chip__n { background: #2563eb; color: #fff; }
+.vt-c-p .vt-chip__n { background: #9333ea; color: #fff; }
+.vt-c-a .vt-chip__n { background: #be123c; color: #fff; }
+.vt-legend .vt-chip__n { min-width: 34px; }
+@media (max-width: 520px) { .vt-ul li { font-size: 15px; } .vt-grp { font-size: 18px; } }
+.vt-wrap > *, .vt-card, .vt-dl > div { min-width: 0; }
+.vt-card { overflow-wrap: break-word; }
+.vt-tbl th, .vt-tbl td { overflow-wrap: normal; }
+.vt-tbl th, .vt-tbl td { min-width: 6.5em; }
