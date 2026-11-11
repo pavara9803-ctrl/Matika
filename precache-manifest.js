@@ -1,6 +1,7 @@
-self.PRECACHE_VERSION = "v147a9bf16c";
+self.PRECACHE_VERSION = "v4fe3d452fb";
 self.PRECACHE_CORE = [
   "./about.html",
+  "./android/twa-manifest.json",
   "./assets/css/fonts.css",
   "./assets/css/matika-ui.css",
   "./assets/css/paramattha.css",
@@ -37,6 +38,7 @@ self.PRECACHE_CORE = [
   "./assets/js/pages/updates-page.js",
   "./assets/js/pali-script.js",
   "./assets/js/pm-atlas.js",
+  "./assets/js/site-header.js",
   "./assets/js/sw-update.js",
   "./assets/js/updates-notice.js",
   "./data/matika/duka/gochhaka-01-hetu.js",
@@ -88,6 +90,8 @@ self.PRECACHE_CORE = [
   "./data/paramattha/rupa-deta.js",
   "./data/search/search-index.js",
   "./data/updates/corrections.js",
+  "./desktop/main.js",
+  "./desktop/package.json",
   "./help.html",
   "./index.html",
   "./manifest.json",
