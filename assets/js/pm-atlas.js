@@ -227,7 +227,9 @@
     }
     btns.forEach(function (b) { b.addEventListener('click', function () { go(b.dataset.sec, true); }); });
     var saved = store(key);
-    go(saved && $('#sec-' + saved) ? saved : btns[0].dataset.sec, false);
+    var hm = /^#sec-([\w-]+)$/.exec(location.hash || '');
+    var want = hm && $('#sec-' + hm[1]) ? hm[1] : (saved && $('#sec-' + saved) ? saved : btns[0].dataset.sec);
+    go(want, false);
     return go;
   }
 
