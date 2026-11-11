@@ -31,7 +31,7 @@
   function lang() { return (window.MX_I18N && window.MX_I18N.lang && window.MX_I18N.lang()) || 'si'; }
   function L(o) { var l = lang(); return o[l] || o.en || o.si; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function root() { return './'; }
+  function root() { return window.MX_ROOT || './'; }
 
   // ── ප්‍රමිතිකරණය: ZWJ/ZWNJ ඉවත්, කුඩා අකුරු, රෝම diacritic ඉවත් (ā→a), විරාම ලකුණු → හිස්තැන ──
   function normChar(ch) {
@@ -218,6 +218,7 @@
   }
 
   function syncUrl() {
+    if (window.MX_NO_URLQ) return;
     try {
       var u = new URL(location.href);
       if (lastQ) u.searchParams.set('q', lastQ); else u.searchParams.delete('q');
@@ -238,7 +239,7 @@
   function reset() { $('hs-q').value = ''; shown = PAGE; filter = 'all'; render(); syncUrl(); }
   function init() {
     if (!$('hs-q')) return;
-    var q0 = ''; try { q0 = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
+    var q0 = ''; try { if (!window.MX_NO_URLQ) q0 = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
     $('hs-q').value = q0;
     $('hs-q').addEventListener('focus', loadIndex);
     $('hs-q').addEventListener('input', function () { loadIndex(); onInput(); });
