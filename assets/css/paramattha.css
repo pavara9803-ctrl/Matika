@@ -561,3 +561,6 @@ body { height: auto !important; min-height: 100vh; }
 :root.dark .vk-c { background: #78350f; color: #fde68a; }
 :root.dark .vk-g h4 { color: #fbbf24; }
 .vk-g li, .vk-n { text-align: left; }
+/* කොටස් තීරුව ඇති පිටුවල පටුන (rail) එයට යටින් — තීරුවේ පසුබිම පටුන වසා නොගනී */
+:root:has(.ca-secbar) .m-rail { z-index: 21; top: calc(var(--m-header-h, 64px) + 92px); max-height: calc(100vh - var(--m-header-h, 64px) - 112px); background: var(--m-paper, transparent); }
+.m-rail .m-toc a { text-align: left; }
