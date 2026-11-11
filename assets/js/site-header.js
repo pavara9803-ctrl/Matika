@@ -1,6 +1,6 @@
 /* ============================================================
    site-header.js — මුල් පිටුවේ ශීර්ෂයම (අන්තර්ගත රුක · සෙවුම · භාෂාව · සැකසුම්) අනෙක් පිටු සඳහා
-   • පිටුවේ පවතින <header> එක ප්‍රතිස්ථාපනය කරයි (පිටු මාතෘකාව සහ පිටුවටම අදාළ බොත්තම් "pagebar" එකකට ගෙන යයි)
+   • පිටුවේ පවතින <header> එක ප්‍රතිස්ථාපනය කරයි (පිටු මාතෘකාව sr-only; "සුරැකි මාතිකා" වැනි බොත්තම් සැකසුම් මෙනුවට)
    • අන්තර්ගත රුක (home-tree.js) සහ සෙවුම (home-search.js) පූරණය කරයි
    • මෙම ගොනුව <header> අවසානයෙන් පසුව, සමකාලීනව (sync) පූරණය විය යුතුයි
    ============================================================ */
@@ -32,6 +32,7 @@
     var href = el.getAttribute('href') || '';
     if (el.tagName === 'A' && /(^|\/)index\.html(#.*)?$/.test(href)) return;            /* මුල් පිටුවට / ආපසු: රුකේ තිබේ */
     if (el.tagName === 'A' && /^\.\.?\/?$/.test(href)) return;
+    if (/scrollToTop/.test(oc)) return;                                                 /* ඉහළට: අවශ්‍ය නැත */
     extras.push(el);
   });
 
@@ -52,31 +53,26 @@
     '<button type="button" id="hs-x" class="hs-x hidden" aria-label="✕">✕</button></form>' +
     GEAR + '</div>';
 
-  /* ── pagebar: පිටු මාතෘකාව + පිටුවටම අදාළ බොත්තම් ── */
-  var bar = null;
-  if (h1 || extras.length) {
-    bar = document.createElement('div');
-    bar.className = 'mx-pagebar';
-    var inner = document.createElement('div');
-    inner.className = 'mx-pagebar__in';
-    var left = document.createElement('div'); left.className = 'mx-pagebar__title';
-    var right = document.createElement('div'); right.className = 'mx-pagebar__acts';
-    if (h1) {
-      h1.className = 'mx-pagebar__h1';
-      left.appendChild(titleNode);
-    }
-    extras.forEach(function (el) { right.appendChild(el); });
-    inner.appendChild(left); inner.appendChild(right); bar.appendChild(inner);
-  }
+  /* පිටුවේ මාතෘකාව (h1) screen-reader සඳහා පමණක් තබයි */
+  if (h1) { h1.className = 'sr-only'; header.appendChild(h1); }
 
   hdr.parentNode.insertBefore(header, hdr);
-  if (bar) hdr.parentNode.insertBefore(bar, hdr);
   hdr.parentNode.removeChild(hdr);
 
   /* ── මෙනුව, රුක, සෙවුම් ප්‍රතිඵල පැනලය ── */
   var wrap = document.createElement('div');
   wrap.innerHTML = MENU + TREE;
   while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
+  var MI = 'w-full text-left px-4 py-3 hover:bg-amber-100 dark:hover:bg-slate-700 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b border-amber-100 dark:border-slate-700 relative';
+  var list = document.querySelector('#custom-menu > div');
+  extras.slice().reverse().forEach(function (el) {
+    var label = el.getAttribute('title') || '';
+    el.className = MI;
+    el.removeAttribute('title');
+    var i = el.querySelector('i'); if (i) i.className = i.className.replace(/\btext-lg\b/, '') + ' text-saffron-600 text-lg w-5';
+    var span = document.createElement('span'); span.textContent = label; el.appendChild(span);
+    if (list) list.insertBefore(el, list.firstChild);
+  });
   var panel = document.createElement('section');
   panel.id = 'hs-panel'; panel.className = 'hs-panel hs-panel--overlay'; panel.hidden = true;
   panel.setAttribute('aria-live', 'polite'); panel.setAttribute('data-no-i18n', '');
