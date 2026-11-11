@@ -1061,16 +1061,7 @@ a, button, summary, label, select, [role="button"], [onclick],
 }
 .mx-card:active { transition-duration: 60ms; }
 
-/* ── අනෙක් පිටුවල ශීර්ෂය (site-header.js): පිටු මාතෘකා තීරුව සහ සෙවුම් ප්‍රතිඵල පැනලය ── */
-.mx-pagebar { background: var(--m-surface, #fff); border-bottom: 1px solid #fcd34d; }
-:root.dark .mx-pagebar { border-bottom-color: rgba(252, 211, 77, .25); }
-.mx-pagebar__in { max-width: 48rem; margin: 0 auto; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.mx-pagebar__title { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.mx-pagebar__acts { display: flex; align-items: center; gap: 8px; flex: none; }
-.mx-pagebar__h1 { margin: 0; font-weight: 700; font-size: 1.05rem; line-height: 1.5; color: #5a1215; }
-:root.dark .mx-pagebar__h1 { color: #fcd34d; }
-.mx-pagebar .rounded-full { color: #b45309; border-color: #f59e0b; }
-:root.dark .mx-pagebar .rounded-full { color: #fcd34d; }
+/* ── අනෙක් පිටුවල ශීර්ෂය (site-header.js): සෙවුම් ප්‍රතිඵල පැනලය ── */
 .hs-panel--overlay { position: fixed; left: 0; right: 0; bottom: 0; top: 80px; overflow-y: auto; z-index: 25; padding: 8px 16px 32px; background: var(--m-bg, #fffbeb); }
 :root.dark .hs-panel--overlay { background: #0f172a; }
 .hs-panel--overlay[hidden] { display: none; }
