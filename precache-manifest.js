@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v7557b0b8ca";
+self.PRECACHE_VERSION = "v19a7ed7e22";
 self.PRECACHE_CORE = [
   "./about.html",
   "./android/twa-manifest.json",
@@ -57,7 +57,10 @@ self.PRECACHE_CORE = [
   "./data/matika/duka/gochhaka-11-upadana.js",
   "./data/matika/duka/gochhaka-12-kilesa.js",
   "./data/matika/duka/gochhaka-13-pitthi.js",
+  "./data/matika/pali/anutika.js",
+  "./data/matika/pali/atthasalini.js",
   "./data/matika/pali/dhammasangani-pali.js",
+  "./data/matika/pali/mulatika.js",
   "./data/matika/sabbatika-data.js",
   "./data/matika/suttanta/suttanta-data-1.js",
   "./data/matika/suttanta/suttanta-data-2.js",

@@ -87,3 +87,33 @@
 .pp-head:focus-visible { outline: 2px solid #b45309; outline-offset: 4px; border-radius: 12px; }
 .dark .pp-hint { background: #78350f; color: #fde68a; border-color: #92400e; }
 .dark .pp-car { color: #fcd34d; }
+/* ග්‍රන්ථ තේරීම (පාළිය · අට්ඨකථාව · මූලටීකාව · අනුටීකාව) */
+.pp-books { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+.pp-book { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 9px 4px; border-radius: 12px; border: 1px solid #ecd3a0; background: rgba(255, 255, 255, .55); color: #78350f; font-family: inherit; cursor: pointer; transition: background .15s, box-shadow .15s, color .15s; }
+.pp-book__t { font-size: 14px; font-weight: 800; }
+.pp-book__s { font-size: 10.5px; opacity: .8; text-align: center; line-height: 1.4; }
+.pp-book:hover { background: #fff; }
+.pp-book.is-on { background: linear-gradient(135deg, #7f1d1d, #9a3412); border-color: #7f1d1d; color: #fde68a; box-shadow: 0 4px 12px -6px rgba(127, 29, 29, .7); }
+.pp-book.is-loading { opacity: .6; cursor: progress; }
+.pp-tabs--3 { grid-template-columns: repeat(3, 1fr); }
+.pp-tabs--3 .pp-tab__t { font-size: 12.5px; text-align: center; line-height: 1.4; }
+/* අට්ඨකථා / ටීකා ඡේද */
+.pp-leaves--cm { gap: 8px; }
+.pp-cm { padding-top: 12px; }
+.pp-cont { margin-top: -4px; border-top-style: dashed; }
+.pp-verse .pp-a { text-align: center !important; font-style: italic; color: #7c2d12; }
+.pp-quote { color: #7f1d1d; font-weight: 700; }
+.pp-ref { color: #a8a29e; font-size: .82em; white-space: nowrap; }
+.pp-empty { margin: 4px 0 0; padding: 14px; border-radius: 12px; text-align: center; font-size: 13.5px; color: #92400e; background: rgba(255, 255, 255, .5); border: 1px dashed #e7cf9a; }
+.dark .pp-book { background: rgba(0, 0, 0, .2); border-color: #5b3a1a; color: #e7c98f; }
+.dark .pp-book:hover { background: rgba(255, 255, 255, .05); }
+.dark .pp-book.is-on { background: linear-gradient(135deg, #9a3412, #b45309); color: #fff7ed; border-color: #b45309; }
+.dark .pp-quote { color: #fcd34d; }
+.dark .pp-verse .pp-a { color: #fdba74; }
+.dark .pp-empty { background: rgba(0, 0, 0, .2); color: #e7c98f; border-color: #5b3a1a; }
+@media (max-width: 520px) {
+  .pp-books { grid-template-columns: repeat(2, 1fr); }
+  .pp-tabs--3 .pp-tab__t { font-size: 11.5px; }
+  .pp-tabs--3 .pp-tab__s { font-size: 10px; }
+}
+.pp-tab { min-width: 0; } .pp-tab__t, .pp-tab__s { overflow-wrap: anywhere; text-align: center; }
