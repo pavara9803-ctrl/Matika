@@ -5,11 +5,11 @@
     "date": "2026-11-18"
   },
   "windows": {
-    "version": "1.0.4",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.4/Tika-Matika-Setup.exe",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.4",
-    "size": 7754812,
+    "version": "1.0.5",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.5/Tika-Matika-Setup.exe",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.5",
+    "size": 7755563,
     "date": "2026-11-18",
-    "notes": "ඇප් එක ඇතුළේ සබැඳි (ඉහළ මෙනුව, අන්තර්ගත රුක) browser එකට යාම නිවැරදි කළා."
+    "notes": "අකුරු ප්‍රමාණය (A− / A+) සැකසුම එක් කළා — ☰ මෙනුවෙන් අකුරු විශාල/කුඩා කළ හැක."
   }
 }
