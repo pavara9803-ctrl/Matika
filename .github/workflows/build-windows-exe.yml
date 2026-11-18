@@ -1,11 +1,12 @@
 # =====================================================================
-#  Tika Matika App — offline Windows app (Electron) build
+#  Tika Matika App — offline Windows app (Tauri / WebView2)
 #  අවශ්‍ය විට පමණක්:  GitHub → Actions → "Build Windows EXE" → Run workflow
-#  • version හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි
-#    (උදා: 1.0.0 → 1.0.1)
+#  • version හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි (උදා: 1.0.1 → 1.0.2)
 #  ප්‍රතිඵලය: එම run එකේ "Artifacts" සහ GitHub Releases (windows-vX.Y.Z):
-#    • Tika-Matika-Setup.exe — install කිරීමේදී folder එක තෝරාගත හැක
+#    • Tika-Matika-Setup.exe — install කිරීමේදී "මට පමණක්" හෝ "සියලු පරිශීලකයින්ට" තෝරාගත හැක
 #  release එකෙන් පසු app-version.json යාවත්කාලීන වේ.
+#  සටහන: පෙර Electron ක්‍රමය (desktop/ ෆෝල්ඩරය) repo එකේ ඉතිරිව ඇත; ගැටලුවක් ආවොත්
+#  මෙම commit එක revert කර එයට ආපසු යා හැක.
 # =====================================================================
 name: Build Windows EXE
 
@@ -20,8 +21,6 @@ on:
         description: 'අලුත් දේ (release සටහනේ පෙන්වයි; නව පේළියකට \n). හිස්ව තැබිය හැක'
         required: false
         default: ''
-  push:
-    tags: ['v*']
 
 permissions:
   contents: write
@@ -33,16 +32,24 @@ concurrency:
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: desktop-app/src-tauri
 
       # අනුවාදය: අතින් දුන්නේ නැත්නම් app-version.json හි අවසාන අගය + 1
       - name: Version
-        shell: bash
         env:
           IN_VERSION: ${{ inputs.version }}
         run: |
@@ -52,54 +59,34 @@ jobs:
             node .github/scripts/app-version.mjs next windows app-version.json
           fi
 
-      - name: Copy site files into the desktop app
-        shell: bash
+      - name: Install Tauri CLI
+        working-directory: desktop-app
+        run: npm install --no-audit --no-fund
+
+      - name: Copy site files into the app + set version
+        working-directory: desktop-app
         run: |
-          mkdir -p desktop/app desktop/build
-          for f in *.html manifest.json; do cp "$f" desktop/app/; done
-          cp -r assets data matika paramattha desktop/app/
-          # ඇප් එකට අවශ්‍ය නොවන විශාල ගොනු ඉවත් කරන්න (exe ප්‍රමාණය අඩු කිරීමට)
-          rm -rf desktop/app/assets/screenshots
-          find desktop/app/assets/icons -type f ! -name 'launchericon-512x512.png' ! -name '192.png' ! -name '512.png' ! -name '16.png' ! -name '128.png' -size +100k -delete
-          cp assets/icons/launchericon-512x512.png desktop/build/icon.png
+          npm run prepare-www
+          npm run set-version
 
-      - name: Set version in desktop/package.json
-        shell: bash
-        run: |
-          node -e '
-            const fs=require("fs"), p="desktop/package.json";
-            const j=JSON.parse(fs.readFileSync(p,"utf8"));
-            j.version=process.env.APP_VERSION;
-            fs.writeFileSync(p,JSON.stringify(j,null,2)+"\n");
-            console.log("desktop version",j.version);
-          '
-
-      - name: Install dependencies
-        working-directory: desktop
-        run: npm install
-
-      - name: Build installer and portable exe
-        working-directory: desktop
-        run: npm run dist
+      - name: Build installer (.exe)
+        working-directory: desktop-app
+        run: npx tauri build
 
       - uses: actions/upload-artifact@v4
         with:
           name: Tika-Matika-Windows-v${{ env.APP_VERSION }}
-          path: |
-            desktop/dist/*.exe
+          path: desktop-app/src-tauri/target/release/bundle/nsis/*.exe
           if-no-files-found: error
 
-      # GitHub Releases: installer ගොනුව (සෘජු බාගත කිරීම — සෑම අනුවාදයකටම එකම නම)
+      # GitHub Releases: installer එක සෑම අනුවාදයකටම එකම නමින් (සෘජු බාගත කිරීම)
       - name: Prepare release file
-        if: github.event_name == 'workflow_dispatch'
-        shell: bash
         run: |
           mkdir -p rel
-          cp desktop/dist/Tika-Matika-Setup-${APP_VERSION}.exe rel/Tika-Matika-Setup.exe
+          cp desktop-app/src-tauri/target/release/bundle/nsis/*-setup.exe rel/Tika-Matika-Setup.exe
           ls -la rel
 
       - name: Publish GitHub Release
-        if: github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: windows-v${{ env.APP_VERSION }}
@@ -107,23 +94,14 @@ jobs:
           name: Windows ${{ env.APP_VERSION }}
           body: |
             අභිධර්ම මාතිකා අධ්‍යයනය (Tika Matika App) — Windows ${{ env.APP_VERSION }} (offline)
-            • Tika-Matika-Setup.exe — install කිරීමේදී folder එක තෝරාගත හැක.
+            • Tika-Matika-Setup.exe — install කිරීමේදී "මට පමණක්" (Administrator අවශ්‍ය නැත) හෝ "සියලු පරිශීලකයින්ට" තෝරන්න.
             "Windows protected your PC" පෙන්වුවහොත්: More info → Run anyway.
 
             ${{ inputs.notes }}
-          files: |
-            rel/Tika-Matika-Setup.exe
+          files: rel/Tika-Matika-Setup.exe
           make_latest: true
 
-      - name: Attach to GitHub Release (tag builds)
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: desktop/dist/*.exe
-
       - name: Record version in app-version.json
-        if: github.event_name == 'workflow_dispatch'
-        shell: bash
         env:
           VERSION: ${{ env.APP_VERSION }}
           NOTES: ${{ inputs.notes }}

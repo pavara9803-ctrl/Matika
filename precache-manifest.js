@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v35f3065136";
+self.PRECACHE_VERSION = "v54f7ab80b3";
 self.PRECACHE_CORE = [
   "./about.html",
   "./android/twa-manifest.json",
@@ -91,8 +91,6 @@ self.PRECACHE_CORE = [
   "./data/paramattha/rupa-deta.js",
   "./data/search/search-index.js",
   "./data/updates/corrections.js",
-  "./desktop/main.js",
-  "./desktop/package.json",
   "./help.html",
   "./index.html",
   "./manifest.json",

@@ -4,7 +4,8 @@
 // ගොනු වෙනස් කළ සෑම විටම නැවත run කරන්න (cache version ද ස්වයංක්‍රීයව වෙනස් වේ).
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const ROOT = path.join(__dirname, '..');
-const SKIP_DIRS = new Set(['node_modules', '.git', 'screenshots', 'tools', '.well-known']);
+// desktop / desktop-app = Windows ඇප් එකේ ගොනු; වෙබ් අඩවියේ offline cache එකට අවශ්‍ය නැත
+const SKIP_DIRS = new Set(['node_modules', '.git', 'screenshots', 'tools', '.well-known', 'desktop', 'desktop-app']);
 const SKIP_FILES = new Set(['vercel.json', 'google8495547c2c561a1f.html', 'sw.js', 'precache-manifest.js', 'generate-precache.js', 'tailwind.min.css', 'tailwind_min.css']);
 const EXT = /\.(html|js|css|json|png|jpe?g|svg|webp|ico|woff2?|ttf)$/i;
 const files = [];
