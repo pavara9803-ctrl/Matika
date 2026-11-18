@@ -81,6 +81,7 @@
     var entry = data.map[key];
     if (!entry) { host.hidden = true; host.innerHTML = ''; return; }
     host.hidden = false;
+    var open = host.dataset.open === '1';
     var tab = getTab();
     if (!entry[tab]) tab = entry.nk ? 'nk' : 'ak';
     var tabs = ['nk', 'ak'].map(function (w) {
@@ -97,15 +98,20 @@
     var more = nums.length > MAXV ? '<button type="button" class="pp-showall">තවත් ඡේද ' + (nums.length - MAXV) + ' ක් පෙන්වන්න <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>' : '';
     var noAk = (!entry.ak && key.charAt(0) === 's') ? '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> අට්ඨකථාකණ්ඩයෙහි විග්‍රහ කෙරෙන්නේ අභිධර්ම මාතිකාව (තික 22, දුක 100) පමණි; සුත්තන්තික දුක එහි නොදැක්වේ.</p>' : '';
     host.innerHTML =
-      '<div class="pp-head">' +
+      '<button type="button" class="pp-head" aria-expanded="' + open + '" aria-controls="' + host.id + '-body">' +
         '<span class="pp-ico" aria-hidden="true"><i class="fa-solid fa-scroll"></i></span>' +
-        '<span class="pp-ttl"><b>මූල පාළිය</b><small>ධම්මසඞ්ගණීපාළි — ' + KANDA[tab].t + '</small></span>' +
-      '</div>' +
+        '<span class="pp-ttl"><b>මූල පාළිය</b><small>ධම්මසඞ්ගණීපාළි — නික්ඛෙපකණ්ඩය · අට්ඨකථාකණ්ඩය</small></span>' +
+        '<span class="pp-hint">' + (open ? 'වසන්න' : 'විස්තරය') + '</span>' +
+        '<i class="fa-solid fa-chevron-down pp-car" aria-hidden="true"></i>' +
+      '</button>' +
+      '<div class="pp-body" id="' + host.id + '-body"' + (open ? '' : ' hidden') + '>' +
       '<div class="pp-tabs" role="tablist" aria-label="පාළි කණ්ඩ">' + tabs + '</div>' +
       '<p class="pp-desc">' + esc(KANDA[tab].d) + '</p>' +
       notes(key, entry, data, tab) + noAk +
       '<div class="pp-leaves">' + body + '</div>' + more +
-      '<p class="pp-src">මූලාශ්‍රය: ධම්මසඞ්ගණීපාළි (අභිධම්මපිටක) — ' + KANDA[tab].t + ', ඡේද අංක ' + nums.join(', ') + '.</p>';
+      '<p class="pp-src">මූලාශ්‍රය: ධම්මසඞ්ගණීපාළි (අභිධම්මපිටක) — ' + KANDA[tab].t + ', ඡේද අංක ' + nums.join(', ') + '.</p></div>';
+    host.classList.toggle('is-open', open);
+    host.querySelector('.pp-head').addEventListener('click', function () { host.dataset.open = open ? '0' : '1'; render(host, key, data); });
     host.querySelectorAll('.pp-tab').forEach(function (b) {
       b.addEventListener('click', function () { if (b.disabled) return; setTab(b.dataset.w); render(host, key, data); });
     });
@@ -130,6 +136,7 @@
       ref.parentNode.insertBefore(host, ref);
     }
     if (!key) { host.hidden = true; return; }
+    if (host.dataset.key !== key) host.dataset.open = '0';   // නව පදයකදී වසා ඇත
     host.dataset.key = key;
     load().then(function (d) { if (host.dataset.key === key) render(host, key, d); }, function () { host.hidden = true; });
   }

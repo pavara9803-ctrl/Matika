@@ -76,3 +76,14 @@
   .pp-tab__t { font-size: 13px; }
 }
 .pp-a.pp-short, .pp-tail { text-align: left; }
+/* වසා ඇති / විවෘත */
+.pp-head { width: 100%; border: 0; background: transparent; padding: 0; text-align: left; font-family: inherit; cursor: pointer; }
+.pp-head .pp-ttl { flex: 1; }
+.pp-hint { flex: none; font-size: 12.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: #fef3c7; color: #92400e; border: 1px solid #f3d89a; }
+.pp-car { flex: none; color: #92400e; font-size: 13px; transition: transform .2s; }
+.pp-card.is-open .pp-car { transform: rotate(180deg); }
+.pp-body[hidden] { display: none; }
+.pp-card:not(.is-open) { padding-bottom: 14px; }
+.pp-head:focus-visible { outline: 2px solid #b45309; outline-offset: 4px; border-radius: 12px; }
+.dark .pp-hint { background: #78350f; color: #fde68a; border-color: #92400e; }
+.dark .pp-car { color: #fcd34d; }
