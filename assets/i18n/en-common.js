@@ -10,6 +10,7 @@ MX_I18N.add({
  "මෙම යෙදුම ගැන": "About this app",
  "අප ගැන": "About us",
  "ඇප් එක භාවිත කරන ආකාරය": "How to use the app",
+ "අකුරු ප්‍රමාණය": "Font size",
  "අදහස් එවන්න": "Send feedback",
  "අභිධර්ම පිටකය": "Abhidhamma Piṭaka",
  "අභිධර්ම මාතිකා අධ්‍යයනය": "Abhidhamma Matika Study",

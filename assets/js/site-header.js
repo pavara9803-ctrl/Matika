@@ -123,6 +123,7 @@
 
   /* ── රුක සහ සෙවුම් පූරණය ── */
   function load(src) { var s = document.createElement('script'); s.src = ROOT + src; document.body.appendChild(s); }
+  load('assets/js/font-size.js');
   load('assets/js/home-tree.js');
   load('assets/js/home-search.js');
 })();
