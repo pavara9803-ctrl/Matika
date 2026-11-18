@@ -1,23 +1,46 @@
+# =====================================================================
+#  Tika Matika App — Android App Bundle (.aab) build  [Bubblewrap / TWA]
+#  ස්වයංක්‍රීයව ධාවනය නොවේ — අවශ්‍ය විට පමණක්:
+#    GitHub → Actions → "Build Android AAB" → Run workflow → Run workflow
+#  • version code / name හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි
+#    (උදා: 23 / 3.0.2 → 24 / 3.0.3). අවශ්‍ය නම් අතින් ද දිය හැක.
+#    වැදගත්: Play Console එකට upload කරන සෑම .aab එකකම versionCode පෙර එකට වඩා
+#    විශාල විය යුතුය; Android Studio වලින් build කළේ නම් ද එම අංකය මෙහි සටහන් කරන්න.
+#  • ප්‍රතිඵලය: එම run එකේ "Artifacts" සහ GitHub Releases
+#    (tag: android-v<name>-code<code>) → .aab එක Play Console →
+#    Production → Create new release වෙත upload කරන්න.
+#  • Repo Settings → Secrets and variables → Actions හි පහත 4 අවශ්‍යයි; නැත්නම්
+#    පරීක්ෂණ සඳහා throw-away key එකකින් build වේ (Play එකට upload කළ නොහැක):
+#      KEYSTORE_BASE64   KEY_ALIAS   KEYSTORE_PASSWORD   KEY_PASSWORD
+# =====================================================================
 name: Build Android AAB
 
 on:
   workflow_dispatch:
     inputs:
-      version_name:
-        description: 'Version name (e.g. 1.1.0)'
+      version_code:
+        description: 'Version code — හිස්ව තබන්න (app-version.json හි අවසාන අගය + 1)'
         required: false
-        default: '1.1.0'
+        default: ''
+      version_name:
+        description: 'Version name — හිස්ව තබන්න (ස්වයංක්‍රීයව, උදා: 3.0.3)'
+        required: false
+        default: ''
       publish_release:
-        description: 'Publish the signed AAB as a GitHub Release (easy download link)'
+        description: 'signed AAB එක GitHub Release එකකට ද (පහසු download link)'
         required: false
         type: boolean
         default: true
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write   # release සහ app-version.json
     env:
       KEYSTORE_B64: ${{ secrets.KEYSTORE_BASE64 }}
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -57,24 +80,33 @@ jobs:
         run: |
           keytool -list -keystore android.keystore -storepass "$KEYSTORE_PASSWORD" 2>&1 | grep -vi "password" | sed 's/^/  /' || true
 
+      # අනුවාදය: අතින් දුන්නේ නැත්නම් app-version.json හි අවසාන අගය + 1
+      - name: Version
+        env:
+          IN_CODE: ${{ inputs.version_code }}
+          IN_NAME: ${{ inputs.version_name }}
+        run: |
+          node .github/scripts/app-version.mjs next android app-version.json
+          [ -n "$IN_CODE" ] && echo "VERSION_CODE=$IN_CODE" >> "$GITHUB_ENV"
+          [ -n "$IN_NAME" ] && echo "VERSION_NAME=$IN_NAME" >> "$GITHUB_ENV"
+          true
+
       - name: Fill in version and key alias
         working-directory: android
-        env:
-          VERSION_NAME: ${{ github.event.inputs.version_name }}
         run: |
-          VERSION_CODE=$(date -u +%y%m%d%H)
-          echo "VERSION_CODE=$VERSION_CODE" >> "$GITHUB_ENV"
-          echo "APP_VERSION_NAME=${VERSION_NAME:-1.1.0}" >> "$GITHUB_ENV"
+          if ! [[ "$VERSION_CODE" =~ ^[0-9]+$ ]] || [ "$VERSION_CODE" -lt 1 ]; then
+            echo "Version code must be a whole number, e.g. 24 (got: '$VERSION_CODE')"; exit 1
+          fi
           node -e '
             const fs=require("fs");
             const m=JSON.parse(fs.readFileSync("twa-manifest.json","utf8"));
             m.signingKey.alias=process.env.KEY_ALIAS;
-            m.appVersionName=process.env.VERSION_NAME||"1.1.0";
+            m.appVersionName=process.env.VERSION_NAME;
             m.appVersion=m.appVersionName;
-            m.appVersionCode=parseInt(process.argv[1],10);
+            m.appVersionCode=parseInt(process.env.VERSION_CODE,10);
             fs.writeFileSync("twa-manifest.json",JSON.stringify(m,null,2));
-            console.log("versionCode",m.appVersionCode);
-          ' "$VERSION_CODE"
+            console.log("version",m.appVersionName,"code",m.appVersionCode);
+          '
 
       - name: Install Android SDK components and Bubblewrap
         run: |
@@ -100,12 +132,12 @@ jobs:
           export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
           chmod +x ./gradlew
           ./gradlew --no-daemon bundleRelease
-          cp app/build/outputs/bundle/release/app-release.aab app-release-bundle.aab
+          cp app/build/outputs/bundle/release/app-release.aab "matika-${VERSION_NAME}-code${VERSION_CODE}.aab"
           jarsigner -sigalg SHA256withRSA -digestalg SHA-256 \
             -keystore android.keystore \
             -storepass "$KEYSTORE_PASSWORD" \
-            app-release-bundle.aab "$KEY_ALIAS"
-          jarsigner -verify app-release-bundle.aab | head -3
+            "matika-${VERSION_NAME}-code${VERSION_CODE}.aab" "$KEY_ALIAS"
+          jarsigner -verify "matika-${VERSION_NAME}-code${VERSION_CODE}.aab" | head -3
           ls -la *.aab
 
       - name: Show signing certificate fingerprint
@@ -113,30 +145,48 @@ jobs:
         run: |
           keytool -list -v -keystore android.keystore -alias "$KEY_ALIAS" -storepass "$KEYSTORE_PASSWORD" | grep -E "SHA256|Alias" || true
 
-      - name: Rename AAB with version
-        working-directory: android
-        run: cp app-release-bundle.aab "matika-${APP_VERSION_NAME}-${VERSION_CODE}.aab"
-
       - uses: actions/upload-artifact@v4
         with:
-          name: matika-aab-${{ steps.ks.outputs.mode }}
+          name: matika-aab-${{ steps.ks.outputs.mode }}-v${{ env.VERSION_NAME }}-code${{ env.VERSION_CODE }}
           path: android/matika-*.aab
+          if-no-files-found: error
 
+      # signed build එකක් නම්: .aab එක GitHub Release එකකට ද (සෘජු බාගත කිරීම)
       - name: Publish AAB as a GitHub Release
         if: ${{ inputs.publish_release && steps.ks.outputs.mode == 'release' }}
         working-directory: android
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          TAG="aab-v${APP_VERSION_NAME}-${VERSION_CODE}"
-          FILE="matika-${APP_VERSION_NAME}-${VERSION_CODE}.aab"
+          TAG="android-v${VERSION_NAME}-code${VERSION_CODE}"
+          FILE="matika-${VERSION_NAME}-code${VERSION_CODE}.aab"
           NOTES="Google Play Console වෙත upload කිරීම සඳහා signed Android App Bundle.
 
-          - versionName: ${APP_VERSION_NAME}
+          - versionName: ${VERSION_NAME}
           - versionCode: ${VERSION_CODE}
           - commit: ${GITHUB_SHA}"
           gh release create "$TAG" "$FILE" \
-            --title "Matika AAB ${APP_VERSION_NAME} (${VERSION_CODE})" \
+            --title "Matika AAB ${VERSION_NAME} (code ${VERSION_CODE})" \
             --notes "$NOTES" \
           || gh release upload "$TAG" "$FILE" --clobber
           gh release view "$TAG" --json url,assets --jq '{url: .url, assets: [.assets[].name]}'
+
+      # signed build එකක් සාර්ථක වූ පසු: අනුවාදය app-version.json හි සටහන් වේ (ඊළඟ build එක +1)
+      - name: Record version in app-version.json
+        if: ${{ steps.ks.outputs.mode == 'release' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SITE="$RUNNER_TEMP/site"
+          for i in 1 2 3; do
+            rm -rf "$SITE"
+            git clone -q --depth 1 --branch main "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" "$SITE"
+            VERSION="$VERSION_NAME" node .github/scripts/app-version.mjs save android "$SITE/app-version.json"
+            cd "$SITE"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add app-version.json
+            git commit -q -m "app-version.json: Android ${VERSION_NAME} (version code ${VERSION_CODE})" || { echo "no change"; break; }
+            if git push -q origin HEAD:main; then echo "app-version.json updated"; break; fi
+            cd - >/dev/null; sleep 5
+          done
