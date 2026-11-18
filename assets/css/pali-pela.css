@@ -1,0 +1,78 @@
+/* ============================================================
+ * pali-pela.css — "මූල පාළිය" කාඩ්පත (ධම්මසඞ්ගණීපාළි නික්ඛෙප / අට්ඨකථා කණ්ඩ)
+ * පුස්කොළ පොතක පත්‍ර ආකාරයට ඡේද
+ * ============================================================ */
+.pp-card { width: 100%; border-radius: 18px; overflow: hidden; border: 1px solid #e7cf9a; background: linear-gradient(180deg, #fff8e6 0%, #fdf1d3 100%); box-shadow: 0 6px 18px -12px rgba(120, 53, 15, .45); padding: 14px 14px 12px; }
+.pp-card[hidden] { display: none; }
+.pp-head { display: flex; align-items: center; gap: 10px; }
+.pp-ico { flex: none; width: 38px; height: 38px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #7f1d1d, #b45309); color: #fde68a; font-size: 17px; box-shadow: inset 0 0 0 1px rgba(253, 230, 138, .35); }
+.pp-ttl { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; }
+.pp-ttl b { font-size: 16px; color: #7f1d1d; }
+.pp-ttl small { font-size: 12px; color: #92400e; }
+
+.pp-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; padding: 4px; border-radius: 14px; background: rgba(146, 64, 14, .08); }
+.pp-tab { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 8px 6px; border-radius: 11px; border: 0; background: transparent; color: #78350f; cursor: pointer; font-family: inherit; transition: background .15s, box-shadow .15s; }
+.pp-tab__t { font-size: 14px; font-weight: 700; }
+.pp-tab__s { font-size: 11px; opacity: .8; }
+.pp-tab:hover:not(:disabled) { background: rgba(255, 255, 255, .55); }
+.pp-tab.is-on { background: #fff; color: #7f1d1d; box-shadow: 0 2px 8px -4px rgba(120, 53, 15, .5); }
+.pp-tab:disabled { opacity: .45; cursor: not-allowed; }
+
+.pp-desc { margin: 10px 2px 0; font-size: 13px; line-height: 1.8; color: #78350f; text-align: justify; }
+.pp-note { margin: 8px 0 0; padding: 7px 10px; border-radius: 10px; background: rgba(217, 119, 6, .1); border: 1px dashed rgba(180, 83, 9, .35); font-size: 12.5px; line-height: 1.75; color: #7c2d12; }
+.pp-note i { color: #b45309; margin-right: 2px; }
+
+/* පුස්කොළ පත්‍රය */
+.pp-leaves { display: grid; gap: 10px; margin-top: 12px; }
+.pp-leaf { position: relative; padding: 14px 18px 10px 18px; border-radius: 10px; background:
+    radial-gradient(circle at 10px 50%, #e8c98a 0 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 10px) 50%, #e8c98a 0 3px, transparent 3.5px),
+    repeating-linear-gradient(0deg, rgba(146, 64, 14, .035) 0 1px, transparent 1px 30px),
+    linear-gradient(180deg, #fffdf6, #fbf0d6);
+  border: 1px solid #ecd3a0; box-shadow: 0 1px 0 #fff inset, 0 3px 10px -8px rgba(120, 53, 15, .6); }
+.pp-leaf[hidden] { display: none; }
+.pp-no { position: absolute; top: -9px; left: 14px; padding: 1px 9px; border-radius: 999px; background: #7f1d1d; color: #fde68a; font-size: 11.5px; font-weight: 700; letter-spacing: .3px; box-shadow: 0 2px 6px -2px rgba(127, 29, 29, .6); }
+.pp-q { margin: 4px 0 4px; font-weight: 800; font-size: 15.5px; color: #7f1d1d; line-height: 1.8; }
+.pp-a { margin: 0; font-size: 15.5px; line-height: 1.95; color: #292524; text-align: justify; }
+.pp-tail { margin-top: 4px; font-weight: 600; color: #7c2d12; }
+.pp-sq { color: #9a3412; }
+.pp-end { display: inline; font-weight: 700; color: #7f1d1d; background: linear-gradient(transparent 62%, rgba(251, 191, 36, .38) 0); }
+.pp-pe { color: #a8a29e; font-size: .9em; white-space: nowrap; }
+.pp-var { color: #a8a29e; font-size: .78em; }
+.pp-copy { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; padding: 3px 9px; border-radius: 999px; border: 1px solid #ecd3a0; background: rgba(255, 255, 255, .7); color: #92400e; font-size: 11.5px; font-family: inherit; cursor: pointer; float: right; }
+.pp-copy:hover { background: #fff; }
+.pp-copy.is-done { background: #dcfce7; border-color: #86efac; color: #166534; }
+.pp-leaf::after { content: ""; display: block; clear: both; }
+
+.pp-showall { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; margin-top: 10px; padding: 8px; border-radius: 12px; border: 1px dashed #d6a85c; background: rgba(255, 255, 255, .5); color: #92400e; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; }
+.pp-src { margin: 10px 2px 0; font-size: 11.5px; line-height: 1.7; color: #a16207; }
+
+/* අඳුරු තේමාව */
+.dark .pp-card { background: linear-gradient(180deg, #2a1a10 0%, #1f140c 100%); border-color: #5b3a1a; }
+.dark .pp-ttl b { color: #fcd34d; }
+.dark .pp-ttl small, .dark .pp-desc, .dark .pp-src { color: #d6b98a; }
+.dark .pp-tabs { background: rgba(0, 0, 0, .25); }
+.dark .pp-tab { color: #e7c98f; }
+.dark .pp-tab:hover:not(:disabled) { background: rgba(255, 255, 255, .06); }
+.dark .pp-tab.is-on { background: #3b2412; color: #fde68a; }
+.dark .pp-note { background: rgba(217, 119, 6, .12); color: #fcd9a8; border-color: rgba(251, 191, 36, .3); }
+.dark .pp-leaf { background:
+    radial-gradient(circle at 10px 50%, #6b4a22 0 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 10px) 50%, #6b4a22 0 3px, transparent 3.5px),
+    linear-gradient(180deg, #33210f, #281a0c);
+  border-color: #5b3a1a; box-shadow: none; }
+.dark .pp-q { color: #fcd34d; }
+.dark .pp-a { color: #f5ead6; }
+.dark .pp-tail, .dark .pp-sq { color: #fdba74; }
+.dark .pp-end { color: #fde68a; background: linear-gradient(transparent 62%, rgba(251, 191, 36, .22) 0); }
+.dark .pp-pe, .dark .pp-var { color: #a8977f; }
+.dark .pp-copy { background: rgba(0, 0, 0, .25); border-color: #5b3a1a; color: #e7c98f; }
+.dark .pp-showall { background: rgba(0, 0, 0, .2); border-color: #6b4a22; color: #fcd34d; }
+
+@media (max-width: 520px) {
+  .pp-card { padding: 12px 10px 10px; border-radius: 16px; }
+  .pp-leaf { padding: 14px 14px 9px; }
+  .pp-q, .pp-a { font-size: 15px; }
+  .pp-tab__t { font-size: 13px; }
+}
+.pp-a.pp-short, .pp-tail { text-align: left; }
