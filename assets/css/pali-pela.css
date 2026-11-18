@@ -117,3 +117,7 @@
   .pp-tabs--3 .pp-tab__s { font-size: 10px; }
 }
 .pp-tab { min-width: 0; } .pp-tab__t, .pp-tab__s { overflow-wrap: anywhere; text-align: center; }
+/* Word ගොනුවේ තද අකුරු */
+.pp-b { font-weight: 800; color: #7f1d1d; }
+.pp-quote .pp-b { color: inherit; }
+.dark .pp-b { color: #fde68a; }

@@ -31,6 +31,19 @@
     });
     return loadingB[book];
   }
+  /* Word ගොනුවේ තද අකුරු: \u0001 … \u0002 සලකුණු → <b> */
+  var BO = '\u0001', BC = '\u0002';
+  function bold(h) { return h.replace(/\u0001([^\u0002]*)\u0002/g, '<b class="pp-b">$1</b>').replace(/[\u0001\u0002]/g, ''); }
+  function plain(s) { return String(s).replace(/[\u0001\u0002]/g, ''); }
+  /* සලකුණු සහිත පාඨය, සලකුණු නොමැති අකුරු n කින් බෙදීම (විවෘත තද කොටස් සමබර කරයි) */
+  function splitAt(m, n) {
+    var c = 0, i = 0, open = false;
+    for (; i < m.length && c < n; i++) { var ch = m.charAt(i); if (ch === BO) open = true; else if (ch === BC) open = false; else c++; }
+    while (i < m.length && (m.charAt(i) === BC)) { open = false; i++; }
+    var a = m.slice(0, i), b = m.slice(i);
+    if (open) { a += BC; b = BO + b; }
+    return [a, b];
+  }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function lsGet(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -41,20 +54,21 @@
     h = h.replace(/\[([^\]]+)\]/g, '<span class="pp-var" title="පාඨාන්තරය">[$1]</span>');
     h = h.replace(/…\s*පෙ\s*\.\s*…|\.\.\.\s*පෙ\s*\.\s*\.\.\./g, '<span class="pp-pe" title="පෙය්‍යාලය — පෙර පරිදි">…පෙ.…</span>');
     h = h.replace(/(තත්ථ\s+කතම[ාංොෙ]\s+[^?]{1,60}\?)/g, '<b class="pp-sq">$1</b>');
+    h = bold(h);
     h = h.replace(/(\s–\s)(ඉමෙ\s+(?:ධම්මා|තයො|චත්තාරො|ඉමානි)?[^–]*?\.)$/, '$1<span class="pp-end">$2</span>');
     return h;
   }
   function fmtPara(n, text) {
     var lines = String(text).split('\n');
     var first = lines.shift();
-    var q = '', rest = first;
-    var m = first.match(/^(කතමෙ\s+ධම්මා\s+[^?]+\?|කතමෙ\s+ධම්මා\s+[^.]+\.|තත්ථ\s+කතම[ාංො]\s+[^?]+\?)\s*(.*)$/);
-    if (m) { q = m[1]; rest = m[2]; }
-    else { var m2 = first.match(/^([^–]{2,60}?(?:ති|න්ති|ීති))\s+–\s*(.*)$/); if (m2) { q = m2[1] + ' –'; rest = m2[2]; } }
+    var q = '', rest = first, fp = plain(first);
+    var m = fp.match(/^(කතමෙ\s+ධම්මා\s+[^?]+\?|කතමෙ\s+ධම්මා\s+[^.]+\.|තත්ථ\s+කතම[ාංො]\s+[^?]+\?)\s*(.*)$/);
+    if (m) { var sp = splitAt(first, m[1].length); q = sp[0]; rest = sp[1].replace(/^\s+/, ''); }
+    else { var m2 = fp.match(/^([^–]{2,60}?(?:ති|න්ති|ීති))\s+–\s*(.*)$/); if (m2) { var sp2 = splitAt(first, m2[1].length); q = sp2[0] + ' –'; rest = sp2[1].replace(/^\s*–\s*/, ''); } }
     var html = '<article class="pp-leaf" data-n="' + n + '">' +
       '<span class="pp-no" aria-label="ඡේද අංකය">§' + n + '</span>' +
-      (q ? '<p class="pp-q">' + esc(q) + '</p>' : '') +
-      (rest ? '<p class="pp-a' + (rest.length < 160 ? ' pp-short' : '') + '">' + fmtLine(rest) + '</p>' : '') +
+      (q ? '<p class="pp-q">' + bold(esc(q)) + '</p>' : '') +
+      (rest ? '<p class="pp-a' + (plain(rest).length < 160 ? ' pp-short' : '') + '">' + fmtLine(rest) + '</p>' : '') +
       lines.map(function (l) { return '<p class="pp-a pp-tail">' + fmtLine(l) + '</p>'; }).join('') +
       '<button type="button" class="pp-copy" data-n="' + n + '" aria-label="ඡේදය පිටපත් කරන්න"><i class="fa-regular fa-copy" aria-hidden="true"></i><span>පිටපත්</span></button>' +
       '</article>';
@@ -64,17 +78,19 @@
   /* අට්ඨකථා / ටීකා ඡේදය: මුල “8.” / “1-6.” / “1006.” අංකය ලේබලයක් ලෙස; ‘‘උද්ධෘත’’ ඉස්මතු */
   function fmtComm(id, text, part) {
     var m = String(text).match(/^(\d+(?:\s*[-–]\s*\d+)?)\.\s+([\s\S]*)$/), lab = '', body = text;
+    if (!m) { var mm = plain(text).match(/^(\d+(?:\s*[-–]\s*\d+)?)\.\s+/); if (mm) { m = [0, mm[1], splitAt(text, mm[0].length)[1]]; } }
     if (m) { lab = m[1].replace(/\s/g, ''); body = m[2]; }
     var h = esc(body)
       .replace(/‘‘([^’]{1,400})’’/g, '<span class="pp-quote">‘‘$1’’</span>')
       .replace(/\(([^()]{1,40}\d[^()]{0,20})\)/g, '<span class="pp-ref">($1)</span>')
       .replace(/…\s*පෙ\s*\.\s*…/g, '<span class="pp-pe">…පෙ.…</span>')
       .replace(/\[([^\]]+)\]/g, '<span class="pp-var">[$1]</span>');
+    h = bold(h);
     var verse = /^\s{2}/.test(text);
     var no = lab ? (part === 'mv' ? (lab.indexOf('-') > -1 || lab.indexOf('–') > -1 ? 'දුක ' + lab : (+lab > 100 ? 'දුක ' + lab : 'තික ' + lab)) : '§' + lab) : '';
     return '<article class="pp-leaf pp-cm' + (lab ? '' : ' pp-cont') + (verse ? ' pp-verse' : '') + '" data-n="' + id + '">' +
       (no ? '<span class="pp-no">' + no + '</span>' : '') +
-      '<p class="pp-a' + (body.length < 160 ? ' pp-short' : '') + '">' + h + '</p>' +
+      '<p class="pp-a' + (plain(body).length < 160 ? ' pp-short' : '') + '">' + h + '</p>' +
       '<button type="button" class="pp-copy" data-n="' + id + '" aria-label="ඡේදය පිටපත් කරන්න"><i class="fa-regular fa-copy" aria-hidden="true"></i><span>පිටපත්</span></button>' +
       '</article>';
   }
@@ -169,7 +185,7 @@
     if (sa) sa.addEventListener('click', function () { host.querySelectorAll('.pp-more').forEach(function (e) { e.hidden = false; }); sa.remove(); });
     host.querySelectorAll('.pp-copy').forEach(function (b) {
       b.addEventListener('click', function () {
-        var n = b.dataset.n, txt = (isPali ? n + '. ' : '') + (data.text[n] || '') + '\n— ' + B.s;
+        var n = b.dataset.n, txt = (isPali ? n + '. ' : '') + plain(data.text[n] || '') + '\n— ' + B.s;
         var done = function () { b.classList.add('is-done'); b.querySelector('span').textContent = 'පිටපත් විය'; setTimeout(function () { b.classList.remove('is-done'); b.querySelector('span').textContent = 'පිටපත්'; }, 1600); };
         try { navigator.clipboard.writeText(txt).then(done, function () {}); } catch (e) {}
       });
