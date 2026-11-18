@@ -7,10 +7,17 @@ on:
         description: 'Version name (e.g. 1.1.0)'
         required: false
         default: '1.1.0'
+      publish_release:
+        description: 'Publish the signed AAB as a GitHub Release (easy download link)'
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       KEYSTORE_B64: ${{ secrets.KEYSTORE_BASE64 }}
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -56,6 +63,8 @@ jobs:
           VERSION_NAME: ${{ github.event.inputs.version_name }}
         run: |
           VERSION_CODE=$(date -u +%y%m%d%H)
+          echo "VERSION_CODE=$VERSION_CODE" >> "$GITHUB_ENV"
+          echo "APP_VERSION_NAME=${VERSION_NAME:-1.1.0}" >> "$GITHUB_ENV"
           node -e '
             const fs=require("fs");
             const m=JSON.parse(fs.readFileSync("twa-manifest.json","utf8"));
@@ -104,7 +113,30 @@ jobs:
         run: |
           keytool -list -v -keystore android.keystore -alias "$KEY_ALIAS" -storepass "$KEYSTORE_PASSWORD" | grep -E "SHA256|Alias" || true
 
+      - name: Rename AAB with version
+        working-directory: android
+        run: cp app-release-bundle.aab "matika-${APP_VERSION_NAME}-${VERSION_CODE}.aab"
+
       - uses: actions/upload-artifact@v4
         with:
           name: matika-aab-${{ steps.ks.outputs.mode }}
-          path: android/app-release-bundle.aab
+          path: android/matika-*.aab
+
+      - name: Publish AAB as a GitHub Release
+        if: ${{ inputs.publish_release && steps.ks.outputs.mode == 'release' }}
+        working-directory: android
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="aab-v${APP_VERSION_NAME}-${VERSION_CODE}"
+          FILE="matika-${APP_VERSION_NAME}-${VERSION_CODE}.aab"
+          NOTES="Google Play Console වෙත upload කිරීම සඳහා signed Android App Bundle.
+
+          - versionName: ${APP_VERSION_NAME}
+          - versionCode: ${VERSION_CODE}
+          - commit: ${GITHUB_SHA}"
+          gh release create "$TAG" "$FILE" \
+            --title "Matika AAB ${APP_VERSION_NAME} (${VERSION_CODE})" \
+            --notes "$NOTES" \
+          || gh release upload "$TAG" "$FILE" --clobber
+          gh release view "$TAG" --json url,assets --jq '{url: .url, assets: [.assets[].name]}'
