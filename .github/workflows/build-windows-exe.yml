@@ -1,12 +1,34 @@
+# =====================================================================
+#  Tika Matika App — offline Windows app (Electron) build
+#  අවශ්‍ය විට පමණක්:  GitHub → Actions → "Build Windows EXE" → Run workflow
+#  • version හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි
+#    (උදා: 1.0.0 → 1.0.1)
+#  ප්‍රතිඵලය: එම run එකේ "Artifacts" සහ GitHub Releases (windows-vX.Y.Z):
+#    • Tika-Matika-Setup.exe — install කිරීමේදී folder එක තෝරාගත හැක
+#  release එකෙන් පසු app-version.json යාවත්කාලීන වේ.
+# =====================================================================
 name: Build Windows EXE
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version — හිස්ව තබන්න (ස්වයංක්‍රීයව අවසාන අගය + 1)'
+        required: false
+        default: ''
+      notes:
+        description: 'අලුත් දේ (release සටහනේ පෙන්වයි; නව පේළියකට \n). හිස්ව තැබිය හැක'
+        required: false
+        default: ''
   push:
     tags: ['v*']
 
 permissions:
   contents: write
+
+concurrency:
+  group: windows-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -17,6 +39,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      # අනුවාදය: අතින් දුන්නේ නැත්නම් app-version.json හි අවසාන අගය + 1
+      - name: Version
+        shell: bash
+        env:
+          IN_VERSION: ${{ inputs.version }}
+        run: |
+          if [ -n "$IN_VERSION" ]; then
+            echo "APP_VERSION=$IN_VERSION" >> "$GITHUB_ENV"; echo "APP_VERSION=$IN_VERSION"
+          else
+            node .github/scripts/app-version.mjs next windows app-version.json
+          fi
 
       - name: Copy site files into the desktop app
         shell: bash
@@ -29,6 +63,17 @@ jobs:
           find desktop/app/assets/icons -type f ! -name 'launchericon-512x512.png' ! -name '192.png' ! -name '512.png' ! -name '16.png' ! -name '128.png' -size +100k -delete
           cp assets/icons/launchericon-512x512.png desktop/build/icon.png
 
+      - name: Set version in desktop/package.json
+        shell: bash
+        run: |
+          node -e '
+            const fs=require("fs"), p="desktop/package.json";
+            const j=JSON.parse(fs.readFileSync(p,"utf8"));
+            j.version=process.env.APP_VERSION;
+            fs.writeFileSync(p,JSON.stringify(j,null,2)+"\n");
+            console.log("desktop version",j.version);
+          '
+
       - name: Install dependencies
         working-directory: desktop
         run: npm install
@@ -39,12 +84,64 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: Tika-Matika-Windows
+          name: Tika-Matika-Windows-v${{ env.APP_VERSION }}
           path: |
             desktop/dist/*.exe
+          if-no-files-found: error
+
+      # GitHub Releases: installer ගොනුව (සෘජු බාගත කිරීම — සෑම අනුවාදයකටම එකම නම)
+      - name: Prepare release file
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          mkdir -p rel
+          cp desktop/dist/Tika-Matika-Setup-${APP_VERSION}.exe rel/Tika-Matika-Setup.exe
+          ls -la rel
+
+      - name: Publish GitHub Release
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: windows-v${{ env.APP_VERSION }}
+          target_commitish: ${{ github.sha }}
+          name: Windows ${{ env.APP_VERSION }}
+          body: |
+            අභිධර්ම මාතිකා අධ්‍යයනය (Tika Matika App) — Windows ${{ env.APP_VERSION }} (offline)
+            • Tika-Matika-Setup.exe — install කිරීමේදී folder එක තෝරාගත හැක.
+            "Windows protected your PC" පෙන්වුවහොත්: More info → Run anyway.
+
+            ${{ inputs.notes }}
+          files: |
+            rel/Tika-Matika-Setup.exe
+          make_latest: true
 
       - name: Attach to GitHub Release (tag builds)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: desktop/dist/*.exe
+
+      - name: Record version in app-version.json
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        env:
+          VERSION: ${{ env.APP_VERSION }}
+          NOTES: ${{ inputs.notes }}
+          URL: https://github.com/${{ github.repository }}/releases/download/windows-v${{ env.APP_VERSION }}/Tika-Matika-Setup.exe
+          PAGE: https://github.com/${{ github.repository }}/releases/tag/windows-v${{ env.APP_VERSION }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          export SIZE=$(stat -c%s rel/Tika-Matika-Setup.exe)
+          SITE="$RUNNER_TEMP/site"
+          for i in 1 2 3; do
+            rm -rf "$SITE"
+            git clone -q --depth 1 --branch main "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" "$SITE"
+            node .github/scripts/app-version.mjs save windows "$SITE/app-version.json"
+            cd "$SITE"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add app-version.json
+            git commit -q -m "app-version.json: Windows ${VERSION}" || { echo "no change"; break; }
+            if git push -q origin HEAD:main; then echo "app-version.json updated"; break; fi
+            cd - >/dev/null; sleep 5
+          done

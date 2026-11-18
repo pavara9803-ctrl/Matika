@@ -1,0 +1,11 @@
+{
+  "android": {
+    "versionCode": 23,
+    "versionName": "3.0.2",
+    "date": "2026-11-17"
+  },
+  "windows": {
+    "version": "1.0.0",
+    "date": "2026-11-09"
+  }
+}
