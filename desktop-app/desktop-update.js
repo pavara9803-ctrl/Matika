@@ -9,10 +9,12 @@
   var ROOT = (function () {
     try { return new URL('.', document.currentScript.src).href; } catch (e) { return './'; }
   })();
+  // raw.githubusercontent.com සෑම විටම CORS header එවන නිසා එය මුලින්
   var REMOTE = [
-    'https://matika-snowy.vercel.app/app-version.json',
-    'https://raw.githubusercontent.com/pavara9803-ctrl/Matika/main/app-version.json'
+    'https://raw.githubusercontent.com/pavara9803-ctrl/Matika/main/app-version.json',
+    'https://matika-snowy.vercel.app/app-version.json'
   ];
+  var lastError = '';
 
   function si() {
     try {
@@ -39,7 +41,10 @@
   function remoteJson(i) {
     i = i || 0;
     if (i >= REMOTE.length) return Promise.reject(new Error('no source'));
-    return getJson(REMOTE[i] + '?t=' + Date.now(), 8000).catch(function () { return remoteJson(i + 1); });
+    return getJson(REMOTE[i] + '?t=' + Date.now(), 8000).catch(function (e) {
+      lastError = (e && e.message) ? e.message : String(e);
+      return remoteJson(i + 1);
+    });
   }
   function mb(b) {
     b = Number(b);
@@ -109,18 +114,64 @@
     ov.querySelector('.mxu-b1').onclick = function () { open(info.url || info.page); close(); };
   }
 
-  function check() {
-    if (navigator.onLine === false) return;
-    getJson(ROOT + 'app-build.json', 4000)
+  // කුඩා දැනුම්දීමක් (අලුත්ම අනුවාදයයි / පරීක්ෂා කළ නොහැකි විය)
+  function note(title, msg) {
+    if (document.getElementById('mxuUpdate')) return;
+    if (!document.getElementById('mxuUpdateCss')) {
+      var st = document.createElement('style');
+      st.id = 'mxuUpdateCss'; st.textContent = CSS; document.head.appendChild(st);
+    }
+    var ov = document.createElement('div');
+    ov.id = 'mxuUpdate'; ov.className = 'mxu-ov';
+    ov.innerHTML = '<div class="mxu-bx"><div class="mxu-hd"><img src="' + esc(ROOT) + 'assets/icons/192.png" alt="">' +
+      '<div class="mxu-t">' + esc(title) + '</div></div><div class="mxu-bd"><p class="mxu-p">' + esc(msg) + '</p>' +
+      '<div class="mxu-ac"><button type="button" class="mxu-b mxu-b1">' + esc(L('හරි', 'OK')) + '</button></div></div></div>';
+    document.body.appendChild(ov);
+    ov.querySelector('.mxu-b1').onclick = function () { ov.remove(); };
+  }
+
+  // manual = පරිශීලකයා මෙනුවෙන් ඉල්ලූ විට (ප්‍රතිඵලය සැම විටම පෙන්වයි)
+  function check(manual) {
+    if (!manual && navigator.onLine === false) return;
+    return getJson(ROOT + 'app-build.json', 4000)
       .then(function (local) {
         return remoteJson().then(function (remote) {
           var info = remote && remote.windows;
-          if (info && (info.url || info.page) && cmp(info.version, local.version) > 0) show(info, local.version);
+          if (info && (info.url || info.page) && cmp(info.version, local.version) > 0) { show(info, local.version); return; }
+          if (manual) note(L('අලුත්ම අනුවාදයයි', 'Up to date'),
+            L('ඔබ භාවිත කරන්නේ අලුත්ම අනුවාදයයි (' + local.version + ').',
+              'You are on the latest version (' + local.version + ').'));
         });
       })
-      .catch(function (err) { console.warn('[update] පරීක්ෂාව මඟහැරියා:', err && err.message ? err.message : err); });
+      .catch(function (err) {
+        var m = (err && err.message) ? err.message : String(err);
+        console.warn('[update] පරීක්ෂාව මඟහැරියා:', m, lastError);
+        if (manual) note(L('පරීක්ෂා කළ නොහැකි විය', 'Could not check'),
+          L('අන්තර්ජාල සම්බන්ධය පරීක්ෂා කර නැවත උත්සාහ කරන්න. (' + (lastError || m) + ')',
+            'Check your internet connection and try again. (' + (lastError || m) + ')'));
+      });
   }
 
-  if (document.readyState === 'complete') setTimeout(check, 1500);
-  else window.addEventListener('load', function () { setTimeout(check, 1500); });
+  // සැකසුම් මෙනුවට "යාවත්කාලීන පරීක්ෂා කරන්න" (Windows ඇප් එකේ පමණි)
+  function addMenuItem() {
+    var list = document.querySelector('#custom-menu .py-1');
+    if (!list || document.getElementById('mxu-check')) return;
+    var b = document.createElement('button');
+    b.id = 'mxu-check';
+    b.type = 'button';
+    b.setAttribute('data-no-i18n', '');
+    b.className = 'w-full text-left px-4 py-3 flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-amber-50 dark:hover:bg-slate-700';
+    b.innerHTML = '<i class="fa-solid fa-rotate text-saffron-600 text-lg w-5"></i><span>' +
+      esc(L('යාවත්කාලීන පරීක්ෂා කරන්න', 'Check for updates')) + '</span>';
+    b.addEventListener('click', function (e) { e.stopPropagation(); check(true); });
+    list.appendChild(b);
+  }
+
+  function start() {
+    addMenuItem();
+    setTimeout(function () { check(false); }, 1500);
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') start();
+  else window.addEventListener('DOMContentLoaded', start);
 })();
