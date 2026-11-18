@@ -6,7 +6,8 @@ const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const ROOT = path.join(__dirname, '..');
 // desktop / desktop-app = Windows ඇප් එකේ ගොනු; වෙබ් අඩවියේ offline cache එකට අවශ්‍ය නැත
 const SKIP_DIRS = new Set(['node_modules', '.git', 'screenshots', 'tools', '.well-known', 'desktop', 'desktop-app']);
-const SKIP_FILES = new Set(['vercel.json', 'google8495547c2c561a1f.html', 'sw.js', 'precache-manifest.js', 'generate-precache.js', 'tailwind.min.css', 'tailwind_min.css']);
+// app-version.json = ඇප් අනුවාද ලෙජරය (Windows/Android build එකකදී වෙනස් වේ; වෙබ් cache එකට අදාළ නැත)
+const SKIP_FILES = new Set(['vercel.json', 'app-version.json', 'google8495547c2c561a1f.html', 'sw.js', 'precache-manifest.js', 'generate-precache.js', 'tailwind.min.css', 'tailwind_min.css']);
 const EXT = /\.(html|js|css|json|png|jpe?g|svg|webp|ico|woff2?|ttf)$/i;
 const files = [];
 (function walk(dir) {

@@ -37,8 +37,9 @@ if (existsSync(iconDir)) {
   }
 }
 
-// 5. බාහිර සබැඳි සඳහා shim එක + එය සෑම HTML පිටුවකටම
-cpSync(join(appDir, 'desktop-links.js'), join(www, 'desktop-links.js'));
+// 5. ඇප් එකට පමණක් අදාළ shim ගොනු + ඒවා සෑම HTML පිටුවකටම
+const SHIMS = ['desktop-links.js', 'desktop-update.js'];
+for (const s of SHIMS) cpSync(join(appDir, s), join(www, s));
 let patched = 0;
 const addShim = (dir, depth) => {
   const prefix = depth === 0 ? './' : '../'.repeat(depth);
@@ -51,13 +52,15 @@ const addShim = (dir, depth) => {
     }
     if (!f.endsWith('.html')) continue;
     let html = readFileSync(p, 'utf8');
-    if (html.includes('desktop-links.js')) continue;
-    const tag = `<script src="${prefix}desktop-links.js" defer></script>`;
-    html = html.includes('</body>') ? html.replace('</body>', `  ${tag}\n</body>`) : html + `\n${tag}\n`;
+    const tags = SHIMS.filter((s) => !html.includes(s))
+      .map((s) => `<script src="${prefix}${s}" defer></script>`);
+    if (!tags.length) continue;
+    const block = tags.map((t) => `  ${t}`).join('\n');
+    html = html.includes('</body>') ? html.replace('</body>', `${block}\n</body>`) : html + `\n${block}\n`;
     writeFileSync(p, html);
     patched++;
   }
 };
 addShim(www, 0);
 
-console.log('www ready:', www, '| HTML පිටු', patched, 'කට desktop-links.js එක් කළා');
+console.log('www ready:', www, '| HTML පිටු', patched, 'කට', SHIMS.join(' + '), 'එක් කළා');

@@ -1,8 +1,7 @@
-self.PRECACHE_VERSION = "v54f7ab80b3";
+self.PRECACHE_VERSION = "v35a8e79184";
 self.PRECACHE_CORE = [
   "./about.html",
   "./android/twa-manifest.json",
-  "./app-version.json",
   "./assets/css/fonts.css",
   "./assets/css/matika-ui.css",
   "./assets/css/paramattha.css",
