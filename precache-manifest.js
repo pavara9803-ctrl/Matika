@@ -1,9 +1,10 @@
-self.PRECACHE_VERSION = "v921022d6fa";
+self.PRECACHE_VERSION = "v126757b657";
 self.PRECACHE_CORE = [
   "./about.html",
   "./android/twa-manifest.json",
   "./assets/css/fonts.css",
   "./assets/css/matika-ui.css",
+  "./assets/css/pali-pela.css",
   "./assets/css/paramattha.css",
   "./assets/css/tailwind-built.css",
   "./assets/fonts/inter-latin.woff2",
@@ -37,6 +38,7 @@ self.PRECACHE_CORE = [
   "./assets/js/pages/samprayoga.js",
   "./assets/js/pages/tika-app.js",
   "./assets/js/pages/updates-page.js",
+  "./assets/js/pali-pela.js",
   "./assets/js/pali-script.js",
   "./assets/js/pm-atlas.js",
   "./assets/js/site-header.js",
@@ -55,6 +57,7 @@ self.PRECACHE_CORE = [
   "./data/matika/duka/gochhaka-11-upadana.js",
   "./data/matika/duka/gochhaka-12-kilesa.js",
   "./data/matika/duka/gochhaka-13-pitthi.js",
+  "./data/matika/pali/dhammasangani-pali.js",
   "./data/matika/sabbatika-data.js",
   "./data/matika/suttanta/suttanta-data-1.js",
   "./data/matika/suttanta/suttanta-data-2.js",
