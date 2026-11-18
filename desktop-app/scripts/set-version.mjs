@@ -1,6 +1,6 @@
 // Actions → Run workflow හිදී දෙන version එක (උදා: 1.0.2) tauri.conf.json සහ Cargo.toml වෙත යොදයි.
 // Windows සීමා: පළමු අංක දෙක 0–255, තුන්වැන්න 0–65535.
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
@@ -15,3 +15,9 @@ writeFileSync(conf, JSON.stringify(c, null, 2) + '\n');
 const cargo = resolve(here, '..', 'src-tauri', 'Cargo.toml');
 writeFileSync(cargo, readFileSync(cargo, 'utf8').replace(/^version = "[^"]*"/m, `version = "${v}"`));
 console.log('version set:', v);
+// ස්ථාපිත අනුවාදය ඇප් එක ඇතුළේ (desktop-update.js → යාවත්කාලීන දැනුම්දීම සඳහා).
+// prepare-www ට පසුව ධාවනය විය යුතුය.
+const www = resolve(here, '..', 'www');
+if (!existsSync(www)) { console.error('www not found — run `npm run prepare-www` first'); process.exit(1); }
+writeFileSync(resolve(www, 'app-build.json'), JSON.stringify({ platform: 'windows', version: v }) + '\n');
+console.log('app-build.json written');
