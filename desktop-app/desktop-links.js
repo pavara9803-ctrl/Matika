@@ -7,6 +7,8 @@
   var t = window.__TAURI__;
   if (!t || !t.core || typeof t.core.invoke !== 'function') return; // බ්‍රවුසරයේ නම් කිසිවක් නොකරයි
 
+  try { document.documentElement.classList.add('is-desktop-app'); } catch (e) {}
+
   function external(url) {
     if (!url) return false;
     if (/^mailto:/i.test(url)) return true;
