@@ -13,12 +13,11 @@
     "date": "2026-11-19"
   },
   "macos": {
-    "version": "1.0.2",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.2/Abhidhamma-Matika.dmg",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.2",
-    "size": 13548517,
-    "date": "2026-11-19",
-    "notes": "බාගත කිරීමේ කොටස ඇප් එක ඇතුළේද පෙන්වයි."
+    "version": "1.0.3",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.3/Abhidhamma-Matika.dmg",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.3",
+    "size": 13565077,
+    "date": "2026-11-19"
   },
   "linux": {
     "version": "1.0.3",
