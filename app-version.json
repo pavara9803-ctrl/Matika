@@ -6,12 +6,12 @@
     "date": "2026-11-19"
   },
   "windows": {
-    "version": "1.0.8",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.8/Abhidhamma-Matika-Setup.exe",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.8",
-    "size": 8170329,
+    "version": "1.0.9",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.9/Abhidhamma-Matika-Setup.exe",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.9",
+    "size": 8173822,
     "date": "2026-11-19",
-    "notes": "ඇප් එකේ නම \"අභිධම්ම මාතිකා\" ලෙස වෙනස් කළා."
+    "notes": "බාගත කිරීමේ කොටස ඇප් එක ඇතුළේද පෙන්වයි (ස්ථාපිත platform එක සලකුණු වේ)."
   },
   "macos": {
     "version": "1.0.1",
