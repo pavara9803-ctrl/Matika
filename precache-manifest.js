@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v92ebeded1d";
+self.PRECACHE_VERSION = "v48cb39c7c4";
 self.PRECACHE_CORE = [
   "./about.html",
   "./android/twa-manifest.json",
@@ -21,6 +21,7 @@ self.PRECACHE_CORE = [
   "./assets/icons/maskable-512.png",
   "./assets/js/app.js",
   "./assets/js/back-nav.js",
+  "./assets/js/downloads.js",
   "./assets/js/feedback.js",
   "./assets/js/font-size.js",
   "./assets/js/home-search.js",
