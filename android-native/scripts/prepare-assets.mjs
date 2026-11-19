@@ -1,7 +1,6 @@
 // වෙබ් අඩවියේ ගොනු Android ඇප් එකේ assets වෙත පිටපත් කරයි (build වන විට).
 //  • Font Awesome CDN සබැඳිය → ඇප් එක ඇතුළේ ඇති පිටපතට (offline සඳහා)
 //  • index.html: <html data-mx-lang-home> (භාෂා බොත්තම මුල් පිටුවේ පමණක්)
-//    සහ "ඇප් එක බාගත කරන්න" කොටස ඉවත් කරයි (ඇප් එකට අදාළ නැත)
 //  • i18n.js: භාෂා බොත්තම මුල් පිටුවේ පමණක් පෙන්වන ආරක්ෂකය නැවත යොදයි
 //  • vendor/fontawesome ගොනු cdnjs වෙතින් බාගත කරයි (git තුළ තබා ගන්නේ නැත)
 // ධාවනය: node android-native/scripts/prepare-assets.mjs   (repo මුලේ සිට)
@@ -15,7 +14,7 @@ const root = resolve(appDir, '..');                       // repo මුල
 const assets = resolve(appDir, 'app/src/main/assets');
 
 const KEEP_ICONS = new Set(['180.png', '192.png', '50.png', 'favicon.svg', 'icon-maskable.svg', 'icon.svg']);
-const SKIP_JS = new Set(['downloads.js']);                // වෙබ් අඩවියට පමණක්
+const SKIP_JS = new Set();
 const ROOT_FILES = ['index.html', 'about.html', 'help.html', 'privacy.html', 'updates.html', 'manifest.json'];
 const FA_VERSION = '6.4.0';
 const FA_LOCAL = '<link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css">';
@@ -28,16 +27,6 @@ function fixHtml(text, isIndex) {
   text = text.replace(FA_CDN, FA_LOCAL);
   if (isIndex) {
     text = text.replace('<html lang="si" class="h-full">', '<html lang="si" class="h-full" data-mx-lang-home>');
-  }
-  // බාගත කිරීමේ කොටස (දැන් help.html හි) ඇප් එකට අවශ්‍ය නැත
-  text = text.replace(/<script src="[^"]*downloads\.js"[^>]*><\/script>\n?/g, '');
-  const i = text.indexOf('<!-- ඇප් එක බාගත කරන්න (platform අනුව) -->');
-  if (i >= 0) {
-    const tail = text.indexOf('<p class="dlios__note">', i);
-    const end = tail >= 0
-      ? text.indexOf('</div>', text.indexOf('</div>', tail) + 6) + '</div>'.length
-      : text.indexOf('</section>', i) + '</section>'.length;
-    text = text.slice(0, i) + text.slice(end);
   }
   return text;
 }

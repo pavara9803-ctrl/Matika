@@ -40,33 +40,52 @@
     card.classList.remove('dl__card--wait');
   }
 
-  // ඇප් එකක් ලෙස (PWA / desktop ඇප්) විවෘත කර ඇත්නම් බාගත කිරීමේ කොටස අවශ්‍ය නැත
-  function installed() {
+  // දැනට භාවිත කරන ඇප් එකට අදාළ කාඩ්පත "ස්ථාපිතයි" ලෙස සලකුණු කරයි
+  function markInstalled(id) {
+    var card = document.getElementById(id);
+    if (!card) return;
+    var meta = card.querySelector('.dl__meta');
+    if (meta) meta.textContent = 'ස්ථාපිතයි';
+    card.classList.add('dl__card--installed');
+  }
+
+  function os() {
+    var u = (navigator.userAgent || '') + ' ' + (navigator.platform || '');
+    if (/Android/i.test(u)) return 'android';
+    if (/iPhone|iPad|iPod/i.test(u)) return 'ios';
+    if (/Mac/i.test(u)) return 'macos';
+    if (/Linux/i.test(u)) return 'linux';
+    if (/Win/i.test(u)) return 'windows';
+    return '';
+  }
+
+  // මේ මොහොතේ ඇප් එකක් ඇතුළේද?
+  function inApp() {
+    if (window.MatikaNative) return 'android';                 // Android ඇප් එක
+    if (window.__TAURI__ || document.documentElement.classList.contains('is-desktop-app')) {
+      var o = os();
+      return (o === 'macos' || o === 'linux') ? o : 'windows'; // desktop ඇප් එක
+    }
     try {
-      if (navigator.standalone) return true;                                  // iOS
-      return window.matchMedia('(display-mode: standalone)').matches ||
-             window.matchMedia('(display-mode: fullscreen)').matches ||
-             window.matchMedia('(display-mode: minimal-ui)').matches;
-    } catch (e) { return false; }
+      var standalone = navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+      if (standalone && os() === 'ios') return 'ios';          // මුල් තිරයට එක් කළ iPhone/iPad
+    } catch (e) {}
+    return '';
   }
 
   // Google Play ඇප් එක දුරකථනයේ ස්ථාපිතද යන්න (Chrome/Android)
   function markAndroidIfInstalled() {
     if (!navigator.getInstalledRelatedApps) return;
     navigator.getInstalledRelatedApps().then(function (apps) {
-      if (!apps || !apps.length) return;
-      var card = document.getElementById('dl-android');
-      if (!card) return;
-      var meta = card.querySelector('.dl__meta');
-      if (meta) meta.textContent = 'ස්ථාපිතයි';
-      card.classList.add('dl__card--installed');
+      if (apps && apps.length) markInstalled('dl-android');
     }).catch(function () {});
   }
 
   function run() {
     var box = document.getElementById('downloads');
     if (!box) return;
-    if (installed()) { box.hidden = true; return; }
+    var here = inApp();
+    if (here) markInstalled('dl-' + (here === 'macos' ? 'macos' : here));
     markAndroidIfInstalled();
     iosHelp();
     load().then(function (d) {
