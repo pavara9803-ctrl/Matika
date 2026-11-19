@@ -29,6 +29,7 @@
     if (!card || !info) return;
     var url = info.url || info.page;
     if (url) card.href = url;
+    if (card.classList.contains('dl__card--installed')) { card.classList.remove('dl__card--wait'); return; }
     var meta = card.querySelector('.dl__meta');
     if (meta) {
       var bits = [];
@@ -92,8 +93,9 @@
       fill('dl-windows', d.windows, '.exe');
       fill('dl-macos', d.macos, '.dmg');
       fill('dl-linux', d.linux, '.deb');
-      if (d.android && d.android.versionName) {
-        var a = document.querySelector('#dl-android .dl__meta');
+      var ac = document.getElementById('dl-android');
+      if (d.android && d.android.versionName && ac && !ac.classList.contains('dl__card--installed')) {
+        var a = ac.querySelector('.dl__meta');
         if (a) a.textContent = 'v' + d.android.versionName + ' · Google Play';
       }
       ['dl-windows', 'dl-macos', 'dl-linux'].forEach(function (id) {
