@@ -1156,7 +1156,9 @@ a, button, summary, label, select, [role="button"], [onclick],
 .ps-intro > summary { display: flex; align-items: center; gap: .55rem; cursor: pointer; list-style: none;
   padding: .7rem .85rem; font-weight: 600; font-size: .92rem; color: #7c2d12; }
 .ps-intro > summary::-webkit-details-marker { display: none; }
-.ps-intro > summary > span { flex: 1; }
+.ps-intro > summary > span:first-of-type { flex: 1; }
+.ps-intro__hint { font-size: .74rem; font-weight: 500; color: #b45309; opacity: .9; white-space: nowrap; }
+.ps-intro[open] .ps-intro__hint { display: none; }
 .ps-intro__chev { font-size: .75rem; transition: transform .18s ease; }
 .ps-intro[open] .ps-intro__chev { transform: rotate(180deg); }
 .ps-intro__body { padding: .2rem .95rem .95rem; border-top: 1px solid rgba(120, 53, 15, .1); }
@@ -1167,3 +1169,7 @@ a, button, summary, label, select, [role="button"], [onclick],
 :root.dark .ps-intro > summary, :root.dark .ps-intro__h { color: #fcd34d; }
 :root.dark .ps-intro__kicker { color: #fbbf24; }
 :root.dark .ps-intro__body { border-color: rgba(255, 255, 255, .08); }
+.ps-intro__src { margin: 1rem 0 0 !important; padding-top: .6rem; border-top: 1px solid rgba(120, 53, 15, .1);
+  font-size: .8rem !important; font-style: italic; color: #8a7f74; text-align: right; }
+:root.dark .ps-intro__hint { color: #fbbf24; }
+:root.dark .ps-intro__src { color: #94a3b8; border-color: rgba(255, 255, 255, .08); }

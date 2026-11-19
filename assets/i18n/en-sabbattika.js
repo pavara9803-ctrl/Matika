@@ -1,5 +1,8 @@
 /* en-sabbattika.js — සබ්බත්තික මාතිකා පිටුව : සිංහල → English (පාලි පාඨ රෝම අකුරට ලිප්‍යන්තරණය කර ඇත) */
 MX_I18N.add({
+ "විස්තරය බැලීම සඳහා ක්ලික් කරන්න": "Click to read",
+ "උපුටා ගැනීම — අභිධර්ම මාර්ගය": "Source — Abhidharma Mārgaya",
+ "පඤ්චස්කන්ධය හැඳින්වීම": "Introduction to the five aggregates",
  "සතර පරමාර්ථ ගැන මූලික අවබෝධයක් ලබා ගැනීමට \"සතර පරමාර්ථ\" කොටස අධ්‍යයනය කරන්න.": "For a basic understanding of the four ultimate realities, study the \"Four Ultimate Realities\" section.",
  "සතර පරමාර්ථ වෙත": "The Four Ultimate Realities",
  "අජ්ඣත්තත්තිකො": "Ajjhattattika",
