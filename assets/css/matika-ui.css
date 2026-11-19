@@ -1136,3 +1136,17 @@ a, button, summary, label, select, [role="button"], [onclick],
 :root.dark .dlios__n { background: rgba(252, 211, 77, .14); color: #fcd34d; }
 :root.dark .dlios__steps li { border-color: rgba(255, 255, 255, .08); }
 :root.dark .dlios__note, :root.dark .dlios__x { color: #94a3b8; }
+
+/* "සතර පරමාර්ථ වෙත" යොමු කිරීමේ තීරුව (සබ්බත්තික මාතිකා පිටුව) */
+.pm-cta { display: flex; align-items: center; justify-content: space-between; gap: .7rem; flex-wrap: wrap;
+  padding: .65rem .8rem; border-radius: 14px; background: rgba(180, 83, 9, .07); border: 1px solid #f2dcae; }
+.pm-cta__t { margin: 0; font-size: .86rem; line-height: 1.6; color: #7c2d12; flex: 1 1 220px; }
+.pm-cta__b { display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .9rem; border-radius: 999px;
+  background: #7f1d1d; color: #fde68a; font-size: .84rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+  transition: background .15s ease, transform .15s ease; }
+.pm-cta__b:hover { background: #991b1b; transform: translateY(-1px); }
+.pm-cta__b i:last-child { font-size: .72rem; }
+:root.dark .pm-cta { background: rgba(252, 211, 77, .08); border-color: #475569; }
+:root.dark .pm-cta__t { color: #fcd34d; }
+:root.dark .pm-cta__b { background: #fcd34d; color: #422006; }
+:root.dark .pm-cta__b:hover { background: #fbbf24; }
