@@ -11,5 +11,15 @@
     "size": 7973714,
     "date": "2026-11-18",
     "notes": "යාවත්කාලීන පරීක්ෂාව නිවැරදි කළා — ☰ මෙනුවේ \"යාවත්කාලීන පරීක්ෂා කරන්න\" එක් කළා."
+  },
+  "linux": {
+    "version": "1.0.0",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.0/Tika-Matika.AppImage",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.0",
+    "size": 85633528,
+    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.0/Tika-Matika.deb",
+    "size2": 7035028,
+    "label2": ".deb (Debian / Ubuntu)",
+    "date": "2026-11-19"
   }
 }
