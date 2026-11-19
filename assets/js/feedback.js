@@ -11,7 +11,7 @@
 const EMAILJS_CONFIG = {
   PUBLIC_KEY: '7x_FOGFJJO8JY6Hmg',      // ← ඔබගේ Public Key
   SERVICE_ID: 'service_x00ykdo',      // ← ඔබගේ Service ID
-  TEMPLATE_ID: 'template_REPLACE_ME'  // ← EmailJS > Email Templates වලින් 'template_' ලෙස ඇරඹෙන ID එක
+  TEMPLATE_ID: 'service_x00ykdo'      // ← EmailJS > Email Templates හි "Contact Us" template එකේ ID
 };
 
 // ============================================================
@@ -27,9 +27,9 @@ var emailjsLoading = false;
 
 function isEmailConfigured() {
   return !!EMAILJS_CONFIG.PUBLIC_KEY &&
-         /^service_/.test(EMAILJS_CONFIG.SERVICE_ID) &&
-         /^template_/.test(EMAILJS_CONFIG.TEMPLATE_ID) &&
-         EMAILJS_CONFIG.TEMPLATE_ID !== 'template_REPLACE_ME';
+         !!EMAILJS_CONFIG.SERVICE_ID &&
+         !!EMAILJS_CONFIG.TEMPLATE_ID &&
+         EMAILJS_CONFIG.TEMPLATE_ID !== 'template_REPLACE_ME';   /* ID ආකෘතිය පරීක්ෂා නොකරයි — EmailJS හි custom ID ද විය හැක */
 }
 
 function loadEmailJS(cb) {
