@@ -1,7 +1,7 @@
 [package]
 name = "tika-matika"
 version = "1.0.2"
-description = "අභිධර්ම මාතිකා අධ්‍යයනය — Tika Matika App"
+description = "අභිධම්ම මාතිකා — Abhidhamma Matika"
 edition = "2021"
 
 [build-dependencies]

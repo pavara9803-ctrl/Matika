@@ -1,4 +1,4 @@
-// අභිධර්ම මාතිකා අධ්‍යයනය — Windows ඇප් එක (Tauri).
+// අභිධම්ම මාතිකා — desktop ඇප් එක (Tauri).
 // වෙබ් ගොනු (www) .exe එක ඇතුළේම ඇති නිසා offline ක්‍රියා කරයි.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
@@ -21,5 +21,5 @@ fn main() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![open_url])
         .run(tauri::generate_context!())
-        .expect("error while running Tika Matika App");
+        .expect("error while running Abhidhamma Matika");
 }

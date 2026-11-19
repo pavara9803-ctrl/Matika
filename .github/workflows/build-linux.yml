@@ -1,10 +1,10 @@
 # =====================================================================
-#  Tika Matika App — offline Linux app (Tauri / WebKitGTK)
+#  අභිධම්ම මාතිකා (Abhidhamma Matika) — offline Linux app (Tauri / WebKitGTK)
 #  අවශ්‍ය විට පමණක්:  GitHub → Actions → "Build Linux app" → Run workflow
 #  • version හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි
 #  ප්‍රතිඵලය: GitHub Releases (linux-vX.Y.Z):
-#    • Tika-Matika.AppImage — ඕනෑම distro එකක; chmod +x කර ධාවනය කරන්න
-#    • Tika-Matika.deb      — Debian / Ubuntu / Mint
+#    • Abhidhamma-Matika.AppImage — ඕනෑම distro එකක; chmod +x කර ධාවනය කරන්න
+#    • Abhidhamma-Matika.deb      — Debian / Ubuntu / Mint
 # =====================================================================
 name: Build Linux app
 
@@ -80,14 +80,14 @@ jobs:
       - name: Collect files
         run: |
           mkdir -p rel
-          cp desktop-app/src-tauri/target/release/bundle/appimage/*.AppImage rel/Tika-Matika.AppImage
-          cp desktop-app/src-tauri/target/release/bundle/deb/*.deb rel/Tika-Matika.deb
-          chmod +x rel/Tika-Matika.AppImage
+          cp desktop-app/src-tauri/target/release/bundle/appimage/*.AppImage rel/Abhidhamma-Matika.AppImage
+          cp desktop-app/src-tauri/target/release/bundle/deb/*.deb rel/Abhidhamma-Matika.deb
+          chmod +x rel/Abhidhamma-Matika.AppImage
           ls -la rel
 
       - uses: actions/upload-artifact@v4
         with:
-          name: Tika-Matika-Linux-v${{ env.APP_VERSION }}
+          name: Abhidhamma-Matika-Linux-v${{ env.APP_VERSION }}
           path: rel/*
           if-no-files-found: error
 
@@ -98,27 +98,27 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: Linux ${{ env.APP_VERSION }}
           body: |
-            අභිධර්ම මාතිකා අධ්‍යයනය (Tika Matika App) — Linux ${{ env.APP_VERSION }} (offline)
-            • Tika-Matika.AppImage — ඕනෑම distro එකක: `chmod +x Tika-Matika.AppImage && ./Tika-Matika.AppImage`
-            • Tika-Matika.deb — Debian / Ubuntu / Mint: `sudo apt install ./Tika-Matika.deb`
+            අභිධම්ම මාතිකා — Linux ${{ env.APP_VERSION }} (offline)
+            • Abhidhamma-Matika.AppImage — ඕනෑම distro එකක: `chmod +x Abhidhamma-Matika.AppImage && ./Abhidhamma-Matika.AppImage`
+            • Abhidhamma-Matika.deb — Debian / Ubuntu / Mint: `sudo apt install ./Abhidhamma-Matika.deb`
 
             ${{ inputs.notes }}
           files: |
-            rel/Tika-Matika.AppImage
-            rel/Tika-Matika.deb
+            rel/Abhidhamma-Matika.AppImage
+            rel/Abhidhamma-Matika.deb
 
       - name: Record version in app-version.json
         env:
           VERSION: ${{ env.APP_VERSION }}
           NOTES: ${{ inputs.notes }}
-          URL: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Tika-Matika.AppImage
-          URL2: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Tika-Matika.deb
+          URL: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Abhidhamma-Matika.AppImage
+          URL2: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Abhidhamma-Matika.deb
           LABEL2: .deb (Debian / Ubuntu)
           PAGE: https://github.com/${{ github.repository }}/releases/tag/linux-v${{ env.APP_VERSION }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          export SIZE=$(stat -c%s rel/Tika-Matika.AppImage)
-          export SIZE2=$(stat -c%s rel/Tika-Matika.deb)
+          export SIZE=$(stat -c%s rel/Abhidhamma-Matika.AppImage)
+          export SIZE2=$(stat -c%s rel/Abhidhamma-Matika.deb)
           SITE="$RUNNER_TEMP/site"
           for i in 1 2 3; do
             rm -rf "$SITE"
