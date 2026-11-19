@@ -28,13 +28,16 @@ function fixHtml(text, isIndex) {
   text = text.replace(FA_CDN, FA_LOCAL);
   if (isIndex) {
     text = text.replace('<html lang="si" class="h-full">', '<html lang="si" class="h-full" data-mx-lang-home>');
-    text = text.replace('<script src="assets/js/downloads.js" defer></script>\n', '');
-    const i = text.indexOf('<!-- ඇප් එක බාගත කරන්න (platform අනුව) -->');
-    if (i >= 0) {
-      const note = text.indexOf('<p class="dl__note">', i);
-      const end = text.indexOf('</section>', note) + '</section>'.length;
-      text = text.slice(0, i) + text.slice(end);
-    }
+  }
+  // බාගත කිරීමේ කොටස (දැන් help.html හි) ඇප් එකට අවශ්‍ය නැත
+  text = text.replace(/<script src="[^"]*downloads\.js"[^>]*><\/script>\n?/g, '');
+  const i = text.indexOf('<!-- ඇප් එක බාගත කරන්න (platform අනුව) -->');
+  if (i >= 0) {
+    const tail = text.indexOf('<p class="dlios__note">', i);
+    const end = tail >= 0
+      ? text.indexOf('</div>', text.indexOf('</div>', tail) + 6) + '</div>'.length
+      : text.indexOf('</section>', i) + '</section>'.length;
+    text = text.slice(0, i) + text.slice(end);
   }
   return text;
 }
