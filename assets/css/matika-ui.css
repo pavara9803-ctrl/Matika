@@ -1126,6 +1126,7 @@ a, button, summary, label, select, [role="button"], [onclick],
   padding: .45rem 0; border-top: 1px solid rgba(120, 53, 15, .08); }
 .dlios__steps li:first-child { border-top: 0; }
 .dlios__steps i { color: #b45309; }
+.dlios__t { flex: 1; }
 .dlios__n { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
   background: rgba(180, 83, 9, .12); color: #9a3412; font-size: .76rem; font-weight: 700; margin-top: .15rem; }
 .dlios__note { margin: .6rem 0 0; padding: 0 1.1rem 1.1rem; font-size: .82rem; color: #8a7f74; }
