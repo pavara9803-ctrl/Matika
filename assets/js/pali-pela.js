@@ -34,6 +34,54 @@
   /* Word ගොනුවේ තද අකුරු: \u0001 … \u0002 සලකුණු → <b> */
   var BO = '\u0001', BC = '\u0002';
   function bold(h) { return h.replace(/\u0001([^\u0002]*)\u0002/g, '<b class="pp-b">$1</b>').replace(/[\u0001\u0002]/g, ''); }
+
+  /* ---------- පාළි අක්ෂර: සිංහල → රෝම (IAST) / මියන්මාර් ----------
+     ඉංග්‍රීසි/චීන දසුනේදී පාළි පාඨ රෝම අකුරෙන්, මියන්මාර් දසුනේදී මියන්මාර් අකුරෙන් (PaliScript) පෙන්වයි.
+     සිංහල දසුනේදී මුල් පාඨය අකුරක්වත් නොවෙනස්ව තබයි. */
+  var SI_C = { 'ක':'k','ඛ':'kh','ග':'g','ඝ':'gh','ඞ':'ṅ','ච':'c','ඡ':'ch','ජ':'j','ඣ':'jh','ඤ':'ñ','ඥ':'ññ',
+    'ට':'ṭ','ඨ':'ṭh','ඩ':'ḍ','ඪ':'ḍh','ණ':'ṇ','ත':'t','ථ':'th','ද':'d','ධ':'dh','න':'n',
+    'ප':'p','ඵ':'ph','බ':'b','භ':'bh','ම':'m','ය':'y','ර':'r','ල':'l','ව':'v','ස':'s','ශ':'s','ෂ':'s','හ':'h','ළ':'ḷ','ෆ':'f',
+    'ඟ':'ṅg','ඬ':'ṇḍ','ඳ':'nd','ඹ':'mb' };
+  var SI_V = { 'අ':'a','ආ':'ā','ඇ':'a','ඈ':'ā','ඉ':'i','ඊ':'ī','උ':'u','ඌ':'ū','ඍ':'ri','එ':'e','ඒ':'e','ඓ':'ai','ඔ':'o','ඕ':'o','ඖ':'au' };
+  var SI_S = { 'ා':'ā','ැ':'a','ෑ':'ā','ි':'i','ී':'ī','ු':'u','ූ':'ū','ෘ':'ri','ෙ':'e','ේ':'e','ෛ':'ai','ො':'o','ෝ':'o','ෞ':'au','ෲ':'rī' };
+  function siToRoman(str) {
+    str = String(str).replace(/‍/g, '');
+    var out = '', pend = false;
+    for (var i = 0; i < str.length; i++) {
+      var ch = str.charAt(i);
+      if (SI_C[ch]) { if (pend) out += 'a'; out += SI_C[ch]; pend = true; }
+      else if (SI_S[ch]) { out += SI_S[ch]; pend = false; }
+      else if (ch === '්') { pend = false; }
+      else if (ch === 'ං') { if (pend) out += 'a'; out += 'ṃ'; pend = false; }
+      else if (ch === 'ඃ') { if (pend) out += 'a'; out += 'ḥ'; pend = false; }
+      else if (SI_V[ch]) { if (pend) out += 'a'; out += SI_V[ch]; pend = false; }
+      else { if (pend) out += 'a'; out += ch; pend = false; }
+    }
+    if (pend) out += 'a';
+    return out;
+  }
+  function curLang() { return (window.MX_I18N && MX_I18N.lang) ? MX_I18N.lang() : 'si'; }
+  function paliScript(str) {
+    var L = curLang();
+    if (L === 'si' || !/[඀-෿]/.test(str)) return str;
+    var r = siToRoman(str);
+    if (L === 'my' && window.PaliScript) {
+      r = PaliScript.toMyanmar(r).replace(/\s*\.(?=\s|$|[’”'"])/g, '။').replace(/,/g, '၊');
+    } else {
+      r = r.replace(/(^|[.?!]\s+|[‘“]+)([a-zāīūṭḍṇñṅḷṃ])/g, function (m, a, b) { return a + b.toUpperCase(); });
+    }
+    return r;
+  }
+  function translitLeaves(root) {
+    if (curLang() === 'si') return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, list = [];
+    while ((n = w.nextNode())) list.push(n);
+    list.forEach(function (t) {
+      if (t.parentNode.closest('.pp-no, button')) return;
+      var v = t.nodeValue; if (/[඀-෿]/.test(v)) t.nodeValue = paliScript(v);
+    });
+  }
+
   function plain(s) { return String(s).replace(/[\u0001\u0002]/g, ''); }
   /* සලකුණු සහිත පාඨය, සලකුණු නොමැති අකුරු n කින් බෙදීම (විවෘත තද කොටස් සමබර කරයි) */
   function splitAt(m, n) {
@@ -177,6 +225,7 @@
       '<p class="pp-desc">' + esc(T(K[tab].d)) + '</p>' + extra +
       '<div class="pp-leaves' + (isPali ? '' : ' pp-leaves--cm') + '" data-no-i18n>' + body + '</div>' + more +
       '<p class="pp-src">' + T('මූලාශ්‍රය: {b} — {k} ({l}).', { b: T(B.s), k: T(K[tab].full || K[tab].t), l: srcList }) + '</p></div>';
+    var lv = host.querySelector('.pp-leaves'); if (lv) translitLeaves(lv);
     host.classList.toggle('is-open', open);
     host.querySelector('.pp-head').addEventListener('click', function () { host.dataset.open = open ? '0' : '1'; render(host, key, data, book); });
     host.querySelectorAll('.pp-book').forEach(function (b) {
@@ -192,7 +241,7 @@
     if (sa) sa.addEventListener('click', function () { host.querySelectorAll('.pp-more').forEach(function (e) { e.hidden = false; }); sa.remove(); });
     host.querySelectorAll('.pp-copy').forEach(function (b) {
       b.addEventListener('click', function () {
-        var n = b.dataset.n, txt = (isPali ? n + '. ' : '') + plain(data.text[n] || '') + '\n— ' + B.s;
+        var n = b.dataset.n, txt = (isPali ? n + '. ' : '') + paliScript(plain(data.text[n] || '')) + '\n— ' + T(B.s);
         var done = function () { b.classList.add('is-done'); b.querySelector('span').textContent = T('පිටපත් විය'); setTimeout(function () { b.classList.remove('is-done'); b.querySelector('span').textContent = T('පිටපත්'); }, 1600); };
         try { navigator.clipboard.writeText(txt).then(done, function () {}); } catch (e) {}
       });
