@@ -23,12 +23,12 @@
   },
   "linux": {
     "version": "1.0.1",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.1/Abhidhamma-Matika.AppImage",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.1/Abhidhamma-Matika.deb",
     "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.1",
-    "size": 85633528,
-    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.1/Abhidhamma-Matika.deb",
-    "size2": 7038412,
-    "label2": ".deb (Debian / Ubuntu)",
+    "size": 7038412,
+    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.1/Abhidhamma-Matika.AppImage",
+    "size2": 85633528,
+    "label2": ".AppImage (ඕනෑම distro)",
     "date": "2026-11-19",
     "notes": "ඇප් එකේ නම \"අභිධම්ම මාතිකා\" ලෙස වෙනස් කළා."
   }

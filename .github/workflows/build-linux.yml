@@ -111,14 +111,14 @@ jobs:
         env:
           VERSION: ${{ env.APP_VERSION }}
           NOTES: ${{ inputs.notes }}
-          URL: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Abhidhamma-Matika.AppImage
-          URL2: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Abhidhamma-Matika.deb
-          LABEL2: .deb (Debian / Ubuntu)
+          URL: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Abhidhamma-Matika.deb
+          URL2: https://github.com/${{ github.repository }}/releases/download/linux-v${{ env.APP_VERSION }}/Abhidhamma-Matika.AppImage
+          LABEL2: .AppImage (ඕනෑම distro)
           PAGE: https://github.com/${{ github.repository }}/releases/tag/linux-v${{ env.APP_VERSION }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          export SIZE=$(stat -c%s rel/Abhidhamma-Matika.AppImage)
-          export SIZE2=$(stat -c%s rel/Abhidhamma-Matika.deb)
+          export SIZE=$(stat -c%s rel/Abhidhamma-Matika.deb)
+          export SIZE2=$(stat -c%s rel/Abhidhamma-Matika.AppImage)
           SITE="$RUNNER_TEMP/site"
           for i in 1 2 3; do
             rm -rf "$SITE"
