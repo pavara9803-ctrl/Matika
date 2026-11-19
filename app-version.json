@@ -13,11 +13,12 @@
     "notes": "ඇප් එකේ නම \"අභිධම්ම මාතිකා\" ලෙස වෙනස් කළා."
   },
   "macos": {
-    "version": "1.0.0",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.0/Tika-Matika.dmg",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.0",
-    "size": 13536499,
-    "date": "2026-11-19"
+    "version": "1.0.1",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.1/Abhidhamma-Matika.dmg",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.1",
+    "size": 13543069,
+    "date": "2026-11-19",
+    "notes": "ඇප් එකේ නම \"අභිධම්ම මාතිකා\" ලෙස වෙනස් කළා."
   },
   "linux": {
     "version": "1.0.1",
