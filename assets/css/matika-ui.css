@@ -1090,3 +1090,6 @@ a, button, summary, label, select, [role="button"], [onclick],
 :root.dark .dl__alt a { color: #fcd34d; }
 /* Windows/macOS/Linux ඇප් එක ඇතුළේ බාගත කිරීමේ කොටස අවශ්‍ය නැත */
 .is-desktop-app #downloads { display: none; }
+.dl__card--installed { opacity: .72; }
+.dl__card--installed .dl__meta { font-weight: 600; color: #15803d; }
+:root.dark .dl__card--installed .dl__meta { color: #86efac; }

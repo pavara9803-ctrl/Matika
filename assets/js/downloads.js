@@ -40,9 +40,34 @@
     card.classList.remove('dl__card--wait');
   }
 
+  // ඇප් එකක් ලෙස (PWA / desktop ඇප්) විවෘත කර ඇත්නම් බාගත කිරීමේ කොටස අවශ්‍ය නැත
+  function installed() {
+    try {
+      if (navigator.standalone) return true;                                  // iOS
+      return window.matchMedia('(display-mode: standalone)').matches ||
+             window.matchMedia('(display-mode: fullscreen)').matches ||
+             window.matchMedia('(display-mode: minimal-ui)').matches;
+    } catch (e) { return false; }
+  }
+
+  // Google Play ඇප් එක දුරකථනයේ ස්ථාපිතද යන්න (Chrome/Android)
+  function markAndroidIfInstalled() {
+    if (!navigator.getInstalledRelatedApps) return;
+    navigator.getInstalledRelatedApps().then(function (apps) {
+      if (!apps || !apps.length) return;
+      var card = document.getElementById('dl-android');
+      if (!card) return;
+      var meta = card.querySelector('.dl__meta');
+      if (meta) meta.textContent = 'ස්ථාපිතයි';
+      card.classList.add('dl__card--installed');
+    }).catch(function () {});
+  }
+
   function run() {
     var box = document.getElementById('downloads');
     if (!box) return;
+    if (installed()) { box.hidden = true; return; }
+    markAndroidIfInstalled();
     load().then(function (d) {
       fill('dl-windows', d.windows, '.exe');
       fill('dl-macos', d.macos, '.dmg');

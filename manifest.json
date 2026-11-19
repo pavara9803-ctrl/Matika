@@ -199,5 +199,12 @@
       "label": "රූප විභාගය - ජංගම දුරකථනය"
     }
   ],
-  "display": "standalone"
+  "display": "standalone",
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "app.vercel.matika_snowy.twa",
+      "url": "https://play.google.com/store/apps/details?id=app.vercel.matika_snowy.twa"
+    }
+  ]
 }
