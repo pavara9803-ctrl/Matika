@@ -1,9 +1,9 @@
 # =====================================================================
-#  Tika Matika App — offline Windows app (Tauri / WebView2)
+#  අභිධම්ම මාතිකා (Abhidhamma Matika) — offline Windows app (Tauri / WebView2)
 #  අවශ්‍ය විට පමණක්:  GitHub → Actions → "Build Windows EXE" → Run workflow
 #  • version හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි (උදා: 1.0.1 → 1.0.2)
 #  ප්‍රතිඵලය: එම run එකේ "Artifacts" සහ GitHub Releases (windows-vX.Y.Z):
-#    • Tika-Matika-Setup.exe — install කිරීමේදී "මට පමණක්" හෝ "සියලු පරිශීලකයින්ට" තෝරාගත හැක
+#    • Abhidhamma-Matika-Setup.exe — install කිරීමේදී "මට පමණක්" හෝ "සියලු පරිශීලකයින්ට" තෝරාගත හැක
 #  release එකෙන් පසු app-version.json යාවත්කාලීන වේ.
 #  සටහන: පෙර Electron ක්‍රමය (desktop/ ෆෝල්ඩරය) repo එකේ ඉතිරිව ඇත; ගැටලුවක් ආවොත්
 #  මෙම commit එක revert කර එයට ආපසු යා හැක.
@@ -75,7 +75,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: Tika-Matika-Windows-v${{ env.APP_VERSION }}
+          name: Abhidhamma-Matika-Windows-v${{ env.APP_VERSION }}
           path: desktop-app/src-tauri/target/release/bundle/nsis/*.exe
           if-no-files-found: error
 
@@ -83,7 +83,7 @@ jobs:
       - name: Prepare release file
         run: |
           mkdir -p rel
-          cp desktop-app/src-tauri/target/release/bundle/nsis/*-setup.exe rel/Tika-Matika-Setup.exe
+          cp desktop-app/src-tauri/target/release/bundle/nsis/*.exe rel/Abhidhamma-Matika-Setup.exe
           ls -la rel
 
       - name: Publish GitHub Release
@@ -93,23 +93,23 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: Windows ${{ env.APP_VERSION }}
           body: |
-            අභිධර්ම මාතිකා අධ්‍යයනය (Tika Matika App) — Windows ${{ env.APP_VERSION }} (offline)
-            • Tika-Matika-Setup.exe — install කිරීමේදී "මට පමණක්" (Administrator අවශ්‍ය නැත) හෝ "සියලු පරිශීලකයින්ට" තෝරන්න.
+            අභිධම්ම මාතිකා — Windows ${{ env.APP_VERSION }} (offline)
+            • Abhidhamma-Matika-Setup.exe — install කිරීමේදී "මට පමණක්" (Administrator අවශ්‍ය නැත) හෝ "සියලු පරිශීලකයින්ට" තෝරන්න.
             "Windows protected your PC" පෙන්වුවහොත්: More info → Run anyway.
 
             ${{ inputs.notes }}
-          files: rel/Tika-Matika-Setup.exe
+          files: rel/Abhidhamma-Matika-Setup.exe
           make_latest: true
 
       - name: Record version in app-version.json
         env:
           VERSION: ${{ env.APP_VERSION }}
           NOTES: ${{ inputs.notes }}
-          URL: https://github.com/${{ github.repository }}/releases/download/windows-v${{ env.APP_VERSION }}/Tika-Matika-Setup.exe
+          URL: https://github.com/${{ github.repository }}/releases/download/windows-v${{ env.APP_VERSION }}/Abhidhamma-Matika-Setup.exe
           PAGE: https://github.com/${{ github.repository }}/releases/tag/windows-v${{ env.APP_VERSION }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          export SIZE=$(stat -c%s rel/Tika-Matika-Setup.exe)
+          export SIZE=$(stat -c%s rel/Abhidhamma-Matika-Setup.exe)
           SITE="$RUNNER_TEMP/site"
           for i in 1 2 3; do
             rm -rf "$SITE"

@@ -1,9 +1,9 @@
 # =====================================================================
-#  Tika Matika App — offline macOS app (Tauri / WKWebView)
+#  අභිධම්ම මාතිකා (Abhidhamma Matika) — offline macOS app (Tauri / WKWebView)
 #  අවශ්‍ය විට පමණක්:  GitHub → Actions → "Build macOS app" → Run workflow
 #  • version හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි
 #  ප්‍රතිඵලය: GitHub Releases (macos-vX.Y.Z):
-#    • Tika-Matika.dmg — Intel සහ Apple Silicon දෙකටම (universal)
+#    • Abhidhamma-Matika.dmg — Intel සහ Apple Silicon දෙකටම (universal)
 #  සටහන: Apple developer අත්සනක් නැති නිසා පළමු වර විවෘත කිරීමේදී
 #  "unidentified developer" පණිවිඩය එයි — ඇප් එක මත Control+click → Open.
 # =====================================================================
@@ -76,13 +76,13 @@ jobs:
       - name: Collect file
         run: |
           mkdir -p rel
-          cp desktop-app/src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg rel/Tika-Matika.dmg
+          cp desktop-app/src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg rel/Abhidhamma-Matika.dmg
           ls -la rel
 
       - uses: actions/upload-artifact@v4
         with:
-          name: Tika-Matika-macOS-v${{ env.APP_VERSION }}
-          path: rel/Tika-Matika.dmg
+          name: Abhidhamma-Matika-macOS-v${{ env.APP_VERSION }}
+          path: rel/Abhidhamma-Matika.dmg
           if-no-files-found: error
 
       - name: Publish GitHub Release
@@ -92,23 +92,23 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: macOS ${{ env.APP_VERSION }}
           body: |
-            අභිධර්ම මාතිකා අධ්‍යයනය (Tika Matika App) — macOS ${{ env.APP_VERSION }} (offline)
-            • Tika-Matika.dmg — Intel සහ Apple Silicon දෙකටම.
+            අභිධම්ම මාතිකා — macOS ${{ env.APP_VERSION }} (offline)
+            • Abhidhamma-Matika.dmg — Intel සහ Apple Silicon දෙකටම.
             පළමු වර විවෘත කිරීමේදී "unidentified developer" පණිවිඩය පැමිණියහොත්:
             Applications ෆෝල්ඩරයේ ඇප් එක මත Control+click → Open → Open.
 
             ${{ inputs.notes }}
-          files: rel/Tika-Matika.dmg
+          files: rel/Abhidhamma-Matika.dmg
 
       - name: Record version in app-version.json
         env:
           VERSION: ${{ env.APP_VERSION }}
           NOTES: ${{ inputs.notes }}
-          URL: https://github.com/${{ github.repository }}/releases/download/macos-v${{ env.APP_VERSION }}/Tika-Matika.dmg
+          URL: https://github.com/${{ github.repository }}/releases/download/macos-v${{ env.APP_VERSION }}/Abhidhamma-Matika.dmg
           PAGE: https://github.com/${{ github.repository }}/releases/tag/macos-v${{ env.APP_VERSION }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          export SIZE=$(stat -f%z rel/Tika-Matika.dmg)
+          export SIZE=$(stat -f%z rel/Abhidhamma-Matika.dmg)
           SITE="$RUNNER_TEMP/site"
           for i in 1 2 3; do
             rm -rf "$SITE"

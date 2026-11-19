@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Tika Matika App",
+  "productName": "අභිධම්ම මාතිකා",
   "version": "1.0.2",
   "identifier": "app.matika.desktop",
   "build": {
@@ -11,7 +11,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "අභිධර්ම මාතිකා අධ්‍යයනය | Tika Matika App",
+        "title": "අභිධම්ම මාතිකා",
         "width": 1200,
         "height": 850,
         "minWidth": 420,
@@ -50,5 +50,6 @@
         "displayLanguageSelector": false
       }
     }
-  }
+  },
+  "mainBinaryName": "abhidhamma-matika"
 }

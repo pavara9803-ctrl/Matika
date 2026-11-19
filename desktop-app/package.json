@@ -2,7 +2,7 @@
   "name": "tika-matika-desktop",
   "private": true,
   "version": "1.0.0",
-  "description": "අභිධර්ම මාතිකා අධ්‍යයනය (Tika Matika App) — offline Windows app (Tauri). GitHub Actions මගින් build වේ: .github/workflows/build-windows-exe.yml",
+  "description": "අභිධම්ම මාතිකා — offline desktop app (Tauri). GitHub Actions මගින් build වේ: .github/workflows/build-windows-exe.yml",
   "scripts": {
     "prepare-www": "node scripts/prepare-www.mjs",
     "set-version": "node scripts/set-version.mjs",
