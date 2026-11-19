@@ -21,14 +21,13 @@
     "notes": "බාගත කිරීමේ කොටස ඇප් එක ඇතුළේද පෙන්වයි."
   },
   "linux": {
-    "version": "1.0.2",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.2/Abhidhamma-Matika.deb",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.2",
-    "size": 7041392,
-    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.2/Abhidhamma-Matika.AppImage",
-    "size2": 85637624,
+    "version": "1.0.3",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.3/Abhidhamma-Matika.deb",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.3",
+    "size": 7047716,
+    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.3/Abhidhamma-Matika.AppImage",
+    "size2": 85641720,
     "label2": ".AppImage (ඕනෑම distro)",
-    "date": "2026-11-19",
-    "notes": "බාගත කිරීමේ කොටස ඇප් එක ඇතුළේද පෙන්වයි."
+    "date": "2026-11-19"
   }
 }
