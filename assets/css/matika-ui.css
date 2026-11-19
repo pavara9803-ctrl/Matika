@@ -1107,3 +1107,31 @@ a, button, summary, label, select, [role="button"], [onclick],
 :root.dark .dl__icon { background: rgba(252, 211, 77, .12); color: #fcd34d; }
 :root.dark .dl__go { color: #fcd34d; }
 :root.dark .dl__card--installed .dl__meta { color: #86efac; }
+
+/* iPhone කාඩ්පත + "Add to Home Screen" උපදෙස් කවුළුව */
+.dl__card--ios { font: inherit; text-align: left; cursor: pointer; }
+.dlios { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .45); padding: 16px; }
+.dlios[hidden] { display: none; }
+.dlios__box { background: #fffbeb; color: #44403c; width: min(440px, 100%); max-height: calc(100% - 24px);
+  overflow-y: auto; border: 1px solid #f2dcae; border-radius: 18px; box-shadow: 0 16px 44px rgba(0, 0, 0, .35); }
+.dlios__head { display: flex; align-items: center; gap: .6rem; padding: 1rem 1.1rem .4rem; }
+.dlios__head i { color: #9a3412; font-size: 1.1rem; }
+.dlios__head h3 { margin: 0; font-size: 1rem; font-weight: 700; color: #7c2d12; flex: 1; line-height: 1.4; }
+.dlios__x { background: none; border: 0; color: #8a7f74; font-size: 1rem; cursor: pointer; padding: .3rem .4rem;
+  border-radius: 8px; }
+.dlios__x:hover { background: rgba(180, 83, 9, .1); color: #7c2d12; }
+.dlios__steps { list-style: none; margin: .5rem 0 0; padding: 0 1.1rem; }
+.dlios__steps li { display: flex; gap: .6rem; align-items: flex-start; font-size: .92rem; line-height: 1.6;
+  padding: .45rem 0; border-top: 1px solid rgba(120, 53, 15, .08); }
+.dlios__steps li:first-child { border-top: 0; }
+.dlios__steps i { color: #b45309; }
+.dlios__n { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(180, 83, 9, .12); color: #9a3412; font-size: .76rem; font-weight: 700; margin-top: .15rem; }
+.dlios__note { margin: .6rem 0 0; padding: 0 1.1rem 1.1rem; font-size: .82rem; color: #8a7f74; }
+:root.dark .dlios__box { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+:root.dark .dlios__head h3 { color: #fcd34d; }
+:root.dark .dlios__head i, :root.dark .dlios__steps i { color: #fcd34d; }
+:root.dark .dlios__n { background: rgba(252, 211, 77, .14); color: #fcd34d; }
+:root.dark .dlios__steps li { border-color: rgba(255, 255, 255, .08); }
+:root.dark .dlios__note, :root.dark .dlios__x { color: #94a3b8; }
