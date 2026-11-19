@@ -71,15 +71,7 @@
     load().then(function (d) {
       fill('dl-windows', d.windows, '.exe');
       fill('dl-macos', d.macos, '.dmg');
-      fill('dl-linux', d.linux, '.AppImage');
-      if (d.linux && d.linux.url2) {
-        var deb = document.getElementById('dl-linux-deb');
-        if (deb) {
-          deb.href = d.linux.url2;
-          deb.textContent = 'Linux: ' + (d.linux.label2 || '.deb') + (d.linux.size2 ? ' · ' + mb(d.linux.size2) : '');
-          deb.hidden = false;
-        }
-      }
+      fill('dl-linux', d.linux, '.deb');
       if (d.android && d.android.versionName) {
         var a = document.querySelector('#dl-android .dl__meta');
         if (a) a.textContent = 'v' + d.android.versionName + ' · Google Play';
