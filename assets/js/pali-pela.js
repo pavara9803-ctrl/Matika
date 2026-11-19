@@ -51,8 +51,8 @@
   /* පාඨය HTML කිරීම: ප්‍රශ්නය, …පෙ.…, [පාඨාන්තර], අවසාන “ඉමෙ ධම්මා …” වාක්‍යය */
   function fmtLine(line) {
     var h = esc(line);
-    h = h.replace(/\[([^\]]+)\]/g, '<span class="pp-var" title="පාඨාන්තරය">[$1]</span>');
-    h = h.replace(/…\s*පෙ\s*\.\s*…|\.\.\.\s*පෙ\s*\.\s*\.\.\./g, '<span class="pp-pe" title="පෙය්‍යාලය — පෙර පරිදි">…පෙ.…</span>');
+    h = h.replace(/\[([^\]]+)\]/g, '<span class="pp-var" title="' + T('පාඨාන්තරය') + '">[$1]</span>');
+    h = h.replace(/…\s*පෙ\s*\.\s*…|\.\.\.\s*පෙ\s*\.\s*\.\.\./g, '<span class="pp-pe" title="' + T('පෙය්‍යාලය — පෙර පරිදි') + '">…පෙ.…</span>');
     h = h.replace(/(තත්ථ\s+කතම[ාංොෙ]\s+[^?]{1,60}\?)/g, '<b class="pp-sq">$1</b>');
     h = bold(h);
     h = h.replace(/(\s–\s)(ඉමෙ\s+(?:ධම්මා|තයො|චත්තාරො|ඉමානි)?[^–]*?\.)$/, '$1<span class="pp-end">$2</span>');
@@ -66,11 +66,11 @@
     if (m) { var sp = splitAt(first, m[1].length); q = sp[0]; rest = sp[1].replace(/^\s+/, ''); }
     else { var m2 = fp.match(/^([^–]{2,60}?(?:ති|න්ති|ීති))\s+–\s*(.*)$/); if (m2) { var sp2 = splitAt(first, m2[1].length); q = sp2[0] + ' –'; rest = sp2[1].replace(/^\s*–\s*/, ''); } }
     var html = '<article class="pp-leaf" data-n="' + n + '">' +
-      '<span class="pp-no" aria-label="ඡේද අංකය">§' + n + '</span>' +
+      '<span class="pp-no" aria-label="' + T('ඡේද අංකය') + '">§' + n + '</span>' +
       (q ? '<p class="pp-q">' + bold(esc(q)) + '</p>' : '') +
       (rest ? '<p class="pp-a' + (plain(rest).length < 160 ? ' pp-short' : '') + '">' + fmtLine(rest) + '</p>' : '') +
       lines.map(function (l) { return '<p class="pp-a pp-tail">' + fmtLine(l) + '</p>'; }).join('') +
-      '<button type="button" class="pp-copy" data-n="' + n + '" aria-label="ඡේදය පිටපත් කරන්න"><i class="fa-regular fa-copy" aria-hidden="true"></i><span>පිටපත්</span></button>' +
+      '<button type="button" class="pp-copy" data-n="' + n + '" aria-label="' + T('ඡේදය පිටපත් කරන්න') + '"><i class="fa-regular fa-copy" aria-hidden="true"></i><span>' + T('පිටපත්') + '</span></button>' +
       '</article>';
     return html;
   }
@@ -87,12 +87,19 @@
       .replace(/\[([^\]]+)\]/g, '<span class="pp-var">[$1]</span>');
     h = bold(h);
     var verse = /^\s{2}/.test(text);
-    var no = lab ? (part === 'mv' ? (lab.indexOf('-') > -1 || lab.indexOf('–') > -1 ? 'දුක ' + lab : (+lab > 100 ? 'දුක ' + lab : 'තික ' + lab)) : '§' + lab) : '';
+    var no = lab ? (part === 'mv' ? (lab.indexOf('-') > -1 || lab.indexOf('–') > -1 ? T('දුක {n}', { n: lab }) : (+lab > 100 ? T('දුක {n}', { n: lab }) : T('තික {n}', { n: lab }))) : '§' + lab) : '';
     return '<article class="pp-leaf pp-cm' + (lab ? '' : ' pp-cont') + (verse ? ' pp-verse' : '') + '" data-n="' + id + '">' +
       (no ? '<span class="pp-no">' + no + '</span>' : '') +
       '<p class="pp-a' + (plain(body).length < 160 ? ' pp-short' : '') + '">' + h + '</p>' +
-      '<button type="button" class="pp-copy" data-n="' + id + '" aria-label="ඡේදය පිටපත් කරන්න"><i class="fa-regular fa-copy" aria-hidden="true"></i><span>පිටපත්</span></button>' +
+      '<button type="button" class="pp-copy" data-n="' + id + '" aria-label="' + T('ඡේදය පිටපත් කරන්න') + '"><i class="fa-regular fa-copy" aria-hidden="true"></i><span>' + T('පිටපත්') + '</span></button>' +
       '</article>';
+  }
+
+  /* UI පාඨ පරිවර්තනය (i18n) — පාළි/අට්ඨකථා/ටීකා පාඨ නොවෙනස්ව තබයි */
+  function T(s, v) {
+    var r = (window.MX_I18N && MX_I18N.t) ? MX_I18N.t(s) : s;
+    if (v) for (var k in v) r = r.split('{' + k + '}').join(v[k]);
+    return r;
   }
 
   var KANDA = {
@@ -107,7 +114,7 @@
 
   function notes(key, entry, data, which) {
     var out = [];
-    if (/^d:(6|7),/.test(key)) out.push('පාළියේ මෙම ගොච්ඡකය ආසව ගොච්ඡකයේ ක්‍රමයටම “…පෙ.…” යොදා සංක්ෂිප්ත කර ඇත; ගොච්ඡකයේ සියලු පද සඳහා එකම ඡේදය දැක්වේ.');
+    if (/^d:(6|7),/.test(key)) out.push(T('පාළියේ මෙම ගොච්ඡකය ආසව ගොච්ඡකයේ ක්‍රමයටම “…පෙ.…” යොදා සංක්ෂිප්ත කර ඇත; ගොච්ඡකයේ සියලු පද සඳහා එකම ඡේදය දැක්වේ.'));
     else {
       // එකම ඡේදය සහෝදර පදයකටද පොදු නම්
       var parts = key.split(':'), idx = parts[1].split(','), sib = [];
@@ -118,7 +125,7 @@
         var e2 = data.map[k2];
         if (e2 && e2[which] && entry[which] && e2[which].join() === entry[which].join()) sib.push(j);
       });
-      if (sib.length) out.push('මෙම ඡේදය ' + (parts[0] === 't' ? 'ත්‍රිකයේ' : 'දුකයේ') + ' අනෙක් පදයටද පොදු ය — පදය අදාළ වන ස්ථානය පාඨයේ ම සොයන්න.');
+      if (sib.length) out.push(parts[0] === 't' ? T('මෙම ඡේදය ත්‍රිකයේ අනෙක් පදයටද පොදු ය — පදය අදාළ වන ස්ථානය පාඨයේ ම සොයන්න.') : T('මෙම ඡේදය දුකයේ අනෙක් පදයටද පොදු ය — පදය අදාළ වන ස්ථානය පාඨයේ ම සොයන්න.'));
     }
     return out.map(function (t) { return '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> ' + esc(t) + '</p>'; }).join('');
   }
@@ -133,12 +140,12 @@
     if (!entry[tab]) tab = B.parts.filter(function (w) { return entry[w]; })[0] || B.parts[0];
     var books = BOOK_ORDER.map(function (b) {
       return '<button type="button" role="tab" class="pp-book' + (b === book ? ' is-on' : '') + '" data-b="' + b + '" aria-selected="' + (b === book) + '">' +
-        '<span class="pp-book__t">' + BOOKS[b].t + '</span><span class="pp-book__s">' + BOOKS[b].s + '</span></button>';
+        '<span class="pp-book__t">' + T(BOOKS[b].t) + '</span><span class="pp-book__s">' + T(BOOKS[b].s) + '</span></button>';
     }).join('');
     var tabs = B.parts.map(function (w) {
       var has = !!entry[w];
       return '<button type="button" role="tab" class="pp-tab' + (w === tab ? ' is-on' : '') + '" data-w="' + w + '" aria-selected="' + (w === tab) + '"' + (has ? '' : ' disabled') + '>' +
-        '<span class="pp-tab__t">' + K[w].t + '</span><span class="pp-tab__s">' + (has ? K[w].s : 'මෙම පදයට නැත') + '</span></button>';
+        '<span class="pp-tab__t">' + T(K[w].t) + '</span><span class="pp-tab__s">' + (has ? T(K[w].s) : T('මෙම පදයට නැත')) + '</span></button>';
     }).join('');
     var nums = entry[tab] || [];
     var MAXV = isPali ? 3 : 4;
@@ -146,30 +153,30 @@
       var h = isPali ? fmtPara(n, data.text[n] || '') : fmtComm(n, data.text[n] || '', tab);
       return i >= MAXV ? h.replace('<article class="pp-leaf', '<article hidden class="pp-more pp-leaf') : h;
     }).join('');
-    if (!nums.length) body = '<p class="pp-empty">මෙම පදය සඳහා ' + B.s + ' ග්‍රන්ථයේ වෙනම විවරණයක් නැත.</p>';
-    var more = nums.length > MAXV ? '<button type="button" class="pp-showall">තවත් ඡේද ' + (nums.length - MAXV) + ' ක් පෙන්වන්න <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>' : '';
+    if (!nums.length) body = '<p class="pp-empty">' + T('මෙම පදය සඳහා {b} ග්‍රන්ථයේ වෙනම විවරණයක් නැත.', { b: T(B.s) }) + '</p>';
+    var more = nums.length > MAXV ? '<button type="button" class="pp-showall">' + T('තවත් ඡේද {n} ක් පෙන්වන්න', { n: nums.length - MAXV }) + ' <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>' : '';
     var extra = '';
     if (isPali) {
-      extra = notes(key, entry, data, tab) + ((!entry.ak && key.charAt(0) === 's') ? '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> අට්ඨකථාකණ්ඩයෙහි විග්‍රහ කෙරෙන්නේ අභිධර්ම මාතිකාව (තික 22, දුක 100) පමණි; සුත්තන්තික දුක එහි නොදැක්වේ.</p>' : '');
+      extra = notes(key, entry, data, tab) + ((!entry.ak && key.charAt(0) === 's') ? '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> ' + T('අට්ඨකථාකණ්ඩයෙහි විග්‍රහ කෙරෙන්නේ අභිධර්ම මාතිකාව (තික 22, දුක 100) පමණි; සුත්තන්තික දුක එහි නොදැක්වේ.') + '</p>' : '');
     } else if (tab === 'mv' && key.charAt(0) !== 't') {
-      extra = '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> දුක මාතිකාවේ විවරණය ගොච්ඡකය (දුක කිහිපයක්) එකට ගෙන කර ඇත; මෙහි ඇත්තේ මෙම දුකය අයත් කොටසයි.</p>';
+      extra = '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> ' + T('දුක මාතිකාවේ විවරණය ගොච්ඡකය (දුක කිහිපයක්) එකට ගෙන කර ඇත; මෙහි ඇත්තේ මෙම දුකය අයත් කොටසයි.') + '</p>';
     } else if (tab === 'mv') {
-      extra = '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> මාතිකාපදවණ්ණනාව ත්‍රිකයේ පද තුනම එකට විවරණය කරයි.</p>';
+      extra = '<p class="pp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> ' + T('මාතිකාපදවණ්ණනාව ත්‍රිකයේ පද තුනම එකට විවරණය කරයි.') + '</p>';
     }
-    var srcList = isPali ? 'ඡේද අංක ' + nums.join(', ') : 'ඡේද ' + nums.length;
+    var srcList = isPali ? T('ඡේද අංක {l}', { l: nums.join(', ') }) : T('ඡේද {n}', { n: nums.length });
     host.innerHTML =
       '<button type="button" class="pp-head" aria-expanded="' + open + '" aria-controls="' + host.id + '-body">' +
         '<span class="pp-ico" aria-hidden="true"><i class="fa-solid fa-scroll"></i></span>' +
-        '<span class="pp-ttl"><b>පාළිය · අට්ඨකථාව · ටීකාව</b><small>ධම්මසඞ්ගණීපාළි · අට්ඨසාලිනී · මූලටීකා · අනුටීකා</small></span>' +
-        '<span class="pp-hint">' + (open ? 'වසන්න' : 'විස්තරය') + '</span>' +
+        '<span class="pp-ttl"><b>' + T('පාළිය · අට්ඨකථාව · ටීකාව') + '</b><small>' + T('ධම්මසඞ්ගණීපාළි · අට්ඨසාලිනී · මූලටීකා · අනුටීකා') + '</small></span>' +
+        '<span class="pp-hint">' + (open ? T('වසන්න') : T('විස්තරය')) + '</span>' +
         '<i class="fa-solid fa-chevron-down pp-car" aria-hidden="true"></i>' +
       '</button>' +
       '<div class="pp-body" id="' + host.id + '-body"' + (open ? '' : ' hidden') + '>' +
-      '<div class="pp-books" role="tablist" aria-label="ග්‍රන්ථය">' + books + '</div>' +
-      '<div class="pp-tabs pp-tabs--' + B.parts.length + '" role="tablist" aria-label="කොටස">' + tabs + '</div>' +
-      '<p class="pp-desc">' + esc(K[tab].d) + '</p>' + extra +
-      '<div class="pp-leaves' + (isPali ? '' : ' pp-leaves--cm') + '">' + body + '</div>' + more +
-      '<p class="pp-src">මූලාශ්‍රය: ' + B.s + ' — ' + (K[tab].full || K[tab].t) + ' (' + srcList + ').</p></div>';
+      '<div class="pp-books" role="tablist" aria-label="' + T('ග්‍රන්ථය') + '">' + books + '</div>' +
+      '<div class="pp-tabs pp-tabs--' + B.parts.length + '" role="tablist" aria-label="' + T('කොටස') + '">' + tabs + '</div>' +
+      '<p class="pp-desc">' + esc(T(K[tab].d)) + '</p>' + extra +
+      '<div class="pp-leaves' + (isPali ? '' : ' pp-leaves--cm') + '" data-no-i18n>' + body + '</div>' + more +
+      '<p class="pp-src">' + T('මූලාශ්‍රය: {b} — {k} ({l}).', { b: T(B.s), k: T(K[tab].full || K[tab].t), l: srcList }) + '</p></div>';
     host.classList.toggle('is-open', open);
     host.querySelector('.pp-head').addEventListener('click', function () { host.dataset.open = open ? '0' : '1'; render(host, key, data, book); });
     host.querySelectorAll('.pp-book').forEach(function (b) {
@@ -186,7 +193,7 @@
     host.querySelectorAll('.pp-copy').forEach(function (b) {
       b.addEventListener('click', function () {
         var n = b.dataset.n, txt = (isPali ? n + '. ' : '') + plain(data.text[n] || '') + '\n— ' + B.s;
-        var done = function () { b.classList.add('is-done'); b.querySelector('span').textContent = 'පිටපත් විය'; setTimeout(function () { b.classList.remove('is-done'); b.querySelector('span').textContent = 'පිටපත්'; }, 1600); };
+        var done = function () { b.classList.add('is-done'); b.querySelector('span').textContent = T('පිටපත් විය'); setTimeout(function () { b.classList.remove('is-done'); b.querySelector('span').textContent = T('පිටපත්'); }, 1600); };
         try { navigator.clipboard.writeText(txt).then(done, function () {}); } catch (e) {}
       });
     });
@@ -198,7 +205,7 @@
       var ref = document.getElementById(beforeId);
       if (!ref || !ref.parentNode) return;
       host = document.createElement('section');
-      host.id = hostId; host.className = 'pp-card'; host.setAttribute('aria-label', 'මූල පාළිය');
+      host.id = hostId; host.className = 'pp-card'; host.setAttribute('aria-label', T('මූල පාළිය'));
       ref.parentNode.insertBefore(host, ref);
     }
     if (!key) { host.hidden = true; return; }
@@ -246,5 +253,14 @@
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  /* භාෂාව වෙනස් වූ විට කාඩ්පත නැවත ඇඳීම (UI පාඨ නව භාෂාවෙන්) */
+  document.addEventListener('mx-lang-change', function () {
+    document.querySelectorAll('.pp-card').forEach(function (host) {
+      host.setAttribute('aria-label', T('මූල පාළිය'));
+      var key = host.dataset.key, bk = host.dataset.book;
+      if (!key || host.hidden || !BOOKS[bk]) return;
+      load(bk).then(function (d) { if (host.dataset.key === key) render(host, key, d, bk); }, function () {});
+    });
+  });
   window.MXPaliPela = { load: load, mount: mount };
 })();

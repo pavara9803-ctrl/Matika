@@ -29,9 +29,9 @@
   /* බිඳෙන ගොනු (404) පූරණය නොකිරීමට: සූදානම් වූ පරිවර්තන ගොනු මෙහි ලියන්න. */
   var AVAILABLE = {
     my: ['my-app.js', 'my-common.js', 'my-duka.js', 'my-paramattha.js', 'my-paramattha2.js', 'my-paramattha3.js',
-         'my-matika.js', 'my-sabbattika.js', 'my-suttanta.js', 'my-tika.js', 'my-nibbana.js'],
-    zh: ['zh-app.js', 'zh-common.js', 'zh-sabbattika.js', 'zh-tika.js', 'zh-duka.js', 'zh-suttanta.js', 'zh-matika.js', 'zh-paramattha.js', 'zh-paramattha3.js', 'zh-paramattha2.js', 'zh-nibbana.js'],
-    'zh-Hant': ['zh-Hant-app.js', 'zh-Hant-common.js', 'zh-Hant-sabbattika.js', 'zh-Hant-tika.js', 'zh-Hant-duka.js', 'zh-Hant-suttanta.js', 'zh-Hant-matika.js', 'zh-Hant-paramattha.js', 'zh-Hant-paramattha3.js', 'zh-Hant-paramattha2.js', 'zh-Hant-nibbana.js']
+         'my-matika.js', 'my-sabbattika.js', 'my-suttanta.js', 'my-tika.js', 'my-nibbana.js', 'my-vithi.js', 'my-paramattha4.js', 'my-pali.js'],
+    zh: ['zh-app.js', 'zh-common.js', 'zh-sabbattika.js', 'zh-tika.js', 'zh-duka.js', 'zh-suttanta.js', 'zh-matika.js', 'zh-paramattha.js', 'zh-paramattha3.js', 'zh-paramattha2.js', 'zh-nibbana.js', 'zh-vithi.js', 'zh-paramattha4.js', 'zh-pali.js'],
+    'zh-Hant': ['zh-Hant-app.js', 'zh-Hant-common.js', 'zh-Hant-sabbattika.js', 'zh-Hant-tika.js', 'zh-Hant-duka.js', 'zh-Hant-suttanta.js', 'zh-Hant-matika.js', 'zh-Hant-paramattha.js', 'zh-Hant-paramattha3.js', 'zh-Hant-paramattha2.js', 'zh-Hant-nibbana.js', 'zh-Hant-vithi.js', 'zh-Hant-paramattha4.js', 'zh-Hant-pali.js']
   };
   var dicts = { en: {}, my: {}, zh: {}, 'zh-Hant': {} };       // සිංහල (සාමාන්‍යකරණය කළ) → පරිවර්තනය
   var patterns = { en: [], my: [], zh: [], 'zh-Hant': [] };    // [RegExp, replacement|function] — ඉලක්කම් අඩංගු පාඨ සඳහා
@@ -367,9 +367,10 @@
   function dictFiles() {
     var p = location.pathname;
     var files = ['en-common.js', 'en-app.js'];
-    if (/\/paramattha\//.test(p)) files.push('en-paramattha.js', 'en-paramattha2.js', 'en-paramattha3.js');
+    if (/\/paramattha\//.test(p)) files.push('en-paramattha.js', 'en-paramattha2.js', 'en-paramattha3.js', 'en-paramattha4.js');
     if (/\/paramattha\/nibbana\.html/.test(p)) files.push('en-nibbana.js');
-    if (/\/matika\//.test(p)) files.push('en-matika.js');
+    if (/\/paramattha\/citta\.html/.test(p)) files.push('en-vithi.js');
+    if (/\/matika\//.test(p)) files.push('en-matika.js', 'en-pali.js');
     if (/\/sabbattika\.html/.test(p)) files.push('en-sabbattika.js');
     if (/\/tika-matika\.html/.test(p)) files.push('en-tika.js');
     if (/\/duka-matika\.html/.test(p)) files.push('en-duka.js');

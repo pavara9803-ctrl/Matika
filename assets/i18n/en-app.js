@@ -87,3 +87,7 @@ MX_I18N.add({
   "ඕනෑම පදයක් සොයන්න": "Search any term",
   "සෙවුම": "Search"
 });
+/* මාතෘකා ගසේ චිත්තවීථි අයිතමය */
+MX_I18N.add({
+ "චිත්තවීථි": "Cognitive process (Cittavīthi)"
+});
