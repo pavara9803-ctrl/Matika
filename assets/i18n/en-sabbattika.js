@@ -1,5 +1,7 @@
 /* en-sabbattika.js — සබ්බත්තික මාතිකා පිටුව : සිංහල → English (පාලි පාඨ රෝම අකුරට ලිප්‍යන්තරණය කර ඇත) */
 MX_I18N.add({
+ "සතර පරමාර්ථ ගැන මූලික අවබෝධයක් ලබා ගැනීමට \"සතර පරමාර්ථ\" කොටස අධ්‍යයනය කරන්න.": "For a basic understanding of the four ultimate realities, study the \"Four Ultimate Realities\" section.",
+ "සතර පරමාර්ථ වෙත": "The Four Ultimate Realities",
  "අජ්ඣත්තත්තිකො": "Ajjhattattika",
  "අජ්ඣත්තාරම්මණත්තිකො": "Ajjhattārammaṇattika",
  "අතීතත්තිකො": "Atītattika",
