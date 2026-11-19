@@ -1068,25 +1068,42 @@ a, button, summary, label, select, [role="button"], [onclick],
 .hs-panel--overlay > * { max-width: 48rem; margin-left: auto; margin-right: auto; }
 
 /* ===== මුල් පිටුවේ "ඇප් එක බාගත කරන්න" කොටස (downloads.js) ===== */
-.dl { max-width: 1100px; margin: 2.5rem auto 1rem; padding: 0 1rem; }
-.dl__title { display: flex; align-items: center; gap: .55rem; font-size: 1.12rem; font-weight: 700;
-  color: var(--mx-heading, #7c2d12); margin: 0 0 .2rem; }
-.dl__sub { margin: 0 0 1rem; font-size: .92rem; color: #78716c; }
-.dl__grid { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-.dl__card { display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: 1.05rem .8rem;
-  border: 1px solid #fcd34d; border-radius: 16px; background: #fffbeb; color: #44403c;
-  text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
-.dl__card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(120, 53, 15, .13); }
-.dl__icon { font-size: 1.75rem; color: #b45309; }
-.dl__name { font-weight: 600; font-size: 1rem; }
-.dl__meta { font-size: .82rem; color: #78716c; min-height: 1.1em; }
-.dl__note { margin: .9rem 0 0; font-size: .86rem; color: #78716c; }
-:root.dark .dl__title { color: #fcd34d; }
-:root.dark .dl__card { background: #1e293b; border-color: #475569; color: #e2e8f0; }
-:root.dark .dl__icon { color: #fcd34d; }
-:root.dark .dl__sub, :root.dark .dl__meta, :root.dark .dl__note { color: #94a3b8; }
-/* Windows/macOS/Linux ඇප් එක ඇතුළේ බාගත කිරීමේ කොටස අවශ්‍ය නැත */
-.is-desktop-app #downloads { display: none; }
-.dl__card--installed { opacity: .72; }
+.dl { max-width: 940px; margin: 2.2rem auto .5rem; padding: 0 1rem; }
+.dl__title { display: flex; align-items: center; gap: .5rem; font-size: 1.02rem; font-weight: 700;
+  color: #7c2d12; margin: 0 0 .15rem; letter-spacing: .01em; }
+.dl__title i { font-size: .92rem; opacity: .85; }
+.dl__sub { margin: 0 0 .85rem; font-size: .84rem; color: #8a7f74; }
+
+.dl__grid { display: grid; gap: .55rem; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+
+.dl__card { display: flex; align-items: center; gap: .6rem; padding: .55rem .7rem;
+  border: 1px solid #f2dcae; border-radius: 14px; text-decoration: none; color: #44403c;
+  background: linear-gradient(180deg, #fffdf7 0%, #fff7e6 100%);
+  box-shadow: 0 1px 2px rgba(120, 53, 15, .05);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
+.dl__card:hover { transform: translateY(-2px); border-color: #e0a33c;
+  box-shadow: 0 6px 16px rgba(120, 53, 15, .14); }
+.dl__card:focus-visible { outline: 2px solid #b45309; outline-offset: 2px; }
+
+.dl__icon { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+  background: rgba(180, 83, 9, .09); color: #9a3412; font-size: 1rem; }
+.dl__text { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.dl__name { font-weight: 600; font-size: .92rem; }
+.dl__meta { font-size: .74rem; color: #8a7f74; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dl__go { margin-left: auto; font-size: .78rem; color: #b45309; opacity: .35;
+  transition: opacity .16s ease, transform .16s ease; }
+.dl__card:hover .dl__go { opacity: 1; transform: translateY(2px); }
+
+.dl__note { margin: .8rem 0 0; font-size: .8rem; color: #8a7f74; }
+.dl__card--installed { opacity: .7; }
 .dl__card--installed .dl__meta { font-weight: 600; color: #15803d; }
+.dl__card--installed .dl__go { display: none; }
+
+:root.dark .dl__title { color: #fcd34d; }
+:root.dark .dl__sub, :root.dark .dl__meta, :root.dark .dl__note { color: #94a3b8; }
+:root.dark .dl__card { background: linear-gradient(180deg, #1f293a 0%, #1a2332 100%);
+  border-color: #3c4a5e; color: #e2e8f0; box-shadow: none; }
+:root.dark .dl__card:hover { border-color: #fcd34d; box-shadow: 0 6px 16px rgba(0, 0, 0, .35); }
+:root.dark .dl__icon { background: rgba(252, 211, 77, .12); color: #fcd34d; }
+:root.dark .dl__go { color: #fcd34d; }
 :root.dark .dl__card--installed .dl__meta { color: #86efac; }
