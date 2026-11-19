@@ -1,0 +1,148 @@
+# =====================================================================
+#  අභිධම්ම මාතිකා — Android App Bundle (.aab)  [native WebView ඇප් එක]
+#  මෙයයි Google Play එකේ ඇති ඇප් එක (android-native/ ෆෝල්ඩරය).
+#  අවශ්‍ය විට පමණක්:  GitHub → Actions → "Build Android App (native)" → Run workflow
+#  • version හිස්ව තැබුවොත් app-version.json හි අවසාන අගයට 1ක් එක් කරයි
+#    (versionCode 25 → 26, versionName 3.0.4 → 3.0.5)
+#  • වෙබ් අඩවියේ ගොනු build වන විට ඇප් එකට පිටපත් වේ (prepare-assets.mjs),
+#    එබැවින් repo එකේ වෙනස්කම් ඉබේම ඇප් එකට ද එයි
+#  • ප්‍රතිඵලය: Actions artifact + GitHub Release (android-v<name>-code<code>)
+#    → Play Console → Production → Create new release වෙත upload කරන්න
+#  • Secrets අවශ්‍යයි: KEYSTORE_BASE64, KEY_ALIAS, KEYSTORE_PASSWORD, KEY_PASSWORD
+#    (Android Studio වලින් මෙතෙක් භාවිත කළ එම keystore එකමයි)
+# =====================================================================
+name: Build Android App (native)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: 'Version code — හිස්ව තබන්න (අවසාන අගය + 1)'
+        required: false
+        default: ''
+      version_name:
+        description: 'Version name — හිස්ව තබන්න (උදා: 3.0.5)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-native-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      KEYSTORE_B64: ${{ secrets.KEYSTORE_BASE64 }}
+      KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Android SDK components
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          yes | "$SDK/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$SDK/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" > /dev/null
+          echo "sdk.dir=$SDK" > android-native/local.properties
+
+      - name: Version
+        env:
+          IN_CODE: ${{ inputs.version_code }}
+          IN_NAME: ${{ inputs.version_name }}
+        run: |
+          node .github/scripts/app-version.mjs next android app-version.json
+          [ -n "$IN_CODE" ] && echo "VERSION_CODE=$IN_CODE" >> "$GITHUB_ENV"
+          [ -n "$IN_NAME" ] && echo "VERSION_NAME=$IN_NAME" >> "$GITHUB_ENV"
+          true
+
+      - name: Copy site files into the app
+        run: node android-native/scripts/prepare-assets.mjs
+
+      - name: Build .aab
+        working-directory: android-native
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon bundleRelease \
+            -PappVersionCode="$VERSION_CODE" -PappVersionName="$VERSION_NAME"
+          ls -la app/build/outputs/bundle/release/
+
+      - name: Sign .aab
+        id: sign
+        run: |
+          mkdir -p rel
+          cp android-native/app/build/outputs/bundle/release/app-release.aab \
+             "rel/abhidhamma-matika-${VERSION_NAME}-code${VERSION_CODE}.aab"
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo "::error::KEYSTORE_BASE64 secret එක සකසා නැත — Play එකට upload කළ හැකි .aab එකක් සෑදිය නොහැක."
+            exit 1
+          fi
+          echo "$KEYSTORE_B64" | tr -d "[:space:]" | base64 -d > "$RUNNER_TEMP/release.keystore"
+          jarsigner -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore "$RUNNER_TEMP/release.keystore" \
+            -storepass "$KEYSTORE_PASSWORD" -keypass "$KEY_PASSWORD" \
+            "rel/abhidhamma-matika-${VERSION_NAME}-code${VERSION_CODE}.aab" "$KEY_ALIAS"
+          jarsigner -verify "rel/abhidhamma-matika-${VERSION_NAME}-code${VERSION_CODE}.aab" | head -2
+          keytool -list -v -keystore "$RUNNER_TEMP/release.keystore" -alias "$KEY_ALIAS" \
+            -storepass "$KEYSTORE_PASSWORD" | grep -E "SHA256:" || true
+          rm -f "$RUNNER_TEMP/release.keystore"
+          ls -la rel
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: abhidhamma-matika-aab-v${{ env.VERSION_NAME }}-code${{ env.VERSION_CODE }}
+          path: rel/*.aab
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-v${{ env.VERSION_NAME }}-code${{ env.VERSION_CODE }}
+          target_commitish: ${{ github.sha }}
+          name: Android ${{ env.VERSION_NAME }} (code ${{ env.VERSION_CODE }})
+          body: |
+            අභිධම්ම මාතිකා — Google Play Console වෙත upload කිරීම සඳහා signed Android App Bundle.
+
+            - versionName: ${{ env.VERSION_NAME }}
+            - versionCode: ${{ env.VERSION_CODE }}
+            - commit: ${{ github.sha }}
+          files: rel/*.aab
+
+      - name: Record version in app-version.json
+        env:
+          VERSION: ${{ env.VERSION_NAME }}
+          VERSION_CODE: ${{ env.VERSION_CODE }}
+          PAGE: https://github.com/${{ github.repository }}/releases/tag/android-v${{ env.VERSION_NAME }}-code${{ env.VERSION_CODE }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SITE="$RUNNER_TEMP/site"
+          for i in 1 2 3; do
+            rm -rf "$SITE"
+            git clone -q --depth 1 --branch main "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" "$SITE"
+            node .github/scripts/app-version.mjs save android "$SITE/app-version.json"
+            cd "$SITE"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add app-version.json
+            git commit -q -m "app-version.json: Android ${VERSION} (version code ${VERSION_CODE})" || { echo "no change"; break; }
+            if git push -q origin HEAD:main; then echo "app-version.json updated"; break; fi
+            cd - >/dev/null; sleep 5
+          done

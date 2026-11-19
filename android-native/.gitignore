@@ -1,0 +1,14 @@
+# Gradle / Android Studio
+.gradle/
+.idea/
+.kotlin/
+build/
+local.properties
+release/
+# prepare-assets.mjs මගින් build වන විට සාදන ගොනු (වෙබ් අඩවියේ මුල් පිටපත repo මුලේ ඇත)
+app/src/main/assets/*
+!app/src/main/assets/assets/
+app/src/main/assets/assets/*
+!app/src/main/assets/assets/js/
+app/src/main/assets/assets/js/*
+!app/src/main/assets/assets/js/native-update.js
