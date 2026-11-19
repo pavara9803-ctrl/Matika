@@ -455,8 +455,31 @@ window.addEventListener('load', function() {
       </span>
       <i class="fa-solid fa-arrow-down dl__go" aria-hidden="true"></i>
     </a>
+    <button type="button" id="dl-ios" class="dl__card dl__card--ios" aria-haspopup="dialog" aria-controls="dl-ios-help">
+      <span class="dl__icon"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></span>
+      <span class="dl__text">
+        <span class="dl__name" data-no-i18n>iPhone / iPad</span>
+        <span class="dl__meta">මුල් තිරයට එක් කරන්න</span>
+      </span>
+      <i class="fa-solid fa-circle-info dl__go" aria-hidden="true"></i>
+    </button>
   </div>
-  <p class="dl__note">iPhone / iPad: Safari හි විවෘත කර "Add to Home Screen" තෝරන්න.</p>
+  <div id="dl-ios-help" class="dlios" role="dialog" aria-modal="true" aria-labelledby="dl-ios-title" hidden>
+    <div class="dlios__box">
+      <div class="dlios__head">
+        <i class="fa-brands fa-apple" aria-hidden="true"></i>
+        <h3 id="dl-ios-title">iPhone / iPad වෙත ඇප් එක එක් කරගන්නා ආකාරය</h3>
+        <button type="button" class="dlios__x" id="dl-ios-close" aria-label="වසන්න"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <ol class="dlios__steps">
+        <li><span class="dlios__n">1</span><span>මෙම වෙබ් අඩවිය <b>Safari</b> බ්‍රවුසරයෙන් විවෘත කරන්න (Chrome හෝ වෙනත් බ්‍රවුසරයකින් මෙය කළ නොහැක).</span></li>
+        <li><span class="dlios__n">2</span><span>තිරයේ පහළ ඇති <b>බෙදාගැනීමේ බොත්තම</b> <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i> එබන්න.</span></li>
+        <li><span class="dlios__n">3</span><span>ලැයිස්තුව පහළට ගෙන <b>"Add to Home Screen"</b> <i class="fa-solid fa-square-plus" aria-hidden="true"></i> තෝරන්න.</span></li>
+        <li><span class="dlios__n">4</span><span>ඉහළ දකුණේ <b>"Add"</b> එබන්න — ඇප් එක මුල් තිරයේ අයිකනයක් ලෙස එක් වේ.</span></li>
+      </ol>
+      <p class="dlios__note">එසේ එක් කළ පසු අන්තර්ජාලය නොමැතිවද ඇප් එක භාවිත කළ හැක.</p>
+    </div>
+  </div>
 </section>
 
 </main>

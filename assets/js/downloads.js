@@ -68,6 +68,7 @@
     if (!box) return;
     if (installed()) { box.hidden = true; return; }
     markAndroidIfInstalled();
+    iosHelp();
     load().then(function (d) {
       fill('dl-windows', d.windows, '.exe');
       fill('dl-macos', d.macos, '.dmg');
@@ -87,6 +88,29 @@
       // දත්ත නොලැබුණොත් කාඩ්පත් Releases පිටුවට යයි; meta හිස් කරයි
       box.querySelectorAll('.dl__card--wait .dl__meta').forEach(function (m) { m.textContent = ''; });
     });
+  }
+
+  // iPhone / iPad: "මුල් තිරයට එක් කරන්න" උපදෙස් කවුළුව
+  function iosHelp() {
+    var btn = document.getElementById('dl-ios');
+    var box = document.getElementById('dl-ios-help');
+    if (!btn || !box) return;
+    function open() {
+      box.hidden = false;
+      document.addEventListener('keydown', onKey);
+      var x = document.getElementById('dl-ios-close');
+      if (x) x.focus();
+    }
+    function close() {
+      box.hidden = true;
+      document.removeEventListener('keydown', onKey);
+      btn.focus();
+    }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    btn.addEventListener('click', open);
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    var x = document.getElementById('dl-ios-close');
+    if (x) x.addEventListener('click', close);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
