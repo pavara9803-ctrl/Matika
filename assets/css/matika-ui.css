@@ -1150,3 +1150,20 @@ a, button, summary, label, select, [role="button"], [onclick],
 :root.dark .pm-cta__t { color: #fcd34d; }
 :root.dark .pm-cta__b { background: #fcd34d; color: #422006; }
 :root.dark .pm-cta__b:hover { background: #fbbf24; }
+
+/* "පඤ්චස්කන්ධය හැඳින්වීම" — විවෘත කළ හැකි කොටස */
+.ps-intro { border: 1px solid #f2dcae; border-radius: 14px; background: rgba(180, 83, 9, .05); margin: 0 0 .9rem; overflow: hidden; }
+.ps-intro > summary { display: flex; align-items: center; gap: .55rem; cursor: pointer; list-style: none;
+  padding: .7rem .85rem; font-weight: 600; font-size: .92rem; color: #7c2d12; }
+.ps-intro > summary::-webkit-details-marker { display: none; }
+.ps-intro > summary > span { flex: 1; }
+.ps-intro__chev { font-size: .75rem; transition: transform .18s ease; }
+.ps-intro[open] .ps-intro__chev { transform: rotate(180deg); }
+.ps-intro__body { padding: .2rem .95rem .95rem; border-top: 1px solid rgba(120, 53, 15, .1); }
+.ps-intro__body p { margin: .7rem 0 0; font-size: .92rem; line-height: 1.85; }
+.ps-intro__kicker { font-size: .78rem !important; font-weight: 600; color: #b45309; margin: .6rem 0 0 !important; }
+.ps-intro__h { margin: 1.1rem 0 0; font-size: .98rem; font-weight: 700; color: #7c2d12; }
+:root.dark .ps-intro { background: rgba(252, 211, 77, .07); border-color: #475569; }
+:root.dark .ps-intro > summary, :root.dark .ps-intro__h { color: #fcd34d; }
+:root.dark .ps-intro__kicker { color: #fbbf24; }
+:root.dark .ps-intro__body { border-color: rgba(255, 255, 255, .08); }
