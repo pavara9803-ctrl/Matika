@@ -14,12 +14,12 @@
     "notes": "බාගත කිරීමේ කොටස ඇප් එක ඇතුළේද පෙන්වයි (ස්ථාපිත platform එක සලකුණු වේ)."
   },
   "macos": {
-    "version": "1.0.1",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.1/Abhidhamma-Matika.dmg",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.1",
-    "size": 13543069,
+    "version": "1.0.2",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.2/Abhidhamma-Matika.dmg",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.2",
+    "size": 13548517,
     "date": "2026-11-19",
-    "notes": "ඇප් එකේ නම \"අභිධම්ම මාතිකා\" ලෙස වෙනස් කළා."
+    "notes": "බාගත කිරීමේ කොටස ඇප් එක ඇතුළේද පෙන්වයි."
   },
   "linux": {
     "version": "1.0.2",
