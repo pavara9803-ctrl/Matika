@@ -5,12 +5,12 @@
     "date": "2026-11-18"
   },
   "windows": {
-    "version": "1.0.6",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.6/Tika-Matika-Setup.exe",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.6",
-    "size": 7973714,
-    "date": "2026-11-18",
-    "notes": "යාවත්කාලීන පරීක්ෂාව නිවැරදි කළා — ☰ මෙනුවේ \"යාවත්කාලීන පරීක්ෂා කරන්න\" එක් කළා."
+    "version": "1.0.7",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.7/Tika-Matika-Setup.exe",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.7",
+    "size": 8170171,
+    "date": "2026-11-19",
+    "notes": "මුල් පිටුවට Windows / macOS / Linux / Android බාගත කිරීමේ කොටස එක් කළා."
   },
   "macos": {
     "version": "1.0.0",
