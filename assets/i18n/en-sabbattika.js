@@ -6,6 +6,7 @@ MX_I18N.add({
  "ආයතන දොළොස හැඳින්වීම": "Introduction to the twelve bases",
  "ධාතු අටළොස හැඳින්වීම": "Introduction to the eighteen elements",
  "චතුරාර්‍ය්‍ය සත්‍යය හැඳින්වීම": "Introduction to the Four Noble Truths",
+ "මාර්ගාඞ්ග හැඳින්වීම": "Introduction to the path factors",
  "සතර පරමාර්ථ ගැන මූලික අවබෝධයක් ලබා ගැනීමට \"සතර පරමාර්ථ\" කොටස අධ්‍යයනය කරන්න.": "For a basic understanding of the four ultimate realities, study the \"Four Ultimate Realities\" section.",
  "සතර පරමාර්ථ වෙත": "The Four Ultimate Realities",
  "අජ්ඣත්තත්තිකො": "Ajjhattattika",
