@@ -1080,12 +1080,13 @@ a, button, summary, label, select, [role="button"], [onclick],
 .dl__icon { font-size: 1.75rem; color: #b45309; }
 .dl__name { font-weight: 600; font-size: 1rem; }
 .dl__meta { font-size: .82rem; color: #78716c; min-height: 1.1em; }
-.dl__extra a { font-size: .8rem; color: #b45309; text-decoration: underline; }
+.dl__alt { margin: .8rem 0 0; font-size: .86rem; }
+.dl__alt a { color: #b45309; text-decoration: underline; }
 .dl__note { margin: .9rem 0 0; font-size: .86rem; color: #78716c; }
 :root.dark .dl__title { color: #fcd34d; }
 :root.dark .dl__card { background: #1e293b; border-color: #475569; color: #e2e8f0; }
 :root.dark .dl__icon { color: #fcd34d; }
 :root.dark .dl__sub, :root.dark .dl__meta, :root.dark .dl__note { color: #94a3b8; }
-:root.dark .dl__extra a { color: #fcd34d; }
+:root.dark .dl__alt a { color: #fcd34d; }
 /* Windows/macOS/Linux ඇප් එක ඇතුළේ බාගත කිරීමේ කොටස අවශ්‍ය නැත */
 .is-desktop-app #downloads { display: none; }
