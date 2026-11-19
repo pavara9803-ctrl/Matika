@@ -12,6 +12,13 @@
     "date": "2026-11-18",
     "notes": "යාවත්කාලීන පරීක්ෂාව නිවැරදි කළා — ☰ මෙනුවේ \"යාවත්කාලීන පරීක්ෂා කරන්න\" එක් කළා."
   },
+  "macos": {
+    "version": "1.0.0",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.0/Tika-Matika.dmg",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.0",
+    "size": 13536499,
+    "date": "2026-11-19"
+  },
   "linux": {
     "version": "1.0.0",
     "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.0/Tika-Matika.AppImage",
