@@ -49,7 +49,11 @@
       fill('dl-linux', d.linux, '.AppImage');
       if (d.linux && d.linux.url2) {
         var deb = document.getElementById('dl-linux-deb');
-        if (deb) { deb.href = d.linux.url2; deb.hidden = false; }
+        if (deb) {
+          deb.href = d.linux.url2;
+          deb.textContent = 'Linux: ' + (d.linux.label2 || '.deb') + (d.linux.size2 ? ' · ' + mb(d.linux.size2) : '');
+          deb.hidden = false;
+        }
       }
       if (d.android && d.android.versionName) {
         var a = document.querySelector('#dl-android .dl__meta');
