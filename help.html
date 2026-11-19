@@ -141,6 +141,71 @@ body { font-family: 'Noto Serif Sinhala', 'Inter', serif; -webkit-tap-highlight-
 <li>ඔබ දෝෂයක් දුටුවොත් එම පිටුවේ ඇති “දෝෂයක් දන්වන්න” බොත්තමෙන් අපට දන්වන්න. පරීක්ෂා කර බලා, නිවැරදි කළ යුතු නම් සකස් කර එහි සටහන් කරමු.</li>
 </ol><a class="hp-go" href="updates.html">නිවැරදි කළ කරුණු බලන්න</a></div></details>
   </section>
+
+<!-- ඇප් එක බාගත කරන්න (platform අනුව) -->
+<section id="downloads" class="dl" aria-labelledby="dl-title">
+  <h2 id="dl-title" class="dl__title"><i class="fa-solid fa-download" aria-hidden="true"></i> ඇප් එක බාගත කරන්න</h2>
+  <p class="dl__sub">අන්තර්ජාලය නොමැතිව භාවිත කළ හැකි ඇප් අනුවාද</p>
+  <div class="dl__grid">
+    <a id="dl-windows" class="dl__card dl__card--wait" href="https://github.com/pavara9803-ctrl/Matika/releases" target="_blank" rel="noopener">
+      <span class="dl__icon"><i class="fa-brands fa-windows" aria-hidden="true"></i></span>
+      <span class="dl__text">
+        <span class="dl__name" data-no-i18n>Windows</span>
+        <span class="dl__meta" data-no-i18n>…</span>
+      </span>
+      <i class="fa-solid fa-arrow-down dl__go" aria-hidden="true"></i>
+    </a>
+    <a id="dl-macos" class="dl__card dl__card--wait" href="https://github.com/pavara9803-ctrl/Matika/releases" target="_blank" rel="noopener">
+      <span class="dl__icon"><i class="fa-brands fa-apple" aria-hidden="true"></i></span>
+      <span class="dl__text">
+        <span class="dl__name" data-no-i18n>macOS</span>
+        <span class="dl__meta" data-no-i18n>…</span>
+      </span>
+      <i class="fa-solid fa-arrow-down dl__go" aria-hidden="true"></i>
+    </a>
+    <a id="dl-linux" class="dl__card dl__card--wait" href="https://github.com/pavara9803-ctrl/Matika/releases" target="_blank" rel="noopener">
+      <span class="dl__icon"><i class="fa-brands fa-linux" aria-hidden="true"></i></span>
+      <span class="dl__text">
+        <span class="dl__name" data-no-i18n>Linux</span>
+        <span class="dl__meta" data-no-i18n>…</span>
+      </span>
+      <i class="fa-solid fa-arrow-down dl__go" aria-hidden="true"></i>
+    </a>
+    <a id="dl-android" class="dl__card" href="https://play.google.com/store/apps/details?id=app.vercel.matika_snowy.twa" target="_blank" rel="noopener">
+      <span class="dl__icon"><i class="fa-brands fa-android" aria-hidden="true"></i></span>
+      <span class="dl__text">
+        <span class="dl__name" data-no-i18n>Android</span>
+        <span class="dl__meta" data-no-i18n>Google Play</span>
+      </span>
+      <i class="fa-solid fa-arrow-down dl__go" aria-hidden="true"></i>
+    </a>
+    <button type="button" id="dl-ios" class="dl__card dl__card--ios" aria-haspopup="dialog" aria-controls="dl-ios-help">
+      <span class="dl__icon"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></span>
+      <span class="dl__text">
+        <span class="dl__name" data-no-i18n>iPhone / iPad</span>
+        <span class="dl__meta">මුල් තිරයට එක් කරන්න</span>
+      </span>
+      <i class="fa-solid fa-circle-info dl__go" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div id="dl-ios-help" class="dlios" role="dialog" aria-modal="true" aria-labelledby="dl-ios-title" hidden>
+    <div class="dlios__box">
+      <div class="dlios__head">
+        <i class="fa-brands fa-apple" aria-hidden="true"></i>
+        <h3 id="dl-ios-title">iPhone / iPad වෙත ඇප් එක එක් කරගන්නා ආකාරය</h3>
+        <button type="button" class="dlios__x" id="dl-ios-close" aria-label="වසන්න"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <ol class="dlios__steps">
+        <li><span class="dlios__n">1</span><span class="dlios__t">මෙම වෙබ් අඩවිය Safari බ්‍රවුසරයෙන් විවෘත කරන්න (Chrome හෝ වෙනත් බ්‍රවුසරයකින් මෙය කළ නොහැක).</span></li>
+        <li><span class="dlios__n">2</span><span class="dlios__t">තිරයේ පහළ ඇති බෙදාගැනීමේ බොත්තම එබන්න.</span> <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i></li>
+        <li><span class="dlios__n">3</span><span class="dlios__t">ලැයිස්තුව පහළට ගෙන "Add to Home Screen" තෝරන්න.</span> <i class="fa-solid fa-square-plus" aria-hidden="true"></i></li>
+        <li><span class="dlios__n">4</span><span class="dlios__t">ඉහළ දකුණේ "Add" එබන්න — ඇප් එක මුල් තිරයේ අයිකනයක් ලෙස එක් වේ.</span></li>
+      </ol>
+      <p class="dlios__note">එසේ එක් කළ පසු අන්තර්ජාලය නොමැතිවද ඇප් එක භාවිත කළ හැක.</p>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <script>
@@ -165,6 +230,7 @@ try {
   }
 } catch (e) {}
 </script>
+<script src="assets/js/downloads.js" defer></script>
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/matika-ui.js" defer></script>
 <script src="assets/js/sw-update.js" defer></script>
