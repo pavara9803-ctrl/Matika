@@ -20,13 +20,13 @@
     "date": "2026-11-20"
   },
   "linux": {
-    "version": "1.0.3",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.3/Abhidhamma-Matika.deb",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.3",
-    "size": 7047716,
-    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.3/Abhidhamma-Matika.AppImage",
-    "size2": 85641720,
+    "version": "1.0.4",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.4/Abhidhamma-Matika.deb",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.4",
+    "size": 7047818,
+    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.4/Abhidhamma-Matika.AppImage",
+    "size2": 85645816,
     "label2": ".AppImage (ඕනෑම distro)",
-    "date": "2026-11-19"
+    "date": "2026-11-20"
   }
 }
