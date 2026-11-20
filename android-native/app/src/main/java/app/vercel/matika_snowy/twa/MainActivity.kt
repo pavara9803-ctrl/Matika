@@ -26,6 +26,8 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -33,6 +35,9 @@ class MainActivity : ComponentActivity() {
 
     // ---- Play Store in-app update ("නව අනුවාදයක් ඇත" දැනුම්දීම) ----
     private lateinit var appUpdateManager: AppUpdateManager
+
+    // ---- Play Store in-app review (තරු දීමේ ඉල්ලීම) ----
+    private lateinit var reviewManager: ReviewManager
 
     /** none | available | downloading | ready */
     @Volatile
@@ -67,6 +72,12 @@ class MainActivity : ComponentActivity() {
         fun startUpdate() {
             runOnUiThread { startOrCompleteUpdate() }
         }
+
+        /** Play Store හි තරු දීමේ කවුළුව ඉල්ලයි (පෙන්වනවා ද යන්න Play තීරණය කරයි) */
+        @JavascriptInterface
+        fun requestReview() {
+            runOnUiThread { launchReview() }
+        }
     }
 
     /** සුරකින ලද අකුරු ප්‍රමාණය; පෙරනිමිය: දුරකථන 90%, ටැබ්ලට් 100% */
@@ -85,6 +96,7 @@ class MainActivity : ComponentActivity() {
         )
 
         appUpdateManager = AppUpdateManagerFactory.create(this)
+        reviewManager = ReviewManagerFactory.create(this)
 
         // app/src/main/assets/* ගොනු https://appassets.androidplatform.net/* ලෙස සේවය කරයි
         val assetLoader = WebViewAssetLoader.Builder()
@@ -216,6 +228,21 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    // ------------------------------------------------------------------
+    // Play Store තරු දීමේ කවුළුව (Play Store හරහා install කළ අනුවාදයකදී පමණක්;
+    // පෙන්වීම Play විසින් තීරණය කරයි — quota ඉක්මවූ විට කිසිවක් නොපෙනේ)
+    // ------------------------------------------------------------------
+    private fun launchReview() {
+        try {
+            reviewManager.requestReviewFlow().addOnCompleteListener { task ->
+                if (!task.isSuccessful) return@addOnCompleteListener
+                try {
+                    reviewManager.launchReviewFlow(this, task.result)
+                } catch (e: Exception) { /* නිශ්ශබ්දව නවතී */ }
+            }
+        } catch (e: Exception) { /* Play Store නැති / sideload කළ අනුවාද */ }
     }
 
     companion object {

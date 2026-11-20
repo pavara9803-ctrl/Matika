@@ -46,4 +46,5 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.10.0")
     implementation("androidx.webkit:webkit:1.12.1")
     implementation("com.google.android.play:app-update:2.1.0")   // Play Store in-app update
+    implementation("com.google.android.play:review:2.0.2")       // Play Store in-app review
 }

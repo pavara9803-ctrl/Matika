@@ -21,12 +21,23 @@ const FA_LOCAL = '<link rel="stylesheet" href="/assets/vendor/fontawesome/css/al
 const FA_CDN = /<link rel="stylesheet" href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*">/g;
 
 // ඇප් එකට ආවේණික ගොනු (ඉවත් නොකළ යුතු)
-const NATIVE_ONLY = ['assets/js/native-update.js', 'assets/vendor'];
+const NATIVE_ONLY = ['assets/js/native-update.js', 'assets/js/native-review.js', 'assets/vendor'];
+
+// සෑම පිටුවකටම එක් කරන ඇප් එකට ආවේණික scripts
+//  • native-update.js — "නව අනුවාදයක් ඇත" දැනුම්දීම (Play in-app update)
+//  • native-review.js — පාඩම් කිහිපයක් බැලූ පසු තරු දීමේ ඉල්ලීම (Play in-app review)
+const NATIVE_SCRIPTS =
+  '<script src="/assets/js/native-update.js" defer></script>\n' +
+  '<script src="/assets/js/native-review.js" defer></script>\n';
 
 function fixHtml(text, isIndex) {
   text = text.replace(FA_CDN, FA_LOCAL);
   if (isIndex) {
     text = text.replace('<html lang="si" class="h-full">', '<html lang="si" class="h-full" data-mx-lang-home>');
+  }
+  if (!text.includes('native-update.js')) {
+    if (!text.includes('</body>')) throw new Error('HTML පිටුවක </body> හමු නොවීය');
+    text = text.replace('</body>', NATIVE_SCRIPTS + '</body>');
   }
   return text;
 }
@@ -39,7 +50,7 @@ for (const name of readdirSync(assets)) {
       if (sub === 'vendor') continue;
       if (sub === 'js') {
         for (const f of readdirSync(join(assets, 'assets/js'))) {
-          if (f === 'native-update.js') continue;
+          if (f.startsWith('native-')) continue;
           rmSync(join(assets, 'assets/js', f), { recursive: true, force: true });
         }
         continue;
