@@ -12,3 +12,4 @@ app/src/main/assets/assets/*
 !app/src/main/assets/assets/js/
 app/src/main/assets/assets/js/*
 !app/src/main/assets/assets/js/native-update.js
+!app/src/main/assets/assets/js/native-review.js
