@@ -13,11 +13,11 @@
     "date": "2026-11-20"
   },
   "macos": {
-    "version": "1.0.3",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.3/Abhidhamma-Matika.dmg",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.3",
-    "size": 13565077,
-    "date": "2026-11-19"
+    "version": "1.0.4",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/macos-v1.0.4/Abhidhamma-Matika.dmg",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/macos-v1.0.4",
+    "size": 13565320,
+    "date": "2026-11-20"
   },
   "linux": {
     "version": "1.0.3",
