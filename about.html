@@ -236,7 +236,11 @@ var aboutSources = [
   { name: 'අභිධර්ම මාතිකා අධ්‍යන ප්‍රවේශය',       author: 'පූජ්‍ය කඩුවෙල අතුලඤාණ හිමි',                          type: 'ග්‍රන්ථය' },
   { name: 'අභිධර්ම චන්ද්‍රිකාව',                    author: 'පූජ්‍ය මාතර ශ්‍රී ධර්මවංශ මහනාහිමි',                    type: 'ග්‍රන්ථය' },
   { name: 'අභිධර්ම මාර්ගය',                       author: 'පූජ්‍ය රේරුකානේ චන්දවිමල මහනාහිමි',                type: 'ග්‍රන්ථය' },
+  { name: 'අභිධර්ම චිත්තවීථි විනිශ්චය',             author: 'පූජ්‍ය කඩුවෙල අතුලඤාණ හිමි',                          type: 'ග්‍රන්ථය' },
+  { name: 'ධම්මසඞ්ගණී පාළිය',                       author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම පිටකය)',            type: 'පාළිය' },
   { name: 'ධම්මසඞ්ගණී අට්ඨකථාව',                   author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම අට්ඨකථා)',        type: 'අට්ඨකථා' },
+  { name: 'ධම්මසඞ්ගණී මූලටීකාව',                    author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම ටීකා)',            type: 'ටීකා' },
+  { name: 'ධම්මසඞ්ගණී අනුටීකාව',                    author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම ටීකා)',            type: 'ටීකා' },
   { name: 'අභිධම්මත්ථවිභාවනී ටීකාව',               author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම ටීකා)',            type: 'ටීකා' },
   { name: 'පරමත්ථ දීපනී ටීකාව',                    author: 'ඡට්ඨ සංගායනා ත්‍රිපිටකය (අභිධර්ම ටීකා)',            type: 'ටීකා' },
   { name: 'මොක්පුර රන්දොර',                        author: 'පූජ්‍ය උ ආචිණ්ණ හිමි (ඵා-ඖක් සයඩො)',                  type: 'ග්‍රන්ථය' },
@@ -247,6 +251,7 @@ var aboutSources = [
 function getSourceStyle(type) {
   switch(type) {
     case 'ග්‍රන්ථය':   return { color: 'from-amber-500 to-saffron-600',   icon: 'fa-solid fa-book',           badge: 'bg-saffron-100 text-saffron-800 dark:bg-saffron-900/40 dark:text-saffron-300' };
+    case 'පාළිය':    return { color: 'from-blue-500 to-indigo-600',        icon: 'fa-solid fa-dharmachakra',   badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' };
     case 'අට්ඨකථා':  return { color: 'from-rose-500 to-red-600',        icon: 'fa-solid fa-scroll',         badge: 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300' };
     case 'ටීකා':     return { color: 'from-purple-500 to-indigo-600',   icon: 'fa-solid fa-bookmark',       badge: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300' };
     case 'සටහන්':    return { color: 'from-emerald-500 to-teal-600',    icon: 'fa-solid fa-pen-to-square',  badge: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' };
