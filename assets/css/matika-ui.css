@@ -1201,3 +1201,25 @@ a, button, summary, label, select, [role="button"], [onclick],
 .vg__link { font-size: 13px; font-weight: 700; color: var(--m-lacquer); text-decoration: underline; text-underline-offset: 3px; }
 :root.dark .vg__link { color: #fcd34d; }
 .vg__chan { margin: 12px 0 0; font-size: 13px; line-height: 1.8; }
+
+/* ============================================================
+   මුල් පිටුවේ වීඩියෝ card එක — කුඩා thumbnail එකක්;
+   ඔබූ විට player එක සම්පූර්ණ පළලට විහිදේ (.is-playing).
+   ============================================================ */
+.home-group__mark--video { color: #b91c1c; background: #fee2e2; border-color: #fca5a5; }
+:root.dark .home-group__mark--video { background: rgba(239,68,68,.16); color: #fca5a5; border-color: rgba(252,165,165,.35); }
+.vg-home {
+  display: flex; align-items: center; gap: 14px; padding: 12px;
+  border-radius: 16px; background: var(--m-surface); border: 1px solid var(--m-rule);
+  box-shadow: 0 1px 0 rgba(120,53,15,.05); overflow: hidden;
+  transition: border-color .15s ease;
+}
+.vg-home:hover { border-color: #f59e0b; }
+.vg-home__media { flex: none; width: 148px; border-radius: 12px; }
+.vg-home .ytf__btn { width: 40px; height: 40px; font-size: 14px; padding-left: 3px; }
+.vg-home__body { display: grid; gap: 3px; min-width: 0; }
+.vg-home__links { margin: 5px 0 0; font-size: 13px; }
+@media (max-width: 420px) { .vg-home__media { width: 116px; } .vg-home { gap: 11px; padding: 10px; } }
+.vg-home.is-playing { display: block; padding: 0; }
+.vg-home.is-playing .vg-home__media { width: 100%; border-radius: 0; }
+.vg-home.is-playing .vg-home__body { padding: 12px 14px 14px; }

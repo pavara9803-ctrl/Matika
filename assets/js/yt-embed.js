@@ -23,6 +23,10 @@
 
     btn.innerHTML = '';
     btn.appendChild(frame);
+
+    /* මුල් පිටුවේ කුඩා card එක: player එක සම්පූර්ණ පළලට විහිදීම */
+    var card = btn.closest ? btn.closest('.vg-home') : null;
+    if (card) card.classList.add('is-playing');
   }
 
   function init(root) {
