@@ -1,9 +1,9 @@
 {
   "android": {
-    "versionCode": 34,
-    "versionName": "3.0.13",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/android-v3.0.13-code34",
-    "date": "2026-11-20"
+    "versionCode": 35,
+    "versionName": "3.0.14",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/android-v3.0.14-code35",
+    "date": "2026-11-26"
   },
   "windows": {
     "version": "1.0.13",
