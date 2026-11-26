@@ -374,3 +374,9 @@ MX_I18N.add({
  "තවත් වීඩියෝ සහ පොඩ්කාස්ට් කථාංග අපගේ YouTube නාලිකාවේ ඇත.": "More videos and podcast episodes are on our YouTube channel.",
  "නාලිකාව වෙත යන්න": "Go to the channel"
 }, 'en');
+
+/* මුල් පිටුවේ වීඩියෝ card එක */
+MX_I18N.add({
+ "ඇප් එක භාවිත කරන ආකාරය කෙටි වීඩියෝවකින් බලන්න.": "Watch a short video on how to use the app.",
+ "තවත් වීඩියෝ සහ මඟපෙන්වීම": "More videos and guide"
+}, 'en');
