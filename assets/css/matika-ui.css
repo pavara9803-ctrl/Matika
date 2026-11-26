@@ -1173,3 +1173,29 @@ a, button, summary, label, select, [role="button"], [onclick],
   font-size: .8rem !important; font-style: italic; color: #8a7f74; text-align: right; }
 :root.dark .ps-intro__hint { color: #fbbf24; }
 :root.dark .ps-intro__src { color: #94a3b8; border-color: rgba(255, 255, 255, .08); }
+
+/* ============================================================
+   වීඩියෝ මඟපෙන්වීම (YouTube) — click-to-play facade
+   YouTube player එක load වන්නේ පරිශීලකයා ඔබූ විට පමණි.
+   ============================================================ */
+.vg { margin-top: 26px; }
+.vg__grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.vg__card { border: 1px solid var(--m-rule); border-radius: 16px; background: var(--ca-panel, var(--m-leaf)); overflow: hidden; }
+.ytf { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #1d1613; border: 0; padding: 0; margin: 0;
+  display: block; cursor: pointer; overflow: hidden; }
+.ytf__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ytf__btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 62px; height: 62px; border-radius: 50%; background: rgba(112, 26, 29, .92); color: #fde68a;
+  display: flex; align-items: center; justify-content: center; font-size: 22px; padding-left: 4px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35); transition: transform .18s ease, background .18s ease; }
+.ytf:hover .ytf__btn { transform: translate(-50%, -50%) scale(1.08); background: #701a1d; }
+.ytf iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vg__body { padding: 12px 14px 14px; }
+.vg__title { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.6; color: var(--m-lacquer); }
+:root.dark .vg__title { color: #fcd34d; }
+.vg__desc { margin: 5px 0 0; font-size: 13px; line-height: 1.75; color: #6b625a; text-align: left !important; }
+:root.dark .vg__desc { color: #a8a29e; }
+.vg__links { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 14px; }
+.vg__link { font-size: 13px; font-weight: 700; color: var(--m-lacquer); text-decoration: underline; text-underline-offset: 3px; }
+:root.dark .vg__link { color: #fcd34d; }
+.vg__chan { margin: 12px 0 0; font-size: 13px; line-height: 1.8; }
