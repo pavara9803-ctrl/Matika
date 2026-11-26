@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v3d9048cb14";
+self.PRECACHE_VERSION = "v221701f003";
 self.PRECACHE_CORE = [
   "./about.html",
   "./android/twa-manifest.json",
