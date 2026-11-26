@@ -6,11 +6,12 @@
     "date": "2026-11-26"
   },
   "windows": {
-    "version": "1.0.13",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.13/Abhidhamma-Matika-Setup.exe",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.13",
-    "size": 8229239,
-    "date": "2026-11-20"
+    "version": "1.0.14",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/windows-v1.0.14/Abhidhamma-Matika-Setup.exe",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/windows-v1.0.14",
+    "size": 8161445,
+    "date": "2026-11-26",
+    "notes": "අලුත්: වීඩියෝ මඟපෙන්වීම (මුල් පිටුවේ සහ help පිටුවේ YouTube හැඳින්වීම් වීඩියෝව)"
   },
   "macos": {
     "version": "1.0.6",
