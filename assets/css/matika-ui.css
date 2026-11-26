@@ -1179,7 +1179,9 @@ a, button, summary, label, select, [role="button"], [onclick],
    YouTube player එක load වන්නේ පරිශීලකයා ඔබූ විට පමණි.
    ============================================================ */
 .vg { margin-top: 26px; }
-.vg__grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+/* auto-fit: වීඩියෝ එකක් පමණක් ඇති විට එය පිටුවේ සම්පූර්ණ පළල ගනී;
+   කිහිපයක් ඇති විට තීරු ලෙස බෙදේ. */
+.vg__grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .vg__card { border: 1px solid var(--m-rule); border-radius: 16px; background: var(--ca-panel, var(--m-leaf)); overflow: hidden; }
 .ytf { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #1d1613; border: 0; padding: 0; margin: 0;
   display: block; cursor: pointer; overflow: hidden; }
