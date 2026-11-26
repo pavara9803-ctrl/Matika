@@ -1,4 +1,4 @@
-self.PRECACHE_VERSION = "v421d640aff";
+self.PRECACHE_VERSION = "v3d9048cb14";
 self.PRECACHE_CORE = [
   "./about.html",
   "./android/twa-manifest.json",
@@ -45,6 +45,7 @@ self.PRECACHE_CORE = [
   "./assets/js/site-header.js",
   "./assets/js/sw-update.js",
   "./assets/js/updates-notice.js",
+  "./assets/js/yt-embed.js",
   "./data/matika/duka/gochhaka-01-hetu.js",
   "./data/matika/duka/gochhaka-02-cullantara.js",
   "./data/matika/duka/gochhaka-03-asava.js",

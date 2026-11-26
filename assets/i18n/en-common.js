@@ -361,3 +361,16 @@ MX_I18N.add({
  "ඔබ දෝෂයක් දුටුවොත් එම පිටුවේ ඇති “දෝෂයක් දන්වන්න” බොත්තමෙන් අපට දන්වන්න. පරීක්ෂා කර බලා, නිවැරදි කළ යුතු නම් සකස් කර එහි සටහන් කරමු.": "If you notice an error, tell us with the “Report an error” button on that page. We will check it and, if it needs correcting, fix it and record it there.",
  "නිවැරදි කළ කරුණු බලන්න": "View the corrected points"
 }, 'en');
+
+/* වීඩියෝ මඟපෙන්වීම (help.html — YouTube කොටස) */
+MX_I18N.add({
+ "වීඩියෝ මඟපෙන්වීම": "Video guide",
+ "ඇප් එකේ කොටස් සහ ඒවා භාවිත කරන ආකාරය පියවරෙන් පියවර වීඩියෝවෙන් බලන්න.": "Watch a step-by-step video on the app's sections and how to use them.",
+ "අභිධම්ම මාතිකා ඇප් එක — හැඳින්වීම": "Abhidhamma Matika app — Introduction",
+ "ඇප් එකේ මාතිකා කොටස්, සතර පරමාර්ථ පිටු සහ ප්‍රධාන පහසුකම් හැඳින්වීම.": "An introduction to the matika sections, the four paramattha pages and the main features.",
+ "YouTube හි නරඹන්න": "Watch on YouTube",
+ "වීඩියෝව ධාවනය කරන්න": "Play the video",
+ "වීඩියෝව YouTube හි විවෘත කරන්න": "Open the video on YouTube",
+ "තවත් වීඩියෝ සහ පොඩ්කාස්ට් කථාංග අපගේ YouTube නාලිකාවේ ඇත.": "More videos and podcast episodes are on our YouTube channel.",
+ "නාලිකාව වෙත යන්න": "Go to the channel"
+}, 'en');

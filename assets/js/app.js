@@ -249,6 +249,7 @@
       case 'star': rateThisApp(); break;
       case 'about': window.location.href = 'about.html'; break;
       case 'help': window.location.href = 'help.html'; break;
+      case 'video': window.location.href = 'help.html#video'; break;
       case 'updates': window.location.href = 'updates.html'; break;
       case 'feedback':
         if (typeof window.openFeedbackModal === 'function') {
