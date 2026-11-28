@@ -21,14 +21,13 @@
     "notes": "අලුත්: වීඩියෝ මඟපෙන්වීම (මුල් පිටුවේ සහ help පිටුවේ YouTube හැඳින්වීම් වීඩියෝව)"
   },
   "linux": {
-    "version": "1.0.7",
-    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.7/Abhidhamma-Matika.deb",
-    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.7",
-    "size": 7099958,
-    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.7/Abhidhamma-Matika.AppImage",
-    "size2": 85694968,
+    "version": "1.0.8",
+    "url": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.8/Abhidhamma-Matika.deb",
+    "page": "https://github.com/pavara9803-ctrl/Matika/releases/tag/linux-v1.0.8",
+    "size": 7255908,
+    "url2": "https://github.com/pavara9803-ctrl/Matika/releases/download/linux-v1.0.8/Abhidhamma-Matika.AppImage",
+    "size2": 85752312,
     "label2": ".AppImage (ඕනෑම distro)",
-    "date": "2026-11-26",
-    "notes": "අලුත්: වීඩියෝ මඟපෙන්වීම (මුල් පිටුවේ සහ help පිටුවේ YouTube හැඳින්වීම් වීඩියෝව)"
+    "date": "2026-11-28"
   }
 }
